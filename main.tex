@@ -1,0 +1,47 @@
+\documentclass[a4paper,10pt,intlimits,sumlimits]{amsart}
+\usepackage[utf8]{inputenc}
+
+\usepackage{conf}
+
+\hyphenation{pro-duct de-fi-ning}
+
+%% Margin notes (use commands below to enable or disable notes)
+% \usepackage[disable]{todonotes}
+\usepackage[color=blue!30]{todonotes} 
+
+\begin{document}
+
+%% Title pages
+\input{main/titlepage.tex}
+
+\maketitle
+\footnotesize
+\tableofcontents
+\normalsize
+
+%% Main matter
+\section{Introduction}
+\label{sec:intro}
+\input{main/intro.tex}
+
+
+%% Bibliography (uncomment one among biblatex and bibtex
+%% BibLaTeX
+\printbibliography
+
+% %% Bibtex instead of BibLaTeX (specified in packages.tex)
+% %
+% \footnotesize
+% \bibliographystyle{amsplain}
+% \bibliography{bibliography} 
+
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

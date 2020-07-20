@@ -1,0 +1,205 @@
+%% Packages
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumerate}
+
+\usepackage{esint}
+
+\usepackage[style=numeric, maxbibnames=99]{biblatex}
+\addbibresource{bibliography.bib}
+\renewcommand*{\bibfont}{\footnotesize}  %make bibliography small
+
+%\usepackage{showkeys}
+
+%\usepackage{mathbbol}
+\usepackage{bbm} %gives characteristic function without making the letters look bad
+\usepackage{bm}
+
+
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns,calc,decorations.pathreplacing}
+
+\usepackage[all]{xy}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref}  % PDF hyperlinks, with coloured links
+\definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
+\definecolor{darkblue}{rgb}{0,0,0.4}
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+\hypersetup{linkcolor=darkblue,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+
+
+%% Environments
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem*{conj*}{Conjecture}
+\newtheorem{example}[thm]{Example}
+
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
+
+
+\numberwithin{equation}{section}
+\numberwithin{thm}{section}
+
+
+
+%% Macros
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\ms}[1]{\mathscr{#1}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+
+\newcommand{\map}[3]{#1 \colon #2 \rightarrow #3}
+
+%% Blackboard  bold shortcuts
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}} 
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\N}{\mathbb{N}} 
+\newcommand{\Z}{\mathbb{Z}} 
+\newcommand{\I}{\mathbb{I}}
+
+\newcommand{\RR}{\R}  
+\newcommand{\CC}{\C} 
+\newcommand{\QQ}{\Q}
+\newcommand{\NN}{\N} 
+\newcommand{\ZZ}{\Z} 
+\newcommand{\II}{\I}
+
+
+%% Integrals
+\newcommand{\dd}{\mathrm{d}}
+\DeclareMathOperator{\pv}{p.v.}
+
+%% Operations
+\newcommand{\tensor}{\otimes}
+\newcommand{\bigtensor}{\bigotimes}
+\renewcommand{\bar}{\overline} % complex conjugation
+\renewcommand{\tilde}{\widetilde} % better tilde
+\newcommand{\restrict}[1]{\raisebox{-3pt}{\big\lvert}_{{#1}}}
+
+%% Transformations
+\DeclareMathOperator{\Fourier}{FT} % Fourier transform 
+\newcommand{\FT}{\widehat}
+
+%% Better Greek letters
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+%% Useful functions
+\renewcommand{\1}{\mathbbm{1}}
+\DeclareMathOperator{\sgn}{sgn}
+
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+%% Set/metric geometry
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\spt}{spt}
+\newcommand{\setint}{\mathring} % interior of a set
+\newcommand{\setclos}{\bar} % closure of a set
+\newcommand{\cptsubset}{\subset\hspace{-2pt}\subset} % compact subset
+
+%% LHS and RHS of eqns
+\DeclareMathOperator{\LHS}{LHS}
+\DeclareMathOperator{\RHS}{RHS}
+
+
+%% Linear maps
+\newcommand{\Lin}{\mc{L}} % bounded linear maps
+\DeclareMathOperator{\Id}{Id} % identity operator
+\DeclareMathOperator{\rk}{rk} % rank
+\DeclareMathOperator{\tr}{tr} % trace
+
+%% Matrices and vectors
+\newcommand{\pmatr}[1]{\begin{pmatrix}#1\end{pmatrix}} % matrix
+\newcommand{\bmatr}[1]{\begin{bmatrix}#1\end{bmatrix}} % matrix
+
+%% *************************
+%% Project-local
+%% *************************
+
+%% Symmetry operators
+\DeclareMathOperator{\Mod}{Mod} % modulation
+\DeclareMathOperator{\Tr}{Tr} % translation
+\DeclareMathOperator{\Dil}{Dil} % dilation
+
+%% Operators
+\newcommand{\HT}{\mathrm{H}}
+\newcommand{\BHT}{\mathrm{BHT}}
+\newcommand{\BHF}{\mathrm{BHF}}
+\newcommand{\BHWF}{\mathrm{BHWF}}
+
+%% Embeddings
+\newcommand{\Emb}{\mathrm{E}}
+
+%% Wave packet differentiation
+\newcommand{\wpD}{\mf{d}}
+\newcommand{\DEF}{\square}
+
+%% Outer measure
+\newcommand{\sL}{\hbox{\raisebox{0.06em}-}\kern-0.45emL} %% local L^p
+\newcommand{\lI}{\mf{I}} %% integral size without the absolute value
+\newcommand{\OX}{\mathbb{X}} % topological space
+\newcommand{\OB}{\mathbb{B}} % a generating sets
+\newcommand{\OA}{\mathbb{A}} % the algebra of functions.
+\newcommand{\OS}{\mathbb{S}} % size
+
+\newcommand{\lL}{\mf{L}} %% Lebesgue size
+\newcommand{\mlL}{\overline{\mf{L}}} %% maximal Lebesgue size
+\newcommand{\RS}{\mathfrak{R}} % random size
+\newcommand{\mRS}{\overline{\mathfrak{R}}} % maximal random size
+\newcommand{\DS}{\mathfrak{W}} % defect size
+\newcommand{\FS}{\mathfrak{S}} % full size
+\newcommand{\RbdS}{\mathfrak{RB}} %R-bound size
+
+\newcommand{\mT}{\mf{T}} % model tree
+\newcommand{\mD}{\mf{D}} % model strip
+\newcommand{\mA}{\mf{A}} % model convex set
+\newcommand{\TT}{\mbb{T}} %  trees
+\newcommand{\DD}{\mbb{D}} % strips
+
+\renewcommand{\AA}{\mathbb{A}} % a convex set
+\newcommand{\V}{V} % cones
+
+\newcommand{\Bor}{\ms{B}} %Borel functions
+
+\newcommand{\Sch}{\ms{S}} % Schwarz functions
+
+\newcommand{\loc}{\operatorname{loc}} % locally 
+
+\newcommand{\lac}{\operatorname{lac}} 
+\newcommand{\ov}{\operatorname{ov}} 
+
+%% Aliases
+\newcommand{\sm}{\setminus}
+
+
