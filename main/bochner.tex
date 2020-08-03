@@ -1,3 +1,114 @@
+\subsection{Banach-valued functions and Bochner spaces}
+
+Consider a measure space $(S,\mc{A},\mu)$ (so $\mc{A}$ is a $\sigma$-algebra of subsets of $S$, and $\mu$ is a measure on $\mc{A}$), and a Banach space $X$.
+The topic of these notes is the analysis of functions $\map{f}{S}{X}$, and of operators acting on such functions.
+Thus it will be useful for us to gain some familiarity with the idea of $X$-valued functions.
+
+The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\C}$ and a vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
+This function is denoted by $f \otimes \mb{x}$ and formally defined by
+\begin{equation*}
+  \map{f \otimes \mb{x}}{S}{X}, \qquad (f \otimes \mb{x})(s) := f(s)\mb{x} \quad \text{for all $s \in S$.}
+\end{equation*}
+The range of $f \otimes \mb{x}$ is contained in the linear span of $\mb{x}$, and is thus `one-dimensional'.
+
+The second simplest kind of $X$-valued function are the \emph{simple functions}.\footnote{Sorry.}
+A function $\map{f}{S}{X}$ is \emph{($\mc{A}$-)simple} if there exists a finite collection of $\mc{A}$-measurable subsets $S_1,\ldots,S_N \subset S$ and vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
+\begin{equation*}
+  f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
+\end{equation*}
+where $\1_{S_n}$ is the indicator function (or characteristic function) of $S_n$.
+We denote the vector space of $\mc{A}$-simple functions $S \to X$ by $\Simp_{\mc{A}}(S;X)$ (or by $\Simp(S;X)$ when the $\sigma$-algebra $\mc{A}$ is understood).
+Note that the range of $f$ is contained in $\spn(\mb{x}_1,\ldots,\mb{x}_N)$, so $f$ can be thought of as `finite-dimensional'.
+
+Of course, we need more than simple functions; measure theory tells us that the most useful class of functions are the \emph{measurable functions}.
+When considering Banach-valued functions, particularly when our Banach spaces are allowed to be infinite-dimensional, there is more than one notion of measurability, and these are generally inequivalent.
+
+\begin{defn}
+  Consider a function $\map{f}{S}{X}$.
+  We say that $f$ is
+  \begin{itemize}
+  \item
+    \emph{($\mc{A}$-)measurable} if for every Borel set $B \subset X$, the preimage $f^{-1}(B)$ is in $\mc{A}$;
+  \item
+    \emph{strongly ($\mc{A}$-)measurable} if it is the pointwise limit of simple functions; that is, if there exists a sequence $(f_n)_{n=1}^\infty$ in $\Simp_{\mc{A}}(S;X)$ such that $f = \lim_{n \to \infty} f_n$ pointwise on $S$;
+  \item
+    \emph{weakly ($\mc{A}$)-measurable} if for every continuous linear functional $\mb{x}^* \in X^*$, the function
+    \begin{equation*}
+      \map{\langle f, \mb{x}^* \rangle}{S}{\C}, \qquad \langle f, \mb{x}^* \rangle(s) := \langle f(s), \mb{x}^* \rangle \quad \text{for all $s \in S$}
+    \end{equation*}
+    if measurable.
+  \end{itemize}
+
+  We use the following notation:
+  \begin{center}
+    \begin{tabular}{r|l}
+      $\Meas (S;X)$  & Measurable $\map{f}{S}{X}$    \\
+      $\SMeas(S;X)$  & Strongly measurable $\map{f}{S}{X}$    \\
+      $\WMeas(S;X)$  & Weakly measurable $\map{f}{S}{X}$.    
+    \end{tabular}
+  \end{center}
+  
+\end{defn}
+
+
+Simple functions are measurable, as $f^{-1}(B)$ is measurable for \emph{every} $B \subset X$.
+Strongly measurable functions, being pointwise limits of measurable functions, are also measurable.
+That is, we have the containments
+\begin{equation*}
+  \Simp(S;X) \subset \SMeas(S;X) \subset \Meas(S;X).
+\end{equation*}
+
+\todo{example showing that strong measurability is stronger than measurability for non-separable spaces?}
+
+Given $\map{f}{S}{X}$, we abuse notation and let $\|f\|_X$ denote the function $S \to [0,\infty)$ defined by $s \mapsto \|f(s)\|_X$.
+If $f$ is measurable, then $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
+
+\begin{defn}
+  For $p \in [1,\infty]$, we let $L^p(S,\mc{A},\mu;X)$ denote the set of \emph{strongly} $\mc{A}$-measurable functions $f \in \SMeas_{\mc{A}}(S;X)$ such that $\|f\|_X \in L^p(S,\mc{A},\mu)$, and we write
+  \begin{equation*}
+    \|f\|_{L^p(S,\mc{A},\mu;X)} := \| \|f\|_X \|_{L^p(S,\mc{A},\mu)}.
+  \end{equation*}
+  When the choice of $\sigma$-algebra $\mc{A}$ and measure $\mu$ is clear, we write $L^p(S;X)$ in place of $L^p(S,\mc{A},\mu;X)$.
+\end{defn}
+
+\begin{rmk}
+  It is possible for $\|f\|_X$ to be in $L^p(S)$ without $f$ itself being strongly measurable (or even measurable).
+  Such an $f$ does not qualify for membership in $L^p(S;X)$.
+\end{rmk}
+
+When $V \subset \Meas(S;\C)$ is a set of measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
+\begin{equation*}
+  V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\}.
+\end{equation*}
+That is, $V \otimes X$ is the set of finite linear combinations of $X$-valued functions of the form $f \otimes \mb{x}$, where $f$ is a scalar-valued function in $V$ and $\mb{x} \in X$.
+For example, when $V$ is the set of characteristic functions of measurable sets, $V \otimes X = \Simp(S;X)$ is the set of $X$-valued simple functions.
+
+\begin{prop}
+  Let $p \in [1,\infty)$, and suppose that $V \subset L^p(S)$ is dense.
+  Then $V \otimes X$ is dense in $L^p(S;X)$.
+\end{prop}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{itemize}
+\item defn of the integral for $f \in L^1(S;X)$
+\item weak measurability; Pettis meas. theorem
+\end{itemize}
+
+
+
+
+
+
+\begin{itemize}
+\item defn
+\item density of simple functions on $L^p(S;X)$ for $p \in [1,\infty)$, non-density for $p = \infty$
+\item Radon--Nikodym property, duality
+\item tensor extensions + extension of positive operators
+\end{itemize}
+
 
 %%% Local Variables:
 %%% mode: latex
