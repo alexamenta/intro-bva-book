@@ -63,14 +63,51 @@ Theorem \ref{thm:conditional-expectation-EU} lets us speak of \emph{the} conditi
 \end{example}
 
 
+\subsection{Filtrations and stopping times}
 
+-information-theoretic interpretation
+-limiting $\sigma$-algebra
+-examples of stopping times (first hitting time of closed set or whatever)
 
 \subsection{Definitions and key examples of martingales}
 
 -stopped martingales
 -Rademacher variables and sums
 
-\subsection{Doob's maximal inequality}
+\begin{thm}[$L^p$-convergence of martingales]
+  %Pisier Theorem 1.14
+  
+\end{thm}
+
+\subsection{Maximal inequalities and pointwise convergence}
+% proofs from Pisier with little modifications to allow for infinite martingales
+
+
+\begin{defn}
+  definition of $\R$-valued submartingale
+\end{defn}
+
+As an example, consider a martingale $(f_n)_{n \in \N}$ taking values in a Banach space $X$.
+Then by {\color{red} CITE PART OF POSITIVE OP EXTENSION HERE} we have for all $m \geq n$
+\begin{equation*}
+  \|f_n\|_X = \|\E^{\mc{F}_n} f_m\|_X \leq \E^{\mc{F}_n} \|f_m\|_X \qquad \text{almost surely},
+\end{equation*}
+so that the sequence $(\|f_n\|_X)_{n \in \N}$ is an $\R$-valued submartingale.
+
+\begin{thm}[Doob's maximal inequalties]
+  
+\end{thm}
+
+% i think we can do without this
+% but include it if necessary
+% \begin{thm}[Burkholder--Davis--Gundy inequality]
+% \end{thm}
+
+\begin{thm}[Martingale convergence theorem]
+  
+\end{thm}
+
+
 
 \subsection{John--Nirenberg for adapted sequences and the Kahane--Khintchine inequalities}
 % following HNVW1 section 3.2.c
@@ -344,9 +381,6 @@ and its maximal function
 \end{equation*}
 
 }
-
-
-
 
 
 
