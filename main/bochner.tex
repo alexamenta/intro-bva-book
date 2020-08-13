@@ -1,23 +1,23 @@
-\subsection{Banach-valued functions and Bochner spaces}
+\subsection{Strong measurability and Bochner spaces}
 
-Consider a measure space $(S,\mc{A},\mu)$ (so $\mc{A}$ is a $\sigma$-algebra of subsets of $S$, and $\mu$ is a measure on $\mc{A}$), and a Banach space $X$.
+Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$} and a Banach space $X$.
 The topic of these notes is the analysis of functions $\map{f}{S}{X}$, and of operators acting on such functions.
 Thus it will be useful for us to gain some familiarity with the idea of $X$-valued functions.
 
-The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\C}$ and a vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
+The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\C}$ and a non-zero vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
 This function is denoted by $f \otimes \mb{x}$ and formally defined by
 \begin{equation*}
   \map{f \otimes \mb{x}}{S}{X}, \qquad (f \otimes \mb{x})(s) := f(s)\mb{x} \quad \text{for all $s \in S$.}
 \end{equation*}
 The range of $f \otimes \mb{x}$ is contained in the linear span of $\mb{x}$, and is thus `one-dimensional'.
 
-The second simplest kind of $X$-valued function are the \emph{simple functions}.\footnote{Sorry.}
-A function $\map{f}{S}{X}$ is \emph{($\mc{A}$-)simple} if there exists a finite collection of $\mc{A}$-measurable subsets $S_1,\ldots,S_N \subset S$ and vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
+The second simplest kind of $X$-valued function are the \emph{simple functions}.
+A function $\map{f}{S}{X}$ is \emph{simple} if there exists a finite collection of pairwise disjoint measurable subsets $S_1,\ldots,S_N \subset S$ and non-zero vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
 \begin{equation*}
   f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
 \end{equation*}
-where $\1_{S_n}$ is the indicator function (or characteristic function) of $S_n$.
-We denote the vector space of $\mc{A}$-simple functions $S \to X$ by $\Simp_{\mc{A}}(S;X)$ (or by $\Simp(S;X)$ when the $\sigma$-algebra $\mc{A}$ is understood).
+where $\1_{S_n}$ is the indicator function of $S_n$.
+We denote the vector space of simple functions $S \to X$ by $\Simp(S;X)$ or $\Simp_{\mc{A}}(S;X)$.
 Note that the range of $f$ is contained in $\spn(\mb{x}_1,\ldots,\mb{x}_N)$, so $f$ can be thought of as `finite-dimensional'.
 
 Of course, we need more than simple functions; measure theory tells us that the most useful class of functions are the \emph{measurable functions}.
@@ -28,96 +28,179 @@ When considering Banach-valued functions, particularly when our Banach spaces ar
   We say that $f$ is
   \begin{itemize}
   \item
-    \emph{($\mc{A}$-)measurable} if for every Borel set $B \subset X$, the preimage $f^{-1}(B)$ is in $\mc{A}$;
+    \emph{measurable} if for every Borel set $B \subset X$, the preimage $f^{-1}(B)$ is measurable;
   \item
-    \emph{strongly ($\mc{A}$-)measurable} if it is the pointwise limit of simple functions; that is, if there exists a sequence $(f_n)_{n=1}^\infty$ in $\Simp_{\mc{A}}(S;X)$ such that $f = \lim_{n \to \infty} f_n$ pointwise on $S$;
-  \item
-    \emph{weakly ($\mc{A}$)-measurable} if for every continuous linear functional $\mb{x}^* \in X^*$, the function
-    \begin{equation*}
-      \map{\langle f, \mb{x}^* \rangle}{S}{\C}, \qquad \langle f, \mb{x}^* \rangle(s) := \langle f(s), \mb{x}^* \rangle \quad \text{for all $s \in S$}
-    \end{equation*}
-    if measurable.
+    \emph{strongly measurable} (or \emph{Bochner measurable}) if it is the pointwise limit of simple functions; that is, if there exists a sequence $(f_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $f = \lim_{n \to \infty} f_n$ pointwise on $S$;
   \end{itemize}
+  Both of these notions implicitly refer to the $\sigma$-algebra $\mc{A}$.
 
-  We use the following notation:
-  \begin{center}
-    \begin{tabular}{r|l}
-      $\Meas (S;X)$  & Measurable $\map{f}{S}{X}$    \\
-      $\SMeas(S;X)$  & Strongly measurable $\map{f}{S}{X}$    \\
-      $\WMeas(S;X)$  & Weakly measurable $\map{f}{S}{X}$.    
-    \end{tabular}
-  \end{center}
   
 \end{defn}
 
+With the convenient notation
+\begin{center}
+  \begin{tabular}{r|l}
+    $\Meas (S;X)$  & Measurable $\map{f}{S}{X}$    \\
+    $\SMeas(S;X)$  & Strongly measurable $\map{f}{S}{X}$   
+  \end{tabular}
+\end{center}
+we have the containment
+\begin{equation}\label{eq:measurability-inclusions}
+  \SMeas(S;X) \subset \Meas(S;X)
+\end{equation}
+When $X$ is finite-dimensional these notions coincide: the derivation of strong measurability from measurability is a standard result in measure theory.\footnote{See for example \cite[Corollary 4.2.7]{rD04} in the one-dimensional case; extending this to the finite-dimensional case can be done by summing up coordinates.} %mk
+But in the general context of Banach spaces this inclusion \eqref{eq:measurability-inclusions} is strict.
 
-Simple functions are measurable, as $f^{-1}(B)$ is measurable for \emph{every} $B \subset X$.
-Strongly measurable functions, being pointwise limits of measurable functions, are also measurable.
-That is, we have the containments
-\begin{equation*}
-  \Simp(S;X) \subset \SMeas(S;X) \subset \Meas(S;X).
-\end{equation*}
+\begin{example}[A measurable function which is not strongly measurable]
+  Let $X$ be a Banach space, and consider the identity map $\map{I}{X}{X}$, which is continuous and hence measurable.
+  If $I$ is strongly measurable, then there exists a sequence of simple functions $(i_n)_{n \in \N}$ converging pointwise to $I$.
+  For each $\mb{x} \in X$ we then have
+  \begin{equation*}
+    \mb{x} = \lim_{n \to \infty} i_n(\mb{x}),
+  \end{equation*}
+  so that the union $U := \cup_{n \in \N} i_n(X)$ is dense in $X$.
+  Since each $i_n$ is simple, $U$ is countable, which implies that $X$ is separable.
+  Thus if $X$ is not separable (e.g. if $X = L^\infty(\R)$), the identity map $\map{I_X}{X}{X}$ is measurable (even continuous) but not strongly measurable.\footnote{In fact, if $X$ is separable, then $\SMeas(S;X) = \Meas(S;X)$; this is one part of the \emph{Pettis measurability theorem}, which we will not cover in these notes. See for example \cite[Theorem 1.1.6]{HNVW16}.}
+\end{example}
 
-\todo{example showing that strong measurability is stronger than measurability for non-separable spaces?}
 
 Given $\map{f}{S}{X}$, we abuse notation and let $\|f\|_X$ denote the function $S \to [0,\infty)$ defined by $s \mapsto \|f(s)\|_X$.
 If $f$ is measurable, then $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
 
 \begin{defn}
-  For $p \in [1,\infty]$, we let $L^p(S,\mc{A},\mu;X)$ denote the set of \emph{strongly} $\mc{A}$-measurable functions $f \in \SMeas_{\mc{A}}(S;X)$ such that $\|f\|_X \in L^p(S,\mc{A},\mu)$, and we write
+  Let $(S,\mc{A},\mu)$ be a measure space.
+  For $p \in [1,\infty]$, we let $L^p(S,\mu;X)$ denote the set of \emph{strongly} measurable functions $f \in \SMeas(S;X)$ such that $\|f\|_X \in L^p(S,\mu)$, modulo $\mu$-almost everywhere equality, and we write
   \begin{equation*}
-    \|f\|_{L^p(S,\mc{A},\mu;X)} := \| \|f\|_X \|_{L^p(S,\mc{A},\mu)}.
+    \|f\|_{L^p(S,\mu;X)} := \| \|f\|_X \|_{L^p(S,\mu)}.
   \end{equation*}
-  When the choice of $\sigma$-algebra $\mc{A}$ and measure $\mu$ is clear, we write $L^p(S;X)$ in place of $L^p(S,\mc{A},\mu;X)$.
+  Each $L^p(S,\mu;X)$ is a Banach space: the proof is identical to the classic proof in the scalar-valued case.\footnote{For revision see \cite[Theorem 5.2.1]{rD04}.}
 \end{defn}
 
 \begin{rmk}
   It is possible for $\|f\|_X$ to be in $L^p(S)$ without $f$ itself being strongly measurable (or even measurable).
-  Such an $f$ does not qualify for membership in $L^p(S;X)$.
+  Such a function does not qualify for membership in $L^p(S;X)$.
 \end{rmk}
 
+
+\begin{prop}
+  Let $X$ be a Banach space and $p \in [1,\infty)$.
+  Then the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
+\end{prop}
+
+\begin{proof}
+  % L^infty, if needed
+  % Let $f \in L^p(S;X)$ and consider the truncations
+  % \begin{equation*}
+  %   f_\lambda := \1_{\{s \in S : \|f_\lambda(s)\|_X \leq \lambda\}} f \qquad \forall \lambda > 0.
+  % \end{equation*}
+  % Then $\|(f - f_{\lambda})(s)\|_X^p \leq \|f(s)\|_X^p$ for almost all $s \in S$, so by dominated convergence
+  % \begin{equation*}
+  %   \begin{aligned}
+  %     \lim_{\lambda \to \infty} \|f - f_{\lambda}\|_{L^p(S;X)}^p
+  %     &= \lim_{\lambda \to \infty} \int_{S} \|(f - f_{\lambda})(s)\|_X^p \, \dd\mu(s) \\
+  %     &= \int_{S} \lim_{\lambda \to \infty}  \|(f - f_{\lambda})(s)\|_X^p \, \dd\mu(s) = 0.
+  %   \end{aligned}
+  % \end{equation*}
+  % Thus $f_{\lambda} \to f$ in $L^p(S;X)$ as $\lambda \to \infty$, and since each $f_{\lambda}$ is in $L^\infty(S;X) \cap L^p(S;X)$, thus subspace is dense in $L^p(S;X)$.
+
+  Fix $f \in L^p(S;X)$.
+  Since $f$ is strongly measurable, there exists a sequence of simple functions $f_n \in \Simp(S;X)$ with $\lim_{n \to \infty} f_n = f$ pointwise almost everywhere.
+  Now set
+  \begin{equation*}
+    g_n := \1_{ \{s \in S : \|f_n(s)\|_X \leq 2\|f\|_X \} } f_n;
+  \end{equation*}
+  the functions $g_n$ are simple and they also converge to $f$ pointwise almost everywhere.
+  Furthermore we have
+  \begin{equation*}
+    \|g_n\|_{L^p(S;X)}^p = \int_{\{s \in S : \|f_n(s)\|_X \leq 2\|f\|_X \} } \|f_n(s)\|_X^p \, \dd\mu(s) \leq 2^p \|f\|_{L^p(S;X)}^p,
+  \end{equation*}
+  so each $g_n$ is in $L^p(S;X)$.
+  Since $\|f(s) - g_n(s)\|_X \leq 3\|f(s)\|_X$ for almost all $s$, dominated convergence yields
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{n \to \infty} \|f - g_n\|_{L^p(S;X)}^p &= \lim_{n \to \infty} \int_S \|f(s) - g_n(s)\|_{X}^p \, \dd\mu(s) \\
+      &= \int_S \lim_{n \to \infty}  \|f(s) - g_n(s)\|_{X}^p \, \dd\mu(s) = 0,
+    \end{aligned}
+  \end{equation*}
+  so that $g_n \to f$ in $L^p(S;X)$, completing the proof.
+\end{proof}
+
+Note that the case $p = \infty$ is not included in the proposition above, even though the simple functions are dense in $L^\infty(S;\C)$.
+
+\begin{prop}
+  Let $X$ be a Banach space.
+  Then the simple functions are dense in $\ell^\infty(\N;X)$ if and only if $X$ is finite dimensional.\footnote{This proposition can be extended to more general measure space $S$ in place of $\N$, provided $S$ contains infinitely many disjoint measurable sets of positive measure.}
+\end{prop}
+
+\begin{proof}
+  First suppose $X$ is finite dimensional, and fix $f \in \ell^\infty(\N;X)$ and $\varepsilon > 0$.
+  Let $C = \|f\|_{\ell^\infty(\N;X)}$, and note that the closed ball $\overline{B_C(0)} \subset X$ is compact (this uses finite dimensionality of $X$).
+  Thus there exists a finite collection of vectors $(\mb{x}_i)_{i=1}^N$ in $\overline{B_C(0)}$ such that the open balls $B_{\varepsilon}(\mb{x}_i)$ cover $\overline{B_C(0)}$.
+  For each $n \in \N$ we thus have that $f(n) \in B_{\varepsilon}(\mb{x}_{i(n)})$ for some $i(n) \in \{1,\ldots,N\}$.
+  Define a function $\map{f_{\varepsilon}}{\N}{X}$ by
+  \begin{equation*}
+    f_{\varepsilon}(n) := \mb{x}_{i(n)};
+  \end{equation*}
+  since the range of $f_{\varepsilon}$ is finite, $f_{\varepsilon}$ is simple.
+  Furthermore since $f(n) \in B_{\varepsilon}(\mb{x}_{i(n)})$ for each $n \in \N$ we have
+  \begin{equation*}
+    \|f - f_{\varepsilon}\|_{\ell^\infty(\N;X)} = \sup_{n \in \N} \|f(n) - \mb{x}_{i(n)}\|_{X} \leq \varepsilon.
+  \end{equation*}
+  Since $\varepsilon > 0$ was arbitrary, we have established density of the simple functions in $\ell^\infty(\N;X)$ when $X$ is finite dimensional.
+
+  Now we prove the converse.
+  Aiming for a contradiction, suppose that $X$ is infinite dimensional.
+  Then there exists a sequence $(a_n)_{n \in \N}$ in the unit ball $B_1(0) \subset X$ such that
+  \begin{equation*}
+    \|a_n - a_m\|_X > 1/2 \qquad \text{for all $n \neq m$.}
+  \end{equation*}
+  Now let $f(n) = a_n$ for all $n \in \N$, so that $f \in \ell^\infty(\N;X)$, and suppose that there exists a simple function $g \in \Simp(\N;X)$ with $\|f - g\|_{\ell^\infty(\N;X)} < 1/4$.
+  Then for all $n \neq m$ we must have
+  \begin{equation*}
+    \begin{aligned}
+      \|a_n - a_m\|_X &\leq \|f(n) - g(n)\|_X + \|g(n) - g(m)\|_X + \|g(m) - f(m)\|_X \\
+      &\leq \frac{1}{2} + \|g(n) - g(m)\|_X,
+    \end{aligned}
+  \end{equation*}
+  so that
+  \begin{equation*}
+    \|g(n) - g(m)\|_X \geq \|a_n - a_m\|_X - \frac{1}{2} > 0.
+  \end{equation*}
+  It follows that $g$ has infinite range, contradicting the assumption that $g$ is simple.
+\end{proof}
+
+\subsection{The Bochner integral}
+
+\begin{itemize}
+\item defn of the integral for $f \in L^1(S;X)$
+\item evaluation
+\item basic stuff re: linearity. don't dwell too long
+\end{itemize}
+
+
+
+
+\subsection{Duality and the Radon--Nikodym property}
+
+
+
+\subsection{Extensions of operators to Bochner spaces}
+
+{\color{blue} pasted from earlier - rewrite
 When $V \subset \Meas(S;\C)$ is a set of measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
 \begin{equation*}
   V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\}.
 \end{equation*}
 That is, $V \otimes X$ is the set of finite linear combinations of $X$-valued functions of the form $f \otimes \mb{x}$, where $f$ is a scalar-valued function in $V$ and $\mb{x} \in X$.
 For example, when $V$ is the set of characteristic functions of measurable sets, $V \otimes X = \Simp(S;X)$ is the set of $X$-valued simple functions.
+}
 
-\begin{prop}
-  Let $p \in [1,\infty)$, and suppose that $V \subset L^p(S)$ is dense.
-  Then $V \otimes X$ is dense in $L^p(S;X)$.\todo{rephrase with just simple functions}
-\end{prop}
-
-\begin{proof}
-  
-\end{proof}
-
-\begin{prop}
-  Let $X$ be a Banach space.
-  Then the simple functions are dense in $\ell^\infty(\N;X)$ if and only if $X$ is infinite-dimensional.
-\end{prop}
-
-\begin{proof}
-  
-\end{proof}
-
-\begin{itemize}
-\item defn of the integral for $f \in L^1(S;X)$
-\item weak measurability; Pettis meas. theorem
-\end{itemize}
-
-
-\subsection{Duality and the Radon--Nikodym property}
-
-\subsection{Extensions of operators to Bochner spaces}
 
 \begin{itemize}
 \item defn of tensor extensions
 \item result on positive operators
 \item nonexample: Fourier transform. counterexamples
 \end{itemize}
-
-
 
 
 
