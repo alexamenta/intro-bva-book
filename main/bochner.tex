@@ -1,4 +1,4 @@
-\subsection{Strong measurability and Bochner spaces}
+\subsection{Notions of measurability}
 
 Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$} and a Banach space $X$.
 The topic of these notes is the analysis of functions $\map{f}{S}{X}$, and of operators acting on such functions.
@@ -13,9 +13,9 @@ The range of $f \otimes \mb{x}$ is contained in the linear span of $\mb{x}$, and
 
 The second simplest kind of $X$-valued function are the \emph{simple functions}.
 A function $\map{f}{S}{X}$ is \emph{simple} if there exists a finite collection of pairwise disjoint measurable subsets $S_1,\ldots,S_N \subset S$ and non-zero vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
-\begin{equation*}
+\begin{equation}\label{eqn:simple-function-standard-form}
   f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
-\end{equation*}
+\end{equation}
 where $\1_{S_n}$ is the indicator function of $S_n$.
 We denote the vector space of simple functions $S \to X$ by $\Simp(S;X)$ or $\Simp_{\mc{A}}(S;X)$.
 Note that the range of $f$ is contained in $\spn(\mb{x}_1,\ldots,\mb{x}_N)$, so $f$ can be thought of as `finite-dimensional'.
@@ -31,8 +31,10 @@ When considering Banach-valued functions, particularly when our Banach spaces ar
     \emph{measurable} if for every Borel set $B \subset X$, the preimage $f^{-1}(B)$ is measurable;
   \item
     \emph{strongly measurable} (or \emph{Bochner measurable}) if it is the pointwise limit of simple functions; that is, if there exists a sequence $(f_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $f = \lim_{n \to \infty} f_n$ pointwise on $S$;
+  \item
+    \emph{weakly measurable} if for every functional $\mb{x}^* \in X^*$, the function $\map{\langle f, \mb{x}^*\rangle}{S}{\C}$ given by $s \mapsto \langle f(s), \mb{x}^* \rangle$ is measurable.
   \end{itemize}
-  Both of these notions implicitly refer to the $\sigma$-algebra $\mc{A}$.
+  All of these notions implicitly refer to the $\sigma$-algebra $\mc{A}$.
 
   
 \end{defn}
@@ -41,15 +43,16 @@ With the convenient notation
 \begin{center}
   \begin{tabular}{r|l}
     $\Meas (S;X)$  & Measurable $\map{f}{S}{X}$    \\
-    $\SMeas(S;X)$  & Strongly measurable $\map{f}{S}{X}$   
+    $\SMeas(S;X)$  & Strongly measurable $\map{f}{S}{X}$ \\
+    $\WMeas(S;X)$  & Weakly measurable $\map{f}{S}{X}$,
   \end{tabular}
 \end{center}
 we have the containment
 \begin{equation}\label{eq:measurability-inclusions}
-  \SMeas(S;X) \subset \Meas(S;X)
+  \SMeas(S;X) \subset \Meas(S;X) \subset \WMeas(S;X).
 \end{equation}
-When $X$ is finite-dimensional these notions coincide: the derivation of strong measurability from measurability is a standard result in measure theory.\footnote{See for example \cite[Corollary 4.2.7]{rD04} in the one-dimensional case; extending this to the finite-dimensional case can be done by summing up coordinates.} %mk
-But in the general context of Banach spaces this inclusion \eqref{eq:measurability-inclusions} is strict.
+When $X$ is finite-dimensional these notions coincide: the derivation of strong measurability from measurability is a standard result in measure theory,\footnote{See for example \cite[Corollary 4.2.7]{rD04} in the one-dimensional case; extending this to the finite-dimensional case can be done by summing up coordinates.} and weak measurability is just a convoluted rewriting of coordinatewise measurability.
+But in the general context of Banach spaces the inclusions \eqref{eq:measurability-inclusions} are strict.
 
 \begin{example}[A measurable function which is not strongly measurable]
   Let $X$ be a Banach space, and consider the identity map $\map{I}{X}{X}$, which is continuous and hence measurable.
@@ -60,12 +63,69 @@ But in the general context of Banach spaces this inclusion \eqref{eq:measurabili
   \end{equation*}
   so that the union $U := \cup_{n \in \N} i_n(X)$ is dense in $X$.
   Since each $i_n$ is simple, $U$ is countable, which implies that $X$ is separable.
-  Thus if $X$ is not separable (e.g. if $X = L^\infty(\R)$), the identity map $\map{I_X}{X}{X}$ is measurable (even continuous) but not strongly measurable.\footnote{In fact, if $X$ is separable, then $\SMeas(S;X) = \Meas(S;X)$; this is one part of the \emph{Pettis measurability theorem}, which we will not cover in these notes. See for example \cite[Theorem 1.1.6]{HNVW16}.}
+  Thus if $X$ is not separable (e.g. if $X = L^\infty(\R)$), the identity map $\map{I_X}{X}{X}$ is measurable (even continuous) but not strongly measurable.
 \end{example}
 
+\begin{rmk}
+  The existence of weakly measurable functions that are not measurable is not so simple, but see \cite[Example 1.4.3]{HNVW16} for an argument which shows that the $\sigma$-algebra $\sigma(X^*)$ may be strictly smaller than the Borel $\sigma$-algebra on $X$.
+  The indicator function of a Borel set which is not in $\sigma(X^*)$ is then weakly measurable, but not measurable.
+\end{rmk}
+
+It turns out that the notion of strong measurability is strongly connected with that of separability.
+
+\begin{thm}[Pettis measurability theorem]\label{thm:Pettis-measurability}
+  Let $(S,\mc{A})$ be a measurable space and $X$ a Banach space.
+  Then a function $\map{f}{S}{X}$ is strongly measurable if and only if it is weakly measurable and \emph{separably valued} (i.e. there exists a separable closed subspace $X' \subset X$ such that $f(S) \subset X'$).
+  In particular, if $X$ is separable, then
+  \begin{equation*}
+    \SMeas(S;X) = \Meas(S;X) = \WMeas(S;X).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  First suppose that $f$ is strongly measurable.
+  Then $f$ is automatically weakly measurable, and we just need to show that $f$ is separably valued.
+  Let $(f_n)_{n \in \N}$ be a sequence of simple functios converging to $f$ pointwise.
+  Let $X_n \subset X$ be the closure of the range of $f_n$.
+  Each $X_n$ is finite-dimensional, hence separable, and the closed subspace $X'$ of $X$ generated by the collection $(X_n)_{n \in \N}$ is also separable.
+  Since $f_n \to f$ pointwise, the range of $f$ is contained in $X'$, and thus $f$ is separably valued.
+
+  Now assume that $f$ is weakly measurable and separably valued.
+  Without loss of generality we may simply assume that $X$ is separable (potentially replacing $X$ by the closure of the range of $f$).
+  Let $(\mb{x}_n)_{n \in \N}$ be a dense sequence in $X$, and for each $n \in \N$ define a function $\map{\phi_n}{X}{\{\mb{x}_1,\ldots,\mb{x}_n\}}$ such that for all $\mb{x} \in X$,
+  \begin{equation*}
+    \|\mb{x} - \phi_n(\mb{x})\|_X = \min_{1 \leq j \leq n} \|\mb{x} - \mb{x}_j\|_X.
+  \end{equation*}
+  By density of $(\mb{x}_n)_{n \in \N}$ in $X$ we thus have that $\phi_n(\mb{x}) \to \mb{x}$ for all $\mb{x} \in X$.
+  Now define functions $\map{f_n}{S}{X}$ by
+  \begin{equation*}
+    f_n(s) := \phi_n(f(s)) \qquad \forall s \in S,
+  \end{equation*}
+  so that $f_n \to f$ pointwise.
+  Each $f_n$ has finite range, so to show that $f_n$ is simple we need only show that the preimages $f_n^{-1}(\mb{x}_k)$ are measurable.
+  For all $1 \leq k \leq n$ We have
+  \begin{equation*}
+    f_n^{-1}(\mb{x}_k)
+    = \{\phi_n(f(s)) = \mb{x}_k \}
+    = \{\|f(s) - \mb{x}_k\|_X = \min_{1 \leq j \leq n} \|f(s) - \mb{x}_j\|_X \}.
+  \end{equation*}
+  Let $(\mb{x}_n^*)_{n \in \N}$ be a norming sequence of unit vectors on $X^*$; then since $f$ is weakly measurable, for each $j \in \{1,\ldots,n\}$ the function
+  \begin{equation*}
+    s \mapsto \|f(s) - \mb{x}_j\|_X = \sup_{n \in \N} |\langle f(s) - \mb{x}_j, \mb{x}_n^* \rangle|
+  \end{equation*}
+  is measurable (being the countable supremum of measurable functions).
+  Thus the function
+  \begin{equation*}
+    \min_{1 \leq j \leq n} \|f(s) - \mb{x}_j\|_X
+  \end{equation*}
+  is also measurable, and the representation above shows that $f_n^{-1}(\mb{x}_k)$ is measurable (being the set on which two measurable functions are equal).
+  Hence $f_n$ is simple, and consequently $f$ is strongly measurable.
+\end{proof}
+
+\subsection{Bochner spaces}
 
 Given $\map{f}{S}{X}$, we abuse notation and let $\|f\|_X$ denote the function $S \to [0,\infty)$ defined by $s \mapsto \|f(s)\|_X$.
-If $f$ is measurable, then $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
+If $f$ is strongly measurable, then the scalar-valued function $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
 
 \begin{defn}
   Let $(S,\mc{A},\mu)$ be a measure space.
@@ -82,7 +142,7 @@ If $f$ is measurable, then $\|f\|_X$ is also measurable, since the function $\mb
 \end{rmk}
 
 
-\begin{prop}
+\begin{prop}\label{prop:simple-density}
   Let $X$ be a Banach space and $p \in [1,\infty)$.
   Then the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
 \end{prop}
@@ -171,11 +231,167 @@ Note that the case $p = \infty$ is not included in the proposition above, even t
 
 \subsection{The Bochner integral}
 
-\begin{itemize}
-\item defn of the integral for $f \in L^1(S;X)$
-\item evaluation
-\item basic stuff re: linearity. don't dwell too long
-\end{itemize}
+We turn to defining integrals of vector-valued functions.
+As in the scalar-valued theory we start with simple functions, for which there is only one reasonable definition.
+Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+If $f \in \Simp(S;X)$ is a simple function represented as
+\begin{equation*}
+  f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
+\end{equation*}
+and if in addition $f \in L^1(S,\mu;X)$, we define the \emph{Bochner integral}
+\begin{equation*}
+  \int_S f \, \dd\mu = \int_S f(s) \, \dd \mu(s) := \sum_{n=1}^N \mu(S_n) \mb{x}_n \in X.
+\end{equation*}
+Note that the assumption $f \in L^1(S,\mu;X)$ is equivalent to having $\mu(S_n) < \infty$ for all $n$.
+The Bochner integral is a linear map $\Simp(S;X) \cap L^1(S,\mu;X) \to X$, and for $f$ as above it satisfies
+\begin{equation*}
+  \Big\| \int_S f(s) \, \dd \mu(s) \Big\|_X \leq |\mu(S_n)| \|\mb{x}_n\|_X = \|f\|_{L^1(S,\mu;X)}.
+\end{equation*}
+Thus by density of $\Simp(S;X) \cap L^1(S,\mu;X)$ in $L^1(S,\mu;X)$ (Proposition \ref{prop:simple-density}), the Bochner integral extends to a bounded linear map $L^1(S,\mu;X) \to X$ which we continue to call the Bochner integral and denote by the same symbol.
+Thus the Bochner integral of $g \in L^1(S,\mu;X)$ is given by 
+\begin{equation*}
+  \int_S g \, \dd\mu := \lim_{n \to \infty} \int_S f_n \, \dd\mu \in X
+\end{equation*}
+where $f_n \in \Simp(S;X) \cap L^1(S,\mu;X)$ for all $n \in \N$ and $f_n \to g$ in $L^1(S,\mu;X)$.
+
+The Bochner integral satisfies the following properties.
+\begin{prop}
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  The Bochner integral satisfies the following properties:
+  \begin{description}
+  \item[Linearity] For $f_1, f_2 \in L^1(S,\mu;X)$ and $\lambda_1, \lambda_2 \in \C$,
+    \begin{equation*}
+      \int_S (\lambda_1 f_1 + \lambda_2 f_2)(s) \, \dd\mu(s) = \lambda_1 \int_S f_1(s) \dd\mu(s) + \lambda_2 \int_S f_2(s) \dd\mu(s) .
+    \end{equation*}
+  \item[Commutation with linear maps] If $f \in L^1(S,\mu;X)$ and $T \in \Lin(X,Y)$ is a bounded linear map into a Banach space $Y$,
+    \begin{equation*}
+      T\Big( \int_S f \, \dd\mu \Big) = \int_S Tf(s) \, \dd\mu(s) \in Y
+    \end{equation*}
+    where $Tf \in L^1(S,\mu;Y)$ is given by $(Tf)(s) = T(f(s))$ for almost all $s \in S$.
+    In particular, if $\mb{x}^* \in X^* = \Lin(X,\C)$, then
+    \begin{equation*}
+      \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) \in \C.
+    \end{equation*}
+  \item[Closure] If $f \in L^1(S,\mu;X)$ and $X_0$ is a closed subspace of $X$ such that $f(s) \in X_0$ for almost all $s \in S$, then $\int_S f \, \dd\mu \in X_0$.
+  \item[Dominated convergence] Let $(f_n)_{n \in \N}$ be a sequence in $L^1(S,\mu;X)$, $\map{f}{S}{X}$, and suppose that $\lim_{n \to \infty} f_n = f$ almost everywhere.
+    Suppose that there exists a non-negative $g \in L^1(S,\mu)$ such that $\|f_n\|_X \leq g$ almost everywhere.
+    Then $f \in L^1(S,\mu;X)$ and
+    \begin{equation*}
+      \int_S f \, \dd\mu = \lim_{n \to \infty} \int_S f_n \, \dd\mu.
+    \end{equation*}
+  \item[Substitution / Change of Variables]
+    Let $(T,\mc{B})$ be a measurable space and $\map{\phi}{S}{T}$ a measurable function, and let $\nu = \mu \circ \phi^{-1}$ denote the pushforward measure.
+    Suppose $g \in L^1(T,\nu;X)$.
+    Then $g \circ \phi \in L^1(S,\mu;X)$, and
+    \begin{equation*}
+      \int_S g \circ \phi \, \dd\mu = \int_T g \, \dd\nu.
+    \end{equation*}
+    
+  \end{description}
+\end{prop}
+
+\begin{proof}
+  \begin{description}
+  \item[Linearity] follows from the definition.
+    
+  \item[Commutation with linear maps] by continuity it suffices to prove this for simple $f \in \Simp(S;X) \cap L^1(S,\mu;X)$.
+    Writing $f$ as in \eqref{eqn:simple-function-standard-form} we have 
+    \begin{equation*}
+      \begin{aligned}
+        T\Big(\int_S \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \, \dd\mu \Big)
+        = T\Big(\sum_{n=1}^N \mu(S_n) \otimes \mb{x}_n \, \dd\mu \Big)
+        &= \sum_{n=1}^N \mu(S_n) \otimes T(\mb{x}_n) \\
+        &= \int_S Tf \, \dd\mu.
+      \end{aligned}
+    \end{equation*}
+        
+  \item[Closure] We may assume that $X_0$ is a proper subspace of $X$, otherwise there is nothing to show.
+    Let $\mb{y} \in X \sm X_0$, and by Hahn--Banach\footnote{It's possible to prove this without Hahn--Banach. See \cite[Corollary 1.1.22]{HNVW16}.} choose a functional $\mb{x}^* \in X^*$ such that $\langle \mb{y}, \mb{x}^* \rangle = 1$ and $X_0 \subset \ker \mb{x}^*$.
+    Then by the commutation property above we have
+    \begin{equation*}
+      \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) = 0
+    \end{equation*}
+    since $f(s) \in X_0$ for almost all $s \in S$.
+    Thus $\int_S f \, \dd\mu \neq y$.
+    Since $y \in X \sm X_0$ was arbitrary, we conclude that $\int_S f \, \dd\mu \in X_0$.
+
+  \item[Dominated convergence]
+    By continuity of the Bochner integral it suffices to show that $f \in L^1(S,\mu;X)$ and  $f_n \to f$ in $L^1(S,\mu;X)$.
+    The first fact follows from $\|f\|_{L^1(S,\mu;X)} \leq \|g\|_{L^1(S,\mu)}$.
+    For the second, since $\|(f_n - f)(s)\|_X \leq 2g(s)$ almost everywhere, we have
+    \begin{equation*}
+      \lim_{n \to \infty} \int_S \|(f_n - f)(s)\|_X \, \dd\mu(s) = 0
+    \end{equation*}
+    by scalar dominated convergence.
+
+  \item[Substitution]
+    First we need to show that $g \circ \phi$ is strongly measurable.
+    Let
+    \begin{equation*}
+      g_i = \sum_{n=1}^{N_i} \1_{S_{n,i}} \otimes \mb{x}_{n,i}
+    \end{equation*}
+    be a sequence of simple functions converging to $g$ $\mu$-almost everywhere.
+    Then
+    \begin{equation*}
+      g_i \circ \phi = \sum_{n=1}^{N_i} (\1_{S_{n,i}} \circ \phi) \otimes \mb{x}_{n,i} = \sum_{n=1}^{N_i} \1_{\phi^{-1}(S_{n,i})} \otimes \mb{x}_{n,i}
+    \end{equation*}
+    is a sequence of simple functions converging to $g \circ \phi$ $\nu$-almost everywhere, so $g \circ \phi$ is also strongly measurable.
+    The identity for scalar-valued functions
+    \begin{equation*}
+      \int_S \|f \circ \phi(s)\|_X \, \dd\mu(s) = \int_T \|f(s)\|_X \, \dd\nu(t)
+    \end{equation*}
+    implies that $f \circ \phi \in L^1(S,\mu;X)$.
+    Finally, for all $\mb{x}^* \in X^*$ we have by the commutation property and the substitution identity for scalar-valued functions
+    \begin{equation*}
+      \begin{aligned}
+        \Big\langle \int_S f \circ \phi \, \dd\mu , \mb{x}^* \Big\rangle
+        = \int_S \langle f(\phi(s)), \mb{x}^* \rangle \, \dd\mu(s)
+        &= \int_T \langle f(s), \mb{x}^* \rangle \, \dd\nu(t) \\
+        &= \Big\langle \int_T f \, \dd\nu, \mb{x}^* \Big\rangle,
+      \end{aligned}
+    \end{equation*}
+    which proves the result.
+  \end{description}
+\end{proof}
+
+\begin{rmk}
+  This method used to prove the substitution identity is known as \emph{scalarisation}: it proves an identity for $X$-valued functions by testing it against all functionals $\mb{x}^* \in X^*$.
+  This useful technique often reduces identities for Banach-valued functions to known identities for scalar-valued functions.
+\end{rmk}
+
+\todo{exposition}
+
+\begin{prop}[Fubini]
+  Let $(S,\mc{A},\mu)$ and $(T,\mc{B},\nu)$ be $\sigma$-finite measure spaces\footnote{The scalar Fubini theorem fails for non-$\sigma$-finite spaces!} and let $f \in L^1(S \times T; X)$.
+  Then
+  \begin{itemize}
+  \item for almost all $s \in S$ the function $f(s,\cdot)$ is in $L^1(T;X)$,
+  \item for almost all $t \in T$ the function $f(\cdot,t)$ is in $L^1(S;X)$,
+  \item the functions $\int_T f(\cdot,t) \, \dd\nu(t)$ and $\int_S f(s,\cdot) \, \dd\mu(s)$ are in $L^1(T;X)$ and $L^1(S;X)$ respectively, and
+    \begin{equation}\label{eq:fubini}
+      \int_{S \times T} f \, \dd(\mu \times \nu) = \int_T \Big(  \int_S f(s,t) \, \dd\mu(s) \Big) \, \dd\nu(t) = \int_S \Big(\int_T f(s,t) \, \dd\nu(t) \Big) \, \dd\mu(s).
+    \end{equation}
+  \end{itemize}
+\end{prop}
+
+\begin{proof}
+  Consider an everywhere-defined representative of $f$.
+  Since $f$ is strongly measurable, by the Pettis measurability theorem (Theorem \ref{thm:Pettis-measurability}), it is weakly measurable and separably valued.
+  Thus the functions $f(s,\cdot)$ and $f(\cdot,t)$ are separably valued for all $s \in S$ and $t \in T$, and by the corresponding scalar-valued result, they are both weakly measurable.
+  Thus $f(s,\cdot)$ and $f(\cdot,t)$ are strongly measurable.
+  Now since the function $(s,t) \mapsto \|f(s,t)\|_X$ is integrable, the scalar Fubini theorem implies all of the integrability claims.
+  The equalities \eqref{eq:fubini} are proven by scalarisation: for $\mb{x}^* \in X^*$ we have
+  \begin{equation*}
+    \begin{aligned}
+      \Big\langle \int_{S \times T} f \, \dd(\mu \times \nu) , \mb{x}^* \Big\rangle
+      &= \int_{S \times T} \langle f(s,t), \mb{x}^* \rangle \, \dd(\mu \times \nu) \\
+      &= \int_{S} \int_{T} \langle f(s,t), \mb{x}^* \rangle \, \dd\nu(t) \, \dd\mu(s) \\
+      &= \int_{S} \Big\langle \int_{T} f(s,t) \, \dd\nu(t) , \mb{x}^* \Big\rangle \, \dd\mu(s) \\
+      &= \Big\langle \int_S \Big(\int_{T} f(s,t) \, \dd\nu(t) \Big)\, \dd\mu(s) , \mb{x}^* \Big\rangle
+  \end{aligned}
+  \end{equation*}
+  by the scalar Fubini theorem, and likewise with the order of $S$ and $T$ reversed.
+\end{proof}
 
 
 
@@ -198,7 +414,7 @@ For example, when $V$ is the set of characteristic functions of measurable sets,
 
 \begin{itemize}
 \item defn of tensor extensions
-\item result on positive operators
+\item result on positive operators (example: Lebesgue integral to Bochner integral!)
 \item nonexample: Fourier transform. counterexamples
 \end{itemize}
 
