@@ -3,39 +3,67 @@
 
 \begin{defn}\label{defn:conditional-expectation} %Dudley, p336
   Let $(\Omega, \mc{A}, \P)$ be a probability space, and let $f \in L^1(\Omega, \mc{A}; \P)$ be an integrable random variable.
-  Given a $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a \emph{conditional expectation of $f$ given $\mc{B}$} is a $\mc{B}$-measurable random variable $\E^{\mc{B}}(f)$ such that
+  Given a $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a \emph{conditional expectation of $f$ given $\mc{B}$} is a $\mc{B}$-measurable random variable $\E^{\mc{B}}f$ such that
   \begin{equation}\label{eq:conditional-expectation-property}
-    \qquad \int_B \E^{\mc{B}}(f) \, \dd\P = \int_B f \, \dd\P \qquad \text{for all $B \in \mc{B}$.}
+    \qquad \int_B \E^{\mc{B}}f \, \dd\P = \int_B f \, \dd\P \qquad \text{for all $B \in \mc{B}$.}
   \end{equation}
 \end{defn}
 
+\begin{example}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and let $\mc{B} \subset \mc{A}$ be a sub-$\sigma$-algebra which is \emph{atomic}, in the sense that there is a collection of pairwise disjoint subsets $(B_\lambda)_{\lambda \in \Lambda}$ of $\mc{B}$ which generate $\mc{B}$, such that $\P(B_{\lambda}) > 0$ for all $\lambda$, and such that if $B_\lambda$ can be written as a disjoint union $B_\lambda = C \cup D$ for some sets $C,D \in \mc{B}$, then $\P(C) = 0$ or $\P(D) = 0$ (i.e. the sets $B_\lambda$ are \emph{atoms}).
+  Let's compute \emph{the} conditional expectation $\E^{\mc{B}}f$ of an integrable random variable $f \in L^1(\Omega,\mc{A},\P)$ (it turns out there is only one).
+  Since the atoms $(B_\lambda)_{\lambda}$ generate $\mc{B}$ and are pairwise disjoint, and since $\E^{\mc{B}}f$ is $\mc{B}$-measurable, $\E^{\mc{B}}f$ must be constant on each $B_\lambda$, so that
+  \begin{equation*}
+    \E^{\mc{B}} f = \sum_{\lambda \in \Lambda} \1_{B_\lambda} c_\lambda
+  \end{equation*}
+  for some scalars $(c_\lambda)_{\lambda \in \Lambda}$.
+  Averaging over one of the atoms $B_{\lambda}$ and using \eqref{eq:conditional-expectation-property} tells us that
+  \begin{equation*}
+    \begin{aligned}
+      c_\lambda = \frac{1}{\P(B_\lambda)} \int_{B_\lambda} \E^{\mc{B}} f \, \dd\P = \frac{1}{\P(B_\lambda)} \int_{B_\lambda} f \, \dd\P.
+    \end{aligned}
+  \end{equation*}
+  In probabilistic terms, the quantity on the right hand side is the conditional expectation of $f$ given $B_\lambda$, which exists since $\P(B_\lambda) > 0$.
+\end{example}
+
+The previous example shows that conditional expectations with respect to atomic $\sigma$-algebras exist and are unique.
+This is true in full generality.
 
 \begin{thm}\label{thm:conditional-expectation-EU}
-  For any $f \in L^1(\Omega, \mc{A}; \P)$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a unique conditional expectation $\E^{\mc{B}}(f) \in L^1(\Omega, \mc{B}, \P)$ exists.
+  For any $f \in L^1(\Omega, \mc{A}; \P)$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a unique conditional expectation $\E^{\mc{B}}f \in L^1(\Omega, \mc{B}, \P)$ exists.
+  Furthermore, for all $p \in [1,\infty]$, the operator $\E^{\mc{B}}$ is a positive contraction from $L^p(\Omega, \mc{A}; \P)$ to $L^p(\Omega, \mc{B}; \P)$.
 \end{thm}
 
 \begin{proof} %Dudley p337 for uniqueness and 'proof by measure theory', 
   First let's handle the uniqueness.
-  Suppose $\E^{\mc{B}}(f)$ and $\td{\E}^{\mc{B}}(f)$ are two conditional expectations of $f$ given $\mc{B}$.
+  Suppose $\E^{\mc{B}}f$ and $\td{\E}^{\mc{B}}f$ are two conditional expectations of $f$ given $\mc{B}$.
   Then for all subsets $B \in \mc{B}$ we have
   \begin{equation*}
-    \int_B \E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f) \, \dd\P = \int_B f \, \dd\P - \int_B f \, \dd\P = 0.
+    \int_B \E^{\mc{B}}f - \td{\E}^{\mc{B}}f \, \dd\P = \int_B f \, \dd\P - \int_B f \, \dd\P = 0.
   \end{equation*}
-  Since $\E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f)$ is $\mc{B}$-measurable, the subsets
+  Since $\E^{\mc{B}}f - \td{\E}^{\mc{B}}f$ is $\mc{B}$-measurable, the subsets
   \begin{equation*}
-    B_+ := \{\E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f) > 0\} \quad \text{and} \quad B_- := \{\E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f) < 0\}
+    B_+ := \{\E^{\mc{B}}f - \td{\E}^{\mc{B}}f > 0\} \quad \text{and} \quad B_- := \{\E^{\mc{B}}f - \td{\E}^{\mc{B}}f < 0\}
   \end{equation*}
   are both in $\mc{B}$, so we get
   \begin{equation*}
-    \int_\Omega | \E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f) | \, \dd\P
-    = \int_{B_+}  \E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f) \, \dd\P -  \int_{B_-}  \E^{\mc{B}}(f) - \td{\E}^{\mc{B}}(f) \, \dd\P 
+    \int_\Omega | \E^{\mc{B}}f - \td{\E}^{\mc{B}}f | \, \dd\P
+    = \int_{B_+}  \E^{\mc{B}}f - \td{\E}^{\mc{B}}f \, \dd\P -  \int_{B_-}  \E^{\mc{B}}f - \td{\E}^{\mc{B}}f \, \dd\P 
     = 0,
   \end{equation*}
-  establishing that $\E^{\mc{B}}(f) = \td{\E}^{\mc{B}}(f)$ almost surely.
+  establishing that $\E^{\mc{B}}f = \td{\E}^{\mc{B}}f$ almost surely.
+
+  We can prove positivity from the defining property \eqref{eq:conditional-expectation-property}, before we establish existence.
+  Suppose $f \in L^1(\Omega, \mc{A}, \P)$ is almost-everywhere nonnegative.
+  Then for all $B \in \mc{B}$ we have
+  \begin{equation*}
+    \int_B \E^{\mc{B}} f \, \dd\P = \int_B f \, \dd\P \geq 0,
+  \end{equation*}
+  which implies that the $\mc{B}$-measurable function $\E^{\mc{B}}f$ is a.e. nonnegative.\footnote{This uses an exercise from measure theory: if $g$ is $\mc{B}$-measurable and $\int_B g \geq 0$ for all $\mc{B}$-measurable sets, then $g \geq 0$ a.e.. Proof: the set $N := \{g(\omega) < 0\}$ is $\mc{B}$-measurable, and assuming it has positive measure leads to the contradiction $0 \leq \int_B g < 0$.}
 
   As for existence: let $P^{\mc{B}}$ be the orthogonal projection of $L^2(\Omega, \mc{A}, \P)$ onto the closed subspace $L^2(\Omega, \mc{B}, \P)$.
   Then for all $f \in L^1(\Omega, \mc{A}, \P) \cap L^2(\Omega, \mc{A}, \P)$ and all $B \in \mc{B}$,
-  \begin{equation}
+  \begin{equation}\label{eq:CE-integration}
     \int_B P^{\mc{B}} f \, \dd\P = \langle P^{\mc{B}} f, \1_{B} \rangle = \langle f, P^{\mc{B}} \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P
   \end{equation}
   where $\langle \cdot, \cdot \rangle$ denotes the inner product on $L^2(\Omega, \mc{A}, \P)$, using that $\1_{B} \in L^2(\Omega, \mc{B}, \P)$.
@@ -47,32 +75,157 @@
     \leq \|f\|_{L^1(\Omega, \mc{A}, \P)}
   \end{equation*}
   where the supremum is over all $g \in L^\infty(\Omega, \mc{B}, \P)$ with $\|g\|_\infty = 1$ (note that $g \in L^2(\Omega, \mc{B}, \P)$ follows since $\Omega$ is a probability space).
-  Thus $P^{\mc{B}}$ extends to a contraction $\map{\E^{\mc{B}}}{L^1(\Omega, \mc{A}, \P)}{L^1(\Omega, \mc{B}, \P)}$, and for all $f \in L^1(\Omega, \mc{A}, \P)$ and $B \in \mc{B}$ this extension satisfies
+  Thus $P^{\mc{B}}$ extends to a contraction $\map{\E^{\mc{B}}}{L^1(\Omega, \mc{A}, \P)}{L^1(\Omega, \mc{B}, \P)}$, and for all $f \in L^1(\Omega, \mc{A}, \P)$ and $B \in \mc{B}$, since integration on $B$ is a continuous linear functional on both $L^1(\Omega, \mc{B}, \P)$ and $L^1(\Omega, \mc{A}, \P)$, this extension satisfies
   \begin{equation*}
     \begin{aligned}
-      \int_B \E^{\mc{B}}f \, \dd\P = \lim_{n \to \infty} 
+      \int_B \E^{\mc{B}}f \, \dd\P = \lim_{n \to \infty} \int_B P^B f_n \, \dd\P \stackrel{\eqref{eq:CE-integration}}{=} \lim_{n \to \infty} \int_B f_n \, \dd\P = \int_B f \, \dd\P
     \end{aligned}
   \end{equation*}
   where $(f_n)_{n \in \N}$ is a sequence in $L^2(\Omega, \mc{A}, \P)$ converging to $f$ in $L^1$.
+  Thus the extension $\E^{\mc{B}}$ is a conditional expectation as claimed.
+  
+  We now show that $\E^{\mc{B}}$ is a contraction from $L^p(\Omega,\mc{A};\P)$ to $L^p(\Omega,\mc{B};\P)$ for all $p \in (1,\infty]$, the case $p=1$ already being established.
+  Here is a clever proof which represents $\E^{\mc{B}}$ as the adjoint of an inclusion (this can be reworked to provide another proof of existence).
+  For all $f \in L^p(\Omega,\mc{A};\P) \cap L^2(\Omega,\mc{A};\P)$ and $g \in L^{p'}(\Omega,\mc{B};\P) \cap L^2(\Omega,\mc{B};\P)$ we have
+  \begin{equation*}
+    \begin{aligned}
+      \langle \E^{\mc{B}} f, g \rangle = \langle P^B f, g \rangle = \langle f, P^B g \rangle = \langle f, g \rangle
+    \end{aligned}
+  \end{equation*}
+  since the orthogonal projection $P^B$ is self-adjoint on $L^2(\Omega,\mc{A};\P)$.
+  Since $g$ was assumed to lie in a dense subspace of $L^{p'}(\Omega,\mc{B};\P)$, this shows that the conditional expectation $\map{\E^{\mc{B}}}{L^p(\Omega,\mc{A};\P)}{L^1(\Omega,\mc{B};\P)}$ is the adjoint of the canonical inclusion $L^{p'}(\Omega,\mc{B},\P) \to L^{p'}(\Omega,\mc{A},\P)$, which is contractive.
+  Thus by duality $\E^{\mc{B}}$ is a contraction from $L^p(\Omega,\mc{A};\P)$ to $L^p(\Omega,\mc{B};\P)$.
 \end{proof}
 
-Theorem \ref{thm:conditional-expectation-EU} lets us speak of \emph{the} conditional expectation of an integrable random variable.
+Having established that the conditional expectation $\E^{\mc{B}}$ is a \textbf{positive} bounded operator from $L^p(\Omega, \mc{A};\P)$ to $L^p(\Omega,\mc{B};\P)$, we can appeal to the extension theorem for positive operators to define conditonal expectations on Banach-valued random variables.
 
-\begin{example}
-  (atomic $\sigma$-algebra, conditional expectation given by conditional probabilities)
-\end{example}
+\begin{defn}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
+  Given a $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, we define the \emph{conditional expectation operator}
+  \begin{equation*}
+    \map{\E_X^{\mc{B}}}{L^1(\Omega,\mc{A},\P;X)}{L^1(\Omega,\mc{B};\P;X)} 
+  \end{equation*}
+  as the unique bounded linear extension of the tensor extension
+  \begin{equation*}
+    \map{\E^{\mc{B}} \otimes I}{L^1(\Omega,\mc{A},\P) \otimes X}{L^1(\Omega,\mc{B},\P) \otimes X}.
+  \end{equation*}
+  We will often overload notation and write $\E^{\mc{B}}$ to denote $\E_X^{\mc{B}}$.
+\end{defn}
+
+Since the conditional expectation $\E^{\mc{B}}$ on scalar-valued functions is positive and contractive on $L^p$ for all $p \in [1,\infty)$, Theorem \ref{thm:positive-extensions} tells us that $\E_X^{\mc{B}}$ is well-defined and is in fact a contraction on $L^p(\Omega,\mc{A},\P;X)$ for all $p \in [1,\infty)$.
+For $p = \infty$, since $L^\infty(\Omega;X)$ is lacking in convenient dense subspaces, we can't argue so abstractly.
+Here is a somewhat ad-hoc argument for contractivity on $L^\infty$.
+
+\begin{prop}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
+  Then the conditional expectation $\E_X^{\mc{B}}$, which \emph{a priori} maps
+  \begin{equation*}
+    \map{\E_X^{\mc{B}}}{L^\infty(\Omega,\mc{A},\P;X) \subset L^1(\Omega,\mc{A},\P;X)}{L^1(\Omega,\mc{B},\P;X)},
+  \end{equation*}
+  is a contraction on $L^\infty(\Omega,\mc{A},\P;X)$.
+\end{prop}
+
+\begin{proof}
+  Let $f \in L^\infty(\Omega,\mc{A},P;X)$.
+  Since $L^\infty(\Omega,\mc{A},\P;X) \subset L^2(\Omega,\mc{A},\P;X)$, $E^{\mc{B}} f = \td{P^{\mc{B}}} f$ can be seen as the tensor extension of the orthogonal projection of $L^2(\Omega,\mc{A},\P)$ onto $L^2(\Omega, \mc{B},\P)$ (as in the proof of Theorem \ref{thm:conditional-expectation-EU}).
+  By Proposition \ref{prop:bochner-preduality}, we can test $\|\E_X^{\mc{B}} f\|_\infty$ by duality, using that $L^2(\Omega,\mc{B}; X^*)$ is dense in $L^1(\Omega, \mc{B}; X^*)$.
+  For all nonzero $g \in L^2(\Omega, \mc{B}; X^*)$ we have
+\begin{equation*}
+  \begin{aligned}
+    | \langle \E_X^{\mc{B}} f, g \rangle |
+    =  | \langle \td{P^{\mc{B}}} f, g \rangle | 
+    \stackrel{(*)}{=} | \langle f, \td{P^{\mc{B}}} g \rangle | 
+    &=  | \langle f, \E_X^{\mc{B}} g \rangle | \\
+    &\leq  \|f\|_{L^\infty(\Omega,\mc{A},\P;X)} \|\E_X^{\mc{B}} g\|_{L^1(\Omega,\mc{A},\P;X^*)} \\
+    &\leq  \|f\|_{L^\infty(\Omega,\mc{A},\P;X)} \| g\|_{L^1(\Omega,\mc{A},\P;X^*)}.
+  \end{aligned}
+\end{equation*}
+For the starred equality see Exercise \ref{ex:tensor-adjoint} in the previous chapter.
+Taking the supremum over all such $g$ completes the proof.
+\end{proof}
+
+
+\todo{further properties of vector-valued conditional expectations}
+
+
+
+
 
 
 \subsection{Filtrations and stopping times}
 
--information-theoretic interpretation
--limiting $\sigma$-algebra
--examples of stopping times (first hitting time of closed set or whatever)
+\begin{defn}
+  A \emph{filtration} on a probability space $(\Omega,\mc{A},\P)$ is a monotone increasing (i.e. nondecreasing) sequence of $\sigma$-subalgebras
+  \begin{equation*}
+    \mc{A}_0 \subseteq \mc{A}_1 \subseteq \mc{A}_2 \subseteq \cdots \subseteq \mc{A}.
+  \end{equation*}
+\end{defn}
+
+\begin{rmk}
+  With obvious modifications one can talk about filtrations starting at an arbitrary index $(\mc{A}_n)_{n = n_0}^\infty$, finite filtrations $(\mc{A}_n)_{n = n_0}^N$, or filtrations with respect to arbitrary (total or partial) orders, for example continuously-indexed filtrations $(\mc{A}_t)_{t \geq 0}$.
+  There is no need to be too pedantic about these definitions.
+\end{rmk}
+
+The most important interpretation of a filtration $(\mc{A}_n)_{n=0}^\infty$ is that each $\sigma$-subalgebra $\mc{A}_n \subset \mc{A}$ models the \emph{information available at time $n$} (in reference to some discrete time-dependent process).
+The monotonicity assumption encapsulates the idea that the available information does not decrease as time progresses.
+There are two equivalent ways of thinking about this: one is that at time $n$ one has access to all $\mc{A}_n$-measurable subsets; the other is that at time $n$ one has access to all $\mc{A}_n$-measurable functions.
+
+
+\begin{defn}
+  Given a filtration $(\mc{A}_n)_{n=0}^\infty$ on a probability space $(\Omega, \mc{A}, \P)$, a random variable $\map{T}{\Omega}{\N \cup \{\infty\}}$ is called a \emph{stopping time} (with respect to $(\mc{A}_n)$) if 
+  \begin{equation*}
+    \{\omega \in \Omega: T(\omega) \leq n\} \in \mc{A}_n \qquad \forall n \geq 0.
+  \end{equation*}
+  The stopping time $T$ is \emph{finite} if $T$ is almost surely finite.
+\end{defn}
+
+Generally stopping times $T$ are defined in terms of some kind of stochastic \emph{stopping condition}.
+Interpreting the filtration $(\mc{A}_n)_{n \in \N}$ as modelling the available information at time $n$, $T$ being a stopping time says precisely that at time $n$, one can identify all events $\omega \in \Omega$ for which $T(\omega) \leq n$.
+Said less precisely, if $T$ is a stopping time, then at time $n$, one can tell whether $T$ is less than $n$.
+This is best understood by example.
+
+\begin{example}
+  Let $\Omega = \{H, T\}^\N$ equipped with the product $\sigma$-algebra and measure, where each factor $\{H, T\}$ has the full $\sigma$-algebra and the uniform probability measure.
+  Let $\map{\pi_n}{\Omega}{\{H,T\}}$ be the $n$-th coordinate function. 
+  Then the sequence of random variables $(\pi_n)_{n \in \N}$ represents an infinite sequence of fair coin tosses ($H$ is heads, $T$ is tails).
+  Let $\mc{A}_n = \sigma(\pi_0,\ldots,\pi_n)$ be the $\sigma$-subalgebra generated by the first $n+1$ coordinates, so that $(\mc{A}_n)_{n = 0}^\infty$ is a filtration.
+  Let
+  \begin{equation*}
+    T(\omega) := \inf\Big\{n \in \N : \pi_n(\omega) = H \Big\}
+  \end{equation*}
+  with the usual convention that $T(\omega) = \infty$ if $\pi_n(\omega) \neq H$ for all $n \in \N$.
+  That is, $T(\omega)$ is the first time $n$ at which $\pi_n(\omega) = H$.
+  At time $n$ (i.e. after the $n$-th coin flip) we obviously know whether or not one of the $m$-th coin flips, with $m \leq n$, showed an $H$, which indicates that $T$ should be a stopping time.
+  Rigourously, one shows this by writing for all $n \in \N$
+  \begin{equation*}
+    \begin{aligned}
+      \{\omega \in \Omega : T(\omega) \leq n\}
+      &= \big\{\omega : \inf\{m : \pi_m(\omega) = H\} \leq n\big\} \\
+      &= \{\omega  : \text{$\pi_m(\omega) = H$ for some $m \leq n$}\} \\
+      &= \bigcup_{m = 0}^n \pi_m^{-1}(H) \in \sigma(\pi_0,\ldots,\pi_n) = \mc{A}_n.
+    \end{aligned}
+  \end{equation*}
+
+  In fact, $T$ is a finite stopping time, which is one of the classic computations of probability:
+  \begin{equation*}
+    \P(T = \infty) = \P(\{\text{$\pi_m = H$ for all $m \in \N$} \}) = \prod_{m=0}^\infty \frac{1}{2} = 0.
+  \end{equation*}
+  
+\end{example}
+
+
+\begin{prop}
+  first hitting time of a closed set is a stopping time, if needed\todo{write}
+\end{prop}
 
 \subsection{Definitions and key examples of martingales}
 
 -stopped martingales
 -Rademacher variables and sums
+
+\begin{defn}
+  limiting $\sigma$-algebra 
+\end{defn}
 
 \begin{thm}[$L^p$-convergence of martingales]
   %Pisier Theorem 1.14
@@ -387,6 +540,13 @@ and its maximal function
 \subsection{Gundy's decomposition}
 
 \subsection{The Radon--Nikodym property, martingale convergence, and Bochner space duality}
+
+\subsection*{Exercises}
+
+\begin{exercise}
+  test
+\end{exercise}
+
 
 
 %%% Local Variables:

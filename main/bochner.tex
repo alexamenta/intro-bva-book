@@ -268,7 +268,7 @@ In the scalar case $X = \C$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong
 We will see later on that this is true for a Banach space $X$ if and only if it has the \emph{Radon--Nikodym property}.
 For now we will establish a duality result that holds for every Banach space.
 
-\begin{prop}
+\begin{prop}\label{prop:bochner-preduality}
   Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space\footnote{The $\sigma$-finiteness assumption is only needed for $p = 1$.} and $X$ a Banach space.
   Then for all $1 \leq p \leq \infty$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is an isometry onto a closed subspace of $L^p(S;X)^*$ which is norming for $L^p(S;X)$: that is, for every $f \in L^p(S;X)$,
   \begin{equation*}
@@ -671,14 +671,14 @@ Before that we record a simple observation: tensor extensions can do no better t
   Taking the supremum over all nonzero $f \in L^p(S)$ completes the proof.
 \end{proof}
 
-\begin{prop}\label{prop:positive-extensions}
+\begin{thm}\label{thm:positive-extensions}
   Fix a measure space $(S,\mc{A},\mu)$ and $p,q \in [1,\infty)$.
   Let $T \in \Lin(L^p(S),L^q(S))$ be a bounded linear operator which is \emph{positive}, meaning that for all (a.e.) nonnegative $f \in L^p(S)$, $Tf \in L^q(S)$ is also (a.e.) nonnegative.
   Then for every Banach space $X$ the tensor extension $\td{T}$ is bounded from $L^p(S;X) \to L^q(S;X)$, and in fact
   \begin{equation*}
     \|\td{T}\|_{L^p(S;X) \to L^q(S;X)} = \|T\|_{L^p(S) \to L^q(S)}.
   \end{equation*}
-\end{prop}
+\end{thm}
 
 \begin{proof}
   We will show the estimate
@@ -716,7 +716,7 @@ Before that we record a simple observation: tensor extensions can do no better t
   proving \eqref{eq:positive-pw-est} and completing the proof.
 \end{proof}
 
-Proposition \ref{prop:positive-extensions} shows that the `extension problem' for positive operators is not much of a problem: positive operators extend automatically.
+Theorem \ref{thm:positive-extensions} shows that the `extension problem' for positive operators is not much of a problem: positive operators extend automatically.
 Since most interesting operators are not positive, a lot of work remains.
 
 
@@ -737,6 +737,12 @@ Since most interesting operators are not positive, a lot of work remains.
   \item If $X$ is separable or $A$ is separable, show that $C(A;X)$ is contained in $L^\infty(A, \mu;X)$.
   \item Give an example of a topological space $A$ and a Banach space $X$ such that $C(A;X)$ is not contained in $L^\infty(A,\mu;X)$.
   \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex:tensor-adjoint}
+  Let $(S,\mc{A},\mu)$ be a measure space, let $T$ be a bounded linear operator on $L^2(S,\mu)$, and let $X$ be a Banach space.
+  Let $T^*$ denote the adjoint of $T$.
+  Show that $\td{T} = T \otimes I$ is bounded on $L^2(S,\mu;X)$ if and only if $\td{T^*} = T^* \otimes I$ is bounded on $L^2(S,\mu;X^*)$, and in this case their bounded linear extensions to $L^2(S,\mu;X)$ and $L^2(S,\mu;X^*)$ satisfy $(\td{T})^* = \td{T^*}$.
 \end{exercise}
 
 \begin{exercise}\label{ex:FT-bounded-1-infty}
