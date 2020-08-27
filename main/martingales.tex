@@ -208,40 +208,36 @@ First we will establish a foundational result in the case $X = \R$, from which t
   \end{equation*}
   which implies that the $\mc{B}$-measurable function $\E^{\mc{B}}f$ is a.s. nonnegative.\footnote{This uses an exercise from measure theory: if $g$ is $\mc{B}$-measurable and $\int_B g \geq 0$ for all $\mc{B}$-measurable sets, then $g \geq 0$ a.e.. Proof: the set $N := \{g(\omega) < 0\}$ is $\mc{B}$-measurable, and assuming it has positive measure leads to the contradiction $0 \leq \int_B g < 0$.}
 
-  As for existence: identify $L^2(\mc{B};\R)$ with a closed subspace of $L^2(\mc{A};\R)$ by inclusion, and let $P^{\mc{B}}$ be the corresponding orthogonal projection of $L^2(\mc{A}; \R)$.
-  Then for all $f \in L^2(\mc{A}; \R)$ and all $B \in \mc{B}$,
-  \begin{equation}\label{eq:CE-integration}
-    \int_B P^{\mc{B}} f \, \dd\P = \langle P^{\mc{B}} f, \1_{B} \rangle = \langle f, P^{\mc{B}} \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P
-  \end{equation}
-  where $\langle \cdot, \cdot \rangle$ denotes the inner product on $L^2(\mc{A}; \R)$, using that $\1_{B} \in L^2(\mc{B}; \R)$.
-  Furthermore, 
+  As for existence: we fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A};\R)$, and we will construct a conditional expectation $\E^{\mc{B}}f \in L^p(\mc{B};\R) \subset L^p(\mc{A};\R)$ directly, which is evidently contractive.
+  First suppose $p > 1$, so that $p' < \infty$.
+  The inclusion map $\map{\iota}{L^{p'}(\mc{B};\R)}{L^{p'}(\mc{A};\R)}$ is contractive, so (using that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$) its adjoint $\map{\iota^*}{L^p(\mc{A};\R)}{L^p(\mc{B};\R)}$ is also contractive.
+  For all $f \in L^p(\mc{A};\R)$ and all sets $B \in \mc{B}$ we then have
   \begin{equation*}
-    \|P^{\mc{B}} f \|_{1} = \sup_{g} |\langle P^{\mc{B}} f, g \rangle|
-    = \sup_{g} |\langle f, P^{\mc{B}} g \rangle|
-    = \sup_{g} |\langle f, g \rangle| 
-    \leq \|f\|_{1}
+    \int_B \iota^* f \, \dd\P = \langle \iota^* f, \1_{B} \rangle = \langle f, \iota \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P,
   \end{equation*}
-  where the supremum is over all $g \in L^\infty(\mc{B}; \R) \subset L^2(\mc{B};\R)$ with $\|g\|_\infty = 1$.
-  Thus $P^{\mc{B}}$ extends to a contraction $\map{\E^{\mc{B}}}{L^1(\mc{A}; \R)}{L^1(\mc{B}; \R)}$, and for all $f \in L^1(\mc{A}; \R)$ and $B \in \mc{B}$, since integration on $B$ is a continuous linear functional on $L^1(\mc{A}; \R)$, this extension satisfies
+  so $\iota^* f \in L^p(\mc{B};\R) \subset L^1(\mc{B};\R)$ is a conditional expectation of $f$ given $\mc{B}$.
+
+  For $p = 1$ this argument becomes harder, since $L^1$ is strictly contained in the dual of $L^\infty$.
+  Instead we argue by density.
+  We have that $L^2(\mc{A},\P)$ is dense in $L^1(\mc{A},\P)$, so we can aim to extend the conditional expectation defined above (in the case $p=2$) by continuity.
+  For $f \in L^2(\mc{A},\P)$ and $g \in L^\infty(\mc{B};\R)$ we have, since $L^\infty(\mc{B};\R) \subset L^2(\mc{B};\R)$,
   \begin{equation*}
-    \begin{aligned}
-      \int_B \E^{\mc{B}}f \, \dd\P = \lim_{n \to \infty} \int_B P^B f_n \, \dd\P \stackrel{\eqref{eq:CE-integration}}{=} \lim_{n \to \infty} \int_B f_n \, \dd\P = \int_B f \, \dd\P
-    \end{aligned}
+    |\langle \iota^* f, g \rangle| = |\langle f, \iota g \rangle| = |\langle f, g \rangle| \leq \|f\|_1 \|g\|_\infty.
   \end{equation*}
-  where $(f_n)_{n \in \N}$ is a sequence in $L^2(\mc{A}; \P)$ converging to $f$ in $L^1$.
-  Thus the extension $\E^{\mc{B}}$ is a conditional expectation as claimed.
-  
-  We now show that $\E^{\mc{B}}$ is a contraction on $L^p(\mc{A};\R)$ for all $p \in (1,\infty]$, the case $p=1$ already being established.
-  Here is a clever proof which represents $\E^{\mc{B}}$ as the adjoint of an inclusion (this can be reworked to provide another proof of existence).
-  For all $f \in L^p(\mc{A};\R) \cap L^2(\mc{A};\R)$ and $g \in L^{p'}(\mc{B};\R) \cap L^2(\mc{B};\R)$ we have
+  Taking the supremum over all nonzero $g \in L^\infty(\mc{B};\R)$ proves that
   \begin{equation*}
-    \begin{aligned}
-      \langle \E^{\mc{B}} f, g \rangle = \langle P^B f, g \rangle = \langle f, P^B g \rangle = \langle f, g \rangle
-    \end{aligned}
+    \|\iota^* f\|_1 \leq \|f\|_1,
   \end{equation*}
-  since the orthogonal projection $P^B$ is self-adjoint on $L^2(\mc{A};\R)$.
-  Since $g$ was assumed to lie in a dense subspace of $L^{p'}(\mc{B};\R)$, this shows that the conditional expectation $\map{\E^{\mc{B}}}{L^p(\mc{A};\R)}{L^1(\mc{B};\R)}$ is the adjoint of the canonical inclusion $L^{p'}(\mc{B};\R) \to L^{p'}(\mc{A};\R)$, which is contractive.
-  Thus by duality $\E^{\mc{B}}$ is a contraction from $L^p(\mc{A};\R)$ to $L^p(\mc{B};\R)$.
+  so $\iota^*$ extends to a contraction $L^1(\mc{A};\R) \to L^1(\mc{B};\R)$.
+  For $f \in L^1(\mc{A};\R)$ and $B \in \mc{B}$, using that integration on $B$ is a continuous linear functional on $L^1$, we have
+  \begin{equation*}
+    \int_B \iota^* f \, \dd\P
+    = \lim_{n \to \infty} \int_B \iota^* f_n \, \dd\P
+    = \lim_{n \to \infty} \int_B  f_n \, \dd\P
+    = \int_B f \, \dd\P
+  \end{equation*}
+  where $f_n$ is a sequence in $L^2(\mc{A};\R)$ converging to $f$ in $L^1(\mc{A};\R)$.
+  Thus the continuous extension of $\iota^*$ is a conditional expectation of $f$, and we are done.
 \end{proof}
 
 Note that the proof of the previous result also establishes the following adjoint relation.
