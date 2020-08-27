@@ -240,28 +240,29 @@ First we will establish a foundational result in the case $X = \R$, from which t
   Thus the continuous extension of $\iota^*$ is a conditional expectation of $f$, and we are done.
 \end{proof}
 
-Note that the proof of the previous result also establishes the following adjoint relation.
+Note that the proof of the previous result also establishes the following adjoint relation (the case $p=\infty$ involves a few lines of work which are left as an exercise).
 
 \begin{prop}
-  (CE is adjoint to inclusion)
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $\mc{B}$ a $\sigma$-subalgebra of $\mc{A}$.
+  For all $p \in (1,\infty]$, the conditional expectation $\E^{\mc{B}}$ on $L^p(\mc{A};\R)$ is the adjoint of the corresponding conditional expectation on $L^{p'}(\mc{A};\R)$. 
 \end{prop}
 
 
-Having established that the conditional expectation $\E^{\mc{B}}$ is a \textbf{positive} bounded operator from $L^p(\Omega, \mc{A};\P)$ to $L^p(\Omega,\mc{B};\P)$, we can appeal to the extension theorem for positive operators to define conditonal expectations on Banach-valued random variables.
+Having established that the conditional expectation $\E^{\mc{B}}$ is a \textbf{positive} bounded operator from $L^p(\Omega, \mc{A};\P)$ to $L^p(\Omega,\mc{B};\P)$, we can appeal to the extension theorem for positive operators to define conditional expectations on Banach-valued random variables.
 
 \begin{defn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
-  Given a $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, we define the \emph{conditional expectation operator}
+  Given a $\sigma$-subalgebra $\mc{B} \subset \mc{A}$ and an exponent $p \in [1,\infty)$, we define the \emph{conditional expectation operator}
   \begin{equation*}
-    \map{\E_X^{\mc{B}}}{L^1(\Omega,\mc{A},\P;X)}{L^1(\Omega,\mc{B};\P;X)} 
+    \map{\E_X^{\mc{B}}}{L^p(\Omega,\mc{A},\P;X)}{L^p(\Omega,\mc{B};\P;X)} 
   \end{equation*}
-  as the unique bounded linear extension of the tensor extension
+  as the unique bounded linear extension of
   \begin{equation*}
-    \map{\E^{\mc{B}} \otimes I}{L^1(\Omega,\mc{A},\P) \otimes X}{L^1(\Omega,\mc{B},\P) \otimes X}.
+    \map{\E^{\mc{B}} \otimes I}{L^p(\Omega,\mc{A},\P) \otimes X}{L^p(\Omega,\mc{B},\P) \otimes X}.
   \end{equation*}
   We will often overload notation and write $\E^{\mc{B}}$ to denote $\E_X^{\mc{B}}$.
 \end{defn}
-
+\todo{up to here}
 Since the conditional expectation $\E^{\mc{B}}$ on scalar-valued functions is positive and contractive on $L^p$ for all $p \in [1,\infty)$, Theorem \ref{thm:positive-extensions} tells us that $\E_X^{\mc{B}}$ is well-defined and is in fact a contraction on $L^p(\Omega,\mc{A},\P;X)$ for all $p \in [1,\infty)$.
 For $p = \infty$, since $L^\infty(\Omega;X)$ is lacking in convenient dense subspaces, we can't argue so abstractly.
 Here is a somewhat ad-hoc argument for contractivity on $L^\infty$.
