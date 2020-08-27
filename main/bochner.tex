@@ -1,10 +1,12 @@
+\todo{add expository intro}
+
 \subsection{Notions of measurability}
 
-Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$} and a Banach space $X$.
+Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$.} and a Banach space $X$ over a scalar field $\K$ (either $\R$ or $\C$).
 The topic of these notes is the analysis of functions $\map{f}{S}{X}$, and of operators acting on such functions.
 Thus it will be useful for us to gain some familiarity with the idea of $X$-valued functions.
 
-The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\C}$ and a non-zero vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
+The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\K}$ and a non-zero vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
 This function is denoted by $f \otimes \mb{x}$ and formally defined by
 \begin{equation*}
   \map{f \otimes \mb{x}}{S}{X}, \qquad (f \otimes \mb{x})(s) := f(s)\mb{x} \quad \text{for all $s \in S$.}
@@ -32,7 +34,7 @@ When considering Banach-valued functions, particularly when our Banach spaces ar
   \item
     \emph{strongly measurable} (or \emph{Bochner measurable}) if it is the pointwise limit of simple functions; that is, if there exists a sequence $(f_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $f = \lim_{n \to \infty} f_n$ pointwise on $S$;
   \item
-    \emph{weakly measurable} if for every functional $\mb{x}^* \in X^*$, the function $\map{\langle f, \mb{x}^*\rangle}{S}{\C}$ given by $s \mapsto \langle f(s), \mb{x}^* \rangle$ is measurable.
+    \emph{weakly measurable} if for every functional $\mb{x}^* \in X^*$, the function $\map{\langle f, \mb{x}^*\rangle}{S}{\K}$ given by $s \mapsto \langle f(s), \mb{x}^* \rangle$ is measurable.
   \end{itemize}
   All of these notions implicitly refer to the $\sigma$-algebra $\mc{A}$.
 
@@ -55,7 +57,7 @@ we have the containment
 When $X$ is finite-dimensional these notions coincide: the derivation of strong measurability from measurability is a standard result in measure theory,\footnote{See for example \cite[Corollary 4.2.7]{rD04} in the one-dimensional case; extending this to the finite-dimensional case can be done by summing up coordinates.} and weak measurability is just a convoluted rewriting of coordinatewise measurability.
 But in the general context of Banach spaces the inclusions \eqref{eq:measurability-inclusions} are strict.
 
-\begin{example}[A measurable function which is not strongly measurable]
+\begin{example}[A measurable function which is not strongly measurable]\todo{Can we do this with a $\sigma$-finite measure space? Maybe an uncountable product of probability spaces? Countable generation should be the issue.}
   Let $X$ be a Banach space, and consider the identity map $\map{I}{X}{X}$, which is continuous and hence measurable.
   If $I$ is strongly measurable, then there exists a sequence of simple functions $(i_n)_{n \in \N}$ converging pointwise to $I$.
   For each $\mb{x} \in X$ we then have
@@ -126,7 +128,7 @@ It turns out that the notion of strong measurability is strongly connected with 
 As a quick application of this result, we show that strong measurability is preserved under multiplication with measurable scalar-valued functions.\footnote{This can also be proven directly via pointwise approximation with simple functions.}
 
 \begin{cor}\label{cor:strong-meas-meas-mult}
-  Suppose that $\map{f}{S}{X}$ is strongly measurable and the scalar-valued function $\map{\phi}{S}{\C}$ is measurable.
+  Suppose that $\map{f}{S}{X}$ is strongly measurable and the scalar-valued function $\map{\phi}{S}{\K}$ is measurable.
   Then the product $\map{\phi f}{S}{X}$, $(\phi f)(s) := \phi(s)f(s)$, is strongly measurable.
 \end{cor}
 
@@ -144,12 +146,12 @@ As a quick application of this result, we show that strong measurability is pres
 
 \subsection{Bochner spaces}
 
-Given $\map{f}{S}{X}$, we abuse notation and let $\|f\|_X$ denote the function $S \to [0,\infty)$ defined by $s \mapsto \|f(s)\|_X$.
-If $f$ is strongly measurable, then the scalar-valued function $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
+Given $\map{f}{S}{X}$, we let $\|f\|_X$ denote the scalar-valued function $S \to \K$ defined by $s \mapsto \|f(s)\|_X$.
+If $f$ is strongly measurable, then $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
 
 \begin{defn}
   Let $(S,\mc{A},\mu)$ be a measure space.
-  For $p \in [1,\infty]$, we let $L^p(S,\mu;X)$ denote the set of \emph{strongly} measurable functions $f \in \SMeas(S;X)$ such that $\|f\|_X \in L^p(S,\mu)$, modulo $\mu$-almost everywhere equality, and we write
+  For $p \in [1,\infty]$, we let $L^p(S,\mu;X)$ denote the set of \emph{strongly} measurable functions $f \in \SMeas(S;X)$ such that $\|f\|_X \in L^p(S,\mu)$, modulo $\mu$-a.e. equality, and we write
   \begin{equation*}
     \|f\|_{L^p(S,\mu;X)} := \| \|f\|_X \|_{L^p(S,\mu)}.
   \end{equation*}
@@ -205,7 +207,7 @@ If $f$ is strongly measurable, then the scalar-valued function $\|f\|_X$ is also
   so that $g_n \to f$ in $L^p(S;X)$, completing the proof.
 \end{proof}
 
-Note that the case $p = \infty$ is not included in the proposition above, even though the simple functions are dense in $L^\infty(S;\C)$.
+Note that the case $p = \infty$ is not included in the proposition above, even though the simple functions are dense in $L^\infty(S)$.
 
 \begin{prop}
   Let $X$ be a Banach space.
@@ -250,35 +252,27 @@ Note that the case $p = \infty$ is not included in the proposition above, even t
 \end{proof}
 
 Now we present some elementary duality results.
-For an exponent $p \in [1,\infty]$ we let $p'$ denote the \emph{H\"older conjugate}
+Recall the definition of the H\"older conjugate from Section \ref{sec:conventions}.
+Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $g \in L^{p'}(S;X^*)$ induces a bounded linear functional $\Phi g \in L^p(S;X)^*$ by integration of the duality pairing between $X$ and $X^*$:
 \begin{equation*}
-  p' := \begin{cases}
-    \frac{p}{p-1} & p \in (1,\infty) \\
-    \infty & p = 1 \\
-    1 & p = \infty,
-  \end{cases}
+  \Phi g(f) := \int_S \langle f(s), g(s) \rangle \, \dd\mu(s) \qquad \forall f \in L^p(S;X).
 \end{equation*}
-so that $p^{-1} + (p')^{-1} = 1$ (interpreting $1/\infty$ as $0$).
-Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $g \in L^{p'}(S;X^*)$ induces a bounded linear functional $\Phi_g \in L^p(S;X)^*$ by integration of the $X-X^*$ duality pairing:
-\begin{equation*}
-  \Phi_g(f) := \int_S \langle f(s), g(s) \rangle \, \dd\mu(s) \qquad \forall f \in L^p(S;X).
-\end{equation*}
-H\"older's inequality implies that $\|\Phi_g\|_{L^p(S;X)^*} \leq \|g\|_{L^{p'}(S;X^*)}$.
-In the scalar case $X = \C$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong L^p(S)^*$: that is, every functional $\phi \in L^p(S)^*$ is of the form $\phi = \Phi_g$ for some $g \in L^{p'}(S)$, and furthermore $\|\phi\|_{L^p(S)^*} = \|g\|_{L^{p'}(S)}$.
-We will see later on that this is true for a Banach space $X$ if and only if it has the \emph{Radon--Nikodym property}.
+H\"older's inequality implies that $\|\Phi g\|_{L^p(S;X)^*} \leq \|g\|_{L^{p'}(S;X^*)}$.
+In the scalar case $X = \K$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong L^p(S)^*$: that is, every functional $\phi \in L^p(S)^*$ is of the form $\phi = \Phi g$ for some $g \in L^{p'}(S)$, and furthermore $\|\phi\|_{L^p(S)^*} = \|g\|_{L^{p'}(S)}$.
+We will see in Section \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ is an isometric isomorphism if and only if $X$ has the \emph{Radon--Nikodym property}.
 For now we will establish a duality result that holds for every Banach space.
 
 \begin{prop}\label{prop:bochner-preduality}
   Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space\footnote{The $\sigma$-finiteness assumption is only needed for $p = 1$.} and $X$ a Banach space.
   Then for all $1 \leq p \leq \infty$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is an isometry onto a closed subspace of $L^p(S;X)^*$ which is norming for $L^p(S;X)$: that is, for every $f \in L^p(S;X)$,
   \begin{equation*}
-    \|f\|_{L^p(S;X)} = \sup_{\substack{g \in L^{p'}(S;X^*) \\ g \neq 0}} \frac{| \Phi_g(f) |}{\|g\|}
+    \|f\|_{L^p(S;X)} = \sup_{\substack{g \in L^{p'}(S;X^*) \\ g \neq 0}} \frac{| \Phi g(f) |}{\|g\|}
     = \sup_{\substack{g \in L^{p'}(S;X^*) \\ \|g\| = 1}} \Big| \int_S \langle f(s), g(s) \rangle \, \dd\mu(s) \Big|.
   \end{equation*}
 \end{prop}
 
 \begin{proof}
-  To show that $\Phi$ is an isometry, it suffices to show that $\|\Phi_g\|_{L^p(S;X)^*} \geq 1$ whenever $g \in L^{p'}(S;X^*)$ with $\|g\|_{L^{p'}(S;X^*)} = 1$ (the reverse estimate was already mentioned; it follows from H\"older's inequality).
+  To show that $\Phi$ is an isometry, it suffices to show that $\|\Phi g\|_{L^p(S;X)^*} \geq 1$ whenever $g \in L^{p'}(S;X^*)$ with $\|g\|_{L^{p'}(S;X^*)} = 1$ (the reverse estimate has already been discussed).
   
   \textbf{Mild case: $p > 1$.}
   In this case we have $p' < \infty$, so by density of the simple functions in $L^{p'}(S;X^*)$ and continuity of $\Phi$ we may assume that $g$ is simple, i.e.
@@ -303,16 +297,16 @@ For now we will establish a duality result that holds for every Banach space.
     \end{aligned}
   \end{equation*}
   as the $\mb{x}_n$ are unit vectors and $p(p' - 1) = 1$.
-  Testing $\Phi_g$ against $f_{\varepsilon}$ yields
+  Testing $\Phi g$ against $f_{\varepsilon}$ yields
   \begin{equation*}
     \begin{aligned}
-      \Phi_g(f_\varepsilon) = \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p' - 1} \langle \mb{x}_n, \mb{x}_n^* \rangle
+      \Phi g(f_\varepsilon) = \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p' - 1} \langle \mb{x}_n, \mb{x}_n^* \rangle
       &\geq (1-\varepsilon) \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p'} \\
       &= (1-\varepsilon) \|g\|_{L^{p'}(S;X^*)} = 1-\varepsilon.
     \end{aligned}
   \end{equation*}
-  This proves that $\|\Phi_g\|_{L^p(S;X)^*} \geq 1-\varepsilon$.
-  Since $\varepsilon > 0$ was arbitrary, we find that $\|\Phi_g\|_{L^p(S;X)^*} \geq 1$ as intended.
+  This proves that $\|\Phi g\|_{L^p(S;X)^*} \geq 1-\varepsilon$.
+  Since $\varepsilon > 0$ was arbitrary, we find that $\|\Phi g\|_{L^p(S;X)^*} \geq 1$ as intended.
 
   \textbf{Spicy case: $p=1$.}
   Fix $\varepsilon > 0$ and define
@@ -356,22 +350,22 @@ For now we will establish a duality result that holds for every Banach space.
   Then $\|f_{\varepsilon}\|_{L^1(S;X)} = 1$, and
   \begin{equation*}
     \begin{aligned}
-      |\Phi_g(f)| &=  \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, g(s) \rangle \, \dd\mu(s) \Big| \\
+      |\Phi g(f)| &=  \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, g(s) \rangle \, \dd\mu(s) \Big| \\
       &\geq \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, \mb{x}^* \rangle \, \dd\mu(s) \Big| - \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, g(s) - \mb{x} \rangle  \, \dd\mu(s) \Big| \\
       &\geq (\|\mb{x}^*\|_{X^*} - \varepsilon) - \varepsilon \geq 1 - 4\varepsilon.
     \end{aligned}
   \end{equation*}
-  Since $\varepsilon > 0$ was arbitrary, we get $\|\Phi_g\|_{L^1(S;X)^*} \geq 1$, as we wanted.
+  Since $\varepsilon > 0$ was arbitrary, we get $\|\Phi g\|_{L^1(S;X)^*} \geq 1$, as we wanted.
 
   \textbf{Norming property:}
-  Note that since $X$ embeds isometrically into its double dual $X^{**}$, we can identify $X$-valued functions with $X^{**}$-valued functions which take values in $X$.
+  Since $X$ embeds isometrically into its double dual $X^{**}$, we can identify $X$-valued functions with $X^{**}$-valued functions which take values in $X$.
   We exploit this and the previous results to show
   \begin{equation*}
     \begin{aligned}
-      \|f\|_{L^p(S;X)} = \|f\|_{L^p(S;(X^*)^*)} &= \|\Phi_f\|_{L^{p'}(S; X^*)^*} \\
+      \|f\|_{L^p(S;X)} = \|f\|_{L^p(S;(X^*)^*)} &= \|\Phi f\|_{L^{p'}(S; X^*)^*} \\
       &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ \|g\| = 1}} \int_{S} |\langle g(s) , f(s) \rangle_{X^*, X^{**}}| \, \dd\mu(s) \\
       &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ \|g\| = 1}} \int_{S} |\langle f(s) , g(s) \rangle_{X, X^*}| \, \dd\mu(s) \\
-      &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ g \neq 0}} \frac{|\Phi_g(f)|}{\|g\|},
+      &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ g \neq 0}} \frac{|\Phi g(f)|}{\|g\|},
     \end{aligned}
   \end{equation*}
   completing the proof.
@@ -407,7 +401,7 @@ The Bochner integral satisfies the following properties.
   Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
   The Bochner integral satisfies the following properties:
   \begin{description}
-  \item[Linearity] For $f_1, f_2 \in L^1(S,\mu;X)$ and $\lambda_1, \lambda_2 \in \C$,
+  \item[Linearity] For $f_1, f_2 \in L^1(S,\mu;X)$ and $\lambda_1, \lambda_2 \in \K$,
     \begin{equation*}
       \int_S (\lambda_1 f_1 + \lambda_2 f_2)(s) \, \dd\mu(s) = \lambda_1 \int_S f_1(s) \dd\mu(s) + \lambda_2 \int_S f_2(s) \dd\mu(s) .
     \end{equation*}
@@ -416,9 +410,9 @@ The Bochner integral satisfies the following properties.
       T\Big( \int_S f \, \dd\mu \Big) = \int_S Tf(s) \, \dd\mu(s) \in Y
     \end{equation*}
     where $Tf \in L^1(S,\mu;Y)$ is given by $(Tf)(s) = T(f(s))$ for almost all $s \in S$.
-    In particular, if $\mb{x}^* \in X^* = \Lin(X,\C)$, then
+    In particular, if $\mb{x}^* \in X^* = \Lin(X,\K)$, then
     \begin{equation*}
-      \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) \in \C.
+      \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) \in \K.
     \end{equation*}
   \item[Closure] If $f \in L^1(S,\mu;X)$ and $X_0$ is a closed subspace of $X$ such that $f(s) \in X_0$ for almost all $s \in S$, then $\int_S f \, \dd\mu \in X_0$.
   \item[Dominated convergence] Let $(f_n)_{n \in \N}$ be a sequence in $L^1(S,\mu;X)$, $\map{f}{S}{X}$, and suppose that $\lim_{n \to \infty} f_n = f$ almost everywhere.
@@ -439,22 +433,21 @@ The Bochner integral satisfies the following properties.
 \end{prop}
 
 \begin{proof}
+  Linearity follows from the definition.
+  The remaining properties are proved as follows:
+  
   \begin{description}
-  \item[Linearity] follows from the definition.
-    
-  \item[Commutation with linear maps] by continuity it suffices to prove this for simple $f \in \Simp(S;X) \cap L^1(S,\mu;X)$.
+ 
+    \item[Commutation with linear maps] by continuity it suffices to prove this for simple $f \in \Simp(S;X) \cap L^1(S,\mu;X)$.
     Writing $f$ as in \eqref{eqn:simple-function-standard-form} we have 
     \begin{equation*}
-      \begin{aligned}
         T\Big(\int_S \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \, \dd\mu \Big)
-        = T\Big(\sum_{n=1}^N \mu(S_n) \otimes \mb{x}_n \, \dd\mu \Big)
-        &= \sum_{n=1}^N \mu(S_n) \otimes T(\mb{x}_n) \\
-        &= \int_S Tf \, \dd\mu.
-      \end{aligned}
+        = \sum_{n=1}^N \mu(S_n) \otimes T(\mb{x}_n) 
+        = \int_S Tf \, \dd\mu.
     \end{equation*}
         
   \item[Closure] We may assume that $X_0$ is a proper subspace of $X$, otherwise there is nothing to show.
-    Let $\mb{y} \in X \sm X_0$, and by Hahn--Banach\footnote{It's possible to prove this without Hahn--Banach. See \cite[Corollary 1.1.22]{HNVW16}.} choose a functional $\mb{x}^* \in X^*$ such that $\langle \mb{y}, \mb{x}^* \rangle = 1$ and $X_0 \subset \ker \mb{x}^*$.
+    Let $\mb{y} \in X \sm X_0$, and by Hahn--Banach\footnote{If you are philosophically opposed to Hahn--Banach, then see \cite[Corollary 1.1.22]{HNVW16} for a proof that avoids it, and promptly stop reading these notes to avoid further frustration.} choose a functional $\mb{x}^* \in X^*$ such that $\langle \mb{y}, \mb{x}^* \rangle = 1$ and $X_0 \subset \ker \mb{x}^*$.
     Then by the commutation property above we have
     \begin{equation*}
       \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) = 0
@@ -507,7 +500,7 @@ The Bochner integral satisfies the following properties.
   This useful technique often reduces identities for Banach-valued functions to known identities for scalar-valued functions.
 \end{rmk}
 
-\todo{exposition}
+There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we do not have access to the notion of a non-negative vector-valued function).
 
 \begin{prop}[Fubini]
   Let $(S,\mc{A},\mu)$ and $(T,\mc{B},\nu)$ be $\sigma$-finite measure spaces\footnote{The scalar Fubini theorem fails for non-$\sigma$-finite spaces!} and let $f \in L^1(S \times T; X)$.
@@ -544,7 +537,7 @@ The Bochner integral satisfies the following properties.
 Let's move away from the abstract stuff for a moment and define the most important operators in analysis.
 
 \begin{defn}
-  Let $X$ be a Banach space.
+  Let $X$ be a complex Banach space.
   For a Bochner integrable function $f \in L^1(\R^d;X)$ we define the \emph{Fourier transform} as the Bochner integral
   \begin{equation*}
     \hat{f}(\xi) = \mc{F}(f)(\xi) := \int_{\R^d} f(t) e^{-2\pi i t \cdot \xi} \, \dd t \qquad \forall \xi \in \R^d. 
@@ -577,7 +570,7 @@ Formally, the Fourier transform and inverse Fourier transform are mutually inver
 \subsection{Extensions of operators to Bochner spaces}
 
 \begin{defn}
-  For a measurable space $(S,\mc{A})$ and a set $V \subset \Meas(S;\C)$ of measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
+  For a measurable space $(S,\mc{A})$ and a set $V \subset \Meas(S;\K)$ of measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
   \begin{equation*}
     V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\} \subset \SMeas(S;X).\footnote{Functions in $V \otimes X$ are strongly measurable since they have finite-dimensional range.}
   \end{equation*}
@@ -599,9 +592,9 @@ Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.
   \end{equation*}
   so that $f \otimes \mb{x} \in L^p(S;X)$.
   By linearity, this implies $L^p(S) \otimes X$ is contained in $L^p(S;X)$.
-  For density, note that $L^p(S) \otimes X$ contains $(\Sigma(S;\C) \cap L^p(S)) \otimes X$, and that
+  For density, note that $L^p(S) \otimes X$ contains $(\Sigma(S;\K) \cap L^p(S)) \otimes X$, and that
   \begin{equation*}
-    (\Sigma(S;\C) \cap L^p(S)) \otimes X = \Sigma(S;X) \cap L^p(S;X),
+    (\Sigma(S;\K) \cap L^p(S)) \otimes X = \Sigma(S;X) \cap L^p(S;X),
   \end{equation*}
   as both spaces are equal to the set of simple functions with finite measure support.
   By Proposition \ref{prop:simple-density}, this space is dense in $L^p(S;X)$, and thus the same is true of $L^p(S) \otimes X$.
@@ -622,7 +615,7 @@ Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.
 \end{defn}
 
 The tensor extension is a well-defined map between algebraic tensor products $L^{p_1}(S_1) \otimes X \to L^{p_2}(S_2) \otimes X$.
-By Proposition \ref{prop:ATP-density}, $L^{p_1}(S_1) \otimes X$ is a dense subspaces of $L^{p_1}(S_1;X)$, while $L^{p_2}(S_2) \otimes X$ is a subspace of $L^{p_2}(S_2;X)$ (possibly non-dense if $p_2 = \infty$), so if there exists $C < \infty$ such that
+By Proposition \ref{prop:ATP-density}, $L^{p_1}(S_1) \otimes X$ is a dense subspace of $L^{p_1}(S_1;X)$, while $L^{p_2}(S_2) \otimes X$ is a subspace of $L^{p_2}(S_2;X)$ (possibly non-dense if $p_2 = \infty$), so if there exists $C < \infty$ such that
 \begin{equation}\label{eq:tensor-ext-estimate}
   \|(T \otimes I)f\|_{L^{p_2}(S_2;X)} \leq C \|f\|_{L^{p_1}(S_1;X)} \qquad \forall f \in L^{p_1}(S_1) \otimes X,
 \end{equation}
@@ -640,13 +633,12 @@ Writing out a general element $f \in L^p(S) \otimes X$ as a linear combination o
 for all functions $f_n \in L^{p_1}(S_1)$ and vectors $\mb{x}_n \in X$.
 This estimate does not simply follow from boundedness of $T$.
 It turns out to rely on potentially subtle interactions between the operator $T$ and the Banach space $X$.
-The main goal of this course is to understand these interactions for various operators and Banach spaces.
 
 We have already seen one fundamental example.
 \begin{example}
-  Fix a measure space $(S,\mc{A},\mu)$ and let $\map{T}{L^1(S)}{\C}$ denote the Lebesgue integral.\footnote{This fits in the scope of Definition \ref{defn:tensor-exts} by considering $\C$ as a Lebesgue space $L^1(\mathrm{pt})$ over a single point, with counting measure. Then $X$ may be identified with the Bochner space $L^1(\mathrm{pt};X)$.}
+  Fix a measure space $(S,\mc{A},\mu)$ and let $\map{T}{L^1(S)}{\K}$ denote the Lebesgue integral.\footnote{This fits in the scope of Definition \ref{defn:tensor-exts} by considering $\C$ as a Lebesgue space $L^1(\mathrm{pt})$ over a single point, with counting measure. Then $X$ may be identified with the Bochner space $L^1(\mathrm{pt};X)$.}
   Let $X$ be a Banach space.
-  Then for all $f \in \Simp(S;\C) \otimes X$ we have
+  Then for all $f \in \Simp(S;\K) \otimes X$ we have
   \begin{equation*}
     (T \otimes I)f = (T \otimes I)\Big(\sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \Big) = \sum_{n=1}^N T(\1_{S_n}) \otimes \mb{x}_n = \sum_{n=1}^N \mu(S_n) \otimes \mb{x}_n = \int_S f \, \dd\mu,
   \end{equation*}
@@ -654,7 +646,7 @@ We have already seen one fundamental example.
   Thus the Lebesgue integral admits a bounded $X$-valued extension, namely the Bochner integral.
 \end{example}
 
-In this example, the Banach space $X$ plays no real role; we will see in Thm \ref{thm:positive-extensions} that this phenomenon occurs for all positive operators.
+In this example, the Banach space $X$ plays no real role; we will see in Theorem \ref{thm:positive-extensions} that this phenomenon occurs for all positive operators.
 Before that we record a simple observation: tensor extensions can do no better than the original operator.
 
 \begin{prop}
@@ -680,7 +672,7 @@ Before that we record a simple observation: tensor extensions can do no better t
 
 \begin{thm}\label{thm:positive-extensions}
   Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$), $p_1 \in [1,\infty)$, and $p_2 \in [1,\infty]$.
-  Let $T \in \Lin(L^{p_1}(S_1),L^{p_2}(S_2))$ be a bounded linear operator which is \emph{positive}, meaning that for all a.e. nonnegative $f \in L^{p_1}(S_1)$, $Tf \in L^{p_2}(S_2)$ is also a.e. nonnegative.
+  Let $T \in \Lin(L^{p_1}(S_1),L^{p_2}(S_2))$ be a bounded linear operator which is \emph{positive}, meaning that for all a.e. non-negative $f \in L^{p_1}(S_1)$, $Tf \in L^{p_2}(S_2)$ is also a.e. non-negative.\footnote{When the scalar field $\K$ is $\C$, `non-negative' simply means `real-valued and non-negative'.}
   Then $T$ admits a bounded $X$-valued extension for every Banach space $X$, and in fact
   \begin{equation*}
     \|\td{T}\|_{L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)} = \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)}.
@@ -724,7 +716,11 @@ Before that we record a simple observation: tensor extensions can do no better t
 \end{proof}
 
 Theorem \ref{thm:positive-extensions} shows that the `extension problem' for positive operators is not much of a problem: positive operators extend automatically.
-Since most interesting operators are not positive, a lot of work remains.
+Of course, most interesting operators are not positive.
+
+\begin{example}
+  \todo{Fourier transform. counterexample for $\ell^\infty$}\todo{write this up}
+\end{example}
 
 
 
@@ -763,7 +759,7 @@ Since most interesting operators are not positive, a lot of work remains.
 \end{exercise}
 
 \begin{exercise}\label{ex:FT-bounded-1-infty}
-  Let $X$ be a Banach space.
+  Let $X$ be a complex Banach space.
   Show that $\hat{f} \in C(\R^d;X)$ for all $f \in L^1(\R^d;X)$.
   Conclude that the Fourier transform is bounded from $L^1(\R^d;X)$ to $L^\infty(\R^d;X)$.
 \end{exercise}
@@ -797,7 +793,8 @@ Since most interesting operators are not positive, a lot of work remains.
     \end{equation*}
   \item Let $(\mb{h}_n)_{n \in \N}$ be an orthonormal basis of $H$, and $(f_n)_{n \in \N}$ an orthonormal basis of $L^2(S,\mu)$.
     Show that the elementary tensors $\{f_n \otimes \mb{h}_m : n,m \in \N\}$ are an orthonormal basis of $L^2(S;H)$.
-  \item Show that the Fourier transform on the torus, initially defined as a bounded operator $\map{\mc{F}}{L^1(\T^d;H)}{\ell^\infty(\Z^d;H)}$, extends to an isometry from $L^2(\T^d;H)$ to $\ell^2(\Z^d;H)$.
+  \item Suppose that the Hilbert space $H$, as above, is defined over $\C$.
+    Show that the Fourier transform on the torus, initially defined as a bounded operator $\map{\mc{F}}{L^1(\T^d;H)}{\ell^\infty(\Z^d;H)}$, extends to an isometry from $L^2(\T^d;H)$ to $\ell^2(\Z^d;H)$.
   \end{itemize}
 \end{exercise}
 

@@ -1,13 +1,29 @@
 The one-sentence goal of this course is to study harmonic analysis in the context of functions $\map{f}{\R}{X}$ of a single variable, taking values in an infinite-dimensional Banach space $X$.
 
 
-\subsection{Conventions}
-Throughout these notes, unless otherwise stated, $X$ will denote a Banach space over the complex numbers $\C$, but everything applies equally well (sometimes better) to Banach spaces over the real numbers $\R$.
+\subsection{Conventions}\label{sec:conventions}
+Throughout these notes we will deal with both real and complex Banach spaces.
+If we do not explicitly specify `real' or `complex', then either choice can be made, and we will write $\K$ to denote the scalar field (i.e. $\K = \R$ or $\K = \C$).
+Every complex Banach space can be seen as a real Banach space by restricting scalar multiplication to the reals.
+On the other hand, every real Banach space can be `complexified', a process which doubles the dimension over $\R$ and does what it should: for example the complexification of $\R^n$ is $\C^n$, the complexification of $L^p(S;\R)$ is $L^p(S;\C)$, and so on.
+It's a good idea not to think too hard about this.
+
+For an exponent $p \in [1,\infty]$ we let $p'$ denote the \emph{H\"older conjugate}
+\begin{equation*}
+  p' := \begin{cases}
+    \frac{p}{p-1} & p \in (1,\infty) \\
+    \infty & p = 1 \\
+    1 & p = \infty,
+  \end{cases}
+\end{equation*}
+so that $p^{-1} + (p')^{-1} = 1$ (interpreting $1/\infty$ as $0$).
+
+
 
 
  % {\footnotesize
  %   \subsection{Acknowledgements}
- %   Mark Veraar, Jan van Neerven, Gennady Uraltsev, Christoph Thiele, Marco Fraccaroli, Aidan Schumann, Pierre Portal, 
+ %   Mark Veraar, Emiel Lorist, Bas Nieraeth, Ivan Yaroslavtsev, Nick Lindemulder, Jan van Neerven, Gennady Uraltsev, Christoph Thiele, Marco Fraccaroli, Aidan Schumann, Pierre Portal, 
  % }
 
 
