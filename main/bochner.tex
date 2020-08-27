@@ -608,33 +608,39 @@ Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.
 \end{proof}
 
 \begin{defn}\label{defn:tensor-exts}
-  Let $(S,\mc{A},\mu)$ be a measure space, $p,q \in [1,\infty)$, and consider a bounded linear operator
+  Let $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$) be measure spaces, $p_1 \in [1,\infty)$ and $p_2 \in [1,\infty]$, and consider a bounded linear operator
   \begin{equation*}
-    \map{T}{L^p(S,\mu)}{L^q(S,\mu)}
+    \map{T}{L^{p_1}(S_1,\mu_1)}{L^{p_2}(S_2,\mu_2)}
   \end{equation*}
   acting on scalar-valued functions.
   Let $X$ be a Banach space.
   The \emph{tensor extension} of $T$ with the identity $\map{I}{X}{X}$ is the map between algebraic tensor products
   \begin{equation*}
-    \map{T \otimes I}{L^p(S,\mu) \otimes X}{L^q(S,\mu) \otimes X}
+    \map{T \otimes I}{L^{p_1}(S_1,\mu_1) \otimes X}{L^{p_2}(S_2,\mu_2) \otimes X}
   \end{equation*}
-  satisfying $(T \otimes I)(f \otimes \mb{x}) = (Tf) \otimes \mb{x}$ for all $f \in L^p(S,\mu)$ and $\mb{x} \in X$.
-  Often we will denote $T \otimes I$ by $\td{T}$ or (overloading notation) $T$.
+  satisfying $(T \otimes I)(f \otimes \mb{x}) = (Tf) \otimes \mb{x}$ for all $f \in L^{p_1}(S_1,\mu_1)$ and $\mb{x} \in X$.
 \end{defn}
 
-The tensor extension is a well-defined map between algebraic tensor products $L^p(S) \otimes X \to L^q(S) \otimes X$.
-By Proposition \ref{prop:ATP-density}, these are dense subspaces of $L^p(S;X)$ and $L^q(S;X)$ respectively, so if there exists $C < \infty$ such that
+The tensor extension is a well-defined map between algebraic tensor products $L^{p_1}(S_1) \otimes X \to L^{p_2}(S_2) \otimes X$.
+By Proposition \ref{prop:ATP-density}, $L^{p_1}(S_1) \otimes X$ is a dense subspaces of $L^{p_1}(S_1;X)$, while $L^{p_2}(S_2) \otimes X$ is a subspace of $L^{p_2}(S_2;X)$ (possibly non-dense if $p_2 = \infty$), so if there exists $C < \infty$ such that
 \begin{equation}\label{eq:tensor-ext-estimate}
-  \|(T \otimes I)f\|_{L^q(S;X)} \leq C \|f\|_{L^p(S;X)} \qquad \forall f \in L^p(S) \otimes X,
+  \|(T \otimes I)f\|_{L^{p_2}(S_2;X)} \leq C \|f\|_{L^{p_1}(S_1;X)} \qquad \forall f \in L^{p_1}(S_1) \otimes X,
 \end{equation}
-then $T \otimes I$ may be extended to a bounded linear operator $L^p(S;X) \to L^q(S;X)$.
-Writing out a general element $f \in L^p(S) \otimes X$ as a linear combination of elementary tensors, we see that the estimate \eqref{eq:tensor-ext-estimate} is equivalent to
+then $T \otimes I$ may be extended to a bounded linear operator $L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)$.
+
+\begin{defn}
+  With the notation above, if the estimate \eqref{eq:tensor-ext-estimate} holds, we say that $T$ \emph{admits a bounded $X$-valued extension}, and we denote the continuous extension of $T \otimes I$ by $\td{T}_X$, $\td{T}$, or even just $T$.
+\end{defn}
+
+
+Writing out a general element $f \in L^p(S) \otimes X$ as a linear combination of elementary tensors, we see that $T$ admits a bounded $X$-valued extension if and only if there exists a constant $C < \infty$ such that
 \begin{equation}\label{eq:tensor-ext-estimate-full}
-  \Big\|\sum_{n=1}^N (Tf_n) \otimes \mb{x}_n\Big\|_{L^q(S;X)} \leq C \Big\|\sum_{n=1}^N f_n \otimes \mb{x}_n\Big\|_{L^p(S;X)} \qquad \forall f_n \in L^p(S) \quad \forall \mb{x}_n \in X.
+  \Big\|\sum_{n=1}^N (Tf_n) \otimes \mb{x}_n\Big\|_{L^{p_2}(S_2;X)} \leq C \Big\|\sum_{n=1}^N f_n \otimes \mb{x}_n\Big\|_{L^{p_1}(S_1;X)}
 \end{equation}
+for all functions $f_n \in L^{p_1}(S_1)$ and vectors $\mb{x}_n \in X$.
 This estimate does not simply follow from boundedness of $T$.
 It turns out to rely on potentially subtle interactions between the operator $T$ and the Banach space $X$.
-\textbf{The goal of this course is to understand these interactions for various operators and Banach spaces.}
+The main goal of this course is to understand these interactions for various operators and Banach spaces.
 
 We have already seen one fundamental example.
 \begin{example}
@@ -644,39 +650,40 @@ We have already seen one fundamental example.
   \begin{equation*}
     (T \otimes I)f = (T \otimes I)\Big(\sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \Big) = \sum_{n=1}^N T(\1_{S_n}) \otimes \mb{x}_n = \sum_{n=1}^N \mu(S_n) \otimes \mb{x}_n = \int_S f \, \dd\mu,
   \end{equation*}
-  so that the tensor extension of the Lebesgue integral is the Bochner integral, which we have already shown extends to a bounded linear map $L^1(S;X) \to X$.
+  so that the tensor extension of the Lebesgue integral agrees with the Bochner integral, which we have already shown maps $L^1(S;X)$ to $X$.
+  Thus the Lebesgue integral admits a bounded $X$-valued extension, namely the Bochner integral.
 \end{example}
 
-In this example, the Banach space $X$ plays no real role; we will see in Proposition \ref{prop:positive-extensions} that this phenomenon occurs for all positive operators.
+In this example, the Banach space $X$ plays no real role; we will see in Thm \ref{thm:positive-extensions} that this phenomenon occurs for all positive operators.
 Before that we record a simple observation: tensor extensions can do no better than the original operator.
 
 \begin{prop}
-  Fix a measure space $(S,\mc{A},\mu)$ and $p,q \in [1,\infty)$.
+  Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$) and exponents $p_1 \in [1,\infty)$, $q \in [1,\infty]$.
   Let $T \in \Lin(L^p(S),L^q(S))$ be a bounded linear operator, and let $X$ be a Banach space.
-  Then the tensor extension $\td{T}$ satisfies
+  Then the tensor extension $T \otimes I$ satisfies
   \begin{equation*}
-    \|\td{T}\|_{L^p(S;X) \to L^q(S;X)} \geq \|T\|_{L^p(S) \to L^q(S)}.
+    \|T \otimes I\|_{L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)} \geq \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)}.
   \end{equation*}
 \end{prop}
 
 \begin{proof}
   Fix a nonzero vector $\mb{x} \in X$.
-  Then for all nonzero $f \in L^p(S)$ we have
+  Then for all nonzero $f \in L^{p_1}(S_1)$ we have
   \begin{equation*}
     \begin{aligned}
-      \|\td{T}(f \otimes \mb{x})\|_{L^q(S;X)} = \|Tf \otimes \mb{x}\|_{L^q(S;X)} &= \|Tf\|_{L^q(S)} \|\mb{x}\|_X \\
-      &= \frac{\|Tf\|_{L^q(S)}}{\|f\|_{L^p(S)}} \|f \otimes \mb{x}\|_{L^p(S;X)}.
+      \|(T \otimes I)(f \otimes \mb{x})\|_{L^{p_2}(S_2;X)} = \|Tf \otimes \mb{x}\|_{L^{p_2}(S_2;X)} &= \|Tf\|_{L^{p_2}(S_2)} \|\mb{x}\|_X \\
+      &= \frac{\|Tf\|_{L^{p_2}(S_2)}}{\|f\|_{L^{p_1}(S_1)}} \|f \otimes \mb{x}\|_{L^{p_1}(S_1;X)}.
     \end{aligned}
   \end{equation*}
   Taking the supremum over all nonzero $f \in L^p(S)$ completes the proof.
 \end{proof}
 
 \begin{thm}\label{thm:positive-extensions}
-  Fix a measure space $(S,\mc{A},\mu)$ and $p,q \in [1,\infty)$.
-  Let $T \in \Lin(L^p(S),L^q(S))$ be a bounded linear operator which is \emph{positive}, meaning that for all (a.e.) nonnegative $f \in L^p(S)$, $Tf \in L^q(S)$ is also (a.e.) nonnegative.
-  Then for every Banach space $X$ the tensor extension $\td{T}$ is bounded from $L^p(S;X) \to L^q(S;X)$, and in fact
+  Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$), $p_1 \in [1,\infty)$, and $p_2 \in [1,\infty]$.
+  Let $T \in \Lin(L^{p_1}(S_1),L^{p_2}(S_2))$ be a bounded linear operator which is \emph{positive}, meaning that for all a.e. nonnegative $f \in L^{p_1}(S_1)$, $Tf \in L^{p_2}(S_2)$ is also a.e. nonnegative.
+  Then $T$ admits a bounded $X$-valued extension for every Banach space $X$, and in fact
   \begin{equation*}
-    \|\td{T}\|_{L^p(S;X) \to L^q(S;X)} = \|T\|_{L^p(S) \to L^q(S)}.
+    \|\td{T}\|_{L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)} = \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)}.
   \end{equation*}
 \end{thm}
 
@@ -685,17 +692,17 @@ Before that we record a simple observation: tensor extensions can do no better t
   \begin{equation}\label{eq:positive-pw-est}
     \|\td{T}f(s)\|_X \leq T(\|f\|_X)(s)
   \end{equation}
-  for all $f \in \Simp(S;X) \cap L^p(S;X)$ and almost all $s \in S$.
+  for all $f \in \Simp(S;X) \cap L^{p_1}(S_1;X)$ and almost all $s \in S$.
   This will imply
   \begin{equation*}
     \begin{aligned}
-      \|\td{T}f\|_{L^q(S;X)} &= \Big( \int_{S} \|\td{T}f(s)\|_X^q \, \dd\mu(s) \Big)^{1/q} \\
-      &\leq \Big( \int_{S} T(\|f(s)\|_X)^q \, \dd\mu(s) \Big)^{1/q}\\
-      &\leq \|T\|_{L^p(S) \to L^q(S)} \Big( \int_{S} \|f(s)\|_X^p \, \dd\mu(s) \Big)^{1/p} \\
-      &= \|T\|_{L^p(S) \to L^q(S)} \|f\|_{L^p(S;X)}
+      \|\td{T}f\|_{L^{p_2}(S_2;X)} &= \Big( \int_{S} \|\td{T}f(s)\|_X^{p_2} \, \dd\mu(s) \Big)^{1/p_2} \\
+      &\leq \Big( \int_{S} T(\|f(s)\|_X)^{p_2} \, \dd\mu(s) \Big)^{1/p_2}\\
+      &\leq \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)} \Big( \int_{S} \|f(s)\|_X^{p_1} \, \dd\mu(s) \Big)^{1/p_1} \\
+      &= \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)} \|f\|_{L^{p_1}(S_1;X)}
     \end{aligned}
   \end{equation*}
-  and complete the proof by density of $\Simp(S;X) \cap L^p(S;X)$ in $L^p(S;X)$.
+  which implies the result by density of $\Simp(S;X) \cap L^{p_1}(S_1;X)$ in $L^{p_1}(S_1;X)$.
 
   Now let's prove \eqref{eq:positive-pw-est}.
   Consider a simple function
@@ -739,10 +746,20 @@ Since most interesting operators are not positive, a lot of work remains.
   \end{itemize}
 \end{exercise}
 
+\begin{exercise}
+  Let $(S_i, \mc{A}_i, \mu_i)$ ($i \in \{1,2\}$) be measure spaces, let $p_1 \in [1,\infty)$, and let $p_2 \in [1,\infty]$.
+  Suppose that $T \in \Lin(L^{p_1}(S_1), L^{p_2}(S_2))$ is a bounded linear operator. 
+  Show that $T$ admits a bounded $X$-valued extension for all finite-dimensional Banach spaces $X$.
+\end{exercise}
+
 \begin{exercise}\label{ex:tensor-adjoint}
-  Let $(S,\mc{A},\mu)$ be a measure space, let $T$ be a bounded linear operator on $L^2(S,\mu)$, and let $X$ be a Banach space.
+  Let $(S,\mc{A},\mu)$ be a measure space and $p \in (1,\infty)$, let $T$ be a bounded linear operator on $L^p(S,\mu)$, and let $X$ be a Banach space.
   Let $T^*$ denote the adjoint of $T$.
-  Show that $\td{T} = T \otimes I$ is bounded on $L^2(S,\mu;X)$ if and only if $\td{T^*} = T^* \otimes I$ is bounded on $L^2(S,\mu;X^*)$, and in this case their bounded linear extensions to $L^2(S,\mu;X)$ and $L^2(S,\mu;X^*)$ satisfy $(\td{T})^* = \td{T^*}$.
+  Show that $T$ admits a bounded $X$-valued extension if and only if the adjoint $T^* \in \Lin(L^{p'}(S,\mu))$ admits a bounded $X^*$-valued extension, and show that
+  \begin{equation*}
+    (\td{T}_X)^* \Phi f = \td{(T^*)}_{X^*} f
+  \end{equation*}
+  for all $f \in L^{p'}(S;X^*)$, where $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is as in Proposition \ref{prop:bochner-preduality}. 
 \end{exercise}
 
 \begin{exercise}\label{ex:FT-bounded-1-infty}
