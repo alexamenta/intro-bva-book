@@ -174,23 +174,17 @@ The stopping time $T_K$ defined above is called the \emph{first hitting time of 
 
 The previous example shows that conditional expectations with respect to atomic $\sigma$-algebras exist and are unique.
 The same is true for general $\sigma$-algebras, but proving this will take a few steps.
-First we will establish a foundational result in the scalar-valued case.
+First we establish the uniqueness of conditional expectations.
 
-\begin{thm}\label{thm:conditional-expectation-EU}
-  Let $(\Omega,\mc{A},\P)$ be a probability space.
-  For any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a unique (up to almost sure equality) conditional expectation $\E^{\mc{B}}f$ exists.
-  Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive contraction on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
-  \begin{equation*}
-    \|\E^{\mc{B}}f\|_{p} \leq \|f\|_{p},
-  \end{equation*}
-  and if $f$ is a.s. nonnegative then so is $\E^{\mc{B}}f$.
-\end{thm}
+\begin{prop}\label{prop:CE-uniqueness}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
+  For any $f \in L^1(\mc{A};X)$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, if $\E^{\mc{B}}f$ and $\td{\E}^{\mc{B}}f$ are two conditional expectations of $f$ given $\mc{B}$, then $\E^{\mc{B}}f = \td{\E}^{\mc{B}}f$ almost surely.
+\end{prop}
 
 \begin{proof}
-  First we handle uniqueness.
-  For this it suffices to consider the case $\K = \R$, as the case $\K = \C$ follows by considering real and imaginary parts.
-  Suppose that $\E^{\mc{B}}f$ and $\td{E}^{\mc{B}}f$ are two conditional expectations of $f$ given $\mc{B}$.
-  For all subsets $B \in \mc{B}$ we have
+  First we consider the real one-dimensional case.
+  Fix $f \in L^1(\mc{A};\R)$.
+  For all $B \in \mc{B}$ we have
   \begin{equation*}
     \int_B \E^{\mc{B}}f - \td{\E}^{\mc{B}}f \, \dd\P = \int_B f \, \dd\P - \int_B f \, \dd\P = 0.
   \end{equation*}
@@ -206,6 +200,46 @@ First we will establish a foundational result in the scalar-valued case.
     = 0,
   \end{equation*}
   establishing that $\E^{\mc{B}}f = \td{\E}^{\mc{B}}f$ almost surely.
+
+  Now let $X$ be any real Banach space and suppose $f \in L^1(\mc{A};X)$.
+  We aim to show that $\E^{\mc{B}} f = \td{\E}^{\mc{B}} f$ almost surely.
+  By Lemma \ref{lem:coordinatewise-equality-test} it suffices to show that
+  \begin{equation}\label{eq:CE-testing-eq}
+    \langle \E^{\mc{B}} f, \mb{x}^* \rangle \aseq \langle \td{\E}^{\mc{B}} f, \mb{x}^* \rangle \qquad \text{for all $\mb{x}^* \in X^*$.}
+  \end{equation}
+  This will follow from showing that $\langle \E^{\mc{B}} f, \mb{x}^* \rangle$ and $\langle \td{\E}^{\mc{B}} f, \mb{x}^* \rangle$ are both conditional expectations of the $\R$-valued function $\langle f, \mb{x}^* \rangle$ given $\mc{B}$, thanks to the uniqueness result already established in the one-dimensional case.
+  For all $B \in \mc{B}$ we have
+  \begin{equation*}
+    \int_B \langle \E^{\mc{B}} f, \mb{x}^* \rangle \, \dd\P
+    = \Big\langle \int_B \E^{\mc{B}} f \, \dd\P, \mb{x}^* \Big\rangle
+    = \Big\langle \int_B f \, \dd\P, \mb{x}^* \Big\rangle
+    = \int_B \langle f, \mb{x}^* \rangle \, \dd\P
+  \end{equation*}
+  using that $\E^{\mc{B}}f$ is a conditional expectation of $f$, and the same argument shows that
+  \begin{equation*}
+    \int_B \langle \td{\E}^{\mc{B}} f, \mb{x}^* \rangle \, \dd\P = \int_B \langle f, \mb{x}^* \rangle \, \dd\P.
+  \end{equation*}
+  Thus $\langle \E^{\mc{B}} f, \mb{x}^* \rangle$ and $\langle \td{\E}^{\mc{B}} f, \mb{x}^* \rangle$ are conditional expectations of of $\langle f, \mb{x}^* \rangle$ given $\mc{B}$, establishing \eqref{eq:CE-testing-eq}, and thus proving that $\E^{\mc{B}} f \aseq \td{E}^{\mc{B}} f$.
+
+  Finally, if $X$ is a complex Banach space, the result follows by considering real and imaginary parts separately.
+\end{proof}
+
+
+
+
+First we will establish a foundational result in the scalar-valued case.
+
+\begin{thm}\label{thm:conditional-expectation-EU}
+  Let $(\Omega,\mc{A},\P)$ be a probability space.
+  For any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a unique (up to almost sure equality) conditional expectation $\E^{\mc{B}}f$ exists.
+  Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive contraction on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
+  \begin{equation*}
+    \|\E^{\mc{B}}f\|_{p} \leq \|f\|_{p},
+  \end{equation*}
+  and if $f$ is a.s. nonnegative then so is $\E^{\mc{B}}f$.
+\end{thm}
+
+\begin{proof}
 
   We can prove positivity from the defining property \eqref{eq:conditional-expectation-property}, before we establish existence.
   Suppose $f \in L^1(\mc{A})$ is a.s. nonnegative.
@@ -262,12 +296,39 @@ Now we can use the extension theorem for positive operators to show the existenc
 
 \begin{prop}
   Let $(\Omega,\mc{A},\P)$ be a probability space, let $\mc{B}$ be a $\sigma$-subalgebra of $\mc{A}$, and let $X$ be a Banach space.
-  Then for any $f \in L^1(\mc{A};X)$, a unique (up to a.s. equality) conditional expectation $\E_X^{\mc{B}}f$ exists.
+  Then for any $f \in L^1(\mc{A};X)$, a unique (up to a.s. equality) conditional expectation $\E_X^{\mc{B}}f$ of $f$ given $\mc{B}$ exists.
   Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a contraction on $L^p(\mc{A};X)$.
 \end{prop}
 
 \begin{proof}
-  \todo{do this after sorting out real vs. complex Banach spaces}
+  \todo{come back to this after proving $X$-valued uniqueness from the beginning}
+  First we observe the following fact: if $f \in L^1(\mc{A};X)$ and $\mb{x}^* \in X^*$ is a functional, and if $\E^{\mc{B}}_X f$ is a conditional expectation of $f$ given $\mc{B}$, then
+    \begin{equation*}
+      \langle \E^{\mc{B}}_X f, \mb{x}^* \rangle = \E^{\mc{B}}(\langle f, \mb{x}^*\rangle)
+    \end{equation*}
+    
+  
+  First fix $p \in [1,\infty)$.
+  Since the conditional expectation $\E^{\mc{B}}$ is a positive operator on $L^p(\mc{A})$, by Theorem \ref{thm:positive-extensions} it admits a bounded $X$-valued extension, which we denote by $\E_X^{\mc{B}}$.
+  Since $\E^{\mc{B}}$ is contractive, so is $\E_X^{\mc{B}}$.%mk
+  We just need to show that for all $f \in L^p(\mc{A};X)$, $\E_X^{\mc{B}}f$ is a conditional expectation of $f$ given $\mc{B}$; we will do this by scalarisation.
+  For all $B \in \mc{B}$ and all functionals $\mb{x}^* \in X^*$, since the function $\langle f, \mb{x}^* \rangle$ is in $L^1(\mc{A})$, we have
+  \begin{equation*}
+    \begin{aligned}
+      \Big\langle \int_B \E_X^{\mc{B}} f \, \dd\P, \mb{x}^* \Big\rangle
+      &= \int_B \langle \E_X^{\mc{B}} f, \mb{x}^* \rangle \, \dd\P \\
+      &\stackrel{(*)}{=} \int_B \E^{\mc{B}} (\langle f, \mb{x}^* \rangle) \, \dd\P
+      = \int_B \langle f, \mb{x}^* \rangle \, \dd\P
+      = \Big\langle \int_B f \, \dd\P, \mb{x}^* \Big\rangle.
+    \end{aligned}
+  \end{equation*}
+  where the starred equality follows from (CITE PROPOSITION)\todo{cite this}.
+  Since this holds for all $\mb{x}^* \in X^*$, we have the equality
+  \begin{equation*}
+     \int_B \E_X^{\mc{B}} f \, \dd\P = \int_B f \, \dd\P,
+   \end{equation*}
+   which shows that $\E_X^{\mc{B}}$ is a conditional expectation of $f$ given $\mc{B}$.
+  
 \end{proof}
 
 

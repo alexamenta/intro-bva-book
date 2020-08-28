@@ -144,6 +144,40 @@ As a quick application of this result, we show that strong measurability is pres
   But then $\phi(s)f(s) \in X_0$ as well, so $\phi f$ is separably-valued.
 \end{proof}
 
+Before moving on to Bochner spaces we note that almost-everywhere equality of strongly measurable functions is equivalent to `coordinatewise' almost-everywhere equality.
+This is a surprisingly useful observation; it is often used to deduce identities for vector-valued functions from corresponding identities for scalar-valued functions.
+
+\begin{lem}\label{lem:coordinatewise-equality-test}
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  Suppose that $\map{f,g}{S}{X}$ are two strongly measurable functions.
+  Then $f$ and $g$ are equal almost everywhere if and only if for all functionals $\mb{x}^* \in X^*$, the scalar-valued functions $\langle f, \mb{x}^*\rangle$ and $\langle g, \mb{x}^* \rangle$ are equal almost everywhere.
+\end{lem}
+
+\begin{proof}
+  The implication
+  \begin{equation*}
+    f \stackrel{\ae}{=}g \Longrightarrow \forall \mb{x}^* \in X^* \;  \langle f, \mb{x}^* \rangle \stackrel{\ae}{=} \langle g, \mb{x}^* \rangle
+  \end{equation*}
+  is straightforward, and is even true for (non-strongly) measurable functions, so we omit the proof.
+  The converse direction is harder because although each of the sets
+  \begin{equation*}
+    N_{\mb{x}^*} := \{s \in S : \langle f(s), \mb{x}^* \rangle \neq \langle g(s), \mb{x}^* \rangle\} \qquad \mb{x}^* \in X^*
+  \end{equation*}
+  has measure zero, the (uncountable!) union of these sets over all $\mb{x}^* \in X^*$ does not \emph{a priori} have measure zero.
+  This is where strong measurability comes into play, via the Pettis theorem.
+  Since $f$ and $g$ are separably-valued, there exists a separable closed subspace $X_0 \subset X$ such that both $f$ and $g$ are $X_0$-valued.
+  Since $X_0$ is separable, there is a (countable!) sequence $(\mb{x}_n^*)_{n \in \N}$ in $X^*$ which separates points of $X_0$.\footnote{That is, if $\mb{x} \neq \mb{y} \in X_0$, then there exists $n \in \N$ such that $\langle \mb{x}, \mb{x}_n^* \rangle \neq \langle \mb{y}, \mb{x}_n^* \rangle$. See \cite[Proposition B.1.11]{HNVW16}.}
+  Now define
+  \begin{equation*}
+    N := \bigcup_{n \in \N} N_{\mb{x}_n^*};
+  \end{equation*}
+  this set has measure zero since it is the countable union of sets with measure zero.
+  For all $s \notin N$ we then have $\langle f(s), \mb{x}_n^* \rangle = \langle g(s), \mb{x}_n^* \rangle$ for all $n \in \N$, and since $(\mb{x}_n^*)_{n \in \N}$ separates points of $X_0$, it follows that $f(s) = g(s)$.
+  Thus $f \stackrel{\ae}{=} g$.  
+\end{proof}
+
+
+
 \subsection{Bochner spaces}
 
 Given $\map{f}{S}{X}$, we let $\|f\|_X$ denote the scalar-valued function $S \to \K$ defined by $s \mapsto \|f(s)\|_X$.
@@ -495,11 +529,6 @@ The Bochner integral satisfies the following properties.
   \end{description}
 \end{proof}
 
-\begin{rmk}
-  This method used to prove the substitution identity is known as \emph{scalarisation}: it proves an identity for $X$-valued functions by testing it against all functionals $\mb{x}^* \in X^*$.
-  This useful technique often reduces identities for Banach-valued functions to known identities for scalar-valued functions.
-\end{rmk}
-
 There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we do not have access to the notion of a non-negative vector-valued function).
 
 \begin{prop}[Fubini]
@@ -798,7 +827,14 @@ Of course, most interesting operators are not positive.
   \end{itemize}
 \end{exercise}
 
-
+\begin{exercise}
+  Give an example of a measure space $(S, \mc{A}, \mu)$, a Banach space $X$, and a measurable function $\map{f}{S}{X}$ such that
+  \begin{itemize}
+  \item $\langle f, \mb{x}^* \rangle \stackrel{\ae}{=} 0$ for all $\mb{x}^* \in X^*$,
+  \item $f$ is everywhere non-zero.
+  \end{itemize}
+  \todo{I don't even know the answer to this one, maybe too hard...}
+\end{exercise}
 
 
 %%% Local Variables:
