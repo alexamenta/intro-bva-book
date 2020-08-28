@@ -224,15 +224,12 @@ First we establish the uniqueness of conditional expectations.
   Finally, if $X$ is a complex Banach space, the result follows by considering real and imaginary parts separately.
 \end{proof}
 
+Next we will establish existence, positivity, and $L^p$-contractivity of conditional expectations in the scalar-valued case.
 
-
-
-First we will establish a foundational result in the scalar-valued case.
-
-\begin{thm}\label{thm:conditional-expectation-EU}
+\begin{thm}\label{thm:conditional-expectation-existence-scalar}
   Let $(\Omega,\mc{A},\P)$ be a probability space.
-  For any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a unique (up to almost sure equality) conditional expectation $\E^{\mc{B}}f$ exists.
-  Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive contraction on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
+  For any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a conditional expectation $\E^{\mc{B}}f$ exists.
+  The operator $f \mapsto \E^{\mc{B}}f$ is linear, and for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive contraction on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
   \begin{equation*}
     \|\E^{\mc{B}}f\|_{p} \leq \|f\|_{p},
   \end{equation*}
@@ -248,69 +245,66 @@ First we will establish a foundational result in the scalar-valued case.
     \int_B \E^{\mc{B}} f \, \dd\P = \int_B f \, \dd\P \geq 0,
   \end{equation*}
   which implies that the $\mc{B}$-measurable function $\E^{\mc{B}}f$ is a.s. nonnegative.\footnote{This uses an exercise from measure theory: if $g$ is $\mc{B}$-measurable and $\int_B g \geq 0$ for all $\mc{B}$-measurable sets, then $g \geq 0$ a.e.. Proof: the set $N := \{g(\omega) < 0\}$ is $\mc{B}$-measurable, and assuming it has positive measure leads to the contradiction $0 \leq \int_B g < 0$.}
-
-
-  Now we prove existence.
-  Fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A})$; we will construct a contractive conditional expectation $\E^{\mc{B}}f \in L^p(\mc{B};\K) \subset L^p(\mc{A};\K)$ directly.
+  
+  Now fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A})$; we will construct a linear contractive conditional expectation operator $\E^{\mc{B}}$ on $L^p(\mc{B};\K)$ directly.
 
   \textbf{Mild case: $p > 1$}, so most importantly $p' < \infty$.
-  The inclusion map $\map{\iota}{L^{p'}(\mc{B})}{L^{p'}(\mc{A})}$ is contractive, so (using that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$) its adjoint $\map{\iota^*}{L^p(\mc{A})}{L^p(\mc{B})}$ is also contractive.
-  For all $f \in L^p(\mc{A})$ and $B \in \mc{B}$ we then have
+  The inclusion map $\map{\iota}{L^{p'}(\mc{B})}{L^{p'}(\mc{A})}$ is  contractive, so (using that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$) its adjoint $\map{\E^{\mc{B}} := \iota^*}{L^p(\mc{A})}{L^p(\mc{B})}$ is also contractive.
+  For all $f \in L^p(\mc{A})$ and $B \in \mc{B}$ we have
   \begin{equation*}
-    \int_B \iota^* f \, \dd\P = \langle \iota^* f, \1_{B} \rangle = \langle f, \iota \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P,
+    \int_B \E^{\mc{B}} f \, \dd\P = \langle \iota^* f, \1_{B} \rangle = \langle f, \iota \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P,
   \end{equation*}
-  so $\iota^* f \in L^p(\mc{B}) \subset L^1(\mc{B})$ is a conditional expectation of $f$ given $\mc{B}$.
+  so $\E^{\mc{B}} f \in L^p(\mc{B}) \subset L^1(\mc{B})$ is a conditional expectation of $f$ given $\mc{B}$.
 
-  \textbf{(German) spicy case: $p = 1$.} The difficulty here is that $L^1$ is \emph{strictly} contained in the dual of $L^\infty$, so we can't just take an adjoint of the inclusion $L^\infty(\mc{B}) \to L^\infty(\mc{A})$.
+
+  \textbf{(German) spicy case: $p = 1$.} The difficulty here is that $L^1$ is \emph{strictly} contained in the dual of $L^\infty$, so taking an adjoint of the inclusion $L^\infty(\mc{B}) \to L^\infty(\mc{A})$ is not so straightforward.\footnote{See Exercise \ref{ex:conditional-expectation-as-adjoint}.} 
   Instead we argue by density.
   We have that $L^2(\mc{A})$ is dense in $L^1(\mc{A})$, so we aim to extend the conditional expectation defined above (in the case $p=2$) by continuity.
   For $f \in L^2(\mc{A})$ and $g \in L^\infty(\mc{B})$ we have
   \begin{equation*}
-    |\langle \iota^* f, g \rangle| = |\langle f, \iota g \rangle| = |\langle f, g \rangle| \leq \|f\|_1 \|g\|_\infty
+    |\langle \E^{\mc{B}} f, g \rangle| = |\langle f, \iota g \rangle| = |\langle f, g \rangle| \leq \|f\|_1 \|g\|_\infty
   \end{equation*}
   using that $L^\infty(\mc{B}) \subset L^2(\mc{B})$.
   Taking the supremum over all nonzero $g \in L^\infty(\mc{B})$ proves that
   \begin{equation*}
-    \|\iota^* f\|_1 \leq \|f\|_1,
+    \|\E^{\mc{B}} f\|_1 \leq \|f\|_1,
   \end{equation*}
-  so $\iota^*$ extends to a contraction $L^1(\mc{A}) \to L^1(\mc{B})$.
+  so $\E^{\mc{B}}$ extends to a contraction $L^1(\mc{A}) \to L^1(\mc{B})$.
   For $f \in L^1(\mc{A})$ and $B \in \mc{B}$, using that integration on $B$ is a continuous linear functional on $L^1$, we have
   \begin{equation*}
-    \int_B \iota^* f \, \dd\P
-    = \lim_{n \to \infty} \int_B \iota^* f_n \, \dd\P
+    \int_B \E^{\mc{B}} f \, \dd\P
+    = \lim_{n \to \infty} \int_B \E^{\mc{B}} f_n \, \dd\P
     = \lim_{n \to \infty} \int_B  f_n \, \dd\P
     = \int_B f \, \dd\P
   \end{equation*}
   where $f_n$ is a sequence in $L^2(\mc{A})$ converging to $f$ in $L^1(\mc{A})$.
-  Thus the continuous extension of $\iota^*$ is a conditional expectation of $f$, and we are done.
+  Thus $\E^{\mc{B}}f$ is a conditional expectation of $f$ given $\mc{B}$, and we are done.
 \end{proof}
 
+\todo{i'm not sure that we need the following stuff}
+{\color{blue}
 Note that the proof of the previous result also establishes the following adjoint relation (the case $p=\infty$ involves a few lines of work which are left as an exercise).\todo{include exercise}
 
 \begin{prop}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $\mc{B}$ a $\sigma$-subalgebra of $\mc{A}$.
   For all $p \in (1,\infty]$, the conditional expectation $\E^{\mc{B}}$ on $L^p(\mc{A})$ is the adjoint of the corresponding conditional expectation on $L^{p'}(\mc{A})$. 
 \end{prop}
+}
 
 Now we can use the extension theorem for positive operators to show the existence of conditional expectations of Banach-valued random variables.
 
 \begin{prop}
   Let $(\Omega,\mc{A},\P)$ be a probability space, let $\mc{B}$ be a $\sigma$-subalgebra of $\mc{A}$, and let $X$ be a Banach space.
-  Then for any $f \in L^1(\mc{A};X)$, a unique (up to a.s. equality) conditional expectation $\E_X^{\mc{B}}f$ of $f$ given $\mc{B}$ exists.
+  Then for any $f \in L^1(\mc{A};X)$, a conditional expectation $\E_X^{\mc{B}}f$ of $f$ given $\mc{B}$ exists.
   Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a contraction on $L^p(\mc{A};X)$.
 \end{prop}
 
-\begin{proof}
-  \todo{come back to this after proving $X$-valued uniqueness from the beginning}
-  First we observe the following fact: if $f \in L^1(\mc{A};X)$ and $\mb{x}^* \in X^*$ is a functional, and if $\E^{\mc{B}}_X f$ is a conditional expectation of $f$ given $\mc{B}$, then
-    \begin{equation*}
-      \langle \E^{\mc{B}}_X f, \mb{x}^* \rangle = \E^{\mc{B}}(\langle f, \mb{x}^*\rangle)
-    \end{equation*}
-    
-  
+\todo{UP TO HERE. need a lemma on scalarisation of tensor extensions.}
+
+\begin{proof}  
   First fix $p \in [1,\infty)$.
   Since the conditional expectation $\E^{\mc{B}}$ is a positive operator on $L^p(\mc{A})$, by Theorem \ref{thm:positive-extensions} it admits a bounded $X$-valued extension, which we denote by $\E_X^{\mc{B}}$.
-  Since $\E^{\mc{B}}$ is contractive, so is $\E_X^{\mc{B}}$.%mk
+  Since $\E^{\mc{B}}$ is contractive, so is $\E_X^{\mc{B}}$.
   We just need to show that for all $f \in L^p(\mc{A};X)$, $\E_X^{\mc{B}}f$ is a conditional expectation of $f$ given $\mc{B}$; we will do this by scalarisation.
   For all $B \in \mc{B}$ and all functionals $\mb{x}^* \in X^*$, since the function $\langle f, \mb{x}^* \rangle$ is in $L^1(\mc{A})$, we have
   \begin{equation*}
@@ -755,6 +749,11 @@ and its maximal function
   \item
     As above, but now let $X = \ell^2(\N)$, and show that the stopping time $T_K$ is finite for all $\lambda > 0$.
   \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex:conditional-expectation-as-adjoint}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $\mc{B}$ a $\sigma$-subalgebra of $\mc{A}$.
+  Using that $L^1(\mc{A}) \subsetneq L^\infty(\mc{A})^*$, show that the adjoint of the inclusion map $\map{\iota}{L^\infty(\mc{B})}{L^\infty(\mc{A})}$, which \emph{a priori} maps $L^1(\mc{A}) \to L^\infty(\mc{B})^* \supsetneq L^1(\mc{B})$, actually maps into $L^1(\mc{B})$ \emph{without invoking the existence of a conditional expectation operator on $L^1$.}
 \end{exercise}
 
 \begin{exercise}\label{ex:martingale-elementary-properties}
