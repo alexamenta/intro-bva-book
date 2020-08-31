@@ -771,10 +771,20 @@ Of course, most interesting operators are not positive.
   \end{itemize}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:tensor-extension-basic-props}
   Let $(S_i, \mc{A}_i, \mu_i)$ ($i \in \{1,2\}$) be measure spaces, let $p_1 \in [1,\infty)$, and let $p_2 \in [1,\infty]$.
-  Suppose that $T \in \Lin(L^{p_1}(S_1), L^{p_2}(S_2))$ is a bounded linear operator. 
-  Show that $T$ admits a bounded $X$-valued extension for all finite-dimensional Banach spaces $X$.
+  Suppose that $T \in \Lin(L^{p_1}(S_1), L^{p_2}(S_2))$ is a bounded linear operator.
+  \begin{itemize}
+  \item
+    Show that $T$ admits a bounded $X$-valued extension for all finite-dimensional Banach spaces $X$.
+  \item
+    Let $X$ be any Banach space and suppose $\mb{x}^* \in X^*$.
+    Show that for all $f \in L^{p_1}(S_1) \otimes X$,
+    \begin{equation*}
+      \langle (T \otimes I)f, \mb{x}^* \rangle = T(\langle f, \mb{x}^* \rangle).
+    \end{equation*}
+  \end{itemize}
+
 \end{exercise}
 
 \begin{exercise}\label{ex:tensor-adjoint}
