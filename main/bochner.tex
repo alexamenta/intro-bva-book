@@ -792,9 +792,13 @@ Of course, most interesting operators are not positive.
   Let $T^*$ denote the adjoint of $T$.
   Show that $T$ admits a bounded $X$-valued extension if and only if the adjoint $T^* \in \Lin(L^{p'}(S,\mu))$ admits a bounded $X^*$-valued extension, and show that
   \begin{equation*}
-    (\td{T}_X)^* \Phi f = \td{(T^*)}_{X^*} f
+    (\td{T}_X)^* \Phi g = \td{(T^*)}_{X^*} g
   \end{equation*}
-  for all $f \in L^{p'}(S;X^*)$, where $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is as in Proposition \ref{prop:bochner-preduality}. 
+  for all $g \in L^{p'}(S;X^*)$, where $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is as in Proposition \ref{prop:bochner-preduality}.
+  Conclude that for all $f \in L^p(S;X)$ and all $g \in L^{p'}(S;X)$,
+  \begin{equation}\label{eq:tensor-adjoint-identity}
+    \langle \td{T}_X f, g \rangle = \langle f, \td{(T^*)}_{X^*} g \rangle.
+  \end{equation}
 \end{exercise}
 
 \begin{exercise}\label{ex:FT-bounded-1-infty}
