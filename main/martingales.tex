@@ -428,7 +428,7 @@ They are intricately linked with many topics in harmonic and functional analysis
 
 \begin{example}
   Let $(\Omega, \mc{A}, \P)$ be a probability space and $(\mc{A}_n)_{n \in \N}$ a filtration.
-  Let $X$ be a Banach space and $f \in L^1([0,1);X)$.
+  Let $X$ be a Banach space and $f \in L^1(\Omega;X)$.
   For each $n \in \N$ define $f_n := \E^{\mc{A}_n}f \in L^1(\Omega;X)$.
   Then by the monotonicity property of conditional expectations,
   \begin{equation*}
@@ -436,6 +436,18 @@ They are intricately linked with many topics in harmonic and functional analysis
   \end{equation*}
   so $(f_n)_{n \in \N}$ is a martingale.
   This is called the \emph{martingale associated with $f$}.
+
+  When $\Omega = [0,1)$ is the unit interval with Borel $\sigma$-algebra and Lebesgue measure, and when we consider the dyadic filtration $(\mc{F}_n)_{n \in \N}$ as in Example \ref{eg:dyadic-filtration}, the martingale associated with a function $f \in L^1([0,1);X)$ is given by
+  \begin{equation*}
+    f_n = \sum_{I \in \mc{D}_n} \1_I \otimes \langle f \rangle_I
+  \end{equation*}
+  where $\mc{D}_n$ is the set of dyadic intervals $I \subset [0,1)$ of length $2^{-n}$ and $\langle f \rangle_I = \fint_I f(t) \, \dd t$ is the average of $f$ on $I$ (these conditional expectations were computed in Example \ref{eg:atomic-CE}).
+  The difference sequence of this martingale is given by (for $n \geq 1$)\todo{UP TO HERE}
+  \begin{equation*}
+    df_n = f_n - f_{n-1} = 
+  \end{equation*}
+  where for each dyadic interval $I \in \mc{D}_{n-1}$, we write $I_\pm$ for the two dyadic intervals in $\mc{D}_{n}$ with $I = I_- \cup I_+$, where $I_-$ is to the left of $I_+$ (i.e. $\sup_{I_-} = \inf_{I_+}$).
+  
 \end{example}
 
 \begin{example}
