@@ -442,12 +442,27 @@ They are intricately linked with many topics in harmonic and functional analysis
     f_n = \sum_{I \in \mc{D}_n} \1_I \otimes \langle f \rangle_I
   \end{equation*}
   where $\mc{D}_n$ is the set of dyadic intervals $I \subset [0,1)$ of length $2^{-n}$ and $\langle f \rangle_I = \fint_I f(t) \, \dd t$ is the average of $f$ on $I$ (these conditional expectations were computed in Example \ref{eg:atomic-CE}).
-  The difference sequence of this martingale is given by (for $n \geq 1$)\todo{UP TO HERE}
+  Each dyadic interval $I \in \mc{D}_{n-1}$ can be `halved', i.e. $I = I_{-} \cup I_{+}$, where $I_{\pm} \in \mc{D}_{n}$ and $I_-$ is to the left of $I_+$ (i.e. $\sup_{I_-} = \inf_{I_+}$).
+  Let's compute the difference $df_n$ on an interval $I \in \mc{D}_{n-1}$:
   \begin{equation*}
-    df_n = f_n - f_{n-1} = 
+    \begin{aligned}
+      \1_{I}(df_{n}) &= \1_{I}(f_{n} - f_{n-1}) \\
+      &= \1_{I_{-}} \otimes \langle f \rangle_{I_{-}} + \1_{I_{+}} \otimes \langle f \rangle_{I_{+}} - (\1_{-} + \1_{+}) \otimes \langle f \rangle_{I} \\
+      &= \1_{I_{-}} \otimes \Big( \frac{2}{|I|}\int_{I_{-}} f - \frac{1}{|I|}\int_{I} f \Big) + \1_{I_{+}} \otimes \Big( \frac{2}{|I|}\int_{I_{+}} f - \frac{1}{|I|}\int_{I} f \Big) \\
+      &= \1_{I_{-}} \otimes \Big( \frac{1}{|I|}\int_{I_{-}} f - \frac{1}{|I|}\int_{I_{+}} f \Big) - \1_{I_{+}} \otimes \Big( \frac{1}{|I|}\int_{I_{-}} f - \frac{1}{|I|}\int_{I_{+}} f \Big) \\
+      &= h_I \otimes \langle f, h_I \rangle
+    \end{aligned}
   \end{equation*}
-  where for each dyadic interval $I \in \mc{D}_{n-1}$, we write $I_\pm$ for the two dyadic intervals in $\mc{D}_{n}$ with $I = I_- \cup I_+$, where $I_-$ is to the left of $I_+$ (i.e. $\sup_{I_-} = \inf_{I_+}$).
-  
+  where
+  \begin{equation*}
+    h_I := \frac{1}{|I|^{1/2}} (\1_{I_-} - \1_{I_+})
+  \end{equation*}
+  is the ($L^2$-normalised) \emph{Haar function} associated with $I \in \mc{D}_{n}$.
+  Thus the representation of $f$ in terms of martingale differences corresponds to its Haar expansion (ignoring the issue of whether the sums converge):
+  \begin{equation*}
+    f = f_0 + \sum_{n \geq 1} df_{n} = \langle f \rangle_{[0,1)} + \sum_{n \geq 1} \sum_{I \in \mc{D}_{n-1}} h_I \otimes \langle f, h_I \rangle. 
+  \end{equation*}
+
 \end{example}
 
 \begin{example}
