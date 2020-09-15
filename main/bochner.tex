@@ -197,7 +197,6 @@ If $f$ is strongly measurable, then $\|f\|_X$ is also measurable, since the func
   Such a function does not qualify for membership in $L^p(S;X)$.
 \end{rmk}
 
-
 \begin{prop}\label{prop:simple-density}
   Let $X$ be a Banach space and $p \in [1,\infty)$.
   Then the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
@@ -240,6 +239,11 @@ If $f$ is strongly measurable, then $\|f\|_X$ is also measurable, since the func
   \end{equation*}
   so that $g_n \to f$ in $L^p(S;X)$, completing the proof.
 \end{proof}
+
+
+\begin{rmk}
+  Proposition \ref{prop:simple-density} can be extended to more general dense subspaces of $L^p(S)$; see Exercise \ref{ex:general-density}.
+\end{rmk}
 
 Note that the case $p = \infty$ is not included in the proposition above, even though the simple functions are dense in $L^\infty(S)$.
 
@@ -769,6 +773,12 @@ Of course, most interesting operators are not positive.
   \item If $X$ is separable or $A$ is separable, show that $C(A;X)$ is contained in $L^\infty(A, \mu;X)$.
   \item Give an example of a topological space $A$ and a Banach space $X$ such that $C(A;X)$ is not contained in $L^\infty(A,\mu;X)$.
   \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex:general-density}
+  Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space and $p \in [1,\infty)$.
+  Let $V \subset L^p(S;\K)$ be a dense subspace.
+  Show that $V \otimes X$ is dense in $L^p(S;X)$.
 \end{exercise}
 
 \begin{exercise}\label{ex:tensor-extension-basic-props}

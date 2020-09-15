@@ -1,0 +1,152 @@
+
+
+\subsection{Vector measures and the Radon--Nikodym property}
+
+\begin{defn}
+  Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space (recall: $\mc{A}$ is a $\sigma$-algebra on $S$).
+  An $X$-valued \emph{vector measure} is a function $\map{\mu}{\mc{A}}{X}$ which is countably additive, in the sense that for all sequences $(E_n)_{n \in \N}$ of pairwise disjoint sets in $\mc{A}$,
+  \begin{equation*}
+    \mu\big( \bigcup_{n \in \N} E_n \big) = \sum_{n \in \N} \mu(E_n).
+  \end{equation*}
+  Note that this condition includes convergence of the series on the right hand side in $X$.
+\end{defn}
+
+Vector measures are just like measures, except the measure of a set $E \subset S$ is now a vector $\mu(E) \in X$ rather than a scalar.
+We are most interested in vector measures with the following boundedness condition.
+
+\begin{defn}
+  Let $X$ be a Banach space and $\mu$ an $X$-valued vector measure on a maesurable space $(S,\mc{A})$.
+  The \emph{variation} of $\mu$ is the scalar-valued measure $\map{|\mu|}{\mc{A}}{[0,\infty]}$ defined by
+  \begin{equation*}
+    |\mu|(E) := \sup_{\pi} \sum_{A \in \pi} \|\mu(A)\|_X,
+  \end{equation*}
+  where the supremum ranges over all partitions $\pi$ of $S$ into $\mc{A}$-measurable sets.
+  We define the \emph{total variation norm} $\|\mu\|_{\var} := |\mu|(S)$, and we say that $\mu$ has \emph{bounded variation} if $\|\mu\|_{\var} < \infty$.
+  Equivalently, $\mu$ has bounded variation if there exists a finite scalar-valued measure $\nu$ on $\mc{A}$ such that $\|\mu(A)\|_X \leq \nu(A)$ for all $A \in \mc{A}$ (as the minimal measure with this property is $|\mu|$).
+\end{defn}
+
+It is not particularly difficult to define integrals of scalar-valued functions with respect to vector measures.
+
+\begin{prop}
+  Let $X$ be a Banach space and $\mu$ an $X$-valued vector measure of bounded variation on a measurable space $(S,\mc{A})$.
+  Then there is a unique continuous linear map $\map{[\mu]}{L^1(S,\mc{A},|\mu|)}{X}$ such that $[\mu](\1_{A}) = \mu(A)$ for all $A \in \mc{A}$.
+  We use integral notation to denote this map, i.e. we write
+  \begin{equation*}
+    \int_{S} f(s) \, \dd\mu(s) := [\mu](f) \qquad \forall f \in L^1(S,\mc{A},|\mu|).
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+  We skip the verification that the prescription $[\mu](\1_{A})$ extends by linearity to a consistent map on integrable simple functions.\footnote{``It is dreadfully boring to show that this formula defines a linear map... from the space of simple functions of the above form into $X$ and we leave this as an exercise for masochists.'' \cite[pp5-6]{DU77}}
+  We just need to show boundedness, and the conclusion will follow by density.
+  Consider a simple function $g \in L^1(S,\mc{A},|\mu|)$ of the form
+  \begin{equation*}
+    g = \sum_{n=1}^{N} c_n \1_{S_n} 
+  \end{equation*}
+  with scalars $c_n \in \K$.
+  Then
+  \begin{equation*}
+    \begin{aligned}
+      \|[\mu](g)\|_X \leq \sum_{n=1}^{N} |c_n| \|\mu(S_n)\|_X \leq \sum_{n=1}^{N} |c_n| |\mu|(S_n) = \|g\|_{L^1(|\mu|)}.
+    \end{aligned}
+  \end{equation*}
+  That's all.
+\end{proof}
+
+
+\begin{example}\label{eg:RN-density}
+  Let $(S,\mc{A})$ be a measurable space and $X$ a Banach space.
+  Suppose $\nu$ is a finite scalar-valued measure on $(S,\mc{A})$ and $f \in L^1(S,\mc{A},\nu;X)$.
+  Then we can define an $X$-valued vector measure $\mu$ (sometimes denoted $\mu = f\nu$) by Bochner integration:
+  \begin{equation*}
+    \mu(A) = \int_A f(s) \, \dd\nu.
+  \end{equation*}
+  This vector measure has bounded variation: given a partition $S = \bigcup_{n \in \N} S_n$, we compute
+  \begin{equation*}
+    \sum_{n \in \N} \|\mu(S_n)\|_{X} = \sum_{n \in \N} \Big\| \int_{S_n} f(s) \, \dd\nu \Big\|_X
+    \leq \int_{S} \|f(s)\|_{X} \, \dd\nu
+  \end{equation*}
+  so that $\|\mu\|_{\var} \leq \|f\|_{L^1(\nu;X)}$.\footnote{In fact, this is an equality. See \cite[pp43]{gP16}.}
+\end{example}
+
+Now let's revise some measure theory.
+Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measurable space $(S,\mc{A})$, then we say \emph{$\nu$ is absolutely continuous with respect to $\mu$}, written $\nu \ll \mu$, if $A \in \mc{A}$ and $\mu(A) = 0$ implies $\nu(A) = 0$.
+
+\begin{thm}[Radon--Nikodym]
+  Let $(S,\mc{A})$ be a measurable space, and let $\mu$ be a $\sigma$-finite measure on $\mc{A}$.
+  Let $\nu$ be a finite signed measure on $\mc{A}$ such that $\nu \ll \mu$.
+  Then there exists a unique $h \in L^1(S,\mc{A},\mu)$ such that
+  \begin{equation*}
+    \nu(A) = \int_{A} h(s) \, \dd\mu(s) \qquad \forall A \in \mc{A}.
+  \end{equation*}
+\end{thm}
+
+See \cite[Theorem 5.5.4]{rD04} for a proof.
+One might expect that an analogous theorem holds for vector measures, but it turns out to depend on the geometry of the target Banach space.
+
+\begin{defn}
+  Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space.
+  A Banach space $X$ is said to have the \emph{Radon--Nikodym property (RNP) with respect to $(S,\mc{A},\mu)$} if for every $X$-valued vector measure $\nu$ on $(S,\mc{A})$ such that $\|\nu\|_{\var} < \infty$ and $|\nu| \ll \mu$, there is a function $f \in L^1(S,\mc{A},\mu;X)$ such that $\nu = f\mu$ (as defined in Example \ref{eg:RN-density}).
+  We say $X$ has the \emph{Radon--Nikodym property} if it has the property above with respect to every $\sigma$-finite measure space $(S,\mc{A},\mu)$.
+\end{defn}
+
+The classical Radon--Nikodym theorem says that the scalar fields $\R$ and $\C$ have the RNP.
+We will investigate this property for other Banach spaces by considering its relationship with martingales and with properties of convex sets.
+We will also connect it with the duality of Bochner spaces $L^p(S;X)$, answering a question left open in Chapter \ref{sec:Bochner-spaces}.
+
+\subsection{The RNP and martingale convergence}
+
+\begin{thm}
+  Let $X$ be a Banach space which has the Radon--Nikodym property with respect to a probability space $(\Omega,\mc{A},\P)$.
+  Let $(f_n)_{n \in \N}$ be a martingale on $\Omega$ such that the set $\{\|f_n\|_X : n \in \N\} \subset L^1(\Omega)$ is bounded and uniformly integrable.
+  Then there exists $f_\infty \in L^1(\Omega;X)$ such that $f_n = \E^{\mc{F}_n} f_\infty$ for all $n \in \N$.
+\end{thm}
+
+\begin{proof}
+  Let the martingale be adapted to a filtration $(\mc{A}_n)_{n \in \N}$, and for simplicity suppose $\mc{A} = \mc{A}_\infty$.
+  Since this is an RNP proof, our goal is to use $(f_n)_{n \in \N}$ to construct a vector measure on $\mc{A}$ of bounded variation which is absolutely continuous with respect to $\P$, from which we will extract the function $f_\infty$.
+
+  For all $A \in \mc{A}$ we wish to define
+  \begin{equation}\label{eq:mu-stationary-limit}
+    \mu(A) := \lim_{k \to \infty} \int_A f_k \, \dd\P,
+  \end{equation}
+  but we will have to work to show that this definition makes sense.
+  First observe that the definition makes sense for all $A \in \bigcup_{n \in \N} \mc{A}_{n}$; indeed, if $A \in \mc{A}_{n}$ then for $k \geq n$ we have
+  \begin{equation*}
+    \int_A f_k \, \dd\P = \int_A f_n \, \dd \P
+  \end{equation*}
+  and the limit in \eqref{eq:mu-stationary-limit} is equal to $\int_A f_n \, \dd\P$.
+  \todo{UP TO HERE}
+\end{proof}
+
+\begin{cor}
+  (spaces without RNP)
+\end{cor}
+
+\subsection{Duality of Bochner spaces}
+
+\subsection*{Exercises}
+
+% \begin{exercise}
+%   Let $\map{T}{L^1([0,1])}{X}$ be a bounded linear operator, and for all Borel sets $E \subset [0,1]$ define
+%   \begin{equation*}
+%     \mu_T(E) := T(\1_{E}).
+%   \end{equation*}
+%   Show that $\mu_T$ is an $X$-valued vector measure with bounded variation, and show furthermore that $\mu_T$ is absolutely continuous with respect to the Lebesgue measure.
+%   What does this say about bounded linear operators $L^1([0,1]) \to X$ when $X$ has the Radon--Nikodym property?
+% \end{exercise}
+
+\begin{exercise}
+  Let $X$ be a Banach space with the Radon--Nikodym property.
+  Show that every bounded linear operator $\map{T}{L^1([0,1])}{X}$ is of the form
+  \begin{equation*}
+    Tf = \int_0^1 f(t) g(t) \, \dd t
+  \end{equation*}
+  for some $g \in L^1([0,1];X)$.
+\end{exercise}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main.tex"
+%%% End:
