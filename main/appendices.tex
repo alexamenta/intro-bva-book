@@ -39,6 +39,22 @@ The following results are all standard the suggested references are essentially 
   Then there exists a functional $\Lambda \in X^*$ such that $|\Lambda(\mb{x})| \leq p(\mb{x})$ for all $\mb{x} \in X$ and $\Lambda(\mb{y}) = \lambda(\mb{y})$ for all $\mb{y} \in Y$.
 \end{thm}
 
+The Hahn--Banach theorem implies duality relations between subspaces and quotient spaces.
+
+\begin{prop}\label{prop:duality-subspace-quotient}
+  Let $Y$ be a closed subspace of $X$, and define the annihilator
+  \begin{equation*}
+    Y^\perp := \{\mb{x}^* \in X^* : \text{$\langle \mb{y}, \mb{x}^* \rangle$ for all $\mb{y} \in Y$}\}. 
+  \end{equation*}
+  Then $Y^{\perp}$ is a closed subspace of $X^*$, and we have isometric isomorphisms
+  \begin{equation*}
+    X^* / Y^\perp = M^* \qquad \text{and} \qquad (X/Y)^* = M^{\perp}:
+  \end{equation*}
+  the first is given by restriction to $Y$, and the second is given by precomposition with the quotient map $X \to X / Y$.
+\end{prop}
+
+
+
 The \emph{weak topology} on $X$ the weakest topology on $X$ such that every functional $\mb{x}^* \in X^*$ is continuous.
 The weak toplogy is weaker than the usual (norm) topology on $X$, and these topologies are equal if and only if $X$ is finite dimensional.
 

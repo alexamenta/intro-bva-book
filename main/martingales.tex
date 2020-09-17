@@ -856,14 +856,14 @@ The sequence space $\ell^\infty$ contains $c_0$, which does not have $p$-MCP for
 Of course, $\ell^\infty$ is a dual space, but it isn't separable.
 
 \begin{lem}
-  For all $p \in [1,\infty]$, the MCP is separably determined: that is, a Banach space $X$ has the MCP if and only if every separable subspace $Y \subset X$ has the MCP.
+  For all $p \in [1,\infty]$, the $p$-MCP is separably determined: that is, a Banach space $X$ has the $p$-MCP if and only if every separable closed subspace $Y \subset X$ has the $p$-MCP.
 \end{lem}
 
 \begin{proof}
   The `only if' direction is immediate, as a $Y$-valued martingale can be seen as an $X$-valued martingale, and if a martingale converges a.s. in $X$, then since $Y$ is closed it must also converge a.s. in $Y$.
 
-  On the other hand, suppose that every separable subspace $Y \subset X$ has the $p$-MCP, and let $(f_n)$ be an $X$-valued martingale which is uniformly bounded in $L^p$.
-  Each $f_n$ is strongly measurable and hence separably-valued by the Pettis theorem (Theorem \ref{thm:Pettis-measurability}), so there is a sequence of separable subspaces $Y_n \subset X$ such that $f_n$ takes values in $Y_n$.
+  On the other hand, suppose that every separable closed subspace $Y \subset X$ has the $p$-MCP, and let $(f_n)$ be an $X$-valued martingale which is uniformly bounded in $L^p$.
+  Each $f_n$ is strongly measurable and hence separably-valued by the Pettis theorem (Theorem \ref{thm:Pettis-measurability}), so there is a sequence of separable closed subspaces $Y_n \subset X$ such that $f_n$ takes values in $Y_n$.
   The union of these spaces generates a separable closed subspace $Y$.
   The martingale $(f_n)_{n \in \N}$ then takes values in $Y$, and since $Y$ has the $p$-MCP by assumption, $(f_n)_{n \in \N}$ is a.s. convergent in $Y$, hence also in $X$.
 \end{proof}
@@ -873,8 +873,26 @@ Of course, $\ell^\infty$ is a dual space, but it isn't separable.
 \end{cor}
 
 \begin{proof}
-  \todo{UP TO HERE}
+  By the previous lemma, it suffices to show that every separable closed subspace $Y \subset X$ has the $\infty$-MCP, and by Theorem \ref{thm:MCP-sepdual} we just need to show that every such $Y$ is a dual space.
+  
+  Consider the annihilator
+  \begin{equation*}
+    Y^{\perp} := \{\mb{x}^* \in X^* :  \text{$\langle \mb{y}, \mb{x}^* \rangle = 0$ for all $y \in Y$}\},
+  \end{equation*}
+  and the double annihilator
+  \begin{equation*}
+    Y^{\perp\perp} = (Y^\perp)^\perp = \{\mb{x}^{**} \in X^{**} : \text{$\langle \mb{z}, \mb{x}^{**} \rangle = 0$ for all $z \in Y^\perp$}\}.
+  \end{equation*}
+  By Proposition \ref{prop:duality-subspace-quotient} we know that $Y^{\perp\perp}$ is isometrically isomorphic to the dual space $X^*/Y^\perp$, so it suffices to show that $j(Y) = Y^{\perp\perp}$, where $\map{j}{X}{X^{**}}$ is the canonical inclusion.
+  The containment $j(Y) \subset Y^{\perp\perp}$ is a direct consequence of the definition.
+  To show the reverse inclusion, suppose that $\mb{x}^{**} \notin j(Y)$; we will conclude that $\mb{x}^{**} \notin Y^{\perp\perp}$.
+  To do this we need to find a functional $\mb{x}^* \in Y^{\perp}$ such that $\langle\mb{x}^*, \mb{x}^{**}\rangle \neq 0$.
+  Since $X$ is reflexive, $\mb{x}^{**} = j(\mb{x})$ for some $\mb{x} \in X \sm Y$.
+  By Hahn--Banach there exists a functional $\mb{x}^* \in X^*$ such that $\langle \mb{x}, \mb{x}^* \rangle = 1$ and $\mb{x}^* \in Y^\perp$.
+  Since $\langle \mb{x}, \mb{x}^* \rangle = \langle \mb{x}^*, j(\mb{x}) \rangle = \langle \mb{x}^*, \mb{x}^{**} \rangle$, the functional $\mb{x}^*$ does exactly what we want.
 \end{proof}
+
+Thus reflexive spaces have the $\infty$-MCP, even if they are not separable.
 
 
 \subsection*{Exercises}
