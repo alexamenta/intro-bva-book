@@ -695,7 +695,7 @@ The answer turns out to depend on the geometry of $X$, and we will discuss this 
 For now we will quickly settle the scalar case.
 When $p=1$ we need an additional condition to guarantee relative weak compactness.
 
-\begin{defn}
+\begin{defn}\label{defn:UI}
   Let $(\Omega,\mc{A},\P)$ be a probability space.
   A bounded subset $\mc{F} \subset L^1(\Omega)$ is \emph{uniformly integrable} (or \emph{equi-integrable}) if for all $\varepsilon > 0$, there exists $\delta > 0$ such that
   \begin{equation*}
@@ -741,10 +741,11 @@ Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we hav
 
 \subsection{Martingale convergence as a Banach space property}
 
-With Theorem \ref{thm:mgale-cv-repn} and Remark \ref{rmk:mgale-cv-p1} as inspiration, we make the following definition.
+With Theorem \ref{thm:mgale-cv-repn} as inspiration, we make the following definition.
 
 \begin{defn}
-  For $p \in [1,\infty]$, we say that a Banach space $X$ has the \emph{$p$-martingale convergence property} (or \emph{$p$-MCP}) if every $X$-valued martingale which is uniformly bounded in $L^p$ converges almost surely.
+  For $p \in [1,\infty]$, we say that a Banach space $X$ has the \emph{$p$-martingale convergence property} (or \emph{$p$-MCP}) if every $X$-valued martingale which is uniformly bounded in $L^p$ (and uniformly integrable, when $p=1$) converges almost surely.
+  We say that $X$ has this property with respect to a given probability space $(\Omega,\mc{A},\P)$ if it holds for every $X$-valued martingale on this space.
 \end{defn}
 
 \begin{rmk}
@@ -759,7 +760,7 @@ This is a good way of seeing what can be proven directly using martingales.
 Remark \ref{rmk:mgale-cv-p1} says that the scalar field $\K$ has the $1$-MCP, and arguing coordinatewise shows that every finite-dimensional Banach space also has this property.
 In the following two examples we will show that the Banach spaces $c_0$ and $L^1(\Omega)$ do not have the $\infty$-MCP (and hence do not have the $p$-MCP for any $p \in [1,\infty]$). 
 
-\begin{example}
+\begin{example}\label{eg:c0-noMCP}
   Let $\{-1,1\}$ be equipped with the uniform probability measure and let $\Omega = \{-1,1\}^{\N}$ have the product measure.
   Let $\map{\pi_n}{\Omega}{\{-1,1\}}$ be the $n$-th coordinate function.
   Consider the Banach space $c_0$ of scalar-valued sequences $(a_n)_{n \in \N}$ satisfying $\lim_{n \to \infty} a_n = 0$, equipped with the $\ell^\infty$-norm.
@@ -965,7 +966,7 @@ Thus reflexive spaces have the $\infty$-MCP, even if they are not separable.
 \end{exercise}
 
 \begin{exercise}
-  Modify Example \ref{eg:L1-noMCP} to show that $L^1([0,1])$ does not have the martingale convergence property.
+  Modify Example \ref{eg:L1-noMCP} to show that $L^1([0,1])$ does not have the $\infty$-martingale convergence property. (Do not simply use that $L^1([0,1])$ is isometrically isomorphic to $L^1(\Omega)$---construct a `bad' martingale directly.)
 \end{exercise}
 
 

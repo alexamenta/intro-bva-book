@@ -97,34 +97,66 @@ We will also connect it with the duality of Bochner spaces $L^p(S;X)$, answering
 
 \subsection{The RNP and martingale convergence}
 
+First we connect the Radon--Nikodym property to the martingale convergence properties introduced in the previous chapter.
+
 \begin{thm}
   Let $X$ be a Banach space which has the Radon--Nikodym property with respect to a probability space $(\Omega,\mc{A},\P)$.
-  Let $(f_n)_{n \in \N}$ be a martingale on $\Omega$ such that the set $\{\|f_n\|_X : n \in \N\} \subset L^1(\Omega)$ is bounded and uniformly integrable.
-  Then there exists $f_\infty \in L^1(\Omega;X)$ such that $f_n = \E^{\mc{F}_n} f_\infty$ for all $n \in \N$.
+  Then $X$ has the $1$-martingale convergence property with respect to $(\Omega,\mc{A},\P)$.
 \end{thm}
 
 \begin{proof}
-  Let the martingale be adapted to a filtration $(\mc{A}_n)_{n \in \N}$, and for simplicity suppose $\mc{A} = \mc{A}_\infty$.
-  Since this is an RNP proof, our goal is to use $(f_n)_{n \in \N}$ to construct a vector measure on $\mc{A}$ of bounded variation which is absolutely continuous with respect to $\P$, from which we will extract the function $f_\infty$.
+  Let $(f_n)_{n \in \N}$ be an $L^1$-bounded and uniformly integrable martingale on $\Omega$, adapted to a filtration $(\mc{A}_n)_{n \in \N}$.
+  For simplicity we may assume $\mc{A} = \mc{A}_\infty$.
+  Our goal is to use the martingale to construct a vector measure on $\mc{A}$ of bounded variation which is absolutely continuous with respect to $\P$, from which we will extract a limiting function $f_\infty$.
 
   For all $A \in \mc{A}$ we wish to define
   \begin{equation}\label{eq:mu-stationary-limit}
     \mu(A) := \lim_{k \to \infty} \int_A f_k \, \dd\P,
   \end{equation}
-  but we will have to work to show that this definition makes sense.
+  but we will have to work to show that this limit exists.
   First observe that the definition makes sense for all $A \in \bigcup_{n \in \N} \mc{A}_{n}$; indeed, if $A \in \mc{A}_{n}$ then for $k \geq n$ we have
   \begin{equation*}
     \int_A f_k \, \dd\P = \int_A f_n \, \dd \P
   \end{equation*}
   and the limit in \eqref{eq:mu-stationary-limit} is equal to $\int_A f_n \, \dd\P$.
-  \todo{UP TO HERE}
+  Now consider a general $A \in \mc{A}$.
+  Then for each $k \in \N$ we have\todo{make sure this property is listed somewhere}
+  \begin{equation*}
+     \int_A f_k \, \dd\P = \E(f_k \1_{A}) = \E(\E^{\mc{A}_k}(f_k \1_{A})) = \E(f_k \E^{\mc{A}_k}(\1_{A})).
+   \end{equation*}
+   Thus to show that the limit in \eqref{eq:mu-stationary-limit} exists, we need to show that the sequence $(\E(f_k \E^{\mc{A}_k}( \1_{A})))_{k \in \N}$ is Cauchy.
+   For $k < \ell$ we have, using conditional expectation magic,
+   \begin{equation*}
+     \begin{aligned}
+       \E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))
+       &= \E \Big( f_k \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A})\Big) \\
+       &= \E \Big(  \E^{\mc{A}_{k}}(f_\ell \E^{\mc{A}_k}(\1_{A})) - \E^{\mc{A}_{k}}(f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) )\Big) \\
+       &= \E \Big(  f_\ell \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) \Big) \\
+       &= \E \Big(  f_\ell (\E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A}))\Big).
+     \end{aligned}
+   \end{equation*}
+   Thus we get
+   \begin{equation*}
+     \|\E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))\|_{X}
+     \leq \|  f_\ell (\E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A})) \|_{L^1(\Omega;X)}.
+   \end{equation*}
+   Since the functions $\E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A})$ are uniformly in $L^\infty$ and the set $(f_{n})_{n \in \N}$ is uniformly integrable,\todo{up to here. have to do the proof using UI directly, doesn't seem to follow abstractly from weak compactness.}
 \end{proof}
 
 \begin{cor}
-  (spaces without RNP)
+  The spaces $c_0$ and $L^1([0,1])$ do not have the RNP.
 \end{cor}
 
+\begin{proof}
+  In Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} we showed that these spaces do not have the $\infty$-MCP, and hence they do not have the $1$-MCP. 
+\end{proof}
+
+
+\subsection{Dentability and trees}
+
+
 \subsection{Duality of Bochner spaces}
+
 
 \subsection*{Exercises}
 
@@ -150,6 +182,10 @@ We will also connect it with the duality of Bochner spaces $L^p(S;X)$, answering
   Let $X$ be a Banach space with the Radon--Nikodym property.
   Use this property to show that for every measure space $(S,\mc{A},\mu)$ and every sub-$\sigma$-algebra $\mc{B} \subset \mc{A}$, every $f \in L^1(\mc{A};X)$ has a conditional expectation with respect to $\mc{B}$.
   (Of course this holds for \emph{every} Banach space, but your job here is to derive it in a simpler way under the RNP assumption.)
+\end{exercise}
+
+\begin{exercise}[Rademacher's theorem and the RNP]
+  Show that a Banach space $X$ has the Radon--Nikodym property if and only if every $X$-valued Lipschitz function on $[0,1]$ is differentiable almost everywhere.
 \end{exercise}
 
 
