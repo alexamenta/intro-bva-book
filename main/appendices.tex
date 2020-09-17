@@ -1,10 +1,103 @@
 \subsection{Results from functional analysis}
 
-\begin{itemize}
-\item Hahn-Banach
-\item dual, double dual, reflexivity. Banach-Alaoglu (closed unit ball of a dual space is weak*-compact).
-\item separability
-\end{itemize}
+Throughout this section $X$ is a Banach space over the scalar field $\K$ (which is either $\R$ or $\C$).
+$X^*$ denotes the dual Banach space, i.e. the Banach space of all bounded $\K$-linear functionals $\map{\mb{x}^*}{X}{\K}$, under the norm
+\begin{equation*}
+  \|\mb{x}^*\|_{X^*} := \sup_{\mb{x} \in X \sm \{0\}} \frac{|\mb{x}^*(\mb{x})|}{\|\mb{x}\|_{X}} = \sup_{\substack{\mb{x} \in X \\ \|\mb{x}\|_{X} = 1}} |\mb{x}^*(\mb{x})|.
+\end{equation*}
+Often we write $\langle \mb{x}, \mb{x}^* \rangle := \mb{x}^*(\mb{x})$.
+
+The following results are all standard the suggested references are essentially picked out at random.
+
+\cite[Section III.3]{RS80}
+
+\begin{thm}[Hahn--Banach: real case]
+  Let $X$ be a real Banach space.
+  Let $\map{p}{X}{\R}$ be a real-valued function satisfying
+  \begin{equation*}
+    p(\alpha \mb{x}_1 + (1-\alpha) \mb{x}_2) \leq \alpha p(\mb{x}_1) + (1-\alpha)p(\mb{x}_2)
+  \end{equation*}
+  for all $\mb{x}_1, \mb{x}_2 \in X$ and all $\alpha \in  [0,1]$.
+  Let $\lambda$ be an $\R$-linear functional defined on a subspace $Y \subset X$, satisfying
+  \begin{equation*}
+    \lambda(\mb{y}) \leq p(\mb{y}) \qquad \forall \mb{y} \in Y.
+  \end{equation*}
+  Then there exists a functional $\Lambda \in X^*$ such that $\Lambda(\mb{x}) \leq p(\mb{x})$ for all $\mb{x} \in X$ and $\Lambda(\mb{y}) = \lambda(\mb{y})$ for all $\mb{y} \in Y$.
+\end{thm}
+
+\begin{thm}[Hahn--Banach: complex case]
+  Let $X$ be a complex Banach space.
+  Let $\map{p}{X}{\R}$ be a real-valued function satisfying
+  \begin{equation*}
+    p(\alpha \mb{x}_1 + \beta \mb{x}_2) \leq |\alpha|p(\mb{x}_1) + |\beta|p(\mb{x}_2)
+  \end{equation*}
+  for all $\mb{x}_1, \mb{x}_2 \in X$ and all $\alpha,\beta \in \C$ with $|\alpha| + |\beta| = 1$.
+  Let $\lambda$ be a $\C$-linear functional defined on a subspace $Y \subset X$, satisfying
+  \begin{equation*}
+    |\lambda(\mb{y})| \leq p(\mb{y}) \qquad \forall \mb{y} \in Y.
+  \end{equation*}
+  Then there exists a functional $\Lambda \in X^*$ such that $|\Lambda(\mb{x})| \leq p(\mb{x})$ for all $\mb{x} \in X$ and $\Lambda(\mb{y}) = \lambda(\mb{y})$ for all $\mb{y} \in Y$.
+\end{thm}
+
+The \emph{weak topology} on $X$ the weakest topology on $X$ such that every functional $\mb{x}^* \in X^*$ is continuous.
+The weak toplogy is weaker than the usual (norm) topology on $X$, and these topologies are equal if and only if $X$ is finite dimensional.
+
+The \emph{double dual} of $X$ is the space $X^{**} = (X^*)^*$.
+Each $\mb{x} \in X$ induces an element of the double dual in a notationally confusing way: for each $\mb{x}^* \in X^*$, $\mb{x}$ acts on $\mb{x}^*$ by
+\begin{equation*}
+  \langle \mb{x}^*, \mb{x} \rangle := \mb{x}^*(\mb{x}) = \langle \mb{x}, \mb{x}^* \rangle.
+\end{equation*}
+This identification yields a canonical isometric embedding $X \to X^{**}$, and $X$ is called \emph{reflexive} if this map is surjective (i.e. each functional on $X^*$ is given by an element of $X$, using the above identification).
+In this case $X$ and $X^{**}$ are canonically isomorphic.\footnote{It is possible that $X$ and $X^{**}$ are isometrically isomorphic without $X$ being reflexive \cite{rJ51}.}
+
+The \emph{weak-*} topology on a dual space $X^*$ is the weakest topology such that all the functions
+\begin{equation*}
+  \big\{ \mb{x}^* \mapsto \mb{x}^*(\mb{x}) : \mb{x} \in X\big\}
+\end{equation*}
+are continuous.
+The weak-* topology is great because it has the following fundamental compactness property.
+
+\cite[Theorem IV.21]{RS80}
+\begin{thm}[Banach--Alaoglu]
+  The closed unit ball of $X^*$ is compact in the weak-* topology.
+\end{thm}
+
+One can show that $X$ is reflexive if and only if the weak topology and the weak-* topology inherited from $X^{**}$ coincide.
+Using Banach--Alaoglu, this can be restated in the following way.
+
+\begin{cor}\label{cor:reflexive-iff-weakcpt}
+  $X$ is reflexive if and only if the closed unit ball $B_{X}$ is weakly compact.
+\end{cor}
+
+
+There are three notions of compactness in topological spaces that coincide for metric spaces: \emph{compactness} (every open cover has a finite subcover), \emph{sequential compactness} (every sequence has a convergent subsequence), and \emph{countable compactness} (every sequence has a cluster point, or equivalently, every countable open cover has a finite subcover).
+Although the weak topology on $X$ may not be metrisable, it behaves as if it were:
+
+\begin{thm}[Eberlein-Smulian]
+  Let $A$ be a subset of a Banach space $X$.
+  The following are equivalent:
+  \begin{itemize}
+  \item $A$ is weakly compact,
+  \item $A$ is weakly sequentially compact,
+  \item $A$ is weakly countably compact.
+  \end{itemize}
+\end{thm}
+
+And thus Corollary \ref{cor:reflexive-iff-weakcpt} can be restated as follows:
+
+\begin{cor}
+  $X$ is reflexive if and only if every bounded sequence has a weakly convergent subsequence.
+\end{cor}
+
+A Banach space is \emph{separable} if it has a countable dense subset.
+One can show via the Hahn--Banach theorem that if $X^*$ is separable, then so is $X$ \cite[Theorem III.7]{RS80}.
+
+\begin{thm}\label{thm:sep-met-dual}
+  $X$ is separable if and only if the closed unit ball $\overline{B_{X^*}}$ of $X^*$ is weak-* metrisable.\todo{need a citation for this theorem}
+  Thus by Banach--Alaoglu and the equivalence of compactness notions for metrisable spaces, if $X$ is separable, then $\overline{B_{X^*}}$ is weak-* sequentially compact.
+\end{thm}
+
+
 
 \subsection{Results from probability theory}
 

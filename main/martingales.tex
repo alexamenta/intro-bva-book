@@ -704,9 +704,9 @@ When $p=1$ we need an additional condition to guarantee relative weak compactnes
 \end{defn}
 
 A bounded subset $\mc{F} \subset L^1(\Omega)$ is uniformly integrable if and only if it is weakly relatively compact (see \cite[Theorem 5.2.9]{AK06}).
-For $p > 1$, every bounded subset $\mc{F} \subset L^p(\Omega)$ is weakly relatively compact by reflexivity and the Banach--Alaoglu theorem\todo{cite in appendix}.
+For $p > 1$, every bounded subset $\mc{F} \subset L^p(\Omega)$ is weakly relatively compact \todo{cite the right thing in appendix, Eberlein-Smulian}
 
-\begin{thm}
+\begin{thm}\label{thm:mgale-cv-repn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and fix $p \in [1,\infty)$.
   Let $(f_n)_{n \in \N}$ be a scalar-valued martingale with respect to a filtration $(\mc{A}_n)_{n \in \N}$, and suppose that $\sup_{n \in \N} \|f_n\|_{p} < \infty$.
   If $p = 1$, suppose furthermore that the set $\{f_n : n \in \N\} \subset L^1(\Omega)$ is uniformly integrable.
@@ -733,7 +733,31 @@ Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we hav
   which implies that $f_n = \E^{\mc{F}_n} f_\infty$.
 \end{proof}
 
-\subsection{Banach spaces with and without martingale convergence}
+\begin{rmk}\label{rmk:mgale-cv-p1}
+  In fact, when $p = 1$, the assumption of uniform integrability can be removed, and the following is true: every scalar-valued martingale with $\sup_{n \in \N} \|f_n\|_1 < \infty$ converges almost everywhere (but not necessarily in $L^1$).
+  We will skip the proof of this result so as to spend more time with Banach spaces, but if you're interested see \cite[Theorem 1.34]{gP16}.
+  The proof isn't particularly difficult.
+\end{rmk}
+
+\subsection{Martingale convergence as a Banach space property}
+
+With Theorem \ref{thm:mgale-cv-repn} and Remark \ref{rmk:mgale-cv-p1} as inspiration, we make the following definition.
+
+\begin{defn}
+  For $p \in [1,\infty]$, we say that a Banach space $X$ has the \emph{$p$-martingale convergence property} (or \emph{$p$-MCP}) if every $X$-valued martingale which is uniformly bounded in $L^p$ converges almost surely.
+\end{defn}
+
+\begin{rmk}
+  This is not a standard definition, because it turns out to be equivalent to the more familiar \emph{Radon--Nikodym property}, which we will discuss in the next chapter. But for now, it will help to give the property a more martingaley name.
+\end{rmk}
+
+Formally, the $1$-MCP is the strongest of these properties, and the $\infty$-MCP is the weakest.
+As stated in the remark above, it will turn out that these properties are equivalent, but we don't know that yet.
+For the moment we will investigate the $p$-MCP na\"ively, without invoking this equivalence.
+This is a good way of seeing what can be proven directly using martingales.
+
+Remark \ref{rmk:mgale-cv-p1} says that the scalar field $\K$ has the $1$-MCP, and arguing coordinatewise shows that every finite-dimensional Banach space also has this property.
+In the following two examples we will show that the Banach spaces $c_0$ and $L^1(\Omega)$ do not have the $\infty$-MCP (and hence do not have the $p$-MCP for any $p \in [1,\infty]$). 
 
 \begin{example}
   Let $\{-1,1\}$ be equipped with the uniform probability measure and let $\Omega = \{-1,1\}^{\N}$ have the product measure.
@@ -748,26 +772,109 @@ Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we hav
     f_n := \sum_{k = 0}^{n} \pi_k \otimes \mb{e}_k.
   \end{equation*} 
   (As shown in Example \ref{eg:betting-game-martingale}, this is a martingale; in fact, it is just a special case of our `betting game', in which one wagers the vector $\mb{e}_n$ at time $n$, regardless of the previous outcomes.)
-  Then for all $p < \infty$ we have
+  Then we have
   \begin{equation*}
-    \|f_n\|_{L^p(\Omega;c_0)} \leq \|f_n\|_{L^\infty(\Omega;c_0)} = \esssup_{\omega \in \Omega} \|(\pi_k(\omega))_{k = 0}^n\|_{c_0} = 1,
+    \|f_n\|_{L^\infty(\Omega;c_0)} = \esssup_{\omega \in \Omega} \|(\pi_k(\omega))_{k = 0}^n\|_{c_0} = 1,
   \end{equation*}
-  so the martingale $(f_n)_{n \in \N}$ is uniformly bounded in $L^p$ for all $p< \infty$.
+  so the martingale $(f_n)_{n \in \N}$ is uniformly bounded in $L^\infty$.
   But for all $\omega$ in $\Omega$ and all $n < m$, we have
   \begin{equation*}
     \|f_n(\omega) - f_m(\omega)\|_{c_0} = \max_{n < k \leq m} |\pi_k(\omega)| = 1,
   \end{equation*}
-  so the sequence $(f_n(\omega))_{n \in \N}$ is not Cauchy in $c_0$ and hence not convergent.\footnote{Of course, if $f_n(\omega)$ converged, then its limit $f(\omega)$ would have to be in $c_0$ and would also have to be of the form $(\pm 1, \pm 1, \pm 1, \ldots)$, which is impossible because of the decay condition in the definition of this space. But this argument shows that convergence is not even possible in the larger space $\ell^\infty$.}
+  so the sequence $(f_n(\omega))_{n \in \N}$ is not Cauchy in $c_0$ and hence not convergent.
 \end{example}
 
-\begin{example}
-  (example valued in $L^1$, see Pisier remark 1.35)
+\begin{example}\label{eg:L1-noMCP}
+  With the notation of the previous example, let $X = L^1(\Omega)$ and consider the $X$-valued martingale
+  \begin{equation}\label{eq:L1-example-mgale}
+    f_n(\omega) := \prod_{k \leq n} (1 + \pi_{k}(\omega)\pi_k)
+  \end{equation}
+  (Exercise \ref{ex:mgale-check} asks you to show that this is indeed a martingale).
+  For all $\omega \in \Omega$ and $n \in \N$ we have
+  \begin{equation*}
+    \begin{aligned}
+      \|f_n(\omega)\|_{X} &= \int_{\Omega} \prod_{k \leq n} (1 + \pi_k(\omega)\pi_k(\eta))  \, \dd\P(\eta) \\
+      &= \prod_{k \leq n} \int_{\Omega}  (1 + \pi_k(\omega)\pi_k(\eta)) \, \dd\P(\eta)
+      = 1
+    \end{aligned}
+  \end{equation*}
+  by mutual independence of the variables $\pi_k$, so the martingale $(f_n)$ is uniformly bounded in $L^\infty$.
+  However, we also have
+  \begin{equation*}
+    \begin{aligned}
+      &\|f_n(\omega) - f_{n+1}(\omega)\|_{X} \\
+      &= \int_{\Omega} \Big| \Big(1 - (1 + \pi_{n+1}(\omega)\pi_{n+1}(\eta))\Big)\prod_{k \leq n} (1 + \pi_k(\omega)\pi_k(\eta)) \Big|\, \dd\P(\eta) \\
+      &= \int_{\Omega} |\pi_{n+1}(\omega) \pi_{n+1}(\eta)| \, \dd\P(\eta) \prod_{k \leq n} \int_{\Omega} 1 + \pi_k(\omega)\pi_k(\eta) \, \dd\P(\eta) = 1,
+    \end{aligned}
+  \end{equation*}
+  which shows that the sequence $(f_n(\omega))_{n \in \N}$ cannot be Cauchy in $X$, and hence is not convergent.
 \end{example}
 
-\begin{prop}
-  reflexive spaces and separable duals are good
-\end{prop}
+It is not surprising that the Banach spaces $c_0$ and $L^1(\Omega)$ fail the $\infty$-MCP, as these are classically `bad' spaces.
+Most spaces that arise in practise are better behaved.
 
+\begin{thm}\label{thm:MCP-sepdual}
+  If $X$ is a separable dual space (i.e. $X$ is separable and $X = Y^*$ for some Banach space $Y$), then $X$ has the $\infty$-MCP.
+\end{thm}
+
+\begin{proof}
+  Let $(f_n)_{n \in \N}$ be an $X$-valued martingale (on a probability space $\Omega$) which is uniformly bounded in $L^\infty$.
+  By homogeneity we may assume without loss of generality that each $f_n$ is valued in the closed unit ball of $X$, which by Banach--Alaoglu is weak-* compact.
+  For each $\omega \in \Omega$, let $f(\omega)$ be a weak-* limit point of the sequence $(f_n(\omega))_{n \in \N}$.
+  
+  Since $X = Y^*$ is separable, so is $Y$, and we can choose a countable dense subset $D \subset \overline{B_{Y}}$ of the unit ball of $Y$.
+  For each $\mb{y} \in D$, the scalar-valued martingale $(\langle \mb{y}, f_n \rangle)_{n \in \N}$ is uniformly bounded in $L^\infty$ and thus converges a.s. to a limit (Theorem \ref{thm:mgale-cv-repn}), which must be $\langle \mb{y}, f \rangle$.
+  For each $n \in \N$ and $\mb{y} \in D$ let $N_{\mb{y}} \subset \Omega$ denote the null set on which this convergence fails, let $N = \bigcup_{\mb{y} \in D} N_{\mb{y}}$ so that $\P(N) = 0$ (since $D$ is countable), and observe that
+  \begin{equation*}
+    \langle \mb{y}, f_n(\omega) \rangle \to \langle \mb{y}, f(\omega) \rangle \qquad \forall \omega \in \Omega \sm N \quad \forall \mb{y} \in D.
+  \end{equation*}
+  Since $D$ is dense in the unit ball of $Y$ we have this convergence (away from $N$) for all $\mb{y} \in Y$, and since $Y$ is weak-* dense in $Y^{**}$\todo{add Goldstine's theorem to the appendix} we have
+    \begin{equation*}
+      \langle f_n(\omega), \mb{y}^{**} \rangle \to \langle f(\omega), \mb{y}^{**} \rangle \qquad \forall \omega \in \Omega \sm N \quad \forall \mb{y}^{**} \in Y^{**} = X^{*}.
+  \end{equation*}
+  Since the functions $f_n$ are all measurable, this shows that $\map{f}{\Omega \sm N}{X}$ is weakly measurable, and since $X$ is separable, Pettis tells us that $f$ is strongly measurable.
+
+  It remains to show that $f_n \to f$ on $\Omega \sm N$ in the norm topology on $X$.\todo{i'm stuck here for now}
+  For all $\omega \in \Omega \sm N$ and $\mb{x} \in X$ we have, using that for each $\mb{y} \in D$ the scalar-valued martingale $\langle \mb{y}, \mb{x} - f_n \rangle$ converges to $\langle \mb{y}, \mb{x} - f \rangle$ on $\Omega \sm N$, 
+  \begin{equation*}
+    \|\mb{x} - f_n(\omega)\|_{X}
+    = \sup_{\mb{y} \in D} |\langle \mb{y}, \mb{x} - f_n(\omega) \rangle| 
+    = \sup_{\mb{y} \in D} |\E^{\mc{A}_n} (\langle \mb{y}, \mb{x} - f \rangle)(\omega) | 
+    \leq \E^{\mc{A}_n}( \|\mb{x} - f\|_{X})(\omega)
+  \end{equation*}
+  using \eqref{eq:positive-pw-est}.
+  Since the function $\|\mb{x} - f\|_{X}$ is bounded and measurable, we have
+  \begin{equation*}
+    \limsup_{n \to \infty} \|\mb{x} - f_n(\omega)\|_{X} \leq \limsup_{n \to \infty} \E^{\mc{A}_n}( \|\mb{x} - f\|_{X})(\omega) = \|\mb{x} - f(\omega)\|_{X}.
+  \end{equation*}
+  Now taking $\mb{x} = f(\omega)$ shows that $f_n(\omega) \to f(\omega)$ in $X$.
+  The proof is complete.  
+\end{proof}
+
+So separable dual spaces have the $\infty$-MCP: this includes the spaces $L^p([0,1])$ for $p \in (1,\infty)$ as well as the sequence space $\ell^1$ (which is the dual of $c_0$).
+The sequence space $\ell^\infty$ contains $c_0$, which does not have $p$-MCP for any $p$ as shown above, so $\ell^\infty$ doesn't have any of these properties either.
+Of course, $\ell^\infty$ is a dual space, but it isn't separable.
+
+\begin{lem}
+  For all $p \in [1,\infty]$, the MCP is separably determined: that is, a Banach space $X$ has the MCP if and only if every separable subspace $Y \subset X$ has the MCP.
+\end{lem}
+
+\begin{proof}
+  The `only if' direction is immediate, as a $Y$-valued martingale can be seen as an $X$-valued martingale, and if a martingale converges a.s. in $X$, then since $Y$ is closed it must also converge a.s. in $Y$.
+
+  On the other hand, suppose that every separable subspace $Y \subset X$ has the $p$-MCP, and let $(f_n)$ be an $X$-valued martingale which is uniformly bounded in $L^p$.
+  Each $f_n$ is strongly measurable and hence separably-valued by the Pettis theorem (Theorem \ref{thm:Pettis-measurability}), so there is a sequence of separable subspaces $Y_n \subset X$ such that $f_n$ takes values in $Y_n$.
+  The union of these spaces generates a separable closed subspace $Y$.
+  The martingale $(f_n)_{n \in \N}$ then takes values in $Y$, and since $Y$ has the $p$-MCP by assumption, $(f_n)_{n \in \N}$ is a.s. convergent in $Y$, hence also in $X$.
+\end{proof}
+
+\begin{cor}
+  If $X$ is reflexive, then $X$ has the $\infty$-MCP.
+\end{cor}
+
+\begin{proof}
+  \todo{UP TO HERE}
+\end{proof}
 
 
 \subsection*{Exercises}
@@ -833,6 +940,14 @@ Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we hav
 
 \begin{exercise}\label{ex:mgale-conv}
   Prove the pointwise convergence theorem for martingales, Theorem \ref{thm:mgale-pw-conv}, as a consequence of Doob's maximal inequality and the $L^p$-convergence theorem (Theorem \ref{thm:mgale-conv-Lp}).
+\end{exercise}
+
+\begin{exercise}\label{ex:mgale-check}
+  Show that the $L^1(\Omega;P)$-valued stochastic process defined in \eqref{eq:L1-example-mgale} is a martingale. %mk
+\end{exercise}
+
+\begin{exercise}
+  Modify Example \ref{eg:L1-noMCP} to show that $L^1([0,1])$ does not have the martingale convergence property.
 \end{exercise}
 
 
