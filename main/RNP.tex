@@ -98,6 +98,88 @@ We will also connect it with the duality of Bochner spaces $L^p(S;X)$, answering
 \subsection{The RNP and martingale convergence}
 
 First we connect the Radon--Nikodym property to the martingale convergence properties introduced in the previous chapter.
+This is done by means of the following vector measures associated with uniformly integrable martingales.
+
+\begin{thm}\label{thm:martingale-measure}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
+  Let $(f_n)_{n \in \N}$ be an $X$-valued $L^1$-bounded uniformly integrable martingale with respect to a filtration $(\mc{A}_{n})_{n \in \N}$.
+  Then there exists an $X$-valued vector measure on $\mc{A}$ with the following properties:
+  \begin{itemize}
+  \item $\mu(A) = \int_{A} f_n \, \dd\P$ for all $A \in \mc{A}_{n}$,
+  \item $\|\mu\|_{\var} \leq \sup_{n} \|f_n\|_{L^1(\Omega;X)}$,
+  \item $\mu$ is absolutely continuous with respect to $\P$.
+  \end{itemize}
+\end{thm}
+
+\begin{proof}
+  For all $A \in \mc{A}$ we wish to define
+  \begin{equation}\label{eq:mu-stationary-limit}
+    \mu(A) := \lim_{k \to \infty} \int_A f_k \, \dd\P,
+  \end{equation}
+  but it is not immediate that this limit exists.
+  If $A \in \mc{A}_{n}$ then for $k \geq n$ we have
+  \begin{equation*}
+    \int_A f_k \, \dd\P = \int_A f_n \, \dd \P
+  \end{equation*}
+  by the martingale property, so at least for $A \in \mc{A}_{n}$ the limit exists and equals $\int_A f_n \, \dd\P$, establishing the first desired property.
+  For a general $A \in \mc{A}$, for each $k \in \N$ we have\todo{make sure this property is listed somewhere}
+  \begin{equation*}
+     \int_A f_k \, \dd\P = \E(f_k \1_{A}) = \E(\E^{\mc{A}_k}(f_k \1_{A})) = \E(f_k \E^{\mc{A}_k}(\1_{A})).
+   \end{equation*}
+   Thus to show that the limit in \eqref{eq:mu-stationary-limit} exists, we need to show that the sequence $(\E(f_k \E^{\mc{A}_k}( \1_{A})))_{k \in \N}$ is Cauchy.
+   Let $\phi_{k,\ell} = \E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A})$.
+   For $k < \ell$ we have, using conditional expectation magic,
+   \begin{equation*}
+     \begin{aligned}
+       \E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))
+       &= \E \Big( f_k \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A})\Big) \\
+       &= \E \Big(  \E^{\mc{A}_{k}}(f_\ell \E^{\mc{A}_k}(\1_{A})) - \E^{\mc{A}_{k}}(f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) )\Big) \\
+       &= \E \Big(  f_\ell \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) \Big) 
+       = \E (  f_\ell \phi_{k,\ell}).
+     \end{aligned}
+   \end{equation*}
+   Thus we get
+   \begin{equation*}
+     \|\E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))\|_{X}
+     \leq \|f_\ell \phi_{k,\ell}\|_{L^1(\Omega;X)}.
+   \end{equation*}
+   Since $\|\phi_{k,\ell}\|_\infty \leq 2$ for all $k$ and $\ell$, for all $t > 0$ we have
+   \begin{equation*}
+     \begin{aligned}
+       \|  f_\ell \phi_{k,\ell} \|_{L^1(\Omega;X)}
+       &\leq \Big( \int_{\|f_{\ell}\|_{X} > t} + \int_{\|f_{\ell}\|_{X} \leq t} \Big) \|f_{\ell}(\omega)\|_{X}|\phi_{k,\ell}(\omega)| \, \dd\P(\omega) \\
+       &\leq \Big( 2\int_{\|f_{\ell}\|_{X} > t} \|f_{\ell}(\omega)\|_{X} \dd\P(\omega) + t\E|\phi_{k,\ell}| \Big)
+     \end{aligned}
+   \end{equation*}
+   so that
+   \begin{equation*}
+     \begin{aligned}
+       \|  f_\ell \phi_{k,\ell} \|_{L^1(\Omega;X)}
+       &\leq 2\limsup_{t \to 0} \int_{\|f_{\ell}\|_{X} > t} \|f_{\ell}(\omega)\|_{X} \dd\P(\omega) \\
+       &\leq 2\limsup_{t \to 0} \sup_{j \in \N}  \int_{\|f_{j}\|_{X} > t} \|f_{j}(\omega)\|_{X} \dd\P(\omega).
+   \end{aligned}
+ \end{equation*}
+ Uniform integrability of $(f_j)$ says exactly that the the right hand side here is zero (see Exercise \ref{ex:UI-characterisation}), which establishes that the limit in \eqref{eq:mu-stationary-limit} exists.
+
+ We still need to show that $\mu$ is actually a vector measure.
+ It is clear from the definition that it is finitely additive, but we need countable additivity.
+ Consider the submartingale $(\|f_n\|_{X})_{n \in \N}$: this is $L^1$-bounded and uniformly integrable, so by Theorem \ref{thm:submartingale-convergence} it has an $L^1$-limit $g \in L^1(\Omega)$.
+ Thus for all $A \in \mc{A}$
+ \begin{equation*}
+   \|\mu(A)\|_{X} \leq \lim_{n \to \infty} \int_{A} \|f_n(\omega)\| \, \dd\P(\omega) = \int_{A} g(\omega) \, \dd\P(\omega).
+ \end{equation*}
+ By Exercise \ref{ex:fa-meas-ca}, this implies that $\mu$ is countably additive with
+ \begin{equation*}
+   \|\mu\|_{\var} \leq \|g\P\|_{\var} = \|g\|_{L^1(\Omega)} = \sup_{n \in \N} \|f_n\|_{L^1(\Omega;X)},
+ \end{equation*}
+ and that
+ \begin{equation*}
+   |\mu| \ll g\P \ll \P,
+ \end{equation*}
+ as required.
+\end{proof}
+
+Now we can show the claimed connection between the RNP and martingale convergence.
 
 \begin{thm}
   Let $X$ be a Banach space which has the Radon--Nikodym property with respect to a probability space $(\Omega,\mc{A},\P)$.
@@ -105,42 +187,23 @@ First we connect the Radon--Nikodym property to the martingale convergence prope
 \end{thm}
 
 \begin{proof}
-  Let $(f_n)_{n \in \N}$ be an $L^1$-bounded and uniformly integrable martingale on $\Omega$, adapted to a filtration $(\mc{A}_n)_{n \in \N}$.
-  For simplicity we may assume $\mc{A} = \mc{A}_\infty$.
-  Our goal is to use the martingale to construct a vector measure on $\mc{A}$ of bounded variation which is absolutely continuous with respect to $\P$, from which we will extract a limiting function $f_\infty$.
-
-  For all $A \in \mc{A}$ we wish to define
-  \begin{equation}\label{eq:mu-stationary-limit}
-    \mu(A) := \lim_{k \to \infty} \int_A f_k \, \dd\P,
-  \end{equation}
-  but we will have to work to show that this limit exists.
-  First observe that the definition makes sense for all $A \in \bigcup_{n \in \N} \mc{A}_{n}$; indeed, if $A \in \mc{A}_{n}$ then for $k \geq n$ we have
+  Fix an $L^1$-bounded uniformly integrable $X$-valued martingale $(f_n)_{n \in \N}$, with respect to a filtration $(\mc{A}_{n})_{n \in \N}$.
+  By Theorem \ref{thm:martingale-measure}, there exists an $X$-valued vector measure $\mu$ on $\mc{A}$ such that
   \begin{equation*}
-    \int_A f_k \, \dd\P = \int_A f_n \, \dd \P
+    \mu(A) = \int_{A} f_n \, \dd\P \qquad \forall A \in \mc{A}_n
   \end{equation*}
-  and the limit in \eqref{eq:mu-stationary-limit} is equal to $\int_A f_n \, \dd\P$.
-  Now consider a general $A \in \mc{A}$.
-  Then for each $k \in \N$ we have\todo{make sure this property is listed somewhere}
+  and $\mu \ll \P$.
+  Since $X$ has the RNP with respect to $(\Omega,\mc{A},\P)$ there exists a function $f \in L^1(\Omega,\P;X)$ such that
   \begin{equation*}
-     \int_A f_k \, \dd\P = \E(f_k \1_{A}) = \E(\E^{\mc{A}_k}(f_k \1_{A})) = \E(f_k \E^{\mc{A}_k}(\1_{A})).
-   \end{equation*}
-   Thus to show that the limit in \eqref{eq:mu-stationary-limit} exists, we need to show that the sequence $(\E(f_k \E^{\mc{A}_k}( \1_{A})))_{k \in \N}$ is Cauchy.
-   For $k < \ell$ we have, using conditional expectation magic,
-   \begin{equation*}
-     \begin{aligned}
-       \E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))
-       &= \E \Big( f_k \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A})\Big) \\
-       &= \E \Big(  \E^{\mc{A}_{k}}(f_\ell \E^{\mc{A}_k}(\1_{A})) - \E^{\mc{A}_{k}}(f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) )\Big) \\
-       &= \E \Big(  f_\ell \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) \Big) \\
-       &= \E \Big(  f_\ell (\E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A}))\Big).
-     \end{aligned}
-   \end{equation*}
-   Thus we get
-   \begin{equation*}
-     \|\E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))\|_{X}
-     \leq \|  f_\ell (\E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A})) \|_{L^1(\Omega;X)}.
-   \end{equation*}
-   Since the functions $\E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A})$ are uniformly in $L^\infty$ and the set $(f_{n})_{n \in \N}$ is uniformly integrable,\todo{up to here. have to do the proof using UI directly, doesn't seem to follow abstractly from weak compactness.}
+    \int_{A} f \, \dd\P = \mu(A) = \int_A f_n \, \dd\P
+  \end{equation*}
+  for all $A \in \mc{A}_n$.
+  Equivalently stated, we have
+  \begin{equation*}
+    \E^{\mc{A}_n} f = f_n
+  \end{equation*}
+  for all $n \in \N$, and thus by Theorem \ref{thm:mgale-pw-conv} $f_n$ is almost surely convergent to $f$.
+  Thus $X$ has the $1$-martingale convergence property, and the proof is complete.
 \end{proof}
 
 \begin{cor}
@@ -151,8 +214,135 @@ First we connect the Radon--Nikodym property to the martingale convergence prope
   In Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} we showed that these spaces do not have the $\infty$-MCP, and hence they do not have the $1$-MCP. 
 \end{proof}
 
+In summary, for all $p \in (1,\infty]$ we currently have the implications
+\begin{equation*}
+  \mathrm{RNP} \Longrightarrow 1-\mathrm{MCP} \Longrightarrow p-\mathrm{MCP} \Longrightarrow \infty-\mathrm{MCP}
+\end{equation*}
+where these properties are taken either universally or with respect to a given probability space.
+In the next section we will add more properties and `complete the loop'.
 
-\subsection{Dentability and trees}
+\subsection{Trees and dentability}
+
+\begin{defn}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
+  Given $\delta > 0$, an $X$-valued $L_1$-bounded martingale $(f_n)_{n \in \N}$ on $\Omega$ is called \emph{$\delta$-separated} if the following properties hold:
+  \begin{itemize}
+  \item $f_0$ is constant,
+  \item each $f_n$ takes only finitely many values,
+  \item for all $n \in \N$ and $\omega \in \Omega$, $\|f_n(\omega) - f_{n+1}(\omega)\|_X \geq \delta$.
+  \end{itemize}
+  The set $S := \{f_n(\omega) : n \in \N, \omega \in \Omega\}$ is called a \emph{$\delta$-separated tree}.  
+\end{defn}
+
+The martingales described in Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} (see also Exercise \ref{ex:L1-noMCP-var}) are $1$-separated, and thus yield $1$-separated trees in $c_0$ and $L_1$.
+When one tries to draw a $\delta$-separated tree on a piece of paper, one quickly starts to run out of space.
+This is because pieces of paper model finite-dimensional Banach spaces, which have good martingale convergence properties.
+
+\begin{prop}
+  If a Banach space $X$ has the $\infty$-MCP, then for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree.
+\end{prop}
+
+\begin{proof}
+  Bounded $\delta$-separated trees correspond to $L^\infty$-bounded martingales such that
+  \begin{equation*}
+    \|f_n(\omega) - f_{n+1}(\omega)\|_{X},
+  \end{equation*}
+  for all $\omega \in \Omega$ and $n \in \N$,
+  which directly obstructs convergence of $(f_n)$ everywhere in $\Omega$.
+\end{proof}
+
+Thus our chain of implications now takes the form
+\begin{equation*}
+  \mathrm{RNP} \Longrightarrow 1-\mathrm{MCP} \Longrightarrow p-\mathrm{MCP} \Longrightarrow \infty-\mathrm{MCP}
+  \Longrightarrow \mathrm{NBST}
+\end{equation*}
+where NBST stands for `no bounded separated trees'.\footnote{As with MCP, this is not standard terminology: ultimately it's just equivalent to RNP.}
+The connection between (nonexistence of) bounded separated trees and the Radon--Nikodym property will go through the concept of \emph{dentable sets}.
+
+\begin{defn}
+  A subset $D \subset X$ of a Banach space $X$ is called \emph{dentable} if for all $\varepsilon > 0$ there exists $\mb{x} \in D$ such that
+  \begin{equation*}
+    \mb{x} \notin \overline{\conv}(D \sm B_{\varepsilon}(\mb{x}))
+  \end{equation*}
+  where $\overline{\conv}$ denotes the closure of the convex hull.
+\end{defn}
+
+Before going further let us prove a lemma which relates `non-dentability at scale $\varepsilon$' to a corresponding property of an enlarged set which does not involve closures. 
+
+\begin{lem}\label{lem:dentlem}
+  Let $X$ be a Banach space.
+  Fix $\varepsilon > 0$ and let $D \subset B$ be a subset such that for all $\mb{x} \in D$,
+  \begin{equation}\label{eq:dentlem-ass}
+    \mb{x} \in \overline{\conv}(D \sm B_{\varepsilon}(\mb{x})).
+  \end{equation}
+  Then for all $\mb{x} \in \tilde{D} := D + B_{\varepsilon/2}(0)$,
+  \begin{equation}
+    \mb{x} \in \conv(\tilde{D} \sm B_{\varepsilon/2}(\mb{x}))
+  \end{equation}
+  (note that no closure is taken here).
+\end{lem}
+
+\begin{proof}
+  Fix $\mb{x} = \mb{x}' + \mb{y} \in \tilde{D}$, where $\mb{x}' \in D$ and $\|\mb{y}\|_{X} < \varepsilon/2$.
+  Choose $\delta > 0$ so small that $\delta + \|\mb{y}\|_{X} < \varepsilon/2$.
+  By the assumed property \eqref{eq:dentlem-ass}, there exists $n \in \N$, scalars $\alpha_i \in [0,1]$, $i = 1,\ldots,n$, and vectors $\mb{x}_1,\ldots,\mb{x}_n \in D \sm B_{\varepsilon}(\mb{x})$ such that
+  \begin{equation*}
+    \mb{x}' = \mb{z} + \sum_{i=1}^{n} \alpha_i \mb{x}_{i}.
+  \end{equation*}
+  for some $\mb{z} \in B_{\delta}(0)$.
+  We then have
+  \begin{equation*}
+    \mb{x} = \mb{z} + \mb{y} + \sum_{i=1}^{n} \alpha_i \mb{x}_{i} = \sum_{i=1}^{n}\alpha_i(\mb{z} + \mb{y} + \mb{x}_{i}).
+  \end{equation*}
+  The points $\mb{z} + \mb{y} + \mb{x}_{i}$ are in $\tilde{D} \sm B_{\varepsilon/2}(\mb{x})$: indeed, we have
+  \begin{equation*}
+    \|\mb{z} + \mb{y}\|_{X} \leq \delta + \|\mb{y}\|_{X} < \varepsilon/2
+  \end{equation*}
+  by the choice of $\delta$, and
+  \begin{equation*}
+    \|\mb{x} - (\mb{z} + \mb{y} + \mb{x}_i) \|_{X}
+    = \|\mb{x}' - \mb{z} - \mb{x}_i\|_{X}
+    \geq \|\mb{x}' - \mb{x}_i\|_{X} - \|\mb{z}\|_{X}
+    > \varepsilon - \delta > \varepsilon/2,
+  \end{equation*}
+  finishing the job.
+\end{proof}
+
+\begin{thm}
+  Let $X$ be a Banach space, and suppose that for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree.
+  Then every bounded subset of $X$ is dentable.
+\end{thm}
+  
+\begin{proof}
+  We prove the contrapositive: we suppose that there exists a bounded non-dentable set $D \subset X$, and for given $\delta > 0$ we will construct a bounded $\delta$-separated tree.
+  Since $D$ is non-dentable, there exists $\varepsilon > 0$ such that for all $\mb{x} \in D$,
+  \begin{equation*}
+    \mb{x} \in \overline{\conv}(D \sm B_{2\varepsilon}(\mb{x})).
+  \end{equation*}
+  By Lemma \ref{lem:dentlem}, for all $\mb{x} \in \tilde{D} := D + B_{\varepsilon}(0)$,
+  \begin{equation*}
+    \mb{x} \in \conv(\tilde{D} \sm B_{\varepsilon}(\mb{x})).
+  \end{equation*}
+  We will construct a $\varepsilon$-separated tree in the bounded set $\tilde{D}$, and by rescaling this will yield the result.
+
+  Let $(\Omega,\mc{A},\P)$ be the interval $[0,1]$ with Borel $\sigma$-algebra and Lebesgue measure.
+  We construct a $\varepsilon$-separated martingale inductively.
+  Let $\mb{x}_{0} \in \tilde{D}$ be arbitrary and $f_0 \equiv \mb{x}_0$.
+  Since $\mb{x}_0 \in \conv(\tilde{D} \sm B_{\varepsilon}(\mb{x}_0))$, there exist numbers $\alpha_1,\ldots, \alpha_n \in (0,1)$ summing to $1$ and vectors $\mb{x}_{1}, \ldots, \mb{x}_{n} \in \tilde{D}$ such that
+  \begin{equation*}
+    \mb{x}_0 = \sum_{i=1}^{n} \alpha_{i} \mb{x}_{i} \qquad \text{and} \qquad \|\mb{x}_{i} - \mb{x}_{0}\|_X \geq \varepsilon.
+  \end{equation*}
+  Partition the unit interval $[0,1]$ into intervals $(I_i)_{i=1}^{n}$ with length $|I_{i}| = \alpha_{i}$, let $\mc{A}_{0}$ be the trivial $\sigma$-algebra on $[0,1]$, and let $\mc{A}_{1}$ be the $\sigma$-algebra generated by the intervals $(I_i)_{i=1}^{n}$.
+  Define
+  \begin{equation*}
+    f_1 = \sum_{i=1}^{n} \alpha_i \1_{I_i} \otimes \mb{x}_{i}.
+  \end{equation*}
+  Then $\E^{\mc{A}_0} f_1 = f_0$, and $\|f_1(\omega) - f_0(\omega)\|_{X} \geq \varepsilon$ for all $\omega \in [0,1]$.
+  Since each point $\mb{x}_{i}$ is in $\tilde{D}$, we can repeat this process inductively, representing each $\mb{x}_{i}$ as a convex combination of vectors in $\tilde{D} \sm B_{\varepsilon}(\mb{x}_i)$, using these vectors to define $f_2$ on $I_{i}$, and so on, to construct a $\varepsilon$-separated martingale valued in $\tide{D}$, and thus a bounded $\varepsilon$-separated tree.
+\end{proof}
+
+
+\todo{UP TO HERE. have to do nondentable implies RNP}
 
 
 \subsection{Duality of Bochner spaces}
@@ -183,6 +373,21 @@ First we connect the Radon--Nikodym property to the martingale convergence prope
   Use this property to show that for every measure space $(S,\mc{A},\mu)$ and every sub-$\sigma$-algebra $\mc{B} \subset \mc{A}$, every $f \in L^1(\mc{A};X)$ has a conditional expectation with respect to $\mc{B}$.
   (Of course this holds for \emph{every} Banach space, but your job here is to derive it in a simpler way under the RNP assumption.)
 \end{exercise}
+
+\begin{exercise}\label{ex:fa-meas-ca}
+  Let $X$ be a Banach space and $(S,\mc{A})$ a measure space.
+  Let $\nu$ be a finitely additive $X$-valued vector measure on $(S,\mc{A})$, i.e. a function $\map{\nu}{\mc{A}}{X}$ such that
+  \begin{equation*}
+    \nu\Big(\sum_{n=1}^{N} E_n\Big) = \sum_{n=1}^{N} \nu(E_n)
+  \end{equation*}
+  for all $N \in \N$ and $E_1,\ldots,E_n \in \mc{A}$.
+  Suppose that there is a \emph{countably additive} (scalar) measure $\mu$ on $(S,\mc{A})$ such that
+  \begin{equation*}
+    \|\nu(A)\|_{X} \leq \mu(A) \qquad \forall A \in \mc{A}.
+  \end{equation*}
+  Show that $\nu$ is countably additive, $\|\nu\|_{\var} \leq \|\mu\|_{\var}$, and $|\nu| \ll \mu$.
+\end{exercise}
+
 
 \begin{exercise}[Rademacher's theorem and the RNP]
   Show that a Banach space $X$ has the Radon--Nikodym property if and only if every $X$-valued Lipschitz function on $[0,1]$ is differentiable almost everywhere.
