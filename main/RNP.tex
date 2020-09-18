@@ -94,6 +94,11 @@ One might expect that an analogous theorem holds for vector measures, but it tur
 The classical Radon--Nikodym theorem says that the scalar fields $\R$ and $\C$ have the RNP.
 We will investigate this property for other Banach spaces by considering its relationship with martingales and with properties of convex sets.
 We will also connect it with the duality of Bochner spaces $L^p(S;X)$, answering a question left open in Chapter \ref{sec:Bochner-spaces}.
+Before moving on we record a simple reduction.
+
+\begin{prop}\label{prop:RNP-finite-sufficient}
+  \todo{sufficient to consider finite measure}
+\end{prop}
 
 \subsection{The RNP and martingale convergence}
 
@@ -338,15 +343,139 @@ Before going further let us prove a lemma which relates `non-dentability at scal
     f_1 = \sum_{i=1}^{n} \alpha_i \1_{I_i} \otimes \mb{x}_{i}.
   \end{equation*}
   Then $\E^{\mc{A}_0} f_1 = f_0$, and $\|f_1(\omega) - f_0(\omega)\|_{X} \geq \varepsilon$ for all $\omega \in [0,1]$.
-  Since each point $\mb{x}_{i}$ is in $\tilde{D}$, we can repeat this process inductively, representing each $\mb{x}_{i}$ as a convex combination of vectors in $\tilde{D} \sm B_{\varepsilon}(\mb{x}_i)$, using these vectors to define $f_2$ on $I_{i}$, and so on, to construct a $\varepsilon$-separated martingale valued in $\tide{D}$, and thus a bounded $\varepsilon$-separated tree.
+  Since each point $\mb{x}_{i}$ is in $\tilde{D}$, we can repeat this process inductively, representing each $\mb{x}_{i}$ as a convex combination of vectors in $\tilde{D} \sm B_{\varepsilon}(\mb{x}_i)$, using these vectors to define $f_2$ on $I_{i}$, and so on, to construct a $\varepsilon$-separated martingale valued in $\tilde{D}$, and thus a bounded $\varepsilon$-separated tree.
 \end{proof}
 
+Finally we will `complete the loop' in our discussion of the Radon--Nikodym property, martingale convergence, and dentability.
 
-\todo{UP TO HERE. have to do nondentable implies RNP}
+\begin{thm}
+  Let $X$ be a Banach space such that every bounded subset of $X$ is dentable.
+  Then $X$ has the Radon--Nikodym property.
+\end{thm}
 
+\begin{proof}
+  Let $(S,\mc{A},\mu)$ be a finite measure space, and let $\map{\mb{\nu}}{\mc{A}}{X}$ be an $X$-valued vector measure with $\|\mb{\nu}\|_{X} \leq \mu$ and $|\mb{\nu}| \ll \mu$.
+  Our task is to find a function $f \in L^1(S,\mc{A},\mu;X)$ such that $\mb{\nu} = f\mu$.
+  By Proposition \ref{prop:RNP-finite-sufficient} this is sufficient to prove that $X$ has the RNP.
+
+  For all sets $\alpha \in \mc{A}$ let
+  \begin{equation*}
+    \begin{aligned}
+      \mc{A}_{+}(\alpha) &:= \{\beta \in \mc{A} : \beta \subset \alpha, \mu(\beta) > 0\}, \\
+      \mc{A}_{+} &:= \mc{A}_{+}(S)
+    \end{aligned}
+  \end{equation*}
+  and for all $\alpha \in \mc{A}_{+}$ define
+  \begin{equation*}
+    \mb{x}_{\alpha} := \mu(\alpha)^{-1} \mb{\nu}(\alpha)\in X, \qquad 
+    C_{\alpha} := \{ \mb{x}_{\beta} : \beta \in \mc{A}_{+}(\alpha)\} \subset X.
+  \end{equation*}
+  Note that $\|\mb{x}_{\alpha}\|_X \leq 1$ for all $\alpha \in \mc{A}_{+}$ by the assumptions on $\mb{\nu}$, so every $C_{\alpha}$ is bounded and hence (by assumption) dentable.
+
+  \textbf{We make the following claim:} \emph{for all $\varepsilon > 0$ and $\alpha \in \mc{A}_{+}$, there exists $\alpha' \in \mc{A}_+(\alpha)$ such that $\diam(C_{\alpha}) \leq 2\varepsilon$.}
+  
+  We assume this is not the case and establish a contradiction.
+  Thus there exist $\varepsilon > 0$ and $\alpha \in \mc{A}_{+}$ such that $\diam(C_{\alpha'}) > 2\varepsilon$ for all $\alpha' \in \mc{A}_+(\alpha)$.
+  In particular, for every $\mb{x} \in X$ and $\alpha' \in \mc{A}_{+}(\alpha)$, there is a subset $\beta \in \mc{A}_{+}(\alpha')$ such that $\|\mb{x} - \mb{x}_{\beta}\|_{X} > \varepsilon$.\footnote{Otherwise there would exist a vector $\tilde{\mb{x}} \in X$ with $\|\tilde{\mb{x}} - \mb{x}_{\beta}\|_{X} \leq \varepsilon$ for all $\beta \in \mc{A}_{+}(\alpha')$, which implies $\|\mb{x}_{\beta} - \mb{x}_{\beta'}\|_{X} \leq 2\varepsilon$ for all $\beta,\beta' \in \mc{A}_+(\alpha')$ and hence $\diam(C_{\alpha'}) \leq 2\varepsilon$. Contradiction.}
+  
+  Now consider a fixed $\alpha' \in \mc{A}_{+}(\alpha)$ and let $\{\beta_{\lambda}\}_{\lambda \in \Lambda}$ be a maximal collection of disjoint measurable elements of $\mc{A}_+(\alpha')$ such that $\|\mb{x}_{\alpha'} - \mb{x}_{\beta_\lambda}\|_{X} > \varepsilon$, where $\Lambda$ is some indexing set.
+  Since the sets $\beta_{\lambda}$ are disjoint and have positive measure, and since
+  \begin{equation*}
+    \sum_{\lambda \in \Lambda} \mu(\beta_{\lambda}) \leq \mu(\alpha') < \infty,
+  \end{equation*}
+  the indexing set $\Lambda$ is at most countable.
+  By construction we must have
+  \begin{equation}\label{eq:mu-sum}
+    \mu\Big(\alpha' \sm \bigcup_{\lambda \in \Lambda} \beta_\lambda\Big) = 0;
+  \end{equation}
+  otherwise we could find a set $\beta_{!} \in \mc{A}_{+}(\alpha' \sm \cup_{\lambda} \beta_{\lambda}) \subset \mc{A}_{+}(\alpha')$ such that $\|\mb{x}_{\alpha'} - \mb{x}_{\beta_{!}}\|_{X} > \varepsilon$, contradicting the maximality of the set $
+  \{\beta_{\lambda}\}$.
+  Since $\mb{\nu} \ll \mu$, this yields
+  \begin{equation*}
+    \mb{\nu}\Big(\alpha' \sm \bigcup_{\lambda \in \Lambda} \beta_\lambda\Big) = 0,
+  \end{equation*}
+  or equivalently (using countable additivity)
+  \begin{equation*}
+    \mb{\nu}(\alpha') = \sum_{\lambda \in \Lambda} \mb{\nu}(\beta_\lambda).
+  \end{equation*}
+  This lets us write
+  \begin{equation*}
+    \begin{aligned}
+      \mb{x}_{\alpha'}
+      &= \mu(\alpha')^{-1}\mb{\nu}(\alpha') \\
+      &= \sum_{\lambda \in \Lambda} \mu(\alpha')^{-1}\mb{\nu}(\beta_\lambda) \\
+      &= \sum_{\lambda \in \Lambda} \frac{\mu(\beta_\lambda)}{\mu(\alpha')} \mb{x}_{\beta_\lambda}.
+    \end{aligned}
+  \end{equation*}
+  By \eqref{eq:mu-sum} we have that the coefficients of this series sum to $1$, and the vectors in the series satisfy
+  \begin{equation*}
+    \mb{x}_{\beta_{\lambda}} \in C_{\alpha'} \qquad \text{and} \qquad \| \mb{x}_{\alpha'}- \mb{x}_{\beta_\lambda} \|_X > \varepsilon,
+  \end{equation*}
+  which tells us that
+  \begin{equation*}
+    \mb{x}_{\alpha'} \in \overline{\conv}(C_{\alpha'} \sm B_{\varepsilon}(\mb{x}_{\alpha'})).
+  \end{equation*}
+  Since this is true for all $\alpha' \in \mc{A}_{+}(\alpha)$, we find that $C_{\alpha}$ is not dentable.
+  This is a contradiction, which implies that our claim above is true.
+
+  Now we return to the construction of a Radon--Nikodym derivative $f$ of $\mb{\nu}$ with respect to $\mu$.
+  Fix $\varepsilon > 0$.
+  Using the claim we just established, let $(\alpha_{\lambda})_{\lambda \in \Lambda}$ be a maximal disjoint collection of sets in $\mc{A}_+$ such that $\diam(C_{\alpha_{\lambda}}) \leq 2\varepsilon$.
+  Then $\Lambda$ is at most countable (by the same argument used in the last paragraph) and
+  \begin{equation*}
+    \mu(S \sm \bigcup_{\lambda \in \Lambda} \alpha_{\lambda}) = 0;
+  \end{equation*}
+  if this were not the case then we could select $\alpha' \in \mc{A}_+(S \sm \cup_{\lambda \in \Lambda} \alpha_{\lambda}) \subset \mc{A}_+$ with $\diam(C_{\alpha'}) \leq 2\varepsilon$ (using the claim) and contradict maximality.
+  Define
+  \begin{equation*}
+    g_{\varepsilon} := \sum_{\lambda \in \Lambda} \1_{\alpha_{\lambda}} \otimes \mb{x}_{\alpha_{\lambda}}.
+  \end{equation*}
+  Then $g_{\varepsilon} \in L^1(S,\mc{A},\mu;X)$ (since it is bounded and the measure is finite).
+  We will show that
+  \begin{equation}\label{eq:g-computation}
+    \|\mb{\nu} - g_{\varepsilon}\mu\|_{\var} \leq 2\mu(S)\varepsilon;
+  \end{equation}
+  since this holds for all $\varepsilon > 0$, we find that $\mb{\nu}$ is in the closure in $M(S,\mc{A};X)$ of the set of measures of the form $g\mu$ with $g \in L^1(S,\mc{A},\mu;X)$.
+  But this set is closed in $M(S,\mc{A};X)$,\todo{provide the discussion that makes this argument work} so there exists $g \in L^1(S,\mu;X)$ with $\mb{\nu} = g\mu$, as desired.
+
+  It remains to show \eqref{eq:g-computation}.
+  To see this first note that for all $\alpha \in \mc{A}_+$
+  \begin{equation*}
+    \begin{aligned}
+      \mb{\nu}(\alpha) - g_\varepsilon\mu(\alpha)
+      &= \sum_{\lambda \in \Lambda} \Big(  \mb{\nu}(\alpha \cap \alpha_{\lambda}) - \int_{\alpha \cap \alpha_{\lambda}} g_{\varepsilon} \, \dd\mu \Big) \\
+      &= \sum_{\lambda \in \Lambda} \Big(  \mb{\nu}(\alpha \cap \alpha_{\lambda}) - \mu(\alpha \cap \alpha_{\lambda}) \mb{x}_{\alpha_{\lambda}} \Big) \\
+      &= \sum_{\lambda \in \Lambda} \mu(\alpha \cap \alpha_{\lambda})(\mb{x}_{\alpha \cap \alpha_{\lambda}} - \mb{x}_{\alpha_{\lambda}}),
+    \end{aligned}
+  \end{equation*}
+  and so
+  \begin{equation*}
+      \|\mb{\nu}(\alpha) - g_\varepsilon\mu(\alpha)\|_{X}
+      \leq \sum_{\lambda \in \Lambda} \mu(\alpha \cap \alpha_{\lambda}) \|\mb{x}_{\alpha \cap \alpha_{\lambda}} - \mb{x}_{\alpha_{\lambda}}\|_{X} \leq 2\mu(\alpha)\varepsilon
+    \end{equation*}
+    using that $\diam(C_{\alpha_{\lambda}}) \leq 2\varepsilon$.
+    Taking the supremum over $\alpha \in \mc{A}_{+}$ proves \eqref{eq:g-computation} and completes the proof.
+  \end{proof}
+  
+  Combining this with everything else we know, we have proven the following theorem.
+  \begin{thm}
+    The following properties of a Banach space $X$ are equivalent:
+    \begin{itemize}
+    \item $X$ has the RNP;
+    \item $X$ has the $p$-MCP for all $p \in [1,\infty]$;
+    \item $X$ has the $\infty$-MCP;
+    \item for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree;
+    \item every bounded subset of $X$ is dentable.
+    \end{itemize}
+  \end{thm}
+
+  Note that while the RNP is a measure-theoretic property that makes reference to all $\sigma$-finite measure spaces, and the MCP properties and the nonexistence of bounded separated trees make reference to martingales valued in $X$, the property that every bounded subset is dentable is an intrinsic geometric property of $X$.
+  In fact, by carefully looking at the implications proven above, one can show that it suffices to have the RNP with respect to the unit interval $[0,1]$ in order to show that every bounded subset $X$ is dentable.
+  This argument shows that a Banach space has the RNP if and only if it has the RNP with respect to the unit interval (see Exercise \ref{ex:RNP-unitinterval}).
 
 \subsection{Duality of Bochner spaces}
 
+\todo{todo}
 
 \subsection*{Exercises}
 
@@ -388,9 +517,13 @@ Before going further let us prove a lemma which relates `non-dentability at scal
   Show that $\nu$ is countably additive, $\|\nu\|_{\var} \leq \|\mu\|_{\var}$, and $|\nu| \ll \mu$.
 \end{exercise}
 
-
 \begin{exercise}[Rademacher's theorem and the RNP]
   Show that a Banach space $X$ has the Radon--Nikodym property if and only if every $X$-valued Lipschitz function on $[0,1]$ is differentiable almost everywhere.
+\end{exercise}
+
+\begin{exercise}\label{ex:RNP-unitinterval}
+  Suppose that $X$ has the Radon--Nikodym property with respect to the unit interval $[0,1]$ with Borel $\sigma$-algebra and Lebesgue measure.
+  Show that $X$ has the Radon--Nikodym property with respect to all $\sigma$-finite measure spaces.
 \end{exercise}
 
 
