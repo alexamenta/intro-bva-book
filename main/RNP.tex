@@ -450,32 +450,105 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
   \end{equation*}
   and so
   \begin{equation*}
-      \|\mb{\nu}(\alpha) - g_\varepsilon\mu(\alpha)\|_{X}
-      \leq \sum_{\lambda \in \Lambda} \mu(\alpha \cap \alpha_{\lambda}) \|\mb{x}_{\alpha \cap \alpha_{\lambda}} - \mb{x}_{\alpha_{\lambda}}\|_{X} \leq 2\mu(\alpha)\varepsilon
-    \end{equation*}
-    using that $\diam(C_{\alpha_{\lambda}}) \leq 2\varepsilon$.
-    Taking the supremum over $\alpha \in \mc{A}_{+}$ proves \eqref{eq:g-computation} and completes the proof.
-  \end{proof}
-  
-  Combining this with everything else we know, we have proven the following theorem.
-  \begin{thm}
-    The following properties of a Banach space $X$ are equivalent:
-    \begin{itemize}
-    \item $X$ has the RNP;
-    \item $X$ has the $p$-MCP for all $p \in [1,\infty]$;
-    \item $X$ has the $\infty$-MCP;
-    \item for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree;
-    \item every bounded subset of $X$ is dentable.
-    \end{itemize}
-  \end{thm}
+    \|\mb{\nu}(\alpha) - g_\varepsilon\mu(\alpha)\|_{X}
+    \leq \sum_{\lambda \in \Lambda} \mu(\alpha \cap \alpha_{\lambda}) \|\mb{x}_{\alpha \cap \alpha_{\lambda}} - \mb{x}_{\alpha_{\lambda}}\|_{X} \leq 2\mu(\alpha)\varepsilon
+  \end{equation*}
+  using that $\diam(C_{\alpha_{\lambda}}) \leq 2\varepsilon$.
+  Taking the supremum over $\alpha \in \mc{A}_{+}$ proves \eqref{eq:g-computation} and completes the proof.
+\end{proof}
 
-  Note that while the RNP is a measure-theoretic property that makes reference to all $\sigma$-finite measure spaces, and the MCP properties and the nonexistence of bounded separated trees make reference to martingales valued in $X$, the property that every bounded subset is dentable is an intrinsic geometric property of $X$.
-  In fact, by carefully looking at the implications proven above, one can show that it suffices to have the RNP with respect to the unit interval $[0,1]$ in order to show that every bounded subset $X$ is dentable.
-  This argument shows that a Banach space has the RNP if and only if it has the RNP with respect to the unit interval (see Exercise \ref{ex:RNP-unitinterval}).
+Combining this with everything else we know, we have proven the following theorem.
+\begin{thm}
+  The following properties of a Banach space $X$ are equivalent:
+  \begin{itemize}
+  \item $X$ has the Radon--Nikodym property;
+  \item $X$ has the $p$-martingale convergence property for all $p \in [1,\infty]$;
+  \item $X$ has the $\infty$-martingale convergence property;
+  \item for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree;
+  \item every bounded subset of $X$ is dentable.
+  \end{itemize}
+\end{thm}
+
+\begin{rmk}
+  It is possible to prove that the $\infty$-MCP implies the RNP directly, but I don't think this is as nice as going via dentability.
+  See \cite[Proof of Theorem 2.9]{gP16}.
+\end{rmk}
+
+This set of equivalences says quite a bit.
+First, it says that a.s. convergence of $L^p$-bounded martingales holds for some $p \in [1,\infty]$ if and only if it holds for all $p \in [1,\infty]$.
+This $p$-independence of martingale-based Banach space properties turns out to be fairly typical; martingales satisfy miraculous extrapolation properties of this kind.
+Second, note that the first four properties are `extrinsic': the RNP makes reference to all $\sigma$-finite measure spaces, and the MCP properties and the nonexistence of bounded separated trees make reference to martingales valued in $X$.
+In contrast, the last property is an intrinsic geometric property of $X$.
+It is always satisfying to find an intrinsic geometric characterisation of what seems to be an extrinsic property.
+One more point: by carefully looking at the proofs of these implications, one can show that it suffices to have the RNP with respect to the unit interval $[0,1]$ in order to show that every bounded subset $X$ is dentable.
+This argument shows that a Banach space has the RNP if and only if it has the RNP with respect to the unit interval (see Exercise \ref{ex:RNP-unitinterval}).
+
+Let's rattle off some consequences of this theorem.
+
+\begin{cor}
+  Reflexive spaces and separable dual spaces have the RNP.
+\end{cor}
+
+\begin{proof}
+  By Theorem \ref{thm:MCP-sepdual} and Corollary \ref{cor:MCP-reflexive}, these spaces have the $\infty$-MCP.
+  Thus they also have the RNP.
+\end{proof}
+
+\begin{cor}
+  The RNP is separably determined, i.e. it holds for a Banach space $X$ if and only if it holds for all separable subspaces $Y \subset X$.
+\end{cor}
+
+\begin{proof}
+  By Lemma \ref{lem:MCP-sepdet}, this is true for the $p$-MCP (for all $p \in [1,\infty]$, but these properties are now known to be equivalent anyway). 
+\end{proof}
+
+\begin{rmk}
+  Not satisfied? See \cite[\textsection VII.6]{DU77} for 29 characterisations of the Radon--Nikodym property.
+\end{rmk}
 
 \subsection{Duality of Bochner spaces}
 
-\todo{todo}
+Recall Proposition \ref{prop:bochner-preduality}: for every $\sigma$-finite measure space $(S,\mc{A},\mu)$ and every Banach space $X$, for all $p \in [1,\infty]$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ given by
+\begin{equation*}
+  \Phi g(f) = \int_{S} \langle f(s), g(s) \rangle \, \dd\mu(s) \qquad \forall f \in L^p(S;X)
+\end{equation*}
+is an isometry onto a closed norming subspace of $L^p(S;X)^*$.
+We will now complete this result with the help of the Radon--Nikodym property.
+
+\begin{thm}
+  A dual space $X^*$ has the Radon--Nikodym property if and only if for any countably generated probability space $(\Omega,\mc{A},\P)$ and any $p \in [1,\infty)$ the isometric embedding $\map{\Phi}{L^{p'}(\Omega;X^*)}{L^p(\Omega;X)^*}$ is an isomorphism.
+\end{thm}
+
+\begin{proof}
+  First suppose $X^*$ has the RNP and let $(\Omega, \mc{A}, \P)$ be a countably generated probability space.
+  Then there exists a filtration $(\mc{A}_n)_{n \in \N}$ of finite sub-$\sigma$-algebras of $\mc{A}$ such that $\mc{A}_\infty = \mc{A}$.
+  Let $\phi \in L^p(\mc{A};X)^*$ be a bounded linear functional.
+  For each $n \in \N$ consider the restriction maps
+  \begin{equation*}
+    \map{R_n}{L^{p}(\mc{A};X)^*}{L^{p}(\mc{A}_{n};X)^*} \qquad \text{and} \qquad \map{r_n}{L^{p}(\mc{A}_{n+1};X)^*}{L^{p}(\mc{A}_{n};X)^*},
+  \end{equation*}
+  and define $\phi_n := R_n \phi \in L^p(\mc{A}_n;X)^*$.
+  Then
+  \begin{equation}\label{eq:common-restrictions}
+    r_n \phi_{n+1} = r_n R_{n+1} \phi = R_n \phi = \phi_n.
+  \end{equation}
+  Now for each $n$ consider the isometric embedding
+  \begin{equation*}
+    \map{\Phi_n}{L^{p'}(\mc{A}_n;X^*)}{L^p(\mc{A}_n;X)^*}.
+  \end{equation*}
+  Since each $\mc{A}_n$ is finite, each $\Phi_n$ is an isomorphism (Exercise \ref{ex:finite-sigma-alg-duality}), so there exist functions $g_n \in L^{p'}(\mc{A}_n;X^*)$ such that $\Phi_n g_n = \phi_n$.
+  The equality \eqref{eq:common-restrictions} yields
+  \begin{equation*}
+    \Phi_{n}^{-1} r_n \Phi_{n+1} g_{n+1} = g_n.
+  \end{equation*}
+  We are going to show that $\Phi_{n}^{-1} r_n \Phi_{n+1} g_{n+1} = \E^{\mc{A}_n} g_{n+1}$, thus proving that the sequence $(g_n)_{n \in \N}$ is a martingale.\todo{up to here, want a clean proof of this}
+\end{proof}
+
+
+
+
+
+
 
 \subsection*{Exercises}
 
@@ -525,6 +598,8 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
   Suppose that $X$ has the Radon--Nikodym property with respect to the unit interval $[0,1]$ with Borel $\sigma$-algebra and Lebesgue measure.
   Show that $X$ has the Radon--Nikodym property with respect to all $\sigma$-finite measure spaces.
 \end{exercise}
+
+
 
 
 %%% Local Variables:

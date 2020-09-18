@@ -781,6 +781,15 @@ Of course, most interesting operators are not positive.
   Show that $V \otimes X$ is dense in $L^p(S;X)$.
 \end{exercise}
 
+\begin{exercise}\label{ex:finite-sigma-alg-duality}
+  Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space such that the $\sigma$-algebra $\mc{A}$ is finite.
+  Show that the isometric embedding
+  \begin{equation*}
+    \map{\Phi}{L^{p'}(S,\mc{A},\mu;X^*)}{L^p(S,\mc{A},\mu;X)^*}, \qquad \Phi g(f) = \int_S \langle f(x), g(x) \rangle \, \dd\mu(x)
+  \end{equation*}
+  is an isomorphism for all $p \in [1,\infty]$.
+\end{exercise}
+
 \begin{exercise}\label{ex:tensor-extension-basic-props}
   Let $(S_i, \mc{A}_i, \mu_i)$ ($i \in \{1,2\}$) be measure spaces, let $p_1 \in [1,\infty)$, and let $p_2 \in [1,\infty]$.
   Suppose that $T \in \Lin(L^{p_1}(S_1), L^{p_2}(S_2))$ is a bounded linear operator.
