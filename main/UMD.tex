@@ -1,18 +1,135 @@
-\subsection{Unconditional sequences in Banach spaces}
+% i think we will lose too much time doing unconditionality...
+%
+% \subsection{Unconditional summability}
 
+% Recall the following counterintuitive theorem from basic real analysis (cite RUDIN PMA Theorem 3.54).\todo{add ref}
+
+% \begin{thm}[Riemann]
+%   Let $\sum_{n \in \N} a_n$ be a series of real numbers which is convergent but not absolutely convergent.
+%   Then for all $-\infty \leq \alpha \leq \beta \leq \infty$ there exists a bijective function $\map{r}{\N}{\N}$ such that
+%   \begin{equation*}
+%     \liminf_{N \to \infty} \sum_{n=0}^{N} a_{r(n)} = \alpha, \quad \limsup_{N \to \infty} \sum_{n=0}^{N} a_{r(n)} = \beta.
+%   \end{equation*}
+%   In particular, the numbers $(a_n)_{n \in \N}$ can be rearranged so that the resulting series converge to any extended real number.  
+% \end{thm}
+
+% Such a series is called \emph{conditionally convergent}, and the key point to understand is that the value of the series $\sum_{n \in \N} a_n$ depends on the order of summation.
+% This phenomenon relies on the possibility of negative entries of the series, as if all $a_n$ are nonnegative, the series is either absolutely convergent or divergent.
+
+% Consider the following restatement of the contrapositive.
+
+% \begin{cor}
+%   Let $\sum_{n \in \N} a_n$ be a series of real numbers such that for every bijective function $\map{r}{\N}{\N}$, the rearranged series $\sum_{n \in \N} a_{r(n)}$ converges to a \emph{finite} limit.
+%   Then the series $\sum_{n \in \N} a_n$ is absolutely convergent (and thus has a unique limit).  
+% \end{cor}
+
+% \begin{proof}
+%   If the series were not absolutely convergent, then Riemann's theorem would give a rearrangement that converges to $+\infty$.
+% \end{proof}
+
+% In infinite-dimensional Banach spaces, the situation is, as always, more complicated.
+
+% %i'm working from Lindenstrauss-Tzafriri for this
+
+% \begin{prop}
+%   For a sequence $(\mb{x}_{n})_{n \in \N}$ in a Banach space $X$, the followinf properties are equivalent.
+%   \begin{enumerate}[(a)]
+%   \item The series $\sum_{n \in \N} \mb{x}_{r(n)}$ converges for every bijective $\map{r}{\N}{\N}$.
+%   \item There exists $\mb{x} = X$ such that for every bijective $\map{r}{\N}{\N}$,
+%     \begin{equation*}
+%       \mb{x} = \sum_{n \in \N} \mb{x}_{r(n)}.
+%     \end{equation*}
+%   \item The series $\sum_{i=1}^{\infty} \mb{x}_{n_{i}}$ converges for every increasing sequence $n_1 < n_2 < \cdots$.
+%   \item The series $\sum_{n \in \N} \epsilon_{n} \mb{x}_{n}$ converges for every sequence of signs $\epsilon_{n} = \pm 1$.
+%   \item There exists a constant $C < \infty$ such that for all $(a_{n})_{n \in \N} \in \ell^\infty(\N)$ and all $N \in \N$,
+%     \begin{equation*}
+%       \Big\| \sum_{n = 0}^{N} a_n \mb{x}_n \Big\|_{X} \leq C\|a\|_{\ell^\infty(\N)}.
+%     \end{equation*}
+%   \item For every $\varepsilon > 0$, there exists an $n \in \N$ such that
+%     \begin{equation*}
+%       \Big\| \sum_{i \in S} \mb{x}_{i} \Big\|_{X} < \varepsilon
+%     \end{equation*}
+%     for every finite set $S \subset \{n, n+1, \cdots\}$.
+%   \end{enumerate}
+%   If these conditions hold, we say that the sequence $(\mb{x}_{n})_{n \in \N}$ is \emph{unconditionally summable}, and the infimum of the possible constants $C$ is called the \emph{unconditionality constant} of the sequence.
+% \end{prop}
+
+% \begin{proof}
+%   (b) directly implies (a), and
+% \end{proof}
+
+
+  
 \subsection{The UMD property}
 
-defn; easy examples; independence of $p$
+\begin{defn}
+  For $p \in (1,\infty)$ a Banach space $X$ is said to have the \emph{$\UMD_{p}$ property} (Unconditionality of Martingale Differences in $L^p$) if there exists a constant $C < \infty$ such that for all probability spaces $(\Omega,\mc{A},\P)$, all $X$-valued $L^p$-bounded martingales $(f_n)_{n \in \N}$, and all sequences of signs $\xi_n = \pm 1$,
+  \begin{equation*}
+    \sup_{N \in \N} \Big\| \sum_{n=0}^{N} \xi_{n} df_{n} \Big\|_{L^p(\Omega;X)} \leq C \sup_{n \in \N} \|f_n\|_{L^p(\Omega;X)}.
+  \end{equation*}
+  The best possible constant $C$ in this inequality is denoted $\beta_{p}(X)$.
+  We say that $X$ has the \emph{UMD property} if it has the $\UMD_{p}$ property for all $p \in (1,\infty)$.
+\end{defn}
 
-\subsection{$p$-independence of the UMD property; Gundy's decomposition}
+\begin{rmk}
+  We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property (i.e. $\UMD_{q}$ for all $q \in (1,\infty)$).
+\end{rmk}
 
-\subsection{Dyadic UMD (is just UMD)}
+Recall that $df_{n} := f_n - f_{n-1}$ (with $df_0 := f_0$), so this property can be rewritten as having
+\begin{equation*}
+  \Big\| \sum_{n=0}^{N} \xi_{n} df_{n} \Big\|_{L^p(\Omega;X)} \leq C \Big\| \sum_{n=0}^{N} df_{n}\Big\|_{L^p(\Omega;X)}
+\end{equation*}
+for all $N \in \N$ and all sign sequences $\xi$.
+In Banach space lingo, thus says that the sequence $(df_n)_{k \in \N}$ in $L^p(\Omega;X)$ is \emph{unconditional}, or equivalently that the series $\sum_{n} df_n$ converges in $L^p(\Omega;X)$ independently of the order of summation.
+
+Put very bluntly, the UMD property says that martingale differences behave vaguely like orthogonal sequences in $L^p(\Omega;X)$.
+
+\begin{example}
+  Every Hilbert space $H$ has $\UMD_{2}$, with $\beta_{2}(H) = 1$.
+  To show this let $(f_n)_{n \in \N}$ be an $H$-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
+  Then for all sign sequences $\xi$ and all $N \in \N$, since the martingale differences $df_{n}$ are independent and hence pairwise orthogonal, we have
+  \begin{equation*}
+      \Big\| \sum_{n=0}^N \xi_{n} df_{n} \Big\|_{L^2(\Omega;H)}^{2}
+      = \sum_{n = 0}^{N} \xi_{n}^{2} \|df_{n}\|_{L^2(\Omega)}^{2}
+      = \sum_{n = 0}^{N} \|df_{n}\|_{L^2(\Omega)}^{2}
+      = \Big\| \sum_{n=0}^N df_{n} \Big\|_{L^2(\Omega;H)}^{2}.
+  \end{equation*}
+\end{example}
+
+Before going into a more in-depth analysis of the UMD property, we present a few straightforward consequences of it.
+
+\todo{up to here}
+
+\begin{prop}
+  stable under duals, subspaces
+\end{prop}
+
+
+
+\subsection{$p$-independence of the UMD property}\label{sec:UMD-p-independence}
+
+\begin{cor}
+  Hilbert spaces and $L^p$-spaces are UMD
+\end{cor}
+
+\subsection{Sufficiency of dyadic martingales}
 
 \subsection{UMD and reflexivity}
 
 UMD implies reflexive, hence also RNP
 
 \subsection{Examples and counterexamples}
+
+Bunch of counterexamples from non-reflexivity
+State Qiu's counterexample
+give a few more if possible...
+
+\subsection*{Exercises}
+
+\begin{exercise}
+  (boundedness of martingale transforms on UMD spaces)
+\end{exercise}
+
 
 %%% Local Variables:
 %%% mode: latex

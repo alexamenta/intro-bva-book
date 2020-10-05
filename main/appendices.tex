@@ -115,12 +115,28 @@ One can show via the Hahn--Banach theorem that if $X^*$ is separable, then so is
 
 
 
-\subsection{Results from probability theory}
+\subsection{Results from probability theory}\label{sec:probability}
+
+This course uses \emph{basic} probabilistic concepts quite heavily, but very little of advanced probability theory or stochastic analysis.
+Here we collect the basic concepts and results that we will need.
+A good reference for probability theory from the viewpoint of mathematical analysis is \cite{rD04} (from which I have taken most of this material).
+For a more simple introduction to basic probability, (CITE ROSS)\todo{add ref} is quite good.
+
+Let $(\Omega,\mc{A})$ be a measurable space.
+A \emph{probability measure} on $(\Omega,\mc{A})$ is a measure $\P$ with $\P(\Omega) = 1$.
+Probabilists like to refer to measurable sets $A \in \mc{A}$ as \emph{events}.
+If $(S,\mc{B})$ is another measurable space, a \emph{random variable} is a ($\mc{A}$ to $\mc{B}$) measurable function $\map{X}{\Omega}{S}$.
+
 
 \begin{itemize}
 \item independence of random variables and $\sigma$-algebras
 \item mutual independence of sequences of RVs
+\item characteristic functions and uniqueness
 \end{itemize}
+
+\begin{thm}\label{thm:characteristic-function-uniqueness}
+  (if two $X$-valued random variables have the same characteristic function then they are equal a.e.)
+\end{thm}
 
 \subsection{Complex interpolation?}
 

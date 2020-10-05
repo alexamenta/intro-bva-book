@@ -22,8 +22,20 @@ I then flip a fair coin, which shows either Heads or Tails, and the state of you
 The Banach space $X$ is not ordered, so there is no canonical notion of $\mb{s}_n$ being `more' or `less' than $\mb{s}_{n-1}$. Thus the game is not about winning or losing (the true winner of the game is Functional Analysis).
 In this chapter we will discuss various probabilistic concepts that can be well-understood in the context of this game.
 
+\subsection{Random variables, filtrations, and stochastic processes}
 
-\subsection{Filtrations and stochastic processes}
+First we will set up some basic probabilistic language in Banach spaces.
+See Section \ref{sec:probability} in the Appendix for a review of basic measure-theoretic probability theory.
+
+\begin{defn}
+  Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space.
+  An \emph{$X$-valued random variable} is a strongly measurable function $\map{f}{\Omega}{X}$.
+  If $f \in L^1(\Omega;X)$ is an integrable random variable, we define the \emph{expectation} to be the Bochner integral
+  \begin{equation*}
+    \E f = \int_{\Omega} f(\omega) \, \dd\P(\omega).
+  \end{equation*}
+  When $X$ is the scalar field, this coincides with the usual definition of the expectation of a scalar-valued random variable.
+\end{defn}
 
 \begin{defn}
   A \emph{filtration} on a probability space $(\Omega,\mc{A},\P)$ is a monotone increasing (i.e. nondecreasing) sequence of $\sigma$-subalgebras
@@ -72,7 +84,7 @@ While we don't plan on saying anything really serious about these in this course
 \begin{defn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
   A \emph{(discrete-time) $X$-valued stochastic process} on $(\Omega,\mc{A},\P)$ is a sequence of $\mc{A}$-measurable random variables $\map{f_n}{\Omega}{X}$, $n \in \N$.
-  Given a filtration $(\mc{A}_n)_{n \in \N}$, a stochastic process $(f_n)_{n \in \N}$ is called \emph{predictable} (with respect to the filtration) if each $f_n$ is $\mc{A}_{n-1}$-measurable (with the convention that $\mc{A}_{-1} = \{\varnothing, \Omega\}$).
+  Given a filtration $(\mc{A}_n)_{n \in \N}$, a stochastic process $(f_n)_{n \in \N}$ is called \emph{predictable} (with respect to the filtration) if each $f_n$ is $\mc{A}_{n-1}$-measurable (with the convention that $\mc{A}_{-1} = \{\varnothing, \Omega\}$), and \emph{adapted} if each $f_n$ is $\mc{A}_{n}$ measurable.
 \end{defn}
 
 \begin{rmk}
