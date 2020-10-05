@@ -33,7 +33,7 @@ Two standard choices are:
   These are square waves with period $2^{-n}$, and form a Rademacher sequence.
 \end{example}
 
-A \emph{finite Rademacher sum} in a Banach space $X$ is an $X$-valued random variable of the form
+A \emph{(finite) Rademacher sum} in a Banach space $X$ is an $X$-valued random variable of the form
 \begin{equation}\label{eq:rademacher-sum}
   \sum_{n = 0}^{N} \varepsilon_n \mb{x}_{n} \colon \Omega \to X,
 \end{equation}
@@ -51,7 +51,7 @@ There are two fundamental properties that they satisfy: the \emph{contraction pr
 \begin{thm}[Contraction principle]
   There exists a constant $C \leq 2$ with the following property: for all Banach spaces $X$, all $N \in \N$, and all finite sequences $(\mb{x}_{n})_{n = 0}^{N}$ in $X$ and $(a_{n})_{n=0}^{N}$ in the scalar field $\K$,
   \begin{equation*}
-    \E \Big\| \sum_{n \in \N} \varepsilon_{n} a_{n} \mb{x}_{n} \Big\|_{X} \leq C \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}
+    \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} a_{n} \mb{x}_{n} \Big\|_{X} \leq C \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}.
   \end{equation*}
 \end{thm}
 
@@ -59,13 +59,13 @@ There are two fundamental properties that they satisfy: the \emph{contraction pr
   First suppose that $a_n \in \{-1,+1\}$ for all $n = 0, \ldots, N$.
   Then $(a_n \varepsilon_{n})_{n=0}^{N}$ is a Rademacher sequence, and since Rademacher averages do not depend on the choice of Rademacher sequence we have
   \begin{equation*}
-    \E \Big\| \sum_{n \in \N} \varepsilon_{n} a_{n} \mb{x}_{n} \Big\|_{X} = \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}.
+    \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} a_{n} \mb{x}_{n} \Big\|_{X} = \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}.
   \end{equation*}
-  Now for a general \emph{real} sequence $a = (a_n)_{n=0}^{N}$ with $-1 \leq a_n \leq 1$ for each $n$, note that the point $a \in \R^{N+1}$ lies in the (solid) hypercube with vertices
+  Now for a general \emph{real} sequence $a = (a_n)_{n=0}^{N}$ with $-1 \leq a_n \leq 1$ for each $n$, note that the point $a \in \R^{N+1}$ lies in the hypercube with vertices
   \begin{equation*}
-    V = \{(v_{0}, v_{1}\ldots, v_{N}) : v_{i} \in \{-1,+1\} \quad \forall i\}.
+    V = \{v = (v_{0}, v_{1}\ldots, v_{N}) : v_{n} \in \{-1,+1\} \quad \forall n \}.
   \end{equation*}
-  Since the solid hypercube is the convex hull of its vertices, there exist numbers $(\lambda_{v})_{v \in V}$ such that
+  Since the hypercube is the convex hull of its vertices, there exist numbers $(\lambda_{v})_{v \in V}$ such that
   \begin{equation*}
     a = \sum_{v \in V} \lambda_{v} v \qquad \text{and} \qquad \sum_{v \in V} \lambda_{v} = 1.
   \end{equation*}
@@ -90,7 +90,7 @@ For complex Banach spaces and $\C$-valued sequences, the result (with $C=2$) fol
   See \cite[Proposition 3.2.10]{HNVW16}.
 \end{rmk}
 
-\subsection{The Kahane--Khintchine and John--Nirenberg inequalities}
+\subsection{The Kahane--Khintchine inequality and its consequences}
 
 We formulated our Rademacher averages simply as the expectation of a Rademacher sum.
 One could instead consider the $p$-th moments (or `$L^p$-averages')
@@ -110,9 +110,95 @@ It turns out that these are independent of $p$ up to a constant \emph{uniformly 
 
 Since $\Omega$ is a probability space, H\"older's inequality yields the case $p \leq q$ with constant $\kappa_{p,q} = 1$, so the real difficulty is when $p > q$.
 
-The Kahane--Khintchine inequality is so useful that they are generally used without comment in the literature.
+The Kahane--Khintchine inequality is so useful that it is often used without comment in the literature.
 One well-known proof is a reduction to \emph{hypercontractivity of the heat semigroup on the discrete cube}, providing an interesting link with the analysis of Boolean functions (and of course this link goes much deeper).
 We will follow \cite{HNVW16} and prove it via the \emph{John--Nirenberg theorem for adapted sequences}, which is quite useful in itself.
+But before that, let's look at some consequences of Kahane--Khintchine.
+
+\begin{prop}
+  Let $X$ be a Banach space and consider a sequence $(\mb{x}_{n})_{n \in \N}$ in $X$.
+    For all $p,q \in (0,\infty)$, the Rademacher sum
+    \begin{equation}\label{eq:rad-sum-example}
+      \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n}
+    \end{equation}
+    converges in $L^p(\Omega;X)$ if and only if it converges in $L^q(\Omega;X)$.
+\end{prop}
+
+\begin{proof}
+  Suppose that the Rademacher sum converges in $L^q(\Omega;X)$.
+  Convergence of the Rademacher sum in $L^p(\Omega;X)$ is equivalent to the limit
+  \begin{equation*}
+    \limsup_{N,M \to \infty} \Big\| \sum_{n=N}^{M} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^p(\Omega;X)} = 0.
+  \end{equation*}
+  But of course by Kahane--Khintchine we have
+  \begin{equation*}
+    \limsup_{N,M \to \infty} \Big\| \sum_{n=N}^{M} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^p(\Omega;X)}
+    \leq \kappa_{p,q} \limsup_{N,M \to \infty} \Big\| \sum_{n=N}^{M} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^q(\Omega;X)} = 0.
+  \end{equation*}
+\end{proof}
+
+When the Banach space under consideration is a Hilbert space, Rademacher averages are equivalent to $\ell^2$ sums.
+
+\begin{thm}[Khintchine's inequality]\label{thm:khintchine}
+  Let $H$ be a Hilbert space and $(\mb{h}_{n})_{n \in \N}$ a sequence in $H$.
+  Then for all $p \in (0,\infty)$,
+  \begin{equation*}
+    \Big(\E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{h}_{n} \Big\|_{H}^{p} \Big)^{1/p} \simeq_{p} \|\mb{h}\|_{\ell^2(H)}.
+  \end{equation*}
+  In particular, for all scalar sequences $(a_{n})_{n \in \N}$,
+  \begin{equation*}
+    \Big( \E \Big| \sum_{n \in \N} \varepsilon_{n} a_{n} \Big|^{p} \Big)^{1/p} \simeq_{p} \Big( \sum_{n \in \N} |a_{n}|^{2} \Big)^{1/2}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Using Kahane--Khintchine, independence of the Rademacher variables, and $\E(\varepsilon_{n}^{2}) = 1$,
+  \begin{equation*}
+    \begin{aligned}
+      \Big( \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{h}_{n} \Big\|_{H}^{p} \Big)^{2/p}
+      &\simeq_{p} \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{h}_{n} \Big\|_{L^2(\Omega;H)}^{2} \\
+      &=  \int_{\Omega} \big\langle \sum_{n \in \N} \varepsilon_{n}(\omega) \mb{h}_{n}, \sum_{m \in \N} \varepsilon_{m}(\omega) \mb{h}_{m} \big\rangle \, \dd \P(\omega) \\
+      &  \sum_{n,m \in \N} \E(\varepsilon_n \varepsilon_m) \langle \mb{h}_{n}, \mb{h}_{m} \rangle 
+      =  \sum_{n \in \N} \langle \mb{h}_{n}, \mb{h}_{n} \rangle  = \|\mb{h}\|_{\ell^2(H)}^{2}.
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+When the Banach space is a Lebesgue space, the Kahane--Khintchine inequality also lets us conveniently identify Rademacher averages with \emph{square functions}.
+
+\begin{thm}
+  Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space.
+  Fix $p \in (0,\infty)$ and suppose $(f_{n})_{n \in \N}$ is a sequence of (scalar-valued) functions in $L^p(S,\mu)$.
+  Then
+  \begin{equation*}
+    \E \Big\| \sum_{n \in \N} \varepsilon_{n} f_{n} \Big\|_{L^p(S,\mu)} \simeq_{p} \Big\| \Big( \sum_{n \in \N} |f_{n}|^{2} \Big)^{1/2} \Big\|_{L^p(S,\mu)}.
+  \end{equation*}
+\end{thm}
+
+In this equality, the sum inside the $L^p$-norm is the function
+\begin{equation*}
+  \Big( \sum_{n \in \N} |f_{n}|^{2} \Big)^{1/2}(s) := \Big( \sum_{n \in \N} |f_{n}(s)|^{2} \Big)^{1/2} \qquad \forall s \in S.
+\end{equation*}
+
+\begin{proof}
+  By Kahane--Khintchine, along with Fubini and Theorem \ref{thm:khintchine}, we have
+  \begin{equation*}
+    \begin{aligned}
+      \Big(\E \Big\| \sum_{n \in \N} \varepsilon_{n} f_{n} \Big\|_{L^p(S,\mu)}\Big)^{p}
+      &\simeq_{p} \E \Big\| \sum_{n \in \N} \varepsilon_{n} f_{n} \Big\|_{L^p(S,\mu)}^{p} \\
+      &=  \int_{\Omega} \int_{S} \Big| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n}(s) \Big|^{p} \, \dd\mu(s) \, \dd\P(\omega)  \\
+      &=  \int_{S} \int_{\Omega} \Big| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n}(s) \Big|^{p} \, \dd\P(\omega) \, \dd\mu(s)  \\
+      &=  \int_{S} \E \Big| \sum_{n \in \N} \varepsilon_{n} f_{n}(s) \Big|^{p}  \, \dd\mu(s)  \\
+      &\simeq \int_{S} \Big( \sum_{n \in \N} |f_{n}(s)|^{2} \Big)^{p/2}  \, \dd\mu(s) \\
+      &= \Big\| \Big( \sum_{n \in \N} |f_{n}|^{2} \Big)^{1/2} \Big\|_{L^p(S,\mu)}^{p}.
+    \end{aligned}
+\end{equation*}
+\end{proof}
+
+\subsection{The John--Nirenberg inequality for stochastic processes}
+
+
+
 
 Fix a Banach space $X$ and a probability space $(\Omega,\mc{A},\P)$.
 Consider a filtration $(\mc{A}_n)_{n \in \N}$ and an adapted $X$-valued stochastic process $f = (f_n)_{n \in \N}$ (i.e. $f_n$ is $\mc{A}_n$-measurable for all $n \in \N$).
@@ -133,7 +219,7 @@ We will prove this as a consequence of a series of lemmas, but before that, let'
 \begin{proof}[Proof of Theorem \ref{thm:kk}, assuming the John--Nirenberg inequality]
   Consider the filtration and adapted sequence\todo{have to unify all the notation... UP TO HERE}
   \begin{equation*}
-    \mc{F}_n := \sigma(\{\varepsilon_j : 1 \leq j \leq n\}), \qquad \phi_n := \sum_{j=1}^n \varepsilon_j \mb{x}_j.
+    \mc{A}_n := \sigma(\{\varepsilon_j : 1 \leq j \leq n\}), \qquad \phi_n := \sum_{j=1}^n \varepsilon_j \mb{x}_j.
   \end{equation*}
   We claim that for all $q \in [1,\infty)$ we have
   \begin{equation}\label{eq:kk-claim}
