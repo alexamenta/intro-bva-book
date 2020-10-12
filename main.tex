@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt,intlimits,sumlimits]{amsart}
+\documentclass[a4paper,10pt,intlimits,sumlimits]{amsbook}
 \usepackage[utf8]{inputenc}
 
 \usepackage{conf}
@@ -11,52 +11,54 @@
 
 \begin{document}
 
-%% Title pages
-\input{main/titlepage.tex}
+\title[Banach-valued analysis]{Introduction to Banach-valued analysis}
+\date{\today}
+
+\author[A. Amenta]{Alex Amenta}
+\address{\noindent Mathematisches Institut \newline \indent Universit\"at Bonn, Bonn, Germany}
+\email{amenta@math.uni-bonn.de}
 
 \maketitle
-\footnotesize
 \tableofcontents
-\normalsize
 
 %% Main matter
-\section{Introduction}
+\chapter{Introduction}
 \label{sec:intro}
 \input{main/intro.tex}
 
-\section{The Bochner spaces \texorpdfstring{$L^p(S;X)$}{Lp(S;X)}}
+\chapter{The Bochner spaces \texorpdfstring{$L^p(S;X)$}{Lp(S;X)}}
 \label{sec:Bochner-spaces}
 \input{main/bochner.tex}
 
-\section{Probability in Banach spaces}
+\chapter{Probability in Banach spaces}
 \label{sec:martingales} 
 \input{main/martingales.tex}
 
-\section{The Radon--Nikodym property}
+\chapter{The Radon--Nikodym property}
 \label{sec:RNP}
 \input{main/RNP.tex}
 
-\section{Rademacher sums}
+\chapter{Rademacher sums}
 \label{sec:rademacher}
 \input{main/rademacher.tex}
 
-\section{The class of UMD spaces}
+\chapter{The class of UMD spaces}
 \label{sec:UMD}
 \input{main/umd.tex}
 
-\section{Fourier multipliers and Littlewood--Paley theory}
+\chapter{Fourier multipliers and Littlewood--Paley theory}
 \label{sec:HT}
 \input{main/HT.tex}
 
-\section{Schatten class operators}
+\chapter{Schatten class operators}
 \label{sec:schatten}
 \input{main/schatten.tex}
 
-\section{Fourier type}
+\chapter{Fourier type}
 \label{sec:fouriertype}
 \input{main/fouriertype.tex}
 
-\section{Appendices}
+\chapter{Appendices}
 \label{sec:appendices}
 \input{main/appendices.tex}
 
@@ -70,7 +72,7 @@
 
 % %% Bibtex instead of BibLaTeX (specified in packages.tex)
 % %
-\footnotesize
+%\footnotesize
 \bibliographystyle{amsplain}
 \bibliography{bibliography} 
 

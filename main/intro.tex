@@ -1,4 +1,42 @@
-The one-sentence goal of this course is to study harmonic analysis in the context of functions $\map{f}{\R}{X}$ of a single variable, taking values in an infinite-dimensional Banach space $X$.
+A vast portion of analysis, probably the majority, is concerned with properties of scalar-valued functions
+\begin{equation*}
+  \map{f}{\R^{d}}{\K}, \qquad \K = \text{$\R$ or $\C$}
+\end{equation*}
+and with operators acting on such functions.
+The one-line goal of this course is to study what happens when scalar-valued functions are replaced by \emph{Banach-valued} functions: that is, we are going to study properties of functions
+\begin{equation*}
+  \map{\mb{f}}{\R^{d}}{X},
+\end{equation*}
+where $X$ is a Banach space.
+
+If $X$ is finite-dimensional, then we can choose a basis $\mb{e}_{1}, \ldots, \mb{e}_{n}$ for $X$, and with respect to this basis the function $\mb{f}$ may be written as
+\begin{equation*}
+  \mb{f}(x) = \sum_{i=1}^{n} f_{i}(x) \mb{e}_{i}
+\end{equation*}
+for some scalar-valued functions $\map{f_{i}}{\R^{d}}{\K}$.
+In this way, properties of the function $\mb{f}$ can be deduced from properties of the scalar-valued functions $f_{i}$.
+
+Properties of operators acting on $X$-valued functions can also be reduced to scalar-valued properties when $X$ is finite-dimensional.
+Consider for example the Fourier transform, defined on integrable scalar-valued functions $f \in L^1(\R)$ by
+\begin{equation*}
+  \hat{f}(\xi) := \int_{\R} f(x) e^{-2\pi i x \xi} \, \dd x
+\end{equation*}
+The (debatably) most important theorem in Fourier analysis is the Plancherel theorem, which says that the Fourier transform is an isometry on $L^2$:
+\begin{equation*}
+  \|\hat{f}\|_{L^2(\R)} = \|f\|_{L^2(\R)}.
+\end{equation*}
+For a vector-valued function $\map{\mb{f}}{\R}{X}$ as above, the Fourier transform $\map{\hat{\mb{f}}}{\R}{X}$ can be defined in the same way: we have
+\begin{equation*}
+  \begin{aligned}
+    \hat{\mb{f}}(\xi)
+    &:= \int_{\R} \mb{f}(x) e^{-2\pi i x \xi} \, \dd x \\
+    &= \int_{\R} \Big( \sum_{i=1}^{n} f_{i}(x) \mb{e}_{i} \Big) e^{-2\pi i x \xi} \, \dd x \\
+    &= \sum_{i=1}^{n} \Big(\int_{\R} f_{i}(x) e^{-2\pi i x \xi} \, \dd x \Big) \mb{e}_{i}
+    &= \sum_{i=1}^{n} \hat{f_{i}}(\xi) \mb{e}_{i}
+  \end{aligned}
+\end{equation*}
+where the Lebesgue integral is extended to $X$-valued functions by linearity.\footnote{This construction requires that $X$ is finite-dimensional. In general, the Lebesgue integral has to be replaced by a \emph{Bochner integral}. This is covered in Chapter \ref{sec:Bochner-spaces}.}
+
 
 
 \subsection{Conventions}\label{sec:conventions}
@@ -23,7 +61,6 @@ so that $p^{-1} + (p')^{-1} = 1$ (interpreting $1/\infty$ as $0$).
 
  % {\footnotesize
  %   \subsection{Acknowledgements}
- %   Mark Veraar, Emiel Lorist, Bas Nieraeth, Ivan Yaroslavtsev, Nick Lindemulder, Jan van Neerven, Gennady Uraltsev, Christoph Thiele, Marco Fraccaroli, Aidan Schumann, Pierre Portal, 
  % }
 
 
