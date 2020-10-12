@@ -1,45 +1,151 @@
-A vast portion of analysis, probably the majority, is concerned with properties of scalar-valued functions
+A good deal of real analysis is concerned with properties of scalar-valued functions
 \begin{equation*}
   \map{f}{\R^{d}}{\K}, \qquad \K = \text{$\R$ or $\C$}
 \end{equation*}
 and with operators acting on such functions.
-The one-line goal of this course is to study what happens when scalar-valued functions are replaced by \emph{Banach-valued} functions: that is, we are going to study properties of functions
+The one-line goal of this course is to study what happens when scalar-valued functions are replaced by \emph{Banach-valued} functions: that is, we are going to study functions
 \begin{equation*}
   \map{\mb{f}}{\R^{d}}{X},
 \end{equation*}
-where $X$ is a Banach space.
+where $X$ is a Banach space, and we will study properties of operators acting on $X$-valued functions.
+This will reveal interesting relationships between Fourier analysis, probability, measure theory, operator theory, and the geometry of Banach spaces.
 
-If $X$ is finite-dimensional, then we can choose a basis $\mb{e}_{1}, \ldots, \mb{e}_{n}$ for $X$, and with respect to this basis the function $\mb{f}$ may be written as
-\begin{equation*}
-  \mb{f}(x) = \sum_{i=1}^{n} f_{i}(x) \mb{e}_{i}
-\end{equation*}
-for some scalar-valued functions $\map{f_{i}}{\R^{d}}{\K}$.
-In this way, properties of the function $\mb{f}$ can be deduced from properties of the scalar-valued functions $f_{i}$.
+\section{A case study: the Fourier transform and Plancherel's theorem}
 
-Properties of operators acting on $X$-valued functions can also be reduced to scalar-valued properties when $X$ is finite-dimensional.
-Consider for example the Fourier transform, defined on integrable scalar-valued functions $f \in L^1(\R)$ by
+To keep things simple, consider a finite-dimensional complex Banach space $X$ with a basis $\mb{e}_{1}, \ldots, \mb{e}_{N}$.
+Every vector $\mb{x} \in X$ has a basis expansion
 \begin{equation*}
-  \hat{f}(\xi) := \int_{\R} f(x) e^{-2\pi i x \xi} \, \dd x
+  \mb{x} = \sum_{n=1}^{N} x_{n} \mb{e}_{n},
 \end{equation*}
-The (debatably) most important theorem in Fourier analysis is the Plancherel theorem, which says that the Fourier transform is an isometry on $L^2$:
+so every $X$-valued function $\map{\mb{f}}{\R}{X}$ may be written as
+\begin{equation*}
+  \mb{f}(x) = \sum_{n=1}^{N} f_{n}(x) \mb{e}_{n}
+\end{equation*}
+for some scalar-valued functions $\map{f_{n}}{\R}{\C}$.
+This expansion suggests that properties of $\mb{f}$ can be deduced from properties of the scalar-valued functions $f_{n}$.
+
+The Fourier transform is defined on integrable scalar-valued functions $f \in L^1(\R)$ by
+\begin{equation*}
+  \hat{f}(\xi) := \int_{\R} f(x) e^{-2\pi i x \xi} \, \dd x.
+\end{equation*}
+Plancherel's theorem, arguably the most important result in Fourier analysis, says that the Fourier transform is an isometry on $L^2$:
 \begin{equation*}
   \|\hat{f}\|_{L^2(\R)} = \|f\|_{L^2(\R)}.
 \end{equation*}
-For a vector-valued function $\map{\mb{f}}{\R}{X}$ as above, the Fourier transform $\map{\hat{\mb{f}}}{\R}{X}$ can be defined in the same way: we have
+Does this still hold for $X$-valued functions?
+Before we can answer the question we need to say what we mean by the Fourier transform and the $L^2$-norm for $X$-valued functions.
+Given $\map{\mb{f}}{\R}{X}$ as above, the Fourier transform $\map{\hat{\mb{f}}}{\R}{X}$ can be defined as in the scalar-valued case: we have
 \begin{equation*}
   \begin{aligned}
     \hat{\mb{f}}(\xi)
     &:= \int_{\R} \mb{f}(x) e^{-2\pi i x \xi} \, \dd x \\
-    &= \int_{\R} \Big( \sum_{i=1}^{n} f_{i}(x) \mb{e}_{i} \Big) e^{-2\pi i x \xi} \, \dd x \\
-    &= \sum_{i=1}^{n} \Big(\int_{\R} f_{i}(x) e^{-2\pi i x \xi} \, \dd x \Big) \mb{e}_{i}
-    &= \sum_{i=1}^{n} \hat{f_{i}}(\xi) \mb{e}_{i}
+    &= \int_{\R} \Big( \sum_{n=1}^{N} f_{n}(x) \mb{e}_{n} \Big) e^{-2\pi n x \xi} \, \dd x \\
+    &= \sum_{n=1}^{N} \Big(\int_{\R} f_{n}(x) e^{-2\pi i x \xi} \, \dd x \Big) \mb{e}_{n}
+    &= \sum_{n=1}^{N} \hat{f_{n}}(\xi) \mb{e}_{n}
   \end{aligned}
 \end{equation*}
-where the Lebesgue integral is extended to $X$-valued functions by linearity.\footnote{This construction requires that $X$ is finite-dimensional. In general, the Lebesgue integral has to be replaced by a \emph{Bochner integral}. This is covered in Chapter \ref{sec:Bochner-spaces}.}
+where the Lebesgue integral is extended to $X$-valued functions by linearity.\footnote{This requires finite-dimensionality of $X$. In general, the Lebesgue integral is replaced by a \emph{Bochner integral}. This is covered in Chapter \ref{sec:Bochner-spaces}.}
+The $L^2$-norm on $X$-valued functions is defined by
+\begin{equation*}
+  \|\mb{f}\|_{L^2(\R;X)} := \Big( \int_{\R} \|\mb{f}(x)\|_{X}^{2} \, \dd x \Big)^{1/2}.
+\end{equation*}
+This yields a Banach space $L^2(\R;X)$, but already we start to see that something suspicious is going on: \emph{there is no natural way to turn $L^2(\R;X)$ into a Hilbert space unless $X$ itself is a Hilbert space.}
+Of course, since any two norms on a finite-dimensional vector space are equivalent, there exists a constant $1 \leq C_{X} < \infty$ such that
+\begin{equation}\label{eq:fd-norm-equivalence}
+  C_{X}^{-1} \|(x_{n})_{n=1}^{N}\|_{\ell^2_{N}} \leq \|\mb{x}\|_{X} \leq C_{X} \|(x_{n})_{n=1}^{N}\|_{\ell^2_{N}},
+\end{equation}
+where
+\begin{equation*}
+  \|(x_{n})_{i=1}^{N}\|_{\ell^2_{N}} := \Big( \sum_{n=1}^{N} |x_{n}|^{2} \Big)^{1/2}
+\end{equation*}
+is the familiar Euclidean norm on $\C^{N}$.
+Since $\ell^{2}_{N}$ is a Hilbert space, \eqref{eq:fd-norm-equivalence} lets us treat $X$ as if it were a Hilbert space; the constant $C_{X}$ measures how close $X$ is to the Hilbert space $\ell^{2}_{N}$, with $C_{X} = 1$ if and only if $X$ is isometric to $\ell^{2}_{N}$.
+
+We proceed with our investigation of the Plancherel theorem.
+Using the basis expansion and the equivalence of norms in \eqref{eq:fd-norm-equivalence}, we can compute
+\begin{equation*}
+  \begin{aligned}
+    \|\hat{\mb{f}}\|_{L^2(\R;X)}
+    &= \Big( \int_{\R} \Big\| \sum_{n=1}^{N} \hat{f_{n}}(\xi)  \mb{e}_{n} \Big\|_{X}^{2} \, \dd \xi \Big)^{1/2} \\
+    &\leq C_{X} \Big( \sum_{n=1}^{N} \int_{\R} | \hat{f_{n}}(\xi) |^{2} \, \dd \xi \Big)^{1/2} \\
+    &\stackrel{(*)}{=} C_{X} \Big( \sum_{n=1}^{N} \int_{\R} | f_{n}(x) |^{2} \, \dd x \Big)^{1/2} \\
+    &\leq C_{X}^{2} \Big( \int_{\R} \Big\| \sum_{n=1}^{n} f_{n}(x)  \mb{e}_{n} \Big\|_{X}^{2} \Big)^{1/2} = C_{X}^{2} \|\mb{f}\|_{L^2(\R;X)},
+  \end{aligned}
+\end{equation*}
+using the (scalar-valued) Plancherel theorem to deduce the starred equality.
+Thus we do have a kind of $X$-valued Plancherel theorem, but now instead of being an isometry, the Fourier transform is merely bounded on $L^2(\R;X)$ with norm $\leq C_{X}^{2}$.
+So the boundedness of the Fourier transform on $L^2(\R;X)$ seems to have something to do with the proximity of $X$ to a Hilbert space.
+
+Now what if $X$ is infinite-dimensonal?
+If a constant $C_{X}$ as in \eqref{eq:fd-norm-equivalence} exists (but with $N = \infty$), i.e. if $X$ is isomorphic to $\ell^2(\N)$, then the argument above still works,\footnote{As mentioned in an earlier footnote, the Lebesgue integral has to be replaced by the Bochner integral.} and the norm of the $X$-valued Fourier transform on $L^2(\R;X)$ is $\leq C_{X}^{2}$.
+The surprising fact is that the converse is also true: we will prove this in Chapter \ref{sec:fouriertype}.
+
+\begin{thm}[Kwapie\`n, 1972]\label{thm:Kwapien-intro}
+  The $X$-valued Fourier transform is bounded on $L^2(\R;X)$ if and only if $X$ is isomorphic to a Hilbert space.
+\end{thm}
+
+This is just one (extreme) example of the following general principle: when $T$ is an operator on scalar-valued functions which is bounded on some Lebesgue space $L^p(\R)$, then $T$ can be extended to $X$-valued functions, and the boundedness of this extension on $L^p(\R;X)$ reflects geometric properties of the Banach space $X$.
+Different operators (and different values of $p$) can be used to detect different geometric properties.
+
+\section{A case study: the Hilbert transform}
+
+One important operator in harmonic analysis is the Hilbert transform, defined on $\map{f}{\R}{\C}$ by
+\begin{equation}\label{eq:HT-scalar}
+  Hf(x) := \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \lim_{\varepsilon \downarrow 0} \int_{|y| > \varepsilon} f(x-y) \, \frac{\dd y}{y}.
+\end{equation}
+The Hilbert transform is a prototypical \emph{singular integral operator}: the integral kernel $1/y$ is not integrable, so $H$ cannot be defined as a classical integral operator, but cancellation between the positive and negative values of $1/y$ allow $Hf$ to be well-defined when $f$ is sufficiently smooth (Schwartz, for example).
+One can show that $H$ is a \emph{Fourier multiplier} with symbol $m(\xi) = -i\sgn(\xi)$: that is, for all Schwartz functions $f \in \Sch(\R)$, $Hf = (m\hat{f})^{\vee}$, where $\vee$ denotes the inverse Fourier transform.
+Plancherel's theorem implies that the Hilbert transform is an isometry on $L^2(\R)$: indeed,
+\begin{equation*}
+  \|Hf\|_{L^2(\R)} = \|m\hat{f}\|_{L^2(\R)} \leq \|m\|_{L^\infty(\R)} \|\hat{f}\|_{L^2(\R)} = \|f\|_{L^{2}(\R)},
+\end{equation*}
+since $|m(\xi)| = 1$ for all $\xi \in \R$.
+Furthermore, since the singular kernel $1/y$ has relatively nice decay and smoothness estimates (despite its singular nature), Calder\'on--Zygmund theory can be used to extrapolate the $L^2$-boundedness to $L^p$: for $p \in (1,\infty)$ there exists a constant $C_{p} < \infty$ such that
+\begin{equation*}
+  \|Hf\|_{L^p(\R)} \leq C_{p} \|f\|_{L^p(\R)} \qquad \forall f \in \Sch(\R).
+\end{equation*}
+
+What about vector-valued extensions?
+If $X$ is a Banach space, then the $X$-valued Hilbert transform can be defined as a singular integral via the formula \eqref{eq:HT-scalar}, and it is an $X$-valued Fourier multiplier with symbol $-i\sgn(\xi)$ (using the $X$-valued Fourier transform from the previous case study).\footnote{Once more: when $X$ is infinite dimensional, Bochner integrals need to replace Lebesgue integrals!}
+If $X$ is isomorphic to a Hilbert space, we can invoke the $X$-valued Plancherel theorem to estimate
+\begin{equation*}
+  \|Hf\|_{L^2(\R;X)} \leq K_{X} \|m\hat{f}\|_{L^2(\R;X)} \leq K_{X} \|m\|_{L^\infty(\R)} \|\hat{f}\|_{L^2(\R;X)}= K_{X}^{2} \|f\|_{L^{2}(\R;X)},
+\end{equation*}
+where $1 \leq K_{X} < \infty$ denotes the norm of the Fourier transform on $L^2(\R;X)$.
+Vector-valued Calder\'on--Zygmund methods can then be used to extrapolate this result to $L^p(\R;X)$-boundedness for all $p \in (1,\infty)$.
+
+If $X$ is not isomorphic to a Hilbert space, then we know by Kwapie\`n's theorem that the Fourier transform is \emph{not} bounded on $L^2(\R;X)$, so the previous argument is unavailable.
+However, the scalar-valued Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, not just $p = 2$, which suggests that boundedness of the $X$-valued Hilbert transform is a less stringent condition than the $X$-valued Plancherel theorem.
+And indeed, this is the case.
+We will prove the following theorem in Chapter \ref{sec:HT}.
+
+\begin{thm}[Burkholder--Bourgain, 1981]
+  The $X$-valued Hilbert transform is bounded on $L^p(\R;X)$ for some (equivalently, all) $p \in (1,\infty)$ if and only if $X$ has the \emph{UMD property}.
+\end{thm}
+
+UMD stands for Unconditionality of Martingale Differences.
+Martingales are a fundamental class of stochastic processes, and unconditionality of a sequence in a Banach space says that the elements of the sequence are, in some sense, `independent' or `orthogonal'.
+The UMD property is probabilistic in nature; the Burkholder--Bourgain theorem says that it is also a harmonic-analytic property.
+Thus the UMD property is a natural and often necessary assumption for Banach-valued analysis.
+Hilbert spaces are UMD,\footnote{The arguments above show this as a consequence of the Kwapie\`n and Burkholder--Bourgain theorems, but this is absolute overkill. It can be proven directly from the definition in terms of martingales.} but so are most natural function spaces, in particular $L^p$ spaces and Sobolev spaces $W^{p}_{s}$ (with $p \in (1,\infty)$).
+Thus the UMD property appears readily in applications to PDEs, both deterministic and stochastic.
+Even spaces of operators can be UMD, for example the Schatten classes $\mc{S}^{p} \subset B(H)$ (studied in Chapter \ref{sec:schatten}) or more general \emph{noncommutative} $L^p$-spaces (unfortunately not covered in these notes), and consequences of the UMD property for these spaces can be used to prove deep results in operator theory.
+
+\section{Plan of attack}
+
+In this course you will be introduced to some fundamental topics in Banach-valued analysis.\footnote{One very important topic which I have completely skipped is the relationship between weighted norm estimates, the Hardy--Littlewood maximal operator, and the UMD property for Banach function spaces and lattices. These topics are completely fundamental and should be included in an introductory course, but then I wouldn't have time to include the material on Schatten classes, and after all, the future is noncommutative...}
+
+We start in Chapter \ref{sec:Bochner-spaces} with Bochner spaces and strong measurability.
+Measurability is always a bit of a pain to discuss but it would be impossible to do anything without it, and in the infinite-dimensional setting a bit of preliminary work is needed so that we can thoughtlessly integrate.
+
+We move on to probabilistic concepts in Chapter \ref{sec:martingales}, the most important being that of a vector-valued martingale.
+As described above, this is needed in order to define the UMD property, but it is fundamental in its own right, and it is very useful in analysing the \emph{Radon-Nikodym property}.
+This is done in Chapter \ref{sec:RNP}.
+
+...\todo{continue}
 
 
-
-\subsection{Conventions}\label{sec:conventions}
+\section{Conventions}\label{sec:conventions}
 Throughout these notes we will deal with both real and complex Banach spaces.
 If we do not explicitly specify `real' or `complex', then either choice can be made, and we will write $\K$ to denote the scalar field (i.e. $\K = \R$ or $\K = \C$).
 Every complex Banach space can be seen as a real Banach space by restricting scalar multiplication to the reals.
@@ -55,8 +161,6 @@ For an exponent $p \in [1,\infty]$ we let $p'$ denote the \emph{H\"older conjuga
   \end{cases}
 \end{equation*}
 so that $p^{-1} + (p')^{-1} = 1$ (interpreting $1/\infty$ as $0$).
-
-
 
 
  % {\footnotesize
