@@ -1,52 +1,50 @@
-\todo{add expository intro}
+Rather than considering individual functions, one by one, it is smart to consider \emph{spaces} of functions with certain properties: smooth functions, continuous functions, integrable functions, and so on.
+One of the fundamental classes of functions are the Lebesgue spaces, $L^p(S)$, associated with a measure space $S$.
+For vector-valued functions, the analogue of Lebesgue spaces are the \emph{Bochner spaces}.
+These are spaces of measurable vector-valued functions defined modulo measure zero sets, as are Lebesgue spaces.
+In order to define them we need to make precise what we mean by `measurability', as this turns out to be more complicated than usual in the vector-valued setting.
 
 \section{Notions of measurability}
 
-Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$.} and a Banach space $X$ over a scalar field $\K$ (either $\R$ or $\C$).
-The topic of these notes is the analysis of functions $\map{f}{S}{X}$, and of operators acting on such functions.
-Thus it will be useful for us to gain some familiarity with the idea of $X$-valued functions.
-
+Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$.} and let $X$ be a Banach space over the scalar field $\K$ (either $\R$ or $\C$).
 The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\K}$ and a non-zero vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
-This function is denoted by $f \otimes \mb{x}$ and formally defined by
+This function is denoted using the tensor notation $f \otimes \mb{x}$, and formally defined by
 \begin{equation*}
-  \map{f \otimes \mb{x}}{S}{X}, \qquad (f \otimes \mb{x})(s) := f(s)\mb{x} \quad \text{for all $s \in S$.}
+  \map{f \otimes \mb{x}}{S}{X}, \qquad (f \otimes \mb{x})(s) := f(s)\mb{x} \quad \forall s \in S.
 \end{equation*}
-The range of $f \otimes \mb{x}$ is contained in the linear span of $\mb{x}$, and is thus `one-dimensional'.
-
+Note that the range of $f \otimes \mb{x}$ is contained in the linear span of $\mb{x}$.
 The second simplest kind of $X$-valued function are the \emph{simple functions}.
-A function $\map{f}{S}{X}$ is \emph{simple} if there exists a finite collection of pairwise disjoint measurable subsets $S_1,\ldots,S_N \subset S$ and non-zero vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
+A function $\map{\mb{g}}{S}{X}$ is \emph{simple} if there exists a finite collection of pairwise disjoint measurable subsets $S_1,\ldots,S_N \subset S$ and non-zero vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
 \begin{equation}\label{eqn:simple-function-standard-form}
-  f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
+  \mb{g} = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
 \end{equation}
 where $\1_{S_n}$ is the indicator function of $S_n$.
 We denote the vector space of simple functions $S \to X$ by $\Simp(S;X)$ or $\Simp_{\mc{A}}(S;X)$.
-Note that the range of $f$ is contained in $\spn(\mb{x}_1,\ldots,\mb{x}_N)$, so $f$ can be thought of as `finite-dimensional'.
+Note that the range of $\mb{g}$ is contained in $\spn(\mb{x}_1,\ldots,\mb{x}_N)$, which is a finite-dimensional subspace of $X$.
 
-Of course, we need more than simple functions; measure theory tells us that the most useful class of functions are the \emph{measurable functions}.
+Of course, we need more than simple functions; we need \emph{measurable functions}.
 When considering Banach-valued functions, particularly when our Banach spaces are allowed to be infinite-dimensional, there is more than one notion of measurability, and these are generally inequivalent.
 
 \begin{defn}
-  Consider a function $\map{f}{S}{X}$.
-  We say that $f$ is
+  Let $X$ be a Banach space.
+  We say that a function $\map{\mb{f}}{S}{X}$ is
   \begin{itemize}
   \item
-    \emph{measurable} if for every Borel set $B \subset X$, the preimage $f^{-1}(B)$ is measurable;
+    \emph{measurable} if for every Borel set $B \subset X$, the preimage $\mb{f}^{-1}(B)$ is measurable;
   \item
-    \emph{strongly measurable} (or \emph{Bochner measurable}) if it is the pointwise limit of simple functions; that is, if there exists a sequence $(f_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $f = \lim_{n \to \infty} f_n$ pointwise on $S$;
+    \emph{strongly measurable} (or \emph{Bochner measurable}) if it is the pointwise limit of simple functions; that is, if there exists a sequence $(\mb{f}_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $\mb{f} = \lim_{n \to \infty} \mb{f}_n$ pointwise on $S$;
   \item
-    \emph{weakly measurable} if for every functional $\mb{x}^* \in X^*$, the function $\map{\langle f, \mb{x}^*\rangle}{S}{\K}$ given by $s \mapsto \langle f(s), \mb{x}^* \rangle$ is measurable.
+    \emph{weakly measurable} if for every functional $\mb{x}^* \in X^*$, the scalar-valued function $\map{\langle \mb{f}, \mb{x}^*\rangle}{S}{\K}$ given by $s \mapsto \langle \mb{f}(s), \mb{x}^* \rangle$ is measurable.
   \end{itemize}
   All of these notions implicitly refer to the $\sigma$-algebra $\mc{A}$.
-
-  
 \end{defn}
 
-With the convenient notation
+Using the notation
 \begin{center}
   \begin{tabular}{r|l}
-    $\Meas (S;X)$  & Measurable $\map{f}{S}{X}$    \\
-    $\SMeas(S;X)$  & Strongly measurable $\map{f}{S}{X}$ \\
-    $\WMeas(S;X)$  & Weakly measurable $\map{f}{S}{X}$,
+    $\Meas (S;X)$  & Measurable $\map{\mb{f}}{S}{X}$    \\
+    $\SMeas(S;X)$  & Strongly measurable $\map{\mb{f}}{S}{X}$ \\
+    $\WMeas(S;X)$  & Weakly measurable $\map{\mb{f}}{S}{X}$
   \end{tabular}
 \end{center}
 we have the containment
@@ -57,33 +55,36 @@ we have the containment
 When $X$ is finite-dimensional these notions coincide: the derivation of strong measurability from measurability is a standard result in measure theory,\footnote{See for example \cite[Corollary 4.2.7]{rD04} in the one-dimensional case; extending this to the finite-dimensional case can be done by summing up coordinates.} and weak measurability is just a convoluted rewriting of coordinatewise measurability.
 But in the general context of Banach spaces the inclusions \eqref{eq:measurability-inclusions} are strict.
 
-\begin{example}[A measurable function which is not strongly measurable]\todo{Can we do this with a $\sigma$-finite measure space? Maybe an uncountable product of probability spaces? Countable generation should be the issue.}
-  Let $X$ be a Banach space, and consider the identity map $\map{I}{X}{X}$, which is continuous and hence measurable.
-  If $I$ is strongly measurable, then there exists a sequence of simple functions $(i_n)_{n \in \N}$ converging pointwise to $I$.
+\begin{example}[A measurable function which is not strongly measurable]
+  Let $X$ be a non-separable Banach space (for example, $X = L^\infty(\R)$), and consider the identity map $\map{I}{X}{X}$, which is continuous and hence measurable.
+  We prove that $I$ is not strongly measurable by contradiction.
+  Assuming $I$ is strongly measurable, we find that there exists a sequence of simple functions $(i_n)_{n \in \N}$ converging pointwise to $I$.
   For each $\mb{x} \in X$ we then have
   \begin{equation*}
     \mb{x} = \lim_{n \to \infty} i_n(\mb{x}),
   \end{equation*}
   so that the union $U := \cup_{n \in \N} i_n(X)$ is dense in $X$.
   Since each $i_n$ is simple, $U$ is countable, which implies that $X$ is separable.
-  Thus if $X$ is not separable (e.g. if $X = L^\infty(\R)$), the identity map $\map{I_X}{X}{X}$ is measurable (even continuous) but not strongly measurable.
+  Thus $I$ not strongly measurable.
 \end{example}
 
 \begin{rmk}
-  The existence of weakly measurable functions that are not measurable is not so simple, but see \cite[Example 1.4.3]{HNVW16} for an argument which shows that the $\sigma$-algebra $\sigma(X^*)$ may be strictly smaller than the Borel $\sigma$-algebra on $X$.
+  The existence of weakly measurable functions that are not measurable is not so simple, but see \cite[Example 1.4.3]{HNVW16} for an argument which shows that the $\sigma$-algebra $\sigma(X^*)$ (which defines the set of weakly measurable functions) may be strictly smaller than the Borel $\sigma$-algebra on $X$.
   The indicator function of a Borel set which is not in $\sigma(X^*)$ is then weakly measurable, but not measurable.
 \end{rmk}
 
-It turns out that the notion of strong measurability is strongly connected with that of separability.
+We used non-separability to construct a function which is measurable but not strongly measurable, and there is a very good reason for this.
 
 \begin{thm}[Pettis measurability theorem]\label{thm:Pettis-measurability}
   Let $(S,\mc{A})$ be a measurable space and $X$ a Banach space.
-  Then a function $\map{f}{S}{X}$ is strongly measurable if and only if it is weakly measurable and \emph{separably valued} (i.e. there exists a separable subspace $X' \subset X$ such that $f(S) \subset X'$).
+  Then a function $\map{\mb{f}}{S}{X}$ is strongly measurable if and only if it is weakly measurable and \emph{separably valued} (i.e. there exists a separable subspace $X' \subset X$ such that $\mb{f}(S) \subset X'$).
   In particular, if $X$ is separable, then
   \begin{equation*}
     \SMeas(S;X) = \Meas(S;X) = \WMeas(S;X).
   \end{equation*}
 \end{thm}
+
+\todo{UP TO HERE}
 
 \begin{proof}
   First suppose that $f$ is strongly measurable.
