@@ -105,15 +105,22 @@ And thus Corollary \ref{cor:reflexive-iff-weakcpt} can be restated as follows:
   $X$ is reflexive if and only if every bounded sequence has a weakly convergent subsequence.
 \end{cor}
 
-A Banach space is \emph{separable} if it has a countable dense subset.
+A Banach space is \emph{separable} if it has a countable dense subset.\todo{add examples}
 One can show via the Hahn--Banach theorem that if $X^*$ is separable, then so is $X$ \cite[Theorem III.7]{RS80}.
+Separability can be characterised in terms of weak-* metrisability in the dual space.
 
 \begin{thm}\label{thm:sep-met-dual}
   $X$ is separable if and only if the closed unit ball $\overline{B_{X^*}}$ of $X^*$ is weak-* metrisable.\todo{need a citation for this theorem}
   Thus by Banach--Alaoglu and the equivalence of compactness notions for metrisable spaces, if $X$ is separable, then $\overline{B_{X^*}}$ is weak-* sequentially compact.
 \end{thm}
 
+Given subsets $F \subset X$ and $Y \subset X^{*}$, one says that $Y$ \emph{separates points of $F$} if for every distinct pair of vectors $\mb{x} \neq \mb{y} \in F$ there exists a functional $\mb{x}^{*} \in Y$ such that $\langle \mb{x}, \mb{x}^{*} \rangle \neq \langle \mb{y}, \mb{x}^{*} \rangle$.
+A topological argument (see \cite[Proposition B.1.11]{HNVW16}) implies the following.
 
+\begin{prop}\label{prop:sep-sep-points}
+  If $F$ is a separable subset of a Banach space $X$, and $Y \subset X^{*}$ is weak-* dense in $X^{*}$, then $Y$ contains a countable subset which separates points of $F$.
+  In particular, if $X$ is separable, then there exists a sequence $(\mb{x}_{n}^{*})_{n \in \N}$ in $X^{*}$ which separates points of $X$.
+\end{prop}
 
 \section{Results from probability theory}\label{sec:probability}
 
