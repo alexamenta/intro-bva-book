@@ -181,68 +181,60 @@ This is a surprisingly useful observation, which can be used to deduce identitie
   Thus $\mb{f} \stackrel{\ae}{=} \mb{g}$.  
 \end{proof}
 
-\todo{UP TO HERE}
-
 \section{Bochner spaces}
 
-Given $\map{f}{S}{X}$, we let $\|f\|_X$ denote the scalar-valued function $S \to \K$ defined by $s \mapsto \|f(s)\|_X$.
-If $f$ is strongly measurable, then $\|f\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
+We are ready to define Bochner spaces, which generalise Lebesgue spaces to Banach-valued functions.
+Given a Banach-valued function $\map{\mb{f}}{S}{X}$, we let $\|\mb{f}\|_X$ denote the non-negative function on $S$ defined by $s \mapsto \|\mb{f}(s)\|_X$.
+If $\mb{f}$ is measurable, then $\|\mb{f}\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
 
 \begin{defn}
-  Let $(S,\mc{A},\mu)$ be a measure space.
-  For $p \in [1,\infty]$, we let $L^p(S,\mu;X)$ denote the set of \emph{strongly} measurable functions $f \in \SMeas(S;X)$ such that $\|f\|_X \in L^p(S,\mu)$, modulo $\mu$-a.e. equality, and we write
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  For $p \in [1,\infty]$, we let $L^p(S,\mc{A},\mu;X)$ denote the set of \emph{strongly} $\mc{A}$-measurable functions $\mb{f} \in \SMeas(S;X)$ such that $\|\mb{f}\|_X \in L^p(S,\mc{A},\mu)$, and we write
   \begin{equation*}
-    \|f\|_{L^p(S,\mu;X)} := \| \|f\|_X \|_{L^p(S,\mu)}.
+    \|\mb{f}\|_{L^p(S,\mc{A},\mu;X)} := \| \|\mb{f}\|_X \|_{L^p(S,\mc{A},\mu)}.
   \end{equation*}
-  Each $L^p(S,\mu;X)$ is a Banach space: the proof is identical to the classic proof in the scalar-valued case.\footnote{For revision see \cite[Theorem 5.2.1]{rD04}.}
+  We consider two functions $\mb{f}, \mb{g} \in L^p(S,\mc{A},\mu;X)$ to be equal if $\mb{f} \aeeq \mb{g}$.
+  Each $L^p(S,\mc{A},\mu;X)$ is a Banach space: the proof is identical to the classic proof in the scalar-valued case.\footnote{For revision see \cite[Theorem 5.2.1]{rD04}.}
 \end{defn}
 
-\begin{rmk}
-  It is possible for $\|f\|_X$ to be in $L^p(S)$ without $f$ itself being strongly measurable (or even measurable).
-  Such a function does not qualify for membership in $L^p(S;X)$.
+In general we won't use all of $S$, $\mc{A}$, and $\mu$ in the notation for $L^p(S,\mc{A},\mu;X)$; we will only write out the parameters that need to be emphasised (whatever combination of the set, the $\sigma$-algebra, and the measure).
+If the parameters are equally unimportant we may even omit all three (as in Remark \ref{rmk:lp-issues} below).
+On the other hand, we will never omit $X$ unless $X = \K$ is the scalar field.
+
+\begin{rmk}\label{rmk:lp-issues}
+  It is possible for the scalar-valued function $\|\mb{f}\|_X$ to be in $L^p$ without $\mb{f}$ itself being strongly measurable (or even measurable).
+  Such a function does not qualify for membership in $L^p(X)$.
+  See Exercise \ref{ex:Lp-issues}.
 \end{rmk}
 
+In the scalar-valued setting, the simple functions are dense in $L^p$-spaces, and for $p < \infty$ the same holds for Bochner spaces. 
+
 \begin{prop}\label{prop:simple-density}
-  Let $X$ be a Banach space and $p \in [1,\infty)$.
-  Then the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach.
+  Then for $p \in [1,\infty)$, the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
 \end{prop}
 
 \begin{proof}
-  % L^infty, if needed
-  % Let $f \in L^p(S;X)$ and consider the truncations
-  % \begin{equation*}
-  %   f_\lambda := \1_{\{s \in S : \|f_\lambda(s)\|_X \leq \lambda\}} f \qquad \forall \lambda > 0.
-  % \end{equation*}
-  % Then $\|(f - f_{\lambda})(s)\|_X^p \leq \|f(s)\|_X^p$ for almost all $s \in S$, so by dominated convergence
-  % \begin{equation*}
-  %   \begin{aligned}
-  %     \lim_{\lambda \to \infty} \|f - f_{\lambda}\|_{L^p(S;X)}^p
-  %     &= \lim_{\lambda \to \infty} \int_{S} \|(f - f_{\lambda})(s)\|_X^p \, \dd\mu(s) \\
-  %     &= \int_{S} \lim_{\lambda \to \infty}  \|(f - f_{\lambda})(s)\|_X^p \, \dd\mu(s) = 0.
-  %   \end{aligned}
-  % \end{equation*}
-  % Thus $f_{\lambda} \to f$ in $L^p(S;X)$ as $\lambda \to \infty$, and since each $f_{\lambda}$ is in $L^\infty(S;X) \cap L^p(S;X)$, thus subspace is dense in $L^p(S;X)$.
-
-  Fix $f \in L^p(S;X)$.
-  Since $f$ is strongly measurable, there exists a sequence of simple functions $f_n \in \Simp(S;X)$ with $\lim_{n \to \infty} f_n = f$ pointwise almost everywhere.
+  Fix $\mb{f} \in L^p(S;X)$.
+  Since $\mb{f}$ is strongly measurable, there exists a sequence of simple functions $\mb{f}_n \in \Simp(S;X)$ with $\lim_{n \to \infty} \mb{f}_n = \mb{f}$ pointwise almost everywhere.
   Now set
   \begin{equation*}
-    g_n := \1_{ \{s \in S : \|f_n(s)\|_X \leq 2\|f\|_X \} } f_n;
+    \mb{g}_n := \1_{ \{s \in S : \|\mb{f}_n(s)\|_X \leq 2\|\mb{f}\|_X\} } \mb{f}_n.
   \end{equation*}
-  the functions $g_n$ are simple and they also converge to $f$ pointwise almost everywhere.
+  The functions $\mb{g}_n$ are simple, and they converge to $\mb{f}$ pointwise almost everywhere.
   Furthermore we have
   \begin{equation*}
-    \|g_n\|_{L^p(S;X)}^p = \int_{\{s \in S : \|f_n(s)\|_X \leq 2\|f\|_X \} } \|f_n(s)\|_X^p \, \dd\mu(s) \leq 2^p \|f\|_{L^p(S;X)}^p,
+    \|\mb{g}_n\|_{L^p(S;X)}^p = \int_{\{s \in S : \|\mb{f}_n(s)\|_X \leq 2\|\mb{f}\|_X \} } \|\mb{f}_n(s)\|_X^p \, \dd\mu(s) \leq 2^p \|\mb{f}\|_{L^p(S;X)}^p,
   \end{equation*}
-  so each $g_n$ is in $L^p(S;X)$.
-  Since $\|f(s) - g_n(s)\|_X \leq 3\|f(s)\|_X$ for almost all $s$, dominated convergence yields
+  so each $\mb{g}_n$ is in $L^p(S;X)$.
+  Since $\|\mb{f}(s) - \mb{g}_n(s)\|_X \leq 3\|\mb{f}(s)\|_X$ for almost all $s$, dominated convergence yields
   \begin{equation*}
     \begin{aligned}
-      \lim_{n \to \infty} \|f - g_n\|_{L^p(S;X)}^p &= \lim_{n \to \infty} \int_S \|f(s) - g_n(s)\|_{X}^p \, \dd\mu(s) \\
-      &= \int_S \lim_{n \to \infty}  \|f(s) - g_n(s)\|_{X}^p \, \dd\mu(s) = 0,
+      \lim_{n \to \infty} \|\mb{f} - \mb{g}_n\|_{L^p(S;X)}^p &= \lim_{n \to \infty} \int_S \|\mb{f}(s) - \mb{g}_n(s)\|_{X}^p \, \dd\mu(s) \\
+      &= \int_S \lim_{n \to \infty}  \|\mb{f}(s) - \mb{g}_n(s)\|_{X}^p \, \dd\mu(s) = 0,
     \end{aligned}
   \end{equation*}
-  so that $g_n \to f$ in $L^p(S;X)$, completing the proof.
+  so $\mb{g}_n \to \mb{f}$ in $L^p(S;X)$, completing the proof.
 \end{proof}
 
 
@@ -250,11 +242,15 @@ If $f$ is strongly measurable, then $\|f\|_X$ is also measurable, since the func
   Proposition \ref{prop:simple-density} can be extended to more general dense subspaces of $L^p(S)$; see Exercise \ref{ex:general-density}.
 \end{rmk}
 
-Note that the case $p = \infty$ is not included in the proposition above, even though the simple functions are dense in $L^\infty(S)$.
+Note that the case $p = \infty$ is not included in the proposition above, even though the simple functions are dense in $L^\infty$.
+This is because the density of simple functions in $L^\infty(S;X)$ (for a sufficiently rich measure space) is equivalent to the compactness of the unit ball of $X$, which is equivalent to the finite dimensionality of $X$.
+We will prove this in the special case where $S = \N$, but the proof can be extended to any measure space containing infinitely many disjoint measurable sets of positive measure.
+
+\todo{UP TO HERE}
 
 \begin{prop}
   Let $X$ be a Banach space.
-  Then the simple functions are dense in $\ell^\infty(\N;X)$ if and only if $X$ is finite dimensional.\footnote{This proposition can be extended to more general measure space $S$ in place of $\N$, provided $S$ contains infinitely many disjoint measurable sets of positive measure.}
+  Then the simple functions are dense in $\ell^\infty(\N;X)$ if and only if $X$ is finite dimensional.
 \end{prop}
 
 \begin{proof}
@@ -778,6 +774,10 @@ Of course, most interesting operators are not positive.
   \item If $X$ is separable or $A$ is separable, show that $C(A;X)$ is contained in $L^\infty(A, \mu;X)$.
   \item Give an example of a topological space $A$ and a Banach space $X$ such that $C(A;X)$ is not contained in $L^\infty(A,\mu;X)$.
   \end{itemize}
+\end{exercise}
+
+\begin{exercise}\label{ex:Lp-issues}
+  Give an example of a Banach space $X$, a measure space $(S,\mc{A},\mu)$, and a function $\map{\mb{f}}{S}{X}$ such that $\|\mb{f}\|_{X} \in L^p(S,\mu)$, but $\mb{f} \notin L^p(S,\mu;X)$.
 \end{exercise}
 
 \begin{exercise}\label{ex:general-density}
