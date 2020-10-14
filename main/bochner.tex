@@ -435,171 +435,162 @@ That is, the Bochner integral of a general function $\mb{g} \in L^1(\mu;X)$ is g
   \int_S \mb{g} \, \dd\mu := \lim_{n \to \infty} \int_S \mb{f}_n \, \dd\mu \in X
 \end{equation*}
 where $\mb{f}_n \in \Simp(S;X) \cap L^1(\mu;X)$ for all $n \in \N$ and $\mb{f}_n \to \mb{g}$ in $L^1(\mu;X)$.
+We refer to functions in $L^1(\mu,X)$ as \emph{Bochner integrable}.
 
-\todo{UP TO HERE}
-
-The Bochner integral satisfies the following properties.
+The Bochner integral satisfies various familiar and useful properties.
 \begin{prop}
   Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
-  The Bochner integral satisfies the following properties:
   \begin{description}
-  \item[Linearity] For $f_1, f_2 \in L^1(S,\mu;X)$ and $\lambda_1, \lambda_2 \in \K$,
+  \item[Commutation with linear maps] If $\mb{f} \in L^1(\mu;X)$ and $T \in \Lin(X,Y)$ is a bounded linear map into a Banach space $Y$,
     \begin{equation*}
-      \int_S (\lambda_1 f_1 + \lambda_2 f_2)(s) \, \dd\mu(s) = \lambda_1 \int_S f_1(s) \dd\mu(s) + \lambda_2 \int_S f_2(s) \dd\mu(s) .
+      T\Big( \int_S \mb{f} \, \dd\mu \Big) = \int_S T\mb{f} \, \dd\mu \in Y,
     \end{equation*}
-  \item[Commutation with linear maps] If $f \in L^1(S,\mu;X)$ and $T \in \Lin(X,Y)$ is a bounded linear map into a Banach space $Y$,
-    \begin{equation*}
-      T\Big( \int_S f \, \dd\mu \Big) = \int_S Tf(s) \, \dd\mu(s) \in Y
-    \end{equation*}
-    where $Tf \in L^1(S,\mu;Y)$ is given by $(Tf)(s) = T(f(s))$ for almost all $s \in S$.
+    where $T\mb{f} \in L^1(\mu;Y)$ is given by $(T\mb{f})(s) = T(\mb{f}(s))$ for almost all $s \in S$.
     In particular, if $\mb{x}^* \in X^* = \Lin(X,\K)$, then
     \begin{equation*}
-      \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) \in \K.
+      \Big\langle \int_S \mb{f} \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle \mb{f}(s), \mb{x}^* \rangle \, \dd\mu(s) \in \K.
     \end{equation*}
-  \item[Closure] If $f \in L^1(S,\mu;X)$ and $X_0$ is a closed subspace of $X$ such that $f(s) \in X_0$ for almost all $s \in S$, then $\int_S f \, \dd\mu \in X_0$.
-  \item[Dominated convergence] Let $(f_n)_{n \in \N}$ be a sequence in $L^1(S,\mu;X)$, $\map{f}{S}{X}$, and suppose that $\lim_{n \to \infty} f_n = f$ almost everywhere.
-    Suppose that there exists a non-negative $g \in L^1(S,\mu)$ such that $\|f_n\|_X \leq g$ almost everywhere.
-    Then $f \in L^1(S,\mu;X)$ and
+  \item[Closure] If $\mb{f} \in L^1(\mu;X)$ and $X_0$ is a closed subspace of $X$ such that $f(s) \in X_0$ for almost all $s \in S$, then $\int_S \mb{f} \, \dd\mu \in X_0$.
+  \item[Dominated convergence] Let $(\mb{f}_n)_{n \in \N}$ be a sequence in $L^1(\mu;X)$, $\map{\mb{f}}{S}{X}$, and suppose that $\lim_{n \to \infty} \mb{f}_n \aeeq \mb{f}$.
+    Suppose that there exists a non-negative $g \in L^1(\mu)$ such that $\|\mb{f}_n\|_X \leq g$ almost everywhere.
+    Then $\mb{f} \in L^1(\mu;X)$ and
     \begin{equation*}
-      \int_S f \, \dd\mu = \lim_{n \to \infty} \int_S f_n \, \dd\mu.
+      \int_S \mb{f} \, \dd\mu = \lim_{n \to \infty} \int_S \mb{f}_n \, \dd\mu.
     \end{equation*}
   \item[Substitution / Change of Variables]
-    Let $(T,\mc{B})$ be a measurable space and $\map{\phi}{S}{T}$ a measurable function, and let $\nu = \mu \circ \phi^{-1}$ denote the pushforward measure.
-    Suppose $g \in L^1(T,\nu;X)$.
-    Then $g \circ \phi \in L^1(S,\mu;X)$, and
+    Let $(S',\mc{A}')$ be a measurable space and $\map{\phi}{S}{S'}$ a measurable function, and let $\nu = \mu \circ \phi^{-1}$ denote the pushforward measure.
+    Suppose $\mb{g} \in L^1(\nu;X)$.
+    Then $\mb{g} \circ \phi \in L^1(\mu;X)$, and
     \begin{equation*}
-      \int_S g \circ \phi \, \dd\mu = \int_T g \, \dd\nu.
+      \int_S \mb{g} \circ \phi \, \dd\mu = \int_{S'} \mb{g} \, \dd\nu.
     \end{equation*}
     
   \end{description}
 \end{prop}
 
 \begin{proof}
-  Linearity follows from the definition.
-  The remaining properties are proved as follows:
-  
   \begin{description}
  
-    \item[Commutation with linear maps] by continuity it suffices to prove this for simple $f \in \Simp(S;X) \cap L^1(S,\mu;X)$.
-    Writing $f$ as in \eqref{eqn:simple-function-standard-form} we have 
+    \item[Commutation with linear maps] by continuity it suffices to prove this for simple $\mb{f} \in \Simp(S;X) \cap L^1(\mu;X)$.
+    Writing $\mb{f}$ as in \eqref{eqn:simple-function-standard-form} we have 
     \begin{equation*}
         T\Big(\int_S \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \, \dd\mu \Big)
         = \sum_{n=1}^N \mu(S_n) \otimes T(\mb{x}_n) 
-        = \int_S Tf \, \dd\mu.
+        = \int_S T\mb{f} \, \dd\mu.
     \end{equation*}
         
   \item[Closure] We may assume that $X_0$ is a proper subspace of $X$, otherwise there is nothing to show.
     Let $\mb{y} \in X \sm X_0$, and by Hahn--Banach\footnote{If you are philosophically opposed to Hahn--Banach, then see \cite[Corollary 1.1.22]{HNVW16} for a proof that avoids it, and promptly stop reading these notes to avoid further frustration.} choose a functional $\mb{x}^* \in X^*$ such that $\langle \mb{y}, \mb{x}^* \rangle = 1$ and $X_0 \subset \ker \mb{x}^*$.
     Then by the commutation property above we have
     \begin{equation*}
-      \Big\langle \int_S f \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle f(s), \mb{x}^* \rangle \, \dd\mu(s) = 0
+      \Big\langle \int_S \mb{f} \, \dd\mu, \mb{x}^* \Big\rangle = \int_S \langle \mb{f}(s), \mb{x}^* \rangle \, \dd\mu(s) = 0
     \end{equation*}
-    since $f(s) \in X_0$ for almost all $s \in S$.
-    Thus $\int_S f \, \dd\mu \neq y$.
-    Since $y \in X \sm X_0$ was arbitrary, we conclude that $\int_S f \, \dd\mu \in X_0$.
+    since $\mb{f}(s) \in X_0$ for almost all $s \in S$.
+    Thus $\int_S \mb{f} \, \dd\mu \neq y$.
+    Since $y \in X \sm X_0$ was arbitrary, we conclude that $\int_S \mb{f} \, \dd\mu \in X_0$.
 
   \item[Dominated convergence]
-    By continuity of the Bochner integral it suffices to show that $f \in L^1(S,\mu;X)$ and  $f_n \to f$ in $L^1(S,\mu;X)$.
-    The first fact follows from $\|f\|_{L^1(S,\mu;X)} \leq \|g\|_{L^1(S,\mu)}$.
-    For the second, since $\|(f_n - f)(s)\|_X \leq 2g(s)$ almost everywhere, we have
+    By continuity of the Bochner integral it suffices to show that $\mb{f} \in L^1(\mu;X)$ and $\mb{f}_n \to \mb{f}$ in $L^1(\mu;X)$.
+    The first fact follows from $\|\|\mb{f}\|_{X}\|_{L^1(\mu)} \leq \|g\|_{L^1(\mu)} < \infty$ and the almost-everywhere strong measurability of almost-everywhere limits of strongly measurable functions (Exercise \ref{ex:sm-limits}).
+    For the second, since $\|(\mb{f}_n - \mb{f})(s)\|_X \leq 2g(s)$ almost everywhere, we have
     \begin{equation*}
-      \lim_{n \to \infty} \int_S \|(f_n - f)(s)\|_X \, \dd\mu(s) = 0
+      \lim_{n \to \infty} \int_S \|(\mb{f}_n - \mb{f})(s)\|_X \, \dd\mu(s) = 0
     \end{equation*}
-    by scalar dominated convergence.
-
+    by dominated convergence for scalar-valued functions.
+    
   \item[Substitution]
-    First we need to show that $g \circ \phi$ is strongly measurable.
+    First we need to show that $\mb{g} \circ \phi$ is strongly measurable.
     Let
     \begin{equation*}
-      g_i = \sum_{n=1}^{N_i} \1_{S_{n,i}} \otimes \mb{x}_{n,i}
+      \mb{g}_i = \sum_{n=1}^{N_i} \1_{S_{n,i}} \otimes \mb{x}_{n,i}
     \end{equation*}
-    be a sequence of simple functions converging to $g$ $\mu$-almost everywhere.
+    be a sequence of simple functions converging to $\mb{g}$ $\mu$-almost everywhere.
     Then
     \begin{equation*}
-      g_i \circ \phi = \sum_{n=1}^{N_i} (\1_{S_{n,i}} \circ \phi) \otimes \mb{x}_{n,i} = \sum_{n=1}^{N_i} \1_{\phi^{-1}(S_{n,i})} \otimes \mb{x}_{n,i}
+      \mb{g}_i \circ \phi = \sum_{n=1}^{N_i} (\1_{S_{n,i}} \circ \phi) \otimes \mb{x}_{n,i} = \sum_{n=1}^{N_i} \1_{\phi^{-1}(S_{n,i})} \otimes \mb{x}_{n,i}
     \end{equation*}
-    is a sequence of simple functions converging to $g \circ \phi$ $\nu$-almost everywhere, so $g \circ \phi$ is also strongly measurable.
+    is a sequence of simple functions converging to $\mb{g} \circ \phi$ $\nu$-almost everywhere, so $\mb{g} \circ \phi$ is also strongly measurable.
     The identity for scalar-valued functions
     \begin{equation*}
-      \int_S \|f \circ \phi(s)\|_X \, \dd\mu(s) = \int_T \|f(s)\|_X \, \dd\nu(t)
+      \int_{S'} \|\mb{g} \circ \phi(s)\|_X \, \dd\mu(s) = \int_T \|\mb{g}(s)\|_X \, \dd\nu(t)
     \end{equation*}
-    implies that $f \circ \phi \in L^1(S,\mu;X)$.
+    implies that $\mb{g} \circ \phi \in L^1(\mu;X)$.
     Finally, for all $\mb{x}^* \in X^*$ we have by the commutation property and the substitution identity for scalar-valued functions
     \begin{equation*}
       \begin{aligned}
-        \Big\langle \int_S f \circ \phi \, \dd\mu , \mb{x}^* \Big\rangle
-        = \int_S \langle f(\phi(s)), \mb{x}^* \rangle \, \dd\mu(s)
-        &= \int_T \langle f(s), \mb{x}^* \rangle \, \dd\nu(t) \\
-        &= \Big\langle \int_T f \, \dd\nu, \mb{x}^* \Big\rangle,
+        \Big\langle \int_S \mb{g} \circ \phi \, \dd\mu , \mb{x}^* \Big\rangle
+        = \int_S \langle \mb{g}(\phi(s)), \mb{x}^* \rangle \, \dd\mu(s)
+        &= \int_{S'} \langle \mb{g}(s), \mb{x}^* \rangle \, \dd\nu(t) \\
+        &= \Big\langle \int_{S'} \mb{g} \, \dd\nu, \mb{x}^* \Big\rangle,
       \end{aligned}
     \end{equation*}
     which proves the result.
   \end{description}
 \end{proof}
 
-There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we do not have access to the notion of a non-negative vector-valued function).
+There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we have no concept of a non-negative vector-valued function at this level of generality).
 
 \begin{prop}[Fubini]
-  Let $(S,\mc{A},\mu)$ and $(T,\mc{B},\nu)$ be $\sigma$-finite measure spaces\footnote{The scalar Fubini theorem fails for non-$\sigma$-finite spaces!} and let $f \in L^1(S \times T; X)$.
+  Let $(S,\mc{A},\mu)$ and $(S',\mc{A}',\mu')$ be $\sigma$-finite measure spaces\footnote{The scalar Fubini theorem fails for non-$\sigma$-finite spaces!}, and consider the product measure space $(S \times S', \mc{A} \times \mc{A}', \mu \times \mu')$.
+  Let $\mb{f} \in L^1(S \times S'; X)$.
   Then
   \begin{itemize}
-  \item for almost all $s \in S$ the function $f(s,\cdot)$ is in $L^1(T;X)$,
-  \item for almost all $t \in T$ the function $f(\cdot,t)$ is in $L^1(S;X)$,
-  \item the functions $\int_T f(\cdot,t) \, \dd\nu(t)$ and $\int_S f(s,\cdot) \, \dd\mu(s)$ are in $L^1(T;X)$ and $L^1(S;X)$ respectively, and
+  \item for almost all $s \in S$ the function $\mb{f}(s,\cdot)$ is in $L^1(S';X)$,
+  \item for almost all $s' \in S'$ the function $\mb{f}(\cdot,s')$ is in $L^1(S;X)$,
+  \item the functions $\int_{S'} \mb{f}(\cdot,s') \, \dd\mu'(s')$ and $\int_{S} \mb{f}(s,\cdot) \, \dd\mu(s)$ are in $L^1(S;X)$ and $L^1(S';X)$ respectively, and
     \begin{equation}\label{eq:fubini}
-      \int_{S \times T} f \, \dd(\mu \times \nu) = \int_T \Big(  \int_S f(s,t) \, \dd\mu(s) \Big) \, \dd\nu(t) = \int_S \Big(\int_T f(s,t) \, \dd\nu(t) \Big) \, \dd\mu(s).
+      \int_{S \times S'} \mb{f} \, \dd(\mu \times \mu') = \int_{S'} \Big(  \int_S \mb{f}(s,s') \, \dd\mu(s) \Big) \, \dd\mu'(s') = \int_S \Big(\int_{S'} \mb{f}(s,s') \, \dd\mu'(s') \Big) \, \dd\mu(s).
     \end{equation}
   \end{itemize}
 \end{prop}
 
 \begin{proof}
-  Consider an everywhere-defined representative of $f$.
-  Since $f$ is strongly measurable, by the Pettis measurability theorem (Theorem \ref{thm:Pettis-measurability}), it is weakly measurable and separably valued.
-  Thus the functions $f(s,\cdot)$ and $f(\cdot,t)$ are separably valued for all $s \in S$ and $t \in T$, and by the corresponding scalar-valued result, they are both weakly measurable.
-  Thus $f(s,\cdot)$ and $f(\cdot,t)$ are strongly measurable.
-  Now since the function $(s,t) \mapsto \|f(s,t)\|_X$ is integrable, the scalar Fubini theorem implies all of the integrability claims.
+  Consider an everywhere-defined representative of $\mb{f}$.
+  Since $\mb{f}$ is strongly measurable, by the Pettis measurability theorem (Theorem \ref{thm:Pettis-measurability}), it is weakly measurable and separably valued.
+  Thus the functions $\mb{f}(s,\cdot)$ and $\mb{f}(\cdot,s')$ are separably valued for all $s \in S$ and $s' \in S'$, and by the scalar-valued Fubini theorem, they are both weakly measurable.
+  Thus $\mb{f}(s,\cdot)$ and $\mb{f}(\cdot,s')$ are strongly measurable.
+  Now since the function $(s,s') \mapsto \|\mb{f}(s,s')\|_X$ is integrable, the scalar-valued Fubini theorem implies all of the integrability claims.
   The equalities \eqref{eq:fubini} are proven by scalarisation: for $\mb{x}^* \in X^*$ we have
   \begin{equation*}
     \begin{aligned}
-      \Big\langle \int_{S \times T} f \, \dd(\mu \times \nu) , \mb{x}^* \Big\rangle
-      &= \int_{S \times T} \langle f(s,t), \mb{x}^* \rangle \, \dd(\mu \times \nu) \\
-      &= \int_{S} \int_{T} \langle f(s,t), \mb{x}^* \rangle \, \dd\nu(t) \, \dd\mu(s) \\
-      &= \int_{S} \Big\langle \int_{T} f(s,t) \, \dd\nu(t) , \mb{x}^* \Big\rangle \, \dd\mu(s) \\
-      &= \Big\langle \int_S \Big(\int_{T} f(s,t) \, \dd\nu(t) \Big)\, \dd\mu(s) , \mb{x}^* \Big\rangle
+      \Big\langle \int_{S \times S'} \mb{f} \, \dd(\mu \times \mu') , \mb{x}^* \Big\rangle
+      &= \int_{S \times S'} \langle \mb{f}(s,s'), \mb{x}^* \rangle \, \dd(\mu \times \mu') \\
+      &= \int_{S} \int_{S'} \langle \mb{f}(s,s'), \mb{x}^* \rangle \, \dd\mu'(s') \, \dd\mu(s) \\
+      &= \int_{S} \Big\langle \int_{S'} \mb{f}(s,s') \, \dd\mu'(s') , \mb{x}^* \Big\rangle \, \dd\mu(s) \\
+      &= \Big\langle \int_S \Big(\int_{S'} \mb{f}(s,s') \, \dd\mu'(s') \Big)\, \dd\mu(s) , \mb{x}^* \Big\rangle
   \end{aligned}
   \end{equation*}
-  by the scalar Fubini theorem, and likewise with the order of $S$ and $T$ reversed.
+  by the scalar-valued Fubini theorem, and likewise with the roles of $S$ and $S'$ reversed.
 \end{proof}
 
-Let's move away from the abstract stuff for a moment and define the most important operators in analysis.
+Let's move away from the abstract stuff for a moment and define vector-valued Fourier transforms.
+As we described in the introduction, these are defined just like scalar-valued Fourier transforms, but with Bochner integrals replacing Lebesgue integrals.
 
 \begin{defn}
   Let $X$ be a complex Banach space.
-  For a Bochner integrable function $f \in L^1(\R^d;X)$ we define the \emph{Fourier transform} as the Bochner integral
+  For a Bochner integrable function $\mb{f} \in L^1(\R^d;X)$ we define the \emph{Fourier transform} as the Bochner integral
   \begin{equation*}
-    \hat{f}(\xi) = \mc{F}(f)(\xi) := \int_{\R^d} f(t) e^{-2\pi i t \cdot \xi} \, \dd t \qquad \forall \xi \in \R^d. 
+    \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R^d} e^{-2\pi i t \cdot \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R^d. 
   \end{equation*}
-  Note that $\hat{f}(\xi) \in X$ for all $x \in \R^d$.
-  We also define the \emph{inverse Fourier transform} on $g \in L^1(\R^d;X)$:
+  We also define the \emph{inverse Fourier transform} on $\mb{g} \in L^1(\R^d;X)$:
   \begin{equation*}
-    g^{\vee}(t) = \mc{F}^{-1}(g)(x) := \int_{\R^d} g(\xi) e^{2\pi i t \cdot \xi} \, \dd \xi \qquad \forall t \in \R^d.
+    \mb{g}^{\vee}(x) = \mc{F}^{-1}(\mb{g})(x) := \int_{\R^d} e^{2\pi i x \cdot \xi} \mb{g}(\xi) \, \dd \xi \in X \qquad \forall x \in \R^d.
   \end{equation*}
-
-  For functions $f \in L^1(\T^d ; X)$ on the $d$-torus $\T^d = [0,1]^d$, we use the same notation for the Fourier transform (and its inverse on $g \in L^1(\Z^d; X)$)
+  For functions $\mb{f} \in L^1(\T^d ; X)$ on the $d$-torus $\T^d = [0,1]^d$, we use the same notation for the Fourier transform (and its inverse on $\mb{g} \in L^1(\Z^d; X)$)
   \begin{equation*}
     \begin{aligned}
-      \hat{f}(n) &= \mc{F}(f)(n) := \int_{\T^d} f(t) e^{-2\pi i t \cdot n} \, \dd t \qquad \forall n \in \Z^d, \\
-      g^{\vee}(t) &= \mc{F}^{-1}(g)(t) := \sum_{n \in \Z^d} g(n) e^{2\pi i t \cdot n} X \qquad \forall t \in \R^d.
+      \hat{\mb{f}}(n) &= \mc{F}(\mb{f})(n) := \int_{\T^d} e^{-2\pi i t \cdot n} \mb{f}(t)  \, \dd t \in X \qquad \forall n \in \Z^d, \\
+      \mb{g}^{\vee}(t) &= \mc{F}^{-1}(\mb{g})(t) := \sum_{n \in \Z^d} e^{2\pi i t \cdot n}  \mb{g}(n) \in X \qquad \forall t \in \T^d.
     \end{aligned}
   \end{equation*}
 \end{defn}
 
-Note that if $f \in L^1(\R^d;X)$, then the function $x \mapsto f(x)e^{-2\pi i x \cdot \xi}$ is strongly integrable for each $\xi \in \R^d$ (see Lemma \ref{cor:strong-meas-meas-mult}), so the definitions above make sense.\footnote{Analogous statements hold for $\T^d$ and $\Z^d$ of course.}
+Note that if $\mb{f} \in L^1(\R^d;X)$, then the function $x \mapsto \mb{f}(x)e^{-2\pi i x \cdot \xi}$ is Bochner integrable for each $\xi \in \R^d$ (see Lemma \ref{cor:strong-meas-meas-mult}), so the definitions above make sense.\footnote{Analogous statements hold for $\T^d$ and $\Z^d$.}
 Furthermore
 \begin{equation*}
-  \|\hat{f}(\xi)\|_X \leq \int_{\R^d} \| f(x) e^{-2\pi i x \cdot \xi} \|_X \, \dd x = \|f\|_{L^1(\R^d;X)}.
+  \|\hat{\mb{f}}(\xi)\|_X \leq \int_{\R^d} \| \mb{f}(x) e^{-2\pi i x \cdot \xi} \|_X \, \dd x = \|\mb{f}\|_{L^1(\R^d;X)}.
 \end{equation*}
-In fact, $\hat{f}$ is itself strongly integrable, and the Fourier transform is bounded from $L^1(\R^d;X)$ to $L^\infty(\R^d;X)$ (see Exercise \ref{ex:FT-bounded-1-infty}).
+In fact, $\hat{\mb{f}}$ is strongly measurable, and so the Fourier transform is bounded from $L^1(\R^d;X)$ to $L^\infty(\R^d;X)$ (see Exercise \ref{ex:FT-bounded-1-infty}).
 Formally, the Fourier transform and inverse Fourier transform are mutually inverse operators, but to make this statement rigourous we have to restrict to appropriate classes of functions or distributions, which for now we will not do.
 
 
@@ -798,6 +789,12 @@ Of course, most interesting operators are not positive.
   is an isomorphism for all $p \in [1,\infty]$.
 \end{exercise}
 
+\begin{exercise}\label{ex:sm-limits}
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  Let $(\mb{f}_{n})_{n \in \N}$ be a sequence of strongly measurable $X$-valued functions and $\map{\mb{f}}{S}{X}$, and suppose that $\mb{f}_{n} \to \mb{f}$ almost everywhere (with respect to $\mu$).
+  Show that there exists a set $N \subset S$ with $\mu(N) = 0$ such that $\mb{f}$ is strongly measurable on $S \sm N$.
+\end{exercise}
+
 \begin{exercise}\label{ex:tensor-extension-basic-props}
   Let $(S_i, \mc{A}_i, \mu_i)$ ($i \in \{1,2\}$) be measure spaces, let $p_1 \in [1,\infty)$, and let $p_2 \in [1,\infty]$.
   Suppose that $T \in \Lin(L^{p_1}(S_1), L^{p_2}(S_2))$ is a bounded linear operator.
@@ -866,15 +863,6 @@ Of course, most interesting operators are not positive.
   \item Suppose that the Hilbert space $H$, as above, is defined over $\C$.
     Show that the Fourier transform on the torus, initially defined as a bounded operator $\map{\mc{F}}{L^1(\T^d;H)}{\ell^\infty(\Z^d;H)}$, extends to an isometry from $L^2(\T^d;H)$ to $\ell^2(\Z^d;H)$.
   \end{itemize}
-\end{exercise}
-
-\begin{exercise}
-  Give an example of a measure space $(S, \mc{A}, \mu)$, a Banach space $X$, and a measurable function $\map{f}{S}{X}$ such that
-  \begin{itemize}
-  \item $\langle f, \mb{x}^* \rangle \stackrel{\ae}{=} 0$ for all $\mb{x}^* \in X^*$,
-  \item $f$ is everywhere non-zero.
-  \end{itemize}
-  \todo{I don't even know the answer to this one, maybe too hard...}
 \end{exercise}
 
 
