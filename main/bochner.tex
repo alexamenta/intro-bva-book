@@ -411,28 +411,32 @@ For now we will establish a duality result that holds with no additional assumpt
 \section{The Bochner integral}
 
 In the previous section we defined spaces of vector-valued functions satisfying integrability conditions.
-Now we actually define integrals of vector-valued functions.
-As in the scalar-valued theory we start with simple functions, for which there is only one reasonable definition.
+It still remains to actually define \emph{integrals} of vector-valued functions.
+In the introduction we gave a simple definition for finite-dimensonal vector spaces by using basis expansions and linearity, but the world of infinite-dimensional spaces is too complicated for such a simple method.
+The key to our definition will be the density of the simple functions in $L^1(X)$: this will let us define our integral on simple functions (which are simple) and then extend by continuity.
+
 Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
-If $f \in \Simp(S;X)$ is a simple function represented as
+If $\mb{f} \in \Simp(S;X)$ is a simple function represented as
 \begin{equation*}
-  f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
+  \mb{f} = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
 \end{equation*}
-and if in addition $f \in L^1(S,\mu;X)$, we define the \emph{Bochner integral}
+and if in addition $\mb{f} \in L^1(\mu;X)$, we define the \emph{Bochner integral}
 \begin{equation*}
-  \int_S f \, \dd\mu = \int_S f(s) \, \dd \mu(s) := \sum_{n=1}^N \mu(S_n) \mb{x}_n \in X.
+  \int_S \mb{f} \, \dd\mu = \int_S \mb{f}(s) \, \dd \mu(s) := \sum_{n=1}^N \mu(S_n) \mb{x}_n \in X.
 \end{equation*}
-Note that the assumption $f \in L^1(S,\mu;X)$ is equivalent to having $\mu(S_n) < \infty$ for all $n$.
-The Bochner integral is a linear map $\Simp(S;X) \cap L^1(S,\mu;X) \to X$, and for $f$ as above it satisfies
+Note that $\mb{f} \in L^1(\mu;X)$ if and only if $\mu(S_n) < \infty$ for all $n$.
+The Bochner integral is a linear map $\Simp(S;X) \cap L^1(\mu;X) \to X$, and for $\mb{f}$ as above it satisfies
 \begin{equation*}
-  \Big\| \int_S f(s) \, \dd \mu(s) \Big\|_X \leq |\mu(S_n)| \|\mb{x}_n\|_X = \|f\|_{L^1(S,\mu;X)}.
+  \Big\| \int_S \mb{f} \, \dd \mu \Big\|_X \leq |\mu(S_n)| \|\mb{x}_n\|_X = \|\mb{f}\|_{L^1(\mu;X)}.
 \end{equation*}
-Thus by density of $\Simp(S;X) \cap L^1(S,\mu;X)$ in $L^1(S,\mu;X)$ (Proposition \ref{prop:simple-density}), the Bochner integral extends to a bounded linear map $L^1(S,\mu;X) \to X$ which we continue to call the Bochner integral and denote by the same symbol.
-Thus the Bochner integral of $g \in L^1(S,\mu;X)$ is given by 
+Thus by density of $\Simp(S;X) \cap L^1(\mu;X)$ in $L^1(\mu;X)$ (Proposition \ref{prop:simple-density}), the Bochner integral extends to a bounded linear map $L^1(\mu;X) \to X$ which we continue to call the Bochner integral and denote by the same symbol.
+That is, the Bochner integral of a general function $\mb{g} \in L^1(\mu;X)$ is given by 
 \begin{equation*}
-  \int_S g \, \dd\mu := \lim_{n \to \infty} \int_S f_n \, \dd\mu \in X
+  \int_S \mb{g} \, \dd\mu := \lim_{n \to \infty} \int_S \mb{f}_n \, \dd\mu \in X
 \end{equation*}
-where $f_n \in \Simp(S;X) \cap L^1(S,\mu;X)$ for all $n \in \N$ and $f_n \to g$ in $L^1(S,\mu;X)$.
+where $\mb{f}_n \in \Simp(S;X) \cap L^1(\mu;X)$ for all $n \in \N$ and $\mb{f}_n \to \mb{g}$ in $L^1(\mu;X)$.
+
+\todo{UP TO HERE}
 
 The Bochner integral satisfies the following properties.
 \begin{prop}
