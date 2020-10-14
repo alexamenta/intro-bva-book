@@ -595,18 +595,21 @@ Formally, the Fourier transform and inverse Fourier transform are mutually inver
 
 \section{Extensions of operators to Bochner spaces}
 
-
+In the introduction we showed that extending bounded operators on scalar-valued functions to bounded operators on vector-valued functions is a potentially difficult task, and depends strongly on the operators and the Banach spaces under consideration.
+Before we can talk about the boundedness of such extensions we need to define the extensions themselves.
+This can be done by basis expansions (particularly in the finite-dimensional setting, where this suffices), but the `right' definition is through tensor extensions.
 
 \begin{defn}
-  For a measurable space $(S,\mc{A})$ and a set $V \subset \Meas(S;\K)$ of measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
+  For a measurable space $(S,\mc{A})$ and a set $V \subset \Meas(S;\K)$ of $\mc{A}$-measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
   \begin{equation*}
-    V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\} \subset \SMeas(S;X).\footnote{Functions in $V \otimes X$ are strongly measurable since they have finite-dimensional range.}
+    V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\} \subset \SMeas(S;X).
   \end{equation*}
   That is, $V \otimes X$ is the set of finite linear combinations of $X$-valued functions of the form $f \otimes \mb{x}$, where $f$ is a scalar-valued function in $V$ and $\mb{x} \in X$.
+  Functions in $V \otimes X$, having finite-dimensional range, are automatically strongly measurable.
 \end{defn}
 
 For example, when $V$ is the set of characteristic functions of measurable sets, $V \otimes X = \Simp(S;X)$ is the set of $X$-valued simple functions.
-Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.
+Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.\todo{UP TO HERE}
 
 \begin{prop}\label{prop:ATP-density}
   Let $(S,\mc{A},\mu)$ be a measure space, $X$ a Banach space, and $p \in [1,\infty)$.
