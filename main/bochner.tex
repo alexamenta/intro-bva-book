@@ -604,12 +604,13 @@ This can be done by basis expansions (particularly in the finite-dimensional set
   \begin{equation*}
     V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\} \subset \SMeas(S;X).
   \end{equation*}
-  That is, $V \otimes X$ is the set of finite linear combinations of $X$-valued functions of the form $f \otimes \mb{x}$, where $f$ is a scalar-valued function in $V$ and $\mb{x} \in X$.
+  That is, $V \otimes X$ is the set of \emph{finite} linear combinations of $X$-valued functions of the form $f \otimes \mb{x}$, where $f$ is a scalar-valued function in $V$ and $\mb{x} \in X$.
+  The function $f \otimes \mb{x}$ is called an \emph{elementary tensor}.
   Functions in $V \otimes X$, having finite-dimensional range, are automatically strongly measurable.
 \end{defn}
 
 For example, when $V$ is the set of characteristic functions of measurable sets, $V \otimes X = \Simp(S;X)$ is the set of $X$-valued simple functions.
-Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.\todo{UP TO HERE}
+Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.
 
 \begin{prop}\label{prop:ATP-density}
   Let $(S,\mc{A},\mu)$ be a measure space, $X$ a Banach space, and $p \in [1,\infty)$.
@@ -619,7 +620,7 @@ Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.\todo{UP
 \begin{proof}
   For $f \in L^p(S)$ and $\mb{x} \in X$ we compute
   \begin{equation*}
-    \|f \otimes \mb{x}\|_{L^p(S,\mu;X)}^p = \int_S \|f(s)\mb{x}\|_{X}^p \, \dd\mu(s) = \|\mb{x}\|_X^p \|f\|_{L^p(S)}^p,
+    \|f \otimes \mb{x}\|_{L^p(S;X)}^p = \int_S \|f(s)\mb{x}\|_{X}^p \, \dd\mu(s) = \|\mb{x}\|_X^p \|f\|_{L^p(S)}^p,
   \end{equation*}
   so that $f \otimes \mb{x} \in L^p(S;X)$.
   By linearity, this implies $L^p(S) \otimes X$ is contained in $L^p(S;X)$.
@@ -627,62 +628,60 @@ Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.\todo{UP
   \begin{equation*}
     (\Sigma(S;\K) \cap L^p(S)) \otimes X = \Sigma(S;X) \cap L^p(S;X),
   \end{equation*}
-  as both spaces are equal to the set of simple functions with finite measure support.
+  as both spaces are equal to the set of simple functions supported on sets of finite measure.
   By Proposition \ref{prop:simple-density}, this space is dense in $L^p(S;X)$, and thus the same is true of $L^p(S) \otimes X$.
 \end{proof}
 
 \begin{defn}\label{defn:tensor-exts}
-  Let $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$) be measure spaces, $p_1 \in [1,\infty)$ and $p_2 \in [1,\infty]$, and consider a bounded linear operator
+  Let $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$) be measure spaces, $p_1 \in [1,\infty)$ and $p_2 \in [1,\infty]$ (note that $p_{2} = \infty$ is allowed), and consider a bounded linear operator
   \begin{equation*}
-    \map{T}{L^{p_1}(S_1,\mu_1)}{L^{p_2}(S_2,\mu_2)}
+    \map{T}{L^{p_1}(S_{1})}{L^{p_2}(S_{2})}
   \end{equation*}
   acting on scalar-valued functions.
   Let $X$ be a Banach space.
-  The \emph{tensor extension} of $T$ with the identity $\map{I}{X}{X}$ is the map between algebraic tensor products
+  The \emph{tensor extension of $T$ by the identity map $\map{I}{X}{X}$} is the linear map between algebraic tensor products
   \begin{equation*}
-    \map{T \otimes I}{L^{p_1}(S_1,\mu_1) \otimes X}{L^{p_2}(S_2,\mu_2) \otimes X}
+    \map{T \otimes I}{L^{p_1}(S_1) \otimes X}{L^{p_2}(S_2) \otimes X}
   \end{equation*}
-  satisfying $(T \otimes I)(f \otimes \mb{x}) = (Tf) \otimes \mb{x}$ for all $f \in L^{p_1}(S_1,\mu_1)$ and $\mb{x} \in X$.
+  satisfying $(T \otimes I)(f \otimes \mb{x}) = (Tf) \otimes \mb{x}$ for all $f \in L^{p_1}(S_1)$ and $\mb{x} \in X$.
 \end{defn}
 
 The tensor extension is a well-defined map between algebraic tensor products $L^{p_1}(S_1) \otimes X \to L^{p_2}(S_2) \otimes X$.
 By Proposition \ref{prop:ATP-density}, $L^{p_1}(S_1) \otimes X$ is a dense subspace of $L^{p_1}(S_1;X)$, while $L^{p_2}(S_2) \otimes X$ is a subspace of $L^{p_2}(S_2;X)$ (possibly non-dense if $p_2 = \infty$), so if there exists $C < \infty$ such that
 \begin{equation}\label{eq:tensor-ext-estimate}
-  \|(T \otimes I)f\|_{L^{p_2}(S_2;X)} \leq C \|f\|_{L^{p_1}(S_1;X)} \qquad \forall f \in L^{p_1}(S_1) \otimes X,
+  \|(T \otimes I)\mb{f}\|_{L^{p_2}(S_2;X)} \leq C \|\mb{f}\|_{L^{p_1}(S_1;X)} \qquad \forall \mb{f} \in L^{p_1}(S_1) \otimes X,
 \end{equation}
 then $T \otimes I$ may be extended to a bounded linear operator $L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)$.
 
 \begin{defn}
   With the notation above, if the estimate \eqref{eq:tensor-ext-estimate} holds, we say that $T$ \emph{admits a bounded $X$-valued extension}, and we denote the continuous extension of $T \otimes I$ by $\td{T}_X$, $\td{T}$, or even just $T$.
 \end{defn}
-
-
-Writing out a general element $f \in L^p(S) \otimes X$ as a linear combination of elementary tensors, we see that $T$ admits a bounded $X$-valued extension if and only if there exists a constant $C < \infty$ such that
+%mk
+Writing out a general element $\mb{f} \in L^p(S) \otimes X$ as a linear combination of elementary tensors, we see that $T$ admits a bounded $X$-valued extension if and only if there exists a constant $C < \infty$ such that
 \begin{equation}\label{eq:tensor-ext-estimate-full}
   \Big\|\sum_{n=1}^N (Tf_n) \otimes \mb{x}_n\Big\|_{L^{p_2}(S_2;X)} \leq C \Big\|\sum_{n=1}^N f_n \otimes \mb{x}_n\Big\|_{L^{p_1}(S_1;X)}
 \end{equation}
 for all functions $f_n \in L^{p_1}(S_1)$ and vectors $\mb{x}_n \in X$.
-This estimate does not simply follow from boundedness of $T$.
+\emph{This estimate does not simply follow from boundedness of $T$.}
 It turns out to rely on potentially subtle interactions between the operator $T$ and the Banach space $X$.
 
-We have already seen one fundamental example.
 \begin{example}
-  Fix a measure space $(S,\mc{A},\mu)$ and let $\map{T}{L^1(S)}{\K}$ denote the Lebesgue integral.\footnote{This fits in the scope of Definition \ref{defn:tensor-exts} by considering $\C$ as a Lebesgue space $L^1(\mathrm{pt})$ over a single point, with counting measure. Then $X$ may be identified with the Bochner space $L^1(\mathrm{pt};X)$.}
+  Fix a measure space $(S,\mc{A},\mu)$ and let $\map{T}{L^1(S)}{\K}$ denote the Lebesgue integral.\footnote{This fits in the scope of Definition \ref{defn:tensor-exts} by considering $\K$ as a Lebesgue space $L^1(\mathrm{pt})$ over a single point. Then $X$ may be identified with the Bochner space $L^1(\mathrm{pt};X)$.}
   Let $X$ be a Banach space.
-  Then for all $f \in \Simp(S;\K) \otimes X$ we have
+  Then for all $\mb{f} \in \Simp(S;\K) \otimes X$ we have
   \begin{equation*}
-    (T \otimes I)f = (T \otimes I)\Big(\sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \Big) = \sum_{n=1}^N T(\1_{S_n}) \otimes \mb{x}_n = \sum_{n=1}^N \mu(S_n) \otimes \mb{x}_n = \int_S f \, \dd\mu,
+    (T \otimes I)\mb{f} = (T \otimes I)\Big(\sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \Big) = \sum_{n=1}^N T(\1_{S_n}) \otimes \mb{x}_n = \sum_{n=1}^N \mu(S_n) \otimes \mb{x}_n = \int_S \mb{f} \, \dd\mu,
   \end{equation*}
   so that the tensor extension of the Lebesgue integral agrees with the Bochner integral, which we have already shown maps $L^1(S;X)$ to $X$.
   Thus the Lebesgue integral admits a bounded $X$-valued extension, namely the Bochner integral.
 \end{example}
 
-In this example, the Banach space $X$ plays no real role; we will see in Theorem \ref{thm:positive-extensions} that this phenomenon occurs for all positive operators.
-Before that we record a simple observation: tensor extensions can do no better than the original operator.
+In the example of the Lebesgue integral the Banach space $X$ plays no real role; we will see in Theorem \ref{thm:positive-extensions} that this phenomenon occurs for all \emph{positive} operators.
+Before that we record a simple observation: bounds for a tensor extension can be no better than bounds for the original operator.
 
-\begin{prop}
-  Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$) and exponents $p_1 \in [1,\infty)$, $q \in [1,\infty]$.
-  Let $T \in \Lin(L^p(S),L^q(S))$ be a bounded linear operator, and let $X$ be a Banach space.
+\begin{prop}\label{prop:lb-ext}
+  Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$) and exponents $p_1 \in [1,\infty)$, $p_2 \in [1,\infty]$.
+  Let $T \in \Lin(L^{p_1}(S),L^{p_2}(S))$ be a bounded linear operator, and let $X$ be a Banach space.
   Then the tensor extension $T \otimes I$ satisfies
   \begin{equation*}
     \|T \otimes I\|_{L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)} \geq \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)}.
@@ -698,49 +697,52 @@ Before that we record a simple observation: tensor extensions can do no better t
       &= \frac{\|Tf\|_{L^{p_2}(S_2)}}{\|f\|_{L^{p_1}(S_1)}} \|f \otimes \mb{x}\|_{L^{p_1}(S_1;X)}.
     \end{aligned}
   \end{equation*}
-  Taking the supremum over all nonzero $f \in L^p(S)$ completes the proof.
+  Taking the supremum over all nonzero $f \in L^{p_1}(S_1)$ completes the proof.
 \end{proof}
 
 \begin{thm}\label{thm:positive-extensions}
   Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$), $p_1 \in [1,\infty)$, and $p_2 \in [1,\infty]$.
-  Let $T \in \Lin(L^{p_1}(S_1),L^{p_2}(S_2))$ be a bounded linear operator which is \emph{positive}, meaning that for all a.e. non-negative $f \in L^{p_1}(S_1)$, $Tf \in L^{p_2}(S_2)$ is also a.e. non-negative.\footnote{When the scalar field $\K$ is $\C$, `non-negative' simply means `real-valued and non-negative'.}
-  Then $T$ admits a bounded $X$-valued extension for every Banach space $X$, and in fact
+  Let $T \in \Lin(L^{p_1}(S_1),L^{p_2}(S_2))$ be a bounded linear operator which is \emph{positive}, i.e. for all non-negative $f \in L^{p_1}(S_1)$, $Tf \in L^{p_2}(S_2)$ is also non-negative.\footnote{When the scalar field $\K$ is $\C$, `non-negative' simply means `real-valued and non-negative'.}
+  Then $T$ admits a bounded $X$-valued extension for every Banach space $X$: in fact, we have
   \begin{equation*}
-    \|\td{T}\|_{L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)} = \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)}.
+    \|\td{T}\|_{L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)} = \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)}
   \end{equation*}
+  and the pointwise estimate
+  \begin{equation}\label{eq:positive-pw-est}
+    \|\td{T}\mb{f}\|_X \stackrel{\mathrm{a.e.}}{\leq} T(\|\mb{f}\|_X) \qquad \forall \mb{f} \in L^{p_1}(S_1;X).
+  \end{equation}
+  
 \end{thm}
 
 \begin{proof}
-  We will show the estimate\todo{this is fundamental enough that it should be isolated as a lemma}
-  \begin{equation}\label{eq:positive-pw-est}
-    \|\td{T}f(s)\|_X \leq T(\|f\|_X)(s)
-  \end{equation}
-  for all $f \in \Simp(S;X) \cap L^{p_1}(S_1;X)$ and almost all $s \in S$.
+  To ease notation we will assume $(S_1, \mc{A}_1, \mu_1) = (S_2, \mc{A}_2, \mu_2)$ and $p_1 = p_2$, and omit the subscripts. The same proof holds in general.
+  
+  We will show the pointwise estimate in \eqref{eq:positive-pw-est} for all simple functions $\mb{f} \in \Simp(S;X) \cap L^{p}(S;X)$.
   This will imply
   \begin{equation*}
     \begin{aligned}
-      \|\td{T}f\|_{L^{p_2}(S_2;X)} &= \Big( \int_{S} \|\td{T}f(s)\|_X^{p_2} \, \dd\mu(s) \Big)^{1/p_2} \\
-      &\leq \Big( \int_{S} T(\|f(s)\|_X)^{p_2} \, \dd\mu(s) \Big)^{1/p_2}\\
-      &\leq \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)} \Big( \int_{S} \|f(s)\|_X^{p_1} \, \dd\mu(s) \Big)^{1/p_1} \\
-      &= \|T\|_{L^{p_1}(S_1) \to L^{p_2}(S_2)} \|f\|_{L^{p_1}(S_1;X)}
+      \|\td{T}\mb{f}\|_{L^{p}(S;X)} &= \Big( \int_{S} \|\td{T}\mb{f}(s)\|_X^{p} \, \dd\mu(s) \Big)^{1/p} \\
+      &\leq \Big( \int_{S} T(\|\mb{f}(s)\|_X)^{p} \, \dd\mu(s) \Big)^{1/p}\\
+      &\leq \|T\|_{\Lin(L^{p}(S))} \Big( \int_{S} \|\mb{f}(s)\|_X^{p} \, \dd\mu(s) \Big)^{1/p} \\
+      &= \|T\|_{\Lin(L^{p}(S))} \|\mb{f}\|_{L^{p}(S;X)}
     \end{aligned}
   \end{equation*}
-  which implies the result by density of $\Simp(S;X) \cap L^{p_1}(S_1;X)$ in $L^{p_1}(S_1;X)$.
+  which implies the result by density of $\Simp(S;X) \cap L^{p}(S;X)$ in $L^{p}(S;X)$ (noting that the reverse estimate is shown in Proposition \ref{prop:lb-ext}).
 
   Now let's prove \eqref{eq:positive-pw-est}.
   Consider a simple function
   \begin{equation*}
-    f = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n
+    \mb{f} = \sum_{n=1}^N \1_{E_n} \otimes \mb{x}_n
   \end{equation*}
-  and note that $|T(\1_{S_n})| = T(\1_{S_n})$ by positivity of $T$.
+  and note that $|T(\1_{E_n})| \aeeq T(\1_{E_n})$ by positivity of $T$.
   Then
   \begin{equation*}
     \begin{aligned}
-      \|\td{T}f(s)\|_X &= \Big\| \sum_{n=1}^N T(\1_{S_n})(s) \mb{x}_n \Big\|_X \\
-      &\leq \sum_{n=1}^N |T(\1_{S_n})(s)| \|\mb{x}_n\|_X \\
-      &= \sum_{n=1}^N T(\1_{S_n})(s) \|\mb{x}_n\|_X 
-      = T\Big( \sum_{n=1}^N \1_{S_n} \|\mb{x}_n\|_X \Big)(s) 
-      = T(\|f\|_X)(s),
+      \|\td{T}\mb{f}(s)\|_X &= \Big\| \sum_{n=1}^N T(\1_{E_n})(s) \mb{x}_n \Big\|_X \\
+      &\leq \sum_{n=1}^N |T(\1_{E_n})(s)| \|\mb{x}_n\|_X \\
+      &\aeeq \sum_{n=1}^N T(\1_{E_n})(s) \|\mb{x}_n\|_X 
+      = T\Big( \sum_{n=1}^N \1_{E_n} \|\mb{x}_n\|_X \Big)(s) 
+      = T(\|\mb{f}\|_X)(s),
     \end{aligned}
   \end{equation*}
   proving \eqref{eq:positive-pw-est} and completing the proof.
