@@ -246,26 +246,24 @@ Note that the case $p = \infty$ is not included in the proposition above, even t
 This is because the density of simple functions in $L^\infty(S;X)$ (for a sufficiently rich measure space) is equivalent to the compactness of the unit ball of $X$, which is equivalent to the finite dimensionality of $X$.
 We will prove this in the special case where $S = \N$, but the proof can be extended to any measure space containing infinitely many disjoint measurable sets of positive measure.
 
-\todo{UP TO HERE}
-
 \begin{prop}
   Let $X$ be a Banach space.
   Then the simple functions are dense in $\ell^\infty(\N;X)$ if and only if $X$ is finite dimensional.
 \end{prop}
 
 \begin{proof}
-  First suppose $X$ is finite dimensional, and fix $f \in \ell^\infty(\N;X)$ and $\varepsilon > 0$.
-  Let $C = \|f\|_{\ell^\infty(\N;X)}$, and note that the closed ball $\overline{B_C(0)} \subset X$ is compact (this uses finite dimensionality of $X$).
-  Thus there exists a finite collection of vectors $(\mb{x}_i)_{i=1}^N$ in $\overline{B_C(0)}$ such that the open balls $B_{\varepsilon}(\mb{x}_i)$ cover $\overline{B_C(0)}$.
-  For each $n \in \N$ we thus have that $f(n) \in B_{\varepsilon}(\mb{x}_{i(n)})$ for some $i(n) \in \{1,\ldots,N\}$.
-  Define a function $\map{f_{\varepsilon}}{\N}{X}$ by
+  First suppose $X$ is finite dimensional, and fix $\mb{f} \in \ell^\infty(\N;X)$ and $\varepsilon > 0$.
+  Let $C = \|\mb{f}\|_{\ell^\infty(\N;X)}$.
+  By compactness of the closed ball $\overline{B_C(0)} \subset X$, there exists a finite collection of vectors $(\mb{x}_i)_{i=1}^N$ in $\overline{B_C(0)}$ such that the open balls $B_{\varepsilon}(\mb{x}_i)$ cover $\overline{B_C(0)}$.
+  For each $n \in \N$ we thus have that $\mb{f}(n) \in B_{\varepsilon}(\mb{x}_{i(n)})$ for some $i(n) \in \{1,\ldots,N\}$.
+  Define a function $\map{\mb{f}_{\varepsilon}}{\N}{X}$ by
   \begin{equation*}
-    f_{\varepsilon}(n) := \mb{x}_{i(n)};
+    \mb{f}_{\varepsilon}(n) := \mb{x}_{i(n)}.
   \end{equation*}
-  since the range of $f_{\varepsilon}$ is finite, $f_{\varepsilon}$ is simple.
-  Furthermore since $f(n) \in B_{\varepsilon}(\mb{x}_{i(n)})$ for each $n \in \N$ we have
+  Since the range of $\mb{f}_{\varepsilon}$ is finite, $\mb{f}_{\varepsilon}$ is simple.
+  Furthermore, since $\mb{f}(n) \in B_{\varepsilon}(\mb{x}_{i(n)})$ for each $n \in \N$ we have
   \begin{equation*}
-    \|f - f_{\varepsilon}\|_{\ell^\infty(\N;X)} = \sup_{n \in \N} \|f(n) - \mb{x}_{i(n)}\|_{X} \leq \varepsilon.
+    \|\mb{f} - \mb{f}_{\varepsilon}\|_{\ell^\infty(\N;X)} = \sup_{n \in \N} \|\mb{f}(n) - \mb{x}_{i(n)}\|_{X} \leq \varepsilon.
   \end{equation*}
   Since $\varepsilon > 0$ was arbitrary, we have established density of the simple functions in $\ell^\infty(\N;X)$ when $X$ is finite dimensional.
 
@@ -275,83 +273,83 @@ We will prove this in the special case where $S = \N$, but the proof can be exte
   \begin{equation*}
     \|\mb{a}_n - \mb{a}_m\|_X > 1/2 \qquad \text{for all $n \neq m$.}
   \end{equation*}
-  Now let $f(n) = \mb{a}_n$ for all $n \in \N$, so that $f \in \ell^\infty(\N;X)$, and suppose that there exists a simple function $g \in \Simp(\N;X)$ with $\|f - g\|_{\ell^\infty(\N;X)} < 1/4$.
+  Now let $\mb{f}(n) = \mb{a}_n$ for all $n \in \N$, so that $\mb{f} \in \ell^\infty(\N;X)$, and suppose that there exists a simple function $\mb{g} \in \Simp(\N;X)$ with $\|\mb{f} - \mb{g}\|_{\ell^\infty(\N;X)} < 1/4$.
   Then for all $n \neq m$ we must have
   \begin{equation*}
     \begin{aligned}
-      \|\mb{a}_n - \mb{a}_m\|_X &\leq \|f(n) - g(n)\|_X + \|g(n) - g(m)\|_X + \|g(m) - f(m)\|_X \\
-      &\leq \frac{1}{2} + \|g(n) - g(m)\|_X,
+      \|\mb{a}_n - \mb{a}_m\|_X &\leq \|\mb{f}(n) - \mb{g}(n)\|_X + \|\mb{g}(n) - \mb{g}(m)\|_X + \|\mb{g}(m) - \mb{f}(m)\|_X \\
+      &\leq \frac{1}{2} + \|\mb{g}(n) - \mb{g}(m)\|_X,
     \end{aligned}
   \end{equation*}
   so that
   \begin{equation*}
-    \|g(n) - g(m)\|_X \geq \|\mb{a}_n - \mb{a}_m\|_X - \frac{1}{2} > 0.
+    \|\mb{g}(n) - \mb{g}(m)\|_X \geq \|\mb{a}_n - \mb{a}_m\|_X - \frac{1}{2} > 0.
   \end{equation*}
-  It follows that $g$ has infinite range, contradicting the assumption that $g$ is simple.
+  It follows that $\mb{g}$ has infinite range, contradicting the assumption that $\mb{g}$ is simple.
 \end{proof}
 
 Now we present some elementary duality results.
-Recall the definition of the H\"older conjugate from Section \ref{sec:conventions}.
-Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $g \in L^{p'}(S;X^*)$ induces a bounded linear functional $\Phi g \in L^p(S;X)^*$ by integration of the duality pairing between $X$ and $X^*$:
+Fix an exponent $p \in [1,\infty]$, and recall the definition of the H\"older conjugate exponent $p' = p/(p-1)$, with $1' = \infty$ and $\infty' = 1$.
+Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $\mb{g} \in L^{p'}(S;X^*)$ induces a bounded linear functional $\Phi \mb{g} \in L^p(S;X)^*$ by integration of the duality pairing between $X$ and $X^*$:
 \begin{equation*}
-  \Phi g(f) := \int_S \langle f(s), g(s) \rangle \, \dd\mu(s) \qquad \forall f \in L^p(S;X).
+  \Phi \mb{g}(\mb{f}) := \int_S \langle \mb{f}(s), \mb{g}(s) \rangle \, \dd\mu(s) \in \K \qquad \forall \mb{f} \in L^p(S;X).
 \end{equation*}
-H\"older's inequality implies that $\|\Phi g\|_{L^p(S;X)^*} \leq \|g\|_{L^{p'}(S;X^*)}$.
+H\"older's inequality implies that $\|\Phi \mb{g}\|_{L^p(S;X)^*} \leq \|\mb{g}\|_{L^{p'}(S;X^*)}$.
 In the scalar case $X = \K$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong L^p(S)^*$: that is, every functional $\phi \in L^p(S)^*$ is of the form $\phi = \Phi g$ for some $g \in L^{p'}(S)$, and furthermore $\|\phi\|_{L^p(S)^*} = \|g\|_{L^{p'}(S)}$.
-We will see in Chapter \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ is an isometric isomorphism if and only if $X$ has the \emph{Radon--Nikodym property}.
-For now we will establish a duality result that holds for every Banach space.
+We will see in Chapter \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ is an isometric isomorphism if and only if $X$ has the \emph{Radon--Nikodym property} with respect to the measure space $(S,\mc{A},\mu)$.
+For now we will establish a duality result that holds with no additional assumptions on the Banach space.
 
 \begin{prop}\label{prop:bochner-preduality}
   Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space\footnote{The $\sigma$-finiteness assumption is only needed for $p = 1$.} and $X$ a Banach space.
-  Then for all $1 \leq p \leq \infty$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is an isometry onto a closed subspace of $L^p(S;X)^*$ which is norming for $L^p(S;X)$: that is, for every $f \in L^p(S;X)$,
+  Then for all $1 \leq p \leq \infty$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is an isometry onto a closed subspace of $L^p(S;X)^*$ which is norming for $L^p(S;X)$: that is, for every $\mb{f} \in L^p(S;X)$,
   \begin{equation*}
-    \|f\|_{L^p(S;X)} = \sup_{\substack{g \in L^{p'}(S;X^*) \\ g \neq 0}} \frac{| \Phi g(f) |}{\|g\|}
-    = \sup_{\substack{g \in L^{p'}(S;X^*) \\ \|g\| = 1}} \Big| \int_S \langle f(s), g(s) \rangle \, \dd\mu(s) \Big|.
+    \|\mb{f}\|_{L^p(S;X)} = \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \Big| \int_S \langle \mb{f}(s), \mb{g}(s) \rangle \, \dd\mu(s) \Big|.
   \end{equation*}
 \end{prop}
 
 \begin{proof}
-  To show that $\Phi$ is an isometry, it suffices to show that $\|\Phi g\|_{L^p(S;X)^*} \geq 1$ whenever $g \in L^{p'}(S;X^*)$ with $\|g\|_{L^{p'}(S;X^*)} = 1$ (the reverse estimate has already been discussed).
+  To show that $\Phi$ is an isometry, it suffices to show that $\|\Phi \mb{g}\|_{L^p(S;X)^*} \geq 1$ whenever $\mb{g} \in L^{p'}(S;X^*)$ with $\|\mb{g}\|_{L^{p'}(S;X^*)} = 1$ (we've already discussed the reverse estimate).
   
   \textbf{Mild case: $p > 1$.}
-  In this case we have $p' < \infty$, so by density of the simple functions in $L^{p'}(S;X^*)$ and continuity of $\Phi$ we may assume that $g$ is simple, i.e.
+  In this case we have $p' < \infty$, so by density of the simple functions in $L^{p'}(S;X^*)$ and continuity of $\Phi$ we may assume that $\mb{g}$ is simple, i.e.
   \begin{equation*}
-    g = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n^*
+    \mb{g} = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n^*
   \end{equation*}
   for some pairwise disjoint sets $S_n \in \mc{A}$ with $\mu(S_n) < \infty$ and some nonzero vectors $\mb{x}_n^* \in X^*$.
   Let $\varepsilon > 0$, and choose unit vectors $\mb{x}_n \in X$ (depending on $\varepsilon$) such that
   \begin{equation*}
     \langle \mb{x}_n, \mb{x}_n^* \rangle \geq (1-\varepsilon)\|\mb{x}_n^*\|_{X^*} \qquad \forall n \in \{1,\ldots,N\}.
   \end{equation*}
-  Using these vectors define a test function
+  Use these vectors to define a test function
   \begin{equation*}
-    f_\varepsilon := \sum_{n=1}^N \1_{S_n} \otimes \|\mb{x}_n^*\|_{X^*}^{p' - 1} \mb{x}_n.
+    \mb{f}_\varepsilon := \sum_{n=1}^N \1_{S_n} \otimes \|\mb{x}_n^*\|_{X^*}^{p' - 1} \mb{x}_n.
   \end{equation*}
-  Then we can compute
+  This function satisfies
   \begin{equation*}
     \begin{aligned}
-      \|f_\varepsilon\|_{L^p(S;X)}^p &= \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p(p' - 1)} \|\mb{x}_n\|_{X}^p \\
+      \|\mb{f}_\varepsilon\|_{L^p(S;X)}^p &= \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p(p' - 1)} \|\mb{x}_n\|_{X}^p \\
       &= \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p'}
-      = \|g\|_{L^{p'}(S;X^*)}^{p'} = 1
+      = \|\mb{g}\|_{L^{p'}(S;X^*)}^{p'} = 1
     \end{aligned}
   \end{equation*}
   as the $\mb{x}_n$ are unit vectors and $p(p' - 1) = 1$.
-  Testing $\Phi g$ against $f_{\varepsilon}$ yields
+  Testing $\Phi \mb{g}$ against $\mb{f}_{\varepsilon}$ yields
   \begin{equation*}
     \begin{aligned}
-      \Phi g(f_\varepsilon) = \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p' - 1} \langle \mb{x}_n, \mb{x}_n^* \rangle
+      \Phi \mb{g}(\mb{f}_\varepsilon) = \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p' - 1} \langle \mb{x}_n, \mb{x}_n^* \rangle
       &\geq (1-\varepsilon) \sum_{n=1}^N \mu(S_n) \|\mb{x}_n^*\|_{X^*}^{p'} \\
-      &= (1-\varepsilon) \|g\|_{L^{p'}(S;X^*)} = 1-\varepsilon.
+      &= (1-\varepsilon) \|\mb{g}\|_{L^{p'}(S;X^*)} = 1-\varepsilon.
     \end{aligned}
   \end{equation*}
-  This proves that $\|\Phi g\|_{L^p(S;X)^*} \geq 1-\varepsilon$.
-  Since $\varepsilon > 0$ was arbitrary, we find that $\|\Phi g\|_{L^p(S;X)^*} \geq 1$ as intended.
+  This proves that $\|\Phi \mb{g}\|_{L^p(S;X)^*} \geq 1-\varepsilon$.
+  Since $\varepsilon > 0$ was arbitrary, we find that $\|\Phi \mb{g}\|_{L^p(S;X)^*} \geq 1$ as intended.
 
   \textbf{Spicy case: $p=1$.}
   Fix $\varepsilon > 0$ and define
   \begin{equation}
-    A_{\varepsilon} := \{s \in S : \|g(s)\|_{X^*} > 1-\varepsilon\}.
+    A_{\varepsilon} := \{s \in S : \|\mb{g}(s)\|_{X^*} > 1-\varepsilon\},
   \end{equation}
+  recalling that we assumed the normalisation $\|\mb{g}\|_{L^\infty(S;X^{*})} = 1$.
   Then $\mu(A_\varepsilon) > 0$, but we could run into the problem that $\mu(A_\varepsilon) = \infty$.
   Since $S$ is $\sigma$-finite, we can write $S$ as an increasing union of sets of finite measure
   \begin{equation*}
@@ -359,52 +357,52 @@ For now we will establish a duality result that holds for every Banach space.
   \end{equation*}
   and thus for sufficiently large $n$ the set
   \begin{equation*}
-    A_{\varepsilon}^{n} := \{s \in S_n : \|g(s)\|_{X^*} > 1 - \varepsilon\}
+    A_{\varepsilon}^{n} := \{s \in S_n : \|\mb{g}(s)\|_{X^*} > 1 - \varepsilon\}
   \end{equation*}
   satisfies $0 < \mu(A_\varepsilon) < \infty$.\footnote{The main issue is that $A_{\varepsilon}^{n}$ could have zero measure, but if this were true for all $n$, then $\mu(A_{\varepsilon}) = \sup_{n \in \N} \mu(A_{\varepsilon}^n) = 0$, which is a contradiction.}
   Let $B_\varepsilon = A_{\varepsilon}^{n}$ for such a large $n$.
 
-  Since $g$ is strongly measurable, the Pettis measurability theorem says that $g(B_\varepsilon)$ is separable, and thus there exists a sequence $(\mb{x}^*_{k})_{k \in \N}$ in $X^*$ such that
+  Since $\mb{g}$ is strongly measurable, the Pettis measurability theorem says that $\mb{g}(B_\varepsilon)$ is separable, and thus there exists a sequence $(\mb{x}^*_{k})_{k \in \N}$ in $X^*$ such that
   \begin{equation*}
-    g(B_\varepsilon) \subset \bigcup_{k \in \N} B_{\varepsilon}(\mb{x}^{*}_{k})
+    \mb{g}(B_\varepsilon) \subset \bigcup_{k \in \N} B_{\varepsilon}(\mb{x}^{*}_{k})
   \end{equation*}
   and thus
   \begin{equation*}
-    B_{\varepsilon} \subset \bigcup_{k \in \N} g^{-1}(B_{\varepsilon}(\mb{x}^{*}_{k})).
+    B_{\varepsilon} \subset \bigcup_{k \in \N} \mb{g}^{-1}(B_{\varepsilon}(\mb{x}^{*}_{k})).
   \end{equation*}
   Since $\mu(B_{\varepsilon}) > 0$, there exists a vector $\mb{x}^* \in X^*$ (i.e. one of the vectors $\mb{x}_k^{*}$) such that the set
   \begin{equation*}
-     B_{\varepsilon, \mb{x}^*} := B_\varepsilon \cap g^{-1}(B_{\varepsilon}(\mb{x}^{*})) = \{s \in B_\varepsilon : \|g(s) - \mb{x}^{*}\|_{X^*} < \varepsilon\}
+     B_{\varepsilon, \mb{x}^*} := B_\varepsilon \cap \mb{g}^{-1}(B_{\varepsilon}(\mb{x}^{*})) = \{s \in B_\varepsilon : \|\mb{g}(s) - \mb{x}^{*}\|_{X^*} < \varepsilon\}
   \end{equation*}
   has positive measure.
   Picking a point $s_0 \in B_{\varepsilon, \mb{x}^*}$ and using the definition of $B_{\varepsilon}$, we see that
   \begin{equation*}
-    \|\mb{x}^*\|_{X^*} \geq \|g(s_0)\|_{X^*} - \|g(s_0) - \mb{x}^*\|_{X^*} > 1 - 2\varepsilon.
+    \|\mb{x}^*\|_{X^*} \geq \|\mb{g}(s_0)\|_{X^*} - \|\mb{g}(s_0) - \mb{x}^*\|_{X^*} > 1 - 2\varepsilon.
   \end{equation*}
 
   Now fix a unit vector $\mb{x} \in X$ such that $\langle \mb{x}, \mb{x}^* \rangle \geq \|\mb{x}^*\|_{X^*} - \varepsilon$, and consider the test function
   \begin{equation*}
-    f_{\varepsilon} := \1_{B_{\varepsilon, \mb{x}^*}} \otimes \mu(B_{\varepsilon, \mb{x}^*})^{-1} \mb{x}.
+    \mb{f}_{\varepsilon} := \1_{B_{\varepsilon, \mb{x}^*}} \otimes \mu(B_{\varepsilon, \mb{x}^*})^{-1} \mb{x}.
   \end{equation*}
-  Then $\|f_{\varepsilon}\|_{L^1(S;X)} = 1$, and
+  Then $\|\mb{f}_{\varepsilon}\|_{L^1(S;X)} = 1$, and
   \begin{equation*}
     \begin{aligned}
-      |\Phi g(f)| &=  \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, g(s) \rangle \, \dd\mu(s) \Big| \\
-      &\geq \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, \mb{x}^* \rangle \, \dd\mu(s) \Big| - \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, g(s) - \mb{x} \rangle  \, \dd\mu(s) \Big| \\
+      |\Phi \mb{g}(\mb{f})| &=  \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, \mb{g}(s) \rangle \, \dd\mu(s) \Big| \\
+      &\geq \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, \mb{x}^* \rangle \, \dd\mu(s) \Big| - \Big| \fint_{B_{\varepsilon, \mb{x}^*}} \langle \mb{x}, \mb{g}(s) - \mb{x} \rangle  \, \dd\mu(s) \Big| \\
       &\geq (\|\mb{x}^*\|_{X^*} - \varepsilon) - \varepsilon \geq 1 - 4\varepsilon.
     \end{aligned}
   \end{equation*}
-  Since $\varepsilon > 0$ was arbitrary, we get $\|\Phi g\|_{L^1(S;X)^*} \geq 1$, as we wanted.
+  Since $\varepsilon > 0$ was arbitrary, we get $\|\Phi \mb{g}\|_{L^1(S;X)^*} \geq 1$, as we wanted.
 
   \textbf{Norming property:}
-  Since $X$ embeds isometrically into its double dual $X^{**}$, we can identify $X$-valued functions with $X^{**}$-valued functions which take values in $X$.
-  We exploit this and the previous results to show
+  This follows from the fact that $\Phi$ is an isometry, arguing via the double dual of $X$.
+  Let $\map{i}{X}{X^{**}}$ denote the canonical isometric embedding of $X$ into its double dual.
+  Then we can write
   \begin{equation*}
     \begin{aligned}
-      \|f\|_{L^p(S;X)} = \|f\|_{L^p(S;(X^*)^*)} &= \|\Phi f\|_{L^{p'}(S; X^*)^*} \\
-      &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ \|g\| = 1}} \int_{S} |\langle g(s) , f(s) \rangle_{X^*, X^{**}}| \, \dd\mu(s) \\
-      &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ \|g\| = 1}} \int_{S} |\langle f(s) , g(s) \rangle_{X, X^*}| \, \dd\mu(s) \\
-      &= \sup_{\substack{g \in L^{p'}(S;X^*) \\ g \neq 0}} \frac{|\Phi g(f)|}{\|g\|},
+      \|\mb{f}\|_{L^p(S;X)} = \|i \circ \mb{f}\|_{L^p(S;(X^*)^*)} &= \|\Phi (i \circ \mb{f})\|_{L^{p'}(S; X^*)^*} \\
+      &= \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \int_{S} |\langle \mb{g}(s) , i(\mb{f}(s)) \rangle| \, \dd\mu(s) \\
+      &= \sup_{\mb{g}} \int_{S} |\langle \mb{f}(s) , \mb{g}(s) \rangle| \, \dd\mu(s),
     \end{aligned}
   \end{equation*}
   completing the proof.
@@ -412,7 +410,8 @@ For now we will establish a duality result that holds for every Banach space.
 
 \section{The Bochner integral}
 
-We turn to defining integrals of vector-valued functions.
+In the previous section we defined spaces of vector-valued functions satisfying integrability conditions.
+Now we actually define integrals of vector-valued functions.
 As in the scalar-valued theory we start with simple functions, for which there is only one reasonable definition.
 Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
 If $f \in \Simp(S;X)$ is a simple function represented as
