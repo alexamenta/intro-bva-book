@@ -80,7 +80,7 @@ Now what if $X$ is infinite-dimensonal?
 If a constant $C_{X}$ as in \eqref{eq:fd-norm-equivalence} exists (but with $N = \infty$), i.e. if $X$ is isomorphic to $\ell^2(\N)$, then the argument above still works,\footnote{As mentioned in an earlier footnote, the Lebesgue integral has to be replaced by the Bochner integral.} and the norm of the $X$-valued Fourier transform on $L^2(\R;X)$ is $\leq C_{X}^{2}$.
 The surprising fact is that the converse is also true: we will prove this in Chapter \ref{sec:fouriertype}.
 
-\begin{thm}[Kwapie\`n, 1972]\label{thm:Kwapien-intro}
+\begin{thm}[Kwapie\'n, 1972]\label{thm:Kwapien-intro}
   The $X$-valued Fourier transform is bounded on $L^2(\R;X)$ if and only if $X$ is isomorphic to a Hilbert space.
 \end{thm}
 
@@ -109,12 +109,12 @@ What about vector-valued extensions?
 If $X$ is a Banach space, then the $X$-valued Hilbert transform can be defined as a singular integral via the formula \eqref{eq:HT-scalar}, and it is an $X$-valued Fourier multiplier with symbol $-i\sgn(\xi)$ (using the $X$-valued Fourier transform from the previous case study).\footnote{Once more: when $X$ is infinite dimensional, Bochner integrals need to replace Lebesgue integrals!}
 If $X$ is isomorphic to a Hilbert space, we can invoke the $X$-valued Plancherel theorem to estimate
 \begin{equation*}
-  \|Hf\|_{L^2(\R;X)} \leq K_{X} \|m\hat{f}\|_{L^2(\R;X)} \leq K_{X} \|m\|_{L^\infty(\R)} \|\hat{f}\|_{L^2(\R;X)}= K_{X}^{2} \|f\|_{L^{2}(\R;X)},
+  \|H\mb{f}\|_{L^2(\R;X)} \leq K_{X} \|m\hat{\mb{f}}\|_{L^2(\R;X)} \leq K_{X} \|m\|_{L^\infty(\R)} \|\hat{\mb{f}}\|_{L^2(\R;X)}= K_{X}^{2} \|\mb{f}\|_{L^{2}(\R;X)},
 \end{equation*}
 where $1 \leq K_{X} < \infty$ denotes the norm of the Fourier transform on $L^2(\R;X)$.
 Vector-valued Calder\'on--Zygmund methods can then be used to extrapolate this result to $L^p(\R;X)$-boundedness for all $p \in (1,\infty)$.
 
-If $X$ is not isomorphic to a Hilbert space, then we know by Kwapie\`n's theorem that the Fourier transform is \emph{not} bounded on $L^2(\R;X)$, so the previous argument is unavailable.
+If $X$ is not isomorphic to a Hilbert space, then we know by Kwapie\'n's theorem that the Fourier transform is \emph{not} bounded on $L^2(\R;X)$, so the previous argument is unavailable.
 However, the scalar-valued Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, not just $p = 2$, which suggests that boundedness of the $X$-valued Hilbert transform is a less stringent condition than the $X$-valued Plancherel theorem.
 And indeed, this is the case.
 We will prove the following theorem in Chapter \ref{sec:HT}.
@@ -127,22 +127,9 @@ UMD stands for Unconditionality of Martingale Differences.
 Martingales are a fundamental class of stochastic processes, and unconditionality of a sequence in a Banach space says that the elements of the sequence are, in some sense, `independent' or `orthogonal'.
 The UMD property is probabilistic in nature; the Burkholder--Bourgain theorem says that it is also a harmonic-analytic property.
 Thus the UMD property is a natural and often necessary assumption for Banach-valued analysis.
-Hilbert spaces are UMD,\footnote{The arguments above show this as a consequence of the Kwapie\`n and Burkholder--Bourgain theorems, but this is absolute overkill. It can be proven directly from the definition in terms of martingales.} but so are most natural function spaces, in particular $L^p$ spaces and Sobolev spaces $W^{p}_{s}$ (with $p \in (1,\infty)$).
+Hilbert spaces are UMD,\footnote{The arguments above show this as a consequence of the Kwapie\'n and Burkholder--Bourgain theorems, but this is absolute overkill. It can be proven directly from the definition in terms of martingales.} but so are most natural function spaces, in particular $L^p$ spaces and Sobolev spaces $W^{p}_{s}$ (with $p \in (1,\infty)$).
 Thus the UMD property appears readily in applications to PDEs, both deterministic and stochastic.
 Even spaces of operators can be UMD, for example the Schatten classes $\mc{S}^{p} \subset B(H)$ (studied in Chapter \ref{sec:schatten}), and consequences of the UMD property for these spaces can be used to prove deep results in operator theory.
-
-\section{Plan of attack}
-
-In this course you will be introduced to some fundamental topics in Banach-valued analysis.\footnote{One very important topic which I have completely skipped is the relationship between weighted norm estimates, the Hardy--Littlewood maximal operator, and the UMD property for Banach function spaces and lattices. These topics are completely fundamental and should be included in an introductory course, but then I wouldn't have time to include the material on Schatten classes, and after all, the future is noncommutative...}
-
-We start in Chapter \ref{sec:Bochner-spaces} with Bochner spaces and strong measurability.
-Measurability is always a bit of a pain to discuss but it would be impossible to do anything without it, and in the infinite-dimensional setting a bit of preliminary work is needed so that we can thoughtlessly integrate.
-
-We move on to probabilistic concepts in Chapter \ref{sec:martingales}, the most important being that of a vector-valued martingale.
-As described above, this is needed in order to define the UMD property, but it is fundamental in its own right, and it is very useful in analysing the \emph{Radon-Nikodym property}.
-This is done in Chapter \ref{sec:RNP}.
-
-...\todo{continue}
 
 
 \section{Conventions}\label{sec:conventions}
