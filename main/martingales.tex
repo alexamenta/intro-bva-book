@@ -1,14 +1,19 @@
+In the previous chapter we introduced the problem of whether a bounded operator $T \in \Lin(L^p)$ on scalar-valued functions has a bounded $X$-valued extension.
+We saw that this depends on both the operator $T$ and the Banach space $X$.
+To answer this question for various classes of operators, we need to be able to describe different geometric properties a Banach space $X$ may have.
+Basic notions from functional analysis, such as separability and reflexivity, are not fine-grained enough to answer these questions.
 
-\todo{Write expository introduction}
+One useful way of quantifying the geometry of a Banach space $X$ is to consider various properties of $X$-valued stochastic processes.
+It is certainly not obvious that this would be useful, but many years of research has shown this to be the case.
+By looking at particular classes of $X$-valued stochastic processes (for example, \emph{martingales}) and particular properties that they may or may not have (for example, \emph{pointwise convergence} or \emph{unconditionality} properties), one is led to useful Banach space properties (in the preceding examples, the \emph{Radon--Nikodym property} or the \emph{UMD property}).
+Banach-valued probability is a very interesting field in its own right, and we will only scratch the surface; for a proper overview see for example \cite{LT91}.
 
-\section{Gambling in Banach spaces}\label{sec:gambling}
-
-To motivate the theory in this section, we're going to imagine a betting game.
+I want you to imagine the following betting game, on offer at the Banach-valued \emph{Spielhalle}.
 At each turn, you bet on the outcome of a coin toss.
 The quantities that you can bet are taken from a Banach space $X$.
 The initial state of your wallet, $\mb{s}_{-1}$, is the zero vector
 \begin{equation*}
-  \mb{s}_{-1} = 0 \in X.
+  \mb{s}_{-1} = \mb{0} \in X.
 \end{equation*}
 At each time $n \in \N = \{0,1,\ldots\}$, you choose a vector $\mb{x}_n \in X$ to wager.
 I then flip a fair coin, which shows either Heads or Tails, and the state of your wallet becomes
@@ -20,7 +25,12 @@ I then flip a fair coin, which shows either Heads or Tails, and the state of you
   \end{cases}
 \end{equation*}
 The Banach space $X$ is not ordered, so there is no canonical notion of $\mb{s}_n$ being `more' or `less' than $\mb{s}_{n-1}$. Thus the game is not about winning or losing (the true winner of the game is Functional Analysis).
-In this chapter we will discuss various probabilistic concepts that can be well-understood in the context of this game.
+This game is a good model for many of the probabilistic concepts introduced in this chapter, and we will come back to it at various points.
+
+\begin{rmk}
+  It will become clear in these notes that I am not an expert in probability, and there will probably be inaccuracies in these notes.
+  Please let me know if you find any mistakes!
+\end{rmk}
 
 \section{Random variables, filtrations, and stochastic processes}
 
