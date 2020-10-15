@@ -134,10 +134,18 @@ Even spaces of operators can be UMD, for example the Schatten classes $\mc{S}^{p
 
 \section{Conventions}\label{sec:conventions}
 Throughout these notes we will deal with both real and complex Banach spaces.
-If we do not explicitly specify `real' or `complex', then either choice can be made, and we will write $\K$ to denote the scalar field (i.e. $\K = \R$ or $\K = \C$).
+If I do not explicitly specify `real' or `complex', then either choice can be made, and we will write $\K$ to denote the scalar field (i.e. $\K = \R$ or $\K = \C$).
 Every complex Banach space can be seen as a real Banach space by restricting scalar multiplication to the reals.
 On the other hand, every real Banach space can be `complexified', a process which doubles the dimension over $\R$ and does what it should: for example the complexification of $\R^n$ is $\C^n$, the complexification of $L^p(S;\R)$ is $L^p(S;\C)$, and so on.
 It's a good idea not to think too hard about this.
+
+I have tried to maintain the convention of writing vectors and vector-valued functions in bold: so I write $\mb{x} \in X$ for a vector in a Banach space $X$, and $\map{\mb{f}}{\R}{X}$ for an $X$-valued function.
+This convention is not standard but I believe it helps in gaining intuition: vectors, and vector-valued functions, are intrinsically `heavier' than their scalar analogues.
+This leads to some typographical paradoxes: do we consider an element of $L^2(\R)$ as a scalar-valued function (thus writing $f$) or an element of a Banach space (thus writing $\mb{f}$)?
+The answer depends on the context.
+I just want to point out that nobody makes this distinction in the literature (except myself, in recent papers).
+Probably for good reason.
+
 
 For an exponent $p \in [1,\infty]$ we let $p'$ denote the \emph{H\"older conjugate}
 \begin{equation*}

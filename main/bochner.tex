@@ -752,9 +752,57 @@ Theorem \ref{thm:positive-extensions} shows that the `extension problem' for pos
 Of course, most interesting operators are not positive.
 
 \begin{example}
-  \todo{Fourier transform. counterexample for $\ell^\infty$}\todo{write this up}
-\end{example}
+  The \emph{Hausdorff-Young inequality} says that the Fourier transform $\mc{F}$ on scalar-valued functions is bounded from $L^p(\R)$ to $L^{p'}(\R)$ for all $p \in [1,2]$.\footnote{For $p=2$ this is Plancherel's theorem, and for $p=1$ it is straightforward, and as shown above it even holds for Banach-valued functions. The intermediate result can be proven by interpolation, e.g. by the Riesz--Thorin theorem.}
+  Fix $p \in [1,2)$, and consider the Banach space $\ell^p := \ell^{p}(\N)$.
+  We will show that for all $r \in (p,2]$, the bound
+  \begin{equation}\label{eq:FT-bound-lp}
+    \map{\mc{F}}{L^r(\R;\ell^p)}{L^{r'}(\R;\ell^p)}
+  \end{equation}
+  does not hold.
+  Thus the Fourier transform \emph{from $L^r(\R)$ to $L^{r'}(\R)$} does not have a bounded extension to $\ell^p$ for any $1 \leq p < r$.\footnote{On the other hand, it has a bounded extension to $\ell^p$ for $r \leq p \leq 2$. What we are saying is that \emph{$\ell^p$ has Fourier type $r$ for all $r \in [1,p]$}: we will discuss this in more depth in Chapter \ref{sec:fouriertype}.}
 
+  Fix a Schwartz function $f \in \mc{S}(\R)$ supported in the unit interval $(0,1)$, normalised such that $\|f\|_r = 1$.
+  For each $N \in \{1,2,\ldots\}$ define a function $\map{\mb{f}_N}{\R}{\ell^p}$ by
+  \begin{equation*}
+      \mb{f}_N := \sum_{n=0}^{N-1} \Tr_{n}(f) \otimes \mb{e}_n
+      = (f, \Tr_{1}(f), \Tr_{2}(f), \ldots, \Tr_{N}(f), 0, 0, \ldots).
+  \end{equation*}
+  where $(\mb{e}_{n})_{n \in \N}$ are the standard basis elements of $\ell^p$ and $\Tr_{n}f(x) = f(x-n)$ denotes the operator of translation by $n$.
+  We can write
+  \begin{equation*}
+    \begin{aligned}
+      \|\mb{f}_N\|_{L^r(\R;\ell^p)}^{r}
+      &= \int_{\R} \|\mb{f}_N(x)\|_{\ell^p}^r \, \dd x  \\
+      &= \sum_{m=0}^{N-1} \int_{m}^{m+1} \Big(\sum_{n=0}^{N-1} |f(x-n)|^p \Big)^{r/p} \, \dd x \\
+      &= \sum_{m=0}^{N-1} \int_{m}^{m+1} |f(x-m)|^r \, \dd x 
+      = \sum_{m=0}^{N-1} \int_0^1 |f(x)|^r \, \dd x = N
+    \end{aligned}
+  \end{equation*}
+  using that for $x \in (m,m+1)$ we have $f(x-n) = 0$ unless $n=m$.
+  Now using that the Fourier transform of a translated function is a modulation of the Fourier transform, for all $\xi \in \R$ we have
+  \begin{equation*}
+      \widehat{\mb{f}_N}(\xi) = \sum_{n=0}^{N-1} (\widehat{\Tr_{n}(f)} \otimes \mb{e}_n)(\xi) 
+      = \sum_{n=0}^{N-1} e^{-in\xi} \hat{f}(\xi) \mb{e}_n 
+      = \hat{f}(\xi) \sum_{n=0}^{N-1} e^{-in\xi} \mb{e}_n,
+  \end{equation*}
+  so
+  \begin{equation*}
+    \|\widehat{\mb{f}_N}\|_{L^{r^\prime}(\R;\ell^p)}^{r'}
+    = \int_\R |\hat{f}(\xi)|^{r^\prime} \bigg( \sum_{n=0}^{N-1} |e^{-in\xi}|^p \bigg)^{r^\prime/p} \, d\xi 
+    = N^{r'/p} \|\hat{f}\|_{L^{r^\prime}(\R)}^{r'}.
+  \end{equation*}
+  If the bound \eqref{eq:FT-bound-lp} holds, there is a constant $C$ (independent of $N$) such that
+  \begin{equation*}
+    \|\widehat{\mb{f}_N}\|_{L^{r^\prime}(\R;\ell^p)} \leq C \|\mb{f}_N\|_{L^r(\R;\ell^p)}
+  \end{equation*}
+  for all $N \geq 1$, but our estimates then imply
+  \begin{equation*}
+    N^{1/p} \|\hat{f}\|_{r^\prime} \leq C N^{1/r},
+  \end{equation*}
+  or equivalently $N^{\frac{1}{p} - \frac{1}{r}} \leq C/\|\hat{f}\|_{r^\prime}$ (using that $\|\hat{f}\|_{r^\prime} \neq 0$).
+  But since $r > p$, the left hand side is unbounded, while the right hand side is constant.
+  This contradiction shows that the bound \eqref{eq:FT-bound-lp} does not hold.
+\end{example}
 
 
 \section*{Exercises}
@@ -780,8 +828,8 @@ Of course, most interesting operators are not positive.
 \end{exercise}
 
 \begin{exercise}\label{ex:general-density}
-  Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space and $p \in [1,\infty)$.
-  Let $V \subset L^p(S;\K)$ be a dense subspace.
+  Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space, and let $p \in [1,\infty)$.
+  Let $V$ be a dense subspace of $L^p(S)$.
   Show that $V \otimes X$ is dense in $L^p(S;X)$.
 \end{exercise}
 
@@ -789,15 +837,17 @@ Of course, most interesting operators are not positive.
   Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space such that the $\sigma$-algebra $\mc{A}$ is finite.
   Show that the isometric embedding
   \begin{equation*}
-    \map{\Phi}{L^{p'}(S,\mc{A},\mu;X^*)}{L^p(S,\mc{A},\mu;X)^*}, \qquad \Phi g(f) = \int_S \langle f(x), g(x) \rangle \, \dd\mu(x)
+    \map{\Phi}{L^{p'}(S,\mc{A},\mu;X^*)}{L^p(S,\mc{A},\mu;X)^*}, \qquad \Phi \mb{g}(\mb{f}) = \int_S \langle \mb{f}(x), \mb{g}(x) \rangle \, \dd\mu(x)
   \end{equation*}
   is an isomorphism for all $p \in [1,\infty]$.
 \end{exercise}
 
 \begin{exercise}\label{ex:sm-limits}
   Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
-  Let $(\mb{f}_{n})_{n \in \N}$ be a sequence of strongly measurable $X$-valued functions and $\map{\mb{f}}{S}{X}$, and suppose that $\mb{f}_{n} \to \mb{f}$ almost everywhere (with respect to $\mu$).
+  Let $(\mb{f}_{n})_{n \in \N}$ be a sequence of $X$-valued functions and $\map{\mb{f}}{S}{X}$, and suppose that $\mb{f}_{n} \to \mb{f}$ almost everywhere (with respect to $\mu$).
+  Suppose that for each $n \in \N$ there exists a set $N_{n} \subset S$ with $\mu(N_{n}) = 0$ such that $\mb{f}_{n}$ is strongly measurable on $S \sm N_{n}$.
   Show that there exists a set $N \subset S$ with $\mu(N) = 0$ such that $\mb{f}$ is strongly measurable on $S \sm N$.
+  (That is: show that the a.e. limit of a.e. strongly measurable functions is a.e. strongly measurable.)
 \end{exercise}
 
 \begin{exercise}\label{ex:tensor-extension-basic-props}
@@ -818,21 +868,21 @@ Of course, most interesting operators are not positive.
 
 \begin{exercise}\label{ex:tensor-adjoint}
   Let $(S,\mc{A},\mu)$ be a measure space and $p \in (1,\infty)$, let $T$ be a bounded linear operator on $L^p(S,\mu)$, and let $X$ be a Banach space.
-  Let $T^*$ denote the adjoint of $T$.
-  Show that $T$ admits a bounded $X$-valued extension if and only if the adjoint $T^* \in \Lin(L^{p'}(S,\mu))$ admits a bounded $X^*$-valued extension, and show that
+  Let $T^*  \in \Lin(L^{p'}(S,\mu))$ denote the adjoint of $T$.
+  Show that $T$ admits a bounded $X$-valued extension if and only if $T^*$ admits a bounded $X^*$-valued extension, and show that
   \begin{equation*}
-    (\td{T}_X)^* \Phi g = \td{(T^*)}_{X^*} g
+    (\td{T}_X)^* \Phi \mb{g} = \td{(T^*)}_{X^*} \mb{g}
   \end{equation*}
-  for all $g \in L^{p'}(S;X^*)$, where $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is as in Proposition \ref{prop:bochner-preduality}.
-  Conclude that for all $f \in L^p(S;X)$ and all $g \in L^{p'}(S;X)$,
+  for all $\mb{g} \in L^{p'}(S;X^*)$, where $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is as in Proposition \ref{prop:bochner-preduality}.
+  Assuming $T$ admits a bounded $X$-valued extension, conclude that for all $\mb{f} \in L^p(S;X)$ and $\mb{g} \in L^{p'}(S;X)$,
   \begin{equation}\label{eq:tensor-adjoint-identity}
-    \langle \td{T}_X f, g \rangle = \langle f, \td{(T^*)}_{X^*} g \rangle.
+    \langle \td{T}_X \mb{f}, \mb{g} \rangle = \langle \mb{f}, \td{(T^*)}_{X^*} \mb{g} \rangle.
   \end{equation}
 \end{exercise}
 
 \begin{exercise}\label{ex:FT-bounded-1-infty}
   Let $X$ be a complex Banach space.
-  Show that $\hat{f} \in C(\R^d;X)$ for all $f \in L^1(\R^d;X)$.
+  Show that $\hat{\mb{f}} \in C(\R^d;X)$ for all $\mb{f} \in L^1(\R^d;X)$.
   Conclude that the Fourier transform is bounded from $L^1(\R^d;X)$ to $L^\infty(\R^d;X)$.
 \end{exercise}
 
@@ -845,28 +895,28 @@ Of course, most interesting operators are not positive.
   is continuous.
   \begin{itemize}
   \item
-    Let $\map{g}{\R^d}{X}$ be strongly measurable.
-    Show that the function $\map{Mg}{\R^d}{Y}$ defined by $(Mg)(\xi) := M(\xi)g(\xi)$ is strongly measurable.
+    Let $\map{\mb{g}}{\R^d}{X}$ be strongly measurable.
+    Show that the function $\map{M\mb{g}}{\R^d}{Y}$ defined by $(M\mb{g})(\xi) := M(\xi)\mb{g}(\xi)$ is strongly measurable.
   \item
-    Suppose in addition that the function $\xi \mapsto \|M(\xi)\|_{\Lin(X,Y)}$ is measurable,\footnote{This can be proven under various assumptions, but don't worry about that now.} and that
+    Suppose in addition that the function $\xi \mapsto \|M(\xi)\|_{\Lin(X,Y)}$ is measurable, and that
     \begin{equation*}
       \int_{\R^d} \|M(\xi)\|_{\Lin(X,Y)} \, \dd \xi < \infty.
     \end{equation*}
-    Show that the operator $T_Mf := (M\hat{f})^\vee$ is well-defined and bounded from $L^1(\R^d;X)$ to $C(\R^d;Y)$.
+    Show that the operator $T_M\mb{f} := (M\hat{\mb{f}})^\vee$ is well-defined and bounded from $L^1(\R^d;X)$ to $C(\R^d;Y)$.
   \end{itemize}
 \end{exercise}
 
 \begin{exercise}
   Let $H$ be an infinite-dimensional separable Hilbert space with inner product $(\cdot , \cdot)$, and let $(S,\mc{A},\mu)$ be a measure space.
   \begin{itemize}
-  \item Show that $L^2(S;H)$ is a Hilbert space with respect to the inner product
+  \item Show that $L^2(\mu;H)$ is a Hilbert space with respect to the inner product
     \begin{equation*}
-      (f, g) := \int_{S} (f(s), g(s)) \, \dd\mu(s) \qquad (f,g \in L^2(S;H)).
+      (\mb{f}, \mb{g}) := \int_{S} (\mb{f}(s), \mb{g}(s)) \, \dd\mu(s) \qquad (\mb{f},\mb{g} \in L^2(\mu;H)).
     \end{equation*}
-  \item Let $(\mb{h}_n)_{n \in \N}$ be an orthonormal basis of $H$, and $(f_n)_{n \in \N}$ an orthonormal basis of $L^2(S,\mu)$.
-    Show that the elementary tensors $\{f_n \otimes \mb{h}_m : n,m \in \N\}$ are an orthonormal basis of $L^2(S;H)$.
-  \item Suppose that the Hilbert space $H$, as above, is defined over $\C$.
-    Show that the Fourier transform on the torus, initially defined as a bounded operator $\map{\mc{F}}{L^1(\T^d;H)}{\ell^\infty(\Z^d;H)}$, extends to an isometry from $L^2(\T^d;H)$ to $\ell^2(\Z^d;H)$.
+  \item Let $(\mb{e}_n)_{n \in \N}$ be an orthonormal basis of $H$ and $(f_n)_{n \in \N}$ an orthonormal basis of $L^2(\mu)$.
+    Show that the elementary tensors $\{f_n \otimes \mb{e}_m : n,m \in \N\}$ are an orthonormal basis of $L^2(\mu;H)$.
+  \item Suppose that the Hilbert space $H$ is complex.
+    Show that the Fourier transform on the torus, initially defined as a bounded operator $\map{\mc{F}}{L^2(\T^d;H)}{\ell^2(\Z^d;H)}$, extends to an isometry from $L^2(\T^d;H)$ to $\ell^2(\Z^d;H)$.
   \end{itemize}
 \end{exercise}
 
