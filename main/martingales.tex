@@ -290,32 +290,33 @@ First we establish the uniqueness of conditional expectations.
   Finally, if $X$ is a complex Banach space, the result follows by considering real and imaginary parts separately.
 \end{proof}
 
-Next we will establish existence, positivity, and $L^p$-contractivity of conditional expectations in the scalar-valued case.\todo{UP TO HERE}%mk
+Next we will establish existence, positivity, and $L^p$-contractivity of conditional expectations in the scalar-valued case.
+The positivity in particular will let us deduce the existence of $X$-valued conditional expectations for every Banach space $X$.
 
 \begin{thm}\label{thm:conditional-expectation-existence-scalar}
   Let $(\Omega,\mc{A},\P)$ be a probability space.
-  For any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a conditional expectation $\E^{\mc{B}}f$ exists.
+  Then for any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a conditional expectation $\E^{\mc{B}}f$ exists.
   The operator $f \mapsto \E^{\mc{B}}f$ is linear, and for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive contraction on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
   \begin{equation*}
     \|\E^{\mc{B}}f\|_{p} \leq \|f\|_{p},
   \end{equation*}
-  and if $f$ is a.s. nonnegative then so is $\E^{\mc{B}}f$.
+  and if $f$ is nonnegative then so is $\E^{\mc{B}}f$.
 \end{thm}
 
 \begin{proof}
-
   We can prove positivity from the defining property \eqref{eq:conditional-expectation-property}, before we establish existence.
-  Suppose $f \in L^1(\mc{A})$ is a.s. nonnegative.
+  Suppose $f \in L^1(\mc{A})$ is nonnegative.
   Then for all $B \in \mc{B}$ we have
   \begin{equation*}
     \int_B \E^{\mc{B}} f \, \dd\P = \int_B f \, \dd\P \geq 0,
   \end{equation*}
-  which implies that the $\mc{B}$-measurable function $\E^{\mc{B}}f$ is a.s. nonnegative.\footnote{This uses an exercise from measure theory: if $g$ is $\mc{B}$-measurable and $\int_B g \geq 0$ for all $\mc{B}$-measurable sets, then $g \geq 0$ a.e.. Proof: the set $N := \{g(\omega) < 0\}$ is $\mc{B}$-measurable, and assuming it has positive measure leads to the contradiction $0 \leq \int_B g < 0$.}
+  which implies that the $\mc{B}$-measurable function $\E^{\mc{B}}f$ is nonnegative.\footnote{This uses an exercise from measure theory: if $g$ is $\mc{B}$-measurable and $\int_B g \geq 0$ for all $\mc{B}$-measurable sets, then $g \stackrel{\mathrm{a.e.}}{\geq} 0$. Proof: the set $N := \{g(\omega) < 0\}$ is $\mc{B}$-measurable, and assuming it has positive measure leads to the contradiction $0 \leq \int_B g < 0$.}
   
-  Now fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A})$; we will construct a linear contractive conditional expectation operator $\E^{\mc{B}}$ on $L^p(\mc{B};\K)$ directly.
+  Now fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A})$; we will construct a linear contractive conditional expectation operator $\E^{\mc{B}}$ on $L^p(\mc{B};\K)$.
 
-  \textbf{Mild case: $p > 1$}, so most importantly $p' < \infty$.
-  The inclusion map $\map{\iota}{L^{p'}(\mc{B})}{L^{p'}(\mc{A})}$ is  contractive, so (using that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$) its adjoint $\map{\E^{\mc{B}} := \iota^*}{L^p(\mc{A})}{L^p(\mc{B})}$ is also contractive.
+  \textbf{Mild case: $p > 1$.}
+  In this case, $p' < \infty$.
+  The inclusion map $\map{\iota}{L^{p'}(\mc{B})}{L^{p'}(\mc{A})}$ is contractive, so its adjoint $\map{\E^{\mc{B}} := \iota^*}{L^p(\mc{A})}{L^p(\mc{B})}$ is also contractive.\footnote{This uses that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$.}
   For all $f \in L^p(\mc{A})$ and $B \in \mc{B}$ we have
   \begin{equation*}
     \int_B \E^{\mc{B}} f \, \dd\P = \langle \iota^* f, \1_{B} \rangle = \langle f, \iota \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P,
@@ -323,9 +324,9 @@ Next we will establish existence, positivity, and $L^p$-contractivity of conditi
   so $\E^{\mc{B}} f \in L^p(\mc{B}) \subset L^1(\mc{B})$ is a conditional expectation of $f$ given $\mc{B}$.
 
 
-  \textbf{(German) spicy case: $p = 1$.} The difficulty here is that $L^1$ is \emph{strictly} contained in the dual of $L^\infty$, so taking an adjoint of the inclusion $L^\infty(\mc{B}) \to L^\infty(\mc{A})$ is not so straightforward.\footnote{See Exercise \ref{ex:conditional-expectation-as-adjoint}.} 
+  \textbf{(German) spicy case: $p = 1$.} In this case $L^1$ is strictly contained in the dual of $L^\infty$, so taking an adjoint of the inclusion $L^\infty(\mc{B}) \to L^\infty(\mc{A})$ is not so straightforward.\footnote{See Exercise \ref{ex:conditional-expectation-as-adjoint}.} 
   Instead we argue by density.
-  We have that $L^2(\mc{A})$ is dense in $L^1(\mc{A})$, so we aim to extend the conditional expectation defined above (in the case $p=2$) by continuity.
+  We know that $L^2(\mc{A})$ is dense in $L^1(\mc{A})$, so we aim to extend the conditional expectation defined above (in the case $p=2$) by continuity.
   For $f \in L^2(\mc{A})$ and $g \in L^\infty(\mc{B})$ we have
   \begin{equation*}
     |\langle \E^{\mc{B}} f, g \rangle| = |\langle f, \iota g \rangle| = |\langle f, g \rangle| \leq \|f\|_1 \|g\|_\infty
@@ -358,7 +359,7 @@ Now we can use the extension theorem for positive operators to show the existenc
 
 \begin{prop}
   Let $(\Omega,\mc{A},\P)$ be a probability space, let $\mc{B}$ be a $\sigma$-subalgebra of $\mc{A}$, and let $X$ be a Banach space.
-  Then for any $f \in L^1(\mc{A};X)$, a conditional expectation $\E_X^{\mc{B}}f$ of $f$ given $\mc{B}$ exists.
+  Then for any $\mb{f} \in L^1(\mc{A};X)$, a conditional expectation $\E_X^{\mc{B}}\mb{f}$ of $\mb{f}$ given $\mc{B}$ exists.
   Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a contraction on $L^p(\mc{A};X)$.
 \end{prop}
 
@@ -367,62 +368,54 @@ Now we can use the extension theorem for positive operators to show the existenc
   First fix $p \in [1,\infty)$.
   Since the conditional expectation $\E^{\mc{B}}$ is a positive operator on $L^p(\mc{A})$, by Theorem \ref{thm:positive-extensions} it admits a bounded $X$-valued extension, which we denote by $\E_X^{\mc{B}}$.
   Since $\E^{\mc{B}}$ is contractive, so is $\E_X^{\mc{B}}$.
-  We just need to show that for all $f \in L^p(\mc{A};X)$, $\E_X^{\mc{B}}f$ is a conditional expectation of $f$ given $\mc{B}$; we will do this by scalarisation.
-  For all $B \in \mc{B}$ and all functionals $\mb{x}^* \in X^*$, since the function $\langle f, \mb{x}^* \rangle$ is in $L^1(\mc{A})$, we have
+  We just need to show that for all $\mb{f} \in L^p(\mc{A};X)$, $\E_X^{\mc{B}}\mb{f}$ is a conditional expectation of $f$ given $\mc{B}$; we will do this by scalarisation.
+  For all $B \in \mc{B}$ and all functionals $\mb{x}^* \in X^*$, since the function $\langle \mb{f}, \mb{x}^* \rangle$ is in $L^1(\mc{A})$, we have
   \begin{equation*}
     \begin{aligned}
-      \Big\langle \int_B \E_X^{\mc{B}} f \, \dd\P, \mb{x}^* \Big\rangle
-      &= \int_B \langle \E_X^{\mc{B}} f, \mb{x}^* \rangle \, \dd\P \\
-      &\stackrel{(*)}{=} \int_B \E^{\mc{B}} (\langle f, \mb{x}^* \rangle) \, \dd\P
-      = \int_B \langle f, \mb{x}^* \rangle \, \dd\P
-      = \Big\langle \int_B f \, \dd\P, \mb{x}^* \Big\rangle.
+      \Big\langle \int_B \E_X^{\mc{B}} \mb{f} \, \dd\P, \mb{x}^* \Big\rangle
+      &= \int_B \langle \E_X^{\mc{B}} \mb{f}, \mb{x}^* \rangle \, \dd\P \\
+      &\stackrel{(*)}{=} \int_B \E^{\mc{B}} (\langle \mb{f}, \mb{x}^* \rangle) \, \dd\P
+      = \int_B \langle \mb{f}, \mb{x}^* \rangle \, \dd\P
+      = \Big\langle \int_B \mb{f} \, \dd\P, \mb{x}^* \Big\rangle.
     \end{aligned}
   \end{equation*}
   (see Exercise \ref{ex:tensor-extension-basic-props} for the starred equality).
   Since this holds for all $\mb{x}^* \in X^*$, we have
   \begin{equation*}
-     \int_B \E_X^{\mc{B}} f \, \dd\P = \int_B f \, \dd\P,
+     \int_B \E_X^{\mc{B}} \mb{f} \, \dd\P = \int_B \mb{f} \, \dd\P,
    \end{equation*}
-   which shows that $\E_X^{\mc{B}}$ is a conditional expectation of $f$ given $\mc{B}$.
+   which shows that $\E_X^{\mc{B}}$ is a conditional expectation of $\mb{f}$ given $\mc{B}$.
 
-   Now we establish the result for $p = \infty$: let $f \in L^\infty(\mc{A};X) \subset L^2(\mc{A};X)$.
-   Then a conditional expectation $\E_X^{\mc{B}} f$ of $f$ given $\mc{B}$ is defined as an element of $L^2(\mc{B};X)$: we just need to show that $\|\E_X^{\mc{B}} f\|_\infty \leq \|f\|_\infty$.
+   Now we establish the result for $p = \infty$: let $\mb{f} \in L^\infty(\mc{A};X) \subset L^2(\mc{A};X)$.
+   Then a conditional expectation $\E_X^{\mc{B}} \mb{f}$ of $\mb{f}$ given $\mc{B}$ is defined, but so far we only know that it is in $L^2(\mc{B};X)$: we just need to show that $\|\E_X^{\mc{B}} f\|_\infty \leq \|f\|_\infty$.
    We can test this by duality using Proposition \ref{prop:bochner-preduality} and that $L^2(\mc{B}; X^*)$ is dense in $L^1( \mc{B}; X^*)$.
    
-   For all $g \in L^2(\mc{B}; X^*)$, since the operator $\E^{\mc{B}} \in \Lin(L^2(\mc{A}))$ is self-adjoint, we have
+   For all $\mb{g} \in L^2(\mc{B}; X^*)$, since the operator $\E^{\mc{B}} \in \Lin(L^2(\mc{A}))$ is self-adjoint, we have
 \begin{equation*}
   \begin{aligned}
-    | \langle \E_X^{\mc{B}} f, g \rangle |
-    =  | \langle \td{\E^{\mc{B}}} f, g \rangle | 
-    &\stackrel{(*)}{=} | \langle f, \td{\E^{\mc{B}}} g \rangle | \\
-    &\leq  \|f\|_{L^\infty(\mc{A};X)} \|\E_X^{\mc{B}} g\|_{L^1(\mc{A};X^*)} \\
-    &\leq  \|f\|_{L^\infty(\mc{A};X)} \| g\|_{L^1(\mc{A};X^*)}.
+    | \langle \E_X^{\mc{B}} \mb{f}, \mb{g} \rangle |
+    =  | \langle \td{\E^{\mc{B}}} \mb{f}, \mb{g} \rangle | 
+    &\stackrel{(*)}{=} | \langle \mb{f}, \td{\E^{\mc{B}}} \mb{g} \rangle | \\
+    &\leq  \|\mb{f}\|_{L^\infty(\mc{A};X)} \|\E_X^{\mc{B}} \mb{g}\|_{L^1(\mc{A};X^*)} \\
+    &\leq  \|\mb{f}\|_{L^\infty(\mc{A};X)} \| \mb{g}\|_{L^1(\mc{A};X^*)}.
   \end{aligned}
 \end{equation*}
-For the starred equality see Exercise \ref{ex:tensor-adjoint} in the previous chapter, particularly the identity \eqref{eq:tensor-adjoint-identity}.
-Taking the supremum over all nonzero $g \in L^2(\mc{B};X^*)$ completes the proof.
-\end{proof}
+For the starred equality see Exercise \ref{ex:tensor-adjoint}, particularly the identity \eqref{eq:tensor-adjoint-identity}.
+Taking the supremum over all nonzero $\mb{g} \in L^2(\mc{B};X^*)$ completes the proof.
+\end{proof} 
 
-
-\todo{further properties of vector-valued conditional expectations, as needed}
+We will introduce further properties of conditional expectations as they are needed.
+For now, we note a multiplication property for $\mc{B}$-measurable multipliers, with proof left as Exercise \ref{ex:CE-measurable-op}.
 
 \begin{prop}\label{prop:CE-measurable-op}
   Let $(\Omega, \mc{A}, \P)$ be a probability space, $\mc{B}$ a $\sigma$-subalgebra of $\mc{A}$, and let $X$ and $Y$ be Banach spaces.
-  Consider an operator-valued function $T \in L^\infty(\Omega, \mc{B}; \Lin(X,Y))$.
-  For $f \in L^1(\Omega, \mc{A}; X)$ define the function $Tf \in L^1(\Omega, \mc{A}; Y)$ by
+  Consider an operator-valued function $T \in L^\infty(\mc{B}; \Lin(X,Y))$.
+  For $\mb{f} \in L^1(\mc{A}; X)$ define the function $T\mb{f} \in L^1(\mc{A}; Y)$ by
   \begin{equation*}
-    Tf(\omega) := T(\omega) f(\omega).
+    T\mb{f}(\omega) := T(\omega) \mb{f}(\omega).
   \end{equation*}
-  Then the identity
-  \begin{equation*}
-    \E^{\mc{B}}(Tf) = T \E^{\mc{B}}f
-  \end{equation*}
-  holds.
+  Then $\E^{\mc{B}}(T\mb{f}) = T \E^{\mc{B}}\mb{f}$ for all $\mb{f} \in L^1(\mc{A};X)$.
 \end{prop}
-
-\begin{proof}
-  Exercise \ref{ex:CE-measurable-op}. %mk
-\end{proof}
 
 \begin{rmk}
   We have only considered conditional expectations $\E^{\mc{B}}$ on probability spaces, but the concept can be extended to general measure spaces $(S,\mc{A},\mu)$ provided that the measure $\mu$ is $\sigma$-finite on the $\sigma$-subalgebra $\mc{B} \subset \mc{A}$ (although the arguments require a fair bit of modification).
