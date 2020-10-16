@@ -132,12 +132,35 @@ For a more simple introduction to basic probability, (CITE ROSS)\todo{add ref} i
 Let $(\Omega,\mc{A})$ be a measurable space.
 A \emph{probability measure} on $(\Omega,\mc{A})$ is a measure $\P$ with $\P(\Omega) = 1$.
 Probabilists like to refer to measurable sets $A \in \mc{A}$ as \emph{events}.
-If $(S,\mc{B})$ is another measurable space, a \emph{random variable} is a ($\mc{A}$ to $\mc{B}$) measurable function $\map{X}{\Omega}{S}$.
+If $S$ is a separable completely metrizable topological space (also called a \emph{Polish space}), an \emph{$S$-valued random variable} is a Borel measurable function $\map{X}{\Omega}{S}$.
 
+\begin{rmk}
+  In Definition \ref{defn:RV}, we define $X$-valued random variables $\map{\mb{f}}{\Omega}{X}$, where $X$ is a Banach space which is possibly not separable.
+  However, we demand that our random variables are \emph{strongly} measurable, which by the Pettis measurability theorem (Theorem \ref{thm:Pettis-measurability}) implies that there is a separable closed subspace $X_{0} \subset X$ such that $\mb{f}$ is valued in $X_{0}$.
+  Thus, by replacing $X$ with $X_{0}$, our Banach-valued random variables are valid random variables in the sense of the previous definition.
+\end{rmk}
+
+\begin{defn}
+  Let $(\Omega,\mc{A},\P)$ be a probability space, let $\Lambda$ be an indexing set, and let $(E_{\lambda})_{\lambda \in \Lambda}$ be Polish spaces.
+  \begin{itemize}
+  \item
+    A sequence of random variables $\map{\xi_{\lambda}}{\Omega}{E_{\lambda}}$ is called \emph{mutually independent} if for all finite subsets of indices $\{\lambda_{n}\}_{n=1}^{N}$ in $\Lambda$ and all Borel sets $B_{n} \subset E_{\lambda_{n}}$,
+    \begin{equation*}
+      \P\Big(\bigcap_{n=1}^{N} \{\omega \in \Omega : \xi_{\lambda_{n}}(\omega) \in B_{n}\} \Big) = \prod_{n=1}^{N} \P(\xi_{\lambda_{n}} \in B_{n}).
+    \end{equation*}
+
+  \item
+    A sequence of $\sigma$-algebras $\mc{A}_{\lambda}$ is called \emph{mutually independent} if for all finite subsets of indices $\{\lambda_{n}\}_{n=1}^{N}$ in $\Lambda$ and all sets $A_{n} \in \mc{A}_{\lambda_{n}}$,
+    \begin{equation*}
+      \P\Big(\bigcap_{n=1}^{N} A_{n} \Big) = \prod_{n=1}^{N} \P(A_{n}).
+    \end{equation*}
+
+  \end{itemize}
+  Note that the random variables $(\xi_{\lambda})_{\lambda \in \Lambda}$ are independent if and only if the $\sigma$-algebras $(\sigma(\xi_{\lambda}))_{\lambda \in \Lambda}$ are independent.
+\end{defn}
 
 \begin{itemize}
-\item independence of random variables and $\sigma$-algebras
-\item mutual independence of sequences of RVs
+\item distributions
 \item characteristic functions and uniqueness
 \end{itemize}
 

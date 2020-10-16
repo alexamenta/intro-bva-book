@@ -38,7 +38,7 @@ This game is a good model for many of the probabilistic concepts introduced in t
 
 First we will set up some basic probabilistic language in Banach spaces.
 
-\begin{defn}
+\begin{defn}\label{defn:RV}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space.
   An \emph{$X$-valued random variable} is a strongly measurable function $\map{\mb{f}}{\Omega}{X}$.
   If $\mb{f} \in L^1(\Omega;X)$ is an integrable random variable, we define the \emph{expectation} to be the Bochner integral
@@ -94,6 +94,11 @@ First we will set up some basic probabilistic language in Banach spaces.
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
   A \emph{(discrete-time) $X$-valued stochastic process} on $(\Omega,\mc{A},\P)$ is a sequence of $\mc{A}$-measurable random variables $\map{\mb{f}_n}{\Omega}{X}$, $n \in \N$.
   We will sometimes use the notation $\mb{f}_{\bullet} := (\mb{f}_{n})_{n \in \N}$, as with our notation for filtrations.
+  The \emph{difference sequence} of $\mb{f}_{\bullet}$ is the stochastic process $d\mb{f}_{\bullet}$ defined by
+  \begin{equation*}
+    d\mb{f}_n := \mb{f}_{n} - \mb{f}_{n-1} \qquad \forall n \in \N,
+  \end{equation*}
+  with the convention that $\mb{f}_{-1} := \mb{0}$.
   
   Given a filtration $\mc{A}_{\bullet}$, a stochastic process $\mb{f}_{\bullet}$ is
   \begin{itemize}
@@ -422,149 +427,144 @@ For now, we note a multiplication property for $\mc{B}$-measurable multipliers, 
   This approach is taken in \cite{HNVW16}.
 \end{rmk}
 
-
 \section{Martingales and martingale transforms}
 
 \begin{defn}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space, let $(\mc{A}_n)_{n \in \N}$ be a filtration on this space,  and let $X$ be a Banach space.
-  \begin{itemize}
-  \item
-    A stochastic process $(M_n)_{n \in \N}$ with each $M_n \in L^1(\Omega; X)$ is called a \emph{martingale} with respect to $(\mc{A}_n)_{n \in \N}$ if 
-    \begin{equation}\label{eq:mgale-defining-property}
-      M_n = \E^{\mc{A}_n} M_{n+1} \qquad \forall n \in \N.
-    \end{equation}
-    Note that in particular each $M_n$ is $\mc{A}_n$-measurable.
-
-  \item
-    Let $(M_n)_{n \in \N}$ be a martingale as above.
-    The associated \emph{martingale difference sequence} is the process $(dM_n)_{n \in \N}$ in $L^1(\Omega; X)$ defined by
-    \begin{equation*}
-      dM_0 := M_0, \qquad dM_k := M_k - M_{k-1} \quad (k \geq 1)
-    \end{equation*}
-    (the difference equation can be made to hold for all $k \geq 0$ by defining $M_{-1} := 0$).
-  \end{itemize}
+  Let $(\Omega, \mc{A}, \P)$ be a probability space with a filtration $\mc{A}_{\bullet}$, and let $X$ be a Banach space.
+  A stochastic process $\mb{f}_{\bullet}$ with $\mb{f}_n \in L^1(\Omega; X)$ for all $n \in \N$ is called a \emph{martingale} with respect to $\mc{A}_{\bullet}$ if 
+  \begin{equation}\label{eq:mgale-defining-property}
+    \mb{f}_n = \E^{\mc{A}_n} \mb{f}_{n+1} \qquad \forall n \in \N.
+  \end{equation}
+  Note that in particular $\mb{f}_{\bullet}$ is adapted to $\mc{A}_{\bullet}$.
 \end{defn}
 
 \begin{rmk}
   Now is a good time to complete Exercise \ref{ex:martingale-elementary-properties}, establishing a few elementary properties of martingales. 
 \end{rmk}
 
-Martingales are stochastic processes that are `balanced': at time $n$, the best estimate of the state of the process at time $n+1$ is precisely the current state of the process.
-They are intricately linked with many topics in harmonic and functional analysis.
+Martingales are stochastic processes that are `balanced' in the following sense: at time $n$, the best estimate of the state of the process at time $n+1$ is precisely the current state of the process.
 
 \begin{example}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space and $(\mc{A}_n)_{n \in \N}$ a filtration.
-  Let $X$ be a Banach space and $f \in L^1(\Omega;X)$.
-  For each $n \in \N$ define $f_n := \E^{\mc{A}_n}f \in L^1(\Omega;X)$.
-  Then by the monotonicity property of conditional expectations,
+  Let $(\Omega, \mc{A}, \P)$ be a probability space and $\mc{A}_{\bullet}$ a filtration.
+  Let $X$ be a Banach space and $\mb{f} \in L^1(\Omega;X)$.
+  For each $n \in \N$ define $\mb{f}_n := \E^{\mc{A}_n}\mb{f} \in L^1(\Omega;X)$.
+  Then by the monotonicity property of conditional expectations (see Exercise \ref{ex:CE-monotonicity})
   \begin{equation*}
-    \E^{\mc{A}_n} f_{n+1} = \E^{\mc{A}_n} \E^{\mc{A}_{n+1}} f = \E^{\mc{A}_n} f = f_n,
+    \E^{\mc{A}_n} \mb{f}_{n+1} = \E^{\mc{A}_n} \E^{\mc{A}_{n+1}} \mb{f} = \E^{\mc{A}_n} \mb{f} = \mb{f}_n,
   \end{equation*}
-  so $(f_n)_{n \in \N}$ is a martingale.
-  This is called the \emph{martingale associated with $f$}.
+  so $\mb{f}_{\bullet}$ is a martingale, called the \emph{martingale associated with $\mb{f}$}. 
 
-  When $\Omega = [0,1)$ is the unit interval with Borel $\sigma$-algebra and Lebesgue measure, and when we consider the dyadic filtration $(\mc{F}_n)_{n \in \N}$ as in Example \ref{eg:dyadic-filtration}, the martingale associated with a function $f \in L^1([0,1);X)$ is given by
+  When $\Omega = [0,1)$ is the unit interval with Borel $\sigma$-algebra and Lebesgue measure, and when we consider the dyadic filtration $\mc{A}_{\bullet}$ as in Example \ref{eg:dyadic-filtration}, the martingale associated with a function $\mb{f} \in L^1([0,1);X)$ is given by
   \begin{equation*}
-    f_n = \sum_{I \in \mc{D}_n} \1_I \otimes \langle f \rangle_I
+    \mb{f}_n = \sum_{I \in \mc{D}_n} \1_I \otimes \langle \mb{f} \rangle_I
   \end{equation*}
-  where $\mc{D}_n$ is the set of dyadic intervals $I \subset [0,1)$ of length $2^{-n}$ and $\langle f \rangle_I = \fint_I f(t) \, \dd t$ is the average of $f$ on $I$ (these conditional expectations were computed in Example \ref{eg:atomic-CE}).
+  where $\mc{D}_n$ is the set of dyadic intervals $I \subset [0,1)$ of length $2^{-n}$ and $\langle \mb{f} \rangle_I = \fint_I \mb{f}(t) \, \dd t$ is the average of $\mb{f}$ on $I$ (we did this computation in Example \ref{eg:atomic-CE}).
   Each dyadic interval $I \in \mc{D}_{n-1}$ can be `halved', i.e. $I = I_{-} \cup I_{+}$, where $I_{\pm} \in \mc{D}_{n}$ and $I_-$ is to the left of $I_+$ (i.e. $\sup_{I_-} = \inf_{I_+}$).
-  Let's compute the difference $df_n$ on an interval $I \in \mc{D}_{n-1}$:
+  Let's compute the difference $d\mb{f}_n$ on an interval $I \in \mc{D}_{n-1}$:
   \begin{equation*}
     \begin{aligned}
-      \1_{I}(df_{n}) &= \1_{I}(f_{n} - f_{n-1}) \\
-      &= \1_{I_{-}} \otimes \langle f \rangle_{I_{-}} + \1_{I_{+}} \otimes \langle f \rangle_{I_{+}} - (\1_{-} + \1_{+}) \otimes \langle f \rangle_{I} \\
-      &= \1_{I_{-}} \otimes \Big( \frac{2}{|I|}\int_{I_{-}} f - \frac{1}{|I|}\int_{I} f \Big) + \1_{I_{+}} \otimes \Big( \frac{2}{|I|}\int_{I_{+}} f - \frac{1}{|I|}\int_{I} f \Big) \\
-      &= \1_{I_{-}} \otimes \Big( \frac{1}{|I|}\int_{I_{-}} f - \frac{1}{|I|}\int_{I_{+}} f \Big) - \1_{I_{+}} \otimes \Big( \frac{1}{|I|}\int_{I_{-}} f - \frac{1}{|I|}\int_{I_{+}} f \Big) \\
-      &= h_I \otimes \langle f, h_I \rangle
+      \1_{I}(d\mb{f}_{n}) &= \1_{I}(\mb{f}_{n} - \mb{f}_{n-1}) \\
+      &= \1_{I_{-}} \otimes \langle \mb{f} \rangle_{I_{-}} + \1_{I_{+}} \otimes \langle \mb{f} \rangle_{I_{+}} - (\1_{-} + \1_{+}) \otimes \langle \mb{f} \rangle_{I} \\
+      &= \1_{I_{-}} \otimes \Big( \frac{2}{|I|}\int_{I_{-}} \mb{f} - \frac{1}{|I|}\int_{I} \mb{f} \Big) + \1_{I_{+}} \otimes \Big( \frac{2}{|I|}\int_{I_{+}} \mb{f} - \frac{1}{|I|}\int_{I} \mb{f} \Big) \\
+      &= \1_{I_{-}} \otimes \Big( \frac{1}{|I|}\int_{I_{-}} \mb{f} - \frac{1}{|I|}\int_{I_{+}} \mb{f} \Big) - \1_{I_{+}} \otimes \Big( \frac{1}{|I|}\int_{I_{-}} \mb{f} - \frac{1}{|I|}\int_{I_{+}} \mb{f} \Big) \\
+      &= h_I \otimes \langle \mb{f}, h_I \rangle
     \end{aligned}
   \end{equation*}
   where
   \begin{equation*}
     h_I := \frac{1}{|I|^{1/2}} (\1_{I_-} - \1_{I_+})
   \end{equation*}
-  is the ($L^2$-normalised) \emph{Haar function} associated with $I \in \mc{D}_{n}$.
+  is the ($L^2$-normalised) \emph{Haar function} associated with the dyadic interval $I$.
   Thus the representation of $f$ in terms of martingale differences corresponds to its Haar expansion (ignoring the issue of whether the sums converge):
   \begin{equation*}
-    f = f_0 + \sum_{n \geq 1} df_{n} = \langle f \rangle_{[0,1)} + \sum_{n \geq 1} \sum_{I \in \mc{D}_{n-1}} h_I \otimes \langle f, h_I \rangle. 
+    \mb{f} = \mb{f}_0 + \sum_{n \geq 1} d\mb{f}_{n} = \langle \mb{f} \rangle_{[0,1)} + \sum_{n \geq 1} \sum_{I \in \mc{D}_{n-1}} h_I \otimes \langle \mb{f}, h_I \rangle. 
   \end{equation*}
-
 \end{example}
 
-The martingale associated with an $L^p$ function has the following fundamental convergence property.
-This will be extended to almost sure convergence in Theorem \ref{thm:mgale-pw-conv}. 
+In general, given a function $\mb{f} \in L^1(\Omega,\mc{A};X)$ and a filtration $\mc{A}_{\bullet}$ as above, we can formally write\footnote{This is assuming that $\mb{f}$ is $\mc{A}_{\infty}$-measurable, in the notation of Theorem \ref{thm:mgale-conv-Lp}. The filtration $\mc{A}_{\bullet}$ may not contain enough information to recover $\mc{A}$.}
+\begin{equation*}
+  \mb{f} = \mb{f}_{0} = \sum_{n \geq 1} d\mb{f}_{n} = \lim_{n \to \infty} \E^{\mc{A}_{n}} \mb{f}.
+\end{equation*}
+In what sense can we take this limit, and thus represent $\mb{f}$ in terms of its associated martingale?
+First we will show convergence in $L^p$-norm; this will be extended to almost sure convergence in Theorem \ref{thm:mgale-pw-conv}. 
 
 \begin{thm}\label{thm:mgale-conv-Lp}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space and $(\mc{A}_{n})_{n \in \N}$ a filtration.
-  Let $\mc{A}_{\infty} \subset \mc{A}$ be the sub-$\sigma$-algebra generated by $\cup_{n \in \N} \mc{A}_{n}$.
+  Let $(\Omega, \mc{A}, \P)$ be a probability space and $\mc{A}_{\bullet}$ a filtration.
+  Let $\mc{A}_{\infty} \subset \mc{A}$ be the $\sigma$-subalgebra generated by $\cup_{n \in \N} \mc{A}_{n}$.
   Let $X$ be a Banach space and $p \in [1,\infty)$.
-  Then for all $f \in L^p(\Omega,\P;X)$ we have $\E^{\mc{A}_{n}} f \to \E^{\mc{A}_\infty} f$ with convergence in $L^p$.
+  Then for all $\mb{f} \in L^p(\Omega;X)$ we have $\E^{\mc{A}_{n}} \mb{f} \to \E^{\mc{A}_\infty} \mb{f}$ with convergence in $L^p$.
 \end{thm}
 
 \begin{proof}
-  Since $\E^{\mc{A}_{n}} f = \E^{\mc{A}_{n}} \E^{\mc{A}_{\infty}} f$ for all $n \in \N$, it suffices to assume that $f = \E^{\mc{A}_{\infty}} f$, i.e. that $f$ is $\mc{A}_{\infty}$-measurable.
+  Since $\E^{\mc{A}_{n}} \mb{f} = \E^{\mc{A}_{n}} \E^{\mc{A}_{\infty}} \mb{f}$ for all $n \in \N$, it suffices to assume that $\mb{f} = \E^{\mc{A}_{\infty}} \mb{f}$, i.e. that $f$ is $\mc{A}_{\infty}$-measurable.
   We will reduce to showing that
   \begin{equation*}
-    \bigcup_{n \in \N} L^p(\Omega,\mc{A}_{n},\P;X)
+    \bigcup_{n \in \N} L^p(\mc{A}_{n};X)
   \end{equation*}
-  is dense in $L^p(\Omega,\mc{A}_{\infty},\P;X)$.
-  Assuming this is true for the moment, given $\varepsilon > 0$, there exists $n \in \N$ and $g \in L^p(\mc{A}_{n};X)$ such that $\|f - g\|_p < \varepsilon$.
-  We also have $\E^{\mc{A}_{m}} g = g$ for all $m > n$, so for all such $m$ we have
+  is dense in $L^p(\mc{A}_{\infty};X)$.
+  Assuming this is true for the moment, given $\varepsilon > 0$, there exists $n \in \N$ and $\mb{g} \in L^p(\mc{A}_{n};X)$ such that $\|\mb{f} - \mb{g}\|_p < \varepsilon$.
+  We also have $\E^{\mc{A}_{m}} \mb{g} = \mb{g}$ for all $m > n$, so for all such $m$ we have
   \begin{equation*}
     \begin{aligned}
-      \|\E^{\mc{A}_{m}} f - f\|_p
-      &\leq \|\E^{\mc{A}_m}(f - g)\|_p + \|\E^{\mc{A}_{m}} g - f\|_p \\
-      &\leq 2\|f - g\|_{p} < 2\varepsilon.
+      \|\E^{\mc{A}_{m}} \mb{f} - \mb{f}\|_p
+      &\leq \|\E^{\mc{A}_m}(\mb{f} - \mb{g})\|_p + \|\E^{\mc{A}_{m}} \mb{g} - \mb{f}\|_p \\
+      &\leq 2\|\mb{f} - \mb{g}\|_{p} < 2\varepsilon.
     \end{aligned}
   \end{equation*}
-  Taking $m \to \infty$ and noting that $\varepsilon$ was arbitrary, we find that $\E^{\mc{A}_{m}} f \to f$ in $L^p$.
+  Taking $m \to \infty$ and noting that $\varepsilon$ was arbitrary, we find that $\E^{\mc{A}_{m}} \mb{f} \to \mb{f}$ in $L^p$.
 
   It remains to prove the density statement, and by Exercise \ref{ex:general-density} it suffices to do this in the scalar case $X = \K$.
   Consider the collection of sets
   \begin{equation*}
-    \mc{C} := \Big\{A \in \mc{A}_{\infty} : \1_{A} \in \overline{\bigcup_{n \in \N} L^p(\mc{A}_{n})} \Big\}
+    \mc{C} := \Big\{A \in \mc{A}_{\infty} : \1_{A} \in \overline{\bigcup_{n \in \N} L^p(\mc{A}_{n})} \Big\} \subset \mc{A}_{\infty},
   \end{equation*}
   where the closure is in $L^p(\mc{A}_{\infty})$.
   Then $\mc{C}$ is a $\sigma$-algebra which contains $\mc{A}_{n}$ for each $n \in \N$, so that $\mc{A}_{\infty} = \mc{C}$, which implies that all $\mc{A}_{\infty}$-simple functions are contained in $\overline{\bigcup_{n \in \N} L^p(\mc{A}_{n})}$, and thus that this closure is $L^p(\mc{A}_{\infty})$.  
 \end{proof}
 
 \begin{example}\label{eg:sum-process}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space, $X$ a Banach space, and let $(g_n)_{n \in \N}$ be a sequence of random variables in $L^1(\Omega;X)$ which are mutually independent.
-  Let $(\mc{F}_n)_{n \in \N}$ be the filtration generated by the process $(g_n)_{n \in \N}$, and for each $n \in \N$ let $\sigma_n := \sum_{m=0}^n g_n$ be the sum of the first $n+1$ random variables.
+  Let $(\Omega, \mc{A}, \P)$ be a probability space, $X$ a Banach space, and let $(\mb{g}_n)_{n \in \N}$ be a sequence of integrable $X$-valued random variables which are mutually independent (see Section \ref{sec:probability} in the appendices), such that $\E\mb{g}_{n} = 0$ for all $n \geq 1$.
+  Let $\mc{A}_{\bullet}$ be the filtration generated by the process $\mb{g}_{\bullet}$, and for each $n \in \N$ let $\mb{\sigma}_n := \sum_{m=0}^n \mb{g}_m$ be the sum of the first $n+1$ random variables.
   Then we have
   \begin{equation*}
     \begin{aligned}
-      \E^{\mc{F}_n} \sigma_{n+1} &= \E^{\mc{F}_n}\Big( \sum_{m=0}^ng_m \Big) + \E^{\mc{F}_n} g_{n+1} \\
-      &=\sum_{m=0}^n g_m = \sigma_n
+      \E^{\mc{A}_n} \mb{\sigma}_{n+1} &= \E^{\mc{A}_n}\Big( \sum_{m=0}^n\mb{g}_m \Big) + \E^{\mc{A}_n} \mb{g}_{n+1} \\
+      &=\sum_{m=0}^n \mb{g}_m + \E\mb{g}_{n+1} = \mb{\sigma}_n
     \end{aligned}
   \end{equation*}
-  since the random variables $(g_m)_{m=0}^n$ are $\mc{F}_n$-measurable and $g_{n+1}$ is independent of $\mc{F}_n$.\todo{this needs to be an exercise or a note}
-  Thus the sum process $(\sigma_n)_{n \in \N}$ is a martingale.
+  since the random variables $(\mb{g}_m)_{m=0}^n$ are $\mc{A}_n$-measurable and $\mb{g}_{n+1}$ is independent of $\mc{A}_n$ (Exercise \ref{ex:ce-ind}).
+  Thus the sum process $\mb{\sigma}_{\bullet}$ is a martingale.
 \end{example}
 
-\begin{prop}\label{prop:mgale-transforms}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space, $X$ a Banach space, and let $(M_n)_{n \in \N}$ be a martingale (valued in $X$) with respect to a filtration $(\mc{A}_n)_{n \in \N}$.
-  Let $Y$ be another Banach space, and let $(T_n)_{n \in \N}$ be a sequence of operators in $L^\infty(\Omega; \Lin(X,Y))$ which is predictable with respect to $(\mc{A}_n)_{n \in \N}$.
-  For each $n \in \N$ and $\omega \in \Omega$ define a function $T_n M_n \in L^1(\Omega; Y)$ by
-  \begin{equation*}
-    (T \cdot M)_n := \sum_{m=0}^n T_m dM_m \in Y.
-  \end{equation*}
-  Then $(T \cdot M)_{n \in \N}$ is a ($Y$-valued) martingale with respect to $(\mc{A}_n)_{n \in \N}$.
-\end{prop}
+An important class of operators in stochastic analysis are \emph{martingale transforms}.\footnote{These are the discrete-time analogues of stochastic integrals.}
+These are defined by acting termwise on a martingale's difference sequence.
+They turn out to be an important model for many operators in harmonic analysis.
 
-\begin{proof}
-  Integrability of each $(T \cdot M)_n$ follows from that of each $M_m$ and the a.s. uniform boundedness of each $T_m$.
-  To see that $(T \cdot M)_{n \in \N}$ is a martingale with respect to $(\mc{A}_n)_{n \in \N}$, it suffices to show\todo{pur a prop. allowing for this} that
-  \begin{equation}\label{eq:transform-independent-increments}
-    \E^{\mc{A}_n} d(T \cdot M)_{n+1} = 0
-  \end{equation}
-  for all $n \in \N$.
-  By Proposition \ref{prop:CE-measurable-op}, since $T_{n+1}$ is $\mc{A}_n$-measurable by the predictability assumption and $dM_{n+1}$ is independent of $\mc{A}_n$ (Exercise \ref{}), we have 
+\begin{defn}
+  Let $(\Omega, \mc{A}, \P)$ be a probability space, $X$ a Banach space, and let $\mb{f}_{\bullet}$ be an $X$-valued martingale with respect to a filtration $\mc{A}_{\bullet}$.
+  Let $Y$ be another Banach space, and let $(T_n)_{n \in \N}$ be a sequence of operators in $L^\infty(\Omega; \Lin(X,Y))$ which is predictable with respect to $\mc{A}_{\bullet}$.
+  The \emph{martingale transform of $\mb{f}_{\bullet}$ by $T_{\bullet}$} is the $Y$-valued martingale $(T \cdot \mb{f})_{\bullet}$ defined by
   \begin{equation*}
-    \E^{\mc{A}_n} d(T \cdot M)_{n+1} = \E^{\mc{A}_n} (T_{n+1} dM_{n+1}) = T_{n+1} \E^{\mc{A}_n} dM_{n+1} = 0,
+    (T \cdot \mb{f})_n := \sum_{m=0}^n T_m d\mb{f}_m.
   \end{equation*}
-  proving \eqref{eq:transform-independent-increments} as required.
-\end{proof}
+\end{defn}
+
+To see that the martingale transform $(T \cdot \mb{f})_{\bullet}$ is itself a martingale, first note that integrability of each $(T \cdot \mb{f})_n$ follows from that of each $\mb{f}_m$ and the a.e. uniform boundedness of each $T_m$.
+It then suffices to show that each $d(T\cdot \mb{f})_{n}$ is $\mc{A}_{n}$-measurable, and that
+\begin{equation}\label{eq:transform-independent-increments}
+  \E^{\mc{A}_n} d(T \cdot \mb{f})_{n+1} = 0 \qquad \forall n \in \N
+\end{equation}
+(see Exercise \ref{ex:martingale-elementary-properties}).
+Since
+\begin{equation*}
+  d(T \cdot \mb{f})_{n} = T_{n} d\mb{f}_{n},
+\end{equation*}
+the assumptions immediately give $\mc{A}_{n}$-measurability.
+As for \eqref{eq:transform-independent-increments}, the predictability assumption on $T_{\bullet}$ and the fact that $\mb{f}_{\bullet}$ is a martingale gives us
+\begin{equation*}
+  \E^{\mc{A}_n} d(T \cdot \mb{f})_{n+1} = \E^{\mc{A}_n} (T_{n+1} d\mb{f}_{n+1}) \stackrel{(*)}{=} T_{n+1} \E^{\mc{A}_n} d\mb{f}_{n+1} = 0,
+\end{equation*}
+using Proposition \ref{prop:CE-measurable-op} to give the starred equality.
 
 \begin{example}\label{eg:betting-game-martingale}
   We return once more to our betting game, with notation given in Example \ref{eg:gambling-filtrations}.
@@ -573,24 +573,25 @@ This will be extended to almost sure convergence in Theorem \ref{thm:mgale-pw-co
     d\mb{s}_{n+1} = \mb{s}_{n+1} - \mb{s}_{n} = \pi_{n+1} \mb{x}_{n+1} \qquad \forall n \in \N,
   \end{equation*}
   where $\pi_{n+1}$ is the outcome of the coin toss and $\mb{x}_{n+1}$ is the vector wagered at time $n+1$.
-  The process $(\pi_n)_{n \in \N}$ generates the filtration $(\mc{F}_n)_{n \in \N}$.
-  Since the random variables $(\pi_n)_{n \in \N}$ are mutually independent, the sum process $(\sigma_{n})_{n \in \N}$ given by
+  The process $\pi_{\bullet}$ generates the filtration $\mc{A}_{\bullet}$.
+  Since the random variables $\pi_{\bullet}$ are mutually independent, the sum process $\sigma_{\bullet}$ given by
   \begin{equation*}
-    \sigma_{n} := \sum_{m=0}^n \pi_{n}
+    \sigma_{n} := \sum_{m=0}^n \pi_{m}
   \end{equation*}
   is a martingale (see Example \ref{eg:sum-process}).
-  Now suppose that the wager vectors $\mb{x}_n \in L^1(\Omega,X)$ are integrable.
-  We assumed that this sequence is predictable with respect to the filtration $(\mc{F}_{n})_{n \in \N}$ (meaning that we place the $n$-th bet before seeing the outcome of the $n$-th coin toss), so we can construct the martingale transform $\mb{x} \cdot \sigma$.\footnote{Technically we are identifying $X$ with $\Lin(\C;X)$ here. Given a vector $\mb{y} \in X$, the associated linear operator $\C \to X$ maps $\lambda \in \C$ to $\lambda \mb{y} \in X$.}
-  By definition, the difference sequence of $\mb{x} \cdot \sigma$ is
+  Now suppose that the wager vectors $\mb{x}_n \in L^1(\Omega;X)$ are integrable.
+  We assumed that this sequence is predictable with respect to $\mc{A}_{\bullet}$ (meaning that we place the $n$-th bet before knowing the outcome of the $n$-th coin toss), so the martingale transform $(\mb{x} \cdot \sigma)_{\bullet}$ is defined.\footnote{Technically we are identifying $X$ with $\Lin(\C;X)$ here. Given a vector $\mb{y} \in X$, the associated linear operator $\C \to X$ maps $\lambda \in \C$ to $\lambda \mb{y} \in X$.}
+  The difference sequence of $(\mb{x} \cdot \sigma)_{\bullet}$ is
   \begin{equation*}
     d(\mb{x} \cdot \sigma)_{n+1} = \mb{x}_{n+1} d\sigma_{n+1} = \pi_{n+1} \mb{x}_{n+1} = d\mb{s}_{n+1}, 
   \end{equation*}
-  and the initial term is
+  with initial term
   \begin{equation*}
     (\mb{x} \cdot \sigma)_0 = \mb{x}_{0} \pi_{0} = \mb{s}_{0},
   \end{equation*}
-  so we have the equality of martingales $(\mb{s}_{n})_{n \in \N} = ((\mb{x} \cdot \sigma)_{n})_{n \in \N}$.
-  That is, the state of your wallet $(\mb{s}_{n})_{n \in \N}$ is a martingale, and it is given by the martingale transform of the sum of coin flips $(\sigma_{n})_{n \in \N}$ by the wager vectors $(\mb{x}_{n})_{n \in \N}$.
+  so we have the equality of martingales $\mb{s}_{\bullet} = (\mb{x} \cdot \sigma)_{\bullet}$.
+  That is, the state of your wallet $\mb{s}_{\bullet}$ is a martingale, and it is given by the martingale transform of the sum of coin flips $\sigma_{\bullet}$ by the wager vectors $\mb{x}_{\bullet}$.
+  This says that the outcome of our $X$-valued betting game is given by a martingale transform of the outcome of the simple coin-toss game.
 \end{example}
 
 
@@ -991,6 +992,16 @@ Thus reflexive spaces have the $\infty$-MCP, even if they are not separable.
   \end{itemize}
 \end{exercise}
 
+\begin{exercise}\label{ex:CE-monotonicity}
+  Let $(\Omega,\mc{A},\P)$ is a probability space, $X$ a Banach space, and $\mb{f} \in L^1(\Omega;X)$.
+  Let $\mc{B}$ and $\mc{B}'$ be $\sigma$-subalgebras of $\mc{A}$ with $\mc{B}' \subset \mc{B}$.
+  Show that
+  \begin{equation*}
+    \E^{\mc{B}'} \E^{\mc{B}} \mb{f} = \E^{\mc{B}'} \mb{f}
+  \end{equation*}
+  in two ways: first using the defining property of conditional expectations, and then using its construction as the adjoint of an inclusion map.
+\end{exercise}
+
 \begin{exercise}\label{ex:CE-adjoint}
   Use the defining property \eqref{eq:conditional-expectation-property} of conditional expectations (i.e. do not use details of its construction) to prove Proposition \ref{prop:CE-adjoint}.
 \end{exercise}
@@ -1004,22 +1015,23 @@ Thus reflexive spaces have the $\infty$-MCP, even if they are not separable.
   Prove Proposition \ref{prop:CE-measurable-op}.
 \end{exercise}
 
+\begin{exercise}\label{ex:ce-ind}
+  Let $(\Omega,\mc{A},\P)$ be a probability space, $X$ a Banach space, and $\mb{f} \in L^1(\Omega;X)$ an integrable random variable.
+  Let $\mc{B}$ be a $\sigma$-subalgebra of $\mc{A}$ which is independent to the $\sigma$-subalgebra $\sigma(\mb{f})$.
+  Show that $\E^{\mc{B}} \mb{f} \aeeq \E \mb{f}.$
+\end{exercise}
+
 \begin{exercise}\label{ex:martingale-elementary-properties}
-  Let $(\Omega,\mc{A},\P)$ be a probability space, $X$ a Banach space, and let $(M_n)_{n \in \N}$ be a martingale with respect to some filtration $(\mc{A}_n)_{n \in \N}$.
+  Let $(\Omega,\mc{A},\P)$ be a probability space with a filtration $\mc{A}_{\bullet}$, $X$ a Banach space, and let $\mb{f}_{\bullet}$ be an $X$-valued stochastic process with $\mb{f}_{n} \in L^1(\Omega;X)$ for all $n \in \N$.
   \begin{itemize}
   \item
-    Show that $M_n = \E^{\mc{A}_n} M_m$ for all $n,m \in \N$ with $m > n$,
+    Show that $\mb{f}_{\bullet}$ is a martingale if and only if $\mb{f}_n = \E^{\mc{A}_n} \mb{f}_m$ for all $n,m \in \N$ with $m > n$.
   \item
-    Let $(\mc{F}_n)_{n \in \N}$ be the filtration generated by $(M_n)_{n \in \N}$, i.e.
-    \begin{equation*}
-      \mc{F}_n := \sigma(M_0, M_1, \ldots, M_n).
-    \end{equation*}
-    Show that $(M_n)_{n \in \N}$ is a martingale with respect to $(\mc{F}_n)_{n \in \N}$.
+    Show that $\mb{f}_{\bullet}$ is a martingale if and only if the difference sequence $d\mb{f}_{n}$ is adapted to $\mc{A}_{\bullet}$, and $\E^{\mc{A}_{n}} (d\mb{f}_{n}) = 0$ for all $n \geq 1$.
+    Conclude that an $X$-valued stochastic process $\mb{g}_{\bullet}$ is the difference sequence of a martingale if and only if it $\mb{g}_{\bullet}$ is $\mc{A}_{\bullet}$-adapted, $\mb{g}_{n} \in L^1(\Omega;X)$ for all $n \in \N$, and $\E^{\mc{A}_{n}}(\mb{g}_{n}) = 0$ for all $n \geq 1$.
   \item
-    For all $p \in [1,\infty]$, show that the sequence $\|M_n\|_{L^p(\Omega,\P;X)}$ is monotonically increasing in $n$.
+    If $\mb{f}_{\bullet}$ is a martingale and $p \in [1,\infty]$, show that $\|\mb{f}_{n}\|_{L^p(\Omega;X)}$ is monotonically increasing in $n$.
   \end{itemize}
-  \todo{add: martingales in bijective correspondence with their difference sequences}
-  \todo{add: martingales = independent increments}
 \end{exercise}
 
 \begin{exercise}\label{ex:mgale-conv}
@@ -1036,7 +1048,7 @@ Thus reflexive spaces have the $\infty$-MCP, even if they are not separable.
 
 
 \begin{exercise}\label{ex:mgale-check}
-  Show that the $L^1(\Omega;P)$-valued stochastic process defined in \eqref{eq:L1-example-mgale} is a martingale. %mk
+  Show that the $L^1(\Omega;P)$-valued stochastic process defined in \eqref{eq:L1-example-mgale} is a martingale. 
 \end{exercise}
 
 \begin{exercise}\label{ex:L1-noMCP-var}
