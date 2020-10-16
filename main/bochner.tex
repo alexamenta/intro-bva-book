@@ -396,12 +396,12 @@ For now we will establish a duality result that holds with no additional assumpt
 
   \textbf{Norming property:}
   This follows from the fact that $\Phi$ is an isometry, arguing via the double dual of $X$.
-  Let $\map{i}{X}{X^{**}}$ denote the canonical isometric embedding of $X$ into its double dual.
+  Let $\map{j}{X}{X^{**}}$ denote the canonical isometric embedding of $X$ into its double dual.
   Then we can write
   \begin{equation*}
     \begin{aligned}
-      \|\mb{f}\|_{L^p(S;X)} = \|i \circ \mb{f}\|_{L^p(S;(X^*)^*)} &= \|\Phi (i \circ \mb{f})\|_{L^{p'}(S; X^*)^*} \\
-      &= \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \int_{S} |\langle \mb{g}(s) , i(\mb{f}(s)) \rangle| \, \dd\mu(s) \\
+      \|\mb{f}\|_{L^p(S;X)} = \|j \circ \mb{f}\|_{L^p(S;(X^*)^*)} &= \|\Phi (j \circ \mb{f})\|_{L^{p'}(S; X^*)^*} \\
+      &= \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \int_{S} |\langle \mb{g}(s) , j(\mb{f}(s)) \rangle| \, \dd\mu(s) \\
       &= \sup_{\mb{g}} \int_{S} |\langle \mb{f}(s) , \mb{g}(s) \rangle| \, \dd\mu(s),
     \end{aligned}
   \end{equation*}
