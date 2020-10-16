@@ -187,20 +187,20 @@ Said less precisely, if $T$ is a stopping time, then at time $n$, one can determ
     \end{aligned}
   \end{equation*}
   and noting that since each $\mb{s}_m$ is $\mc{A}_m$-measurable, the set above is $\mc{A}_n$-measurable.
-  Thus $T_K$ is a stopping time.
+  Thus $T_K$ is a stopping time with respect to $\mc{A}_{\bullet}$.
   Whether $T_K$ is a \emph{finite} stopping time depends on the set $K \subset X$, the wager vectors $(\mb{x}_n)_{n \in \N}$, and potentially even the geometry of $X$ (see Exercise \ref{ex:gambling-in-linfty}).
 \end{example}
 
 The proof above applies to more general stochastic processes.
 
-\begin{prop}
+\begin{prop}\label{prop:first-hitting-time}
   Let $(\Omega, \mc{A}, \P)$ be a probability space and $X$ a Banach space.
-  Let $\mb{f}_{\bullet}$ be an $X$-valued stochastic process and $K \subset X$ a Borel measurable set.
+  Let $\mb{f}_{\bullet}$ be an $X$-valued stochastic process adapted to a filtration $\mc{A}_{\bullet}$, and $K \subset X$ a Borel measurable set.
   Then the function $\map{T_K}{\Omega}{\N \cup \{\infty\}}$ defined by
   \begin{equation*}
     T_K(\omega) := \inf\{n \in \N : \mb{f}_n(\omega) \in K \}
   \end{equation*}
-  is a stopping time.
+  is a stopping time with respect to $\mc{A}_{\bullet}$.
 \end{prop}
 
 The stopping time $T_K$ defined above is called the \emph{first hitting time of $K$}.
@@ -595,138 +595,153 @@ using Proposition \ref{prop:CE-measurable-op} to give the starred equality.
 \end{example}
 
 
-
-
-
 \section{Maximal inequalities and pointwise convergence}
 % proofs from Pisier with little modifications to allow for infinite martingales
 
-
-\begin{defn}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space, let $(\mc{A}_n)_{n \in \N}$ be a filtration on this space.
-  A real-valued stochastic process $(M_n)_{n \in \N}$ with each $M_n \in L^1(\Omega; \R)$ is called a \emph{submartingale} with respect to $(\mc{A}_n)_{n \in \N}$ if 
-  \begin{equation}\label{eq:mgale-defining-property}
-    M_n \stackrel{\as}{\leq} \E^{\mc{A}_n} M_{n+1} \qquad \forall n \in \N.
-  \end{equation}
-\end{defn}
-
-As an example, consider a martingale $(f_n)_{n \in \N}$ taking values in a Banach space $X$, with respect to a filtration $(\mc{A}_{n})_{n \in \N}$.
-Then by the pointwise estimate \eqref{eq:positive-pw-est} established in the proof of Theorem \ref{thm:positive-extensions} we have for all $n \in \N$ 
-\begin{equation*}
-  \|f_n\|_X = \|\E^{\mc{A}_n} f_{n+1}\|_X \stackrel{\as}{\leq} \E^{\mc{A}_n} \|f_{n+1}\|_X,
-\end{equation*}
-so that the sequence $(\|f_n\|_X)_{n \in \N}$ is a submartingale.
+In Theorem \ref{thm:mgale-conv-Lp} we proved the $L^p$-limit $\E^{\mc{A}_{n}} \mb{f} \to \E^{\mc{A}_{\infty}} \mb{f}$ for a function $\mb{f} \in L^p(X)$.
+In this section we will consider almost-everywhere pointwise convergence.
+A general principle usually attributed to Banach says that a.e. pointwise convergence results can be proven by combining $L^p$-convergence results (which we have) with $L^p$-bounds for an appropriate \emph{maximal operator}.
+The maximal operator relevant to our problem is defined as follows.
 
 \begin{defn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
-  Given an $X$-valued stochastic process $(f_{n})_{n \in \N}$ we define the \emph{maximal function}
+  Given an $X$-valued stochastic process $\mb{f}_{\bullet}$ we define the \emph{Doob maximal function}
   \begin{equation*}
-    f^*(\omega) := \sup_{n \in \N} \|f_{n}(\omega)\|_{X} \qquad \forall \omega \in \Omega
+    \mc{M}(\mb{f}_{\bullet})(\omega) := \sup_{n \in \N} \|f_{n}(\omega)\|_{X} \qquad \forall \omega \in \Omega.
   \end{equation*}
+  We call $\mc{M}$ the \emph{Doob maximal operator}.
 \end{defn}
 
-\begin{thm}[Doob's maximal inequalities]\label{thm:doob}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space  and let $(f_{n})_{n \in \N}$ be a real-valued submartingale with respect to a filtration $(\mc{A}_{n})_{n \in \N}$.
-  Then for all $t > 0$ we have
-  \begin{equation*}
-    t\P(\{f^* > t\}) \leq   \sup_{n \in \N} \int_{\{f^* > t\}} |f_{n}| \, \dd\P,
-  \end{equation*}
-  and if $f^* \stackrel{\as}{\geq} 0$ then for all $p \in (1,\infty)$ we have
-  \begin{equation*}
-    \|f^*\|_{L^p(\Omega)} \leq p' \sup_{n \in \N} \|f_{n}\|_{L^p(\Omega)}.
-  \end{equation*}
-\end{thm}
+Note that the Doob maximal function is scalar-valued (and in fact non-negative), and that it is implicitly defined in terms of the scalar-valued process $\|\mb{f}_{\bullet}\|_{X}$.
+In fact, the theory we will present concerning the maximal function is essentially scalar-valued.
+If you're familiar with stochastic processes, you would have seen it before.
 
-\begin{cor}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space and $X$ a Banach space,  and let $(f_{n})_{n \in \N}$ be an $X$-valued martingale.
+\begin{defn}
+  Let $(\Omega, \mc{A}, \P)$ be a probability space with a filtration $\mc{A}_{\bullet}$.
+  A real-valued stochastic process $f_{\bullet}$ with each $f_n \in L^1(\Omega; \R)$ is called a \emph{submartingale} with respect to $\mc{A}_{\bullet}$ if 
+  \begin{equation}\label{eq:mgale-defining-property}
+    f_n \stackrel{\ae}{\leq} \E^{\mc{A}_n} f_{n+1} \qquad \forall n \in \N.
+  \end{equation}
+\end{defn}
+
+The submartingales we consider are all defined in terms of vector-valued martingales.
+Consider a martingale $\mb{f}_{\bullet}$ taking values in a Banach space $X$, with respect to a filtration $\mc{A}_{\bullet}$.
+Then by the pointwise estimate \eqref{eq:positive-pw-est} in Theorem \ref{thm:positive-extensions} we have
+\begin{equation*}
+  \|\mb{f}_n\|_X = \|\E^{\mc{A}_n} \mb{f}_{n+1}\|_X \stackrel{\ae}{\leq} \E^{\mc{A}_n} \|\mb{f}_{n+1}\|_X, \qquad \forall n \in \N,
+\end{equation*}
+so that the real-valued process $(\|\mb{f}_{n}\|_X)_{n \in \N}$ is a submartingale.
+In fact, it is a non-negative submartingale, and to make things simpler we will only consider non-negative submartingales in what follows.\footnote{Actual probabilists will probably be screaming at me at this point. I am cutting corners here, but it shouldn't have any impact on the vector-valued theory. Or will it? Let's hope not. }
+
+\begin{thm}[Doob's maximal inequalities]\label{thm:doob}
+  Let $(\Omega, \mc{A}, \P)$ be a probability space and let $f_{\bullet}$ be a non-negative submartingale with respect to a filtration $\mc{A}_{\bullet}$.
   Then for all $t > 0$ we have
   \begin{equation*}
-    t\P(\{f^* > t\}) \leq  \sup_{n \in \N} \|f_{n}\|_{L^1(\Omega;X)},
+    t\P(\{\mc{M}(f_{\bullet}) > t\}) \leq   \sup_{n \in \N} \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{n} \, \dd\P,
   \end{equation*}
   and for all $p \in (1,\infty)$ we have
   \begin{equation*}
-    \|f^*\|_{L^p(\Omega;X)} \leq p' \sup_{n \in \N} \|f_{n}\|_{L^p(\Omega;X)}.
+    \|\mc{M}(f_{\bullet})\|_{L^p(\Omega)} \leq p' \sup_{n \in \N} \|f_{n}\|_{L^p(\Omega)}.
+  \end{equation*}
+\end{thm}
+
+Before proving Doob's maximal inequalities, we state a quick consequence for $X$-valued martingales, which as we saw before induce non-negative submartingales by taking the norm pointwise.
+The first inequality is written in terms of the \emph{weak $L^1$ space} $L^{1,\infty}$.
+
+\begin{cor}
+  Let $(\Omega, \mc{A}, \P)$ be a probability space and $X$ a Banach space, and let $f_{\bullet}$ be an $X$-valued martingale.
+  Then we have
+  \begin{equation*}
+    \|\mc{M}(\mb{f}_{\bullet})\|_{L^{1,\infty}(\Omega)} :=  \sup_{t > 0} t\P(\{\mc{M}(\mb{f}_{\bullet}) > t\}) \leq  \sup_{n \in \N} \|\mb{f}_{n}\|_{L^1(\Omega;X)},
+  \end{equation*}
+  and for all $p \in (1,\infty)$ we have
+  \begin{equation*}
+    \|\mc{M}(\mb{f}_{\bullet})\|_{L^p(\Omega;X)} \leq p' \sup_{n \in \N} \|\mb{f}_{n}\|_{L^p(\Omega;X)}.
   \end{equation*}
 \end{cor}
 
 \begin{proof}[Proof of Theorem \ref{thm:doob}]
-  Fix $t > 0$ and define the stopping time (relative to the filtration $(\mc{A}_{n})_{n \in \N}$)
+  Fix $t > 0$ and define the random variable
   \begin{equation*}
-    T :=  \inf\{k \in \N : f_k > t\}.
+    T :=  \inf\{n \in \N : f_n > t\}.
   \end{equation*}
+  By Proposition \ref{prop:first-hitting-time}, $T$ is a stopping time relative to the filtration $\mc{A}_{\bullet}$ (it is the first hitting time of the set $(t,\infty)$).
   Then we have
-  \begin{equation*}
+  \begin{equation*} 
     \begin{aligned}
-      t\P(\{f^* > t\})
+      t\P(\{\mc{M}(f_{\bullet}) > t\})
       = t\P(\{T < \infty\})
-      &= \lim_{N \to \infty} \sum_{k = 0}^{N} t\P(\{T = k\}) \\
-      &\leq \lim_{N \to \infty} \Big| \sum_{k = 0}^{N} \int_{\{T = k\}} f_k \, \dd\P \Big| 
-      \leq \lim_{N \to \infty} \Big| \sum_{k = 0}^{N} \int_{\{T = k\}} \E^{\mc{A}_{k}} f_N \, \dd\P \Big|
+      &= \lim_{N \to \infty} \sum_{n = 0}^{N} t\P(\{T = n\}) \\
+      &\leq \lim_{N \to \infty} \sum_{n = 0}^{N} \int_{\{T = n\}} f_n \, \dd\P  \\ 
+      &\leq \lim_{N \to \infty} \sum_{n = 0}^{N} \int_{\{T = n\}} \E^{\mc{A}_{n}} f_N \, \dd\P 
     \end{aligned}
   \end{equation*}
-  using that $f_k > t$ on the set $\{T = k\}$ and that $(f_{n})_{n \in \N}$ is a submartingale.
-  Since $T$ is a stopping time we have $\{T = k\} \in \mc{A}_{k}$, so for all $N \in \N$ we have
+  using that $f_n > t$ on the set $\{T = n\}$ (this uses that $f_{n}$ is nonnegative), and that $f_{\bullet}$ is a submartingale.
+  Since $T$ is a stopping time with respect to $\mc{A}_{\bullet}$ we have $\{T = n\} \in \mc{A}_{n}$, so for all $N \in \N$ we have
   \begin{equation*}
-    \Big| \sum_{k = 0}^{N} \int_{\{T = k\}} \E^{\mc{A}_{k}} f_N \, \dd\P \Big|
-    = \Big| \sum_{k = 0}^{N} \int_{\{T = k\}} f_{N} \, \dd\P \Big|
-    = \Big| \int_{\{T \leq N\}} f_{N} \, \dd\P \Big|
-    \leq \sup_{N \in \N} \int_{\{f^* > t\}} |f_{N}| \, \dd\P 
+    \begin{aligned}
+     \sum_{n = 0}^{N} \int_{\{T = n\}} \E^{\mc{A}_{n}} f_N \, \dd\P 
+    =  \sum_{n = 0}^{N} \int_{\{T = n\}} f_{N} \, \dd\P 
+    &=  \int_{\{T \leq N\}} f_{N} \, \dd\P \\
+    &\leq \sup_{N \in \N} \int_{\{\mc{M}(f_{\bullet}) > t\}} |f_{N}| \, \dd\P
+  \end{aligned}
   \end{equation*}
   proving the first inequality.
 
-  For the second inequality, using that $f^* \stackrel{\as}{\geq} 0$ and supposing $\varepsilon > 0$, for $N$ sufficiently large we have
+  For the second inequality, fix $\varepsilon > 0$.
+  Then for sufficiently large $N$ we have
+  \begin{equation*}
+    t\P(\{\mc{M}(f_{\bullet}) > t\}) \leq (1 + \varepsilon) \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{N} \, \dd \P
+  \end{equation*}
+  by the first inequality.
+  This implies
   \begin{equation*}
     \begin{aligned}
-      \|f^*\|_{p}^{p}
-      &= \int_0^\infty pt^{p-1} \P(\{f^* > t\}) \, \dd t \\
-      &\leq (1 + \varepsilon) \int_0^\infty pt^{p-2} \int_{\{f^* > t\}} f_{N}(\omega) \, \dd\P(\omega) \, \dd t \\
-      &= (1 + \varepsilon) \int_{\Omega} f_{N}(\omega) \Big( \int_0^{f^*(\omega)} pt^{p-2} \, \dd t \Big) \, \dd\P(\omega) \\
-      &= (1 + \varepsilon) \int_{\Omega} \frac{p}{p-1} f_{N}(\omega) f^*(\omega)^{p-1} \, \dd\P(\omega) \\
-      &\leq (1 + \varepsilon) p' \|f_{N}\|_{p} \|f^*\|_{p}^{p-1}
+      \|\mc{M}(f)\|_{p}^{p}
+      &= \int_0^\infty pt^{p-1} \P(\{\mc{M}(f_{\bullet}) > t\}) \, \dd t \\
+      &\leq (1 + \varepsilon) \int_0^\infty pt^{p-2} \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{N}(\omega) \, \dd\P(\omega) \, \dd t \\
+      &= (1 + \varepsilon) \int_{\Omega} f_{N}(\omega) \Big( \int_0^{\mc{M}(f_{\bullet})(\omega)} pt^{p-2} \, \dd t \Big) \, \dd\P(\omega) \\
+      &= (1 + \varepsilon) \int_{\Omega} \frac{p}{p-1} f_{N}(\omega) \mc{M}(f_{\bullet})(\omega)^{p-1} \, \dd\P(\omega) \\
+      &\leq (1 + \varepsilon) p' \|f_{N}\|_{p} \|\mc{M}(f_\bullet)\|_{p}^{p-1}
     \end{aligned}
   \end{equation*}
   using H\"older's inequality in the last step.
-  Dividing through by $\|f^*\|_{p}^{p-1}$ yields
+  Dividing through by $\|\mc{M}(f_{\bullet})\|_{p}^{p-1}$ yields
   \begin{equation*}
-    \|f^*\|_{p} \leq (1 + \varepsilon) p' \sup_{n \in \N}\|f_{n}\|_{p}
+    \|\mc{M}(f_{\bullet})\|_{p} \leq (1 + \varepsilon) p' \sup_{n \in \N}\|f_{n}\|_{p}
   \end{equation*}
   for all $\varepsilon > 0$, which completes the proof.
 \end{proof}
 
-% i think we can do without this
-% but include it if necessary
-% \begin{thm}[Burkholder--Davis--Gundy inequality]
-% \end{thm}
-
-A general principle says that convergence in $L^p$ plus $L^p$-boundedness of the appropriate maximal function implies almost everywhere convergence.
-Here is the consequence for martingales.
+By combining Doob's maximal inequality with the $L^p$-convergence result of Theorem \ref{thm:mgale-conv-Lp}, one (i.e. you) can prove the following pointwise convergence theorem.
 
 \begin{thm}\label{thm:mgale-pw-conv} 
-  Let $(\Omega, \mc{A}, \P)$ be a probability space and $(\mc{A}_{n})_{n \in \N}$ a filtration.
-  Let $\mc{A}_{\infty} \subset \mc{A}$ be the sub-$\sigma$-algebra generated by $\cup_{n \in \N} \mc{A}_{n}$.
+  Let $(\Omega, \mc{A}, \P)$ be a probability space with a filtration $\mc{A}_{\bullet}$.
+  Let $\mc{A}_{\infty} \subset \mc{A}$ be the $\sigma$-subalgebra generated by $\cup_{n \in \N} \mc{A}_{n}$.
   Let $X$ be a Banach space and $p \in [1,\infty)$.
-  Then for all $f \in L^p(\Omega,\P;X)$ we have $\E^{\mc{A}_{n}} f \to \E^{\mc{A}_\infty} f$ almost surely.
+  Then for all $\mb{f} \in L^p(\Omega;X)$ we have $\E^{\mc{A}_{n}} \mb{f} \to \E^{\mc{A}_\infty} \mb{f}$ pointwise almost everywhere.
 \end{thm}
 
 \begin{proof}
   See Exercise \ref{ex:mgale-conv}.
 \end{proof}
 
-Note that this theorem says that the martingale $(f_n)_{n \in \N} = (\E^{\mc{A}_n} f)_{n \in \N}$ associated with an $\mc{A}_{\infty}$-measurable function $f \in L^p(\Omega;X)$ converges almost surely to $f$.
-
-Of course, this martingale is $L^p$-bounded in the following sense:
+Now we turn to a kind of converse question, which will lead to an interesting Banach space property.
+Given a Banach space $X$, which $X$-valued martingales $\mb{f}_{\bullet}$ are of the form $\mb{f}_{n} = \E^{\mc{A}_{n}} \mb{f}$ for some function $\mb{f} \in L^p(X)$?
+First we will need an evidently necessary $L^p$-boundedness condition.
 
 \begin{defn}
-  An $X$-valued stochastic process $(f_n)_{n \in \N}$ on a probability space $(\Omega,\mc{A},\P)$ is called \emph{$L^p$-bounded} if
+  Let $X$ be a Banach space.
+  An $X$-valued stochastic process $\mb{f}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$ is called \emph{$L^p$-bounded} if
   \begin{equation*}
-    \sup_{n \in \N} \|f_n\|_{L^p(\Omega;X)} < \infty.
+    \sup_{n \in \N} \|\mb{f}_n\|_{L^p(\Omega;X)} < \infty.
   \end{equation*}
 \end{defn}
 
-This raises an important question: given a general $L^p$-bounded $X$-valued martingale $(f_n)_{n \in \N}$, does it automatically hold that $f_n = \E^{\mc{A}_n} f$ for some $f \in L^p(\Omega;X)$?
+Given a general $L^p$-bounded $X$-valued martingale $(f_n)_{n \in \N}$, does it automatically hold that $f_n = \E^{\mc{A}_n} f$ for some $f \in L^p(\Omega;X)$?
 The answer turns out to depend on the geometry of $X$, and we will discuss this in the next section.
 For now we will quickly settle the scalar case.
-When $p=1$ we need an additional condition to guarantee relative weak compactness.
+When $p=1$ we will need an additional condition to guarantee relative weak compactness.
 
 \begin{defn}\label{defn:UI}
   Let $(\Omega,\mc{A},\P)$ be a probability space.
@@ -734,7 +749,7 @@ When $p=1$ we need an additional condition to guarantee relative weak compactnes
   \begin{equation*}
     \P(A) < \delta \Rightarrow \sup_{f \in \mc{F}} \int_{A} \|f(\omega)\|_X \, \dd\P(\omega) < \varepsilon \qquad \forall A \in \mc{A}.
   \end{equation*}
-  For a Banach space $X$, we say that an $X$-valued stochastic process $(f_n)_{n \in \N}$ is uniformly integrable if the set $\{\|f_n\|_{X} : n \in \N\} \subset L^1(\Omega)$ is uniformly integrable. 
+  For a Banach space $X$, we say that an $X$-valued stochastic process $\mb{f}_{\bullet}$ is uniformly integrable if the set $\{\|f_n\|_{X} : n \in \N\} \subset L^1(\Omega)$ is uniformly integrable. 
 \end{defn}
 
 A bounded subset $\mc{F} \subset L^1(\Omega)$ is uniformly integrable if and only if it is weakly relatively compact (see \cite[Theorem 5.2.9]{AK06}).
@@ -744,12 +759,13 @@ We use this to prove the following theorem.
 
 \begin{thm}\label{thm:mgale-cv-repn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and fix $p \in [1,\infty)$.
-  Let $(f_n)_{n \in \N}$ be an $L^p$-bounded scalar-valued martingale with respect to a filtration $(\mc{A}_n)_{n \in \N}$.
-  If $p = 1$, suppose furthermore that $(f_n)_{n \in \N}$ is uniformly integrable.
+  Let $f_{\bullet}$ be an $L^p$-bounded scalar-valued martingale with respect to a filtration $\mc{A}_{\bullet}$.
+  If $p = 1$, suppose also that $\mb{f}_{\bullet}$ is uniformly integrable.
   Then there exists a function $f_\infty \in L^p(\Omega,\mc{A},\P)$ such that $f_n = \E^{\mc{A}_n} f_\infty$ for all $n \in \N$.
 \end{thm}
 
-Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we have $f_n \to f_\infty$ almost surely and in $L^p$, so a corollary is that the martingale $(f_n)$ is a.s. convergent.
+Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we have $f_n \to f_\infty$ almost everywhere and in $L^p$.
+In particular, the martingale $f_{\bullet}$ has an almost everywhere pointwise limit.
 
 \begin{proof}
   By the discussion above, there is a subsequence $(f_{n_k})_{k \in \N}$ which converges weakly to a limit $f_\infty \in L^p(\Omega)$.
@@ -770,23 +786,45 @@ Note that by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv} we hav
 \end{proof}
 
 \begin{rmk}\label{rmk:mgale-cv-p1}
-  In fact, when $p = 1$, the assumption of uniform integrability can be removed, and the following is true: every scalar-valued martingale with $\sup_{n \in \N} \|f_n\|_1 < \infty$ converges almost everywhere (but not necessarily in $L^1$).
-  We'll skip the proof of this result so as to spend more time with Banach spaces, but if you're interested see \cite[Theorem 1.34]{gP16}.
-  The proof isn't particularly difficult.
+  When $p = 1$ the assumption of uniform integrability can be removed, and the following is true: every scalar-valued $L^1$-bounded martingale converges almost everywhere (but not necessarily in $L^1$).
+  This is proven in \cite[Theorem 1.34]{gP16}, and the proof isn't particularly difficult, but we'll skip it so that we have more time to spent with Banach spaces.
 \end{rmk}
 
 Later on we are going to need a corresponding result for submartingales.
 
 \begin{thm}\label{thm:submartingale-convergence}
-  Let $(\Omega,\mc{A},\P)$ be a probability space and $(f_n)_{n \in \N}$ a (real-valued) submartingale on $\Omega$ which is $L^1$-bounded and uniformly integrable.
-  Then $f_n$ converges almost surely and in $L^1$.
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $f_{\bullet}$ a real-valued submartingale on $\Omega$ which is $L^1$-bounded and uniformly integrable.
+  Then $f_\bullet$ converges almost everywhere, and in $L^1$.
 \end{thm}
 
 \begin{proof}
-  \todo{come back to this proof. Pisier Theorem 1.36}
+  We will write $f_{n} = \tilde{f}_{n} + a_{n}$ as a sum of an $L^1$-bounded uniformly integrable martingale $\tilde{f}_{\bullet}$ and a monotone increasing `drift' process $a_{\bullet}$.\footnote{This is the \emph{Doob decomposition}.}
+  By Theorem \ref{thm:mgale-cv-repn} to $\tilde{f}_{\bullet}$, this reduces us to showing that $a_{\bullet}$ has the desired convergence properties.
+
+  Define $g_{n} := df_{n} - \E^{\mc{A}_{n-1}}(df_{n})$ for all $n \geq 1$ and $g_{0} := f_{0}$, and let $\tilde{f}_{\bullet}$ be the process with difference sequence $d\tilde{f}_{\bullet} = g_{\bullet}$.
+  By construction $\E^{\mc{A}_{n-1}} g_{n} = 0$ for all $n \geq 1$, so $\tilde{f}_{\bullet}$ is a martingale.
+  Now note that for all $N \geq 1$
+  \begin{equation*}
+    f_{N} = \sum_{n=0}^{N} df_{n} = \sum_{n=0}^{N} d\tilde{f}_{n} + \sum_{n=1}^{N} \E^{\mc{A}_{n-1}}(df_{n}),
+  \end{equation*}
+  so that $f_{\bullet} = \tilde{f}_{\bullet} + a_{\bullet}$, with
+  \begin{equation*}
+    a_{N} := \sum_{n=1}^{N} \E^{\mc{A}_{n-1}}(df_{n}). 
+  \end{equation*}
+  Since $f_{\bullet}$ is a submartingale we have $\E^{\mc{A}_{n-1}}(df_{n}) \geq 0$ for all $n \geq 1$, so $a_{\bullet}$ is non-decreasing.
+  We have
+  \begin{equation*}
+    \|a_{N}\|_{L^1(\Omega)} = \E \sum_{n=1}^{N} \E^{\mc{A}_{n-1}}(df_{n}) = \sum_{n=1}^{N} \E(df_{n}) = \E(f_{N}) - E(f_{0})
+  \end{equation*}
+  by telescoping, thus the $L^1$-boundedness of $a_{\bullet}$ follows from that of $f_{\bullet}$.
+  By monotonicity $a_{\bullet}$ converges almost surely and in $L^1$, and furthermore $a_{\bullet}$ is uniformly integrable.
+  The $L^1$-boundedness and uniform integrability of $\tilde{f}_{\bullet} = f_{\bullet} - a_{\bullet}$ finally follows from that of $f_{\bullet}$ and $a_{\bullet}$.
+  
 \end{proof}
 
 \section{Martingale convergence as a Banach space property}
+
+\todo{UP TO HERE}%mk
 
 With Theorem \ref{thm:mgale-cv-repn} as inspiration, we make the following definition.
 
