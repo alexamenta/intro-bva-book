@@ -269,7 +269,7 @@ To connect the Radon--Nikodym property with the geometry of Banach spaces, we wi
 
 The martingales described in Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} (see also Exercise \ref{ex:L1-noMCP-var}) are $1$-separated, and thus yield $1$-separated trees in $c_0$ and $L_1$.
 But when one tries to draw a $\delta$-separated tree on a piece of paper, one quickly starts to run out of space.
-This is because pieces of paper model finite-dimensional Banach spaces, which have good martingale convergence properties.
+This is because pieces of paper model finite dimensional Banach spaces, which have good martingale convergence properties.
 
 \begin{prop}
   If a Banach space $X$ has the $\infty$-MCP, then for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree.
@@ -543,18 +543,13 @@ Let's rattle off some consequences of this theorem.
   By Lemma \ref{lem:MCP-sepdet}, this is true for the $p$-MCP (for all $p \in [1,\infty]$, but these properties are now known to be equivalent anyway). 
 \end{proof}
 
-\begin{rmk}
-  Not satisfied? See \cite[\textsection VII.6]{DU77} for 29 characterisations of the Radon--Nikodym property.
-\end{rmk}
-
-\section{Duality of Bochner spaces}
-
+Finally, we return to Bochner spaces.
 Recall Proposition \ref{prop:bochner-preduality}: for every $\sigma$-finite measure space $(S,\mc{A},\mu)$ and every Banach space $X$, for all $p \in [1,\infty]$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ given by
 \begin{equation*}
   \Phi \mb{g}(\mb{f}) = \int_{S} \langle \mb{f}(s), \mb{g}(s) \rangle \, \dd\mu(s) \qquad \forall \mb{f} \in L^p(S;X)
 \end{equation*}
 is an isometry onto a closed norming subspace of $L^p(S;X)^*$.
-We will now give the full statement this result with the help of the Radon--Nikodym property.
+We will now complete this result with the help of the Radon--Nikodym property.
 
 \begin{thm}\label{thm:bochner-duality-RNP}
   Let $X$ be a Banach space, and let $(S,\mc{A},\mu)$ be a countably generated measure space.\footnote{This says that there is a countable (or finite) collection of sets $(E_{\lambda})_{\lambda \in \Lambda}$ which generates $\mc{A}$.}
@@ -564,6 +559,9 @@ We will now give the full statement this result with the help of the Radon--Niko
 We leave the proof as an exercise (Exercise \ref{ex:RNP-bochner}). 
 
   
+\begin{rmk}
+  Not satisfied? See \cite[\textsection VII.6]{DU77} for 29 characterisations of the Radon--Nikodym property.
+\end{rmk}
 
 
   

@@ -7,12 +7,12 @@ The one-line goal of this course is to study what happens when scalar-valued fun
 \begin{equation*}
   \map{\mb{f}}{\R^{d}}{X},
 \end{equation*}
-where $X$ is a Banach space (typically infinite-dimensional), and we will study properties of operators acting on $X$-valued functions.
+where $X$ is a Banach space (typically infinite dimensional), and we will study properties of operators acting on $X$-valued functions.
 This will reveal interesting relationships between Fourier analysis, probability, measure theory, operator theory, and the geometry of Banach spaces.
 
 \section{Case study: the Fourier transform and Plancherel's theorem}
 
-To keep things simple, consider a finite-dimensional complex Banach space $X$ with a basis $\mb{e}_{1}, \ldots, \mb{e}_{N}$.
+To keep things simple, consider a finite dimensional complex Banach space $X$ with a basis $\mb{e}_{1}, \ldots, \mb{e}_{N}$.
 Every vector $\mb{x} \in X$ has a basis expansion
 \begin{equation*}
   \mb{x} = \sum_{n=1}^{N} x_{n} \mb{e}_{n}
@@ -22,9 +22,9 @@ for some scalars $x_{n} \in \C$, so every $X$-valued function $\map{\mb{f}}{\R}{
   \mb{f}(x) = \sum_{n=1}^{N} f_{n}(x) \mb{e}_{n}
 \end{equation*}
 for some scalar-valued functions $\map{f_{n}}{\R}{\C}$.
-This expansion suggests that properties of $\mb{f}$ can be deduced from properties of the scalar-valued functions $f_{n}$.
 
-The Fourier transform is defined on integrable scalar-valued functions $f \in L^1(\R)$ by
+We will investigate the Fourier transform on $X$-valued functions.
+For integrable scalar-valued functions $f \in L^1(\R)$, the Fourier transform is defined by
 \begin{equation*}
   \hat{f}(\xi) := \int_{\R} f(x) e^{-2\pi i x \xi} \, \dd x.
 \end{equation*}
@@ -44,13 +44,13 @@ Given $\map{\mb{f}}{\R}{X}$ as above, the Fourier transform $\map{\hat{\mb{f}}}{
     &= \sum_{n=1}^{N} \hat{f_{n}}(\xi) \mb{e}_{n}
   \end{aligned}
 \end{equation*}
-where the Lebesgue integral is extended to $X$-valued functions by linearity.\footnote{This requires finite-dimensionality of $X$. In general, the Lebesgue integral is replaced by a \emph{Bochner integral}. This is covered in Chapter \ref{sec:Bochner-spaces}.}
+where the Lebesgue integral is extended to $X$-valued functions by linearity.\footnote{This requires finite dimensionality of $X$. In general, the Lebesgue integral is replaced by a \emph{Bochner integral}. This is covered in Chapter \ref{sec:Bochner-spaces}.}
 The $L^2$-norm on $X$-valued functions is defined by
 \begin{equation*}
   \|\mb{f}\|_{L^2(\R;X)} := \Big( \int_{\R} \|\mb{f}(x)\|_{X}^{2} \, \dd x \Big)^{1/2}.
 \end{equation*}
 This yields a Banach space $L^2(\R;X)$, but already we start to see that something suspicious is going on: \emph{there is no natural way to turn $L^2(\R;X)$ into a Hilbert space unless $X$ itself is a Hilbert space.}
-Of course, since any two norms on a finite-dimensional vector space are equivalent, there exists a constant $1 \leq C_{X} < \infty$ such that
+Of course, since any two norms on a finite dimensional vector space are equivalent, there exists a constant $1 \leq C_{X} < \infty$ such that
 \begin{equation}\label{eq:fd-norm-equivalence}
   C_{X}^{-1} \|(x_{n})_{n=1}^{N}\|_{\ell^2_{N}} \leq \|\mb{x}\|_{X} \leq C_{X} \|(x_{n})_{n=1}^{N}\|_{\ell^2_{N}},
 \end{equation}
@@ -76,7 +76,7 @@ using the (scalar-valued) Plancherel theorem to deduce the starred equality.
 Thus we do have a kind of $X$-valued Plancherel theorem, but now instead of being an isometry, the Fourier transform is merely bounded on $L^2(\R;X)$ with norm $\leq C_{X}^{2}$.
 So the boundedness of the Fourier transform on $L^2(\R;X)$ seems to have something to do with the proximity of $X$ to a Hilbert space.
 
-Now what if $X$ is infinite-dimensonal?
+Now what if $X$ is infinite dimensonal?
 If a constant $C_{X}$ as in \eqref{eq:fd-norm-equivalence} exists (but with $N = \infty$), i.e. if $X$ is isomorphic to $\ell^2(\N)$, then the argument above still works,\footnote{As mentioned in an earlier footnote, the Lebesgue integral has to be replaced by the Bochner integral.} and the norm of the $X$-valued Fourier transform on $L^2(\R;X)$ is $\leq C_{X}^{2}$.
 The surprising fact is that the converse is also true: we will prove this in Chapter \ref{sec:fouriertype}.
 
@@ -85,15 +85,15 @@ The surprising fact is that the converse is also true: we will prove this in Cha
 \end{thm}
 
 This is just one (extreme) example of the following general principle: when $T$ is an operator on scalar-valued functions which is bounded on some Lebesgue space $L^p(\R)$, then $T$ can be extended to $X$-valued functions, and the boundedness of this extension on $L^p(\R;X)$ reflects geometric properties of the Banach space $X$.
-Different operators (and different values of $p$) can be used to detect different geometric properties.
+Different operators can be used to reflect different geometric properties.
 
 \section{Case study: the Hilbert transform}
 
-One important operator in harmonic analysis is the Hilbert transform, defined on $\map{f}{\R}{\C}$ by
+Another important operator in harmonic analysis is the Hilbert transform, defined on $\map{f}{\R}{\C}$ by
 \begin{equation}\label{eq:HT-scalar}
   Hf(x) := \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \lim_{\varepsilon \downarrow 0} \int_{|y| > \varepsilon} f(x-y) \, \frac{\dd y}{y}.
 \end{equation}
-The Hilbert transform is a prototypical \emph{singular integral operator}: the integral kernel $1/y$ is not integrable, so $H$ cannot be defined as a classical integral operator, but cancellation between the positive and negative values of $1/y$ allow $Hf$ to be well-defined when $f$ is sufficiently smooth (Schwartz, for example).
+The Hilbert transform is a prototypical \emph{singular integral operator}: the integral kernel $1/y$ is not integrable, so $H$ cannot be defined as a classical integral operator, but cancellation between the positive and negative values of $1/y$ allow $Hf$ to be well-defined as a \emph{principal value integral} when $f$ is sufficiently smooth (Schwartz, for example).
 One can show that $H$ is a \emph{Fourier multiplier} with symbol $m(\xi) = -i\sgn(\xi)$: that is, for all Schwartz functions $f \in \Sch(\R)$, $Hf = (m\hat{f})^{\vee}$, where $\vee$ denotes the inverse Fourier transform.
 Plancherel's theorem implies that the Hilbert transform is an isometry on $L^2(\R)$: indeed,
 \begin{equation*}
@@ -112,11 +112,9 @@ If $X$ is isomorphic to a Hilbert space, we can invoke the $X$-valued Plancherel
   \|H\mb{f}\|_{L^2(\R;X)} \leq K_{X} \|m\hat{\mb{f}}\|_{L^2(\R;X)} \leq K_{X} \|m\|_{L^\infty(\R)} \|\hat{\mb{f}}\|_{L^2(\R;X)}= K_{X}^{2} \|\mb{f}\|_{L^{2}(\R;X)},
 \end{equation*}
 where $1 \leq K_{X} < \infty$ denotes the norm of the Fourier transform on $L^2(\R;X)$.
-Vector-valued Calder\'on--Zygmund methods can then be used to extrapolate this result to $L^p(\R;X)$-boundedness for all $p \in (1,\infty)$.
 
-If $X$ is not isomorphic to a Hilbert space, then we know by Kwapie\'n's theorem that the Fourier transform is \emph{not} bounded on $L^2(\R;X)$, so the previous argument is unavailable.
-However, the scalar-valued Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, not just $p = 2$, which suggests that boundedness of the $X$-valued Hilbert transform is a less stringent condition than the $X$-valued Plancherel theorem.
-And indeed, this is the case.
+If $X$ is not isomorphic to a Hilbert space, then we know by Kwapie\'n's theorem that the Fourier transform is \emph{not} bounded on $L^2(\R;X)$, so the previous argument does not apply.
+However, it is possible to approach bounds for the Hilbert transform using probabilistic techniques, avoiding use of Plancherel's theorem, and these arguments can be carried out with values in certain (but not all) Banach spaces.
 We will prove the following theorem in Chapter \ref{sec:HT}.
 
 \begin{thm}[Burkholder--Bourgain, 1983]
@@ -140,7 +138,8 @@ On the other hand, every real Banach space can be `complexified', a process whic
 It's a good idea not to think too hard about this.
 
 I have tried to maintain the convention of writing vectors and vector-valued functions in bold: so I write $\mb{x} \in X$ for a vector in a Banach space $X$, and $\map{\mb{f}}{\R}{X}$ for an $X$-valued function.
-This convention is not standard but I believe it helps in gaining intuition: vectors, and vector-valued functions, are intrinsically `heavier' than their scalar analogues.
+This convention is not standard but I believe it helps in gaining intuition.
+The way I see it, vectors and vector-valued functions are intrinsically `heavier' than their scalar analogues.
 This leads to some typographical paradoxes: do we consider an element of $L^2(\R)$ as a scalar-valued function (thus writing $f$) or an element of a Banach space (thus writing $\mb{f}$)?
 The answer depends on the context.
 I just want to point out that nobody makes this distinction in the literature (except myself, in recent papers).
