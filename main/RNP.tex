@@ -24,6 +24,7 @@ We are most interested in vector measures with the following boundedness conditi
   where the supremum ranges over all partitions $\pi$ of $S$ into $\mc{A}$-measurable sets.
   We define the \emph{total variation norm} $\|\mb{\mu}\|_{\var} := |\mb{\mu}|(S)$, and we say that $\mu$ has \emph{bounded variation} if $\|\mb{\mu}\|_{\var} < \infty$.
   Equivalently, $\mu$ has bounded variation if there exists a finite scalar-valued measure $\nu$ on $\mc{A}$ such that $\|\mb{\mu}(A)\|_X \leq \nu(A)$ for all $A \in \mc{A}$ (the minimal measure with this property is $|\mb{\mu}|$).
+  We let $M(S,\mc{A};X)$ denote the Banach space of all $X$-valued vector measures $\mb{\nu}$ on $\mc{A}$ with bounded variation, under the total variation norm.
 \end{defn}
 
 It is not particularly difficult to define integrals of scalar-valued functions with respect to vector measures.
@@ -253,19 +254,21 @@ In the next section we will add more properties and `complete the loop'.
 
 \section{Trees and dentability}
 
+To connect the Radon--Nikodym property with the geometry of Banach spaces, we will use the notion of a \emph{separated tree}.
+
 \begin{defn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
-  Given $\delta > 0$, an $X$-valued $L_1$-bounded martingale $(f_n)_{n \in \N}$ on $\Omega$ is called \emph{$\delta$-separated} if the following properties hold:
+  Given $\delta > 0$, an $X$-valued $L^1$-bounded martingale $\mb{f}_\bullet$ on $\Omega$ is called \emph{$\delta$-separated} if the following properties hold:
   \begin{itemize}
-  \item $f_0$ is constant,
-  \item each $f_n$ takes only finitely many values,
-  \item for all $n \in \N$ and $\omega \in \Omega$, $\|f_n(\omega) - f_{n+1}(\omega)\|_X \geq \delta$.
+  \item $\mb{f}_0$ is constant,
+  \item each $\mb{f}_n$ has finitely many values (i.e. $\mb{f}_{n}$ is simple),
+  \item for all $n \in \N$ and $\omega \in \Omega$, $\|\mb{f}_n(\omega) - \mb{f}_{n+1}(\omega)\|_X \geq \delta$.
   \end{itemize}
-  The set $S := \{f_n(\omega) : n \in \N, \omega \in \Omega\}$ is called a \emph{$\delta$-separated tree}.  
+  The set of values $S := \{\mb{f}_n(\omega) : n \in \N, \omega \in \Omega\}$ is called a \emph{$\delta$-separated tree}.  
 \end{defn}
 
 The martingales described in Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} (see also Exercise \ref{ex:L1-noMCP-var}) are $1$-separated, and thus yield $1$-separated trees in $c_0$ and $L_1$.
-When one tries to draw a $\delta$-separated tree on a piece of paper, one quickly starts to run out of space.
+But when one tries to draw a $\delta$-separated tree on a piece of paper, one quickly starts to run out of space.
 This is because pieces of paper model finite-dimensional Banach spaces, which have good martingale convergence properties.
 
 \begin{prop}
@@ -273,15 +276,15 @@ This is because pieces of paper model finite-dimensional Banach spaces, which ha
 \end{prop}
 
 \begin{proof}
-  Bounded $\delta$-separated trees correspond to $L^\infty$-bounded martingales such that
+  Bounded $\delta$-separated trees correspond to $L^\infty$-bounded martingales $\mb{f}_{\bullet}$ such that
   \begin{equation*}
-    \|f_n(\omega) - f_{n+1}(\omega)\|_{X},
+    \|\mb{f}_n(\omega) - \mb{f}_{n+1}(\omega)\|_{X} \geq \delta
   \end{equation*}
   for all $\omega \in \Omega$ and $n \in \N$,
-  which directly obstructs convergence of $(f_n)$ everywhere in $\Omega$.
+  which directly obstructs convergence of $\mb{f}_\bullet$ everywhere in $\Omega$.
 \end{proof}
 
-Thus our chain of implications now takes the form
+Thus our chain of implications now has a new member:
 \begin{equation*}
   \mathrm{RNP} \Longrightarrow 1-\mathrm{MCP} \Longrightarrow p-\mathrm{MCP} \Longrightarrow \infty-\mathrm{MCP}
   \Longrightarrow \mathrm{NBST}
@@ -297,7 +300,20 @@ The connection between (nonexistence of) bounded separated trees and the Radon--
   where $\overline{\conv}$ denotes the closure of the convex hull.
 \end{defn}
 
-Before going further let us prove a lemma which relates `non-dentability at scale $\varepsilon$' to a corresponding property of an enlarged set which does not involve closures. 
+An example of a dentable set in $\R^{2}$ is shown in Figure \ref{fig:dentable}.
+It is impossible to draw a bounded non-dentable set due to Theorem \ref{thm:dent-RNP}. 
+
+\begin{figure}
+    \centering
+    \def\svgwidth{\columnwidth}
+    \input{dentable-set.pdf_tex}
+    
+    \caption{A dentable set $D$ in $\R^{2}$, being `dented' at the point $\mb{x} \in D$.}
+    \label{fig:dentable}
+\end{figure}
+
+Before going further we'll need a lemma which relates non-dentability at scale $\varepsilon$ to a corresponding property of an enlarged set which does not involve closures.
+This will let us work directly with convex hulls rather than their closures.
 
 \begin{lem}\label{lem:dentlem}
   Let $X$ be a Banach space.
@@ -315,7 +331,7 @@ Before going further let us prove a lemma which relates `non-dentability at scal
 \begin{proof}
   Fix $\mb{x} = \mb{x}' + \mb{y} \in \tilde{D}$, where $\mb{x}' \in D$ and $\|\mb{y}\|_{X} < \varepsilon/2$.
   Choose $\delta > 0$ so small that $\delta + \|\mb{y}\|_{X} < \varepsilon/2$.
-  By the assumed property \eqref{eq:dentlem-ass}, there exists $n \in \N$, scalars $\alpha_i \in [0,1]$, $i = 1,\ldots,n$, and vectors $\mb{x}_1,\ldots,\mb{x}_n \in D \sm B_{\varepsilon}(\mb{x})$ such that
+  By \eqref{eq:dentlem-ass} we have $\mb{x}' \in \overline{\conv}(D \sm B_{\varepsilon}(\mb{x}'))$, so there exists $n \in \N$, scalars $\alpha_i \in [0,1]$, $i = 1,\ldots,n$, and vectors $\mb{x}_1,\ldots,\mb{x}_n \in D \sm B_{\varepsilon}(\mb{x})$ such that
   \begin{equation*}
     \mb{x}' = \mb{z} + \sum_{i=1}^{n} \alpha_i \mb{x}_{i}.
   \end{equation*}
@@ -338,13 +354,15 @@ Before going further let us prove a lemma which relates `non-dentability at scal
   finishing the job.
 \end{proof}
 
+The concept of dentability is connected with (non-existence of) bounded separated trees as follows.
+
 \begin{thm}
   Let $X$ be a Banach space, and suppose that for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree.
   Then every bounded subset of $X$ is dentable.
 \end{thm}
   
 \begin{proof}
-  We prove the contrapositive: we suppose that there exists a bounded non-dentable set $D \subset X$, and for given $\delta > 0$ we will construct a bounded $\delta$-separated tree.
+  We prove the contrapositive: we suppose that there exists a bounded non-dentable set $D \subset X$, and given $\delta > 0$ we will construct a bounded $\delta$-separated tree.
   Since $D$ is non-dentable, there exists $\varepsilon > 0$ such that for all $\mb{x} \in D$,
   \begin{equation*}
     \mb{x} \in \overline{\conv}(D \sm B_{2\varepsilon}(\mb{x})).
@@ -357,7 +375,7 @@ Before going further let us prove a lemma which relates `non-dentability at scal
 
   Let $(\Omega,\mc{A},\P)$ be the interval $[0,1]$ with Borel $\sigma$-algebra and Lebesgue measure.
   We construct a $\varepsilon$-separated martingale inductively.
-  Let $\mb{x}_{0} \in \tilde{D}$ be arbitrary and $f_0 \equiv \mb{x}_0$.
+  Let $\mb{x}_{0} \in \tilde{D}$ be arbitrary and $\mb{f}_0 \equiv \mb{x}_0$.
   Since $\mb{x}_0 \in \conv(\tilde{D} \sm B_{\varepsilon}(\mb{x}_0))$, there exist numbers $\alpha_1,\ldots, \alpha_n \in (0,1)$ summing to $1$ and vectors $\mb{x}_{1}, \ldots, \mb{x}_{n} \in \tilde{D}$ such that
   \begin{equation*}
     \mb{x}_0 = \sum_{i=1}^{n} \alpha_{i} \mb{x}_{i} \qquad \text{and} \qquad \|\mb{x}_{i} - \mb{x}_{0}\|_X \geq \varepsilon.
@@ -365,22 +383,22 @@ Before going further let us prove a lemma which relates `non-dentability at scal
   Partition the unit interval $[0,1]$ into intervals $(I_i)_{i=1}^{n}$ with length $|I_{i}| = \alpha_{i}$, let $\mc{A}_{0}$ be the trivial $\sigma$-algebra on $[0,1]$, and let $\mc{A}_{1}$ be the $\sigma$-algebra generated by the intervals $(I_i)_{i=1}^{n}$.
   Define
   \begin{equation*}
-    f_1 = \sum_{i=1}^{n} \alpha_i \1_{I_i} \otimes \mb{x}_{i}.
+    \mb{f}_1 = \sum_{i=1}^{n} \alpha_i \1_{I_i} \otimes \mb{x}_{i}.
   \end{equation*}
-  Then $\E^{\mc{A}_0} f_1 = f_0$, and $\|f_1(\omega) - f_0(\omega)\|_{X} \geq \varepsilon$ for all $\omega \in [0,1]$.
-  Since each point $\mb{x}_{i}$ is in $\tilde{D}$, we can repeat this process inductively, representing each $\mb{x}_{i}$ as a convex combination of vectors in $\tilde{D} \sm B_{\varepsilon}(\mb{x}_i)$, using these vectors to define $f_2$ on $I_{i}$, and so on, to construct a $\varepsilon$-separated martingale valued in $\tilde{D}$, and thus a bounded $\varepsilon$-separated tree.
+  Then $\E^{\mc{A}_0} \mb{f}_1 = \mb{f}_0$, and $\|\mb{f}_1(\omega) - \mb{f}_0(\omega)\|_{X} \geq \varepsilon$ for all $\omega \in [0,1]$.
+  Since each point $\mb{x}_{i}$ is in $\tilde{D}$, we can repeat this process inductively, representing each $\mb{x}_{i}$ as a convex combination of vectors in $\tilde{D} \sm B_{\varepsilon}(\mb{x}_i)$, using these vectors to define $\mb{f}_2$ on $I_{i}$, and so on, to construct a $\varepsilon$-separated martingale valued in $\tilde{D}$, and thus a bounded $\varepsilon$-separated tree.
 \end{proof}
 
 Finally we will `complete the loop' in our discussion of the Radon--Nikodym property, martingale convergence, and dentability.
 
-\begin{thm}
+\begin{thm}\label{thm:dent-RNP}
   Let $X$ be a Banach space such that every bounded subset of $X$ is dentable.
   Then $X$ has the Radon--Nikodym property.
 \end{thm}
 
 \begin{proof}
   Let $(S,\mc{A},\mu)$ be a finite measure space, and let $\map{\mb{\nu}}{\mc{A}}{X}$ be an $X$-valued vector measure with $\|\mb{\nu}\|_{X} \leq \mu$ and $|\mb{\nu}| \ll \mu$.
-  Our task is to find a function $f \in L^1(S,\mc{A},\mu;X)$ such that $\mb{\nu} = f\mu$.
+  Our task is to find a function $\mb{f} \in L^1(\mu;X)$ such that $\mb{\nu} = \mb{f}\mu$.
   By Proposition \ref{prop:RNP-finite-sufficient} this is sufficient to prove that $X$ has the RNP.
 
   For all sets $\alpha \in \mc{A}$ let
@@ -425,12 +443,10 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
   \end{equation*}
   This lets us write
   \begin{equation*}
-    \begin{aligned}
       \mb{x}_{\alpha'}
-      &= \mu(\alpha')^{-1}\mb{\nu}(\alpha') \\
-      &= \sum_{\lambda \in \Lambda} \mu(\alpha')^{-1}\mb{\nu}(\beta_\lambda) \\
-      &= \sum_{\lambda \in \Lambda} \frac{\mu(\beta_\lambda)}{\mu(\alpha')} \mb{x}_{\beta_\lambda}.
-    \end{aligned}
+      = \mu(\alpha')^{-1}\mb{\nu}(\alpha') 
+      = \sum_{\lambda \in \Lambda} \mu(\alpha')^{-1}\mb{\nu}(\beta_\lambda) 
+      = \sum_{\lambda \in \Lambda} \frac{\mu(\beta_\lambda)}{\mu(\alpha')} \mb{x}_{\beta_\lambda}.
   \end{equation*}
   By \eqref{eq:mu-sum} we have that the coefficients of this series sum to $1$, and the vectors in the series satisfy
   \begin{equation*}
@@ -443,7 +459,7 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
   Since this is true for all $\alpha' \in \mc{A}_{+}(\alpha)$, we find that $C_{\alpha}$ is not dentable.
   This is a contradiction, which implies that our claim above is true.
 
-  Now we return to the construction of a Radon--Nikodym derivative $f$ of $\mb{\nu}$ with respect to $\mu$.
+  Now we return to the construction of a Radon--Nikodym derivative $\mb{f}$ of $\mb{\nu}$ with respect to $\mu$.
   Fix $\varepsilon > 0$.
   Using the claim we just established, let $(\alpha_{\lambda})_{\lambda \in \Lambda}$ be a maximal disjoint collection of sets in $\mc{A}_+$ such that $\diam(C_{\alpha_{\lambda}}) \leq 2\varepsilon$.
   Then $\Lambda$ is at most countable (by the same argument used in the last paragraph) and
@@ -453,29 +469,29 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
   if this were not the case then we could select $\alpha' \in \mc{A}_+(S \sm \cup_{\lambda \in \Lambda} \alpha_{\lambda}) \subset \mc{A}_+$ with $\diam(C_{\alpha'}) \leq 2\varepsilon$ (using the claim) and contradict maximality.
   Define
   \begin{equation*}
-    g_{\varepsilon} := \sum_{\lambda \in \Lambda} \1_{\alpha_{\lambda}} \otimes \mb{x}_{\alpha_{\lambda}}.
+    \mb{g}_{\varepsilon} := \sum_{\lambda \in \Lambda} \1_{\alpha_{\lambda}} \otimes \mb{x}_{\alpha_{\lambda}}.
   \end{equation*}
-  Then $g_{\varepsilon} \in L^1(S,\mc{A},\mu;X)$ (since it is bounded and the measure is finite).
+  Then $\mb{g}_{\varepsilon} \in L^1(\mu;X)$ (since it is bounded and the measure is finite).
   We will show that
   \begin{equation}\label{eq:g-computation}
-    \|\mb{\nu} - g_{\varepsilon}\mu\|_{\var} \leq 2\mu(S)\varepsilon;
+    \|\mb{\nu} - \mb{g}_{\varepsilon}\mu\|_{\var} \leq 2\mu(S)\varepsilon;
   \end{equation}
-  since this holds for all $\varepsilon > 0$, we find that $\mb{\nu}$ is in the closure in $M(S,\mc{A};X)$ of the set of measures of the form $g\mu$ with $g \in L^1(S,\mc{A},\mu;X)$.
-  But this set is closed in $M(S,\mc{A};X)$,\todo{provide the discussion that makes this argument work} so there exists $g \in L^1(S,\mu;X)$ with $\mb{\nu} = g\mu$, as desired.
+  since this holds for all $\varepsilon > 0$, we find that $\mb{\nu}$ is in the closure in $M(S,\mc{A};X)$ of the set of measures of the form $\mb{g}\mu$ with $\mb{g} \in L^1(\mu;X)$.
+  But this set is closed in $M(S,\mc{A};X)$ (Exercise \ref{ex:closure-M}), so there exists $\mb{g} \in L^1(\mu;X)$ with $\mb{\nu} = \mb{g}\mu$, as desired.
 
   It remains to show \eqref{eq:g-computation}.
   To see this first note that for all $\alpha \in \mc{A}_+$
   \begin{equation*}
     \begin{aligned}
-      \mb{\nu}(\alpha) - g_\varepsilon\mu(\alpha)
-      &= \sum_{\lambda \in \Lambda} \Big(  \mb{\nu}(\alpha \cap \alpha_{\lambda}) - \int_{\alpha \cap \alpha_{\lambda}} g_{\varepsilon} \, \dd\mu \Big) \\
+      \mb{\nu}(\alpha) - \mb{g}_\varepsilon\mu(\alpha)
+      &= \sum_{\lambda \in \Lambda} \Big(  \mb{\nu}(\alpha \cap \alpha_{\lambda}) - \int_{\alpha \cap \alpha_{\lambda}} \mb{g}_{\varepsilon} \, \dd\mu \Big) \\
       &= \sum_{\lambda \in \Lambda} \Big(  \mb{\nu}(\alpha \cap \alpha_{\lambda}) - \mu(\alpha \cap \alpha_{\lambda}) \mb{x}_{\alpha_{\lambda}} \Big) \\
       &= \sum_{\lambda \in \Lambda} \mu(\alpha \cap \alpha_{\lambda})(\mb{x}_{\alpha \cap \alpha_{\lambda}} - \mb{x}_{\alpha_{\lambda}}),
     \end{aligned}
   \end{equation*}
   and so
   \begin{equation*}
-    \|\mb{\nu}(\alpha) - g_\varepsilon\mu(\alpha)\|_{X}
+    \|\mb{\nu}(\alpha) - \mb{g}_\varepsilon\mu(\alpha)\|_{X}
     \leq \sum_{\lambda \in \Lambda} \mu(\alpha \cap \alpha_{\lambda}) \|\mb{x}_{\alpha \cap \alpha_{\lambda}} - \mb{x}_{\alpha_{\lambda}}\|_{X} \leq 2\mu(\alpha)\varepsilon
   \end{equation*}
   using that $\diam(C_{\alpha_{\lambda}}) \leq 2\varepsilon$.
@@ -495,12 +511,12 @@ Combining this with everything else we know, we have proven the following theore
 \end{thm}
 
 \begin{rmk}
-  It is possible to prove that the $\infty$-MCP implies the RNP directly, but I don't think this is as nice as going via dentability.
+  It is possible to prove directly that the $\infty$-MCP implies the RNP, but I don't think this is as nice as arguing via dentability.
   See \cite[Proof of Theorem 2.9]{gP16}.
 \end{rmk}
 
 This set of equivalences says quite a bit.
-First, it says that a.s. convergence of $L^p$-bounded martingales holds for some $p \in [1,\infty]$ if and only if it holds for all $p \in [1,\infty]$.
+First, it says that almost everywhere convergence of $L^p$-bounded martingales holds for some $p \in [1,\infty]$ if and only if it holds for all $p \in [1,\infty]$.
 This $p$-independence of martingale-based Banach space properties turns out to be fairly typical; martingales satisfy miraculous extrapolation properties of this kind.
 Second, note that the first four properties are `extrinsic': the RNP makes reference to all $\sigma$-finite measure spaces, and the MCP properties and the nonexistence of bounded separated trees make reference to martingales valued in $X$.
 In contrast, the last property is an intrinsic geometric property of $X$.
@@ -571,20 +587,7 @@ We will now complete this result with the help of the Radon--Nikodym property.
 
 
 
-
-
-
-
 \section*{Exercises}
-
-% \begin{exercise}
-%   Let $\map{T}{L^1([0,1])}{X}$ be a bounded linear operator, and for all Borel sets $E \subset [0,1]$ define
-%   \begin{equation*}
-%     \mu_T(E) := T(\1_{E}).
-%   \end{equation*}
-%   Show that $\mu_T$ is an $X$-valued vector measure with bounded variation, and show furthermore that $\mu_T$ is absolutely continuous with respect to the Lebesgue measure.
-%   What does this say about bounded linear operators $L^1([0,1]) \to X$ when $X$ has the Radon--Nikodym property?
-% \end{exercise}
 
 \begin{exercise}
   Let $X$ be a Banach space with the Radon--Nikodym property, and suppose that $Y$ is a Banach space which is isomorphic to $X$.
@@ -618,6 +621,16 @@ We will now complete this result with the help of the Radon--Nikodym property.
     \|\nu(A)\|_{X} \leq \mu(A) \qquad \forall A \in \mc{A}.
   \end{equation*}
   Show that $\nu$ is countably additive, $\|\nu\|_{\var} \leq \|\mu\|_{\var}$, and $|\nu| \ll \mu$.
+\end{exercise}
+
+\begin{exercise}\label{ex:closure-M}
+  Let $(S,\mc{A})$ be a measurable space and $X$ a Banach space.
+  Let $\mu$ be a finite measure on $(S,\mc{A})$.
+  Show that the set of $X$-valued vector measures with Radon--Nikodym derivatives with respect to $\mu$, i.e. the set
+  \begin{equation*}
+    \{\mb{g}\mu : \mb{g} \in L^1(\mu;X)\} \subset M(S,\mc{A};X),
+  \end{equation*}
+  is closed in $M(S,\mc{A};X)$.
 \end{exercise}
 
 \begin{exercise}[Rademacher's theorem and the RNP]
