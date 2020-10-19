@@ -4,43 +4,43 @@ We will tie these concepts together via the Radon--Nikodym property, which is os
 \section{Vector measures and the Radon--Nikodym property}
 
 \begin{defn}
-  Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space (recall: $\mc{A}$ is a $\sigma$-algebra on $S$).
-  An $X$-valued \emph{vector measure} is a function $\map{\mu}{\mc{A}}{X}$ which is countably additive, in the sense that for all sequences $(E_n)_{n \in \N}$ of pairwise disjoint sets in $\mc{A}$,
+  Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space.
+  An $X$-valued \emph{vector measure} is a function $\map{\mb{\mu}}{\mc{A}}{X}$ which is countably additive, in the sense that for all sequences $(E_n)_{n \in \N}$ of pairwise disjoint sets in $\mc{A}$,
   \begin{equation*}
-    \mu\big( \bigcup_{n \in \N} E_n \big) = \sum_{n \in \N} \mu(E_n).
+    \mb{\mu}\Big( \bigcup_{n \in \N} E_n \Big) = \sum_{n \in \N} \mb{\mu}(E_n).
   \end{equation*}
-  Note that this condition includes convergence of the series on the right hand side in $X$.
+  Note that this condition includes the convergence in $X$ of the series on the right hand side.
 \end{defn}
 
-Vector measures are just like measures, except the measure of a set $E \subset S$ is now a vector $\mu(E) \in X$ rather than a scalar.
+Vector measures are just like measures, except the measure of a set $E \subset S$ is a vector $\mb{\mu}(E) \in X$ rather than a scalar.
 We are most interested in vector measures with the following boundedness condition.
 
 \begin{defn}
-  Let $X$ be a Banach space and $\mu$ an $X$-valued vector measure on a maesurable space $(S,\mc{A})$.
-  The \emph{variation} of $\mu$ is the scalar-valued measure $\map{|\mu|}{\mc{A}}{[0,\infty]}$ defined by
+  Let $X$ be a Banach space and $\mb{\mu}$ an $X$-valued vector measure on a measurable space $(S,\mc{A})$.
+  The \emph{variation} of $\mb{\mu}$ is the scalar-valued measure $\map{|\mb{\mu}|}{\mc{A}}{[0,\infty]}$ defined by
   \begin{equation*}
-    |\mu|(E) := \sup_{\pi} \sum_{A \in \pi} \|\mu(A)\|_X,
+    |\mb{\mu}|(E) := \sup_{\pi} \sum_{A \in \pi} \|\mb{\mu}(A)\|_X,
   \end{equation*}
   where the supremum ranges over all partitions $\pi$ of $S$ into $\mc{A}$-measurable sets.
-  We define the \emph{total variation norm} $\|\mu\|_{\var} := |\mu|(S)$, and we say that $\mu$ has \emph{bounded variation} if $\|\mu\|_{\var} < \infty$.
-  Equivalently, $\mu$ has bounded variation if there exists a finite scalar-valued measure $\nu$ on $\mc{A}$ such that $\|\mu(A)\|_X \leq \nu(A)$ for all $A \in \mc{A}$ (as the minimal measure with this property is $|\mu|$).
+  We define the \emph{total variation norm} $\|\mb{\mu}\|_{\var} := |\mb{\mu}|(S)$, and we say that $\mu$ has \emph{bounded variation} if $\|\mb{\mu}\|_{\var} < \infty$.
+  Equivalently, $\mu$ has bounded variation if there exists a finite scalar-valued measure $\nu$ on $\mc{A}$ such that $\|\mb{\mu}(A)\|_X \leq \nu(A)$ for all $A \in \mc{A}$ (the minimal measure with this property is $|\mb{\mu}|$).
 \end{defn}
 
 It is not particularly difficult to define integrals of scalar-valued functions with respect to vector measures.
 
 \begin{prop}
-  Let $X$ be a Banach space and $\mu$ an $X$-valued vector measure of bounded variation on a measurable space $(S,\mc{A})$.
-  Then there is a unique continuous linear map $\map{[\mu]}{L^1(S,\mc{A},|\mu|)}{X}$ such that $[\mu](\1_{A}) = \mu(A)$ for all $A \in \mc{A}$.
+  Let $X$ be a Banach space and $\mb{\mu}$ an $X$-valued vector measure of bounded variation on a measurable space $(S,\mc{A})$.
+  Then there is a unique continuous linear map $\map{[\mb{\mu}]}{L^1(S,\mc{A},|\mb{\mu}|)}{X}$ such that $[\mb{\mu}](\1_{A}) = \mb{\mu}(A)$ for all $A \in \mc{A}$.
   We use integral notation to denote this map, i.e. we write
   \begin{equation*}
-    \int_{S} f(s) \, \dd\mu(s) := [\mu](f) \qquad \forall f \in L^1(S,\mc{A},|\mu|).
+    \int_{S} f(s) \, \dd\mb{\mu}(s) := [\mb{\mu}](f) \qquad \forall f \in L^1(S,\mc{A},|\mb{\mu}|).
   \end{equation*}
 \end{prop}
 
 \begin{proof}
-  We skip the verification that the prescription $[\mu](\1_{A})$ extends by linearity to a consistent map on integrable simple functions.\footnote{``It is dreadfully boring to show that this formula defines a linear map... from the space of simple functions of the above form into $X$ and we leave this as an exercise for masochists.'' \cite[pp5-6]{DU77}}
+  We skip the verification that the definition $[\mb{\mu}](\1_{A}) := \mb{\mu}(A)$ extends by linearity to a well-defined map on integrable simple functions.\footnote{``It is dreadfully boring to show that this formula defines a linear map... from the space of simple functions of the above form into $X$ and we leave this as an exercise for masochists.'' \cite[pp5-6]{DU77}}
   We just need to show boundedness, and the conclusion will follow by density.
-  Consider a simple function $g \in L^1(S,\mc{A},|\mu|)$ of the form
+  Consider a simple function $g \in L^1(S,\mc{A},|\mb{\mu}|)$ of the form
   \begin{equation*}
     g = \sum_{n=1}^{N} c_n \1_{S_n} 
   \end{equation*}
@@ -48,57 +48,74 @@ It is not particularly difficult to define integrals of scalar-valued functions 
   Then
   \begin{equation*}
     \begin{aligned}
-      \|[\mu](g)\|_X \leq \sum_{n=1}^{N} |c_n| \|\mu(S_n)\|_X \leq \sum_{n=1}^{N} |c_n| |\mu|(S_n) = \|g\|_{L^1(|\mu|)}.
+      \|[\mb{\mu}](g)\|_X \leq \sum_{n=1}^{N} |c_n| \|\mb{\mu}(S_n)\|_X \leq \sum_{n=1}^{N} |c_n| |\mb{\mu}|(S_n) = \|g\|_{L^1(|\mb{\mu}|)}.
     \end{aligned}
   \end{equation*}
   That's all.
 \end{proof}
 
+Fundamental examples of vector measures are given by integrating vector-valued functions against scalar measures.
 
 \begin{example}\label{eg:RN-density}
   Let $(S,\mc{A})$ be a measurable space and $X$ a Banach space.
-  Suppose $\nu$ is a finite scalar-valued measure on $(S,\mc{A})$ and $f \in L^1(S,\mc{A},\nu;X)$.
-  Then we can define an $X$-valued vector measure $\mu$ (sometimes denoted $\mu = f\nu$) by Bochner integration:
+  Suppose $\nu$ is a finite scalar-valued measure on $(S,\mc{A})$ and $\mb{f} \in L^1(S,\mc{A},\nu;X)$.
+  Then we can define an $X$-valued vector measure $\mb{\mu}$ (sometimes denoted $\mb{f}\nu$) by Bochner integration:
   \begin{equation*}
-    \mu(A) = \int_A f(s) \, \dd\nu.
+    \mb{\mu}(A) = \int_A \mb{f}(s) \, \dd\nu.
   \end{equation*}
   This vector measure has bounded variation: given a partition $S = \bigcup_{n \in \N} S_n$, we compute
   \begin{equation*}
-    \sum_{n \in \N} \|\mu(S_n)\|_{X} = \sum_{n \in \N} \Big\| \int_{S_n} f(s) \, \dd\nu \Big\|_X
-    \leq \int_{S} \|f(s)\|_{X} \, \dd\nu
+    \sum_{n \in \N} \|\mb{\mu}(S_n)\|_{X} = \sum_{n \in \N} \Big\| \int_{S_n} \mb{f}(s) \, \dd\nu \Big\|_X
+    \leq \int_{S} \|\mb{f}(s)\|_{X} \, \dd\nu
   \end{equation*}
-  so that $\|\mu\|_{\var} \leq \|f\|_{L^1(\nu;X)}$.\footnote{In fact, this is an equality. See \cite[pp43]{gP16}.}
+  so that $\|\mb{\mu}\|_{\var} \leq \|\mb{f}\|_{L^1(\nu;X)}$.\footnote{In fact, this is an equality. See \cite[pp43]{gP16}.}
 \end{example}
 
 Now let's revise some measure theory.
-Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measurable space $(S,\mc{A})$, then we say \emph{$\nu$ is absolutely continuous with respect to $\mu$}, written $\nu \ll \mu$, if $A \in \mc{A}$ and $\mu(A) = 0$ implies $\nu(A) = 0$.
+Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measurable space $(S,\mc{A})$, then \emph{$\nu$ is absolutely continuous with respect to $\mu$}, written $\nu \ll \mu$, if $A \in \mc{A}$ and $\mu(A) = 0$ implies $\nu(A) = 0$.
 
 \begin{thm}[Radon--Nikodym]
   Let $(S,\mc{A})$ be a measurable space, and let $\mu$ be a $\sigma$-finite measure on $\mc{A}$.
   Let $\nu$ be a finite signed measure on $\mc{A}$ such that $\nu \ll \mu$.
-  Then there exists a unique $h \in L^1(S,\mc{A},\mu)$ such that
+  Then there exists a unique $h \in L^1(\mu)$ such that
   \begin{equation*}
     \nu(A) = \int_{A} h(s) \, \dd\mu(s) \qquad \forall A \in \mc{A}.
   \end{equation*}
 \end{thm}
 
 See \cite[Theorem 5.5.4]{rD04} for a proof.
-One might expect that an analogous theorem holds for vector measures, but it turns out to depend on the geometry of the target Banach space.
+One might expect that an analogous theorem holds for vector measures, but it turns out to depend on the target Banach space, and thus its validity becomes a definition.
 
 \begin{defn}
   Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space.
-  A Banach space $X$ is said to have the \emph{Radon--Nikodym property (RNP) with respect to $(S,\mc{A},\mu)$} if for every $X$-valued vector measure $\nu$ on $(S,\mc{A})$ such that $\|\nu\|_{\var} < \infty$ and $|\nu| \ll \mu$, there is a function $f \in L^1(S,\mc{A},\mu;X)$ such that $\nu = f\mu$ (as defined in Example \ref{eg:RN-density}).
+  A Banach space $X$ is said to have the \emph{Radon--Nikodym property (RNP) with respect to $(S,\mc{A},\mu)$} if for every $X$-valued vector measure $\mb{\nu}$ on $(S,\mc{A})$ such that $\|\mb{\nu}\|_{\var} < \infty$ and $|\mb{\nu}| \ll \mu$, there is a function $\mb{f} \in L^1(\mu;X)$ such that $\mb{\nu} = \mb{f}\mu$ (as defined in Example \ref{eg:RN-density}).
   We say $X$ has the \emph{Radon--Nikodym property} if it has the property above with respect to every $\sigma$-finite measure space $(S,\mc{A},\mu)$.
 \end{defn}
 
 The classical Radon--Nikodym theorem says that the scalar fields $\R$ and $\C$ have the RNP.
 We will investigate this property for other Banach spaces by considering its relationship with martingales and with properties of convex sets.
-We will also connect it with the duality of Bochner spaces $L^p(S;X)$, answering a question left open in Chapter \ref{sec:Bochner-spaces}.
+We will also connect it with the duality of Bochner spaces $L^p(X)$, answering a question left open in Chapter \ref{sec:Bochner-spaces}.
 Before moving on we record a simple reduction.
 
 \begin{prop}\label{prop:RNP-finite-sufficient}
-  \todo{sufficient to consider finite measure}
+  A Banach space $X$ has the Radon--Nikodym property if and only if it has the RNP with respect to every \emph{finite} measure space.
 \end{prop}
+
+\begin{proof}
+  Suppose that $X$ has the RNP with respect to every finite measure space, and let $(S,\mc{A},\mu)$ be a non-finite measure space.
+  Let $\mb{\nu}$ be an $X$-valued vector measure of finite variation on $(S,\mc{A})$ such that $|\mb{\nu}| \ll \mu$.
+  Since $|\mb{\nu}|$ is a finite measure, $X$ has the RNP with respect to $(S,\mc{A},|\mb{\nu}|)$.
+  Furthermore, we trivially have $|\mb{\nu}| \ll |\mb{\nu}|$.
+  Thus there exists a function $\mb{f} \in L^1(|\mb{\nu}|;X)$ such that $\mb{\nu} = \mb{f}|\mb{\nu}|$.
+  By the scalar Radon--Nikodym theorem, there also exists a function $g \in L^1(\mu)$ such that $|\mb{\nu}| = g\mu$.
+  Since $|\mb{\nu}|$ is a non-negative measure, $g$ is non-negative.
+  Thus we have $\mb{\nu} = (\mb{f}g)\mu$.
+  It remains to show that $\mb{f}g \in L^1(\mu;X)$: this is established by
+  \begin{equation*}
+    \int_{S} \|\mb{f}g\|_{X} \, \dd\mu
+    \leq \int_{S} \|\mb{f}(s)\|_{X} g(s) \, \dd\mu(s) = \|\mb{f}\|_{L^1(g\mu;X)} = \|\mb{f}\|_{L^1(|\mb{\nu}|)} < \infty. 
+  \end{equation*}
+\end{proof}
 
 \section{The RNP and martingale convergence}
 
