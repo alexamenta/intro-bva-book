@@ -7,10 +7,10 @@ The one-line goal of this course is to study what happens when scalar-valued fun
 \begin{equation*}
   \map{\mb{f}}{\R^{d}}{X},
 \end{equation*}
-where $X$ is a Banach space, and we will study properties of operators acting on $X$-valued functions.
+where $X$ is a Banach space (typically infinite-dimensional), and we will study properties of operators acting on $X$-valued functions.
 This will reveal interesting relationships between Fourier analysis, probability, measure theory, operator theory, and the geometry of Banach spaces.
 
-\section{A case study: the Fourier transform and Plancherel's theorem}
+\section{Case study: the Fourier transform and Plancherel's theorem}
 
 To keep things simple, consider a finite-dimensional complex Banach space $X$ with a basis $\mb{e}_{1}, \ldots, \mb{e}_{N}$.
 Every vector $\mb{x} \in X$ has a basis expansion
@@ -87,7 +87,7 @@ The surprising fact is that the converse is also true: we will prove this in Cha
 This is just one (extreme) example of the following general principle: when $T$ is an operator on scalar-valued functions which is bounded on some Lebesgue space $L^p(\R)$, then $T$ can be extended to $X$-valued functions, and the boundedness of this extension on $L^p(\R;X)$ reflects geometric properties of the Banach space $X$.
 Different operators (and different values of $p$) can be used to detect different geometric properties.
 
-\section{A case study: the Hilbert transform}
+\section{Case study: the Hilbert transform}
 
 One important operator in harmonic analysis is the Hilbert transform, defined on $\map{f}{\R}{\C}$ by
 \begin{equation}\label{eq:HT-scalar}
@@ -123,7 +123,7 @@ We will prove the following theorem in Chapter \ref{sec:HT}.
   The $X$-valued Hilbert transform is bounded on $L^p(\R;X)$ for some (equivalently, all) $p \in (1,\infty)$ if and only if $X$ has the \emph{UMD property}.
 \end{thm}
 
-UMD stands for Unconditionality of Martingale Differences.
+UMD stands for \emph{unconditionality of martingale differences}.
 Martingales are a fundamental class of stochastic processes, and unconditionality of a sequence in a Banach space says that the elements of the sequence are, in some sense, `independent' or `orthogonal'.
 The UMD property is probabilistic in nature; the Burkholder--Bourgain theorem says that it is also a harmonic-analytic property.
 Thus the UMD property is a natural and often necessary assumption for Banach-valued analysis.
@@ -134,7 +134,7 @@ Even spaces of operators can be UMD, for example the Schatten classes $\mc{S}^{p
 
 \section{Conventions and notation}\label{sec:conventions}
 Throughout these notes we will deal with both real and complex Banach spaces.
-If I do not explicitly specify `real' or `complex', then either choice can be made, and we will write $\K$ to denote the scalar field (i.e. $\K = \R$ or $\K = \C$).
+If I do not explicitly specify `real' or `complex', then either choice can be made, and $\K$ denotes the scalar field (i.e. $\K = \R$ or $\K = \C$).
 Every complex Banach space can be seen as a real Banach space by restricting scalar multiplication to the reals.
 On the other hand, every real Banach space can be `complexified', a process which doubles the dimension over $\R$ and does what it should: for example the complexification of $\R^n$ is $\C^n$, the complexification of $L^p(S;\R)$ is $L^p(S;\C)$, and so on.
 It's a good idea not to think too hard about this.
