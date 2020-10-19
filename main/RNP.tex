@@ -81,6 +81,10 @@ Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measur
   \begin{equation*}
     \nu(A) = \int_{A} h(s) \, \dd\mu(s) \qquad \forall A \in \mc{A}.
   \end{equation*}
+  The function $h$ is called the \emph{Radon--Nikodym derivative} of $\nu$ with respect to $\mu$, and denoted by
+  \begin{equation*}
+    h = \frac{\dd\nu}{\dd\mu}.
+  \end{equation*}
 \end{thm}
 
 See \cite[Theorem 5.5.4]{rD04} for a proof.
@@ -119,114 +123,118 @@ Before moving on we record a simple reduction.
 
 \section{The RNP and martingale convergence}
 
-First we connect the Radon--Nikodym property to the martingale convergence properties introduced in the previous chapter.
-This is done by means of the following vector measures associated with uniformly integrable martingales.
+We establish the following connection between the Radon--Nikodym property and the martingale convergence properties.
 
-\begin{thm}\label{thm:martingale-measure}
-  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
-  Let $(f_n)_{n \in \N}$ be an $X$-valued $L^1$-bounded uniformly integrable martingale with respect to a filtration $(\mc{A}_{n})_{n \in \N}$.
-  Then there exists an $X$-valued vector measure on $\mc{A}$ with the following properties:
-  \begin{itemize}
-  \item $\mu(A) = \int_{A} f_n \, \dd\P$ for all $A \in \mc{A}_{n}$,
-  \item $\|\mu\|_{\var} \leq \sup_{n} \|f_n\|_{L^1(\Omega;X)}$,
-  \item $\mu$ is absolutely continuous with respect to $\P$.
-  \end{itemize}
+\begin{thm}\label{thm:RNP-MCP}
+  Let $X$ be a Banach space which has the Radon--Nikodym property with respect to a probability space $(\Omega,\mc{A},\P)$.
+  Then $X$ has the $1$-martingale convergence property with respect to $(\Omega,\mc{A},\P)$.
 \end{thm}
 
+Applications of the Radon--Nikodym property generally involve the construction of an appropriate vector measure, from which a magical function is extracted as a Radon--Nikodym derivative.
+In the setting of Theorem \ref{thm:RNP-MCP}, we are given an $X$-valued martingale, and we construct its almost-everywhere limit as the Radon--Nikodym derivative of a certain vector measure.
+In the following proposition we construct the vector measure.
+
+\begin{prop}\label{prop:martingale-measure} 
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
+  Let $\mb{f}_{\bullet}$ be an $X$-valued $L^1$-bounded uniformly integrable martingale with respect to a filtration $\mc{A}_{\bullet}$.
+  Then there exists an $X$-valued vector measure $\mb{\mu}$ on $\mc{A}$ with the following properties:
+  \begin{itemize}
+  \item $\mb{\mu}(A) = \int_{A} \mb{f}_n \, \dd\P$ for all $n \in \N$ and $A \in \mc{A}_{n}$,
+  \item $\|\mb{\mu}\|_{\var} \leq \sup_{n} \|\mb{f}_n\|_{L^1(\Omega;X)}$,
+  \item $\mb{\mu}$ is absolutely continuous with respect to $\P$.
+  \end{itemize}
+\end{prop}
+
 \begin{proof}
-  For all $A \in \mc{A}$ we wish to define
+  For all $A \in \mc{A}$ we would like to define
   \begin{equation}\label{eq:mu-stationary-limit}
-    \mu(A) := \lim_{k \to \infty} \int_A f_k \, \dd\P,
+    \mb{\mu}(A) := \lim_{k \to \infty} \int_A \mb{f}_k \, \dd\P,
   \end{equation}
   but it is not immediate that this limit exists.
-  If $A \in \mc{A}_{n}$ then for $k \geq n$ we have
+  If $n \in \N$ and $A \in \mc{A}_{n}$, then for $k \geq n$ we have
   \begin{equation*}
-    \int_A f_k \, \dd\P = \int_A f_n \, \dd \P
+    \int_A \mb{f}_k \, \dd\P = \int_A \mb{f}_n \, \dd \P
   \end{equation*}
-  by the martingale property, so at least for $A \in \mc{A}_{n}$ the limit exists and equals $\int_A f_n \, \dd\P$, establishing the first desired property.
-  For a general $A \in \mc{A}$, for each $k \in \N$ we have\todo{make sure this property is listed somewhere}
+  by the martingale property, so at least for $A \in \mc{A}_{n}$ the limit exists and equals $\int_A \mb{f}_n \, \dd\P$, establishing the first desired property.
+  For a general $A \in \mc{A}$, for each $k \in \N$ we have
   \begin{equation*}
-     \int_A f_k \, \dd\P = \E(f_k \1_{A}) = \E(\E^{\mc{A}_k}(f_k \1_{A})) = \E(f_k \E^{\mc{A}_k}(\1_{A})).
+     \int_A \mb{f}_k \, \dd\P = \E( \1_{A}\mb{f}_k) = \E(\E^{\mc{A}_k}( \1_{A} \mb{f}_k)) = \E(\E^{\mc{A}_k}(\1_{A}) \mb{f}_k ).
    \end{equation*}
-   Thus to show that the limit in \eqref{eq:mu-stationary-limit} exists, we need to show that the sequence $(\E(f_k \E^{\mc{A}_k}( \1_{A})))_{k \in \N}$ is Cauchy.
+   Thus to show that the limit in \eqref{eq:mu-stationary-limit} exists, we need to show that the sequence $(\E(\E^{\mc{A}_k}( \1_{A}) \mb{f}_k ))_{k \in \N}$ is Cauchy.
    Let $\phi_{k,\ell} = \E^{\mc{A}_k}(\1_{A}) - \E^{\mc{A}_\ell}( \1_{A})$.
    For $k < \ell$ we have, using conditional expectation magic,
    \begin{equation*}
      \begin{aligned}
-       \E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))
-       &= \E \Big( f_k \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A})\Big) \\
-       &= \E \Big(  \E^{\mc{A}_{k}}(f_\ell \E^{\mc{A}_k}(\1_{A})) - \E^{\mc{A}_{k}}(f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) )\Big) \\
-       &= \E \Big(  f_\ell \E^{\mc{A}_k}(\1_{A}) - f_{\ell} \E^{\mc{A}_\ell}( \1_{A}) \Big) 
-       = \E (  f_\ell \phi_{k,\ell}).
+       \E(\E^{\mc{A}_k}(\1_{A}) \mb{f}_k  ) - \E(\E^{\mc{A}_\ell}( \1_{A}) \mb{f}_\ell )
+       &= \E \Big( \E^{\mc{A}_k}(\1_{A}) \mb{f}_k  - \E^{\mc{A}_\ell}( \1_{A}) \mb{f}_{\ell} \Big) \\
+       &= \E \Big(  \E^{\mc{A}_{k}}(\E^{\mc{A}_k}(\1_{A})\mb{f}_\ell ) - \E^{\mc{A}_{k}}( \E^{\mc{A}_\ell}( \1_{A}) \mb{f}_{\ell} )\Big) \\
+       &= \E \Big(  \E^{\mc{A}_k}(\1_{A}) \mb{f}_\ell  - \E^{\mc{A}_\ell}( \1_{A}) \mb{f}_{\ell}  \Big) 
+       = \E ( \phi_{k,\ell} \mb{f}_\ell ).
      \end{aligned}
    \end{equation*}
    Thus we get
    \begin{equation*}
-     \|\E(f_k \E^{\mc{A}_k}(\1_{A})) - \E(f_\ell \E^{\mc{A}_\ell}( \1_{A}))\|_{X}
-     \leq \|f_\ell \phi_{k,\ell}\|_{L^1(\Omega;X)}.
+     \|\E(\E^{\mc{A}_k}(\1_{A}) \mb{f}_k ) - \E( \E^{\mc{A}_\ell}( \1_{A}) \mb{f}_\ell)\|_{X}
+     \leq \|\phi_{k,\ell} \mb{f}_\ell \|_{L^1(\Omega;X)}.
    \end{equation*}
    Since $\|\phi_{k,\ell}\|_\infty \leq 2$ for all $k$ and $\ell$, for all $t > 0$ we have
    \begin{equation*}
      \begin{aligned}
-       \|  f_\ell \phi_{k,\ell} \|_{L^1(\Omega;X)}
-       &\leq \Big( \int_{\|f_{\ell}\|_{X} > t} + \int_{\|f_{\ell}\|_{X} \leq t} \Big) \|f_{\ell}(\omega)\|_{X}|\phi_{k,\ell}(\omega)| \, \dd\P(\omega) \\
-       &\leq \Big( 2\int_{\|f_{\ell}\|_{X} > t} \|f_{\ell}(\omega)\|_{X} \dd\P(\omega) + t\E|\phi_{k,\ell}| \Big)
+       \|  \phi_{k,\ell}  \mb{f}_\ell \|_{L^1(\Omega;X)}
+       &\leq \Big( \int_{\|\mb{f}_{\ell}\|_{X} > t} + \int_{\|\mb{f}_{\ell}\|_{X} \leq t} \Big) |\phi_{k,\ell}(\omega)| \|\mb{f}_{\ell}(\omega)\|_{X} \, \dd\P(\omega) \\
+       &\leq \Big( 2\int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega) + t\E|\phi_{k,\ell}| \Big)
      \end{aligned}
    \end{equation*}
    so that
    \begin{equation*}
      \begin{aligned}
-       \|  f_\ell \phi_{k,\ell} \|_{L^1(\Omega;X)}
-       &\leq 2\limsup_{t \to 0} \int_{\|f_{\ell}\|_{X} > t} \|f_{\ell}(\omega)\|_{X} \dd\P(\omega) \\
-       &\leq 2\limsup_{t \to 0} \sup_{j \in \N}  \int_{\|f_{j}\|_{X} > t} \|f_{j}(\omega)\|_{X} \dd\P(\omega).
+       \|  \phi_{k,\ell} \mb{f}_\ell  \|_{L^1(\Omega;X)}
+       &\leq 2\limsup_{t \to 0} \int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega) \\
+       &\leq 2\limsup_{t \to 0} \sup_{j \in \N}  \int_{\|\mb{f}_{j}\|_{X} > t} \|\mb{f}_{j}(\omega)\|_{X} \dd\P(\omega).
    \end{aligned}
  \end{equation*}
- Uniform integrability of $(f_j)$ says exactly that the the right hand side here is zero (see Exercise \ref{ex:UI-characterisation}), which establishes that the limit in \eqref{eq:mu-stationary-limit} exists.
+ Uniform integrability of $\mb{f}_{\bullet}$ says that the the last quantity above is zero (see Exercise \ref{ex:UI-characterisation}), which establishes that the limit in \eqref{eq:mu-stationary-limit} exists.
 
- We still need to show that $\mu$ is actually a vector measure.
- It is clear from the definition that it is finitely additive, but we need countable additivity.
- Consider the submartingale $(\|f_n\|_{X})_{n \in \N}$: this is $L^1$-bounded and uniformly integrable, so by Theorem \ref{thm:submartingale-convergence} it has an $L^1$-limit $g \in L^1(\Omega)$.
+ We still need to show that $\mb{\mu}$ is actually a vector measure.
+ It is clear from the definition that it is finitely additive, but we need \emph{countable} additivity.
+ Consider the submartingale $(\|\mb{f}_n\|_{X})_{n \in \N}$: this is $L^1$-bounded and uniformly integrable, so by Theorem \ref{thm:submartingale-convergence} it has an $L^1$-limit $g \in L^1(\Omega)$.
  Thus for all $A \in \mc{A}$
  \begin{equation*}
-   \|\mu(A)\|_{X} \leq \lim_{n \to \infty} \int_{A} \|f_n(\omega)\| \, \dd\P(\omega) = \int_{A} g(\omega) \, \dd\P(\omega).
+   \|\mb{\mu}(A)\|_{X} \leq \lim_{n \to \infty} \int_{A} \|\mb{f}_n(\omega)\| \, \dd\P(\omega) = \int_{A} g(\omega) \, \dd\P(\omega).
  \end{equation*}
- By Exercise \ref{ex:fa-meas-ca}, this implies that $\mu$ is countably additive with
+ By Exercise \ref{ex:fa-meas-ca}, this implies that $\mb{\mu}$ is countably additive with
  \begin{equation*}
-   \|\mu\|_{\var} \leq \|g\P\|_{\var} = \|g\|_{L^1(\Omega)} = \sup_{n \in \N} \|f_n\|_{L^1(\Omega;X)},
+   \|\mb{\mu}\|_{\var} \leq \|g\P\|_{\var} = \|g\|_{L^1(\Omega)} = \sup_{n \in \N} \|\mb{f}_n\|_{L^1(\Omega;X)},
  \end{equation*}
  and that
  \begin{equation*}
-   |\mu| \ll g\P \ll \P,
+   |\mb{\mu}| \ll g\P \ll \P,
  \end{equation*}
  as required.
 \end{proof}
 
-Now we can show the claimed connection between the RNP and martingale convergence.
 
-\begin{thm}
-  Let $X$ be a Banach space which has the Radon--Nikodym property with respect to a probability space $(\Omega,\mc{A},\P)$.
-  Then $X$ has the $1$-martingale convergence property with respect to $(\Omega,\mc{A},\P)$.
-\end{thm}
-
-\begin{proof}
-  Fix an $L^1$-bounded uniformly integrable $X$-valued martingale $(f_n)_{n \in \N}$, with respect to a filtration $(\mc{A}_{n})_{n \in \N}$.
-  By Theorem \ref{thm:martingale-measure}, there exists an $X$-valued vector measure $\mu$ on $\mc{A}$ such that
+\begin{proof}[Proof of Theorem \ref{thm:RNP-MCP}: RNP implies $1$-MCP]
+  Let $\mb{f}_{\bullet}$ be an $L^1$-bounded uniformly integrable $X$-valued martingale with respect to a filtration $\mc{A}_{\bullet}$.
+  By Proposition \ref{prop:martingale-measure}, there exists an $X$-valued vector measure $\mb{\mu}$ on $\mc{A}$ such that
   \begin{equation*}
-    \mu(A) = \int_{A} f_n \, \dd\P \qquad \forall A \in \mc{A}_n
+    \mb{\mu}(A) = \int_{A} \mb{f}_n \, \dd\P \qquad \forall A \in \mc{A}_n
   \end{equation*}
-  and $\mu \ll \P$.
-  Since $X$ has the RNP with respect to $(\Omega,\mc{A},\P)$ there exists a function $f \in L^1(\Omega,\P;X)$ such that
+  and $\mb{\mu} \ll \P$.
+  Since $X$ has the RNP with respect to $(\Omega,\mc{A},\P)$, there exists a function $\mb{f} \in L^1(\Omega;X)$ such that
   \begin{equation*}
-    \int_{A} f \, \dd\P = \mu(A) = \int_A f_n \, \dd\P
+    \int_{A} \mb{f} \, \dd\P = \mb{\mu}(A) = \int_A \mb{f}_n \, \dd\P
   \end{equation*}
   for all $A \in \mc{A}_n$.
   Equivalently stated, we have
   \begin{equation*}
-    \E^{\mc{A}_n} f = f_n
+    \E^{\mc{A}_n} \mb{f} = \mb{f}_n
   \end{equation*}
-  for all $n \in \N$, and thus by Theorem \ref{thm:mgale-pw-conv} $f_n$ is almost surely convergent to $f$.
+  for all $n \in \N$, and thus by Theorem \ref{thm:mgale-pw-conv} $\mb{f}_n$ is almost everywhere convergent to $\mb{f}$.
   Thus $X$ has the $1$-martingale convergence property, and the proof is complete.
 \end{proof}
+
+We already have some examples of spaces which do not satisfy the $1$-MCP: it follows that these spaces cannot have the RNP either.
 
 \begin{cor}
   The spaces $c_0$ and $L^1([0,1])$ do not have the RNP.
@@ -234,7 +242,7 @@ Now we can show the claimed connection between the RNP and martingale convergenc
 
 \begin{proof}
   In Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} we showed that these spaces do not have the $\infty$-MCP, and hence they do not have the $1$-MCP. 
-\end{proof}
+\end{proof} %mk
 
 In summary, for all $p \in (1,\infty]$ we currently have the implications
 \begin{equation*}
@@ -577,6 +585,11 @@ We will now complete this result with the help of the Radon--Nikodym property.
 %   Show that $\mu_T$ is an $X$-valued vector measure with bounded variation, and show furthermore that $\mu_T$ is absolutely continuous with respect to the Lebesgue measure.
 %   What does this say about bounded linear operators $L^1([0,1]) \to X$ when $X$ has the Radon--Nikodym property?
 % \end{exercise}
+
+\begin{exercise}
+  Let $X$ be a Banach space with the Radon--Nikodym property, and suppose that $Y$ is a Banach space which is isomorphic to $X$.
+  Show that $Y$ also has the Radon--Nikodym property.
+\end{exercise}
 
 \begin{exercise}
   Let $X$ be a Banach space with the Radon--Nikodym property.
