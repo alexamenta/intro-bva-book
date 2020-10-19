@@ -243,7 +243,7 @@ We already have some examples of spaces which do not satisfy the $1$-MCP: it fol
 
 \begin{proof}
   In Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} we showed that these spaces do not have the $\infty$-MCP, and hence they do not have the $1$-MCP. 
-\end{proof} %mk
+\end{proof} 
 
 In summary, for all $p \in (1,\infty]$ we currently have the implications
 \begin{equation*}
@@ -551,40 +551,22 @@ Let's rattle off some consequences of this theorem.
 
 Recall Proposition \ref{prop:bochner-preduality}: for every $\sigma$-finite measure space $(S,\mc{A},\mu)$ and every Banach space $X$, for all $p \in [1,\infty]$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ given by
 \begin{equation*}
-  \Phi g(f) = \int_{S} \langle f(s), g(s) \rangle \, \dd\mu(s) \qquad \forall f \in L^p(S;X)
+  \Phi \mb{g}(\mb{f}) = \int_{S} \langle \mb{f}(s), \mb{g}(s) \rangle \, \dd\mu(s) \qquad \forall \mb{f} \in L^p(S;X)
 \end{equation*}
 is an isometry onto a closed norming subspace of $L^p(S;X)^*$.
-We will now complete this result with the help of the Radon--Nikodym property.
+We will now give the full statement this result with the help of the Radon--Nikodym property.
 
-\begin{thm}
-  A dual space $X^*$ has the Radon--Nikodym property if and only if for any countably generated probability space $(\Omega,\mc{A},\P)$ and any $p \in [1,\infty)$ the isometric embedding $\map{\Phi}{L^{p'}(\Omega;X^*)}{L^p(\Omega;X)^*}$ is an isomorphism.
+\begin{thm}\label{thm:bochner-duality-RNP}
+  Let $X$ be a Banach space, and let $(S,\mc{A},\mu)$ be a countably generated measure space.\footnote{This says that there is a countable (or finite) collection of sets $(E_{\lambda})_{\lambda \in \Lambda}$ which generates $\mc{A}$.}
+  Then the dual space $X^*$ has the Radon--Nikodym property with respect to $(S,\mc{A},\mu)$ if and only if for all $p \in [1,\infty)$ the isometric embedding $\map{\Phi}{L^{p'}(\mu;X^*)}{L^p(\mu;X)^*}$ is an isomorphism.
 \end{thm}
 
-\begin{proof}
-  First suppose $X^*$ has the RNP and let $(\Omega, \mc{A}, \P)$ be a countably generated probability space.
-  Then there exists a filtration $(\mc{A}_n)_{n \in \N}$ of finite sub-$\sigma$-algebras of $\mc{A}$ such that $\mc{A}_\infty = \mc{A}$.
-  Let $\phi \in L^p(\mc{A};X)^*$ be a bounded linear functional.
-  For each $n \in \N$ consider the restriction maps
-  \begin{equation*}
-    \map{R_n}{L^{p}(\mc{A};X)^*}{L^{p}(\mc{A}_{n};X)^*} \qquad \text{and} \qquad \map{r_n}{L^{p}(\mc{A}_{n+1};X)^*}{L^{p}(\mc{A}_{n};X)^*},
-  \end{equation*}
-  and define $\phi_n := R_n \phi \in L^p(\mc{A}_n;X)^*$.
-  Then
-  \begin{equation}\label{eq:common-restrictions}
-    r_n \phi_{n+1} = r_n R_{n+1} \phi = R_n \phi = \phi_n.
-  \end{equation}
-  Now for each $n$ consider the isometric embedding
-  \begin{equation*}
-    \map{\Phi_n}{L^{p'}(\mc{A}_n;X^*)}{L^p(\mc{A}_n;X)^*}.
-  \end{equation*}
-  Since each $\mc{A}_n$ is finite, each $\Phi_n$ is an isomorphism (Exercise \ref{ex:finite-sigma-alg-duality}), so there exist functions $g_n \in L^{p'}(\mc{A}_n;X^*)$ such that $\Phi_n g_n = \phi_n$.
-  The equality \eqref{eq:common-restrictions} yields
-  \begin{equation*}
-    \Phi_{n}^{-1} r_n \Phi_{n+1} g_{n+1} = g_n.
-  \end{equation*}
-  We are going to show that $\Phi_{n}^{-1} r_n \Phi_{n+1} g_{n+1} = \E^{\mc{A}_n} g_{n+1}$, thus proving that the sequence $(g_n)_{n \in \N}$ is a martingale.\todo{up to here, want a clean proof of this}
-\end{proof}
+We leave the proof as an exercise (Exercise \ref{ex:RNP-bochner}). 
 
+  
+
+
+  
 
 
 \section*{Exercises}
@@ -640,6 +622,10 @@ We will now complete this result with the help of the Radon--Nikodym property.
 \begin{exercise}\label{ex:RNP-unitinterval}
   Suppose that $X$ has the Radon--Nikodym property with respect to the unit interval $[0,1]$ with Borel $\sigma$-algebra and Lebesgue measure.
   Show that $X$ has the Radon--Nikodym property with respect to all $\sigma$-finite measure spaces.
+\end{exercise}
+
+\begin{exercise}\label{ex:RNP-bochner}
+  Prove Theorem \ref{thm:bochner-duality-RNP} in two different ways: first, using vector measures and the Radon--Nikodym property, then using martingales and the martingale convergence properties.\footnote{You can always search for references if you get stuck!}
 \end{exercise}
 
 
