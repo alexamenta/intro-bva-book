@@ -1,15 +1,15 @@
-\section{Results from functional analysis}
+\section{Functional analysis and Banach spaces}
 
 Throughout this section $X$ is a Banach space over the scalar field $\K$ (which is either $\R$ or $\C$).
 $X^*$ denotes the dual Banach space, i.e. the Banach space of all bounded $\K$-linear functionals $\map{\mb{x}^*}{X}{\K}$, under the norm
 \begin{equation*}
   \|\mb{x}^*\|_{X^*} := \sup_{\mb{x} \in X \sm \{0\}} \frac{|\mb{x}^*(\mb{x})|}{\|\mb{x}\|_{X}} = \sup_{\substack{\mb{x} \in X \\ \|\mb{x}\|_{X} = 1}} |\mb{x}^*(\mb{x})|.
 \end{equation*}
-Often we write $\langle \mb{x}, \mb{x}^* \rangle := \mb{x}^*(\mb{x})$.
+Generally we write $\langle \mb{x}, \mb{x}^* \rangle := \mb{x}^*(\mb{x})$.
 
-The following results are all standard the suggested references are essentially picked out at random.
-
-\cite[Section III.3]{RS80}
+The following results are all standard, and the suggested references are essentially picked out at random.
+First, the real and complex versions of the Hahn--Banach theorem.
+See \cite[Section III.3]{RS80}.
 
 \begin{thm}[Hahn--Banach: real case]
   Let $X$ be a real Banach space.
@@ -39,45 +39,49 @@ The following results are all standard the suggested references are essentially 
   Then there exists a functional $\Lambda \in X^*$ such that $|\Lambda(\mb{x})| \leq p(\mb{x})$ for all $\mb{x} \in X$ and $\Lambda(\mb{y}) = \lambda(\mb{y})$ for all $\mb{y} \in Y$.
 \end{thm}
 
-The Hahn--Banach theorem implies duality relations between subspaces and quotient spaces.
+Given a Banach space $X$ and a closed subspace $Y \subset X$, the \emph{quotient space} $X / Y$ is the set of \emph{cosets}
+\begin{equation*}
+  [\mb{x}] := \{\mb{x} + \mb{y} : \mb{y} \in Y\} \subset X
+\end{equation*}
+equipped with the quotient norm
+\begin{equation*}
+  \|[\mb{x}]\|_{X / Y} := \inf\{\|\mb{x} + \mb{y}\|_{X} : \mb{y} \in Y\}.
+\end{equation*}
+The \emph{quotient map} $\map{\pi}{X}{X / Y}$ is given by $\pi(\mb{x}) = [\mb{x}]$.
+The Hahn--Banach theorem implies the following duality relations between subspaces and quotient spaces.
 
 \begin{prop}\label{prop:duality-subspace-quotient}
   Let $Y$ be a closed subspace of $X$, and define the annihilator
   \begin{equation*}
     Y^\perp := \{\mb{x}^* \in X^* : \text{$\langle \mb{y}, \mb{x}^* \rangle$ for all $\mb{y} \in Y$}\}. 
   \end{equation*}
-  Then $Y^{\perp}$ is a closed subspace of $X^*$, and we have isometric isomorphisms
+  Then $Y^{\perp}$ is a closed subspace of $X^*$, and there are isometric isomorphisms
   \begin{equation*}
-    X^* / Y^\perp = M^* \qquad \text{and} \qquad (X/Y)^* = M^{\perp}:
+    X^* / Y^\perp = Y^* \qquad \text{and} \qquad (X/Y)^* = Y^{\perp}:
   \end{equation*}
-  the first is given by restriction to $Y$, and the second is given by precomposition with the quotient map $X \to X / Y$.
+  the first is given by restriction to $Y$, and the second is given by precomposition with the quotient map $\map{\pi}{X}{X / Y}$.
 \end{prop}
 
-
-
-The \emph{weak topology} on $X$ the weakest topology on $X$ such that every functional $\mb{x}^* \in X^*$ is continuous.
+The \emph{weak topology} on $X$ is the weakest topology such that every functional $\mb{x}^* \in X^*$ is continuous.
 The weak toplogy is weaker than the usual (norm) topology on $X$, and these topologies are equal if and only if $X$ is finite dimensional.
+The \emph{weak-*} topology on a dual space $X^*$ is the weakest topology such that all the functions
+\begin{equation*}
+  \big\{ \mb{x}^* \mapsto \mb{x}^*(\mb{x}) : \mb{x} \in X\big\}
+\end{equation*}
+are continuous.
+The weak-* topology is great because it has the following fundamental compactness property \cite[Theorem IV.21]{RS80}.
+
+\begin{thm}[Banach--Alaoglu]
+  The closed unit ball of $X^*$ is compact in the weak-* topology.
+\end{thm}
 
 The \emph{double dual} of $X$ is the space $X^{**} = (X^*)^*$.
 Each $\mb{x} \in X$ induces an element of the double dual in a notationally confusing way: for each $\mb{x}^* \in X^*$, $\mb{x}$ acts on $\mb{x}^*$ by
 \begin{equation*}
   \langle \mb{x}^*, \mb{x} \rangle := \mb{x}^*(\mb{x}) = \langle \mb{x}, \mb{x}^* \rangle.
 \end{equation*}
-This identification yields a canonical isometric embedding $X \to X^{**}$, and $X$ is called \emph{reflexive} if this map is surjective (i.e. each functional on $X^*$ is given by an element of $X$, using the above identification).
+This identification yields a canonical isometric embedding $\map{j}{X}{X^{**}}$, and $X$ is called \emph{reflexive} if this map is surjective (i.e. each functional on $X^*$ is given by an element of $X$, using the above identification).
 In this case $X$ and $X^{**}$ are canonically isomorphic.\footnote{It is possible that $X$ and $X^{**}$ are isometrically isomorphic without $X$ being reflexive \cite{rJ51}.}
-
-The \emph{weak-*} topology on a dual space $X^*$ is the weakest topology such that all the functions
-\begin{equation*}
-  \big\{ \mb{x}^* \mapsto \mb{x}^*(\mb{x}) : \mb{x} \in X\big\}
-\end{equation*}
-are continuous.
-The weak-* topology is great because it has the following fundamental compactness property.
-
-\cite[Theorem IV.21]{RS80}
-\begin{thm}[Banach--Alaoglu]
-  The closed unit ball of $X^*$ is compact in the weak-* topology.
-\end{thm}
-
 One can show that $X$ is reflexive if and only if the weak topology and the weak-* topology inherited from $X^{**}$ coincide.
 Using Banach--Alaoglu, this can be restated in the following way.
 
@@ -85,13 +89,12 @@ Using Banach--Alaoglu, this can be restated in the following way.
   $X$ is reflexive if and only if the closed unit ball $B_{X}$ is weakly compact.
 \end{cor}
 
-Hahn--Banach can be used to prove the following density result the closed unit ball $\overline{B_{X}}$ in $\overline{B_{X^{**}}}$.
+Hahn--Banach can be used to prove the following density result for the closed unit ball $\overline{B_{X}}$ in $\overline{B_{X^{**}}}$.
 See \cite[Proposition B.1.17]{HNVW16}.
 
 \begin{thm}[Goldstine]\label{thm:goldstine}
   The closed unit ball $\overline{B_{X}}$ of $X$ is weak-* dense in the closed unit ball $\overline{B_{X^{**}}}$ of $X^{**}$ (when viewing $X$ as a subset of $X^{**}$ by the canonical isometric embedding).
 \end{thm}
-
 
 There are three notions of compactness in topological spaces that coincide for metric spaces: \emph{compactness} (every open cover has a finite subcover), \emph{sequential compactness} (every sequence has a convergent subsequence), and \emph{countable compactness} (every sequence has a cluster point, or equivalently, every countable open cover has a finite subcover).
 Although the weak topology on $X$ may not be metrisable, it behaves as if it were:
@@ -109,32 +112,33 @@ Although the weak topology on $X$ may not be metrisable, it behaves as if it wer
 And thus Corollary \ref{cor:reflexive-iff-weakcpt} can be restated as follows:
 
 \begin{cor}\label{cor:reflexive-bdd-subsequence}
-  $X$ is reflexive if and only if every bounded sequence has a weakly convergent subsequence.
+  $X$ is reflexive if and only if every bounded sequence in $X$ has a weakly convergent subsequence.
 \end{cor}
 
-A Banach space is \emph{separable} if it has a countable dense subset.\todo{add examples}
+A Banach space is \emph{separable} if it has a countable dense subset.
 One can show via the Hahn--Banach theorem that if $X^*$ is separable, then so is $X$ \cite[Theorem III.7]{RS80}.
 Separability can be characterised in terms of weak-* metrisability in the dual space.
 
 \begin{thm}\label{thm:sep-met-dual}
-  $X$ is separable if and only if the closed unit ball $\overline{B_{X^*}}$ of $X^*$ is weak-* metrisable.\todo{need a citation for this theorem}
+  $X$ is separable if and only if the closed unit ball $\overline{B_{X^*}}$ of $X^*$ is weak-* metrisable.
   Thus by Banach--Alaoglu and the equivalence of compactness notions for metrisable spaces, if $X$ is separable, then $\overline{B_{X^*}}$ is weak-* sequentially compact.
 \end{thm}
 
 Given subsets $F \subset X$ and $Y \subset X^{*}$, one says that $Y$ \emph{separates points of $F$} if for every distinct pair of vectors $\mb{x} \neq \mb{y} \in F$ there exists a functional $\mb{x}^{*} \in Y$ such that $\langle \mb{x}, \mb{x}^{*} \rangle \neq \langle \mb{y}, \mb{x}^{*} \rangle$.
-A topological argument (see \cite[Proposition B.1.11]{HNVW16}) implies the following.
+A topological argument implies the following \cite[Proposition B.1.11]{HNVW16}.
 
 \begin{prop}\label{prop:sep-sep-points}
   If $F$ is a separable subset of a Banach space $X$, and $Y \subset X^{*}$ is weak-* dense in $X^{*}$, then $Y$ contains a countable subset which separates points of $F$.
   In particular, if $X$ is separable, then there exists a sequence $(\mb{x}_{n}^{*})_{n \in \N}$ in $X^{*}$ which separates points of $X$.
 \end{prop}
 
-\section{Results from probability theory}\label{sec:probability}
+\textbf{\emph{further material to be added as required}}
 
-This course uses \emph{basic} probabilistic concepts quite heavily, but very little of advanced probability theory or stochastic analysis.
+\section{Probability theory}\label{sec:probability}
+
+This course uses \emph{basic} probabilistic concepts quite heavily, but no advanced probability theory or stochastic analysis.
 Here we collect the basic concepts and results that we will need.
 A good reference for probability theory from the viewpoint of mathematical analysis is \cite{rD04} (from which I have taken most of this material).
-For a more simple introduction to basic probability, (CITE ROSS)\todo{add ref} is quite good.
 
 Let $(\Omega,\mc{A})$ be a measurable space.
 A \emph{probability measure} on $(\Omega,\mc{A})$ is a measure $\P$ with $\P(\Omega) = 1$.
@@ -166,23 +170,27 @@ If $S$ is a separable completely metrizable topological space (also called a \em
   Note that the random variables $(\xi_{\lambda})_{\lambda \in \Lambda}$ are independent if and only if the $\sigma$-algebras $(\sigma(\xi_{\lambda}))_{\lambda \in \Lambda}$ are independent.
 \end{defn}
 
-\begin{itemize}
-\item distributions
-\item characteristic functions and uniqueness
-\end{itemize}
+\textbf{\emph{further material to be added as required}}
 
-\begin{thm}\label{thm:characteristic-function-uniqueness}
-  (if two $X$-valued random variables have the same characteristic function then they are equal a.e.)
-\end{thm}
+% \begin{itemize}
+% \item distributions
+% \item characteristic functions and uniqueness
+% \end{itemize}
 
-\section{Complex interpolation}
+% \begin{thm}\label{thm:characteristic-function-uniqueness}
+%   (if two $X$-valued random variables have the same characteristic function then they are equal a.e.)
+% \end{thm}
 
-\begin{itemize}
-\item defn
-\item basic structural results
-\item (co)retraction theorem
-\item examples 
-\end{itemize}
+% \section{Complex interpolation}
+
+% \emph{under construction}
+
+% \begin{itemize}
+% \item defn
+% \item basic structural results
+% \item (co)retraction theorem
+% \item examples 
+% \end{itemize}
 
 
 %%% Local Variables:

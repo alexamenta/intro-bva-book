@@ -598,29 +598,29 @@ We will now complete this result with the help of the Radon--Nikodym property.
   Let $X$ be a Banach space with the Radon--Nikodym property.
   Show that every bounded linear operator $\map{T}{L^1([0,1])}{X}$ is of the form
   \begin{equation*}
-    Tf = \int_0^1 f(t) g(t) \, \dd t
+    Tf = \int_0^1 f(t) \mb{g}(t) \, \dd t
   \end{equation*}
-  for some $g \in L^1([0,1];X)$.
+  for some $\mb{g} \in L^1([0,1];X)$.
 \end{exercise}
 
 \begin{exercise}
   Let $X$ be a Banach space with the Radon--Nikodym property.
-  Use this property to show that for every measure space $(S,\mc{A},\mu)$ and every sub-$\sigma$-algebra $\mc{B} \subset \mc{A}$, every $f \in L^1(\mc{A};X)$ has a conditional expectation with respect to $\mc{B}$.
+  Use this property to show that for every measure space $(S,\mc{A},\mu)$ and every sub-$\sigma$-algebra $\mc{B} \subset \mc{A}$, every $\mb{f} \in L^1(\mc{A};X)$ has a conditional expectation with respect to $\mc{B}$.
   (Of course this holds for \emph{every} Banach space, but your job here is to derive it in a simpler way under the RNP assumption.)
 \end{exercise}
 
 \begin{exercise}\label{ex:fa-meas-ca}
   Let $X$ be a Banach space and $(S,\mc{A})$ a measure space.
-  Let $\nu$ be a finitely additive $X$-valued vector measure on $(S,\mc{A})$, i.e. a function $\map{\nu}{\mc{A}}{X}$ such that
+  Let $\mb{\nu}$ be a \emph{finitely additive} $X$-valued vector measure on $(S,\mc{A})$, i.e. a function $\map{\mb{\nu}}{\mc{A}}{X}$ such that
   \begin{equation*}
-    \nu\Big(\sum_{n=1}^{N} E_n\Big) = \sum_{n=1}^{N} \nu(E_n)
+    \mb{\nu}\Big(\sum_{n=1}^{N} E_n\Big) = \sum_{n=1}^{N} \mb{\nu}(E_n)
   \end{equation*}
   for all $N \in \N$ and $E_1,\ldots,E_n \in \mc{A}$.
   Suppose that there is a \emph{countably additive} (scalar) measure $\mu$ on $(S,\mc{A})$ such that
   \begin{equation*}
-    \|\nu(A)\|_{X} \leq \mu(A) \qquad \forall A \in \mc{A}.
+    \|\mb{\nu}(A)\|_{X} \leq \mu(A) \qquad \forall A \in \mc{A}.
   \end{equation*}
-  Show that $\nu$ is countably additive, $\|\nu\|_{\var} \leq \|\mu\|_{\var}$, and $|\nu| \ll \mu$.
+  Show that $\mb{\nu}$ is countably additive, $\|\mb{\nu}\|_{\var} \leq \|\mu\|_{\var}$, and $|\mb{\nu}| \ll \mu$.
 \end{exercise}
 
 \begin{exercise}\label{ex:closure-M}
