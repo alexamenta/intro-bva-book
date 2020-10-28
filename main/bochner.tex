@@ -187,9 +187,10 @@ This is a surprisingly useful observation, which can be used to deduce identitie
 We are ready to define Bochner spaces, which generalise Lebesgue spaces to Banach-valued functions.
 Given a Banach-valued function $\map{\mb{f}}{S}{X}$, we let $\|\mb{f}\|_X$ denote the non-negative function on $S$ defined by $s \mapsto \|\mb{f}(s)\|_X$.
 If $\mb{f}$ is measurable, then $\|\mb{f}\|_X$ is also measurable, since the function $\mb{x} \mapsto \|\mb{x}\|_X$ is continuous.
+\textbf{From now on, we make the standing assumption that all measure spaces are $\sigma$-finite.} This is not necessary, but it avoids a few technicalities that I don't want to deal with.
 
 \begin{defn}
-  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  Let $(S,\mc{A},\mu)$ be a ($\sigma$-finite) measure space and $X$ a Banach space.
   For $p \in [1,\infty]$, we let $L^p(S,\mc{A},\mu;X)$ denote the set of \emph{strongly} $\mc{A}$-measurable functions $\mb{f} \in \SMeas(S;X)$ such that $\|\mb{f}\|_X \in L^p(S,\mc{A},\mu)$, and we write
   \begin{equation*}
     \|\mb{f}\|_{L^p(S,\mc{A},\mu;X)} := \| \|\mb{f}\|_X \|_{L^p(S,\mc{A},\mu)}.
@@ -197,6 +198,13 @@ If $\mb{f}$ is measurable, then $\|\mb{f}\|_X$ is also measurable, since the fun
   We consider two functions $\mb{f}, \mb{g} \in L^p(S,\mc{A},\mu;X)$ to be equal if $\mb{f} \aeeq \mb{g}$.
   Each $L^p(S,\mc{A},\mu;X)$ is a Banach space: the proof is identical to the classic proof in the scalar-valued case.\footnote{For revision see \cite[Theorem 5.2.1]{rD04}.}
 \end{defn}
+
+\begin{rmk}
+  If $\mb{f}$ is strongly measurable and $\mb{g} \aeeq \mb{f}$, then it does not automatically follow that $\mb{g}$ is strongly measurable, but $\mb{g}$ nevertheless has a strongly measurable representative ($\mb{f}$).
+  To be more precise, we should say that $L^p(S;X)$ consists of \emph{$\mu$-almost everywhere strongly measurable} functions $\mb{f}$.
+  I won't be too careful about this distinction.
+  This is discussed at length, and properly, in \cite[Section 1.1.b]{HNVW16}.
+\end{rmk}
 
 In general we won't use all of $S$, $\mc{A}$, and $\mu$ in the notation for $L^p(S,\mc{A},\mu;X)$; we will only write out the parameters that need to be emphasised (whatever combination of the set, the $\sigma$-algebra, and the measure).
 If the parameters are equally unimportant we may even omit all three (as in Remark \ref{rmk:lp-issues} below).
@@ -211,7 +219,7 @@ On the other hand, we will never omit $X$ unless $X = \K$ is the scalar field.
 In the scalar-valued setting, the simple functions are dense in $L^p$-spaces, and for $p < \infty$ the same holds for Bochner spaces. 
 
 \begin{prop}\label{prop:simple-density}
-  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach.
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
   Then for $p \in [1,\infty)$, the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
 \end{prop}
 
@@ -301,7 +309,7 @@ We will see in Chapter \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ 
 For now we will establish a duality result that holds with no additional assumptions on the Banach space.
 
 \begin{prop}\label{prop:bochner-preduality}
-  Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space\footnote{The $\sigma$-finiteness assumption is only needed for $p = 1$.} and $X$ a Banach space.
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
   Then for all $1 \leq p \leq \infty$, the map $\map{\Phi}{L^{p'}(S;X^*)}{L^p(S;X)^*}$ is an isometry onto a closed subspace of $L^p(S;X)^*$ which is norming for $L^p(S;X)$: that is, for every $\mb{f} \in L^p(S;X)$,
   \begin{equation*}
     \|\mb{f}\|_{L^p(S;X)} = \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \Big| \int_S \langle \mb{f}(s), \mb{g}(s) \rangle \, \dd\mu(s) \Big|.
@@ -352,7 +360,7 @@ For now we will establish a duality result that holds with no additional assumpt
   \end{equation}
   recalling that we assumed the normalisation $\|\mb{g}\|_{L^\infty(S;X^{*})} = 1$.
   Then $\mu(A_\varepsilon) > 0$, but we could run into the problem that $\mu(A_\varepsilon) = \infty$.
-  Since $S$ is $\sigma$-finite, we can write $S$ as an increasing union of sets of finite measure
+  Since $S$ is $\sigma$-finite,\footnote{Recall that we always assume this without mention.} we can write $S$ as an increasing union of sets of finite measure
   \begin{equation*}
     S = \bigcup_{n \in \N} S_n, \qquad S_n \subset S_{n+1}, \, \mu(S_n) < \infty \quad \forall n \in \N,
   \end{equation*}
@@ -529,10 +537,10 @@ The Bochner integral satisfies various familiar and useful properties.
   \end{description}
 \end{proof}
 
-There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we have no concept of a non-negative vector-valued function at this level of generality).
+There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we have no concept of a non-negative vector-valued function at this level of generality).\footnote{Recall that we assume every measure space is $\sigma$-finite. Fubini's theorem fails for non-$\sigma$-finite measure spaces, even for scalar-valued functions.}
 
 \begin{prop}[Fubini]
-  Let $(S,\mc{A},\mu)$ and $(S',\mc{A}',\mu')$ be $\sigma$-finite measure spaces\footnote{The scalar Fubini theorem fails for non-$\sigma$-finite spaces!}, and consider the product measure space $(S \times S', \mc{A} \times \mc{A}', \mu \times \mu')$.
+  Let $(S,\mc{A},\mu)$ and $(S',\mc{A}',\mu')$ be measure spaces, and consider the product measure space $(S \times S', \mc{A} \times \mc{A}', \mu \times \mu')$.
   Let $\mb{f} \in L^1(S \times S'; X)$.
   Then
   \begin{itemize}
