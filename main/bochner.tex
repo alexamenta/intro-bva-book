@@ -97,8 +97,13 @@ We used non-separability to construct a function which is measurable but not str
   By replacing $X$ with the closure of the range of $\mb{f}$, we may assume without loss of generality that $X$ is separable.
   Let $(\mb{x}_n)_{n \in \N}$ be a dense sequence in $X$, and for each $n \in \N$ define a function $\map{\phi_n}{X}{\{\mb{x}_1,\ldots,\mb{x}_n\}}$ such that for all $\mb{x} \in X$,
   \begin{equation*}
-    \|\mb{x} - \phi_n(\mb{x})\|_X = \min_{1 \leq j \leq n} \|\mb{x} - \mb{x}_j\|_X.
+    \|\mb{x} - \phi_n(\mb{x})\|_X = \min_{1 \leq j \leq n} \|\mb{x} - \mb{x}_j\|_X,
   \end{equation*}
+  and such that if $\phi_{n}(\mb{x}) = \mb{x}_{k}$,
+  \begin{equation*}
+    \|\mb{x} - \phi_n(\mb{x})\|_X <  \|\mb{x} - \mb{x}_j\|_X \qquad \forall j = 1,\ldots,k-1
+  \end{equation*}
+  (i.e. $\phi_{n}(\mb{x})$ is the first element in the sequence $\mb{x}_{1}, \ldots, \mb{x}_{n}$ for which the distance to $\mb{x}$ is minimised).
   By density of $(\mb{x}_n)_{n \in \N}$ in $X$ we thus have that $\phi_n(\mb{x}) \to \mb{x}$ for all $\mb{x} \in X$.
   Now define functions $\map{\mb{f}_n}{S}{X}$ by
   \begin{equation*}
@@ -111,7 +116,8 @@ We used non-separability to construct a function which is measurable but not str
     \begin{aligned}
     \mb{f}_n^{-1}(\mb{x}_k)
     &= \{s \in S : \phi_n(\mb{f}(s)) = \mb{x}_k \} \\
-    &= \{s \in S : \|\mb{f}(s) - \mb{x}_k\|_X = \min_{1 \leq j \leq n} \|\mb{f}(s) - \mb{x}_j\|_X \}.
+    &= \{s \in S : \|\mb{f}(s) - \mb{x}_k\|_X = \min_{1 \leq j \leq n} \|\mb{f}(s) - \mb{x}_j\|_X \} \cap \\
+    &\hspace{2cm} \bigcap_{j=1}^{k-1} \{s \in S : \|\mb{f}(s) - \mb{x}_{k}\|_{X} < \|\mb{f}(s) - \mb{x}_{j}\|_{X} \}.
   \end{aligned}
   \end{equation*}
   Let $(\mb{x}_m^*)_{m \in \N}$ be a norming sequence of unit vectors in $X^*$.
@@ -124,7 +130,7 @@ We used non-separability to construct a function which is measurable but not str
   \begin{equation*}
     s \mapsto \min_{1 \leq j \leq n} \|\mb{f}(s) - \mb{x}_j\|_X
   \end{equation*}
-  is also measurable, and the representation above shows that $\mb{f}_n^{-1}(\mb{x}_k)$ is measurable (being the set on which two measurable functions are equal).
+  is also measurable, and the representation above shows that $\mb{f}_n^{-1}(\mb{x}_k)$ is measurable (being constructed in terms of level sets and sub-level sets of measurable functions).
   Hence each $\mb{f}_n$ is simple, and consequently $\mb{f}$ is strongly measurable.
 \end{proof}
 
