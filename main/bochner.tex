@@ -228,12 +228,12 @@ In the scalar-valued setting, the simple functions are dense in $L^p$-spaces, an
   Since $\mb{f}$ is strongly measurable, there exists a sequence of simple functions $\mb{f}_n \in \Simp(S;X)$ with $\lim_{n \to \infty} \mb{f}_n = \mb{f}$ pointwise almost everywhere.
   Now set
   \begin{equation*}
-    \mb{g}_n := \1_{ \{s \in S : \|\mb{f}_n(s)\|_X \leq 2\|\mb{f}\|_X\} } \mb{f}_n.
+    \mb{g}_n := \1_{ \{s \in S : \|\mb{f}_n(s)\|_X \leq 2\|\mb{f}(s)\|_X\} } \mb{f}_n.
   \end{equation*}
   The functions $\mb{g}_n$ are simple, and they converge to $\mb{f}$ pointwise almost everywhere.
   Furthermore we have
   \begin{equation*}
-    \|\mb{g}_n\|_{L^p(S;X)}^p = \int_{\{s \in S : \|\mb{f}_n(s)\|_X \leq 2\|\mb{f}\|_X \} } \|\mb{f}_n(s)\|_X^p \, \dd\mu(s) \leq 2^p \|\mb{f}\|_{L^p(S;X)}^p,
+    \|\mb{g}_n\|_{L^p(S;X)}^p = \int_{\{s \in S : \|\mb{f}_n(s)\|_X \leq 2\|\mb{f}(s)\|_X \} } \|\mb{f}_n(s)\|_X^p \, \dd\mu(s) \leq 2^p \|\mb{f}\|_{L^p(S;X)}^p,
   \end{equation*}
   so each $\mb{g}_n$ is in $L^p(S;X)$.
   Since $\|\mb{f}(s) - \mb{g}_n(s)\|_X \leq 3\|\mb{f}(s)\|_X$ for almost all $s$, dominated convergence yields
@@ -304,7 +304,7 @@ Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $\
   \Phi \mb{g}(\mb{f}) := \int_S \langle \mb{f}(s), \mb{g}(s) \rangle \, \dd\mu(s) \in \K \qquad \forall \mb{f} \in L^p(S;X).
 \end{equation*}
 H\"older's inequality implies that $\|\Phi \mb{g}\|_{L^p(S;X)^*} \leq \|\mb{g}\|_{L^{p'}(S;X^*)}$.
-In the scalar case $X = \K$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong L^p(S)^*$: that is, every functional $\phi \in L^p(S)^*$ is of the form $\phi = \Phi g$ for some $g \in L^{p'}(S)$, and furthermore $\|\phi\|_{L^p(S)^*} = \|g\|_{L^{p'}(S)}$.
+In the scalar case $X = \K$, for $p \in [1,\infty)$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong L^p(S)^*$: that is, every functional $\phi \in L^p(S)^*$ is of the form $\phi = \Phi g$ for some $g \in L^{p'}(S)$, and furthermore $\|\phi\|_{L^p(S)^*} = \|g\|_{L^{p'}(S)}$.
 We will see in Chapter \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ is an isometric isomorphism if and only if $X$ has the \emph{Radon--Nikodym property} with respect to the measure space $(S,\mc{A},\mu)$.
 For now we will establish a duality result that holds with no additional assumptions on the Banach space.
 
@@ -436,7 +436,7 @@ and if in addition $\mb{f} \in L^1(\mu;X)$, we define the \emph{Bochner integral
 Note that $\mb{f} \in L^1(\mu;X)$ if and only if $\mu(S_n) < \infty$ for all $n$.
 The Bochner integral is a linear map $\Simp(S;X) \cap L^1(\mu;X) \to X$, and for $\mb{f}$ as above it satisfies
 \begin{equation*}
-  \Big\| \int_S \mb{f} \, \dd \mu \Big\|_X \leq |\mu(S_n)| \|\mb{x}_n\|_X = \|\mb{f}\|_{L^1(\mu;X)}.
+  \Big\| \int_S \mb{f} \, \dd \mu \Big\|_X \leq \sum_{n=1}^{N} |\mu(S_n)| \|\mb{x}_n\|_X = \|\mb{f}\|_{L^1(\mu;X)}.
 \end{equation*}
 Thus by density of $\Simp(S;X) \cap L^1(\mu;X)$ in $L^1(\mu;X)$ (Proposition \ref{prop:simple-density}), the Bochner integral extends to a bounded linear map $L^1(\mu;X) \to X$ which we continue to call the Bochner integral and denote by the same symbol.
 That is, the Bochner integral of a general function $\mb{g} \in L^1(\mu;X)$ is given by 
