@@ -66,7 +66,7 @@ But in the general context of Banach spaces the inclusions \eqref{eq:measurabili
   \end{equation*}
   so that the union $U := \cup_{n \in \N} i_n(X)$ is dense in $X$.
   Since each $i_n$ is simple, $U$ is countable, which implies that $X$ is separable.
-  Thus $I$ not strongly measurable.
+  Thus $I$ is not strongly measurable.
 \end{example}
 
 \begin{rmk}
@@ -106,7 +106,7 @@ We used non-separability to construct a function which is measurable but not str
   \end{equation*}
   so that $\mb{f}_n \to \mb{f}$ pointwise.
   Each $\mb{f}_n$ has finite range, so to show that $\mb{f}_n$ is simple we need only show that the preimages $\mb{f}_n^{-1}(\mb{x}_k)$ are measurable.
-  For all $n \in \N$ and all $1 \leq k \leq n$ We have
+  For all $n \in \N$ and all $1 \leq k \leq n$ we have
   \begin{equation*}
     \begin{aligned}
     \mb{f}_n^{-1}(\mb{x}_k)
@@ -114,7 +114,7 @@ We used non-separability to construct a function which is measurable but not str
     &= \{s \in S : \|\mb{f}(s) - \mb{x}_k\|_X = \min_{1 \leq j \leq n} \|\mb{f}(s) - \mb{x}_j\|_X \}.
   \end{aligned}
   \end{equation*}
-  Let $(\mb{x}_m^*)_{m \in \N}$ be a norming sequence of unit vectors on $X^*$.
+  Let $(\mb{x}_m^*)_{m \in \N}$ be a norming sequence of unit vectors in $X^*$.
   Since $\mb{f}$ is weakly measurable, for each $j \in \{1,\ldots,n\}$ the function
   \begin{equation*}
     s \mapsto \|\mb{f}(s) - \mb{x}_j\|_X = \sup_{m \in \N} |\langle \mb{f}(s) - \mb{x}_j, \mb{x}_m^* \rangle|
@@ -144,11 +144,11 @@ As a quick application, we can show that strong measurability is preserved under
     \langle \phi \mb{f}, \mb{x}^* \rangle(s) = \phi(s) \langle \mb{f}(s) , \mb{x}^* \rangle = \phi \langle \mb{f}, \mb{x}^* \rangle.
   \end{equation*}
   Since $f$ is weakly measurable, the product $\phi \langle \mb{f}, \mb{x}^* \rangle$ is measurable for all $\mb{x}^* \in X^*$, so $\phi \mb{f}$ is weakly measurable.
-  To show that $\phi \mb{f}$ is separably-valued, first note that since $f$ is separably-valued there exists a separable closed subspace $X_0 \subset X$ such that $\mb{f}(s) \in X_0$ for all $s \in S$.
-  But then $\phi(s)\mb{f}(s) \in X_0$ too, so $\phi \mb{f}$ is separably-valued.
+  To show that $\phi \mb{f}$ is separably-valued, first note that since $f$ is separably-valued there exists a separable closed subspace $X' \subset X$ such that $\mb{f}(s) \in X'$ for all $s \in S$.
+  But then $\phi(s)\mb{f}(s) \in X'$ too, so $\phi \mb{f}$ is separably-valued.
 \end{proof}
 
-In what follows we will generally deal with equivalence classes of functions modulo almost-everywhere equivalence, i.e. gievn a measure space $(S,\mc{A},\mu)$ we will consider two measurable functions $\map{\mb{f},\mb{g}}{S}{X}$ as being equal if the set
+In what follows we will generally deal with equivalence classes of functions modulo almost-everywhere equivalence, i.e. given a measure space $(S,\mc{A},\mu)$ we will consider two measurable functions $\map{\mb{f},\mb{g}}{S}{X}$ as being equal if the set
 \begin{equation*}
   \{s \in S : \mb{f}(s) \neq \mb{g}(s)\}
 \end{equation*}
@@ -171,14 +171,14 @@ This is a surprisingly useful observation, which can be used to deduce identitie
   \end{equation*}
   has measure zero, but the (uncountable!) union of these sets over all $\mb{x}^* \in X^*$ need not.
   This is where strong measurability comes into play, via the Pettis theorem.
-  Since $\mb{f}$ and $\mb{g}$ are separably-valued, there exists a separable closed subspace $X_0 \subset X$ containing the ranges of both $\mb{f}$ and $\mb{g}$.
-  Since $X_0$ is separable, there is a (countable!) sequence $(\mb{x}_n^*)_{n \in \N}$ in $X^*$ which separates points of $X_0$.\footnote{That is, if $\mb{x} \neq \mb{y} \in X_0$, then there exists $n \in \N$ such that $\langle \mb{x}, \mb{x}_n^* \rangle \neq \langle \mb{y}, \mb{x}_n^* \rangle$. See Proposition \ref{prop:sep-sep-points} in the appendices.}
+  Since $\mb{f}$ and $\mb{g}$ are separably-valued, there exists a separable closed subspace $X' \subset X$ containing the ranges of both $\mb{f}$ and $\mb{g}$.
+  Since $X'$ is separable, there is a (countable!) sequence $(\mb{x}_n^*)_{n \in \N}$ in $X^*$ which separates points of $X'$.\footnote{That is, if $\mb{x} \neq \mb{y} \in X'$, then there exists $n \in \N$ such that $\langle \mb{x}, \mb{x}_n^* \rangle \neq \langle \mb{y}, \mb{x}_n^* \rangle$. See Proposition \ref{prop:sep-sep-points} in the appendices.}
   Now define
   \begin{equation*}
     N := \bigcup_{n \in \N} N_{\mb{x}_n^*}.
   \end{equation*}
   This set has measure zero since it is the countable union of sets with measure zero.
-  For all $s \notin N$ we then have $\langle \mb{f}(s), \mb{x}_n^* \rangle = \langle \mb{g}(s), \mb{x}_n^* \rangle$ for all $n \in \N$, and since $(\mb{x}_n^*)_{n \in \N}$ separates points of $X_0$, it follows that $\mb{f}(s) = \mb{g}(s)$.
+  For all $s \notin N$ we then have $\langle \mb{f}(s), \mb{x}_n^* \rangle = \langle \mb{g}(s), \mb{x}_n^* \rangle$ for all $n \in \N$, and since $(\mb{x}_n^*)_{n \in \N}$ separates points of $X'$, it follows that $\mb{f}(s) = \mb{g}(s)$.
   Thus $\mb{f} \stackrel{\ae}{=} \mb{g}$.  
 \end{proof}
 
@@ -410,8 +410,8 @@ For now we will establish a duality result that holds with no additional assumpt
   \begin{equation*}
     \begin{aligned}
       \|\mb{f}\|_{L^p(S;X)} = \|j \circ \mb{f}\|_{L^p(S;(X^*)^*)} &= \|\Phi (j \circ \mb{f})\|_{L^{p'}(S; X^*)^*} \\
-      &= \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \int_{S} |\langle \mb{g}(s) , j(\mb{f}(s)) \rangle| \, \dd\mu(s) \\
-      &= \sup_{\mb{g}} \int_{S} |\langle \mb{f}(s) , \mb{g}(s) \rangle| \, \dd\mu(s),
+      &=  \sup_{\substack{\mb{g} \in L^{p'}(S;X^*) \\ \|\mb{g}\| = 1}} \Big| \int_{S} \langle \mb{g}(s) , j(\mb{f}(s)) \rangle \, \dd\mu(s) \Big| \\
+      &= \sup_{\mb{g}} \Big| \int_{S} \langle \mb{f}(s) , \mb{g}(s) \rangle \, \dd\mu(s) \Big|,
     \end{aligned}
   \end{equation*}
   completing the proof.
