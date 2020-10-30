@@ -69,10 +69,39 @@ But in the general context of Banach spaces the inclusions \eqref{eq:measurabili
   Thus $I$ is not strongly measurable.
 \end{example}
 
-\begin{rmk}
-  The existence of weakly measurable functions that are not measurable is not so simple, but see \cite[Example 1.4.3]{HNVW16} for an argument which shows that the $\sigma$-algebra $\sigma(X^*)$ (which defines the set of weakly measurable functions) may be strictly smaller than the Borel $\sigma$-algebra on $X$.
-  The indicator function of a Borel set which is not in $\sigma(X^*)$ is then weakly measurable, but not measurable.
-\end{rmk}
+\begin{example}[A weakly measurable function which is not measurable]\label{eg:non-meas}
+  Consider the non-separable Hilbert space $\ell^2(\R)$ of all countably supported functions $\map{f}{\R}{\C}$ such that
+  \begin{equation*}
+    \|f\|_{\ell^{2}(\R)} := \Big( \sum_{t \in \spt f} |f(t)|^2 \Big)^{1/2} < \infty,
+  \end{equation*}
+  equipped with the inner product
+  \begin{equation*}
+    (f_1, f_2 ) := \sum_{t \in \spt f_1 \cap \spt f_2} f_1(t) \overline{f_2(t)}.
+  \end{equation*} 
+  For all $t \in \R$, let $\mb{e}_{t} \in \ell^2(\R)$ be the function which is equal to $1$ at $t$, and equal to $0$ everywhere else.
+  Note that $\|\mb{e}_{t} - \mb{e}_{s}\|_{\ell^2(\R)} = \sqrt{2}$ whenever $s \neq t$.
+  Now define a function $\map{\mb{F}}{\R}{\ell^2(\R)}$ by
+  \begin{equation*}
+    \mb{F}(t) := \mb{e}_{t}.
+  \end{equation*}
+  (We consider the domain $\R$ as being equipped with the Lebesgue measure).
+  To show that $\mb{F}$ is weakly measurable we use the Riesz representation theorem: all functionals on $\ell^2(\R)$ are of the form $f \mapsto ( f, g )$ for some $g \in \ell^2(\R)$.
+  Such a $g$ is countably supported, and can therefore be approximated in norm by finite linear combinations of vectors $\mb{e}_{t}$, and so weak measurability follows from the fact that the function
+  \begin{equation*}
+    s \mapsto ( \mb{F}(s), \mb{e}_{t} )  = (\mb{e}_{s}, \mb{e}_{t}) = \mb{e}_{t}(s)
+  \end{equation*}
+  is measurable for all $t \in \R$.
+  On the other hand, $\mb{F}$ is not measurable: to see this, fix a non-measurable set $E \subset \R$ and let
+  \begin{equation*}
+    E' := \bigcup_{t \in E} B_{1}(\mb{e}_{t}).
+  \end{equation*}
+  Then $E'$ is open, but $\mb{F}^{-1}( E' ) = E$ is not measurable.
+\end{example}
+
+% \begin{rmk}
+%   The existence of weakly measurable functions that are not measurable is not so simple, but see \cite[Example 1.4.3]{HNVW16} for an argument which shows that the $\sigma$-algebra $\sigma(X^*)$ (which defines the set of weakly measurable functions) may be strictly smaller than the Borel $\sigma$-algebra on $X$.
+%   The indicator function of a Borel set which is not in $\sigma(X^*)$ is then weakly measurable, but not measurable.
+% \end{rmk}
 
 We used non-separability to construct a function which is measurable but not strongly measurable, and there is a very good reason for this.
 
@@ -187,6 +216,10 @@ This is a surprisingly useful observation, which can be used to deduce identitie
   For all $s \notin N$ we then have $\langle \mb{f}(s), \mb{x}_n^* \rangle = \langle \mb{g}(s), \mb{x}_n^* \rangle$ for all $n \in \N$, and since $(\mb{x}_n^*)_{n \in \N}$ separates points of $X'$, it follows that $\mb{f}(s) = \mb{g}(s)$.
   Thus $\mb{f} \stackrel{\ae}{=} \mb{g}$.  
 \end{proof}
+
+\begin{rmk}\label{rmk:eqtest-cex}
+  The weakly measurable function $\map{\mb{F}}{\R}{\ell^2(\R)}$ constructed in Example \ref{eg:non-meas} shows that Lemma \ref{lem:coordinatewise-equality-test} fails without the assumption of strong measurability: we have $\mb{F}(s) \neq 0$ for all $s \in \R$, but for all functionals $\mb{x}^* \in \ell^2(\R)^*$, $\langle \mb{F} , \mb{x}^{*} \rangle \aeeq 0$.
+\end{rmk}
 
 \section{Bochner spaces}
 
