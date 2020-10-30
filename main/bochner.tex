@@ -465,14 +465,14 @@ The key to our definition will be the density of the simple functions in $L^1(X)
 
 Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
 If $\mb{f} \in \Simp(S;X)$ is a simple function represented as
-\begin{equation*}
+\begin{equation}\label{eq:simple-f-bi}
   \mb{f} = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
-\end{equation*}
+\end{equation}
 and if in addition $\mb{f} \in L^1(\mu;X)$, we define the \emph{Bochner integral}
 \begin{equation*}
   \int_S \mb{f} \, \dd\mu = \int_S \mb{f}(s) \, \dd \mu(s) := \sum_{n=1}^N \mu(S_n) \mb{x}_n \in X.
 \end{equation*}
-Note that $\mb{f} \in L^1(\mu;X)$ if and only if $\mu(S_n) < \infty$ for all $n$.
+Note that a simple function as in \eqref{eq:simple-f-bi} is in $L^1(\mu;X)$ if and only if $\mu(S_n) < \infty$ for all $n$.
 The Bochner integral is a linear map $\Simp(S;X) \cap L^1(\mu;X) \to X$, and for $\mb{f}$ as above it satisfies
 \begin{equation*}
   \Big\| \int_S \mb{f} \, \dd \mu \Big\|_X \leq \sum_{n=1}^{N} |\mu(S_n)| \|\mb{x}_n\|_X = \|\mb{f}\|_{L^1(\mu;X)}.
@@ -517,17 +517,18 @@ The Bochner integral satisfies various familiar and useful properties.
 \end{prop}
 
 \begin{proof}
-  \begin{description}
- 
-    \item[Commutation with linear maps] by continuity it suffices to prove this for simple $\mb{f} \in \Simp(S;X) \cap L^1(\mu;X)$.
+  \textbf{Commutation with linear maps:} by continuity it suffices to prove this for simple $\mb{f} \in \Simp(S;X) \cap L^1(\mu;X)$.
     Writing $\mb{f}$ as in \eqref{eqn:simple-function-standard-form} we have 
     \begin{equation*}
+      \begin{aligned}
         T\Big(\int_S \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n \, \dd\mu \Big)
-        = \sum_{n=1}^N \mu(S_n) \otimes T(\mb{x}_n) 
+        = \sum_{n=1}^N \mu(S_n) T(\mb{x}_n)
+        = \int_{S} T\Big(\sum_{n=1}^{N} \1_{S_n}(s) \mb{x}_{n} \Big) \, \dd\mu(s) \\
         = \int_S T\mb{f} \, \dd\mu.
+      \end{aligned}
     \end{equation*}
         
-  \item[Closure] We may assume that $X_0$ is a proper subspace of $X$, otherwise there is nothing to show.
+  \textbf{Closure:} We may assume that $X_0$ is a proper subspace of $X$, otherwise there is nothing to show.
     Let $\mb{y} \in X \sm X_0$, and by Hahn--Banach\footnote{If you are philosophically opposed to Hahn--Banach, then see \cite[Corollary 1.1.22]{HNVW16} for a proof that avoids it, and promptly stop reading these notes to avoid further frustration.} choose a functional $\mb{x}^* \in X^*$ such that $\langle \mb{y}, \mb{x}^* \rangle = 1$ and $X_0 \subset \ker \mb{x}^*$.
     Then by the commutation property above we have
     \begin{equation*}
@@ -537,7 +538,7 @@ The Bochner integral satisfies various familiar and useful properties.
     Thus $\int_S \mb{f} \, \dd\mu \neq y$.
     Since $y \in X \sm X_0$ was arbitrary, we conclude that $\int_S \mb{f} \, \dd\mu \in X_0$.
 
-  \item[Dominated convergence]
+  \textbf{Dominated convergence:}
     By continuity of the Bochner integral it suffices to show that $\mb{f} \in L^1(\mu;X)$ and $\mb{f}_n \to \mb{f}$ in $L^1(\mu;X)$.
     The first fact follows from $\|\|\mb{f}\|_{X}\|_{L^1(\mu)} \leq \|g\|_{L^1(\mu)} < \infty$ and the almost-everywhere strong measurability of almost-everywhere limits of strongly measurable functions (Exercise \ref{ex:sm-limits}).
     For the second, since $\|(\mb{f}_n - \mb{f})(s)\|_X \leq 2g(s)$ almost everywhere, we have
@@ -546,18 +547,19 @@ The Bochner integral satisfies various familiar and useful properties.
     \end{equation*}
     by dominated convergence for scalar-valued functions.
     
-  \item[Substitution]
-    First we need to show that $\mb{g} \circ \phi$ is strongly measurable.
-    Let
-    \begin{equation*}
-      \mb{g}_i = \sum_{n=1}^{N_i} \1_{S_{n,i}} \otimes \mb{x}_{n,i}
-    \end{equation*}
-    be a sequence of simple functions converging to $\mb{g}$ $\mu$-almost everywhere.
-    Then
-    \begin{equation*}
-      \mb{g}_i \circ \phi = \sum_{n=1}^{N_i} (\1_{S_{n,i}} \circ \phi) \otimes \mb{x}_{n,i} = \sum_{n=1}^{N_i} \1_{\phi^{-1}(S_{n,i})} \otimes \mb{x}_{n,i}
-    \end{equation*}
-    is a sequence of simple functions converging to $\mb{g} \circ \phi$ $\nu$-almost everywhere, so $\mb{g} \circ \phi$ is also strongly measurable.
+  \textbf{Substitution:}
+  First we need to show that $\mb{g} \circ \phi$ is strongly measurable.
+  This follows from Pettis' theorem: $\mb{g}$ is separably valued, and therefore so is $\mb{g} \circ \phi$; likewise weak measurability of $\mb{g} \circ \phi$ follows from weak measurability of $\mb{g}$ and measurability of $\phi$.
+    % Let
+    % \begin{equation*}
+    %   \mb{g}_i = \sum_{n=1}^{N_i} \1_{S_{n,i}} \otimes \mb{x}_{n,i}
+    % \end{equation*}
+    % be a sequence of simple functions converging to $\mb{g}$ $\mu$-almost everywhere.
+    % Then
+    % \begin{equation*}
+    %   \mb{g}_i \circ \phi = \sum_{n=1}^{N_i} (\1_{S_{n,i}} \circ \phi) \otimes \mb{x}_{n,i} = \sum_{n=1}^{N_i} \1_{\phi^{-1}(S_{n,i})} \otimes \mb{x}_{n,i}
+    % \end{equation*}
+    % is a sequence of simple functions converging to $\mb{g} \circ \phi$ $\nu$-almost everywhere, so $\mb{g} \circ \phi$ is also strongly measurable.
     The identity for scalar-valued functions
     \begin{equation*}
       \int_{S'} \|\mb{g} \circ \phi(s)\|_X \, \dd\mu(s) = \int_T \|\mb{g}(s)\|_X \, \dd\nu(t)
@@ -573,7 +575,6 @@ The Bochner integral satisfies various familiar and useful properties.
       \end{aligned}
     \end{equation*}
     which proves the result.
-  \end{description}
 \end{proof}
 
 There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we have no concept of a non-negative vector-valued function at this level of generality).\footnote{Recall that we assume every measure space is $\sigma$-finite. Fubini's theorem fails for non-$\sigma$-finite measure spaces, even for scalar-valued functions.}
