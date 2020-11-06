@@ -73,7 +73,7 @@ First we will set up some basic probabilistic language in Banach spaces.
   \end{equation*}
   with the product $\sigma$-algebra and measure.
   Elements of $\Omega$ are sequences $\omega = (\omega_n)_{n \in \N}$ with $\omega_n = \pm 1$.
-  Suppose $n \in \N$, fix a vector $\eta = (\eta_0, \eta_1, \ldots \eta_n) \in \{-1,1\}$ of length $n+1$, and define the set
+  Suppose $n \in \N$, fix a vector $\eta = (\eta_0, \eta_1, \ldots \eta_n) \in \{-1,1\}^{n+1}$ of length $n+1$, and define the set
   \begin{equation*}
     A_{\eta} := \{\omega \in \Omega : \omega_k = \eta_k \; \forall k = 0,1,\ldots,n\};
   \end{equation*}
@@ -150,7 +150,7 @@ Predictability of a stochastic process $\mb{f}_{\bullet}$ with respect to the fi
     \mb{s}_{n+1} = \mb{s}_n + \pi_{n+1} \mb{x}_{n+1} \qquad \forall n \in \N;
   \end{equation*}
   keep in mind that this is an equality of $X$-valued random variables, i.e. functions $\Omega \to X$.
-  Since $\mb{s}_n$, $\pi_{n+1}$, and $\mb{x}_{n+1}$ are all $\mc{A}_{n+1}$-measurable, we find that $\mb{s}_{n+1}$ is $\mc{F}_{n+1}$-measurable (i.e. we know the state of our wallet $\mb{s}_{n+1}$ at time $n+1$).
+  Since $\mb{s}_n$, $\pi_{n+1}$, and $\mb{x}_{n+1}$ are all $\mc{A}_{n+1}$-measurable, we find that $\mb{s}_{n+1}$ is $\mc{A}_{n+1}$-measurable (i.e. we know the state of our wallet $\mb{s}_{n+1}$ at time $n+1$).
   Heuristically, $\mb{s}_{n+1}$ should not be $\mc{A}_n$-measurable unless $\mb{x}_{n+1} \equiv 0$, as this would amount to predicting the future (which can only be done by wagering nothing).
   You should prove this rigourously (Exercise \ref{ex:winnings-unpredictability}).
 \end{example}
@@ -295,13 +295,13 @@ First we establish the uniqueness of conditional expectations.
   Finally, if $X$ is a complex Banach space, the result follows by considering real and imaginary parts separately.
 \end{proof}
 
-Next we will establish existence, positivity, and $L^p$-contractivity of conditional expectations in the scalar-valued case.
+Next we will establish existence, positivity, and $L^p$-nonexpansiveness of conditional expectations in the scalar-valued case.
 The positivity in particular will let us deduce the existence of $X$-valued conditional expectations for every Banach space $X$.
 
 \begin{thm}\label{thm:conditional-expectation-existence-scalar}
   Let $(\Omega,\mc{A},\P)$ be a probability space.
   Then for any $f \in L^1(\mc{A})$ and any $\sigma$-subalgebra $\mc{B} \subset \mc{A}$, a conditional expectation $\E^{\mc{B}}f$ exists.
-  The operator $f \mapsto \E^{\mc{B}}f$ is linear, and for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive contraction on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
+  The operator $f \mapsto \E^{\mc{B}}f$ is linear, and for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a positive and nonexpansive map on $L^p(\mc{A})$: that is, if $f \in L^p(\mc{A})$, then
   \begin{equation*}
     \|\E^{\mc{B}}f\|_{p} \leq \|f\|_{p},
   \end{equation*}
@@ -317,11 +317,11 @@ The positivity in particular will let us deduce the existence of $X$-valued cond
   \end{equation*}
   which implies that the $\mc{B}$-measurable function $\E^{\mc{B}}f$ is nonnegative.\footnote{This uses an exercise from measure theory: if $g$ is $\mc{B}$-measurable and $\int_B g \geq 0$ for all $\mc{B}$-measurable sets, then $g \stackrel{\mathrm{a.e.}}{\geq} 0$. Proof: the set $N := \{g(\omega) < 0\}$ is $\mc{B}$-measurable, and assuming it has positive measure leads to the contradiction $0 \leq \int_B g < 0$.}
   
-  Now fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A})$; we will construct a linear contractive conditional expectation operator $\E^{\mc{B}}$ on $L^p(\mc{B};\K)$.
+  Now fix $p \in [1,\infty]$ and let $f \in L^p(\mc{A})$; we will construct a linear nonexpansive conditional expectation operator $\E^{\mc{B}}$ on $L^p(\mc{B};\K)$.
 
   \textbf{Mild case: $p > 1$.}
   In this case, $p' < \infty$.
-  The inclusion map $\map{\iota}{L^{p'}(\mc{B})}{L^{p'}(\mc{A})}$ is contractive, so its adjoint $\map{\E^{\mc{B}} := \iota^*}{L^p(\mc{A})}{L^p(\mc{B})}$ is also contractive.\footnote{This uses that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$.}
+  The inclusion map $\map{\iota}{L^{p'}(\mc{B})}{L^{p'}(\mc{A})}$ is nonexpansive, so its adjoint $\map{\E^{\mc{B}} := \iota^*}{L^p(\mc{A})}{L^p(\mc{B})}$ is also nonexpansive.\footnote{This uses that $L^p$ is the dual of $(L^{p'})^*$, which requires $p' < \infty$.}
   For all $f \in L^p(\mc{A})$ and $B \in \mc{B}$ we have
   \begin{equation*}
     \int_B \E^{\mc{B}} f \, \dd\P = \langle \iota^* f, \1_{B} \rangle = \langle f, \iota \1_{B} \rangle = \langle f, \1_{B} \rangle = \int_B f \, \dd\P,
@@ -341,7 +341,7 @@ The positivity in particular will let us deduce the existence of $X$-valued cond
   \begin{equation*}
     \|\E^{\mc{B}} f\|_1 \leq \|f\|_1,
   \end{equation*}
-  so $\E^{\mc{B}}$ extends to a contraction $L^1(\mc{A}) \to L^1(\mc{B})$.
+  so $\E^{\mc{B}}$ extends to a nonexpansive map $L^1(\mc{A}) \to L^1(\mc{B})$.
   For $f \in L^1(\mc{A})$ and $B \in \mc{B}$, using that integration on $B$ is a continuous linear functional on $L^1$, we have
   \begin{equation*}
     \int_B \E^{\mc{B}} f \, \dd\P
@@ -365,14 +365,14 @@ Now we can use the extension theorem for positive operators to show the existenc
 \begin{prop}
   Let $(\Omega,\mc{A},\P)$ be a probability space, let $\mc{B}$ be a $\sigma$-subalgebra of $\mc{A}$, and let $X$ be a Banach space.
   Then for any $\mb{f} \in L^1(\mc{A};X)$, a conditional expectation $\E_X^{\mc{B}}\mb{f}$ of $\mb{f}$ given $\mc{B}$ exists.
-  Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is a contraction on $L^p(\mc{A};X)$.
+  Furthermore, for all $p \in [1,\infty]$, $\E^{\mc{B}}$ is nonexpansive on $L^p(\mc{A};X)$.
 \end{prop}
 
 
 \begin{proof}  
   First fix $p \in [1,\infty)$.
   Since the conditional expectation $\E^{\mc{B}}$ is a positive operator on $L^p(\mc{A})$, by Theorem \ref{thm:positive-extensions} it admits a bounded $X$-valued extension, which we denote by $\E_X^{\mc{B}}$.
-  Since $\E^{\mc{B}}$ is contractive, so is $\E_X^{\mc{B}}$.
+  Since $\E^{\mc{B}}$ is nonexpansive, so is $\E_X^{\mc{B}}$.
   We just need to show that for all $\mb{f} \in L^p(\mc{A};X)$, $\E_X^{\mc{B}}\mb{f}$ is a conditional expectation of $f$ given $\mc{B}$; we will do this by scalarisation.
   For all $B \in \mc{B}$ and all functionals $\mb{x}^* \in X^*$, since the function $\langle \mb{f}, \mb{x}^* \rangle$ is in $L^1(\mc{A})$, we have
   \begin{equation*}

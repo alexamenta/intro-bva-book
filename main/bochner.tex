@@ -550,19 +550,9 @@ The Bochner integral satisfies various familiar and useful properties.
   \textbf{Substitution:}
   First we need to show that $\mb{g} \circ \phi$ is strongly measurable.
   This follows from Pettis' theorem: $\mb{g}$ is separably valued, and therefore so is $\mb{g} \circ \phi$; likewise weak measurability of $\mb{g} \circ \phi$ follows from weak measurability of $\mb{g}$ and measurability of $\phi$.
-    % Let
-    % \begin{equation*}
-    %   \mb{g}_i = \sum_{n=1}^{N_i} \1_{S_{n,i}} \otimes \mb{x}_{n,i}
-    % \end{equation*}
-    % be a sequence of simple functions converging to $\mb{g}$ $\mu$-almost everywhere.
-    % Then
-    % \begin{equation*}
-    %   \mb{g}_i \circ \phi = \sum_{n=1}^{N_i} (\1_{S_{n,i}} \circ \phi) \otimes \mb{x}_{n,i} = \sum_{n=1}^{N_i} \1_{\phi^{-1}(S_{n,i})} \otimes \mb{x}_{n,i}
-    % \end{equation*}
-    % is a sequence of simple functions converging to $\mb{g} \circ \phi$ $\nu$-almost everywhere, so $\mb{g} \circ \phi$ is also strongly measurable.
     The identity for scalar-valued functions
     \begin{equation*}
-      \int_{S'} \|\mb{g} \circ \phi(s)\|_X \, \dd\mu(s) = \int_T \|\mb{g}(s)\|_X \, \dd\nu(t)
+      \int_{S} \|\mb{g} \circ \phi(s)\|_X \, \dd\mu(s) = \int_{S'} \|\mb{g}(s)\|_X \, \dd\nu(t)
     \end{equation*}
     implies that $\mb{g} \circ \phi \in L^1(\mu;X)$.
     Finally, for all $\mb{x}^* \in X^*$ we have by the commutation property and the substitution identity for scalar-valued functions
@@ -814,7 +804,7 @@ Of course, most interesting operators are not positive.
   For each $N \in \{1,2,\ldots\}$ define a function $\map{\mb{f}_N}{\R}{\ell^p}$ by
   \begin{equation*}
       \mb{f}_N := \sum_{n=0}^{N-1} \Tr_{n}(f) \otimes \mb{e}_n
-      = (f, \Tr_{1}(f), \Tr_{2}(f), \ldots, \Tr_{N}(f), 0, 0, \ldots).
+      = (f, \Tr_{1}(f), \Tr_{2}(f), \ldots, \Tr_{N-1}(f), 0, 0, \ldots).
   \end{equation*}
   where $(\mb{e}_{n})_{n \in \N}$ are the standard basis elements of $\ell^p$ and $\Tr_{n}f(x) = f(x-n)$ denotes the operator of translation by $n$.
   We can write
