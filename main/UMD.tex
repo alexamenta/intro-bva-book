@@ -1,51 +1,41 @@
-\emph{under construction}
-
 
 \section{The UMD property}
 
 \begin{defn}
-  For $p \in (1,\infty)$ a Banach space $X$ is said to have the \emph{$\UMD_{p}$ property} (Unconditionality of Martingale Differences in $L^p$) if there exists a constant $C < \infty$ such that for all probability spaces $(\Omega,\mc{A},\P)$, all $X$-valued $L^p$-bounded martingales $(f_n)_{n \in \N}$, and all sequences of signs $\xi_n = \pm 1$,
-  \begin{equation*}
-    \sup_{N \in \N} \Big\| \sum_{n=0}^{N} \xi_{n} df_{n} \Big\|_{L^p(\Omega;X)} \leq C \sup_{n \in \N} \|f_n\|_{L^p(\Omega;X)}.
-  \end{equation*}
+  For $p \in (1,\infty)$ a Banach space $X$ is said to have the \emph{$\UMD_{p}$ property} (Unconditionality of Martingale Differences in $L^p$) if there exists a constant $C < \infty$ such that for all probability spaces $(\Omega,\mc{A},\P)$, all $X$-valued $L^p$-bounded martingales $\mb{f}_{\bullet}$, and all sequences of signs $\xi_n = \pm 1$,
+  \begin{equation}\label{eq:UMD-property}
+    \sup_{N \in \N} \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq C \sup_{N \in \N} \|\mb{f}_N\|_{L^p(\Omega;X)}.
+  \end{equation}
   The best possible constant $C$ in this inequality is denoted $\beta_{p}(X)$.
   We say that $X$ has the \emph{UMD property} if it has the $\UMD_{p}$ property for all $p \in (1,\infty)$.
 \end{defn}
 
 \begin{rmk}
-  We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property (i.e. $\UMD_{q}$ for all $q \in (1,\infty)$).
+  We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property, so there is no need to isolate $\UMD_{p}$ as a separate property other than for pedagogical reasons.
 \end{rmk}
 
-Recall that $df_{n} := f_n - f_{n-1}$ (with $df_0 := f_0$), so this property can be rewritten as having
+Recall that the difference process $d\mb{f}_{\bullet}$ is given by $d\mb{f}_{n} := \mb{f}_n - \mb{f}_{n-1}$ (with $\mb{f}_{-1} := \mb{0}$), so \eqref{eq:UMD-property} can be rewritten as
 \begin{equation*}
-  \Big\| \sum_{n=0}^{N} \xi_{n} df_{n} \Big\|_{L^p(\Omega;X)} \leq C \Big\| \sum_{n=0}^{N} df_{n}\Big\|_{L^p(\Omega;X)}
+  \sup_{N \in \N} \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq C \sup_{N \in \N} \Big\| \sum_{n=0}^{N} d\mb{f}_{n}\Big\|_{L^p(\Omega;X)}.
 \end{equation*}
-for all $N \in \N$ and all sign sequences $\xi$.
-In Banach space lingo, thus says that the sequence $(df_n)_{k \in \N}$ in $L^p(\Omega;X)$ is \emph{unconditional}, or equivalently that the series $\sum_{n} df_n$ converges in $L^p(\Omega;X)$ independently of the order of summation.
+In Banach space lingo, thus says that the sequence $d\mb{f}_\bullet$ in $L^p(\Omega;X)$ is \emph{unconditional}, or equivalently, that the convergence (or divergence) in $L^p(\Omega;X)$ of the series $\sum_{n} d\mb{f}_n$ is independent of the order of summation.
 
-Put very bluntly, the UMD property says that martingale differences behave vaguely like orthogonal sequences in $L^p(\Omega;X)$.
+Put very coarsely, the UMD property says that martingale differences behave vaguely like orthogonal sequences in $L^p(\Omega;X)$.
+In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly from orthogonality considerations.
 
 \begin{example}
-  Every Hilbert space $H$ has $\UMD_{2}$, with $\beta_{2}(H) = 1$.
-  To show this let $(f_n)_{n \in \N}$ be an $H$-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
-  Then for all sign sequences $\xi$ and all $N \in \N$, since the martingale differences $df_{n}$ are independent and hence pairwise orthogonal, we have
+  Every Hilbert space $H$ has the $\UMD_{2}$ property, with $\beta_{2}(H) = 1$.
+  To show this let $\mb{f}_{\bullet}$ be an $H$-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
+  Then for all sign sequences $\xi_{\bullet}$ and all $N \in \N$, since the differences $d\mb{f}_{n}$ are independent and hence pairwise orthogonal, we have
   \begin{equation*}
-      \Big\| \sum_{n=0}^N \xi_{n} df_{n} \Big\|_{L^2(\Omega;H)}^{2}
-      = \sum_{n = 0}^{N} \xi_{n}^{2} \|df_{n}\|_{L^2(\Omega)}^{2}
-      = \sum_{n = 0}^{N} \|df_{n}\|_{L^2(\Omega)}^{2}
-      = \Big\| \sum_{n=0}^N df_{n} \Big\|_{L^2(\Omega;H)}^{2}.
+      \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n} \Big\|_{L^2(\Omega;H)}^{2}
+      = \sum_{n = 0}^{N} \xi_{n}^{2} \|d\mb{f}_{n}\|_{L^2(\Omega;H)}^{2}
+      = \sum_{n = 0}^{N} \|d\mb{f}_{n}\|_{L^2(\Omega;H)}^{2}
+      = \Big\| \sum_{n=0}^N d\mb{f}_{n} \Big\|_{L^2(\Omega;H)}^{2}.
   \end{equation*}
 \end{example}
 
-Before going into a more in-depth analysis of the UMD property, we present a few straightforward consequences of it.
-
-\todo{up to here}
-
-\begin{prop}
-  stable under duals, subspaces
-\end{prop}
-
-
+We can't say very much about the UMD property by looking directly at its definition.\todo{we do need Rademacher sums first... square functions are important}
 
 \section{$p$-independence of the UMD property}\label{sec:UMD-p-independence}
 
@@ -66,6 +56,15 @@ State Qiu's counterexample
 give a few more if possible...
 
 \section*{Exercises}
+
+\begin{exercise}\label{ex:UMD-isomorphism}
+  Let $X$ be a Banach space and $Y$ a closed subspace of $X$.
+  Suppose that $Z$ is a Banach space and $\map{\phi}{Z}{Y}$ is an isomorphism.
+  Show that 
+  \begin{equation*}
+    \beta_{p}(Z) \leq \|\phi\|_{\Lin(Z,Y)} \|\phi^{-1}\|_{\Lin(Y,Z)} \beta_{p}(X) \qquad \forall p \in (1,\infty).
+  \end{equation*}
+\end{exercise}
 
 \begin{exercise}
   (boundedness of martingale transforms on UMD spaces)
