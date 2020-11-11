@@ -143,7 +143,7 @@ A good reference for probability theory from the viewpoint of mathematical analy
 Let $(\Omega,\mc{A})$ be a measurable space.
 A \emph{probability measure} on $(\Omega,\mc{A})$ is a measure $\P$ with $\P(\Omega) = 1$.
 Probabilists like to refer to measurable sets $A \in \mc{A}$ as \emph{events}.
-If $S$ is a separable completely metrizable topological space (also called a \emph{Polish space}), an \emph{$S$-valued random variable} is a Borel measurable function $\map{X}{\Omega}{S}$.
+If $S$ is a separable completely metrizable topological space (also called a \emph{Polish space}), an \emph{$S$-valued random variable} is a Borel measurable function $\map{f}{\Omega}{S}$.
 
 \begin{rmk}
   In Definition \ref{defn:RV}, we define $X$-valued random variables $\map{\mb{f}}{\Omega}{X}$, where $X$ is a Banach space which is possibly not separable.
@@ -170,15 +170,34 @@ If $S$ is a separable completely metrizable topological space (also called a \em
   Note that the random variables $(\xi_{\lambda})_{\lambda \in \Lambda}$ are independent if and only if the $\sigma$-algebras $(\sigma(\xi_{\lambda}))_{\lambda \in \Lambda}$ are independent.
 \end{defn}
 
-\textbf{\emph{further material to be added as required}}
+\begin{defn}
+  Let $(\Omega,\mc{A},\P)$ be a probability space, $E$ a Polish space, and $\map{\xi}{\Omega}{E}$ a random variable.
+  The \emph{distribution} of $\xi$ is the pushforward measure $\mu_{\xi} := \xi_{*}(\P)$ on $E$, which is defined by
+  \begin{equation*}
+    \mu_{\xi}(B) := \P(\xi \in B) = \P(\xi^{-1}(B))
+  \end{equation*}
+  for all Borel sets $B \in E$.
+\end{defn}
 
-\begin{itemize}
-\item distributions
-\item characteristic functions and uniqueness
-\end{itemize}
+\todo{do we need the characterisation of independence via distributions?}
+
+For Banach-valued random variables the notion of the \emph{characteristic function} is also quite useful.
+
+\begin{defn}
+  Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space, and suppose $\map{\mb{f}}{\Omega}{X}$ is an $X$-valued random variable.
+  The \emph{characteristic function} of $\mb{f}$ is the function $\map{\phi_{\mb{f}}}{X^{*}}{\C}$ given by
+  \begin{equation*}
+    \phi_{\mb{f}}(\mb{x}^{*}) := \E(e^{i\Re\langle \mb{f}, \mb{x}^{*} \rangle}) = \int_{\Omega} e^{i\Re\langle\mb{f}(\omega), \mb{x}^{*} \rangle} \, \dd\P(\omega) = \int_{X} e^{i\Re \langle\mb{x}, \mb{x}^{*} \rangle} \, \dd\mu_{\mb{f}}(\mb{x})
+  \end{equation*}
+  where $\mu_{\mb{f}}$ is the distribution of $\mb{f}$.
+\end{defn}
+
+In fact, the characteristic function of $\mb{f}$ is just the Fourier transform of the distribution $\mu_{\mb{f}}$ (with an appropriate definition of the Fourier transform of a measure on a Banach space).
+The distribution of a Banach-valued random variable is completely determined by its characteristic function. See \cite[Corollary E.1.17]{HNVW17} for a proof.
 
 \begin{thm}\label{thm:characteristic-function-uniqueness}
-  (if two $X$-valued random variables have the same characteristic function then they are equal a.e.)
+  Let $X$ be a Banach space and suppose that $\mb{f}_{1}$ and $\mb{f}_{2}$ are $X$-valued random variables with equal characteristic functions, $\phi_{\mb{f}_{1}} = \phi_{\mb{f}_{2}}$.
+  Then $\mb{f}_{1}$ and $\mb{f}_{2}$ have equal distributions, $\mu_{\mb{f}_{1}} = \mu_{\mb{f}_{2}}$.
 \end{thm}
 
 % \section{Complex interpolation}
