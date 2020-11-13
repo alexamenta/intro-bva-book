@@ -51,7 +51,7 @@ is independent of the choice of Rademacher sequence.
 Rademacher averages show up \emph{all the time} in Banach-valued analysis, so we better get used to them.
 There are two fundamental properties that they satisfy: the \emph{contraction principle} (to be proven in a moment), and the \emph{Kahane--Khintchine inequalities} (the subject of the next section).
 
-\begin{thm}[Contraction principle]
+\begin{thm}[Contraction principle]\label{thm:contraction}
   There exists a constant $C \leq 2$ with the following property: for all Banach spaces $X$, all $N \in \N$, and all finite sequences $(\mb{x}_{n})_{n = 0}^{N}$ in $X$ and $(a_{n})_{n=0}^{N}$ in the scalar field $\K$,
   \begin{equation*}
     \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} a_{n} \mb{x}_{n} \Big\|_{X} \leq C \Big( \max_{0 \leq n \leq N} |a_{n}| \Big) \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}.
@@ -523,15 +523,77 @@ Now we return to the equivalence of $L^p$- and $L^q$-Rademacher averages:
   which proves the claimed equality \eqref{eq:kk-claim} and completes the proof. 
 \end{proof}
 
+\section{Rademacher spaces, type, and cotype}
+
+Recall Khintchine's inequality from Theorem \ref{thm:khintchine}: if $H$ is a Hilbert space and $(\mb{h}_{n})_{n \in \N}$ is a sequence of vectors in $H$, then for all $p \in [1,\infty)$ we have the identification of the $L^p$-Rademacher average
+\begin{equation*}
+  \Big( \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{h}_{n} \Big\|_{H}^{p} \Big)^{1/p} \simeq_{p} \|\mb{h}\|_{\ell^2(H)}.
+\end{equation*}
+This suggests that for a general Banach space we could use Rademacher averages to create a space of $X$-valued functions which retains some nice properties of the Hilbert space $\ell^2$.
+
+\begin{defn}
+  Let $X$ be a Banach space.
+  For $N \in \N$ we define the (finite) \emph{Rademacher space} $\varepsilon_{N}(X)$ to be the space of finite sequences $\mb{x}_{\bullet} = (\mb{x}_{n})_{n=0}^{N}$ in $X$, equipped with the norm
+  \begin{equation*}
+    \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)} := \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{1}(\Omega;X)},
+  \end{equation*}
+  where $(\varepsilon_{n})_{n = 0}^{N}$ is an arbitrary finite Rademacher sequence on an arbitrary probability space $(\Omega,\mc{A},\P)$.
+  We also define the (infinite) Rademacher space $\varepsilon(X)$ to be the space of infinite sequences $\mb{x}_{\bullet} = (\mb{x}_{n})_{n \in \N}$ such that the series
+  \begin{equation}\label{eq:infinite-rademacher-sum}
+    \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} = \lim_{N \to \infty} \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n}
+  \end{equation}
+  converges in $L^{1}(\Omega;X)$, equipped with the norm
+  \begin{equation*}
+    \|\mb{x}_{\bullet}\|_{\varepsilon(X)} := \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{1}(\Omega;X)}.
+  \end{equation*}
+  As before, $(\varepsilon_{n})_{n \in \N}$ is an arbitrary infinite Rademacher sequence on an arbitrary probability space $(\Omega,\mc{A},\P)$.
+\end{defn}
+
+\begin{rmk}
+  The Kahane--Khintchine inequality says that the Rademacher averages in the definitions above can be replaced with $L^p$-Rademacher averages, and that the resulting norms are equivalent up to a constant independent of $N$.
+  It also says that the convergence of the infinite Rademacher sum \eqref{eq:infinite-rademacher-sum} in $L^1(\Omega;X)$ is equivalent to its convergence in $L^p(\Omega;X)$ for any $p \in [1,\infty)$.
+\end{rmk}
+
+The Rademacher space $\varepsilon(X)$ is a Banach space (Exercise \ref{ex:on-rad-spaces}), and in most applications of Banach-valued analysis it plays the role of $\ell^2(\N;X)$.
+We will see much more of it in later chapters.
+
+We saw already that $\varepsilon(H) = \ell^2(\N;H)$ when $H$ is a Hilbert space; comparing the Rademacher space with more general sequence spaces leads to the important geometric notions of \emph{type} and \emph{cotype}.
+
+\begin{defn}
+  Let $p \in [1,2]$ and $q \in [2,\infty]$.
+  A Banach space $X$ has \emph{(Rademacher) type $p$} if there exists a constant $C < \infty$ such that
+  \begin{equation*}
+    \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \leq C \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{p} \Big)^{1/p}
+  \end{equation*}
+  for all sequences $\mb{x}_{\bullet} \in \ell^{p}(\N;X)$, or equivalently if $\ell^{p}(\N;X) \subset \varepsilon(X)$ with continuous inclusion.
+  On the other hand, $X$ has \emph{(Rademacher) cotype $q$} if there exists $C < \infty$ such that
+  \begin{equation*}
+    \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{q} \Big)^{1/q} \leq C \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} ,
+  \end{equation*}
+  or equivalently if $\varepsilon(X) \subset \ell^{q}(\N;X)$ with continuous inclusion.
+\end{defn}
+
+We restrict to $p \in [1,2]$ and $q \in [2,\infty]$ because the type and cotype inequalities can never hold for $p > 2$ and $q < 2$ (Exercise \ref{ex:no-extreme-types}).
+Every Banach space $X$ has type $1$ and cotype $\infty$: indeed, by the triangle inequality
+\begin{equation*}
+  \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \leq \E \sum_{n \in \N} \|\varepsilon_{n} \mb{x}_{n}\|_{X} = \sum_{n \in \N} \|\mb{x}_{n}\|_{X}
+\end{equation*}
+and by the contraction principle (Theorem \ref{thm:contraction})
+\begin{equation*}
+  \|\mb{x}_{n}\|_{X} \lesssim \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \qquad \forall n \in \N.
+\end{equation*}
+Thus we say that $X$ has \emph{nontrivial type} if it has type $p$ for some $p > 1$, and \emph{finite cotype} if it has cotype $q$ for some $q < \infty$.
+Hilbert spaces have type $2$ and cotype $2$, by Khintchine's inequality.
+
+\begin{example}
+  {\color{blue} For $p < \infty$, $L^p$ has type $\min(p,2)$, cotype $\max(2,p)$.}
+\end{example}
+
+\begin{example}
+  {\color{blue} $c_0$ and $L^\infty$ do not have nontrivial type or finite cotype}. thus cotype does not dualise
+\end{example}
 
 
-\section{Type and cotype}
-
-\begin{itemize}
-\item definitions and examples
-\item K-convexity: implied by UMD; implies type/cotype duality
-\item STATE that K-convexity iff nontrivial type (Maurey--Pisier theorem is too hard for this course)
-\end{itemize}
 
 \section*{Exercises}
 
@@ -547,6 +609,59 @@ Now we return to the equivalence of $L^p$- and $L^q$-Rademacher averages:
   (Hint: use Theorem \ref{thm:characteristic-function-uniqueness}.) 
 \end{exercise}
 
+\begin{exercise}\label{ex:on-rad-spaces}
+  Let $X$ be a Banach space.
+  \begin{itemize}
+  \item
+    Show that the Rademacher space $\varepsilon(X)$ is a Banach space, and likewise for the finite Rademacher spaces $\varepsilon_{N}(X)$ for all $N \in \N$.
+  \item
+    Let $(\mb{x}_{n})_{n \in \N}$ be an infinite sequence in $X$.
+    Show that
+    \begin{equation*}
+      \|\mb{x}_{\bullet}\|_{\varepsilon(X)} = \lim_{N \to \infty} \|(\mb{x}_{n})_{n=0}^{N}\|_{\varepsilon_{N}(X)}.
+    \end{equation*}
+  \item
+    Show that the set of infinite $X$-valued sequences with finite support is dense in $\varepsilon(X)$.
+  \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+  Let $N \in \N$ and suppose that the subsets $(E_{j})_{j=1}^{J}$, $E_{j} \subset \{0,1,\ldots,N\}$ form a partition of $\{0,1,\ldots,N\}$.
+  Let $(\varepsilon_{n})_{n=1}^{N}$ be a Rademacher sequence on a probability space $(\Omega,\mc{A},\P)$, and let $(\varepsilon'_{j})_{j=1}^{J}$ be another Rademacher sequence on a probability space $(\Omega', \mc{A}', \P')$.
+  Let $(\mb{x}_{n})_{n=1}^{N}$ be a finite sequence of vectors in a Banach space $X$.
+  Show that
+  \begin{equation*}
+    \E \Big\| \sum_{n=1}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \E' \E \Big\| \sum_{j=1}^{J} \varepsilon'_{j} \sum_{n \in E_{j}} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}
+  \end{equation*}
+  where $\E'$ denotes the expectation on $\P'$.
+\end{exercise}
+
+\begin{exercise}\label{ex:no-extreme-types}
+  Show that it is impossible for a Banach space to have `type $p > 2$' or `cotype $q < 2$'. (Hint: consider the scalar field and use Khintchine's inequality)
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ and $Y$ be Banach spaces, such that $Y$ is isomorphic to a closed subspace of $X$.
+  If $X$ has type $p$ and cotype $q$, show that $Y$ also has type $p$ and cotype $q$.
+\end{exercise}
+
+\begin{exercise}
+  For $r \in [1,2]$, show that the sequence space $\ell^{r}(\N)$ does not have type $p$ for any $p > r$.
+  For $s \in [2,\infty]$, show that the sequence space $\ell^{s}(\N)$ does not have cotype $q$ for any $q < s$.
+\end{exercise}
+
+\begin{exercise}
+  { \color{blue} three-rad lemma }
+\end{exercise}
+
+\begin{exercise}
+  { \color{blue} Gena's lemma on trilinear forms and cotype }
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ be a Banach space.
+  Show that the Rademacher space $\varepsilon(X)$ has the Radon--Nikodym property if and only if $X$ does. (Hint: use Exercise \ref{ex:Lp-RNP})
+\end{exercise}
 
 %%% Local Variables:
 %%% mode: latex
