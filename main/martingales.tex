@@ -611,7 +611,7 @@ The maximal operator relevant to our problem is defined as follows.
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
   Given an $X$-valued stochastic process $\mb{f}_{\bullet}$ we define the \emph{Doob maximal function}
   \begin{equation*}
-    \mc{M}(\mb{f}_{\bullet})(\omega) := \sup_{n \in \N} \|f_{n}(\omega)\|_{X} \qquad \forall \omega \in \Omega.
+    \mc{M}(\mb{f}_{\bullet})(\omega) := \sup_{n \in \N} \|\mb{f}_{n}(\omega)\|_{X} \qquad \forall \omega \in \Omega.
   \end{equation*}
   We call $\mc{M}$ the \emph{Doob maximal operator}.
 \end{defn}
@@ -650,10 +650,10 @@ In fact, it is a non-negative submartingale, and to make things simpler we will 
 \end{thm}
 
 Before proving Doob's maximal inequalities, we state a quick consequence for $X$-valued martingales, which as we saw before induce non-negative submartingales by taking the norm pointwise.
-The first inequality is written in terms of the \emph{weak $L^1$ space} $L^{1,\infty}$.
+The first inequality is written in terms of the \emph{Lorentz space} (or \emph{weak $L^1$ space}) $L^{1,\infty}$.
 
 \begin{cor}
-  Let $(\Omega, \mc{A}, \P)$ be a probability space and $X$ a Banach space, and let $f_{\bullet}$ be an $X$-valued martingale.
+  Let $(\Omega, \mc{A}, \P)$ be a probability space and $X$ a Banach space, and let $\mb{f}_{\bullet}$ be an $X$-valued martingale.
   Then we have
   \begin{equation*}
     \|\mc{M}(\mb{f}_{\bullet})\|_{L^{1,\infty}(\Omega)} :=  \sup_{t > 0} t\P(\{\mc{M}(\mb{f}_{\bullet}) > t\}) \leq  \sup_{n \in \N} \|\mb{f}_{n}\|_{L^1(\Omega;X)},
@@ -687,7 +687,7 @@ The first inequality is written in terms of the \emph{weak $L^1$ space} $L^{1,\i
      \sum_{n = 0}^{N} \int_{\{T = n\}} \E^{\mc{A}_{n}} f_N \, \dd\P 
     =  \sum_{n = 0}^{N} \int_{\{T = n\}} f_{N} \, \dd\P 
     &=  \int_{\{T \leq N\}} f_{N} \, \dd\P \\
-    &\leq \sup_{N \in \N} \int_{\{\mc{M}(f_{\bullet}) > t\}} |f_{N}| \, \dd\P
+    &\leq \sup_{N \in \N} \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{N} \, \dd\P
   \end{aligned}
   \end{equation*}
   proving the first inequality.
@@ -701,7 +701,7 @@ The first inequality is written in terms of the \emph{weak $L^1$ space} $L^{1,\i
   This implies
   \begin{equation*}
     \begin{aligned}
-      \|\mc{M}(f)\|_{p}^{p}
+      \|\mc{M}(f_{\bullet})\|_{p}^{p}
       &= \int_0^\infty pt^{p-1} \P(\{\mc{M}(f_{\bullet}) > t\}) \, \dd t \\
       &\leq (1 + \varepsilon) \int_0^\infty pt^{p-2} \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{N}(\omega) \, \dd\P(\omega) \, \dd t \\
       &= (1 + \varepsilon) \int_{\Omega} f_{N}(\omega) \Big( \int_0^{\mc{M}(f_{\bullet})(\omega)} pt^{p-2} \, \dd t \Big) \, \dd\P(\omega) \\
@@ -742,7 +742,7 @@ First we will need an evidently necessary $L^p$-boundedness condition.
   \end{equation*}
 \end{defn}
 
-Given a general $L^p$-bounded $X$-valued martingale $(f_n)_{n \in \N}$, does it automatically hold that $f_n = \E^{\mc{A}_n} f$ for some $f \in L^p(\Omega;X)$?
+Given a general $L^p$-bounded $X$-valued martingale $(\mb{f}_n)_{n \in \N}$, does it automatically hold that $\mb{f}_n = \E^{\mc{A}_n} \mb{f}$ for some $\mb{f} \in L^p(\Omega;X)$?
 The answer turns out to depend on the geometry of $X$, and we will discuss this in the next section.
 For now we will quickly settle the scalar case.
 When $p=1$ we will need an additional condition to guarantee relative weak compactness.
@@ -751,14 +751,14 @@ When $p=1$ we will need an additional condition to guarantee relative weak compa
   Let $(\Omega,\mc{A},\P)$ be a probability space.
   A bounded subset $\mc{F} \subset L^1(\Omega)$ is \emph{uniformly integrable} (or \emph{equi-integrable}) if for all $\varepsilon > 0$, there exists $\delta > 0$ such that
   \begin{equation*}
-    \P(A) < \delta \Rightarrow \sup_{f \in \mc{F}} \int_{A} \|f(\omega)\|_X \, \dd\P(\omega) < \varepsilon \qquad \forall A \in \mc{A}.
+    \P(A) < \delta \Rightarrow \sup_{f \in \mc{F}} \int_{A} |f(\omega)| \, \dd\P(\omega) < \varepsilon \qquad \forall A \in \mc{A}.
   \end{equation*}
-  For a Banach space $X$, we say that an $X$-valued stochastic process $\mb{f}_{\bullet}$ is uniformly integrable if the set $\{\|f_n\|_{X} : n \in \N\} \subset L^1(\Omega)$ is uniformly integrable. 
+  For a Banach space $X$, we say that an $X$-valued stochastic process $\mb{f}_{\bullet}$ is uniformly integrable if the set $\{\|\mb{f}_n\|_{X} : n \in \N\} \subset L^1(\Omega)$ is uniformly integrable. 
 \end{defn}
 
 A bounded subset $\mc{F} \subset L^1(\Omega)$ is uniformly integrable if and only if it is weakly relatively compact (see \cite[Theorem 5.2.9]{AK06}).
 For $p \in (1,\infty)$, since $L^p(\Omega)$ is reflexive, every bounded subset $\mc{F} \subset L^p(\Omega)$ is weakly relatively compact (see Corollary \ref{cor:reflexive-iff-weakcpt} of the Banach--Alaoglu theorem).
-In both cases, the Eberlein--Smulian theorem (Theorem \ref{thm:eberlein-smulian}) says that every bounded sequence in $L^p(\Omega)$ (with the additional assumption of uniform integrability if $p=1$) has a convergent subsequence.
+In both cases, the Eberlein--Smulian theorem (Theorem \ref{thm:eberlein-smulian}) says that every bounded sequence in $L^p(\Omega)$ (with the additional assumption of uniform integrability if $p=1$) has a weakly convergent subsequence.
 We use this to prove the following theorem.
 
 \begin{thm}\label{thm:mgale-cv-repn}
@@ -791,7 +791,7 @@ In particular, the martingale $f_{\bullet}$ has an almost everywhere pointwise l
 
 \begin{rmk}\label{rmk:mgale-cv-p1}
   When $p = 1$ the assumption of uniform integrability can be removed, and the following is true: every scalar-valued $L^1$-bounded martingale converges almost everywhere (but not necessarily in $L^1$).
-  This is proven in \cite[Theorem 1.34]{gP16}, and the proof isn't particularly difficult, but we'll skip it so that we have more time to spent with Banach spaces.
+  This is proven in \cite[Theorem 1.34]{gP16}, and the proof isn't particularly difficult, but we'll skip it so that we have more time to spend with Banach spaces.
 \end{rmk}
 
 Later on we are going to need a corresponding result for submartingales.
@@ -853,9 +853,9 @@ For the moment we will investigate the $p$-MCP na\"ively, without invoking this 
   For $p = 1$ the same argument applies once we show that a bounded subset $\mc{F} \subset L^q(\Omega)$ is uniformly integrable.
   To see this, for all $f \in \mc{F}$ and measurable $A \subset \Omega$ use H\"older's inequality to estimate
   \begin{equation*}
-    \int_{A} |f(\omega)| \, \dd\P(\omega) \leq \|f\|_{p} \P(A)^{1/p'}.
+    \int_{A} |f(\omega)| \, \dd\P(\omega) \leq \|f\|_{q} \P(A)^{1/q'}.
   \end{equation*}
-  Thus for all $\varepsilon > 0$, if $\P(A) < (\varepsilon/\sup\{\|f\|_p : f \in \mc{F}\})^{p'}$ then
+  Thus for all $\varepsilon > 0$, if $\P(A) < (\varepsilon/\sup\{\|f\|_q : f \in \mc{F}\})^{q'}$ then
   \begin{equation*}
     \int_{A} |f(\omega)| \, \dd\P(\omega) < \varepsilon,
   \end{equation*}
@@ -1082,7 +1082,7 @@ Thus reflexive spaces have the $\infty$-MCP, even if they are not separable (for
   Let $(\Omega,\mc{A},\P)$ be a probability space.
   Show that a bounded subset $\mc{F} \subset L^1(\Omega)$ is uniformly integrable if and only if
   \begin{equation*}
-    \lim_{t > 0} \sup_{f \in \mc{F}} \int_{\{|f| > t\}} |f(\omega)| \, \dd\P(\omega) = 0.
+    \lim_{t \to \infty} \sup_{f \in \mc{F}} \int_{\{|f| > t\}} |f(\omega)| \, \dd\P(\omega) = 0.
   \end{equation*}
 \end{exercise}
 

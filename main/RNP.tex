@@ -188,13 +188,16 @@ In the following proposition we construct the vector measure.
    \end{equation*}
    so that
    \begin{equation*}
-     \begin{aligned}
-       \|  \phi_{k,\ell} \mb{f}_\ell  \|_{L^1(\Omega;X)}
-       &\leq 2\limsup_{t \to 0} \int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega) \\
-       &\leq 2\limsup_{t \to 0} \sup_{j \in \N}  \int_{\|\mb{f}_{j}\|_{X} > t} \|\mb{f}_{j}(\omega)\|_{X} \dd\P(\omega).
-   \end{aligned}
- \end{equation*}
- Uniform integrability of $\mb{f}_{\bullet}$ says that the the last quantity above is zero (see Exercise \ref{ex:UI-characterisation}), which establishes that the limit in \eqref{eq:mu-stationary-limit} exists.
+     \limsup_{k,\ell \to \infty} \|  \phi_{k,\ell} \mb{f}_\ell  \|_{L^1(\Omega;X)}
+     \leq 2\limsup_{\ell \to \infty} \int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega)
+   \end{equation*}
+   for all $t > 0$, using that $\limsup_{k,\ell \to \infty} \|\phi_{k,\ell}\|_{1} = 0$ (i.e. $(\E^{\mc{A}_{k}} \1_{A})_{k \in \N}$ is convergent in $L^1$).
+   Taking the limit as $t \to \infty$, uniform integrability of $\mb{f}_{\bullet}$ says that
+   \begin{equation*}
+     \limsup_{k,\ell \to \infty} \|  \phi_{k,\ell} \mb{f}_\ell  \|_{L^1(\Omega;X)}
+     \leq 2\lim_{t \to \infty} \sup_{\ell \in \N} \int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega) = 0
+   \end{equation*}
+   (see Exercise \ref{ex:UI-characterisation}), which establishes that the limit in \eqref{eq:mu-stationary-limit} exists.
 
  We still need to show that $\mb{\mu}$ is actually a vector measure.
  It is clear from the definition that it is finitely additive, but we need \emph{countable} additivity.
