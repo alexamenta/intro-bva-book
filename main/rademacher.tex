@@ -563,14 +563,14 @@ We saw already that $\varepsilon(H) = \ell^2(\N;H)$ when $H$ is a Hilbert space;
   Let $p \in [1,2]$ and $q \in [2,\infty]$.
   A Banach space $X$ has \emph{(Rademacher) type $p$} if there exists a constant $C < \infty$ such that
   \begin{equation*}
-    \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \leq C \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{p} \Big)^{1/p}
+    \| \mb{x}_{\bullet} \|_{\varepsilon(X)} := \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \leq C \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{p} \Big)^{1/p} = C\|\mb{x}_{\bullet}\|_{\ell^p(X)}
   \end{equation*}
-  for all sequences $\mb{x}_{\bullet} \in \ell^{p}(\N;X)$, or equivalently if $\ell^{p}(\N;X) \subset \varepsilon(X)$ with continuous inclusion.
+  for all sequences $\mb{x}_{\bullet} \in \ell^{p}(X)$, or equivalently if we have the continuous inclusion $\ell^{p}(X) \subset \varepsilon(X)$.
   On the other hand, $X$ has \emph{(Rademacher) cotype $q$} if there exists $C < \infty$ such that
   \begin{equation*}
-    \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{q} \Big)^{1/q} \leq C \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} ,
+    \|\mb{x}_{\bullet}\|_{\ell^q(X)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon(X)} ,
   \end{equation*}
-  or equivalently if $\varepsilon(X) \subset \ell^{q}(\N;X)$ with continuous inclusion.
+  i.e. if we have the continuous inclusion $\varepsilon(X) \subset \ell^{q}(X)$.
 \end{defn}
 
 We restrict to $p \in [1,2]$ and $q \in [2,\infty]$ because the type and cotype inequalities can never hold for $p > 2$ and $q < 2$ (Exercise \ref{ex:no-extreme-types}).
@@ -580,18 +580,53 @@ Every Banach space $X$ has type $1$ and cotype $\infty$: indeed, by the triangle
 \end{equation*}
 and by the contraction principle (Theorem \ref{thm:contraction})
 \begin{equation*}
-  \|\mb{x}_{n}\|_{X} \lesssim \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \qquad \forall n \in \N.
+  \|\mb{x}_{n}\|_{X} \lesssim \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n}\Big\|_{X} \qquad \forall n \in \N.
 \end{equation*}
-Thus we say that $X$ has \emph{nontrivial type} if it has type $p$ for some $p > 1$, and \emph{finite cotype} if it has cotype $q$ for some $q < \infty$.
+Thus we always have continuous inclusions
+\begin{equation*}
+  \ell^1(X)\subset  \varepsilon(X) \subset \ell^{\infty}(X).
+\end{equation*}
+We say that $X$ has \emph{nontrivial type} if it has type $p$ for some $p > 1$, and \emph{finite cotype} if it has cotype $q$ for some $q < \infty$.
+In this case the continuous inclusions above can be strengthened to
+\begin{equation*}
+  \ell^1(X)\subset \ell^p(X) \subset \varepsilon(X) \subset \ell^{q}(X) \subset \ell^{\infty}(X).
+\end{equation*}
+The continuous inclusions $\ell^{r}(X) \subset \ell^{s}(X)$ for $r < s$ imply that if $X$ has type $p$ and cotype $q$, then $X$ has type $\td{p}$ and cotype $\td{q}$ for all $1 \leq \td{p} \leq p$ and all $q \leq \tilde{q} \leq \infty$.
+
 Hilbert spaces have type $2$ and cotype $2$, by Khintchine's inequality.
+Since every finite-dimensional Banach space is isomorphic to a Hilbert space, and since type and cotype are stable under isomorphism (Exercise \ref{ex:isomorphic-cotype}), it follows that every finite-dimensional Banach space has type $2$ and cotype $2$.
 
 \begin{example}
-  {\color{blue} For $p < \infty$, $L^p$ has type $\min(p,2)$, cotype $\max(2,p)$.}
+  Let $(S,\mc{A},\mu)$ be a measure space, and consider the Banach space $X = L^p(S)$ with $p \in [1,\infty)$.
+  Then $X$ has type $\min(p,2)$ and cotype $\max(p,2)$.
+  For simplicity we will show that $L^p(S)$ has type $p$ when $p \in [1,2]$, as the remaining statements have analogous proofs.
+  For a sequence of functions $f_{n} \in L^p(S)$,
+  \begin{equation*}
+    \begin{aligned}
+      \E \Big\| \sum_{n \in \N} \varepsilon_{n} f_{n} \Big\|_{L^p(S)}
+      &\stackrel{(1)}{\simeq_{p}} \Big( \int_{\Omega} \Big\| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n} \Big\|_{L^p(S)}^{2} \, \dd\P(\omega) \Big)^{1/2} \\
+      &= \Big( \int_{\Omega} \Big( \int_{S} \Big| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n}(s) \Big|^{p} \, \dd\mu(s) \Big)^{2/p} \, \dd\P(\omega) \Big)^{1/2} \\
+      &\stackrel{(2)}{\leq} \Big( \int_{S} \Big( \int_{\Omega} \Big| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n}(s) \Big|^{2} \, \dd\P(\omega) \Big)^{p/2} \, \dd\mu(s) \Big)^{1/p} \\
+      &= \Big( \int_{S} \Big( \E \Big| \sum_{n \in \N} \varepsilon_{n} f_{n}(s) \Big|^{2} \Big)^{p/2} \, \dd\mu(s) \Big)^{1/p} \\
+      &\stackrel{(3)}{\lesssim} \Big( \int_{S} \sum_{n \in \N} |f_{n}(s)|^{p} \, \dd\mu(s) \Big)^{1/p}
+      = \Big( \sum_{n \in \N} \|f_{n}\|_{L^p(S)}^{p} \Big)^{1/p}.
+    \end{aligned}
+  \end{equation*}
+  Estimate (1) uses Kahane--Khintchine, estimate (2) uses Minkowski's inequality (using $2/p > 1$), and estimate (3) uses that the scalar field $\K$ has type $p$.
+  
+  As mentioned above, if the measure space $S$ is such that $L^p(S)$ is finite-dimensional, then $L^p(S)$ has type $2$ and cotype $2$ (the strongest possible type and cotype).
+  If $L^p(S)$ is infinite-dimensional, then it does not have type greater than $\min(p,2)$ or cotype less than $\max(2,p)$ (Exercise \ref{ex:Lp-optimal-type}). 
 \end{example}
 
 \begin{example}
   {\color{blue} $c_0$ and $L^\infty$ do not have nontrivial type or finite cotype}. thus cotype does not dualise
 \end{example}
+
+{\color{blue} Rademacher/H\"older inequality: pre-duality}
+
+
+
+
 
 
 
@@ -640,28 +675,69 @@ Hilbert spaces have type $2$ and cotype $2$, by Khintchine's inequality.
   Show that it is impossible for a Banach space to have `type $p > 2$' or `cotype $q < 2$'. (Hint: consider the scalar field and use Khintchine's inequality)
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:isomorphic-cotype}
   Let $X$ and $Y$ be Banach spaces, such that $Y$ is isomorphic to a closed subspace of $X$.
   If $X$ has type $p$ and cotype $q$, show that $Y$ also has type $p$ and cotype $q$.
 \end{exercise}
 
-\begin{exercise}
-  For $r \in [1,2]$, show that the sequence space $\ell^{r}(\N)$ does not have type $p$ for any $p > r$.
-  For $s \in [2,\infty]$, show that the sequence space $\ell^{s}(\N)$ does not have cotype $q$ for any $q < s$.
-\end{exercise}
-
-\begin{exercise}
-  { \color{blue} three-rad lemma }
-\end{exercise}
-
-\begin{exercise}
-  { \color{blue} Gena's lemma on trilinear forms and cotype }
+\begin{exercise}\label{ex:Lp-optimal-type}
+  \begin{itemize}
+  \item
+    For $p \in [1,\infty)$, show that the sequence space $\ell^{P}(\N)$ does not have type greater than $\min(p,2)$ or cotype less than $\max(p,2)$.
+  \item
+    Let $(S,\mc{A},\mu)$ be a measure space.
+    Then $L^p(S)$ is infinite-dimensional if and only if there exist infinitely many disjoint sets of positive measure in $S$.\footnote{You don't have to prove this, but you can if you like.}
+    In this case, show that $L^p(S)$ does not have type greater than $\min(p,2)$ or cotype less than $\max(p,2)$.
+  \end{itemize}
 \end{exercise}
 
 \begin{exercise}
   Let $X$ be a Banach space.
   Show that the Rademacher space $\varepsilon(X)$ has the Radon--Nikodym property if and only if $X$ does. (Hint: use Exercise \ref{ex:Lp-RNP})
 \end{exercise}
+
+For the remaining exercises we need the following definition.
+
+\begin{defn}
+  Let $X$, $Y$, $Z$ be Banach spaces over the scalar field $\K$.
+  A \emph{trilinear form} on $X \times Y \times Z$ is a map $\map{\Pi}{X \times Y \times Z}{\K}$ which is linear in each variable separately: that is, for fixed $\mb{x} \in X$, $\mb{y} \in Y$, $\mb{z} \in Z$ the maps
+  \begin{equation*}
+    \begin{aligned}
+      \Pi(\cdot, \mb{y}, \mb{z}) &\colon X \to \K, &\mb{x}' \mapsto \Pi(\mb{x}',\mb{y},\mb{z}) \\
+      \Pi(\mb{x}, \cdot, \mb{z}) &\colon Y \to \K, &\mb{y}' \mapsto \Pi(\mb{x},\mb{y}',\mb{z}) \\
+      \Pi(\mb{x}, \mb{y}, \cdot) &\colon Z \to \K, &\mb{z}' \mapsto \Pi(\mb{x},\mb{y},\mb{z}')
+  \end{aligned}
+\end{equation*}
+are all linear.
+Such a trilinear form is \emph{bounded} if there exists a constant $C < \infty$ such that
+\begin{equation*}
+  |\Pi(\mb{x}, \mb{y}, \mb{z})| \leq C\|\mb{x}\|_{X} \|\mb{y}\|_{Y} \|\mb{z}\|_{Z}
+\end{equation*}
+for all $\mb{x} \in X$, $\mb{y} \in Y$, $\mb{z} \in Z$.
+The infimum of all such $C$ is denoted by $\|\Pi\|_{\mathrm{Tri}(X \times Y \times Z)}$.
+\end{defn}
+
+\begin{exercise}
+  Let $X$, $Y$, and $Z$ be Banach spaces, and consider sequences $\mb{x}_{\bullet} \in \varepsilon(X)$, $\mb{y}_{\bullet} \in \varepsilon(Y)$, and $\mb{z}_{\bullet} \in \varepsilon(Z)$.
+  \begin{itemize}
+  \item 
+    Let $\map{\Pi}{X \times Y \times Z}{\K}$ be a bounded trilinear form on the product of three Banach spaces.
+  Show that
+  \begin{equation*}
+    \Big| \sum_{n \in \N} \Pi(\mb{x}_{n}, \mb{y}_{n}, \mb{z}_{n}) \Big|
+    \lesssim \|\Pi\|_{\mathrm{Tri}(X \times Y \times Z)} \|\mb{x}_{\bullet}\|_{\varepsilon(X)} \|\mb{y}_{\bullet}\|_{\varepsilon(Y)} \|\mb{z}_{\bullet}\|_{\varepsilon(Z)}.
+  \end{equation*}
+
+\item
+  Consider a sequence $(\Pi_{n})_{n \in \N}$ of bounded trilinear forms $\map{\Pi_{n}}{X \times Y \times Z}{\K}$.
+  Suppose that there exist $r_1, r_2, r_3 \in [2,\infty]$ such that $X$ has cotype $r_{1}$, $Y$ has cotype $r_{2}$, and $Z$ has cotype $r_{3}$, with $\sum_{i=1}^{3} r_{i}^{-1} \geq 1$.
+  Show that
+  \begin{equation*}
+    \Big| \sum_{n \in \N} \Pi_{n}(\mb{x}_{n}, \mb{y}_{n}, \mb{z}_{n}) \Big|
+    \lesssim \Big(\sup_{n \in \N} \|\Pi_{n}\|_{\mathrm{Tri}(X \times Y \times Z)} \Big) \|\mb{x}_{\bullet}\|_{\varepsilon(X)} \|\mb{y}_{\bullet}\|_{\varepsilon(Y)} \|\mb{z}_{\bullet}\|_{\varepsilon(Z)}.
+  \end{equation*}
+\end{exercise}
+
 
 %%% Local Variables:
 %%% mode: latex
