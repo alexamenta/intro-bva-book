@@ -1,3 +1,6 @@
+## releases
+releases/*
+
 ## Generated PDF files
 **/main.pdf
 ##{}/${projectname}.pdf
