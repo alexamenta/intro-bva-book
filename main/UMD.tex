@@ -11,7 +11,7 @@
 \end{defn}
 
 \begin{rmk}
-  We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property, so there is no need to isolate $\UMD_{p}$ as a separate property other than for pedagogical reasons.
+  We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property, so (as with the $p$-martingale convergence properties) there is no need to isolate $\UMD_{p}$ as a separate property other than for pedagogical reasons.
 \end{rmk}
 
 Recall that the difference process $d\mb{f}_{\bullet}$ is given by $d\mb{f}_{n} := \mb{f}_n - \mb{f}_{n-1}$ (with $\mb{f}_{-1} := \mb{0}$), so \eqref{eq:UMD-property} can be rewritten as
@@ -23,25 +23,71 @@ In Banach space lingo, thus says that the sequence $d\mb{f}_\bullet$ in $L^p(\Om
 Put very coarsely, the UMD property says that martingale differences behave vaguely like orthogonal sequences in $L^p(\Omega;X)$.
 In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly from orthogonality considerations.
 
-\begin{example}
-  Every Hilbert space $H$ has the $\UMD_{2}$ property, with $\beta_{2}(H) = 1$.
-  To show this let $\mb{f}_{\bullet}$ be an $H$-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
+\begin{prop}
+  Every Hilbert space $H$ has $\UMD_{2}$ property, with $\beta_{2}(H) = 1$.
+\end{prop}
+
+\begin{proof}
+  Let $\mb{f}_{\bullet}$ be an $H$-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
   Then for all sign sequences $\xi_{\bullet}$ and all $N \in \N$, since the differences $d\mb{f}_{n}$ are independent and hence pairwise orthogonal, we have
   \begin{equation*}
-      \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n} \Big\|_{L^2(\Omega;H)}^{2}
-      = \sum_{n = 0}^{N} \xi_{n}^{2} \|d\mb{f}_{n}\|_{L^2(\Omega;H)}^{2}
-      = \sum_{n = 0}^{N} \|d\mb{f}_{n}\|_{L^2(\Omega;H)}^{2}
-      = \Big\| \sum_{n=0}^N d\mb{f}_{n} \Big\|_{L^2(\Omega;H)}^{2}.
-  \end{equation*}
-\end{example}
+    \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n} \Big\|_{L^2(\Omega;H)}^{2}
+    = \sum_{n = 0}^{N} \xi_{n}^{2} \|d\mb{f}_{n}\|_{L^2(\Omega;H)}^{2}
+    = \sum_{n = 0}^{N} \|d\mb{f}_{n}\|_{L^2(\Omega;H)}^{2}
+    = \Big\| \sum_{n=0}^N d\mb{f}_{n} \Big\|_{L^2(\Omega;H)}^{2}.
+  \end{equation*}  
+\end{proof}
 
-We can't say very much about the UMD property by looking directly at its definition.\todo{we do need Rademacher sums first... square functions are important}
+At this point, without some extra theory, there isn't much we can say about spaces with $\UMD_{p}$ for $p \neq 2$ other than the following result (which will be more useful later on).
+
+\begin{prop}
+  Let $p \in (1,\infty)$, and suppose $X$ is a Banach space with $\UMD_{p}$.
+  Let $(S,\mc{A},\mu)$ be a nonempty measure space.
+  Then the Bochner space $L^p(\mu;X)$ has $\UMD_{p}$, with $\beta_{p}(L^p(\mu;X)) = \beta_{p}(X)$. 
+\end{prop}
+
+\begin{proof}
+  To avoid confusion let $Y = L^p(\mu;X)$, and let $\mb{f}_{\bullet}$ be a $Y$-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
+  Then for all $N \in \N$, by wrapping the $\UMD_{p}$ property of $X$ in two applications of Fubini's theorem, we have
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;Y)}^{p}
+      &= \int_{\Omega} \int_{S} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\mu(s) \, \dd\P(\omega) \\
+      &=  \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
+      &\leq \beta_{p}(X)^{p} \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
+      &= \beta_{p}(X)^{p} \int_{\Omega}  \int_{S} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega) \Big\|_{X}^{p}   \, \dd\mu(s) \, \dd\P(\omega) \\
+      &= \beta_{p}(X)^{p} \Big\| \sum_{n=0}^N d\mb{f}_{n} \Big\|_{L^p(\Omega;Y)}^{p},
+    \end{aligned}
+  \end{equation*}
+  which establishes $\beta_{p}(Y) \leq \beta_{p}(X)$.
+  The reverse estimate is Exercise \ref{ex:UMD-Lp-reverse}. %mk
+\end{proof}
 
 \section{$p$-independence of the UMD property}\label{sec:UMD-p-independence}
+
+\begin{thm}
+  Let $X$ be a Banach space which has the $\UMD_{p}$ property for some $p \in (1,\infty)$.
+  Then $X$ has $\UMD_{q}$ for all $q \in (1,\infty)$ (i.e. $X$ is UMD).
+\end{thm}
 
 \begin{cor}
   Hilbert spaces and $L^p$-spaces are UMD
 \end{cor}
+
+\begin{rmk}
+  Remark on how the constant $\beta_{p}(X)$ varies.
+\end{rmk}
+
+\begin{rmk}
+  Remark on exact values of $\beta_{p}(H)$ (Burkholder).
+\end{rmk}
+
+\section{Applications to martingale transforms and Haar decompositions}
+
+-martingale transforms are bounded
+-Haar decompositions are unconditional
+
+\section{Stein's inequality: $R$-boundedness of conditional expectations}
 
 \section{Sufficiency of dyadic martingales}
 
@@ -66,8 +112,19 @@ give a few more if possible...
   \end{equation*}
 \end{exercise}
 
+\begin{exercise}\label{ex:UMD-Lp-reverse}
+  Let $X$ be a Banach space and $(S,\mc{A},\mu)$ be a measure space with $\mu(S) > 0$.
+  For $p \in (1,\infty)$, show that $\beta_{p}(L^p(\mu;X)) \geq \beta_{p}(X)$.
+\end{exercise}
+
 \begin{exercise}
-  (boundedness of martingale transforms on UMD spaces)
+  (boundedness of martingale transforms on UMD spaces with $R$-bounded coefficients)
+\end{exercise}
+
+\begin{exercise}
+  $\UMD_{p}$ implies randomised $\UMD_{p}$.
+  Randomised $\UMD_{p}$ are all equivalent.
+  $L^1$ is 'UMD-'.
 \end{exercise}
 
 
