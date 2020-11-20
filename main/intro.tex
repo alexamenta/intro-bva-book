@@ -23,12 +23,12 @@ for some scalars $x_{n} \in \C$, so every $X$-valued function $\map{\mb{f}}{\R}{
 \end{equation*}
 for some scalar-valued functions $\map{f_{n}}{\R}{\C}$.
 
-We will investigate the Fourier transform on $X$-valued functions.
+We will investigate the Fourier transform\index{Fourier transform} on $X$-valued functions.
 For integrable scalar-valued functions $f \in L^1(\R)$, the Fourier transform is defined by
 \begin{equation*}
   \hat{f}(\xi) := \int_{\R} f(x) e^{-2\pi i x \xi} \, \dd x.
 \end{equation*}
-Plancherel's theorem, arguably the most important result in Fourier analysis, says that the Fourier transform is an isometry on $L^2$:
+Plancherel's theorem\index{theorem!Plancherel}, arguably the most important result in Fourier analysis, says that the Fourier transform is an isometry on $L^2$:
 \begin{equation*}
   \|\hat{f}\|_{L^2(\R)} = \|f\|_{L^2(\R)}.
 \end{equation*}
@@ -80,7 +80,7 @@ Now what if $X$ is infinite dimensonal?
 If a constant $C_{X}$ as in \eqref{eq:fd-norm-equivalence} exists (but with $N = \infty$), i.e. if $X$ is isomorphic to $\ell^2(\N)$, then the argument above still works,\footnote{As mentioned in an earlier footnote, the Lebesgue integral has to be replaced by the Bochner integral.} and the norm of the $X$-valued Fourier transform on $L^2(\R;X)$ is $\leq C_{X}^{2}$.
 The surprising fact is that the converse is also true: we will prove this in Chapter \ref{sec:fouriertype}.
 
-\begin{thm}[Kwapie\'n, 1972]\label{thm:Kwapien-intro}
+\begin{thm}[Kwapie\'n, 1972]\label{thm:Kwapien-intro}\index{theorem!Kwapie\'n}
   The $X$-valued Fourier transform is bounded on $L^2(\R;X)$ if and only if $X$ is isomorphic to a Hilbert space.
 \end{thm}
 
@@ -89,12 +89,12 @@ Different operators can be used to reflect different geometric properties.
 
 \section{Case study: the Hilbert transform}
 
-Another important operator in harmonic analysis is the Hilbert transform, defined on $\map{f}{\R}{\C}$ by
+Another important operator in harmonic analysis is the Hilbert transform\index{Hilbert transform}, defined on $\map{f}{\R}{\C}$ by
 \begin{equation}\label{eq:HT-scalar}
   Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\varepsilon \downarrow 0} \int_{|y| > \varepsilon} f(x-y) \, \frac{\dd y}{y}.
 \end{equation}
 The Hilbert transform is a prototypical \emph{singular integral operator}: the integral kernel $1/y$ is not integrable, so $H$ cannot be defined as a classical integral operator, but cancellation between the positive and negative values of $1/y$ allow $Hf$ to be well-defined as a \emph{principal value integral} when $f$ is sufficiently smooth (Schwartz, for example).
-One can show that $H$ is a \emph{Fourier multiplier} with symbol $m(\xi) = -i\sgn(\xi)$: that is, for all Schwartz functions $f \in \Sch(\R)$, $Hf = (m\hat{f})^{\vee}$, where $\vee$ denotes the inverse Fourier transform.
+One can show that $H$ is a \emph{Fourier multiplier}\index{Fourier multiplier} with symbol $m(\xi) = -i\sgn(\xi)$: that is, for all Schwartz functions $f \in \Sch(\R)$, $Hf = (m\hat{f})^{\vee}$, where $\vee$ denotes the inverse Fourier transform.
 Plancherel's theorem implies that the Hilbert transform is an isometry on $L^2(\R)$: indeed,
 \begin{equation*}
   \|Hf\|_{L^2(\R)} = \|m\hat{f}\|_{L^2(\R)} \leq \|m\|_{L^\infty(\R)} \|\hat{f}\|_{L^2(\R)} = \|f\|_{L^{2}(\R)},
@@ -117,8 +117,8 @@ If $X$ is not isomorphic to a Hilbert space, then we know by Kwapie\'n's theorem
 However, it is possible to approach bounds for the Hilbert transform using probabilistic techniques, avoiding use of Plancherel's theorem, and these arguments can be carried out with values in certain (but not all) Banach spaces.
 We will prove the following theorem in Chapter \ref{sec:HT}.
 
-\begin{thm}[Burkholder--Bourgain, 1983]
-  The $X$-valued Hilbert transform is bounded on $L^p(\R;X)$ for some (equivalently, all) $p \in (1,\infty)$ if and only if $X$ has the \emph{UMD property}.
+\begin{thm}[Burkholder--Bourgain, 1983]\index{theorem!Burkholder--Bourgain}
+  The $X$-valued Hilbert transform is bounded on $L^p(\R;X)$ for some (equivalently, all) $p \in (1,\infty)$ if and only if $X$ has the \emph{UMD property}.\index{UMD space}
 \end{thm}
 
 UMD stands for \emph{unconditionality of martingale differences}.
@@ -127,7 +127,7 @@ The UMD property is probabilistic in nature; the Burkholder--Bourgain theorem sa
 Thus the UMD property is a natural and often necessary assumption for Banach-valued analysis.
 Hilbert spaces are UMD,\footnote{The arguments above show this as a consequence of the Kwapie\'n and Burkholder--Bourgain theorems, but this is absolute overkill. It can be proven directly from the definition in terms of martingales.} but so are most natural function spaces, in particular $L^p$ spaces and Sobolev spaces $W^{p}_{s}$ (with $p \in (1,\infty)$).
 Thus the UMD property appears readily in applications to PDEs, both deterministic and stochastic.
-Even spaces of operators can be UMD, for example the Schatten classes $\mc{S}^{p} \subset B(H)$ (studied in Chapter \ref{sec:schatten}), and consequences of the UMD property for these spaces can be used to prove deep results in operator theory.
+Even spaces of operators can be UMD, for example the Schatten classes\index{Schatten class} $\mc{S}^{p} \subset B(H)$ (studied in Chapter \ref{sec:schatten}), and consequences of the UMD property for these spaces can be used to prove deep results in operator theory.
 
 
 \section{Conventions and notation}\label{sec:conventions}

@@ -8,11 +8,11 @@ Before discussing these applications, we need to actually talk about Rademacher 
 \section{Random sums and averages}
 
 \begin{defn}
-  A \emph{Rademacher variable} is a random variable $\map{\varepsilon}{\Omega}{\{-1, 1\}}$ defined on a probability space $(\Omega,\mc{A},\P)$ such that
+  A \emph{Rademacher variable}\index{Rademacher variable}\index{random variable!Rademacher} is a random variable $\map{\varepsilon}{\Omega}{\{-1, 1\}}$ defined on a probability space $(\Omega,\mc{A},\P)$ such that
   \begin{equation*}
     \P(\varepsilon = -1) = \P(\varepsilon = +1) = \frac{1}{2}.
   \end{equation*}
-  A \emph{Rademacher sequence} is a sequence of mutually independent Rademacher variables $(\varepsilon_{n})_{n \in \N}$ on a probability space $(\Omega,\mc{A},\P)$.
+  A \emph{Rademacher sequence}\index{Rademacher sequence} is a sequence of mutually independent Rademacher variables $(\varepsilon_{n})_{n \in \N}$ on a probability space $(\Omega,\mc{A},\P)$.
 \end{defn}
 
 \begin{rmk}
@@ -47,7 +47,7 @@ A \emph{(finite) Rademacher sum} in a Banach space $X$ is an $X$-valued random v
 \end{equation}
 where $(\mb{x}_{n})_{n = 0}^{N}$ is a finite sequence of vectors in $X$ and $(\varepsilon_{n})_{n = 0}^{N}$ is a finite Rademacher sequence on $\Omega$.
 Although the random variable in \eqref{eq:rademacher-sum} depends on the choice of Rademacher sequence, its distribution is independent of this choice (Exercise \ref{ex:rad-sum-dist}).\footnote{Recall that the distribution of a random variable $\map{f}{\Omega}{X}$ is the pushforward measure $f_{*}(\P)$ on $X$, given by $f_{*}(\P)(A) := \P(f^{-1}(A))$ for all Borel sets $A \subset X$.}
-As a consequence, the \emph{(finite) Rademacher average}
+As a consequence, the \emph{(finite) Rademacher average}\index{Rademacher averages}
 \begin{equation*}
   \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \int_{\Omega}  \Big\| \sum_{n = 0}^{N} \varepsilon_{n}(\omega) \mb{x}_{n} \Big\|_{X} \, \dd\P(\omega)
 \end{equation*}
@@ -56,7 +56,7 @@ is independent of the choice of Rademacher sequence.
 Rademacher averages show up \emph{all the time} in Banach-valued analysis, so we better get used to them.
 There are two fundamental properties that they satisfy: the \emph{contraction principle} (to be proven in a moment), and the \emph{Kahane--Khintchine inequalities} (the subject of the next section).
 
-\begin{thm}[Contraction principle]\label{thm:contraction}
+\begin{thm}[Contraction principle]\label{thm:contraction}\index{Contraction principle}
   There exists a constant $C \leq 2$ with the following property: for all Banach spaces $X$, all $N \in \N$, and all finite sequences $(\mb{x}_{n})_{n = 0}^{N}$ in $X$ and $(a_{n})_{n=0}^{N}$ in the scalar field $\K$,
   \begin{equation*}
     \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} a_{n} \mb{x}_{n} \Big\|_{X} \leq C \Big( \max_{0 \leq n \leq N} |a_{n}| \Big) \E \Big\| \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}.
@@ -130,7 +130,7 @@ It turns out that these are independent of $p$ up to a constant which is indepen
   This notation saves a lot of time, particularly when we don't care about the precise value of the constant $C$.
 \end{rmk}
 
-\begin{thm}[Kahane--Khintchine inequality]\label{thm:kk}
+\begin{thm}[Kahane--Khintchine inequality]\label{thm:kk}\index{inequality!Kahane--Khintchine}
   Let $X$ be a Banach space and let $(\varepsilon_{n})_{n \in \N}$ be a Rademacher sequence on a probability space $(\Omega,\mc{A},\P)$.
   Then for all $p,q \in [1,\infty)$ there exists a finite constant $\kappa_{p,q}$ such that for all finite sequences $(\mb{x}_n)_{n=1}^N$ in $X$,
   \begin{equation*}
@@ -178,7 +178,7 @@ But before that, let's look at some consequences of Kahane--Khintchine.
 
 When the Banach space under consideration is a Hilbert space, Rademacher averages are equivalent to $\ell^2$ sums.
 
-\begin{thm}[Khintchine's inequality]\label{thm:khintchine}
+\begin{thm}[Khintchine's inequality]\label{thm:khintchine}\index{inequality!Khintchine}
   Let $H$ be a Hilbert space and $(\mb{h}_{n})_{n \in \N}$ a sequence in $H$.
   Then for all $p \in [1,\infty)$,
   \begin{equation*}
@@ -206,7 +206,7 @@ When the Banach space under consideration is a Hilbert space, Rademacher average
 
 When the Banach space $X$ is a Lebesgue space, the Kahane--Khintchine inequality also lets us identify Rademacher averages with \emph{square functions}.
 
-\begin{thm}
+\begin{thm}\index{Rademacher averages!in Lebesgue spaces} 
   Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space and $p \in [1,\infty)$.
   Then for all sequences $(f_{n})_{n \in \N}$ of (scalar-valued) functions in $L^p(S)$,
   \begin{equation}\label{eq:KK-functions}
@@ -246,7 +246,7 @@ where $\mc{A}_{k}^{+} = \{A \in \mc{A}_{k} : \mu(A) > 0\}$.
 This depends on the choice of $\mc{A}_{\bullet}$, but we do not reference this in the notation.
 The \emph{John--Nirenberg inequality} says that this measure of oscillation is, up to a constant, independent of the choice of $q$.
 
-\begin{thm}[John--Nirenberg inequality for stochastic processes]\label{thm:jn-adapted-sequences}
+\begin{thm}[John--Nirenberg inequality for stochastic processes]\label{thm:jn-adapted-sequences}\index{inequality!John--Nirenberg}
   For all $p,q \in [1,\infty)$ and for all $\mb{f}_{\bullet}$ as above,
   \begin{equation*}
     \|\mb{f}_{\bullet}\|_{*,p} \simeq_{p,q} \|\mb{f}_{\bullet}\|_{*,q}.
@@ -463,7 +463,7 @@ Now we return to the equivalence of $L^p$- and $L^q$-Rademacher averages:
   \Big\|\sum_{n=1}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^p(\Omega;X)} \simeq_{p,q} \Big\|\sum_{n=1}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^q(\Omega;X)}.
 \end{equation*}
 
-\begin{proof}[Proof of Theorem \ref{thm:kk}]
+\begin{proof}[Proof of Theorem \ref{thm:kk}]\index{inequality!Kahane--Khintchine}
   Consider the filtration $\mc{A}_{\bullet}$ generated by the process $\varepsilon_{\bullet}$, and the $\mc{A}_{\bullet}$-adapted sequence $\mb{f}_{\bullet}$ given by
   \begin{equation*}
     \mb{f}_{N} := \sum_{n=1}^N \varepsilon_n \mb{x}_{n}.
@@ -538,7 +538,7 @@ This suggests that for a general Banach space we could use Rademacher averages t
 
 \begin{defn}
   Let $X$ be a Banach space.
-  For $N \in \N$ we define the (finite) \emph{Rademacher space} $\varepsilon_{N}(X)$ to be the space of finite sequences $\mb{x}_{\bullet} = (\mb{x}_{n})_{n=0}^{N}$ in $X$, equipped with the norm
+  For $N \in \N$ we define the (finite) \emph{Rademacher space}\index{Rademacher spaces} $\varepsilon_{N}(X)$ to be the space of finite sequences $\mb{x}_{\bullet} = (\mb{x}_{n})_{n=0}^{N}$ in $X$, equipped with the norm
   \begin{equation*}
     \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)} := \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{1}(\Omega;X)},
   \end{equation*}
@@ -564,7 +564,7 @@ We will see much more of it in later chapters.
 
 We saw already that $\varepsilon(H) = \ell^2(\N;H)$ when $H$ is a Hilbert space; comparing the Rademacher space with more general sequence spaces leads to the important geometric notions of \emph{type} and \emph{cotype}.
 
-\begin{defn}
+\begin{defn}\index{type!Rademacher}\index{cotype!Rademacher}
   Let $p \in [1,2]$ and $q \in [2,\infty]$.
   A Banach space $X$ has \emph{(Rademacher) type $p$} if there exists a constant $C < \infty$ such that
   \begin{equation*}
@@ -601,7 +601,7 @@ The continuous inclusions $\ell^{r}(X) \subset \ell^{s}(X)$ for $r < s$ imply th
 Hilbert spaces have type $2$ and cotype $2$, by Khintchine's inequality.
 Since every finite-dimensional Banach space is isomorphic to a Hilbert space, and since type and cotype are stable under isomorphism (Exercise \ref{ex:isomorphic-cotype}), it follows that every finite-dimensional Banach space has type $2$ and cotype $2$.
 
-\begin{example}
+\begin{example}\index{type!Rademacher!of Lebesgue spaces}\index{cotype!Rademacher!of Lebesgue spaces}
   Let $(S,\mc{A},\mu)$ be a measure space, and consider the Banach space $X = L^p(S)$ with $p \in [1,\infty)$.
   Then $X$ has type $\min(p,2)$ and cotype $\max(p,2)$.
   For simplicity we will show that $L^p(S)$ has type $p$ when $p \in [1,2]$, as the remaining statements have analogous proofs.
@@ -623,7 +623,7 @@ Since every finite-dimensional Banach space is isomorphic to a Hilbert space, an
   If $L^p(S)$ is infinite-dimensional, then it does not have type greater than $\min(p,2)$ or cotype less than $\max(2,p)$ (Exercise \ref{ex:Lp-optimal-type}). 
 \end{example}
 
-\begin{example}
+\begin{example}\index{cotype!failure for $c_{0}$}
   Consider the Banach space $c_{0}$ of scalar-valued sequences $(a_{n})_{n \in \N}$ with $\lim_{n \to \infty} a_{n} = 0$, equipped with the $\sup$ norm.
   We will show that $c_{0}$ does not have finite cotype.
   Consider the standard basis vectors $\mb{e}_{n} \in c_{0}$.
@@ -645,12 +645,12 @@ Since every finite-dimensional Banach space is isomorphic to a Hilbert space, an
   
 \end{example}
 
-Given a Banach space $X$, one would expect that the Rademacher spaces $\varepsilon(X)$ and $\varepsilon(X^{*})$ are dual to each other.
+Given a Banach space $X$, one would expect that the Rademacher spaces $\varepsilon(X)$ and $\varepsilon(X^{*})$ are dual to each other.\index{K-convexity@$K$-convexity!and duality of Rademacher spaces}
 This requires the additional assumption of \emph{$K$-convexity}, which we will discuss in Chapter \ref{sec:UMD}.\footnote{It turns out that this is equivalent to $X$ having non-trivial type.}
 In general we do have the following H\"older-type (or Cauchy--Schwartz-type) inequality.
 See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
 
-\begin{prop}
+\begin{prop}\index{Rademacher spaces!Cauchy--Schwartz-type inequality}
   Let $X$ be a Banach space, and consider $\mb{x}_{\bullet} \in \varepsilon(X)$ and $\mb{x}_{\bullet}^{*} \in \varepsilon(X^{*})$.
   Then
   \begin{equation*}
@@ -723,12 +723,12 @@ See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
   where $\E'$ denotes the expectation on $\P'$.
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\index{Rademacher spaces!have RNP}\index{Radon--Nikodym property!of Rademacher spaces}
   Let $X$ be a Banach space.
   Show that the Rademacher space $\varepsilon(X)$ has the Radon--Nikodym property if and only if $X$ does. (Hint: use Exercise \ref{ex:Lp-RNP})
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\index{Rademacher spaces!commutation with Lebesgue spaces}
   Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
   For all $p \in [1,\infty)$, show that
   \begin{equation*}
@@ -746,7 +746,7 @@ See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
   If $X$ has type $p$ and cotype $q$, show that $Y$ also has type $p$ and cotype $q$.
 \end{exercise}
 
-\begin{exercise}\label{ex:Lp-optimal-type}
+\begin{exercise}\label{ex:Lp-optimal-type}\index{type!Rademacher!of Lebesgue spaces}\index{cotype!Rademacher!of Lebesgue spaces}
   \begin{itemize}
   \item
     For $p \in [1,\infty)$, show that the sequence space $\ell^{p}(\N)$ does not have type greater than $\min(p,2)$ or cotype less than $\max(p,2)$.
@@ -757,7 +757,7 @@ See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
   \end{itemize}
 \end{exercise}
 
-\begin{exercise}\label{ex:c0-notype}
+\begin{exercise}\label{ex:c0-notype}\index{type!failure for $c_{0}$}
   The goal of this exercise is to show that the Banach space $c_{0}$ does not have nontrivial type.
   \begin{enumerate}[(i)]
   \item Fix $N \in \N$ and define the set $\Theta_{N} := \{-1,1\}^{N}$.
@@ -781,7 +781,7 @@ See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
 
 For the next exercise we need the following definition.
 
-\begin{defn}
+\begin{defn}\index{trilinear forms}
   Let $X$, $Y$, $Z$ be Banach spaces over the scalar field $\K$.
   A \emph{trilinear form} on $X \times Y \times Z$ is a map $\map{\Pi}{X \times Y \times Z}{\K}$ which is linear in each variable separately: that is, for fixed $\mb{x} \in X$, $\mb{y} \in Y$, $\mb{z} \in Z$ the maps
   \begin{equation*}

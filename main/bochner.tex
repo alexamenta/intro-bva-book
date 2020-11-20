@@ -8,13 +8,13 @@ In order to define them we need to make precise what we mean by `measurability',
 
 Consider a measurable space $(S,\mc{A})$,\footnote{i.e. $S$ is a set and $\mc{A}$ is a $\sigma$-algebra of subsets of $S$.} and let $X$ be a Banach space over the scalar field $\K$ (either $\R$ or $\C$).
 The simplest kind of $X$-valued function arises by taking a \emph{scalar}-valued function $\map{f}{S}{\K}$ and a non-zero vector $\mb{x} \in X$, and `placing $f$ in the direction of $\mb{x}$'.
-This function is denoted using the tensor notation $f \otimes \mb{x}$, and formally defined by
+This function is denoted using the tensor notation $f \otimes \mb{x}$,\index{tensor product!of functions and vectors} and formally defined by
 \begin{equation*}
   \map{f \otimes \mb{x}}{S}{X}, \qquad (f \otimes \mb{x})(s) := f(s)\mb{x} \quad \forall s \in S.
 \end{equation*}
 Note that the range of $f \otimes \mb{x}$ is contained in the linear span of $\mb{x}$.
 
-The second simplest kind of $X$-valued function are the \emph{simple functions}.
+The second simplest kind of $X$-valued function are the \emph{simple functions}.\index{simple functions}
 A function $\map{\mb{g}}{S}{X}$ is \emph{simple} if there exists a finite collection of pairwise disjoint measurable subsets $S_1,\ldots,S_N \subset S$ and non-zero vectors $\mb{x}_1,\ldots,\mb{x}_N \in X$ such that
 \begin{equation}\label{eqn:simple-function-standard-form}
   \mb{g} = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
@@ -33,9 +33,9 @@ When considering Banach-valued functions, particularly when our Banach spaces ar
   \item
     \emph{measurable} if for every Borel set $B \subset X$, the preimage $\mb{f}^{-1}(B)$ is measurable;
   \item
-    \emph{strongly measurable} (or \emph{Bochner measurable}) if it is the pointwise limit of simple functions; that is, if there exists a sequence $(\mb{f}_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $\mb{f} = \lim_{n \to \infty} \mb{f}_n$ pointwise on $S$;
+    \emph{strongly measurable}\index{strong measurability} (or \emph{Bochner measurability})\index{Bochner measurability|see {strong measurability}} if it is the pointwise limit of simple functions; that is, if there exists a sequence $(\mb{f}_n)_{n=1}^\infty$ in $\Simp(S;X)$ such that $\mb{f} = \lim_{n \to \infty} \mb{f}_n$ pointwise on $S$;
   \item
-    \emph{weakly measurable} if for every functional $\mb{x}^* \in X^*$, the scalar-valued function $\map{\langle \mb{f}, \mb{x}^*\rangle}{S}{\K}$ given by $s \mapsto \langle \mb{f}(s), \mb{x}^* \rangle$ is measurable.
+    \emph{weakly measurable}\index{weak measurability} if for every functional $\mb{x}^* \in X^*$, the scalar-valued function $\map{\langle \mb{f}, \mb{x}^*\rangle}{S}{\K}$ given by $s \mapsto \langle \mb{f}(s), \mb{x}^* \rangle$ is measurable.
   \end{itemize}
   All of these notions implicitly refer to the $\sigma$-algebra $\mc{A}$.
 \end{defn}
@@ -98,14 +98,9 @@ But in the general context of Banach spaces the inclusions \eqref{eq:measurabili
   Then $E'$ is open, but $\mb{F}^{-1}( E' ) = E$ is not measurable.
 \end{example}
 
-% \begin{rmk}
-%   The existence of weakly measurable functions that are not measurable is not so simple, but see \cite[Example 1.4.3]{HNVW16} for an argument which shows that the $\sigma$-algebra $\sigma(X^*)$ (which defines the set of weakly measurable functions) may be strictly smaller than the Borel $\sigma$-algebra on $X$.
-%   The indicator function of a Borel set which is not in $\sigma(X^*)$ is then weakly measurable, but not measurable.
-% \end{rmk}
-
 We used non-separability to construct a function which is measurable but not strongly measurable, and there is a very good reason for this.
 
-\begin{thm}[Pettis measurability theorem]\label{thm:Pettis-measurability}
+\begin{thm}[Pettis measurability theorem]\label{thm:Pettis-measurability}\index{theorem!Pettis (measurability)}\index{strong measurability!relation with weak measurability}
   Let $(S,\mc{A})$ be a measurable space and $X$ a Banach space.
   Then a function $\map{\mb{f}}{S}{X}$ is strongly measurable if and only if it is weakly measurable and \emph{separably valued} (i.e. there exists a separable subspace $X' \subset X$ such that $\mb{f}(S) \subset X'$).
   In particular, if $X$ is separable, then
@@ -221,7 +216,7 @@ This is a surprisingly useful observation, which can be used to deduce identitie
   The weakly measurable function $\map{\mb{F}}{\R}{\ell^2(\R)}$ constructed in Example \ref{eg:non-meas} shows that Lemma \ref{lem:coordinatewise-equality-test} fails without the assumption of strong measurability: we have $\mb{F}(s) \neq 0$ for all $s \in \R$, but for all functionals $\mb{x}^* \in \ell^2(\R)^*$, $\langle \mb{F} , \mb{x}^{*} \rangle \aeeq 0$.
 \end{rmk}
 
-\section{Bochner spaces}
+\section{Bochner spaces}\index{Bochner spaces}
 
 We are ready to define Bochner spaces, which generalise Lebesgue spaces to Banach-valued functions.
 Given a Banach-valued function $\map{\mb{f}}{S}{X}$, we let $\|\mb{f}\|_X$ denote the non-negative function on $S$ defined by $s \mapsto \|\mb{f}(s)\|_X$.
@@ -257,7 +252,7 @@ On the other hand, we will never omit $X$ unless $X = \K$ is the scalar field.
 
 In the scalar-valued setting, the simple functions are dense in $L^p$-spaces, and for $p < \infty$ the same holds for Bochner spaces. 
 
-\begin{prop}\label{prop:simple-density}
+\begin{prop}\label{prop:simple-density}\index{simple functions!density in Bochner spaces}
   Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
   Then for $p \in [1,\infty)$, the subspace of simple functions $\Simp(S;X) \cap L^p(S;X)$ is dense in $L^p(S;X)$.
 \end{prop}
@@ -294,7 +289,7 @@ Note that the case $p = \infty$ is not included in the proposition above, even t
 This is because the density of simple functions in $L^\infty(S;X)$ (for a sufficiently rich measure space) is equivalent to the compactness of the unit ball of $X$, which is equivalent to the finite dimensionality of $X$.
 We will prove this in the special case where $S = \N$, but the proof can be extended to any measure space containing infinitely many disjoint measurable sets of positive measure.
 
-\begin{prop}
+\begin{prop}\index{simple functions!are not dense in $\ell^\infty(\N;X)$}
   Let $X$ be a Banach space.
   Then the simple functions are dense in $\ell^\infty(\N;X)$ if and only if $X$ is finite dimensional.
 \end{prop}
@@ -336,7 +331,7 @@ We will prove this in the special case where $S = \N$, but the proof can be exte
   It follows that $\mb{g}$ has infinite range, contradicting the assumption that $\mb{g}$ is simple.
 \end{proof}
 
-Now we present some elementary duality results.
+Now we present some elementary duality results.\index{Bochner spaces!duality}
 Fix an exponent $p \in [1,\infty]$, and recall the definition of the H\"older conjugate exponent $p' = p/(p-1)$, with $1' = \infty$ and $\infty' = 1$.
 Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $\mb{g} \in L^{p'}(S;X^*)$ induces a bounded linear functional $\Phi \mb{g} \in L^p(S;X)^*$ by integration of the duality pairing between $X$ and $X^*$:
 \begin{equation*}
@@ -344,7 +339,7 @@ Given a measure space $(S,\mc{A},\mu)$ and a Banach space $X$, every function $\
 \end{equation*}
 H\"older's inequality implies that $\|\Phi \mb{g}\|_{L^p(S;X)^*} \leq \|\mb{g}\|_{L^{p'}(S;X^*)}$.
 In the scalar case $X = \K$, for $p \in [1,\infty)$, $\Phi$ is an isometric isomorphism $L^{p'}(S) \cong L^p(S)^*$: that is, every functional $\phi \in L^p(S)^*$ is of the form $\phi = \Phi g$ for some $g \in L^{p'}(S)$, and furthermore $\|\phi\|_{L^p(S)^*} = \|g\|_{L^{p'}(S)}$.
-We will see in Chapter \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ is an isometric isomorphism if and only if $X$ has the \emph{Radon--Nikodym property} with respect to the measure space $(S,\mc{A},\mu)$.
+We will see in Chapter \ref{sec:RNP} that for general Banach spaces $X$, $\Phi$ is an isometric isomorphism if and only if $X$ has the \emph{Radon--Nikodym property}\index{Radon--Nikodym property!and duality of Bochner spaces} with respect to the measure space $(S,\mc{A},\mu)$.
 For now we will establish a duality result that holds with no additional assumptions on the Banach space.
 
 \begin{prop}\label{prop:bochner-preduality}
@@ -468,7 +463,7 @@ If $\mb{f} \in \Simp(S;X)$ is a simple function represented as
 \begin{equation}\label{eq:simple-f-bi}
   \mb{f} = \sum_{n=1}^N \1_{S_n} \otimes \mb{x}_n ,
 \end{equation}
-and if in addition $\mb{f} \in L^1(\mu;X)$, we define the \emph{Bochner integral}
+and if in addition $\mb{f} \in L^1(\mu;X)$, we define the \emph{Bochner integral}\index{Bochner integral}
 \begin{equation*}
   \int_S \mb{f} \, \dd\mu = \int_S \mb{f}(s) \, \dd \mu(s) := \sum_{n=1}^N \mu(S_n) \mb{x}_n \in X.
 \end{equation*}
@@ -486,7 +481,7 @@ where $\mb{f}_n \in \Simp(S;X) \cap L^1(\mu;X)$ for all $n \in \N$ and $\mb{f}_n
 We refer to functions in $L^1(\mu,X)$ as \emph{Bochner integrable}.
 
 The Bochner integral satisfies various familiar and useful properties.
-\begin{prop}
+\begin{prop}\index{Bochner integral!basic properties}
   Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
   \begin{description}
   \item[Commutation with linear maps] If $\mb{f} \in L^1(\mu;X)$ and $T \in \Lin(X,Y)$ is a bounded linear map into a Banach space $Y$,
@@ -569,7 +564,7 @@ The Bochner integral satisfies various familiar and useful properties.
 
 There is also a Fubini theorem for Banach-valued functions (but no Tonelli theorem, as we have no concept of a non-negative vector-valued function at this level of generality).\footnote{Recall that we assume every measure space is $\sigma$-finite. Fubini's theorem fails for non-$\sigma$-finite measure spaces, even for scalar-valued functions.}
 
-\begin{prop}[Fubini]
+\begin{prop}[Fubini]\index{theorem!Fubini}
   Let $(S,\mc{A},\mu)$ and $(S',\mc{A}',\mu')$ be measure spaces, and consider the product measure space $(S \times S', \mc{A} \times \mc{A}', \mu \times \mu')$.
   Let $\mb{f} \in L^1(S \times S'; X)$.
   Then
@@ -607,7 +602,7 @@ As we described in the introduction, these are defined just like scalar-valued F
 
 \begin{defn}
   Let $X$ be a complex Banach space.
-  For a Bochner integrable function $\mb{f} \in L^1(\R^d;X)$ we define the \emph{Fourier transform} as the Bochner integral
+  For a Bochner integrable function $\mb{f} \in L^1(\R^d;X)$ we define the \emph{Fourier transform}\index{Fourier transform} as the Bochner integral
   \begin{equation*}
     \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R^d} e^{-2\pi i t \cdot \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R^d. 
   \end{equation*}
@@ -639,12 +634,12 @@ Before we can talk about the boundedness of such extensions we need to define th
 This can be done by basis expansions (particularly in the finite dimensional setting, where this suffices), but the `right' definition is through tensor extensions.
 
 \begin{defn}
-  For a measurable space $(S,\mc{A})$ and a set $V \subset \Meas(S;\K)$ of $\mc{A}$-measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}
+  For a measurable space $(S,\mc{A})$ and a set $V \subset \Meas(S;\K)$ of $\mc{A}$-measurable scalar-valued functions on $S$, we define the \emph{algebraic tensor product}\index{tensor product!algebraic}
   \begin{equation*}
     V \otimes X := \spn\{f \otimes \mb{x} : f \in V, \mb{x} \in X\} \subset \SMeas(S;X).
   \end{equation*}
   That is, $V \otimes X$ is the set of \emph{finite} linear combinations of $X$-valued functions of the form $f \otimes \mb{x}$, where $f$ is a scalar-valued function in $V$ and $\mb{x} \in X$.
-  The function $f \otimes \mb{x}$ is called an \emph{elementary tensor}.
+  The function $f \otimes \mb{x}$ is called an \emph{elementary tensor}.\index{tensor product!of functions and vectors}
   Functions in $V \otimes X$, having finite dimensional range, are automatically strongly measurable.
 \end{defn}
 
@@ -678,7 +673,7 @@ Another fundamental example is $V = L^p(S)$ for some $p \in [1,\infty]$.
   \end{equation*}
   acting on scalar-valued functions.
   Let $X$ be a Banach space.
-  The \emph{tensor extension of $T$ by the identity map $\map{I}{X}{X}$} is the linear map between algebraic tensor products
+  The \emph{tensor extension of $T$ by the identity map $\map{I}{X}{X}$}\index{tensor extension} is the linear map between algebraic tensor products
   \begin{equation*}
     \map{T \otimes I}{L^{p_1}(S_1) \otimes X}{L^{p_2}(S_2) \otimes X}
   \end{equation*}
@@ -693,9 +688,9 @@ By Proposition \ref{prop:ATP-density}, $L^{p_1}(S_1) \otimes X$ is a dense subsp
 then $T \otimes I$ may be extended to a bounded linear operator $L^{p_1}(S_1;X) \to L^{p_2}(S_2;X)$.
 
 \begin{defn}
-  With the notation above, if the estimate \eqref{eq:tensor-ext-estimate} holds, we say that $T$ \emph{admits a bounded $X$-valued extension}, and we denote the continuous extension of $T \otimes I$ by $\td{T}_X$, $\td{T}$, or even just $T$.
+  With the notation above, if the estimate \eqref{eq:tensor-ext-estimate} holds, we say that $T$ \emph{admits a bounded $X$-valued extension},\index{bounded Banach-valued extension} and we denote the continuous extension of $T \otimes I$ by $\td{T}_X$, $\td{T}$, or even just $T$.
 \end{defn}
-%mk
+
 Writing out a general element $\mb{f} \in L^p(S) \otimes X$ as a linear combination of elementary tensors, we see that $T$ admits a bounded $X$-valued extension if and only if there exists a constant $C < \infty$ such that
 \begin{equation}\label{eq:tensor-ext-estimate-full}
   \Big\|\sum_{n=1}^N (Tf_n) \otimes \mb{x}_n\Big\|_{L^{p_2}(S_2;X)} \leq C \Big\|\sum_{n=1}^N f_n \otimes \mb{x}_n\Big\|_{L^{p_1}(S_1;X)}
@@ -739,7 +734,7 @@ Before that we record a simple observation: bounds for a tensor extension can be
   Taking the supremum over all nonzero $f \in L^{p_1}(S_1)$ completes the proof.
 \end{proof}
 
-\begin{thm}\label{thm:positive-extensions}
+\begin{thm}\label{thm:positive-extensions}\index{tensor extension!of positive operators}
   Fix measure spaces $(S_i,\mc{A}_i,\mu_i)$ ($i \in \{1,2\}$), $p_1 \in [1,\infty)$, and $p_2 \in [1,\infty]$.
   Let $T \in \Lin(L^{p_1}(S_1),L^{p_2}(S_2))$ be a bounded linear operator which is \emph{positive}, i.e. for all non-negative $f \in L^{p_1}(S_1)$, $Tf \in L^{p_2}(S_2)$ is also non-negative.\footnote{When the scalar field $\K$ is $\C$, `non-negative' simply means `real-valued and non-negative'.}
   Then $T$ admits a bounded $X$-valued extension for every Banach space $X$: in fact, we have
@@ -790,8 +785,8 @@ Before that we record a simple observation: bounds for a tensor extension can be
 Theorem \ref{thm:positive-extensions} shows that the `extension problem' for positive operators is not much of a problem: positive operators extend automatically.
 Of course, most interesting operators are not positive.
 
-\begin{example}
-  The \emph{Hausdorff-Young inequality} says that the Fourier transform $\mc{F}$ on scalar-valued functions is bounded from $L^p(\R)$ to $L^{p'}(\R)$ for all $p \in [1,2]$.\footnote{For $p=2$ this is Plancherel's theorem, and for $p=1$ it is straightforward, and as shown above it even holds for Banach-valued functions. The intermediate result can be proven by interpolation, e.g. by the Riesz--Thorin theorem.}
+\begin{example}\index{type!Fourier}
+  The \emph{Hausdorff--Young inequality}\index{Hausdorff--Young inequality|see {Fourier type}} says that the Fourier transform $\mc{F}$ on scalar-valued functions is bounded from $L^p(\R)$ to $L^{p'}(\R)$ for all $p \in [1,2]$.\footnote{For $p=2$ this is Plancherel's theorem, and for $p=1$ it is straightforward, and as shown above it even holds for Banach-valued functions. The intermediate result can be proven by interpolation, e.g. by the Riesz--Thorin theorem.}
   Fix $p \in [1,2)$, and consider the Banach space $\ell^p := \ell^{p}(\N)$.
   We will show that for all $r \in (p,2]$, the bound
   \begin{equation}\label{eq:FT-bound-lp}
@@ -868,13 +863,13 @@ Of course, most interesting operators are not positive.
   Give an example of a Banach space $X$, a measure space $(S,\mc{A},\mu)$, and a function $\map{\mb{f}}{S}{X}$ such that $\|\mb{f}\|_{X} \in L^p(S,\mu)$, but $\mb{f} \notin L^p(S,\mu;X)$.
 \end{exercise}
 
-\begin{exercise}\label{ex:general-density}
+\begin{exercise}\label{ex:general-density}\index{tensor product!algebraic!density in Bochner spaces}
   Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space, and let $p \in [1,\infty)$.
   Let $V$ be a dense subspace of $L^p(S)$.
   Show that $V \otimes X$ is dense in $L^p(S;X)$.
 \end{exercise}
 
-\begin{exercise}\label{ex:finite-sigma-alg-duality}
+\begin{exercise}\label{ex:finite-sigma-alg-duality}\index{Bochner spaces!duality!for finite $\sigma$-algebras}
   Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space such that the $\sigma$-algebra $\mc{A}$ is finite.
   Show that the isometric embedding
   \begin{equation*}
@@ -895,9 +890,9 @@ Of course, most interesting operators are not positive.
   Let $(S_i, \mc{A}_i, \mu_i)$ ($i \in \{1,2\}$) be measure spaces, let $p_1 \in [1,\infty)$, and let $p_2 \in [1,\infty]$.
   Suppose that $T \in \Lin(L^{p_1}(S_1), L^{p_2}(S_2))$ is a bounded linear operator.
   \begin{itemize}
-  \item
+  \item\index{bounded Banach-valued extension!for finite dimensional spaces}
     Show that $T$ admits a bounded $X$-valued extension for all finite dimensional Banach spaces $X$.
-  \item
+  \item\index{tensor extension!adjoints}
     Let $X$ be any Banach space and suppose $\mb{x}^* \in X^*$.
     Show that for all $f \in L^{p_1}(S_1) \otimes X$,
     \begin{equation*}
@@ -907,7 +902,7 @@ Of course, most interesting operators are not positive.
 
 \end{exercise}
 
-\begin{exercise}\label{ex:tensor-adjoint}
+\begin{exercise}\label{ex:tensor-adjoint}\index{bounded Banach-valued extension!adjoints}
   Let $(S,\mc{A},\mu)$ be a measure space and $p \in (1,\infty)$, let $T$ be a bounded linear operator on $L^p(S,\mu)$, and let $X$ be a Banach space.
   Let $T^*  \in \Lin(L^{p'}(S,\mu))$ denote the adjoint of $T$.
   Show that $T$ admits a bounded $X$-valued extension if and only if $T^*$ admits a bounded $X^*$-valued extension, and show that
@@ -927,7 +922,7 @@ Of course, most interesting operators are not positive.
   Conclude that the Fourier transform is bounded from $L^1(\R^d;X)$ to $L^\infty(\R^d;X)$.
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\index{Fourier multiplier!with operator-valued symbol}
   Let $X$ and $Y$ be Banach spaces and consider an operator-valued function $\map{M}{\R^d}{\Lin(X,Y)}$, where $\Lin(X,Y)$ is the Banach space of bounded linear operators from $X$ to $Y$.
   Suppose that $M$ is continuous with respect to the strong operator topology on $\Lin(X,Y)$: that is, suppose that for all vectors $\mb{x} \in X$, the map
   \begin{equation*}
@@ -947,7 +942,7 @@ Of course, most interesting operators are not positive.
   \end{itemize}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\index{Fourier transform!on Hilbert-valued functions}
   Let $H$ be an infinite dimensional separable Hilbert space with inner product $(\cdot , \cdot)$, and let $(S,\mc{A},\mu)$ be a measure space.
   \begin{itemize}
   \item Show that $L^2(\mu;H)$ is a Hilbert space with respect to the inner product

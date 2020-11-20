@@ -3,7 +3,7 @@ We will tie these concepts together via the Radon--Nikodym property, which is os
 
 \section{Vector measures and the Radon--Nikodym property}
 
-\begin{defn}
+\begin{defn}\index{vector measures}
   Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space.
   An $X$-valued \emph{vector measure} is a function $\map{\mb{\mu}}{\mc{A}}{X}$ which is countably additive, in the sense that for all sequences $(E_n)_{n \in \N}$ of pairwise disjoint sets in $\mc{A}$,
   \begin{equation*}
@@ -15,7 +15,7 @@ We will tie these concepts together via the Radon--Nikodym property, which is os
 Vector measures are just like measures, except the measure of a set $E \subset S$ is a vector $\mb{\mu}(E) \in X$ rather than a scalar.
 We are most interested in vector measures with the following boundedness condition.
 
-\begin{defn}
+\begin{defn}\index{vector measures!variation}
   Let $X$ be a Banach space and $\mb{\mu}$ an $X$-valued vector measure on a measurable space $(S,\mc{A})$.
   The \emph{variation} of $\mb{\mu}$ is the scalar-valued measure $\map{|\mb{\mu}|}{\mc{A}}{[0,\infty]}$ defined by
   \begin{equation*}
@@ -73,16 +73,16 @@ Fundamental examples of vector measures are given by integrating vector-valued f
 \end{example}
 
 Now let's revise some measure theory.
-Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measurable space $(S,\mc{A})$, then \emph{$\nu$ is absolutely continuous with respect to $\mu$}, written $\nu \ll \mu$, if $A \in \mc{A}$ and $\mu(A) = 0$ implies $\nu(A) = 0$.
+Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measurable space $(S,\mc{A})$, then \emph{$\nu$ is absolutely continuous with respect to $\mu$},\index{absolute continuity} written $\nu \ll \mu$, if $A \in \mc{A}$ and $\mu(A) = 0$ implies $\nu(A) = 0$.
 
-\begin{thm}[Radon--Nikodym]
+\begin{thm}[Radon--Nikodym]\index{theorem!Radon--Nikodym}
   Let $(S,\mc{A})$ be a measurable space, and let $\mu$ be a $\sigma$-finite measure on $\mc{A}$.
   Let $\nu$ be a finite signed measure on $\mc{A}$ such that $\nu \ll \mu$.
   Then there exists a unique $h \in L^1(\mu)$ such that
   \begin{equation*}
     \nu(A) = \int_{A} h(s) \, \dd\mu(s) \qquad \forall A \in \mc{A}.
   \end{equation*}
-  The function $h$ is called the \emph{Radon--Nikodym derivative} of $\nu$ with respect to $\mu$, and denoted by
+  The function $h$ is called the \emph{Radon--Nikodym derivative}\index{Radon--Nikodym derivative} of $\nu$ with respect to $\mu$, and denoted by
   \begin{equation*}
     h = \frac{\dd\nu}{\dd\mu}.
   \end{equation*}
@@ -91,7 +91,7 @@ Recall that if $\mu$ and $\nu$ are two scalar-valued signed measures on a measur
 See \cite[Theorem 5.5.4]{rD04} for a proof.
 One might expect that an analogous theorem holds for vector measures, but it turns out to depend on the target Banach space, and thus its validity becomes a definition.
 
-\begin{defn}
+\begin{defn}\index{Radon--Nikodym property}\index{RNP|see {Radon--Nikodym property}}
   Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space.
   A Banach space $X$ is said to have the \emph{Radon--Nikodym property (RNP) with respect to $(S,\mc{A},\mu)$} if for every $X$-valued vector measure $\mb{\nu}$ on $(S,\mc{A})$ such that $\|\mb{\nu}\|_{\var} < \infty$ and $|\mb{\nu}| \ll \mu$, there is a function $\mb{f} \in L^1(\mu;X)$ such that $\mb{\nu} = \mb{f}\mu$ (as defined in Example \ref{eg:RN-density}).
   We say $X$ has the \emph{Radon--Nikodym property} if it has the property above with respect to every $\sigma$-finite measure space $(S,\mc{A},\mu)$.
@@ -126,7 +126,7 @@ Before moving on we record a simple reduction.
 
 We establish the following connection between the Radon--Nikodym property and the martingale convergence properties.
 
-\begin{thm}\label{thm:RNP-MCP}
+\begin{thm}\label{thm:RNP-MCP}\index{Radon--Nikodym property!implies $1$-MCP}\index{Martingale Convergence Property!implied by RNP}
   Let $X$ be a Banach space which has the Radon--Nikodym property with respect to a probability space $(\Omega,\mc{A},\P)$.
   Then $X$ has the $1$-martingale convergence property with respect to $(\Omega,\mc{A},\P)$.
 \end{thm}
@@ -240,7 +240,7 @@ In the following proposition we construct the vector measure.
 
 We already have some examples of spaces which do not satisfy the $1$-MCP: it follows that these spaces cannot have the RNP either.
 
-\begin{cor}
+\begin{cor}\index{Radon--Nikodym property!failure of $c_{0}$ and $L^1$}
   The spaces $c_0$ and $L^1([0,1])$ do not have the RNP.
 \end{cor}
 
@@ -261,20 +261,20 @@ To connect the Radon--Nikodym property with the geometry of Banach spaces, we wi
 
 \begin{defn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $X$ a Banach space.
-  Given $\delta > 0$, an $X$-valued $L^1$-bounded martingale $\mb{f}_\bullet$ on $\Omega$ is called \emph{$\delta$-separated} if the following properties hold:
+  Given $\delta > 0$, an $X$-valued $L^1$-bounded martingale $\mb{f}_\bullet$ on $\Omega$ is called \emph{$\delta$-separated}\index{martingales!$\delta$-separated} if the following properties hold:
   \begin{itemize}
   \item $\mb{f}_0$ is constant,
   \item each $\mb{f}_n$ has finitely many values (i.e. $\mb{f}_{n}$ is simple),
   \item for all $n \in \N$ and $\omega \in \Omega$, $\|\mb{f}_n(\omega) - \mb{f}_{n+1}(\omega)\|_X \geq \delta$.
   \end{itemize}
-  The set of values $S := \{\mb{f}_n(\omega) : n \in \N, \omega \in \Omega\}$ is called a \emph{$\delta$-separated tree}.  
+  The set of values $S := \{\mb{f}_n(\omega) : n \in \N, \omega \in \Omega\}$ is called a \emph{$\delta$-separated tree}.  \index{separated trees}
 \end{defn}
 
 The martingales described in Examples \ref{eg:c0-noMCP} and \ref{eg:L1-noMCP} (see also Exercise \ref{ex:L1-noMCP-var}) are $1$-separated, and thus yield $1$-separated trees in $c_0$ and $L_1$.
 But when one tries to draw a $\delta$-separated tree on a piece of paper, one quickly starts to run out of space.
 This is because pieces of paper model finite dimensional Banach spaces, which have good martingale convergence properties.
 
-\begin{prop}
+\begin{prop}\index{separated trees!relation with MCP} 
   If a Banach space $X$ has the $\infty$-MCP, then for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree.
 \end{prop}
 
@@ -295,7 +295,7 @@ Thus our chain of implications now has a new member:
 where NBST stands for `no bounded separated trees'.\footnote{As with MCP, this is not standard terminology: ultimately it's just equivalent to RNP.}
 The connection between (nonexistence of) bounded separated trees and the Radon--Nikodym property will go through the concept of \emph{dentable sets}.
 
-\begin{defn}
+\begin{defn}\index{dentable sets}
   A subset $D \subset X$ of a Banach space $X$ is called \emph{dentable} if for all $\varepsilon > 0$ there exists $\mb{x} \in D$ such that
   \begin{equation*}
     \mb{x} \notin \overline{\conv}(D \sm B_{\varepsilon}(\mb{x}))
@@ -359,7 +359,7 @@ This will let us work directly with convex hulls rather than their closures.
 
 The concept of dentability is connected with (non-existence of) bounded separated trees as follows.
 
-\begin{thm}
+\begin{thm}\index{dentable sets!relation with separated trees}\index{separated trees!relation with dentable sets}
   Let $X$ be a Banach space, and suppose that for all $\delta > 0$, $X$ does not contain a bounded $\delta$-separated tree.
   Then every bounded subset of $X$ is dentable.
 \end{thm}
@@ -394,7 +394,7 @@ The concept of dentability is connected with (non-existence of) bounded separate
 
 Finally we will `complete the loop' in our discussion of the Radon--Nikodym property, martingale convergence, and dentability.
 
-\begin{thm}\label{thm:dent-RNP}
+\begin{thm}\label{thm:dent-RNP}\index{Radon--Nikodym property!relation with dentable sets}\index{dentable sets!relation with RNP}
   Let $X$ be a Banach space such that every bounded subset of $X$ is dentable.
   Then $X$ has the Radon--Nikodym property.
 \end{thm}
@@ -502,7 +502,7 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
 \end{proof}
 
 Combining this with everything else we know, we have proven the following theorem.
-\begin{thm}
+\begin{thm}\index{Radon--Nikodym property!equivalent characterisations}
   The following properties of a Banach space $X$ are equivalent:
   \begin{itemize}
   \item $X$ has the Radon--Nikodym property;
@@ -529,7 +529,7 @@ This argument shows that a Banach space has the RNP if and only if it has the RN
 
 Let's rattle off some consequences of this theorem.
 
-\begin{cor}
+\begin{cor}\index{Radon--Nikodym property!of reflexive spaces and separable duals}
   Reflexive spaces and separable dual spaces have the RNP.
 \end{cor}
 
@@ -538,7 +538,7 @@ Let's rattle off some consequences of this theorem.
   Thus they also have the RNP.
 \end{proof}
 
-\begin{cor}
+\begin{cor}\index{Radon--Nikodym property!is separably determined}
   The RNP is separably determined, i.e. it holds for a Banach space $X$ if and only if it holds for all separable subspaces $Y \subset X$.
 \end{cor}
 
@@ -554,7 +554,7 @@ Recall Proposition \ref{prop:bochner-preduality}: for every $\sigma$-finite meas
 is an isometry onto a closed norming subspace of $L^p(S;X)^*$.
 We will now complete this result with the help of the Radon--Nikodym property.
 
-\begin{thm}\label{thm:bochner-duality-RNP}
+\begin{thm}\label{thm:bochner-duality-RNP}\index{Radon--Nikodym property!and duality of Bochner spaces}
   Let $X$ be a Banach space, and let $(S,\mc{A},\mu)$ be a countably generated measure space.\footnote{This says that there is a countable (or finite) collection of sets $(E_{\lambda})_{\lambda \in \Lambda}$ which generates $\mc{A}$.}
   Then the dual space $X^*$ has the Radon--Nikodym property with respect to $(S,\mc{A},\mu)$ if and only if for all $p \in [1,\infty)$ the isometric embedding $\map{\Phi}{L^{p'}(\mu;X^*)}{L^p(\mu;X)^*}$ is an isomorphism.
 \end{thm}
@@ -562,7 +562,7 @@ We will now complete this result with the help of the Radon--Nikodym property.
 We leave the proof as an exercise (Exercise \ref{ex:RNP-bochner}). 
 
   
-\begin{rmk}
+\begin{rmk}\index{Radon--Nikodym property!equivalent characterisations}
   Not satisfied? See \cite[\textsection VII.6]{DU77} for 29 characterisations of the Radon--Nikodym property.
 \end{rmk}
 
@@ -586,7 +586,7 @@ We leave the proof as an exercise (Exercise \ref{ex:RNP-bochner}).
   for some $\mb{g} \in L^1([0,1];X)$.
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\index{conditional expectations!existence}
   Let $X$ be a Banach space with the Radon--Nikodym property.
   Use this property to show that for every measure space $(S,\mc{A},\mu)$ and every sub-$\sigma$-algebra $\mc{B} \subset \mc{A}$, every $\mb{f} \in L^1(\mc{A};X)$ has a conditional expectation with respect to $\mc{B}$.
   (Of course this holds for \emph{every} Banach space, but your job here is to derive it in a simpler way under the RNP assumption.)
@@ -616,7 +616,7 @@ We leave the proof as an exercise (Exercise \ref{ex:RNP-bochner}).
   is closed in $M(S,\mc{A};X)$.
 \end{exercise}
 
-\begin{exercise}[Rademacher's theorem and the RNP]
+\begin{exercise}[Rademacher's theorem and the RNP]\index{theorem!Rademacher}\index{Radon--Nikodym property!equivalence with Rademacher's theorem}
   Show that a Banach space $X$ has the Radon--Nikodym property if and only if every $X$-valued Lipschitz function on $[0,1]$ is differentiable almost everywhere.
 \end{exercise}
 
@@ -629,7 +629,7 @@ We leave the proof as an exercise (Exercise \ref{ex:RNP-bochner}).
   Prove Theorem \ref{thm:bochner-duality-RNP} in two different ways: first, using vector measures and the Radon--Nikodym property, then using martingales and the martingale convergence properties.\footnote{You can always search for references if you get stuck!}
 \end{exercise}
 
-\begin{exercise}\label{ex:Lp-RNP}
+\begin{exercise}\label{ex:Lp-RNP}\index{Radon--Nikodym property!of Bochner spaces}\index{Bochner spaces!have RNP}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\mu)$ a measure space, and $p \in (1,\infty)$.
   Show that $X$ has the Radon--Nikodym property if and only if $L^p(\Omega;X)$ has the Radon--Nikodym property.
 \end{exercise}
