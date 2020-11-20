@@ -62,12 +62,12 @@ Fundamental examples of vector measures are given by integrating vector-valued f
   Suppose $\nu$ is a finite scalar-valued measure on $(S,\mc{A})$ and $\mb{f} \in L^1(S,\mc{A},\nu;X)$.
   Then we can define an $X$-valued vector measure $\mb{\mu}$ (sometimes denoted $\mb{f}\nu$) by Bochner integration:
   \begin{equation*}
-    \mb{\mu}(A) = \int_A \mb{f}(s) \, \dd\nu.
+    \mb{\mu}(A) = \int_A \mb{f} \, \dd\nu.
   \end{equation*}
   This vector measure has bounded variation: given a partition $S = \bigcup_{n \in \N} S_n$, we compute
   \begin{equation*}
-    \sum_{n \in \N} \|\mb{\mu}(S_n)\|_{X} = \sum_{n \in \N} \Big\| \int_{S_n} \mb{f}(s) \, \dd\nu \Big\|_X
-    \leq \int_{S} \|\mb{f}(s)\|_{X} \, \dd\nu
+    \sum_{n \in \N} \|\mb{\mu}(S_n)\|_{X} = \sum_{n \in \N} \Big\| \int_{S_n} \mb{f} \, \dd\nu \Big\|_X
+    \leq \int_{S} \|\mb{f}\|_{X} \, \dd\nu
   \end{equation*}
   so that $\|\mb{\mu}\|_{\var} \leq \|\mb{f}\|_{L^1(\nu;X)}$.\footnote{In fact, this is an equality. See \cite[pp43]{gP16}.}
 \end{example}
@@ -142,7 +142,7 @@ In the following proposition we construct the vector measure.
   \begin{itemize}
   \item $\mb{\mu}(A) = \int_{A} \mb{f}_n \, \dd\P$ for all $n \in \N$ and $A \in \mc{A}_{n}$,
   \item $\|\mb{\mu}\|_{\var} \leq \sup_{n} \|\mb{f}_n\|_{L^1(\Omega;X)}$,
-  \item $\mb{\mu}$ is absolutely continuous with respect to $\P$.
+  \item $|\mb{\mu}|$ is absolutely continuous with respect to $\P$.
   \end{itemize}
 \end{prop}
 
@@ -183,7 +183,7 @@ In the following proposition we construct the vector measure.
      \begin{aligned}
        \|  \phi_{k,\ell}  \mb{f}_\ell \|_{L^1(\Omega;X)}
        &\leq \Big( \int_{\|\mb{f}_{\ell}\|_{X} > t} + \int_{\|\mb{f}_{\ell}\|_{X} \leq t} \Big) |\phi_{k,\ell}(\omega)| \|\mb{f}_{\ell}(\omega)\|_{X} \, \dd\P(\omega) \\
-       &\leq \Big( 2\int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega) + t\E|\phi_{k,\ell}| \Big)
+       &\leq  2\int_{\|\mb{f}_{\ell}\|_{X} > t} \|\mb{f}_{\ell}(\omega)\|_{X} \dd\P(\omega) + t\E|\phi_{k,\ell}| 
      \end{aligned}
    \end{equation*}
    so that
@@ -220,7 +220,7 @@ In the following proposition we construct the vector measure.
 
 \begin{proof}[Proof of Theorem \ref{thm:RNP-MCP}: RNP implies $1$-MCP]
   Let $\mb{f}_{\bullet}$ be an $L^1$-bounded uniformly integrable $X$-valued martingale with respect to a filtration $\mc{A}_{\bullet}$.
-  By Proposition \ref{prop:martingale-measure}, there exists an $X$-valued vector measure $\mb{\mu}$ on $\mc{A}$ such that
+  By Proposition \ref{prop:martingale-measure}, there exists an $X$-valued vector measure $\mb{\mu}$ on $\mc{A}$ of bounded variation such that
   \begin{equation*}
     \mb{\mu}(A) = \int_{A} \mb{f}_n \, \dd\P \qquad \forall A \in \mc{A}_n
   \end{equation*}
@@ -234,7 +234,7 @@ In the following proposition we construct the vector measure.
   \begin{equation*}
     \E^{\mc{A}_n} \mb{f} = \mb{f}_n
   \end{equation*}
-  for all $n \in \N$, and thus by Theorem \ref{thm:mgale-pw-conv} $\mb{f}_n$ is almost everywhere convergent to $\mb{f}$.
+  for all $n \in \N$, and thus by Theorem \ref{thm:mgale-pw-conv} $\mb{f}_n$ is almost everywhere convergent to $\E^{\mc{A}_{\infty}}\mb{f}$.
   Thus $X$ has the $1$-martingale convergence property, and the proof is complete.
 \end{proof}
 

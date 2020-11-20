@@ -927,7 +927,7 @@ In the following two examples we will show that the Banach spaces $c_0$ and $L^1
 \end{example}
 
 It is not surprising that the Banach spaces $c_0$ and $L^1(\Omega)$ fail the $\infty$-MCP, as these are classically `bad' spaces.
-Most spaces that arise in practise are better behaved.
+Most spaces that arise in practice are better behaved.
 
 \begin{thm}\label{thm:MCP-sepdual}
   If $X$ is a separable dual space (i.e. $X$ is separable and $X = Y^*$ for some Banach space $Y$), then $X$ has the $\infty$-MCP.
@@ -948,7 +948,7 @@ Most spaces that arise in practise are better behaved.
     \begin{equation*}
       \langle \mb{f}_n(\omega), \mb{y}^{**} \rangle \to \langle \mb{f}(\omega), \mb{y}^{**} \rangle \qquad \forall \omega \in \Omega \sm N \quad \forall \mb{y}^{**} \in Y^{**} = X^{*}.
   \end{equation*}
-  Since the functions $\mb{f}_n$ are all measurable, this shows that $\map{\mb{f}}{\Omega \sm N}{X}$ is weakly measurable, and since $X$ is separable, Pettis tells us that $\mb{f}$ is strongly measurable.
+  Since the functions $\mb{f}_n$ are all $\mc{A}_{\infty}$-measurable, this shows that $\map{\mb{f}}{\Omega \sm N}{X}$ is weakly $\mc{A}_{\infty}$-measurable, and since $X$ is separable, Pettis tells us that $\mb{f}$ is strongly $\mc{A}_{\infty}$-measurable.
 
   It remains to show that $\mb{f}_n \to \mb{f}$ on $\Omega \sm N$ in the norm topology on $X$.
   For all $\omega \in \Omega \sm N$ and $\mb{x} \in X$ we have, using that for each $\mb{y} \in D$ the scalar-valued martingale $\langle \mb{y}, \mb{x} - \mb{f}_\bullet \rangle$ converges to $\langle \mb{y}, \mb{x} - \mb{f}\rangle$ on $\Omega \sm N$, 
@@ -959,7 +959,7 @@ Most spaces that arise in practise are better behaved.
     \leq \E^{\mc{A}_n}( \|\mb{x} - \mb{f}\|_{X})(\omega)
   \end{equation*}
   using \eqref{eq:positive-pw-est}.
-  Since the function $\|\mb{x} - \mb{f}\|_{X}$ is bounded and measurable, we have
+  Since the function $\|\mb{x} - \mb{f}\|_{X}$ is bounded and $\mc{A}_{\infty}$-measurable, we have
   \begin{equation*}
     \limsup_{n \to \infty} \|\mb{x} - \mb{f}_n(\omega)\|_{X} \leq \limsup_{n \to \infty} \E^{\mc{A}_n}( \|\mb{x} - \mb{f}\|_{X})(\omega) = \|\mb{x} - \mb{f}(\omega)\|_{X}.
   \end{equation*}
@@ -1000,7 +1000,7 @@ Separability is not necessary for the $p$-MCP; rather, for a Banach space $X$ to
   \begin{equation*}
     Y^{\perp\perp} = (Y^\perp)^\perp = \{\mb{x}^{**} \in X^{**} : \text{$\langle \mb{z}, \mb{x}^{**} \rangle = 0$ for all $\mb{z} \in Y^\perp$}\}.
   \end{equation*}
-  Then $Y^{\perp\perp}$ is isometrically isomorphic to the dual space $X^*/Y^\perp$ (see Proposition \ref{prop:duality-subspace-quotient} in the appendices), so it suffices to show that $j(Y) = Y^{\perp\perp}$, where $\map{j}{X}{X^{**}}$ is the canonical inclusion.
+  Then $Y^{\perp\perp}$ is isometrically isomorphic to the dual space $(X^*/Y^\perp)^{*}$ (see Proposition \ref{prop:duality-subspace-quotient} in the appendices), so it suffices to show that $j(Y) = Y^{\perp\perp}$, where $\map{j}{X}{X^{**}}$ is the canonical inclusion.
   The containment $j(Y) \subset Y^{\perp\perp}$ is a direct consequence of the definition.
   To show the reverse inclusion, suppose that $\mb{x}^{**} \notin j(Y)$; we will conclude that $\mb{x}^{**} \notin Y^{\perp\perp}$.
   To do this we need to find a functional $\mb{x}^* \in Y^{\perp}$ such that $\langle\mb{x}^*, \mb{x}^{**}\rangle \neq 0$.
