@@ -692,29 +692,38 @@ The first inequality is written in terms of the \emph{Lorentz space} (or \emph{w
   \end{equation*}
   proving the first inequality.
 
-  For the second inequality, fix $\varepsilon > 0$.
-  Then for sufficiently large $N$ we have
-  \begin{equation*}
-    t\P(\{\mc{M}(f_{\bullet}) > t\}) \leq (1 + \varepsilon) \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{N} \, \dd \P
-  \end{equation*}
-  by the first inequality.\todo{See `known issues' in the Preface}
-  This implies
+  Before moving on to the second inequality, we observe that we have proven something slightly stronger: fix $N \in \N$ and consider the `stopped submartingale' $f_{\bullet}^{N}$, defined by $f_{n}^{N} := f_{\min(n,N)}^{N}$ for all $n \in \N$.\footnote{$f_{\bullet}^{N}$ is indeed a submartingale: this can be checked directly by separating the cases $n < N$ and $n \geq N$.}
+  Then by stopping at the second last line of the previous proof, we find that
+  \begin{equation}\label{eq:doob-stopped}
+    t\P(\{\mc{M}(f_{\bullet}^{N}) > t\}) \leq \int_{\{\mc{M}(f_{\bullet}^{N}) > t\}} f_{N} \, \dd \P.
+  \end{equation}
+  This `stopped' version of the previous estimate can be extrapolated to $L^p$-estimates.
+
+  Now fix $1 < p < \infty$ and $N \in \N$, and use the `stopped' estimate \eqref{eq:doob-stopped} to deduce
   \begin{equation*}
     \begin{aligned}
-      \|\mc{M}(f_{\bullet})\|_{p}^{p}
-      &= \int_0^\infty pt^{p-1} \P(\{\mc{M}(f_{\bullet}) > t\}) \, \dd t \\
-      &\leq (1 + \varepsilon) \int_0^\infty pt^{p-2} \int_{\{\mc{M}(f_{\bullet}) > t\}} f_{N}(\omega) \, \dd\P(\omega) \, \dd t \\
-      &= (1 + \varepsilon) \int_{\Omega} f_{N}(\omega) \Big( \int_0^{\mc{M}(f_{\bullet})(\omega)} pt^{p-2} \, \dd t \Big) \, \dd\P(\omega) \\
-      &= (1 + \varepsilon) \int_{\Omega} \frac{p}{p-1} f_{N}(\omega) \mc{M}(f_{\bullet})(\omega)^{p-1} \, \dd\P(\omega) \\
-      &\leq (1 + \varepsilon) p' \|f_{N}\|_{p} \|\mc{M}(f_\bullet)\|_{p}^{p-1}
+      \|\mc{M}(f_{\bullet}^{N})\|_{p}^{p}
+      &= \int_0^\infty pt^{p-1} \P(\{\mc{M}(f_{\bullet}^{N}) > t\}) \, \dd t \\
+      &\leq \int_0^\infty pt^{p-2} \int_{\{\mc{M}(f_{\bullet}^{N}) > t\}} f_{N}(\omega) \, \dd\P(\omega) \, \dd t \\
+      &=  \int_{\Omega} f_{N}(\omega) \Big( \int_0^{\mc{M}(f_{\bullet}^{N})(\omega)} pt^{p-2} \, \dd t \Big) \, \dd\P(\omega) \\
+      &=  \int_{\Omega} \frac{p}{p-1} f_{N}(\omega) \mc{M}(f_{\bullet}^{N})(\omega)^{p-1} \, \dd\P(\omega) \\
+      &\leq  p' \|f_{N}\|_{p} \|\mc{M}(f_\bullet^{N})\|_{p}^{p-1}
     \end{aligned}
   \end{equation*}
   using H\"older's inequality in the last step.
-  Dividing through by $\|\mc{M}(f_{\bullet})\|_{p}^{p-1}$ yields
+  Dividing through by $\|\mc{M}(f_{\bullet}^{N})\|_{p}^{p-1}$ yields
   \begin{equation*}
-    \|\mc{M}(f_{\bullet})\|_{p} \leq (1 + \varepsilon) p' \sup_{n \in \N}\|f_{n}\|_{p}
+    \|\mc{M}(f_{\bullet}^{N})\|_{p} \leq p' \|f_{N}\|_{p} \leq p' \sup_{n \in \N} \|f_{n}\|_{p}.
   \end{equation*}
-  for all $\varepsilon > 0$, which completes the proof.
+  Finally, note that the functions $\mc{M}(f_{\bullet}^{N})$ are monotonically increasing in $N$, and that
+  \begin{equation*}
+    \lim_{N \to \infty} \mc{M}(f_{\bullet}^{N})(\omega) = \lim_{N \to \infty} \sup_{1 \leq n \leq N} |f_{n}(\omega)| = \mc{M}(f_{\bullet})(\omega).
+  \end{equation*}
+  Thus by the monotone convergence theorem we have
+  \begin{equation*}
+    \|\mc{M}(f_{\bullet})\|_{p} \leq p' \sup_{n \in \N} \|f_{n}\|_{p},
+  \end{equation*}
+  as claimed.
 \end{proof}
 
 By combining Doob's maximal inequality with the $L^p$-convergence result of Theorem \ref{thm:mgale-conv-Lp}, one (i.e. you) can prove the following pointwise convergence theorem.
