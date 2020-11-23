@@ -103,15 +103,24 @@ We will also connect it with the duality of Bochner spaces $L^p(X)$, answering a
 Before moving on we record a simple reduction.
 
 \begin{prop}\label{prop:RNP-finite-sufficient}
-  A Banach space $X$ has the Radon--Nikodym property if and only if it has the RNP with respect to every \emph{finite} measure space.
+  A Banach space $X$ has the Radon--Nikodym property if and only if for every finite measure space $(S,\mc{A},\mu)$ and every $X$-valued vector measure $\mb{\nu}$ on $(S,\mc{A})$ such that $\|\mb{\nu}(A)\|_{X} \leq \mu(A)$ for every $A \in \mc{A}$, there is a function $\mb{f} \in L^1(\mu;X)$ such that $\mb{\nu} = \mb{f}\mu$.
 \end{prop}
 
 \begin{proof}
-  Suppose that $X$ has the RNP with respect to every finite measure space, and let $(S,\mc{A},\mu)$ be a non-finite measure space.
-  Let $\mb{\nu}$ be an $X$-valued vector measure of finite variation on $(S,\mc{A})$ such that $|\mb{\nu}| \ll \mu$.
-  Since $|\mb{\nu}|$ is a finite measure, $X$ has the RNP with respect to $(S,\mc{A},|\mb{\nu}|)$.
-  Furthermore, we trivially have $|\mb{\nu}| \ll |\mb{\nu}|$.
-  Thus there exists a function $\mb{f} \in L^1(|\mb{\nu}|;X)$ such that $\mb{\nu} = \mb{f}|\mb{\nu}|$.
+  If $X$ has the RNP and $\mu$ and $\mb{\nu}$ are as hypothesised, then we have in particular that
+  \begin{equation*}
+    \|\mb{\nu}\|_{\var} < \|\mu\|_{\var} = \mu(S) < \infty
+  \end{equation*}
+  and $|\mb{\nu}| \ll \mu$, so the RNP gives us the required function $\mb{f} \in L^1(\mu;X)$.
+
+  Conversely, suppose that $X$ has the hypothesised property, and let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space.
+  Let $\mb{\nu}$ be an $X$-valued vector measure of bounded variation on $(S,\mc{A})$ such that $|\mb{\nu}| \ll \mu$.
+  The measure $|\mb{\nu}|$ is finite, and for all $A \in \mc{A}$ we have
+  \begin{equation*}
+    \|\mb{\nu}(A)\|_{X} \leq |\mb{\nu}|(A)
+  \end{equation*}
+  by definition.
+  Thus by hypothesis there exists a function $\mb{f} \in L^1(|\mb{\nu}|;X)$ such that $\mb{\nu} = \mb{f}|\mb{\nu}|$.
   By the scalar Radon--Nikodym theorem, there also exists a function $g \in L^1(\mu)$ such that $|\mb{\nu}| = g\mu$.
   Since $|\mb{\nu}|$ is a non-negative measure, $g$ is non-negative.
   Thus we have $\mb{\nu} = (\mb{f}g)\mu$.
