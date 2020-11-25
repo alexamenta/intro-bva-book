@@ -40,38 +40,49 @@ In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly f
   Thus we have equality in \eqref{eq:UMD-property}, with constant $C = 1$.
 \end{proof}
 
-At this point, without some extra theory, there isn't much we can say about spaces with $\UMD_{p}$ for $p \neq 2$ other than the following results.
+The UMD property can be rephrased succinctly in terms of \emph{martingale sign transforms}.
+Given a finite martingale $(\mb{f}_{n})_{n=0}^{N}$ valued in a Banach space $X$, and given a finite sequence of signs $(\xi_{n})_{n=0}^{N}$, recall that we defined the transformed martingale $(\xi \cdot \mb{f})_{\bullet}$ in terms of its difference sequence,
+\begin{equation*}
+  d(\xi \cdot \mb{f})_{n} := \xi_{n} d\mb{f}_{n} \qquad \text{(or equivalently, $(\xi \cdot \mb{f})_{k} = \sum_{n=0}^{k} \xi_{n} d\mb{f}_{n}$.)}
+\end{equation*}
+The $\UMD_{p}$ property can then be restated as follows: for all finite martingales $(\mb{f}_{n})_{n=0}^{N}$ and all finite sign sequences $(\xi_{n})_{n=1}^{N}$, we have a bound
+\begin{equation*}
+  \|(\xi \cdot \mb{f})_{N}\|_{L^p(\Omega;X)} \lesssim \|\mb{f}_{N}\|_{L^p(\Omega;X)}.
+\end{equation*}
+This can be restated in terms of filtrations.
+Given a finite filtration $(\mc{A}_{n})_{n=0}^{N}$ on a probability space $(\Omega,\mc{A},\P)$ and a finite sequence of signs $(\xi_{n})_{n=0}^{N}$, let $T_{\mc{A}_{\bullet}, \xi_{\bullet}}$ denote the bounded operator acting on $L^1(\Omega;X)$ by
+\begin{equation*}
+  T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f} := \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} = (\xi \cdot \mb{f})_{N},
+\end{equation*}
+where $\mb{f}_{\bullet}$ is the finite martingale associated with $\mb{f}$ and $\mc{A}_{\bullet}$.
+At this point, we have already given all the necessary details to prove the following convenient characterisation of the UMD property.
 
-\begin{prop}
+\begin{prop}\label{prop:UMD-signtransforms}
+  Let $X$ be a Banach space.
+  Then the $\UMD_{p}$ constant of $X$ is given by
+  \begin{equation*}
+    \beta_{p}(X) = \sup_{\Omega,\mc{A}_{\bullet}, \xi_{\bullet}}  \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^p(\Omega;X))},
+  \end{equation*}
+  where the supremum is taken over all probability spaces $(\Omega,\mc{A},\P)$, all finite filtrations $\mc{A}_{\bullet}$, and all finite sign sequences $\xi_{\bullet}$.
+\end{prop}
+
+This characterisation of the $\UMD_{p}$ constant, with a short duality argument, implies the following.
+
+\begin{prop}\label{prop:UMD-duality}
   Let $p \in (1,\infty)$, and let $X$ be a Banach space.
   Then $X$ has the $\UMD_{p}$ property if and only if the dual space $X^{*}$ has the $\UMD_{p'}$ property, and $\beta_{p}(X) = \beta_{p'}(X^{*})$.
 \end{prop}
 
 \begin{proof}
-  By rewriting the definition, we see that $X$ has the $\UMD_{p}$ property if and only if for all finite filtrations $(\mc{A}_{n})_{n = 0}^{N}$ on a probability space $(\Omega,\mc{A},\P)$ and all functions $\mb{f} \in L^p(\Omega;X)$, we have
-  \begin{equation*}
-    \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq C \|\mb{f}\|_{L^p(\Omega;X)}, 
-  \end{equation*}
-  for all sequences of signs $(\xi_{n})_{n=0}^{N}$, where $\mb{f}_{n} = \E^{\mc{A}_{n}} \mb{f}$.
-  That is, writing $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ to denote the bounded linear operator
-  \begin{equation*}
-    \mb{f} \mapsto \sum_{n=0}^{N} \xi_{n} (\E^{\mc{A}_{n}} - \E^{\mc{A}_{n-1}})\mb{f},
-  \end{equation*}
-  we have that $X$ has the $\UMD_{p}$ property if and only if the operators $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ are bounded on $L^p(\Omega;X)$ \emph{uniformly} over all probability spaces $(\Omega,\mc{A},\P)$, all finite filtrations $\mc{A}_{\bullet}$, and all finite sign sequences $\xi_\bullet$.
-  Put concisely in terms of the constant $\beta_{p}(X)$, we have
-  \begin{equation*}
-    \beta_{p}(X) = \sup_{\Omega, \mc{A}_{\bullet}, \xi_{\bullet}} \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p}(\Omega;X))}.
-  \end{equation*}
-
-  Now fix a finite filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$, and a finite sign sequence $\xi_{\bullet}$.
+  Fix a finite filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$, and a finite sign sequence $\xi_{\bullet}$.
   Suppose $\mb{f} \in L^{p}(\Omega;X)$ and $\mb{g} \in L^{p'}(\Omega;X^{*})$.
   Since the (scalar) conditional expectation $\E^{\mc{A}_{n}}$ on $L^p(\Omega)$ is adjoint to the corresponding conditional expectation on $L^{p'}(\Omega)$ (Proposition \ref{prop:CE-adjoint}), and since
   \begin{equation*}
-    \langle \mb{f}, \E^{\mc{A}_{n}} \mb{g} \rangle = \langle \E^{\mc{A}_{n}} \mb{f}, \mb{g} \rangle
+    \langle \E^{\mc{A}_{n}} \mb{f}, \mb{g} \rangle = \langle \mb{f}, \E^{\mc{A}_{n}} \mb{g} \rangle 
   \end{equation*}
   by Exercise \ref{ex:tensor-adjoint}, we get
   \begin{equation*}
-    \langle \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle = \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle 
+    \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle =  \langle \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle.
   \end{equation*}
   Thus by the norming property of $L^{p'}(\Omega;X^{*})$ as a subset of $L^{p}(\Omega;X)^{*}$ (Proposition \ref{prop:bochner-preduality}), and of $L^{p}(\Omega;X)$ as a subset of $L^{p'}(\Omega;X^{*})^{*}$,\footnote{Technically we haven't proven this. The proof is a small modification of that of Proposition \ref{prop:bochner-preduality}, using that $X$ is a norming subspace of $X^{**} = (X^{*})^{*}$. See \cite[Proposition 1.3.1]{HNVW16} for the needed duality result in full generality.}  we get
   \begin{equation*}
@@ -91,6 +102,9 @@ Taking the supremum over all $\Omega$, $\mc{A}_{\bullet}$, and $\xi_{\bullet}$ t
 \end{equation*}
 completing the proof.
 \end{proof}
+
+Before moving on to more subtle properties, we show that the $\UMD_{p}$ property extends to Bochner spaces.
+This will be more useful once we know the $p$-independence of the UMD property.
 
 \begin{prop}
   Let $p \in (1,\infty)$, and suppose $X$ is a Banach space with the $\UMD_{p}$ property.
@@ -117,23 +131,65 @@ completing the proof.
 
 \section{$p$-independence of the UMD property}\label{sec:UMD-p-independence}
 
-Our goal now is to prove that the $\UMD_{p}$ property is independent of $p$, so that from now on we need only refer to the UMD property (without mentioning an exponent $p$).
+Our goal now is to prove that the $\UMD_{p}$ property is independent of $p$.
+For this, we will use the characterisation from Proposition \ref{prop:UMD-signtransforms} of the $\UMD_{p}$ property in terms of finite martingale sign transforms $T_{\mc{A}_{\bullet}, \xi_{\bullet}}$.
+The basic strategy is as follows:
+\begin{itemize}
+\item Assuming that the finite sign transforms $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ are uniformly bounded on $L^p(\Omega;X)$, prove that they have weak-type $(1,1)$ (i.e. that they are bounded from $L^1(\Omega;X)$ to the Lorentz space $L^{1,\infty}(\Omega;X)$ uniformly over all finite filtrations and sign sequences.
+\item Use Marcinkiewicz's interpolation theorem to deduce that the finite sign transforms are uniformly bounded on $L^q(\Omega;X)$ for all $1 < q < p$, and thus that $X$ has the $\UMD_{q}$ property for all $1 < q < p$.
+\item Argue by duality to show that $X$ has the $\UMD_{r}$ property for all $p < r < \infty$, and thus that $X$ has the full $\UMD$ property.
+\end{itemize}
+
+The first two steps are similar to how we proved Doob's maximal inequality (Theorem \ref{thm:doob}), except there we implicitly interpolated between a weak-type $(1,1)$ estimate and an $L^\infty$ bound that such maximal operators automatically satisfy.
+The weak-type $(1,1)$ estimate for sign transforms will be proven relies on \emph{Gundy's decomposition} for martingales, which is analogous to the Calder\'on--Zygmund decomposition of a function.\footnote{
+Students of harmonic analysis may recognise this procedure as essentially being the same as that used in Calder\'on--Zygmund theory: start with an assumed $L^p$ estimate, use properties of the operators under consideration (here we use the martingale property rather than kernel estimates) to deduce weak-type $(1,1)$, and finally use interpolation and duality to extend the $L^p$-boundedness to $L^q$ for all $q \in (1,\infty)$.}
+
+\begin{thm}[Gundy's decomposition]\label{thm:gundy}
+  Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space.
+  Suppose $\mb{f} \in L^1(\Omega;X)$, and let $\mc{A}_{\bullet}$ be a filtration with $\mc{A}_{\infty} = \mc{A}$.
+  Then given $\lambda > 0$, there is a decomposition
+  \begin{equation*}
+    \mb{f} = \mb{a} + \mb{b} + \mb{c}
+  \end{equation*}
+  with $\mb{a}, \mb{b}, \mb{c} \in L^1(\Omega;X)$ satisfying
+  \begin{itemize}
+  \item $\|\mb{a}\|_{L^{1}(\Omega;X)} \lesssim 1$, $\P(\sup_{n \in \N} \|d\mb{a}_{n}\|_{X} \neq 0) \lesssim \lambda^{-1}$,
+  \item $\| \sum_{n \in \N} \|d\mb{b}_{n}\|_{X} \|_{L^1(\Omega)} \lesssim 1$,
+  \item $\| \mb{c} \|_{L^\infty(\Omega;X)} \lesssim \lambda$ and $\|\mb{c}\|_{L^1(\Omega;X)} \lesssim 1$.
+  \end{itemize}
+  where $\mb{a}_{n} = \E^{\mc{A}_{n}} \mb{a}$ and $\mb{b}_{n} = \E^{\mc{A}_{n}} \mb{b}$.
+\end{thm}
+
+We will prove this in the next section.
+For now we will assume it, and deduce the weak-type $(1,1)$ estimate for finite sign transforms in $\UMD_{p}$ spaces.
+
+\begin{prop}\label{prop:martingale-w11}
+  Suppose that $X$ is a Banach space with the $\UMD_{p}$ property.
+  Then for all probability spaces $(\Omega,\mc{A},\P)$ and all finite filtrations $\mc{A}_{\bullet}$ and sign sequences $\xi_{\bullet}$,
+  \begin{equation*}
+    \|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{L^{1,\infty}(\Omega;X)} := \sup_{t > 0} t\P(\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{X} > t) \lesssim_{p} \beta_{p}(X) \|\mb{f}\|_{L^1(\Omega;X)}
+  \end{equation*}
+  for all $\mb{f} \in L^1(\Omega;X)$.
+\end{prop}
+
+\begin{proof}[Proof, assuming Theorem \ref{thm:gundy}]
+  \todo{UP TO HERE}
+\end{proof}
+
+Now we can prove the $p$-independence of the UMD property, still implicitly assuming the validity of Gundy's decomposition.
 
 \begin{thm}\label{thm:UMD-p-independent}
   Let $X$ be a Banach space which has the $\UMD_{p}$ property for some $p \in (1,\infty)$.
   Then $X$ has $\UMD_{q}$ for all $q \in (1,\infty)$ (i.e. $X$ is UMD).
 \end{thm}
 
-We'll prove this as a result of \emph{Gundy's decomposition} for martingales, which is analogous to the Calder\'on--Zygmund decomposition of a function.
+\begin{proof}
+  By Proposition \ref{prop:martingale-w11} we have that all finite martingale sign transforms $T_{\mc{A}_{\bullet}, \xi_{\bullet}}$ are uniformly bounded from $L^1(\Omega;X)$ to $L^{1,\infty}(\Omega;X)$.
+  By the Marcinkiewicz interpolation theorem for Bochner spaces (Theorem \ref{thm:marcinkiewicz} in the appendix), since these operators are also uniformly bounded on $L^p(\Omega;X)$, we find that they are uniformly bounded on $L^q(\Omega;X)$ for all $q \in (1,p)$, and thus $X$ has the $\UMD_{q}$ property for all such $q$.
 
-\begin{thm}[Gundy's decomposition]\label{thm:gundy}
-  
-\end{thm}
-
-Now we prove the $p$-independence of the UMD property, assuming the Gundy decomposition.
-
-\begin{proof}[Proof of Theorem \ref{thm:UMD-p-independent}, assuming Theorem \ref{thm:gundy}]
-  
+  On the other hand, by Proposition \ref{prop:UMD-duality}, we know that $X^{*}$ has the $\UMD_{p'}$ property, and thus by the argument above $X^{*}$ has the $\UMD_{r}$ property for all $r \in (1,p')$.
+  Hence $X$ itself has the $\UMD_{r'}$ property for all $r \in (1,p')$, which (messing with H\"older conjugates) says that $X$ has the $\UMD_{s}$ property for all $s \in (p,\infty)$.
+  Thus $X$ is UMD.
 \end{proof}
 
 \begin{cor}
@@ -150,20 +206,29 @@ Now we prove the $p$-independence of the UMD property, assuming the Gundy decomp
 
 Finally, we return to the proof of Gundy's decomposition.
 
+\section{The proof of Gundy's decomposition}
+
+\todo{we need a bit more on stopping times that we forgot!} ($\sigma$-algebra associated with a stopping time...)
+
 \begin{proof}[Proof of Theorem \ref{thm:gundy}]
+  Define a stopping time
+  \begin{equation*}
+    r(\omega) := \inf\big\{ n \in \N : \|\mb{f}_{n}(\omega)\|_{X} > \lambda \big\},
+  \end{equation*}
+  where $\mb{f}$ is the martingale associated with $\mb{f}$ and $\mc{A}_{\bullet}$.
+  For $n \in \N$ define the scalar-valued function $v_{n} = \|d\mb{f}_{n}\|_{X} \1_{\{r = n\}}$, and define two more stopping times
+  \begin{equation*}
+    \begin{aligned}
+      s(\omega) &:= \inf\Big\{ n \in \N : \sum_{k=0}^{n} \E^{\mc{A}_{k}} v_{k+1} > \lambda \Big\} \\
+      T(\omega) &:= \min(r(\omega), s(\omega)).
+    \end{aligned}
+  \end{equation*}
   
 \end{proof}
 
-\section{Applications to martingale transforms and Haar decompositions}
-
--martingale transforms are bounded
--Haar decompositions are unconditional
-
-\section{Stein's inequality: $R$-boundedness of conditional expectations}
-
 \section{Sufficiency of dyadic martingales}
 
-\section{UMD and reflexivity}
+\section{UMD implies reflexivity}
 
 UMD implies reflexive, hence also RNP
 
@@ -172,6 +237,18 @@ UMD implies reflexive, hence also RNP
 Bunch of counterexamples from non-reflexivity
 State Qiu's counterexample
 give a few more if possible...
+
+
+
+\section{Applications to martingale transforms and Haar decompositions}
+
+-martingale transforms are bounded
+-Haar decompositions are unconditional
+
+\section{Stein's inequality: $R$-boundedness of conditional expectations}
+
+
+
 
 \section*{Exercises}
 
