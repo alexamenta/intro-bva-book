@@ -221,15 +221,15 @@ For now we will assume it, and deduce the weak-type $(1,1)$ estimate for finite 
     \begin{aligned}
       \P(\|\td{\mb{c}}\|_{X} > t)
       &\leq t^{-p}\|T_{\mc{A}_{\bullet, \xi_{\bullet}}} \mb{c} \|_{L^p(\Omega;X)}^{p} \\
-      &\leq t^{-p} \beta_{p}(X)^{p} \|\mb{c} \|_{L^p(\Omega;X)}^{p} \\
-      &\leq t^{-p} \beta_{p}(X)^{p} \Big( \|\mb{c} \|_{L^1(\Omega;X)}^{\frac{1}{p}} \|\mb{c}\|_{L^\infty(\Omega;X)}^{1-\frac{1}{p}} \Big)^{p} \\
-      &\lesssim t^{-p} \beta_{p}(X)^{p} t^{p-1} = t^{-1}\beta_{p}(X)^{p} .
+      &\lesssim_{p,X} t^{-p} \|\mb{c} \|_{L^p(\Omega;X)}^{p} \\
+      &\leq t^{-p}  \Big( \|\mb{c} \|_{L^1(\Omega;X)}^{\frac{1}{p}} \|\mb{c}\|_{L^\infty(\Omega;X)}^{1-\frac{1}{p}} \Big)^{p} \\
+      &\lesssim_{p} t^{-p}  t^{p-1} = t^{-1} .
     \end{aligned}
   \end{equation*}
   Therefore we have
   \begin{equation*}
     3t\P(\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{X} > 3t)
-    \lesssim 3t\big(2t^{-1} + t^{-1} \beta_{p}(X)^{p}\big) \lesssim \beta_{p}(X)^{p}.
+    \lesssim_{p,X} 3t(3t^{-1}) \simeq 1 = \|\mb{f}\|_{L^{1}(\Omega;X)}.
   \end{equation*}
   Taking the supremum over $t > 0$ completes the proof.
 \end{proof}
