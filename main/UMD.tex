@@ -40,7 +40,57 @@ In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly f
   Thus we have equality in \eqref{eq:UMD-property}, with constant $C = 1$.
 \end{proof}
 
-At this point, without some extra theory, there isn't much we can say about spaces with $\UMD_{p}$ for $p \neq 2$ other than the following result (which will be more useful later on).
+At this point, without some extra theory, there isn't much we can say about spaces with $\UMD_{p}$ for $p \neq 2$ other than the following results.
+
+\begin{prop}
+  Let $p \in (1,\infty)$, and let $X$ be a Banach space.
+  Then $X$ has the $\UMD_{p}$ property if and only if the dual space $X^{*}$ has the $\UMD_{p'}$ property, and $\beta_{p}(X) = \beta_{p'}(X^{*})$.
+\end{prop}
+
+\begin{proof}
+  By rewriting the definition, we see that $X$ has the $\UMD_{p}$ property if and only if for all finite filtrations $(\mc{A}_{n})_{n = 0}^{N}$ on a probability space $(\Omega,\mc{A},\P)$ and all functions $\mb{f} \in L^p(\Omega;X)$, we have
+  \begin{equation*}
+    \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq C \|\mb{f}\|_{L^p(\Omega;X)}, 
+  \end{equation*}
+  for all sequences of signs $(\xi_{n})_{n=0}^{N}$, where $\mb{f}_{n} = \E^{\mc{A}_{n}} \mb{f}$.
+  That is, writing $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ to denote the bounded linear operator
+  \begin{equation*}
+    \mb{f} \mapsto \sum_{n=0}^{N} \xi_{n} (\E^{\mc{A}_{n}} - \E^{\mc{A}_{n-1}})\mb{f},
+  \end{equation*}
+  we have that $X$ has the $\UMD_{p}$ property if and only if the operators $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ are bounded on $L^p(\Omega;X)$ \emph{uniformly} over all probability spaces $(\Omega,\mc{A},\P)$, all finite filtrations $\mc{A}_{\bullet}$, and all finite sign sequences $\xi_\bullet$.
+  Put concisely in terms of the constant $\beta_{p}(X)$, we have
+  \begin{equation*}
+    \beta_{p}(X) = \sup_{\Omega, \mc{A}_{\bullet}, \xi_{\bullet}} \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p}(\Omega;X))}.
+  \end{equation*}
+
+  Now fix a finite filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$, and a finite sign sequence $\xi_{\bullet}$.
+  Suppose $\mb{f} \in L^{p}(\Omega;X)$ and $\mb{g} \in L^{p'}(\Omega;X^{*})$.
+  Since the (scalar) conditional expectation $\E^{\mc{A}_{n}}$ on $L^p(\Omega)$ is adjoint to the corresponding conditional expectation on $L^{p'}(\Omega)$ (Proposition \ref{prop:CE-adjoint}), and since
+  \begin{equation*}
+    \langle \mb{f}, \E^{\mc{A}_{n}} \mb{g} \rangle = \langle \E^{\mc{A}_{n}} \mb{f}, \mb{g} \rangle
+  \end{equation*}
+  by Exercise \ref{ex:tensor-adjoint}, we get
+  \begin{equation*}
+    \langle \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle = \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle 
+  \end{equation*}
+  Thus by the norming property of $L^{p'}(\Omega;X^{*})$ as a subset of $L^{p}(\Omega;X)^{*}$ (Proposition \ref{prop:bochner-preduality}), and of $L^{p}(\Omega;X)$ as a subset of $L^{p'}(\Omega;X^{*})^{*}$,\footnote{Technically we haven't proven this. The proof is a small modification of that of Proposition \ref{prop:bochner-preduality}, using that $X$ is a norming subspace of $X^{**} = (X^{*})^{*}$. See \cite[Proposition 1.3.1]{HNVW16} for the needed duality result in full generality.}  we get
+  \begin{equation*}
+    \begin{aligned}
+      \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p}(\Omega;X))}
+      &= \sup_{\mb{f}} \| T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f} \|_{L^{p}(\Omega;X)} \\
+      &= \sup_{\mb{f}, \mb{g}} \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle \\
+      &= \sup_{\mb{f}, \mb{g}} \langle  \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle \\
+      &= \sup_{\mb{g}} \| T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \|_{L^{p'}(\Omega;X^{*})}
+      &= \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p'}(\Omega;X^{*}))},
+  \end{aligned}
+\end{equation*}
+with suprema taken over all normalised $\mb{f} \in L^{p}(\Omega;X)$ and $\mb{g} \in L^{p'}(\Omega;X^{*})$.
+Taking the supremum over all $\Omega$, $\mc{A}_{\bullet}$, and $\xi_{\bullet}$ then shows that
+\begin{equation*}
+  \beta_{p}(X) = \beta_{p'}(X^{*}), 
+\end{equation*}
+completing the proof.
+\end{proof}
 
 \begin{prop}
   Let $p \in (1,\infty)$, and suppose $X$ is a Banach space with the $\UMD_{p}$ property.
@@ -74,9 +124,7 @@ Our goal now is to prove that the $\UMD_{p}$ property is independent of $p$, so 
   Then $X$ has $\UMD_{q}$ for all $q \in (1,\infty)$ (i.e. $X$ is UMD).
 \end{thm}
 
-We will prove this as a result of \emph{Gundy's decomposition} for martingales, which is analogous to the Calder\'on--Zygmund decomposition of a function.
-First we'll state Gundy's decomposition and use it to prove Theorem \ref{thm:UMD-p-independent}.
-Then, after discussing consequences of Theorem \ref{thm:UMD-p-independent}, we will return to the proof of Gundy's decomposition.
+We'll prove this as a result of \emph{Gundy's decomposition} for martingales, which is analogous to the Calder\'on--Zygmund decomposition of a function.
 
 \begin{thm}[Gundy's decomposition]\label{thm:gundy}
   
