@@ -24,7 +24,7 @@ In Banach space lingo, \eqref{eq:UMD-property} says that the sequence $d\mb{f}_\
 Put very coarsely, the UMD property says that martingale differences behave somewhat like orthogonal sequences in $L^p(\Omega;X)$.
 In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly from orthogonality considerations.
 
-\begin{prop}
+\begin{prop}\label{prop:Hilbert-UMD2}
   Every Hilbert space $H$ has the $\UMD_{2}$ property, with best constant $\beta_{2}(H) = 1$.
 \end{prop}
 
@@ -106,7 +106,7 @@ completing the proof.
 Before moving on to more subtle properties, we show that the $\UMD_{p}$ property extends to Bochner spaces.
 This will be more useful once we know the $p$-independence of the UMD property.
 
-\begin{prop}
+\begin{prop}\label{prop:Bochner-UMDp}
   Let $p \in (1,\infty)$, and suppose $X$ is a Banach space with the $\UMD_{p}$ property.
   Let $(S,\mc{A},\mu)$ be a measure space with $\mu(S) > 0$.
   Then the Bochner space $L^p(\mu;X)$ has $\UMD_{p}$, with $\beta_{p}(L^p(\mu;X)) = \beta_{p}(X)$.
@@ -167,13 +167,71 @@ For now we will assume it, and deduce the weak-type $(1,1)$ estimate for finite 
   Suppose that $X$ is a Banach space with the $\UMD_{p}$ property.
   Then for all probability spaces $(\Omega,\mc{A},\P)$ and all finite filtrations $\mc{A}_{\bullet}$ and sign sequences $\xi_{\bullet}$,
   \begin{equation*}
-    \|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{L^{1,\infty}(\Omega;X)} := \sup_{t > 0} t\P(\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{X} > t) \lesssim_{p} \beta_{p}(X) \|\mb{f}\|_{L^1(\Omega;X)}
+    \|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{L^{1,\infty}(\Omega;X)} := \sup_{t > 0} t\P(\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{X} > t) \lesssim_{p,X} \|\mb{f}\|_{L^1(\Omega;X)}
   \end{equation*}
   for all $\mb{f} \in L^1(\Omega;X)$.
 \end{prop}
 
 \begin{proof}[Proof, assuming Theorem \ref{thm:gundy}]
-  \todo{UP TO HERE}
+  Fix a finite filtration $(\mc{A}_{n})_{n=0}^{N}$ on a probability space $(\Omega,\mc{A},\P)$, and a sequence of signs $(\xi_{n})_{n=0}^{N}$.
+  Let $\mb{f} \in L^1(\Omega;X)$; by rescaling we may assume $\|\mb{f}\|_{L^1(\Omega;X)} = 1$.\footnote{If $\mb{f} = 0$ there is nothing to show anyway.}
+  Fix $t > 0$, and let
+  \begin{equation*}
+    \mb{f} = \mb{a} + \mb{b} + \mb{c}
+  \end{equation*}
+  be the Gundy decomposition of $\mb{f}$ at level $t$ (Theorem \ref{thm:gundy}).
+  Writing
+  \begin{equation*}
+    \td{\mb{f}} := T_{\mb{A}_{\bullet}, \xi_{\bullet}}\mb{f},
+    \qquad \td{\mb{a}} := T_{\mb{A}_{\bullet}, \xi_{\bullet}}\mb{a},
+    \qquad \td{\mb{b}} := T_{\mb{A}_{\bullet}, \xi_{\bullet}}\mb{b},
+    \qquad \td{\mb{c}} := T_{\mb{A}_{\bullet}, \xi_{\bullet}}\mb{c},
+  \end{equation*}
+  We have by linearity of the martingale transform
+  \begin{equation*}
+    \td{\mb{f}} = \td{\mb{a}} + \td{\mb{b}} + \td{\mb{c}}
+  \end{equation*}
+  and thus
+  \begin{equation*}
+    \P(\|\td{\mb{f}}\|_{X} > 3t)
+    \leq \P(\|\td{\mb{a}}\|_{X} > t) + \P(\|\td{\mb{b}}\|_{X} > t) + \P(\|\td{\mb{c}}\|_{X} > t).
+  \end{equation*}
+
+  We estimate these three summands separately.
+  First, we have
+  \begin{equation*}
+    \begin{aligned}
+      \P(\|\td{ \mb{a} }\|_{X} > t)
+      \leq \P(\sup_{n} \|d \mb{a}_{n}\|_{X} \neq 0) \lesssim t^{-1},
+    \end{aligned}
+  \end{equation*}
+  as we cannot have $\| \td{ \mb{a} }  \|_{X} = \|T_{ \mc{A}_{\bullet}, \xi_{\bullet} } \mb{a}\|_{X}> t$ without one of the differences $d\mb{a}_{n}$ being nonzero.
+  For the second term, since
+  \begin{equation*}
+    \|\td{\mb{b}}(\omega)\|_{X} = \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{b}_{n}(\omega) \Big\|_{X} \leq \sum_{n = 0}^{N} \|d\mb{b}_{n}(\omega)\|_{X} \qquad \forall \omega \in \Omega,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \P(\|\td{\mb{b}}\|_{X} > t) \leq \P\Big( \sum_{n = 0}^{N} \|d\mb{b}_{n}\|_{X} > t \Big)
+    \leq t^{-1} \Big\|  \sum_{n = 0}^{N} \|d\mb{b}_{n}\|_{X} \Big\|_{L^1(\Omega)} \lesssim t^{-1}
+  \end{equation*}
+  by Chebyshev's inequality.
+  Finally, using Chebyshev again, the $\UMD_{p}$ property, and log-convexity of $L^p$-norms,
+  \begin{equation*}
+    \begin{aligned}
+      \P(\|\td{\mb{c}}\|_{X} > t)
+      &\leq t^{-p}\|T_{\mc{A}_{\bullet, \xi_{\bullet}}} \mb{c} \|_{L^p(\Omega;X)}^{p} \\
+      &\leq t^{-p} \beta_{p}(X)^{p} \|\mb{c} \|_{L^p(\Omega;X)}^{p} \\
+      &\leq t^{-p} \beta_{p}(X)^{p} \Big( \|\mb{c} \|_{L^1(\Omega;X)}^{\frac{1}{p}} \|\mb{c}\|_{L^\infty(\Omega;X)}^{1-\frac{1}{p}} \Big)^{p} \\
+      &\lesssim t^{-p} \beta_{p}(X)^{p} t^{p-1} = t^{-1}\beta_{p}(X)^{p} .
+    \end{aligned}
+  \end{equation*}
+  Therefore we have
+  \begin{equation*}
+    3t\P(\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}\|_{X} > 3t)
+    \lesssim 3t\big(2t^{-1} + t^{-1} \beta_{p}(X)^{p}\big) \lesssim \beta_{p}(X)^{p}.
+  \end{equation*}
+  Taking the supremum over $t > 0$ completes the proof.
 \end{proof}
 
 Now we can prove the $p$-independence of the UMD property, still implicitly assuming the validity of Gundy's decomposition.
@@ -193,18 +251,32 @@ Now we can prove the $p$-independence of the UMD property, still implicitly assu
 \end{proof}
 
 \begin{cor}
-  Hilbert spaces and $L^p$-spaces are UMD
+  The following Banach spaces are UMD:
+  \begin{itemize}
+  \item every Hilbert space,
+  \item every finite-dimensional space,
+  \item every Lebesgue space $L^p(S)$ over a measure space $(S,\mc{A},\mu)$, with $p \in (1,\infty)$,
+  \item every Bochner space $L^p(S;X)$ with $S$ and $p$ as above, provided that $X$ is UMD.
+  \end{itemize}
 \end{cor}
 
-\begin{rmk}
-  Remark on how the constant $\beta_{p}(X)$ varies.
-\end{rmk}
+\begin{proof}
+  We proved in Proposition \ref{prop:Hilbert-UMD2} that every Hilbert space has the $\UMD_{2}$ property, so by $p$-independence, every Hilbert space is $\UMD$.
+  Every finite-dimensional space is isomorphic to a Hilbert space, hence also UMD (see Exercise \ref{ex:UMD-isomorphism}).
+  If $X$ is a UMD space, then in particular $X$ is $\UMD_{p}$, and thus by Proposition \ref{prop:Bochner-UMDp} the Bochner space $L^p(S;X)$ is also $\UMD_{p}$ (hence $\UMD$).
+  Taking $X$ to be the scalar field, which is a Hilbert space, proves that $L^p(S)$ is $\UMD$.
+\end{proof}
 
 \begin{rmk}
-  Remark on exact values of $\beta_{p}(H)$ (Burkholder).
+  Theorem \ref{thm:UMD-p-independent} says that if the constant $\beta_{p}(X)$ is finite for some $p \in (1,\infty)$, then $\beta_{q}(X) < \infty$ for all $q \in (1,\infty)$, but it does not give sharp control on how $\beta_{q}(X)$ changes.
+  It is possible (but difficult) to prove that
+  \begin{equation*}
+    \beta_{p}(H) = \max(p,p') - 1
+  \end{equation*}
+  for every Hilbert space $H$ and all $p \in (1,\infty)$ \cite[Corollary 4.5.15]{HNVW16}.
+  As far as I know, this is the only case where the UMD constant of a space is known exactly (excluding the cases $\beta_{p}(X) = \infty$).
 \end{rmk}
 
-Finally, we return to the proof of Gundy's decomposition.
 
 \section{The proof of Gundy's decomposition}
 
@@ -275,6 +347,7 @@ give a few more if possible...
   Randomised $\UMD_{p}$ are all equivalent.
   $L^1$ is 'UMD-'.
 \end{exercise}
+
 
 
 %%% Local Variables:
