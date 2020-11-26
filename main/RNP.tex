@@ -427,13 +427,13 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
   \end{equation*}
   Note that $\|\mb{x}_{A}\|_X \leq 1$ for all $A \in \mc{A}_{+}$ by the assumptions on $\mb{\nu}$, so every $C_{A}$ is bounded and hence (by assumption) dentable.
 
-  \textbf{We make the following claim:} \emph{for all $\varepsilon > 0$ and $A \in \mc{A}_{+}$, there exists $A' \in \mc{A}_+(A)$ such that $\diam(C_{A}) \leq 2\varepsilon$.}
+  \textbf{We make the following claim:} \emph{for all $\varepsilon > 0$ and $A \in \mc{A}_{+}$, there exists $A' \in \mc{A}_+(A)$ such that $\diam(C_{A'}) \leq 2\varepsilon$.}
   
   We assume this is not the case and establish a contradiction.
   Thus there exist $\varepsilon > 0$ and $A \in \mc{A}_{+}$ such that $\diam(C_{A'}) > 2\varepsilon$ for all $A' \in \mc{A}_+(A)$.
   In particular, for every $\mb{x} \in X$ and $A' \in \mc{A}_{+}(A)$, there is a subset $B \in \mc{A}_{+}(A')$ such that $\|\mb{x} - \mb{x}_{B}\|_{X} > \varepsilon$.\footnote{Otherwise there would exist a vector $\tilde{\mb{x}} \in X$ with $\|\tilde{\mb{x}} - \mb{x}_{B}\|_{X} \leq \varepsilon$ for all $B \in \mc{A}_{+}(A')$, which implies $\|\mb{x}_{B} - \mb{x}_{B'}\|_{X} \leq 2\varepsilon$ for all $B,B' \in \mc{A}_+(A')$ and hence $\diam(C_{A'}) \leq 2\varepsilon$. Contradiction.}
   
-  Now consider a fixed $A' \in \mc{A}_{+}(A)$ and let $\{B_{\lambda}\}_{\lambda \in \Lambda}$ be a maximal collection of disjoint measurable elements of $\mc{A}_+(A')$ such that $\|\mb{x}_{A'} - \mb{x}_{B_\lambda}\|_{X} > \varepsilon$, where $\Lambda$ is some indexing set.
+  Now consider a fixed $A' \in \mc{A}_{+}(A)$ and let $\{B_{\lambda}\}_{\lambda \in \Lambda}$ be a maximal collection of disjoint elements of $\mc{A}_+(A')$ such that $\|\mb{x}_{A'} - \mb{x}_{B_\lambda}\|_{X} > \varepsilon$, where $\Lambda$ is some indexing set.
   Since the sets $B_{\lambda}$ are disjoint and have positive measure, and since
   \begin{equation*}
     \sum_{\lambda \in \Lambda} \mu(B_{\lambda}) \leq \mu(A') < \infty,
@@ -507,7 +507,7 @@ Finally we will `complete the loop' in our discussion of the Radon--Nikodym prop
     \leq \sum_{\lambda \in \Lambda} \mu(A \cap A_{\lambda}) \|\mb{x}_{A \cap A_{\lambda}} - \mb{x}_{A_{\lambda}}\|_{X} \leq 2\mu(A)\varepsilon
   \end{equation*}
   using that $\diam(C_{A_{\lambda}}) \leq 2\varepsilon$.
-  Taking the supremum over $A \in \mc{A}_{+}$ proves \eqref{eq:g-computation} and completes the proof.
+  Taking the supremum over all partitions of $S$ proves \eqref{eq:g-computation} and completes the proof.
 \end{proof}
 
 Combining this with everything else we know, we have proven the following theorem.
