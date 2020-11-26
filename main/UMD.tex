@@ -280,7 +280,58 @@ Now we can prove the $p$-independence of the UMD property, still implicitly assu
 
 \section{The proof of Gundy's decomposition}
 
-\todo{we need a bit more on stopping times that we forgot!} ($\sigma$-algebra associated with a stopping time...)
+The proof of Gundy's decomposition, like the proof of Doob's maximal inequality, involves stopping time arguments.
+To this end we need a few concepts regarding stopping times that we didn't introduce earlier.
+Stopping times are defined in Definition \ref{defn:stopping-time}.
+
+\begin{defn}
+  Let $(\Omega,\mc{A},\P)$ be a probability space and $\mc{A}_{\bullet}$ a filtration.
+  Let $\map{T}{\Omega}{\N \cup \{\infty\}}$ be a stopping time with respect to the filtration $\mc{A}_{\bullet}$.
+
+  \begin{itemize}
+  \item We define the \emph{$\sigma$-algebra associated with the stopping time} $\mc{A}_{T}$ as follows: a subset $A \in \mc{A}$ belongs to $\mc{A}_{T}$ if and only if $A \cap \{T \leq n\} \in \mc{A}_{n}$ for all $n \in \N$.
+    One can show that $\mc{A}_{T}$ is indeed a $\sigma$-algebra.
+  \item Given a stochastic process $\mb{f}_{\bullet}$ valued in a Banach space $X$, we define the random variable $\mb{f}_{T} \colon \Omega \sm \{T = \infty\} \to X$ by
+    \begin{equation*}
+      \mb{f}_{T}(\omega) := \mb{f}_{T(\omega)}(\omega).
+    \end{equation*}
+  \end{itemize}
+\end{defn}
+
+Note that for each $n \in \N$, the constant random variable $n(\omega) \equiv n$ is a stopping time with respect to every filtration.
+Note also that for two stopping times $S,T$ with respect to a filtration $\mc{A}_{\bullet}$, the minimum $\min(S,T)$ is also a stopping time with respect to $\mc{A}_{\bullet}$.
+In particular, $\min(n,T)$ is a stopping time with respect to $\mc{A}_{\bullet}$, and we can define the sequence of $\sigma$-algebras $(\mc{A}_{\min(n,T)})_{n \in \N}$ and the random variables $(\mb{f}_{\min(n,T)})_{n \in \N}$.
+The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise \ref{ex:stopped-filtration}).
+
+\begin{prop}
+  Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space, and let $\mc{A}_{\bullet}$ be a filtration.
+  Let $\mb{f} \in L^1(\Omega;X)$, and let $\mb{f}_{\bullet} := \E^{\mc{A}_{\bullet}} \mb{f}$ be the associated martingale. 
+  Suppose $\map{T}{\Omega}{\N \cup \{\infty\}}$ is a finite stopping time, then
+  \begin{equation}\label{eq:stopmgale}
+    \E^{\mc{A}_{T}} \mb{f} = \mb{f}_{T},
+  \end{equation}
+  and so $\|\mb{f}_{T}\|_{L^1(\Omega;X)} \leq \|\mb{f}\|_{L^1(\Omega;X)}$.
+  Furthermore, $\mb{f}_{\min(\bullet,T)}$ is a martingale with respect to $\mc{A}_{\min(\bullet,T)}$.
+\end{prop}
+
+\begin{proof}
+  The fact that $\mb{f}_{\min(\bullet,T)}$ is a martingale follows from \eqref{eq:stopmgale}, which implies in addition that $\mb{f}_{\min(\bullet,T)} = \E^{\mc{A}_{\min(\bullet,T)}} \mb{f}$ is the martingale associated with $\mb{f}$ and the filtration $\mc{A}_{\min(\bullet,T)}$.
+  Thus we need only prove \eqref{eq:stopmgale}.
+  
+  Fix a set $A \in \mc{A}_{T}$, and let $A_{k} = A \cap \{T = k\}$ for $k \in \N \cup \{\infty\}$, so that $A_{k} \in \mc{A}_{k}$ and $(A_{k})_{k \in \N \cup \{\infty\}}$ is a partition of $A$.
+  With the interpretation $\mb{f}_{\infty} := \mb{f}$, we have
+  \begin{equation*}
+      \int_{A} \mb{f} \, \dd \P 
+      = \sum_{k \in \N \cup \{\infty\}} \int_{A_k} \mb{f} \, \dd \P 
+      = \sum_{k \in \N \cup \{\infty\}} \int_{A_{k}} \mb{f}_{k} \, \dd \P 
+      = \sum_{k \in \N \cup \{\infty\}} \int_{A_{k}} \mb{f}_{T} \, \dd \P 
+      = \int_{A} \mb{f}_{T} \, \dd \P.
+  \end{equation*}
+  Since this holds for all $A \in \mc{A}_{T}$, the defining property of conditional expectations says that $\mb{f}_{T} = \E^{\mc{A}_{T}} \mb{f}$.
+  The nonexpansiveness of conditional expectations on $L^1$ then implies $\|\mb{f}_{T}\|_{L^1(\Omega;X)} \leq \|\mb{f}\|_{L^1(\Omega;X)}$.
+\end{proof}
+
+Now, to Gundy's decomposition.
 
 \begin{proof}[Proof of Theorem \ref{thm:gundy}]
   Define a stopping time
@@ -300,7 +351,10 @@ Now we can prove the $p$-independence of the UMD property, still implicitly assu
 
 \section{Dyadic martingales and dyadic UMD}
 
+\section{Square functions, martingale transforms, and Haar decompositions}
 
+-martingale transforms are bounded
+-Haar decompositions are unconditional (equivalent to UMD, have dyadic characterisation)
 
 \todo{put these in a new section 'Consequences of the UMD property', cap off the first one at reflexivity}
 
@@ -308,11 +362,6 @@ Now we can prove the $p$-independence of the UMD property, still implicitly assu
 
 UMD implies reflexive, hence also RNP
 
-
-\section{Applications to martingale transforms and Haar decompositions}
-
--martingale transforms are bounded
--Haar decompositions are unconditional (equivalent to UMD, have dyadic characterisation)
 
 \section{Stein's inequality: $R$-boundedness of conditional expectations}
 
@@ -333,6 +382,11 @@ UMD implies reflexive, hence also RNP
 \begin{exercise}\label{ex:UMD-Lp-reverse}
   Let $X$ be a Banach space and $(S,\mc{A},\mu)$ be a measure space with $\mu(S) > 0$.
   For $p \in (1,\infty)$, show that $\beta_{p}(L^p(\mu;X)) \geq \beta_{p}(X)$.
+\end{exercise}
+
+\begin{exercise}\label{ex:stopped-filtration}
+  Let $\mc{A}_{\bullet}$ be a filtration on a probability space $(\Omega,\mc{A},\P)$, and let $T$ be a stopping time with respect to $\mc{A}_{\bullet}$.
+  Show that $\mc{A}_{\min(\bullet,T)}$ is a filtration.
 \end{exercise}
 
 \begin{exercise}
