@@ -146,18 +146,18 @@ Students of harmonic analysis may recognise this procedure as essentially being 
 
 \begin{thm}[Gundy's decomposition]\label{thm:gundy}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space.
-  Suppose $\mb{f} \in L^1(\Omega;X)$, and let $\mc{A}_{\bullet}$ be a filtration with $\mc{A}_{\infty} = \mc{A}$.
+  Suppose $\mb{f} \in L^1(\Omega;X)$ with $\|\mb{f}\|_{L^1(\Omega;X)} = 1$, and let $\mc{A}_{\bullet}$ be a filtration.
   Then given $\lambda > 0$, there is a decomposition
   \begin{equation*}
     \mb{f} = \mb{a} + \mb{b} + \mb{c}
   \end{equation*}
   with $\mb{a}, \mb{b}, \mb{c} \in L^1(\Omega;X)$ satisfying
   \begin{itemize}
-  \item $\|\mb{a}\|_{L^{1}(\Omega;X)} \lesssim 1$, $\P(\sup_{n \in \N} \|d\mb{a}_{n}\|_{X} \neq 0) \lesssim \lambda^{-1}$,
+  \item $\|\mb{a}\|_{L^{1}(\Omega;X)} \lesssim 1$, $\P\big(\{\sup_{n \in \N} \|d\mb{a}_{n}\|_{X} \neq 0\}\big) \lesssim \lambda^{-1}$,
   \item $\| \sum_{n \in \N} \|d\mb{b}_{n}\|_{X} \|_{L^1(\Omega)} \lesssim 1$,
   \item $\| \mb{c} \|_{L^\infty(\Omega;X)} \lesssim \lambda$ and $\|\mb{c}\|_{L^1(\Omega;X)} \lesssim 1$.
   \end{itemize}
-  where $\mb{a}_{n} = \E^{\mc{A}_{n}} \mb{a}$ and $\mb{b}_{n} = \E^{\mc{A}_{n}} \mb{b}$.
+  where $\mb{a}_{n} = \E^{\mc{A}_{n}} \mb{a}$ and $\mb{b}_{n} = \E^{\mc{A}_{n}} \mb{b}$ are the martingales associated with the filtration $\mc{A}_{\bullet}$.
 \end{thm}
 
 We will prove this in the next section.
@@ -280,9 +280,9 @@ Now we can prove the $p$-independence of the UMD property, still implicitly assu
 
 \section{The proof of Gundy's decomposition}
 
-The proof of Gundy's decomposition, like the proof of Doob's maximal inequality, involves stopping time arguments.
-To this end we need a few concepts regarding stopping times that we didn't introduce earlier.
-Stopping times are defined in Definition \ref{defn:stopping-time}.
+The proof of Gundy's decomposition, like the proof of Doob's maximal inequality, involves stopping time arguments, but this time they are somewhat heavier.
+We will use a few stopping time concepts that we didn't introduce earlier.
+Stopping times were defined back in Definition \ref{defn:stopping-time}.
 
 \begin{defn}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $\mc{A}_{\bullet}$ a filtration.
@@ -301,17 +301,17 @@ Stopping times are defined in Definition \ref{defn:stopping-time}.
 Note that for each $n \in \N$, the constant random variable $n(\omega) \equiv n$ is a stopping time with respect to every filtration.
 Note also that for two stopping times $S,T$ with respect to a filtration $\mc{A}_{\bullet}$, the minimum $\min(S,T)$ is also a stopping time with respect to $\mc{A}_{\bullet}$.
 In particular, $\min(n,T)$ is a stopping time with respect to $\mc{A}_{\bullet}$, and we can define the sequence of $\sigma$-algebras $(\mc{A}_{\min(n,T)})_{n \in \N}$ and the random variables $(\mb{f}_{\min(n,T)})_{n \in \N}$.
-The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise \ref{ex:stopped-filtration}).
+The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise \ref{ex:stopped-filtration}), and the stochastic process $\mb{f}_{\min(n,T)}$ is called the \emph{stopped process}: the idea is that one takes the process $\mb{f}_{\bullet}$, but once the stopping time $T$ is reached (keeping in mind that this time depends on $\omega \in \Omega$), the process is `stopped' at the value $\mb{f}_{T}$.
 
-\begin{prop}
+\begin{prop}\label{prop:stopped-martingale}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space, and let $\mc{A}_{\bullet}$ be a filtration.
   Let $\mb{f} \in L^1(\Omega;X)$, and let $\mb{f}_{\bullet} := \E^{\mc{A}_{\bullet}} \mb{f}$ be the associated martingale. 
-  Suppose $\map{T}{\Omega}{\N \cup \{\infty\}}$ is a finite stopping time, then
+  If $\map{T}{\Omega}{\N \cup \{\infty\}}$ is a finite stopping time, then
   \begin{equation}\label{eq:stopmgale}
-    \E^{\mc{A}_{T}} \mb{f} = \mb{f}_{T},
+    \E^{\mc{A}_{T}} \mb{f} \aeeq \mb{f}_{T},
   \end{equation}
   and so $\|\mb{f}_{T}\|_{L^1(\Omega;X)} \leq \|\mb{f}\|_{L^1(\Omega;X)}$.
-  Furthermore, $\mb{f}_{\min(\bullet,T)}$ is a martingale with respect to $\mc{A}_{\min(\bullet,T)}$.
+  Furthermore, the stopped process $\mb{f}_{\min(\bullet,T)}$ is a martingale with respect to $\mc{A}_{\min(\bullet,T)}$.
 \end{prop}
 
 \begin{proof}
@@ -346,27 +346,197 @@ Now, to Gundy's decomposition.
       T(\omega) &:= \min(r(\omega), s(\omega)).
     \end{aligned}
   \end{equation*}
+  We define the first term in the decomposition,
+  \begin{equation*}
+    \mb{a} := \mb{f} - \mb{f}_{T}.
+  \end{equation*}
+  Then by Proposition \ref{prop:stopped-martingale} we can estimate
+  \begin{equation}\label{eq:a-1stest}
+    \|\mb{a}\|_{L^1(\Omega;X)} \leq \|\mb{f}\|_{L^1(\Omega;X)} + \|\E^{\mc{A}_{T}}\mb{f}\|_{L^1(\Omega;X)}
+    \lesssim \|\mb{f}\|_{L^1(\Omega;X)} = 1,
+  \end{equation}
+  and at least for this term of the decomposition it remains to show that
+  \begin{equation}\label{eq:a-2ndest}
+    \P\Big(\Big\{\sup_{n \in \N} \|d\mb{a}_{n}\|_{X} \neq 0\Big\}\Big) = \P\Big(\bigcup_{n \in \N} \big\{\|d\mb{a}_{n}\|_{X} \neq 0\big\}\Big) \lesssim \lambda^{-1}.
+  \end{equation}
+  If $\|d\mb{a}_{n}(\omega)\|_{X} \neq 0$ for some $n \in \N$, then we must have $d\mb{f}_{n}(\omega) \neq d\mb{f}_{\min(n,T)}(\omega)$ for some $n \in \N$, which implies that $T(\omega) < \infty$ (in fact, $T(\omega) < n$ for this particular $n$).
+  So we have
+  \begin{equation*}
+    \P\Big(\bigcup_{n \in \N} \big\{\|d\mb{a}_{n}\|_{X} \neq 0\big\}\Big) \leq \P(\{T < \infty\}) \leq \P(\{s < \infty\}) + \P(\{r < \infty\}).
+  \end{equation*}
+  The summand involving $r$ is estimated by
+  \begin{equation}\label{eq:a-rest}
+    \P\big(\{r < \infty\}\big) = \P\big( \{\sup_{n \in \N} \|\mb{f}_{n}\|_{X} > \lambda \} \big)
+    = \P\big( \mc{M}(\mb{f}_{\bullet}) > \lambda \big) \lesssim \lambda^{-1},
+  \end{equation}
+  using Doob's maximal inequality (Theorem \ref{thm:doob}).
+  As for the summand involving $s$, we can use Chebyshev and the properties of conditional expectations to estimate
+  \begin{equation*}
+    \begin{aligned}
+      \P\big(\{s < \infty\}\big)
+      &= \P\big( \big\{ \sum_{k=0}^{\infty} \E^{\mc{A}_{k}} v_{k+1} > \lambda \big\} \big) \\
+      &\leq \lambda^{-1} \E\Big( \sum_{k=0}^{\infty} \E^{\mc{A}_{k}} v_{k+1} \Big)
+      = \lambda^{-1} \sum_{k=0}^{\infty} \E v_{k+1}
+      = \lambda^{-1} \sum_{k=1}^{\infty} \E v_{k}.
+    \end{aligned}
+  \end{equation*}
+  By definition of $v_{k}$ we have
+  \begin{equation*}
+    \E v_{k} = \E ( \|d\mb{f}_{k}\|_{X} \1_{\{r = k\}} ).
+  \end{equation*}
+  When $r(\omega) = k$ we have that
+  \begin{equation*}
+    \|\mb{f}_{k}(\omega)\|_{X} > \lambda \geq \|\mb{f}_{k-1}(\omega)\|_{X},
+  \end{equation*}
+  and thus also that
+  \begin{equation*}
+    \|d\mb{f}_{k}(\omega)\|_{X} \leq \|\mb{f}_{k}(\omega)\|_{X} + \|\mb{f}_{k-1}(\omega)\|_{X} \lesssim \|\mb{f}_{k}(\omega)\|_{X}.
+  \end{equation*}
+  This lets us estimate
+  \begin{equation*}
+    \E ( \|d\mb{f}_{k}\|_{X} \1_{\{r = k\}} )
+    \lesssim \E ( \|\mb{f}_{k}\|_{X} \1_{\{r = k\}} )
+    = \E ( \|\E^{\mc{A}_{k}} \mb{f}\|_{X} \1_{\{r = k\}} ).
+  \end{equation*}
+  The pointwise estimate for tensor extensions of positive operators in Theorem \ref{thm:positive-extensions} then allows us to proceed:
+  \begin{equation*}
+    \begin{aligned}
+    \E ( \|\E^{\mc{A}_{k}} \mb{f}\|_{X} \1_{\{r = k\}} )
+    \leq \E ( \E^{\mc{A}_{k}}(\|\mb{f}\|_{X}) \1_{\{r = k\}} )
+    &= \E ( \E^{\mc{A}_{k}}(\|\mb{f}\|_{X} \1_{\{r = k\}}) ) \\
+    &= \E (\|\mb{f}\|_{X} \1_{\{r = k\}})
+  \end{aligned}
+  \end{equation*}
+  using that the set $\{r = k\}$ is $\mc{A}_{k}$-measurable (i.e. that $r$ is a stopping time with respect to $\mc{A}_{\bullet}$).
+  Putting all this together yields
+  \begin{equation*}
+    \begin{aligned}
+      \P\big(\{s < \infty\}\big)
+      &\leq \lambda^{-1} \sum_{k=1}^{\infty} \E v_{k} \\
+      &\lesssim \lambda^{-1} \sum_{k=1}^{\infty} \E (\|\mb{f}\|_{X} \1_{\{r = k\}})
+      = \lambda^{-1} \E(\|\mb{f}\|_{X} \1_{\{1 \leq r < \infty\}}) \leq \lambda^{-1},
+    \end{aligned}
+  \end{equation*}
+  which along with \eqref{eq:a-rest} proves the remaining estimate \eqref{eq:a-2ndest} for $\mb{a}$.
   
+  Now we need to define functions $\mb{b}$ and $\mb{c}$ such that $\mb{f} - \mb{a} = \mb{b} + \mb{c}$.
+  We will define $\mb{b}$ and $\mb{c}$ via their martingale difference sequences $d\mb{b}_{\bullet}$ and $d\mb{c}_{\bullet}$, and show that these indeed give rise to functions $\mb{b}, \mb{c} \in L^1(\Omega;X)$ with the desired properties.
+  Since $\mb{f} - \mb{a} = \mb{f}_{T}$ by definition, we will need to have
+  \begin{equation}\label{eq:db-req}
+    d\mb{b}_{n} + d\mb{c}_{n} = d\mb{f}_{\min(n,T)} \qquad \forall n \in \N.
+  \end{equation}
+  By writing
+  \begin{equation*}
+    \begin{aligned}
+      d\mb{f}_{\min(n,T)}
+      &= \mb{f}_{\min(n,T)} - \mb{f}_{\min(n-1,T)} \\
+      &= \1_{\{n \leq T\}} d\mb{f}_{n} 
+      = \1_{\{n \leq r\}} \1_{\{n \leq s\}} d\mb{f}_{n} 
+      =  ( \1_{\{n = r\}} + \1_{\{n < r\}}) \1_{\{n \leq s\}} d\mb{f}_{n},
+    \end{aligned}
+  \end{equation*}
+  we see that \eqref{eq:db-req} is satisfied by the definitions
+  \begin{equation*}
+    \begin{aligned}
+      d\mb{b}_{n} &:= \1_{\{n = r\}} \1_{\{n \leq s\}} d\mb{f}_{n}  - \E^{\mc{A}_{n-1}} (\1_{\{n = r\}} \1_{\{n \leq s\}} d\mb{f}_{n} ), \\
+      d\mb{c}_{n} &:= \1_{\{n < r\}} \1_{\{n \leq s\}} d\mb{f}_{n}  + \E^{\mc{A}_{n-1}} (\1_{\{n = r\}} \1_{\{n \leq s\}} d\mb{f}_{n} )
+    \end{aligned}
+  \end{equation*}
+  (for $n = 0$ we omit the conditional expectations).
+  These are indeed martingale difference sequences: for all $n \in \N$ we have $\E^{\mc{A}_{n}} d\mb{b}_{n+1} = 0$ almost automatically, and
+  \begin{equation*}
+    \begin{aligned}
+      \E^{\mc{A}_{n}} d\mb{c}_{n+1}
+      &= \E^{\mc{A}_{n}} (d\mb{f}_{\min(n+1,T)} - d\mb{b}_{n+1}) \\
+      &= \E^{\mc{A}_{n}} d\mb{f}_{\min(n+1,T)} \\
+      &= \E^{\mc{A}_{n}} (\1_{\{n+1 \leq T\}} d\mb{f}_{n+1}) \\
+      &= \1_{\{n+1 \leq T\}}\E^{\mc{A}_{n}} (d\mb{f}_{n+1}) = 0
+    \end{aligned}
+  \end{equation*}
+  using that the set $\{n+1 \leq T\} = \Omega \sm \{T \leq n\}$ is $\mc{A}_{n}$-measurable ($T$ being a stopping time with respect to $\mc{A}_{\bullet}$) and that $\mb{f}_{\bullet}$ is a martingale.
+
+  To ensure that we can use the martingale difference sequences $d\mb{b}_{\bullet}$ and $d\mb{c}_{\bullet}$ to define functions $\mb{b}, \mb{c} \in L^1(\Omega;X)$, we need to ensure convergence of the series $\sum_{n \in \N} d\mb{b}_{n}$ and $\sum_{n \in \N} d\mb{c}_{n}$ in $L^1(\Omega;X)$.
+  Luckily we have
+  \begin{equation*}
+    \begin{aligned}
+    \sum_{n \in \N} \|d\mb{b}_{n}\|_{X} \lesssim \sum_{n \in \N} \1_{\{n = r\}} \1_{\{n \leq s\}} \|d\mb{f}_{n}\|_{X}
+    &\leq \sum_{n \in \N} v_{n} = \sum_{n \in \N} \E(\|\mb{f}\|_{X} \1_{\{r = n\}}) \lesssim 1
+  \end{aligned}
+  \end{equation*}
+  by the argument used in estimating $\mb{a}$.
+  This establishes that $\mb{b} = \sum_{n \in \N} d\mb{b}_{n} \in L^1(\Omega;X)$ exists, and also proves the claimed estimate
+  \begin{equation*}
+    \Big\| \sum_{n \in \N} \|d\mb{b}_{n}\|_{X} \Big\|_{L^1(\Omega;X)} \lesssim 1.
+  \end{equation*}
+  Now since $\mb{f}_{\min(n,T)} = \mb{b}_{n} + \mb{c}_{n}$, and since the martingales $\mb{f}_{\min(\bullet,T)}$ and $\mb{b}_{\bullet}$ both converge in $L^1(\Omega;X)$ and pointwise almost everywhere (Theorem \ref{thm:mgale-pw-conv}), it follows that $\mb{c}_{\bullet}$ also converges to some $\mb{c} \in L^1(\Omega;X)$, both in $L^1(\Omega;X)$ and pointwise almost everywhere.
+  We have
+  \begin{equation*}
+    \begin{aligned}
+    \|\mb{c}\|_{L^1(\Omega;X)} &\leq \|\mb{b}\|_{L^1(\Omega;X)} + \|\mb{f}_{T}\|_{L^1(\Omega;X)} \\
+    &\leq \Big\| \sum_{n \in \N} \|d\mb{b}_{n}\|_{X} \Big\|_{L^1(\Omega;X)} + \|\E^{\mc{A}_{T}} \mb{f}\|_{L^1(\Omega;X)}
+    \lesssim 1
+  \end{aligned}
+  \end{equation*}
+  as required; only the bound $\|\mb{c}\|_{L^\infty(\Omega;X)} \lesssim \lambda$ remains.
+  By the almost everywhere pointwise convergence we have for almost all $\omega \in \Omega$
+  \begin{equation*}
+    \begin{aligned}
+      \mb{c}(\omega)
+      &= \sum_{n \in \N} d\mb{c}_{n}(\omega) \\
+      &= \sum_{n \in \N} \1_{\{n < r\}}(\omega) \1_{\{n \leq s\}}(\omega) d\mb{f}_{n}(\omega)  + \sum_{n \geq 1} \E^{\mc{A}_{n-1}} (\1_{\{n = r\}} \1_{\{n \leq s\}} d\mb{f}_{n} )(\omega).
+    \end{aligned}
+  \end{equation*}
+  The first sum can be estimated by
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n=0}^{N} \1_{\{n < r\}}(\omega) \1_{\{n \leq s\}}(\omega) d\mb{f}_{n}(\omega)
+      &= \sum_{n=0}^{s(\omega)} \1_{\{n < r\}}(\omega) d\mb{f}_{n}(\omega) \\
+      &= \begin{cases}
+        \mb{f}_{\min(r-1,s)}(\omega) & \text{if $r(\omega) > 0$} \\ \mb{0} & \text{if $r(\omega) = 0$,}
+      \end{cases}
+    \end{aligned}
+  \end{equation*}
+  so by definition of the stopping time $r$ we have
+  \begin{equation*}
+    \Big\| \sum_{n=0}^{N} \1_{\{n < r\}}(\omega) \1_{\{n \leq s\}}(\omega) d\mb{f}_{n}(\omega) \Big\|_{X} \leq \lambda.
+  \end{equation*}
+  As for the second sum, since the set $\{n \leq s\} = \Omega \sm \{s \leq n-1\}$ is $\mc{A}_{n-1}$-measurable, we can write
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n \geq 1} \E^{\mc{A}_{n-1}} (\1_{\{n = r\}} \1_{\{n \leq s\}} d\mb{f}_{n} )(\omega)
+      &= \sum_{n \geq 1} \1_{\{n \leq s\}}(\omega) \E^{\mc{A}_{n-1}} (\1_{\{n = r\}}  d\mb{f}_{n} )(\omega) \\
+      &= \sum_{n = 1}^{s(\omega)} \E^{\mc{A}_{n-1}} (\1_{\{n = r\}}  d\mb{f}_{n} )(\omega),
+    \end{aligned}
+  \end{equation*}
+  and again using the pointwise estimate from Theorem \ref{thm:positive-extensions} we have
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{n = 1}^{s(\omega)} \E^{\mc{A}_{n-1}} (\1_{\{n = r\}}  d\mb{f}_{n} )(\omega) \Big\|_{X}
+      &\leq \sum_{n=1}^{s(\omega)} \E^{\mc{A}_{n-1}} (\1_{\{n = r\}} \|d\mb{f}_{n}\|_{X} )(\omega) \\
+      &= \sum_{n=0}^{s(\omega) - 1} \E^{\mc{A}_{n}} (v_{n-1} )(\omega) \leq \lambda
+    \end{aligned}
+  \end{equation*}
+  by the definition of the stopping time $s$.
+  All up, this yields
+  \begin{equation*}
+    \|\mb{c}\|_{L^\infty(\Omega;X)} \lesssim \lambda
+  \end{equation*}
+  and completes the proof.
 \end{proof}
 
-\section{Dyadic martingales and dyadic UMD}
-
-\section{Square functions, martingale transforms, and Haar decompositions}
+\section{Basic applications of the UMD property}
 
 -martingale transforms are bounded
 -Haar decompositions are unconditional (equivalent to UMD, have dyadic characterisation)
+-Stein's inequality
 
-\todo{put these in a new section 'Consequences of the UMD property', cap off the first one at reflexivity}
+\section{Non-examples}
 
-\section{UMD implies reflexivity}
-
-UMD implies reflexive, hence also RNP
-
-
-\section{Stein's inequality: $R$-boundedness of conditional expectations}
-
-
-
+-$\beta_{p}(\ell^{1}_{n}) \gtrsim \log(n)$ (Pisier section 5.7), thus $L^1$ spaces are not UMD when infinite-dimensional
+-$\ell^\infty$, $c_{0}$, $C([0,1])$, etc. by duality
+-argument that UMD implies RNP
+-remark that UMD implies reflexivity (i think we won't prove it)
+-remark: Qiu's counterexample
 
 \section*{Exercises}
 
