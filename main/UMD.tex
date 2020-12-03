@@ -524,11 +524,136 @@ Now, to Gundy's decomposition.
   and completes the proof.
 \end{proof}
 
-\section{Basic applications of the UMD property}
+\section{Burkholder's inequalities and martingale transforms}
 
--martingale transforms are bounded
+For the following estimates we use the Rademacher spaces $\varepsilon(X)$ defined in Section \ref{sec:rademacher-spaces}.\todo{note: square function charactersiation of $Lp$ norm of martingales}
+
+\begin{thm}[Burkholder's inequalities]\label{thm:burkholder}
+  A Banach space $X$ is $\UMD$ if and only if for all $p \in (1,\infty)$ and every $L^p$-bounded martingale $\mb{f}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$,
+  \begin{equation}\label{eq:burkholder}
+    \sup_{n \in \N} \|\mb{f}_{n}\|_{L^p(\Omega;X)} \simeq_{p,X} \|d\mb{f}_{\bullet}\|_{\varepsilon(L^p(\Omega;X))} = \Big( \E \Big\| \sum_{n \in \N} \varepsilon_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)}^{2} \Big)^{1/2}
+  \end{equation}
+  where $\varepsilon_{\bullet}$ is a Rademacher sequence on another probability space $(\Omega', \mc{A}', \P')$.
+\end{thm}
+
+\begin{proof}
+  First suppose that $X$ is UMD.
+  For one side of the estimate, use Kahane--Khintchine to write
+  \begin{equation*}
+    \begin{aligned}
+      \|d\mb{f}_{\bullet}\|_{\varepsilon(L^p(\Omega;X))}
+      &= \sup_{N \in \N} \|d\mb{f}_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))} \\
+      &\simeq_{p} \sup_{N \in \N} \Big( \int_{\Omega'} \int_{\Omega} \Big\| \sum_{n = 0}^{N} \varepsilon_{n}(\omega') d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\P(\omega) \, \dd\P'(\omega') \Big)^{1/p}.
+    \end{aligned}
+  \end{equation*}
+  For each $\omega' \in \Omega'$ and $N \in \N$, the UMD property of $X$ yields
+  \begin{equation*}
+    \begin{aligned}
+      \int_{\Omega} \Big\| \sum_{n = 0}^{N} \varepsilon_{n}(\omega') d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\P(\omega)
+      &\leq \beta_{p}(X)^{p} \int_{\Omega} \Big\| \sum_{n = 0}^{N} d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\P(\omega) \\
+      &= \beta_{p}(X)^{p} \int_{\Omega} \|\mb{f}_{N}(\omega)\|_{X}^{p} \, \dd\P(\omega) \\
+      &\leq \beta_{p}(X)^{p} \|\mb{f}_{N}\|_{L^p(\Omega;X)}^{p}.
+  \end{aligned}
+\end{equation*}
+Integrating over $\omega' \in \Omega'$ and taking the $p$-th root and supremum over $N \in \N$ yields
+\begin{equation*}
+  \|d\mb{f}_{\bullet}\|_{\varepsilon(L^p(\Omega;X))} \lesssim_{p,X} \sup_{n \in \N} \|\mb{f}_{n}\|_{L^p(\Omega;X)}.
+\end{equation*}
+On the other hand, for $\omega' \in \Omega'$ and $N \in \N$ we can also write
+\begin{equation*}
+  \begin{aligned}
+  \int_{\Omega} \Big\| \sum_{n = 0}^{N} d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\P(\omega)
+  &= \int_{\Omega} \Big\| \sum_{n = 0}^{N} \varepsilon_{n}(\omega')^{2} d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\P(\omega) \\
+  &\leq \beta_{p}(X)^{p} \Big\| \sum_{n = 0}^{N} \varepsilon_{n}(\omega') d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\P(\omega).
+\end{aligned}
+\end{equation*}
+Integrating this over $\omega' \in \Omega'$, taking the $p$-th root, and using Kahane--Khintchine gives
+\begin{equation*}
+  \|\mb{f}_{N}\|_{L^p(\Omega;X)} \lesssim_{p,X} \|d\mb{f}_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))},
+\end{equation*}
+so taking the supremum over $N \in \N$ establishes \eqref{eq:burkholder}.
+
+Now let's assume \eqref{eq:burkholder} and establish that $X$ is $\UMD_{p}$, and hence $\UMD$.
+Let $\xi_{\bullet}$ be a sequence of signs and $(\mb{f}_{\bullet})$ an $X$-valued $L^p$-bounded martingale, and fix $N \in \N$.
+Then by assumption
+\begin{equation*}
+  \begin{aligned}
+  \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)}
+  &\lesssim_{p,X} \| \xi_{\bullet} d\mb{f}_{\bullet} \|_{\varepsilon_{N}(L^p(\Omega;X))} \\
+  &\leq \|d\mb{f}_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))}
+  \lesssim_{p,X} \|\mb{f}_{N}\|_{L^p(\Omega;X)} = \Big\| \sum_{n = 0}^{N} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)}
+\end{aligned}
+\end{equation*}
+using the contraction principle in the second estimate.
+Taking the supremum over all $N$says exactly that $X$ is $\UMD_{p}$.
+\end{proof}
+
+As a straightforward corollary, using the identification of Rademacher averages in Lebesgue spaces from Theorem \ref{thm:rademacher-lp}, we obtain Burkholder's classical square function estimate for scalar-valued martingales.
+
+\begin{cor}
+  Let $f_{\bullet}$ be an $L^p$-bounded scalar-valued martingale on a probability space $(\Omega,\mc{A},\P)$.
+  Then
+  \begin{equation*}
+    \sup_{n \in \N} \|f_{n}\|_{L^p(\Omega)} \simeq_{p} \Big\| \Big( \sum_{n \in \N} |df_{n}| \Big)^{1/2} \Big\|_{L^p(\Omega)}. 
+  \end{equation*}
+\end{cor}
+
+Burkholder's inequalities lead to an easy criterion for the boundedness of a martingale transform with scalar-valued coefficients.
+Recall from Definition \ref{dfn:mgale-transform}: given a Banach space $X$ and an $X$-valued martingale $\mb{f}_{\bullet}$ with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$, and given a scalar-valued stochastic process $g_{\bullet}$ in $L^\infty(\Omega)$ which is predictable with respect to $\mc{A}_{\bullet}$,
+the martingale transform $(g \cdot \mb{f})_{\bullet}$ is the martingale defined by
+\begin{equation*}
+  (g \cdot \mb{f})_n := \sum_{m=0}^n g_m d\mb{f}_m,
+\end{equation*}
+or equivalently by the difference sequence
+\begin{equation*}
+  d(g \cdot \mb{f})_{n} = g_{m} d\mb{f}_{m}.
+\end{equation*}
+
+\begin{thm}\label{thm:scalar-mgale-tf-bdd}
+  Let $X$ be a Banach space.
+  Let $p \in (1,\infty)$, and let $\mb{f}_{\bullet}$ an $X$-valued $L^p$-bounded martingale with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$.
+  Suppose that $g_{\bullet}$ is a scalar-valued stochastic process which is $L^\infty$-bounded and $\mc{A}_{\bullet}$-predictable.
+  Then for all $N \in \N$,
+  \begin{equation*}
+    \|(g \cdot \mb{f})_{N}\|_{L^p(\Omega;X)}
+    \lesssim_{p,X} \Big(\sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \Big) \|\mb{f}_{N}\|_{L^p(\Omega;X)}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By Burkholder's inequalities (Theorem \ref{thm:burkholder}) and Exercise \ref{ex:rad-leb-comm} (a consequence of Kahane--Khintchine), %mk
+  \begin{equation*}
+    \begin{aligned}
+      \|(g \cdot \mb{f})_{N}\|_{L^p(\Omega;X)}
+      &\simeq_{p,X} \|d(g \cdot \mb{f})_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))} \\
+      &= \|g_{\bullet} d\mb{f}_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))} \\
+      &\simeq_{p} \|g_{\bullet} d\mb{f}_{\bullet}\|_{L^p(\Omega;\varepsilon_{N}(X))} \\
+      &\simeq_{p} \Big( \int_{\Omega} \|g_{\bullet}(\omega) d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p}.
+    \end{aligned}
+  \end{equation*}
+  The contraction principle then yields
+  \begin{equation*}
+    \begin{aligned}
+    \Big( \int_{\Omega} \|g_{\bullet}(\omega) d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p}
+    &\lesssim \Big( \int_{\Omega} \big( \sup_{n \in \N} |g_{n}(\omega)| \big)^{p} \|d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p} \\
+    &\lesssim \big( \sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \big)  \Big( \int_{\Omega} \|d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p},
+  \end{aligned}
+\end{equation*}
+and one more application of Exercise \ref{ex:rad-leb-comm} and Burkholder's inequality gives
+\begin{equation*}
+  \begin{aligned}
+    \big( \sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \big)  \Big( \int_{\Omega} \|d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p}
+    &= \big( \sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \big) \|d\mb{f}_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))} \\
+    &\lesssim_{p,X} \big( \sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \big) \|\mb{f}_{N}\|_{L^p(\Omega;X)},
+  \end{aligned}
+\end{equation*}
+as we wanted.
+\end{proof}
+
+\todo{UP TO HERE}
+
 -Haar decompositions are unconditional (equivalent to UMD, have dyadic characterisation)
--Stein's inequality
+%-Stein's inequality
 
 \section{Non-examples}
 
