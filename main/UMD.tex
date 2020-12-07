@@ -8,23 +8,23 @@ In the next chapter, which is probably the most important in terms of applicatio
 Recall that the difference sequence of a stochastic process $\mb{f}_{\bullet}$ is the stochastic process $d\mb{f}_{\bullet}$ defined by $d\mb{f}_{n} := \mb{f}_{n} - \mb{f}_{n-1}$, with $\mb{f}_{-1} := \mb{0}$.
 
 \begin{defn}
-  For $p \in (1,\infty)$ a Banach space $X$ is said to have the \emph{$\UMD_{p}$ property} (Unconditionality of Martingale Differences in $L^p$) if there exists a constant $C < \infty$ such that for all probability spaces $(\Omega,\mc{A},\P)$, all $X$-valued $L^p$-bounded martingales $\mb{f}_{\bullet}$, and all sequences of signs $\xi_n = \pm 1$,
+  For $p \in (1,\infty)$ a Banach space $X$ is said to have the \emph{$\UMD_{p}$ property} (Unconditionality of Martingale Differences in $L^p$) if there exists a constant $C < \infty$ such that for all probability spaces $(\Omega,\mc{A},\P)$, all $X$-valued $L^p$-bounded martingales $\mb{f}_{\bullet}$, and all sequences of signs $\xi_n = \pm 1,$
   \begin{equation}\label{eq:UMD-property}
     \sup_{N \in \N} \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq C \sup_{N \in \N} \Big\| \sum_{n=0}^{N} d\mb{f}_{n}\Big\|_{L^p(\Omega;X)}.
   \end{equation}
   The best possible constant $C$ in this inequality is denoted $\beta_{p}(X)$.
-  We say that $X$ has the \emph{UMD property} if it has the $\UMD_{p}$ property for all $p \in (1,\infty)$.
+  We say that $X$ has the \emph{UMD property}\index{UMD property} if it has the $\UMD_{p}$ property for all $p \in (1,\infty)$.
 \end{defn}
 
 \begin{rmk}
   We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property, so (as with the $p$-martingale convergence properties) there is no need to isolate $\UMD_{p}$ as a separate property other than for pedagogical reasons.
 \end{rmk}
 
-In Banach space lingo, \eqref{eq:UMD-property} says that the sequence $d\mb{f}_\bullet$ in $L^p(\Omega;X)$ is \emph{unconditional}, or equivalently, that the convergence (or divergence) in $L^p(\Omega;X)$ of the series $\sum_{n \in \N} d\mb{f}_n$ is independent of the order of summation.\footnote{For a detailed discussion of this point see for example \cite[Section 4.1.b]{HNVW16} or \cite[Section 1.c]{LT77}.}
+In Banach space lingo, \eqref{eq:UMD-property} says that the sequence $d\mb{f}_\bullet$ in $L^p(\Omega;X)$ is \emph{unconditional}\index{unconditional sequence}, or equivalently, that the convergence (or divergence) in $L^p(\Omega;X)$ of the series $\sum_{n \in \N} d\mb{f}_n$ is independent of the order of summation.\footnote{For a detailed discussion of this point see for example \cite[Section 4.1.b]{HNVW16} or \cite[Section 1.c]{LT77}.}
 Put very coarsely, the UMD property says that martingale differences behave somewhat like orthogonal sequences in $L^p(\Omega;X)$.
 In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly from orthogonality considerations.
 
-\begin{prop}\label{prop:Hilbert-UMD2}
+\begin{prop}\label{prop:Hilbert-UMD2}\index{UMD property!of Hilbert spaces}
   Every Hilbert space $H$ has the $\UMD_{2}$ property, with best constant $\beta_{2}(H) = 1$.
 \end{prop}
 
@@ -40,7 +40,7 @@ In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly f
   Thus we have equality in \eqref{eq:UMD-property}, with constant $C = 1$.
 \end{proof}
 
-The UMD property can be rephrased succinctly in terms of \emph{martingale sign transforms}.
+The UMD property can be rephrased succinctly in terms of \emph{martingale sign transforms}.\index{martingale transforms}
 Given a finite martingale $(\mb{f}_{n})_{n=0}^{N}$ valued in a Banach space $X$, and given a finite sequence of signs $(\xi_{n})_{n=0}^{N}$, recall that we defined the transformed martingale $(\xi \cdot \mb{f})_{\bullet}$ in terms of its difference sequence,
 \begin{equation*}
   d(\xi \cdot \mb{f})_{n} := \xi_{n} d\mb{f}_{n} \qquad \text{(or equivalently, $(\xi \cdot \mb{f})_{k} = \sum_{n=0}^{k} \xi_{n} d\mb{f}_{n}$.)}
@@ -68,7 +68,7 @@ At this point, we have already given all the necessary details to prove the foll
 
 This characterisation of the $\UMD_{p}$ constant, with a short duality argument, implies the following.
 
-\begin{prop}\label{prop:UMD-duality}
+\begin{prop}\label{prop:UMD-duality}\index{UMD property!relation with duality}
   Let $p \in (1,\infty)$, and let $X$ be a Banach space.
   Then $X$ has the $\UMD_{p}$ property if and only if the dual space $X^{*}$ has the $\UMD_{p'}$ property, and $\beta_{p}(X) = \beta_{p'}(X^{*})$.
 \end{prop}
@@ -106,7 +106,7 @@ completing the proof.
 Before moving on to more subtle properties, we show that the $\UMD_{p}$ property extends to Bochner spaces.
 This will be more useful once we know the $p$-independence of the UMD property.
 
-\begin{prop}\label{prop:Bochner-UMDp}
+\begin{prop}\label{prop:Bochner-UMDp}\index{UMD property!of Bochner spaces}
   Let $p \in (1,\infty)$, and suppose $X$ is a Banach space with the $\UMD_{p}$ property.
   Let $(S,\mc{A},\mu)$ be a measure space with $\mu(S) > 0$.
   Then the Bochner space $L^p(\mu;X)$ has $\UMD_{p}$, with $\beta_{p}(L^p(\mu;X)) = \beta_{p}(X)$.
@@ -129,13 +129,13 @@ This will be more useful once we know the $p$-independence of the UMD property.
   The reverse estimate is Exercise \ref{ex:UMD-Lp-reverse}.
 \end{proof}
 
-\section{$p$-independence of the UMD property}\label{sec:UMD-p-independence}
+\section{$p$-independence of the UMD property}\label{sec:UMD-p-independence}\index{UMD property!independence of $p$}
 
 Our goal now is to prove that the $\UMD_{p}$ property is independent of $p$.
 For this, we will use the characterisation from Proposition \ref{prop:UMD-signtransforms} of the $\UMD_{p}$ property in terms of finite martingale sign transforms $T_{\mc{A}_{\bullet}, \xi_{\bullet}}$.
 The basic strategy is as follows:
 \begin{itemize}
-\item Assuming that the finite sign transforms $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ are uniformly bounded on $L^p(\Omega;X)$, prove that they have weak-type $(1,1)$ (i.e. that they are bounded from $L^1(\Omega;X)$ to the Lorentz space $L^{1,\infty}(\Omega;X)$ uniformly over all finite filtrations and sign sequences.
+\item Assuming that the finite sign transforms $T_{\mc{A}_{\bullet},\xi_{\bullet}}$ are uniformly bounded on $L^p(\Omega;X)$, prove that they have weak-type $(1,1)$ (i.e. that they are bounded from $L^1(\Omega;X)$ to the Lorentz space $L^{1,\infty}(\Omega;X)$) uniformly over all finite filtrations and sign sequences.
 \item Use Marcinkiewicz's interpolation theorem to deduce that the finite sign transforms are uniformly bounded on $L^q(\Omega;X)$ for all $1 < q < p$, and thus that $X$ has the $\UMD_{q}$ property for all $1 < q < p$.
 \item Argue by duality to show that $X$ has the $\UMD_{r}$ property for all $p < r < \infty$, and thus that $X$ has the full $\UMD$ property.
 \end{itemize}
@@ -144,7 +144,7 @@ The first two steps are similar to how we proved Doob's maximal inequality (Theo
 The weak-type $(1,1)$ estimate for sign transforms will be proven relies on \emph{Gundy's decomposition} for martingales, which is analogous to the Calder\'on--Zygmund decomposition of a function.\footnote{
 Students of harmonic analysis may recognise this procedure as essentially being the same as that used in Calder\'on--Zygmund theory: start with an assumed $L^p$ estimate, use properties of the operators under consideration (here we use the martingale property rather than kernel estimates) to deduce weak-type $(1,1)$, and finally use interpolation and duality to extend the $L^p$-boundedness to $L^q$ for all $q \in (1,\infty)$.}
 
-\begin{thm}[Gundy's decomposition]\label{thm:gundy}
+\begin{thm}[Gundy's decomposition]\label{thm:gundy}\index{Gundy's decomposition}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space.
   Suppose $\mb{f} \in L^1(\Omega;X)$ with $\|\mb{f}\|_{L^1(\Omega;X)} = 1$, and let $\mc{A}_{\bullet}$ be a filtration.
   Then given $\lambda > 0$, there is a decomposition
@@ -236,7 +236,7 @@ For now we will assume it, and deduce the weak-type $(1,1)$ estimate for finite 
 
 Now we can prove the $p$-independence of the UMD property, still implicitly assuming the validity of Gundy's decomposition.
 
-\begin{thm}\label{thm:UMD-p-independent}
+\begin{thm}\label{thm:UMD-p-independent}\index{UMD property!independence of $p$}
   Let $X$ be a Banach space which has the $\UMD_{p}$ property for some $p \in (1,\infty)$.
   Then $X$ has $\UMD_{q}$ for all $q \in (1,\infty)$ (i.e. $X$ is UMD).
 \end{thm}
@@ -250,7 +250,7 @@ Now we can prove the $p$-independence of the UMD property, still implicitly assu
   Thus $X$ is UMD.
 \end{proof}
 
-\begin{cor}
+\begin{cor}\index{UMD property!of Lebesgue spaces}\index{UMD property!of Bochner spaces}
   The following Banach spaces are UMD:
   \begin{itemize}
   \item every Hilbert space,
@@ -284,7 +284,7 @@ The proof of Gundy's decomposition, like the proof of Doob's maximal inequality,
 We will use a few stopping time concepts that we didn't introduce earlier.
 Stopping times were defined back in Definition \ref{defn:stopping-time}.
 
-\begin{defn}
+\begin{defn}\index{stopping time}
   Let $(\Omega,\mc{A},\P)$ be a probability space and $\mc{A}_{\bullet}$ a filtration.
   Let $\map{T}{\Omega}{\N \cup \{\infty\}}$ be a stopping time with respect to the filtration $\mc{A}_{\bullet}$.
 
@@ -301,7 +301,7 @@ Stopping times were defined back in Definition \ref{defn:stopping-time}.
 Note that for each $n \in \N$, the constant random variable $n(\omega) \equiv n$ is a stopping time with respect to every filtration.
 Note also that for two stopping times $S,T$ with respect to a filtration $\mc{A}_{\bullet}$, the minimum $\min(S,T)$ is also a stopping time with respect to $\mc{A}_{\bullet}$.
 In particular, $\min(n,T)$ is a stopping time with respect to $\mc{A}_{\bullet}$, and we can define the sequence of $\sigma$-algebras $(\mc{A}_{\min(n,T)})_{n \in \N}$ and the random variables $(\mb{f}_{\min(n,T)})_{n \in \N}$.
-The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise \ref{ex:stopped-filtration}), and the stochastic process $\mb{f}_{\min(n,T)}$ is called the \emph{stopped process}: the idea is that one takes the process $\mb{f}_{\bullet}$, but once the stopping time $T$ is reached (keeping in mind that this time depends on $\omega \in \Omega$), the process is `stopped' at the value $\mb{f}_{T}$.
+The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise \ref{ex:stopped-filtration}), and the stochastic process $\mb{f}_{\min(n,T)}$ is called the \emph{stopped process}:\index{stopped process} the idea is that one takes the process $\mb{f}_{\bullet}$, but once the stopping time $T$ is reached (keeping in mind that this time depends on $\omega \in \Omega$), the process is `stopped' at the value $\mb{f}_{T}$.
 
 \begin{prop}\label{prop:stopped-martingale}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space, and let $\mc{A}_{\bullet}$ be a filtration.
@@ -333,7 +333,7 @@ The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise
 
 Now, to Gundy's decomposition.
 
-\begin{proof}[Proof of Theorem \ref{thm:gundy}]
+\begin{proof}[Proof of Theorem \ref{thm:gundy}]\index{Gundy's decomposition}
   Define a stopping time
   \begin{equation*}
     r(\omega) := \inf\big\{ n \in \N : \|\mb{f}_{n}(\omega)\|_{X} > \lambda \big\},
@@ -529,7 +529,7 @@ Now, to Gundy's decomposition.
 The UMD property is equivalent to \emph{Burkholder's inequalities}, which say that the $L^p$-norm of a martingale (i.e. the supremum of $L^p$ norms of its terms) is equivalent to a Rademacher average of its difference sequence in $L^p$.
 We will state it in terms of the Rademacher spaces $\varepsilon(X)$ defined in Section \ref{sec:rademacher-spaces}.
 
-\begin{thm}[Burkholder's inequalities]\label{thm:burkholder}
+\begin{thm}[Burkholder's inequalities]\label{thm:burkholder}\index{Burkholder's inequalities}
   A Banach space $X$ is $\UMD$ if and only if for all $p \in (1,\infty)$ and every $L^p$-bounded martingale $\mb{f}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$,
   \begin{equation}\label{eq:burkholder}
     \sup_{n \in \N} \|\mb{f}_{n}\|_{L^p(\Omega;X)} \simeq_{p,X} \|d\mb{f}_{\bullet}\|_{\varepsilon(L^p(\Omega;X))} = \Big( \E \Big\| \sum_{n \in \N} \varepsilon_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)}^{2} \Big)^{1/2}
@@ -610,7 +610,7 @@ or equivalently by the difference sequence
   d(g \cdot \mb{f})_{n} = g_{m} d\mb{f}_{m}.
 \end{equation*}
 
-\begin{thm}\label{thm:scalar-mgale-tf-bdd}
+\begin{thm}\label{thm:scalar-mgale-tf-bdd}\index{martingale transforms!boundedness in UMD spaces}
   Let $X$ be a Banach space.
   Let $p \in (1,\infty)$, and let $\mb{f}_{\bullet}$ an $X$-valued $L^p$-bounded martingale with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$.
   Suppose that $g_{\bullet}$ is a scalar-valued stochastic process which is $L^\infty$-bounded and $\mc{A}_{\bullet}$-predictable.
@@ -677,10 +677,10 @@ The Haar expansion \eqref{eq:haar-expansion} follows from computing
 \end{equation}
 
 Note that the convergence of \eqref{eq:haar-mgale-repn} depends \emph{a priori} on the order of summation of the infinite series.
-When $X$ is UMD, however, the unconditionality of martingale differences says that the sequence $(d\mb{f}_{n})_{n \in \N}$ is unconditional in $L^p([0,1];X)$ for all $p \in (1,\infty)$, and thus that the convergence of \eqref{eq:haar-mgale-repn} in $L^p$ is independent of the order of summation.
+When $X$ is UMD, however, the unconditionality of martingale differences says that the sequence $(d\mb{f}_{n})_{n \in \N}$ is unconditional in $L^p([0,1];X)$ for all $p \in (1,\infty)$, and thus that the convergence of \eqref{eq:haar-mgale-repn} in $L^p$ is independent of the order of summation.\index{Haar decomposition!unconditionality in UMD spaces}
 This observation can be extended to a boundedness result for \emph{Haar multipliers}.
 
-\begin{prop}\label{prop:haar-multipliers}
+\begin{prop}\label{prop:haar-multipliers}\index{Haar multipliers!boundedness in UMD spaces}
   Let $X$ be a UMD Banach space and $p \in (1,\infty)$.
   For each dyadic interval $I \subset [0,1)$, let $a_{I} \in \K$ be a scalar, and suppose that $\sup_{I \in \mc{D}} |a_{I}| < \infty$.
   Then for all $\mb{f} \in L^p([0,1);X)$,
@@ -718,7 +718,7 @@ which proves the result.
 
 In the scalar case $X = \K$, this leads to a quick proof of a classical result.
 
-\begin{cor}
+\begin{cor}\index{Haar decomposition!unconditionality in Lebesgue spaces}
   For all $p \in (1,\infty)$, the Haar functions $(h_{I})_{I \in \mc{D}}$ are unconditional in $L^p([0,1))$.
   That is, for any finite subset $\mc{I} \subset \mc{D}$ and any sequence of signs $(\xi_{I})_{I \in \mc{I}}$,
   \begin{equation*}
@@ -823,41 +823,31 @@ We let $\ell^1_{n}$ denote the space of scalar sequences $(x_{i})_{i=1}^{n}$, or
     \gtrsim \Big\| \Big( \sum_{n=0}^{N} |dg_{n}|^2 \Big)^{1/2} \Big\|_{L^1(\Omega)}.
   \end{equation*}
 
-  We are left with estimating the square function of $g_{\bullet}$ from below.
-  % Observe that
-  % \begin{equation*}
-  %   g_{k}(\omega) = 2^{k}\1_{\{\omega_{1} = \cdots = \omega_{k} = 1\}} \quad \text{and} \quad dg_{k}(\omega) = \pi_{k}(\omega) dg_{k-1}(\omega)
-  % \end{equation*}
-  % for all $\omega \in \Omega$.
-  Define sets
+  It remains to estimate the square function of $g_{\bullet}$ from below.
+  Define disjoint sets
   \begin{equation*}
     \begin{aligned}
-      \Omega_{0} &:= \{\omega \in \Omega: \omega_{1} = -1\}, \\
-      \Omega_{k} &:= \{\omega_{1} = \cdots = \omega_{k} = 1, \omega_{k+1} = -1\} \qquad (0 < k < N), \\
-      \Omega_{N} &:= \{\omega_{1} = \cdots = \omega_{N} = 1\}.
+      \Omega_{k} &:= \{\omega_{1} = \cdots = \omega_{k} = 1, \omega_{k+1} = -1\} \qquad (0 < k < N). \\
     \end{aligned}
   \end{equation*}
-  These sets partition $\Omega$, so we have
+  By disjointness we have
   \begin{equation*}
-    \begin{aligned}
     \Big\| \Big( \sum_{n=0}^{N} |dg_{n}|^2 \Big)^{1/2} \Big\|_{L^1(\Omega)}
-    &= \sum_{m = 0}^{N} \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega) \\
-    &\geq \sum_{m = 1}^{N - 1} \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega).
-  \end{aligned}
+    \geq \sum_{m = 1}^{N - 1} \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega).
   \end{equation*}
   We can compute
   \begin{equation*}
     |dg_{n}(\omega)| = |\pi_{n}(\omega) g_{n-1}(\omega)| = 2^{n-1} \1_{\{\omega_{1} = \cdots = \omega_{n-1} = 1\}}
   \end{equation*}
-  for $n > 1$, and $dg_{0}(\omega) \equiv 1$, so carefully working with the definition of the sets $\Omega_{m}$ yields
+  for $n > 1$, and $dg_{0}(\omega) \equiv 1$, so we can estimate
   \begin{equation*}
     \begin{aligned}
     \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega) 
     &= \int_{\Omega_{m}} \Big( 1 + \sum_{n=1}^{N} 2^{2n - 2} \1_{\{ \omega_{1} = \cdots = \omega_{n-1} = 1\}}(\omega) \Big)^{1/2} \, \dd\P(\omega) \\
     &= \int_{\Omega_{m}} \Big( 1 + \sum_{n=1}^{m+1} 2^{2n - 2} \Big)^{1/2} \, \dd\P(\omega) \\
     &= \P(\Omega_{m})\Big( 1 + \sum_{n=1}^{m+1} 2^{2n - 2} \Big)^{1/2} \\
-    &\geq 2^{-m-1}\Big(\sum_{n=0}^{m} 4^n\Big)^{1/2} \\
-    &\simeq 2^{-m} 2^{m} = 1.
+    &\geq 2^{-m-1}\Big(\sum_{n=0}^{m} 4^n\Big)^{1/2} 
+    \simeq 2^{-m} 2^{m} = 1.
   \end{aligned}
 \end{equation*}
 This crude estimate is enough to establish
@@ -870,7 +860,7 @@ for large $N$. which establishes the result.
   
 \end{proof}
 
-\begin{cor}
+\begin{cor}\index{UMD property!failure for $L^1$}
   Let $(S,\mc{A},\mu)$ be a measure space such that $L^1(S)$ is infinite dimensional.
   Then $L^1(S)$ is not $\UMD$.
 \end{cor}
@@ -897,7 +887,7 @@ for large $N$. which establishes the result.
 \end{proof}
 
 \begin{cor}
-  The following Banach spaces are not UMD:
+  The following Banach spaces are not UMD:\index{UMD property!failure for $L^\infty$, $c_0$, and $C(K)$}
   \begin{itemize}
   \item $L^\infty(S)$ whenever $(S,\mc{A},\mu)$ is a measure space such that $L^\infty(S)$ is infinite dimensional,
   \item The sequence space $c_{0}$ on $\N$,
@@ -917,7 +907,7 @@ for large $N$. which establishes the result.
 
 We close this chapter by showing that UMD spaces have the Radon--Nikodym property.\footnote{A harder argument shows that UMD spaces are reflexive, and in fact `super-reflexive'. Recall that reflexive spaces have RNP.}
 
-\begin{thm}
+\begin{thm}\index{UMD property!implies the Radon--Nikodym property}\index{Radon--Nikodym property!of UMD spaces}
   Suppose that $X$ is a UMD Banach space.
   Then $X$ has the Radon--Nikodym property.
 \end{thm}
@@ -961,7 +951,7 @@ Since this holds for all $N \in \N$ with implicit constants independent of $N$, 
 
 \section*{Exercises}
 
-\begin{exercise}\label{ex:UMD-isomorphism}
+\begin{exercise}\label{ex:UMD-isomorphism}\index{UMD property!of closed subspaces of UMD spaces}
   Let $X$ be a Banach space and $Y$ a closed subspace of $X$.
   Suppose that $Z$ is a Banach space and $\map{\phi}{Z}{Y}$ is an isomorphism.
   Show that 
@@ -975,7 +965,7 @@ Since this holds for all $N \in \N$ with implicit constants independent of $N$, 
   For $p \in (1,\infty)$, show that $\beta_{p}(L^p(\mu;X)) \geq \beta_{p}(X)$.
 \end{exercise}
 
-\begin{exercise}\label{ex:stopped-filtration}
+\begin{exercise}\label{ex:stopped-filtration}\index{UMD property!randomised version}
   Let $\mc{A}_{\bullet}$ be a filtration on a probability space $(\Omega,\mc{A},\P)$, and let $T$ be a stopping time with respect to $\mc{A}_{\bullet}$.
   Show that $\mc{A}_{\min(\bullet,T)}$ is a filtration.
 \end{exercise}
@@ -994,7 +984,7 @@ Since this holds for all $N \in \N$ with implicit constants independent of $N$, 
 
 \end{exercise}
 
-In the following exercise we use the notion of the $R$-bound of a set of operators.
+In the following exercise we use the notion of the $R$-bound of a set of operators.\index{R-bounds@$R$-bounds}
 Let $X$ and $Y$ be Banach spaces and suppose $\mc{T} \subset \Lin(X,Y)$ is a set of bounded linear operators from $X$ to $Y$.
 We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$,
 \begin{equation*}
@@ -1002,7 +992,7 @@ We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C
 \end{equation*}
 The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound of $\mc{T}$.
 
-\begin{exercise}\label{ex:R-bd-mgale-tf}
+\begin{exercise}\label{ex:R-bd-mgale-tf}\index{martingale transforms!boundedness in UMD spaces}
   Let $X$ and $Y$ be UMD Banach spaces, let $p \in (1,\infty)$, and let $\mb{f}_{\bullet}$ be an $X$-valued $L^p$-bounded martingale with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$.
   Let $T_{\bullet}$ be an $R$-bounded sequence of operators in $\Lin(X,Y)$.
   Show that the martingale transform with coefficients $T_{\bullet}$ is bounded, i.e.
@@ -1011,7 +1001,7 @@ The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound 
   \end{equation*}
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\index{UMD property!failure for $\mc{K}(H)$}
   Let $H$ be an infinite dimensional Hilbert space, and let $\mc{K}(H)$ be the space of all compact operators on $H$.
   Show that $\mc{K}(H)$ is not UMD.
 \end{exercise}
