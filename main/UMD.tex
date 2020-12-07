@@ -20,7 +20,7 @@ Recall that the difference sequence of a stochastic process $\mb{f}_{\bullet}$ i
   We will see in Section \ref{sec:UMD-p-independence} that the $\UMD_{p}$ property for some $p \in (1,\infty)$ implies the $\UMD$ property, so (as with the $p$-martingale convergence properties) there is no need to isolate $\UMD_{p}$ as a separate property other than for pedagogical reasons.
 \end{rmk}
 
-In Banach space lingo, \eqref{eq:UMD-property} says that the sequence $d\mb{f}_\bullet$ in $L^p(\Omega;X)$ is \emph{unconditional}, or equivalently, that the convergence (or divergence) in $L^p(\Omega;X)$ of the series $\sum_{n \in \N} d\mb{f}_n$ is independent of the order of summation.
+In Banach space lingo, \eqref{eq:UMD-property} says that the sequence $d\mb{f}_\bullet$ in $L^p(\Omega;X)$ is \emph{unconditional}, or equivalently, that the convergence (or divergence) in $L^p(\Omega;X)$ of the series $\sum_{n \in \N} d\mb{f}_n$ is independent of the order of summation.\footnote{For a detailed discussion of this point see for example \cite[Section 4.1.b]{HNVW16} or \cite[Section 1.c]{LT77}.}
 Put very coarsely, the UMD property says that martingale differences behave somewhat like orthogonal sequences in $L^p(\Omega;X)$.
 In fact, when $X$ is a Hilbert space, the $\UMD_{2}$ property follows directly from orthogonality considerations.
 
@@ -622,7 +622,7 @@ or equivalently by the difference sequence
 \end{thm}
 
 \begin{proof}
-  By Burkholder's inequalities (Theorem \ref{thm:burkholder}) and Exercise \ref{ex:rad-leb-comm} (a consequence of Kahane--Khintchine), %mk
+  By Burkholder's inequalities (Theorem \ref{thm:burkholder}) and Exercise \ref{ex:rad-leb-comm} (a consequence of Kahane--Khintchine), 
   \begin{equation*}
     \begin{aligned}
       \|(g \cdot \mb{f})_{N}\|_{L^p(\Omega;X)}
@@ -670,20 +670,294 @@ To be precise, we have
   \mb{f} = \lim_{N \to \infty} \mb{f}_{N} =  \mb{f}_{0} + \lim_{N \to \infty} \sum_{n = 1}^{N} d\mb{f}_{n}
   = \mb{f}_{0} + \sum_{n = 1}^{\infty} d\mb{f}_{n}
 \end{equation}
-where $\mb{f}_{\bullet}$ is the martingale associated with $\mb{f}$ and the dyadic filtration $\mc{D}_{\bullet}$, with convergence in $L^1([0,1);X)$ and almost everywhere by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv}.
+where $\mb{f}_{\bullet}$ is the martingale associated with $\mb{f}$ and the dyadic filtration $\mc{A}_{\bullet}$ (defined by $\mc{A}_{n} = \sigma(\mc{D}_{n})$), with convergence in $L^1([0,1);X)$ and almost everywhere by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv}.
 The Haar expansion \eqref{eq:haar-expansion} follows from computing
-\begin{equation*}
+\begin{equation}\label{eq:haar-difference}
   d\mb{f}_{n} = \sum_{I \in \mc{D}_{n-1}} h_{I} \otimes \langle \mb{f}, h_{I} \rangle.
-\end{equation*}
+\end{equation}
+
 Note that the convergence of \eqref{eq:haar-mgale-repn} depends \emph{a priori} on the order of summation of the infinite series.
+When $X$ is UMD, however, the unconditionality of martingale differences says that the sequence $(d\mb{f}_{n})_{n \in \N}$ is unconditional in $L^p([0,1];X)$ for all $p \in (1,\infty)$, and thus that the convergence of \eqref{eq:haar-mgale-repn} in $L^p$ is independent of the order of summation.
+This observation can be extended to a boundedness result for \emph{Haar multipliers}.
 
-\section{Non-examples}
+\begin{prop}\label{prop:haar-multipliers}
+  Let $X$ be a UMD Banach space and $p \in (1,\infty)$.
+  For each dyadic interval $I \subset [0,1)$, let $a_{I} \in \K$ be a scalar, and suppose that $\sup_{I \in \mc{D}} |a_{I}| < \infty$.
+  Then for all $\mb{f} \in L^p([0,1);X)$,
+  \begin{equation*}
+    \Big\| \sum_{I \in \mc{D}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1); X)} \lesssim_{p,X} \Big( \sup_{I \in \mc{D}} |a_{I}| \Big) \|\mb{f}\|_{L^p([0,1);X)}.
+  \end{equation*}
+  In particular, taking $a_{I} = \pm 1$, this implies that Haar decompositions are unconditional in $L^p([0,1);X)$.\footnote{We will see later that this characterises the UMD property.}
+\end{prop}
 
--$\beta_{p}(\ell^{1}_{n}) \gtrsim \log(n)$ (Pisier section 5.7), thus $L^1$ spaces are not UMD when infinite-dimensional
--$\ell^\infty$, $c_{0}$, $C([0,1])$, etc. by duality
--argument that UMD implies RNP
--remark that UMD implies reflexivity (i think we won't prove it)
--remark: Qiu's counterexample
+\begin{proof}
+  For each $n \in \N$ consider the function
+  \begin{equation*}
+    g_{n} := \sum_{I \in \mc{D}_{n-1}} a_{I} \1_{I} \qquad (g_{0} := 0).
+  \end{equation*}
+  Then $g_{n}$ is constant on each dyadic interval in $\mc{D}_{n-1}$, and thus $\mc{A}_{n-1}$ measurable.
+  That is, the stochastic process $g_{\bullet}$ is $\mc{A}_{\bullet}$-predictable.
+  Thus by Theorem \ref{thm:scalar-mgale-tf-bdd} and the representation \ref{eq:haar-difference} of the difference sequence $d\mb{f}_{n}$,
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{n \in \N} g_{n} \sum_{I \in \mc{D}_{n-1}} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)} 
+      &\lesssim_{p,X} \Big( \sup_{n \in \N} \|g_{n}\|_{L^\infty([0,1))} \Big) \|\mb{f}\|_{L^p([0,1);X)} \\
+      &= \Big( \sup_{I \in \mc{D}} |a_{I}| \Big) \|\mb{f}\|_{L^p([0,1);X)}.
+  \end{aligned}
+\end{equation*}
+But since the Haar function $h_{I}$ is supported on $I$, we have
+\begin{equation*}
+  \begin{aligned}
+    g_{n} \sum_{I \in \mc{D}_{n-1}} h_{I} \otimes \langle \mb{f}, h_{I} \rangle 
+    &= \Big( \sum_{J \in \mc{D}_{n-1}} a_{J} \1_{J} \Big) \Big( \sum_{I \in \mc{D}_{n-1}} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big) \\
+    &= \sum_{I \in \mc{D}_{n-1}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle,
+  \end{aligned}
+\end{equation*}
+which proves the result.
+\end{proof}
+
+In the scalar case $X = \K$, this leads to a quick proof of a classical result.
+
+\begin{cor}
+  For all $p \in (1,\infty)$, the Haar functions $(h_{I})_{I \in \mc{D}}$ are unconditional in $L^p([0,1))$.
+  That is, for any finite subset $\mc{I} \subset \mc{D}$ and any sequence of signs $(\xi_{I})_{I \in \mc{I}}$,
+  \begin{equation*}
+    \Big\| \sum_{I \in \mc{I}} \xi_{I} h_{I} \Big\|_{L^p([0,1))} \lesssim_{p} \Big\| \sum_{I \in \mc{I}} h_{I} \Big\|_{L^p([0,1))}
+  \end{equation*}
+  (the implicit constant does not depend on the choice of $\mc{I}$).
+\end{cor}
+
+\begin{proof}
+  Let $a_{I} = \xi_{I}$ if $I \in \mc{I}$ and $a_{I} = 0$ for all $I \in \mc{D} \sm \mc{I}$.
+  With $f = \sum_{I \in \mc{I}} h_{I}$, Proposition \ref{prop:haar-multipliers} says that
+  \begin{equation*}
+    \Big\|\sum_{I \in \mc{I}} a_{I} h_{I} \langle f, h_{I} \rangle \Big\|_{L^p([0,1))} \lesssim_{p} \|f\|_{L^p([0,1))}.
+  \end{equation*}
+  But since $\langle h_{I}, h_{J} \rangle = \delta_{I}(J)$, it follows that $\langle f, h_{I} \rangle = 1$ for all $I \in \mc{I}$, and thus
+  \begin{equation*}
+    \Big\|\sum_{I \in \mc{I}} a_{I} h_{I} \Big\|_{L^p([0,1))} \lesssim_{p} \Big\| \sum_{I \in \mc{I}} h_{I}\Big\|_{L^p([0,1))}
+  \end{equation*}
+  as claimed.
+\end{proof}
+
+Since every function $f \in L^p([0,1))$ has a Haar expansion, this says that the Haar functions are an \emph{unconditional basis} of $L^p([0,1))$ for all $p \in (1,\infty)$.
+For more on bases and their relation with Banach space theory see \cite{AK06}.
+
+\section{Failure of UMD for $L^1$ and other spaces}
+
+So far we have not proven that any spaces do \emph{not} have the UMD property.
+The fundamental example of such spaces are (infinite dimensional) $L^1$ spaces.
+We will prove this through a stronger quantitative result, showing that the UMD constants of finite dimensional $L^1$ spaces grow at least logarithmically in their dimension.
+We let $\ell^1_{n}$ denote the space of scalar sequences $(x_{i})_{i=1}^{n}$, or equivalently $\K^n$, with the $\ell^1$-norm.
+
+\begin{thm}\label{thm:L1-not-UMD}
+  There exists a constant $c > 0$ such that for all $n \in \N$, the $\UMD_{p}$ constant of the finite-dimensional $\ell^1$-space $\ell^{1}_{n}$ is bounded from below by
+  \begin{equation*}
+    \beta_{p}(\ell^{1}_{n}) > c\log(n).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  It suffices to show that there exists $c > 0$ such that
+  \begin{equation*}
+    \beta_{p}(\ell^{1}_{2^N}) > cN.
+  \end{equation*}
+  for all $N \in \N$, as for all $m \geq 1$ we can write
+  \begin{equation*}
+    \beta_{p}(\ell^1_{m}) \geq \beta_{p}(\ell^1_{2^N})
+  \end{equation*}
+  with $N = \lfloor \log_{2}(m) \rfloor$.
+
+  Let $\Omega = \prod_{\N} \{-1,+1\}$ with the product $\sigma$-algebra and probability measure, and let $X = L^1(\Omega)$.
+  Consider the $X$-valued martingale $\mb{f}_{\bullet}$ on $\Omega$ from Example \ref{eg:L1-noMCP}:
+  \begin{equation*}
+    \mb{f}_{n}(\omega) := \prod_{k = 1}^{n} (1 + \pi_{k}(\omega)\pi_{k})  \qquad (\mb{f}_{0} \equiv 1)
+  \end{equation*}
+  where $\pi_{k} \colon \Omega \to \{-1,+1\}$ is the $k$th coordinate function (we start indexing from $k = 1$ in this proof to ease notation).
+  This is a martingale with respect to the filtration $\mc{A}_{\bullet}$ generated by $\pi_{\bullet}$.
+  
+  Now fix $N \geq 1$.
+  Since the functions $\mb{f}_{1}, \mb{f}_{2}, \ldots, \mb{f}_{N}$ are all functions of the $\mc{A}_{N}$-measurable coordinate functions $\pi_{1}, \pi_{2}, \ldots, \pi_{N}$, and since $\mc{A}_{N}$ is generated by $2^{N}$ atoms of equal measure, the functions $\mb{f}_{1}, \ldots, \mb{f}_{N}$ take values in a subspace of $X$ which is isometric to $\ell^1_{2^{N}}$.
+  Given a finite sequence of signs $(\xi_{n})_{n=0}^{N}$, this lets us write
+  \begin{equation}\label{eq:L1-notUMD-est1}
+    \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq \beta_{p}(\ell^{1}_{2^N}) \| \mb{f}_{N} \|_{L^p(\Omega;X)}
+  \end{equation}
+  for all $p \in (1,\infty)$.
+  We are left with estimating the norms on borh sides of this inequality.
+  For the right hand side, note that for all $\omega \in \Omega$ we have
+  \begin{equation*}
+    \begin{aligned}
+      \|\mb{f}_{N}(\omega)\|_{X}
+      &= \int_{\Omega} \prod_{k=1}^{N} (1 + \pi_{k}(\omega) \pi_{k}(\eta)) \, \dd\P(\eta) \\
+      &= \int_{\Omega} \prod_{k=1}^{N} (1 + \pi_{k}(\eta))\, \dd\P(\eta) 
+      = \prod_{k=1}^{N} \int_{\Omega} 1 + \pi_{k}(\eta) \, \dd\P(\eta) = 1
+    \end{aligned}
+  \end{equation*}
+  using that for each $\omega$, the sequence of random variables $(\pi_{k}(\omega) \pi_{k})_{k \in \N}$ has the same distribution as $(\pi_{k})_{k \in \N}$ (in fact, it is a Rademacher sequence), and then using independence of these random variables.
+  Taking the $L^p$-norm over $\Omega$ then gives
+  \begin{equation*}
+    \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq \beta_{p}(\ell^{1}_{2^N})
+  \end{equation*}
+  and we are left with the left hand side.
+  
+  For each $\omega \in \Omega$, a similar argument to the previous paragraph shows that
+  \begin{equation*}
+    \begin{aligned}
+      \Big\|  \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X} 
+      &= \int_{\Omega} \Big| \sum_{n=0}^{N} \xi_{n} \Big(\prod_{k=1}^{n-1} 1 + \pi_k(\omega) \pi_k (\eta) \Big) \Big((1 + \pi_n(\omega) \pi_n(\eta)) - 1\Big) \Big|\, \dd\P(\eta) \\
+      &= \int_{\Omega} \Big| \sum_{n=0}^{N} \xi_{n} \Big(\prod_{k=1}^{n-1} 1 + \pi_k (\eta) \Big) \pi_n(\eta) \Big|\, \dd\P(\eta) \\
+      &= \int_{\Omega} \Big| \sum_{n=0}^{N} \xi_{n} dg_{n}(\omega) \Big| \, \dd\P(\omega)
+    \end{aligned}
+  \end{equation*}
+  where $g_{\bullet}$ is the scalar-valued martingale on $\Omega$ given by $g_{n} = \prod_{k=1}^{n} (1 + \pi_{k})$.
+  We can estimate from below
+  \begin{equation*}
+      \sup_{\xi_{n} \in \pm 1} \Big\|  \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}
+      = \sup_{\xi_n \in \pm 1} \Big\|  \sum_{n=0}^{N} \xi_{n} dg_{n} \Big\|_{L^1(\Omega)} 
+      \geq \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} dg_{n} \Big\|_{L^1(\Omega)}
+  \end{equation*}
+  where $\varepsilon_{\bullet}$ is a Rademacher sequence (the average over all sign sequences is of course bounded by the supremum over all sign sequences).
+  Thus by Khintchine's inequality (Theorem \ref{thm:khintchine}),
+  \begin{equation*}
+    \beta_{p}(\ell^{1}_{2^N}) \geq \sup_{\xi_{n} \in \pm 1} \Big\|  \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}
+    \gtrsim \Big\| \Big( \sum_{n=0}^{N} |dg_{n}|^2 \Big)^{1/2} \Big\|_{L^1(\Omega)}.
+  \end{equation*}
+
+  We are left with estimating the square function of $g_{\bullet}$ from below.
+  % Observe that
+  % \begin{equation*}
+  %   g_{k}(\omega) = 2^{k}\1_{\{\omega_{1} = \cdots = \omega_{k} = 1\}} \quad \text{and} \quad dg_{k}(\omega) = \pi_{k}(\omega) dg_{k-1}(\omega)
+  % \end{equation*}
+  % for all $\omega \in \Omega$.
+  Define sets
+  \begin{equation*}
+    \begin{aligned}
+      \Omega_{0} &:= \{\omega \in \Omega: \omega_{1} = -1\}, \\
+      \Omega_{k} &:= \{\omega_{1} = \cdots = \omega_{k} = 1, \omega_{k+1} = -1\} \qquad (0 < k < N), \\
+      \Omega_{N} &:= \{\omega_{1} = \cdots = \omega_{N} = 1\}.
+    \end{aligned}
+  \end{equation*}
+  These sets partition $\Omega$, so we have
+  \begin{equation*}
+    \begin{aligned}
+    \Big\| \Big( \sum_{n=0}^{N} |dg_{n}|^2 \Big)^{1/2} \Big\|_{L^1(\Omega)}
+    &= \sum_{m = 0}^{N} \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega) \\
+    &\geq \sum_{m = 1}^{N - 1} \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega).
+  \end{aligned}
+  \end{equation*}
+  We can compute
+  \begin{equation*}
+    |dg_{n}(\omega)| = |\pi_{n}(\omega) g_{n-1}(\omega)| = 2^{n-1} \1_{\{\omega_{1} = \cdots = \omega_{n-1} = 1\}}
+  \end{equation*}
+  for $n > 1$, and $dg_{0}(\omega) \equiv 1$, so carefully working with the definition of the sets $\Omega_{m}$ yields
+  \begin{equation*}
+    \begin{aligned}
+    \int_{\Omega_{m}} \Big( \sum_{n=0}^{N} |dg_{n}(\omega)|^2 \Big)^{1/2} \, \dd\P(\omega) 
+    &= \int_{\Omega_{m}} \Big( 1 + \sum_{n=1}^{N} 2^{2n - 2} \1_{\{ \omega_{1} = \cdots = \omega_{n-1} = 1\}}(\omega) \Big)^{1/2} \, \dd\P(\omega) \\
+    &= \int_{\Omega_{m}} \Big( 1 + \sum_{n=1}^{m+1} 2^{2n - 2} \Big)^{1/2} \, \dd\P(\omega) \\
+    &= \P(\Omega_{m})\Big( 1 + \sum_{n=1}^{m+1} 2^{2n - 2} \Big)^{1/2} \\
+    &\geq 2^{-m-1}\Big(\sum_{n=0}^{m} 4^n\Big)^{1/2} \\
+    &\simeq 2^{-m} 2^{m} = 1.
+  \end{aligned}
+\end{equation*}
+This crude estimate is enough to establish
+\begin{equation*}
+  \beta_{p}(\ell^1_{2^N}) \gtrsim \Big\| \Big( \sum_{n=0}^{N} |dg_{n}|^2 \Big)^{1/2} \Big\|_{L^1(\Omega)}
+  \gtrsim \sum_{m=1}^{N-1} 1 \simeq N
+\end{equation*}
+for large $N$. which establishes the result.
+  
+  
+\end{proof}
+
+\begin{cor}
+  Let $(S,\mc{A},\mu)$ be a measure space such that $L^1(S)$ is infinite dimensional.
+  Then $L^1(S)$ is not $\UMD$.
+\end{cor}
+
+\begin{proof}
+  Suppose $n \in \N$.
+  Since $L^1(S)$ has dimension greater than $n$, there exist pairwise disjoint sets $E_{1}, \ldots, E_{n} \in \mc{A}$ with $0 < \mu(E_{i}) < \infty$.
+  Define a map $\iota_{n} \colon \ell^1_n \to L^1(S)$ by
+  \begin{equation*}
+    \iota_{n}((a_i)_{i=1}^{n}) := \sum_{i=1}^{n} \frac{a_{i}}{\mu(E_{i})} \1_{E_{i}}.
+  \end{equation*}
+  Then $\iota_{n}$ is linear, and
+  \begin{equation*}
+    \|\iota_{n}(a_{\bullet})\|_{L^1(S)} = \sum_{i=1}^{n} \frac{|a_{i}|}{\mu(E_{i})} \mu(E_{i}) = \|a_{\bullet}\|_{\ell^1_n},
+  \end{equation*}
+  so $\iota_{n}$ is an isometry.
+  In particular, $\iota_{n}$ is an isometric isomorphism from $\ell^1_n$ to the closed subspace $\iota_{n}(\ell^1_n)$ of $L^1(S)$.
+  Thus by Exercise \ref{ex:UMD-isomorphism},
+  \begin{equation*}
+    \beta_{2}(L^1(S)) \geq \beta_{2}(\ell^1_n) \gtrsim \log(n)
+  \end{equation*}
+  with implicit constant independent of $n$.
+  Since $n$ was arbitrary, it follows that $\beta_{2}(L^1(S)) = \infty$, and thus $L^1(S)$ is not UMD.
+\end{proof}
+
+\begin{cor}
+  The following Banach spaces are not UMD:
+  \begin{itemize}
+  \item $L^\infty(S)$ whenever $(S,\mc{A},\mu)$ is a measure space such that $L^\infty(S)$ is infinite dimensional,
+  \item The sequence space $c_{0}$ on $\N$,
+  \item The space $M(K)$ of Borel measures of bounded variation on a compact Hausdorff space $K$ with infinitely many points.
+  \item The space of continuous functions $C(K)$ on a compact Hausdorff topological space $K$ with infinitely many points.
+  \end{itemize}
+\end{cor}
+
+\begin{proof}
+  We repeatedly use Proposition \ref{prop:UMD-duality}: a Banach space $X$ is UMD if and only if its dual space $X^{*}$ is UMD.
+  Since $L^\infty(S)$ is the dual of $L^1(S)$, and since $L^1(S)$ is infinite-dimensional when $L^\infty(S)$ is, we find that $L^\infty(S)$ is not UMD in this case.
+  The dual of $c_{0}$ is $\ell^1$, which is not UMD.
+  As for $M(K)$, there exists a finite measure $\mu \in M(K)$ such that $L^1(\mu)$ is an infinite dimensional closed subspace of $M(K)$.
+  Since $L^1(\mu)$ is not UMD, neither is $M(K)$.
+  Finally, the Riesz--Markov--Kakutani theorem says that the dual of $C(K)$ is $M(K)$, so $C(K)$ is also not UMD.
+\end{proof}
+
+We close this chapter by showing that UMD spaces have the Radon--Nikodym property.\footnote{A harder argument shows that UMD spaces are reflexive, and in fact `super-reflexive'. Recall that reflexive spaces have RNP.}
+
+\begin{thm}
+  Suppose that $X$ is a UMD Banach space.
+  Then $X$ has the Radon--Nikodym property.
+\end{thm}
+
+\begin{proof}
+  Aiming for a contradiction, suppose that $X$ does not have the Radon--Nikodym property.
+  Then by Theorem \ref{thm:RNP-characterisations}, the unit ball of $X$ contains a $\delta$-separated tree for some $\delta > 0$.
+  Thus there exists an $L^p$-bounded martingale $\mb{f}_{\bullet}$ valued in the unit ball of $X$ such that
+  \begin{equation*}
+    \|d\mb{f}_{n}\|_{L^p(X)} = \|\mb{f}_{n} - \mb{f}_{n-1}\|_{L^p(X)} \geq \delta
+  \end{equation*}
+  for all $n \geq 1$.
+  Now fix $N \in \N$ and define a linear map $T \colon \ell^\infty_N \to L^p(X)$ by
+  \begin{equation*}
+    T(a_{\bullet}) := \sum_{n=1}^{N} a_{n} d\mb{f}_{n}.
+  \end{equation*}
+  Burkholder's inequalities (Theorem \ref{thm:burkholder}) and the contraction principle yields
+  \begin{equation*}
+    \begin{aligned}
+    \|T(a_{\bullet})\|_{L^p(X)} = \Big\| \sum_{n=1}^{N} a_{n} d\mb{f}_{n} \Big\|_{L^p(X)}
+    &\lesssim_{p,X} \|a_{n} d\mb{f}_{n}\|_{\varepsilon_{N}(L^p(X))} \\
+    &\lesssim \|a_{\bullet}\|_{\ell^{\infty}_{N}} \|d\mb{f}_{n}\|_{\varepsilon_{N}(L^p(X))} \\
+    &\leq \|a_{\bullet}\|_{\ell^{\infty}_{N}},
+  \end{aligned}
+\end{equation*}
+so $T$ is bounded uniformly in $N$.
+On the other hand we have for all $k$ 
+\begin{equation*}
+  |a_{k}| \leq \delta^{-1} \|a_{k} d\mb{f}_{k}\|_{L^p(X)} \lesssim_{p,X} \Big\| \sum_{k = 0}^{N} a_{k} d\mb{f}_{k}\Big\|_{L^p(X)}
+\end{equation*}
+using the UMD property for the second estimate, so we have that
+\begin{equation*}
+  \|T(a_{\bullet})\|_{L^p(X)} \simeq_{p,X,\delta} \|a_{\bullet}\|_{\ell^\infty_{N}}.
+\end{equation*}
+Thus $T$ is an isomorphism, and so by Exercise \ref{ex:UMD-isomorphism} and Propositions \ref{prop:UMD-duality} and \ref{prop:Bochner-UMDp},
+\begin{equation*}
+  \beta_{p}(X) = \beta_{p}(L^p(X)) \gtrsim_{p,X,\delta} \beta_{p}(\ell^\infty_N) = \beta_{p'}(\ell^1_N) \gtrsim \log(N).
+\end{equation*}
+Since this holds for all $N \in \N$ with implicit constants independent of $N$, it follows that $\beta_{p}(X) = \infty$, which contradicts the assumption that $X$ is UMD.
+\end{proof}
 
 \section*{Exercises}
 
@@ -735,6 +1009,11 @@ The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound 
   \begin{equation*}
     \| (T \cdot \mb{f})_{N} \|_{L^p(\Omega;Y)} \lesssim R(T_{\bullet}) \|\mb{f}_{N}\|_{L^p(\Omega;X)}.
   \end{equation*}
+\end{exercise}
+
+\begin{exercise}
+  Let $H$ be an infinite dimensional Hilbert space, and let $\mc{K}(H)$ be the space of all compact operators on $H$.
+  Show that $\mc{K}(H)$ is not UMD.
 \end{exercise}
 
 
