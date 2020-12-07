@@ -526,7 +526,8 @@ Now, to Gundy's decomposition.
 
 \section{Burkholder's inequalities and martingale transforms}
 
-For the following estimates we use the Rademacher spaces $\varepsilon(X)$ defined in Section \ref{sec:rademacher-spaces}.\todo{note: square function charactersiation of $Lp$ norm of martingales}
+The UMD property is equivalent to \emph{Burkholder's inequalities}, which say that the $L^p$-norm of a martingale (i.e. the supremum of $L^p$ norms of its terms) is equivalent to a Rademacher average of its difference sequence in $L^p$.
+We will state it in terms of the Rademacher spaces $\varepsilon(X)$ defined in Section \ref{sec:rademacher-spaces}.
 
 \begin{thm}[Burkholder's inequalities]\label{thm:burkholder}
   A Banach space $X$ is $\UMD$ if and only if for all $p \in (1,\infty)$ and every $L^p$-bounded martingale $\mb{f}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$,
@@ -650,10 +651,31 @@ and one more application of Exercise \ref{ex:rad-leb-comm} and Burkholder's ineq
 as we wanted.
 \end{proof}
 
-\todo{UP TO HERE}
+See Exercise \ref{ex:R-bd-mgale-tf} for one possible extension of this result to operator-valued martingale transforms.
 
--Haar decompositions are unconditional (equivalent to UMD, have dyadic characterisation)
-%-Stein's inequality
+\section{Haar decompositions}
+
+We return to the Haar decomposition of a function, established way back in Example \ref{eg:haar}.
+Given a Banach space $X$ and an integrable function $\mb{f} \in L^1([0,1);X)$ on the unit interval, the \emph{Haar expansion} of $\mb{f}$ is the representation
+\begin{equation}\label{eq:haar-expansion}
+  \mb{f} = \langle \mb{f} \rangle_{[0,1)} + \sum_{n \geq 1} \sum_{I \in \mc{D}_{n-1}} h_{I} \otimes \langle \mb{f}, h_{I} \rangle,
+\end{equation}
+where $\mc{D}_{n}$ is the set of dyadic subintervals of $[0,1)$ of length $2^{-n}$, $h_{I}$ is the $L^2$-normalised Haar function
+\begin{equation*}
+  h_{I} := \frac{1}{|I|^{1/2}} (\1_{I_{-}} - \1_{I_{+}})
+\end{equation*}
+where $I_{\pm}$ are the two dyadic subintervals of $I$ (with $\sup I_{-} = \inf I_{+}$).
+To be precise, we have
+\begin{equation}\label{eq:haar-mgale-repn}
+  \mb{f} = \lim_{N \to \infty} \mb{f}_{N} =  \mb{f}_{0} + \lim_{N \to \infty} \sum_{n = 1}^{N} d\mb{f}_{n}
+  = \mb{f}_{0} + \sum_{n = 1}^{\infty} d\mb{f}_{n}
+\end{equation}
+where $\mb{f}_{\bullet}$ is the martingale associated with $\mb{f}$ and the dyadic filtration $\mc{D}_{\bullet}$, with convergence in $L^1([0,1);X)$ and almost everywhere by Theorems \ref{thm:mgale-conv-Lp} and \ref{thm:mgale-pw-conv}.
+The Haar expansion \eqref{eq:haar-expansion} follows from computing
+\begin{equation*}
+  d\mb{f}_{n} = \sum_{I \in \mc{D}_{n-1}} h_{I} \otimes \langle \mb{f}, h_{I} \rangle.
+\end{equation*}
+Note that the convergence of \eqref{eq:haar-mgale-repn} depends \emph{a priori} on the order of summation of the infinite series.
 
 \section{Non-examples}
 
@@ -685,14 +707,37 @@ as we wanted.
 \end{exercise}
 
 \begin{exercise}
-  (boundedness of martingale transforms on UMD spaces with $R$-bounded coefficients)
+  For $p \in (1,\infty)$, a Banach space $X$ is said to have the \emph{randomised $\UMD_{p}$ property} if for all $X$-valued $L^p$-bounded martingales on any probability space $(\Omega,\mc{A},\P)$ and any Rademacher sequence $\varepsilon_{\bullet}$,
+  \begin{equation*}
+    \sup_{N \in \N} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \simeq \sup_{N \in \N} \Big\| \sum_{n=0}^{N} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)}.
+  \end{equation*}
+  (this is exactly like the definition of $\UMD_{p}$, but now the signs are randomised).
+
+  \begin{itemize}
+  \item Show that the $\UMD_{p}$ property implies the randomised $\UMD_{p}$ property.\footnote{The converse is an open problem!}
+  \item Show that if $p,q \in (1,\infty)$, the randomised $\UMD_{p}$ property is equivalent to the randomised $\UMD_{q}$ property.
+  \end{itemize}
+
 \end{exercise}
 
-\begin{exercise}
-  $\UMD_{p}$ implies randomised $\UMD_{p}$.
-  Randomised $\UMD_{p}$ are all equivalent.
-  $L^1$ is 'UMD-'.
+In the following exercise we use the notion of the $R$-bound of a set of operators.
+Let $X$ and $Y$ be Banach spaces and suppose $\mc{T} \subset \Lin(X,Y)$ is a set of bounded linear operators from $X$ to $Y$.
+We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$,
+\begin{equation*}
+  \|T_{\bullet} \mb{x}_{\bullet}\|_{\varepsilon_{N}(Y)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)}.
+\end{equation*}
+The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound of $\mc{T}$.
+
+\begin{exercise}\label{ex:R-bd-mgale-tf}
+  Let $X$ and $Y$ be UMD Banach spaces, let $p \in (1,\infty)$, and let $\mb{f}_{\bullet}$ be an $X$-valued $L^p$-bounded martingale with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$.
+  Let $T_{\bullet}$ be an $R$-bounded sequence of operators in $\Lin(X,Y)$.
+  Show that the martingale transform with coefficients $T_{\bullet}$ is bounded, i.e.
+  \begin{equation*}
+    \| (T \cdot \mb{f})_{N} \|_{L^p(\Omega;Y)} \lesssim R(T_{\bullet}) \|\mb{f}_{N}\|_{L^p(\Omega;X)}.
+  \end{equation*}
 \end{exercise}
+
+
 
 
 
