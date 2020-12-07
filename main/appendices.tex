@@ -202,15 +202,58 @@ The distribution of a Banach-valued random variable is completely determined by 
 
 \section{Results from interpolation theory}
 
-\emph{under construction}
+\begin{defn}
+  Let $(S,\mc{A},\mu)$ be a measure space and $f$ a measurable scalar-valued function on $S$.
+  For $p \in (0,\infty]$ we define
+  \begin{equation*}
+    \|f\|_{L^{p,\infty}(S)} := \sup_{t > 0} t^{1/p} \mu\big( \{s \in S : |f(s)| > t\} \big).
+  \end{equation*}
+  The space $L^{p,\infty}(S)$ of functions $f$ with $\|f\|_{L^{p,\infty}(S)}$ is called the \emph{Lorentz space}, or \emph{weak $L^p$ space}.
+\end{defn}
 
-\begin{thm}[Marcinkiewicz]\label{thm:marcinkiewicz}
-  (marcinkiewicz theorem for Bochner spaces)
+Chebyshev's inequality implies that $\|f\|_{L^{p,\infty}(S)} \leq \|f\|_{L^p(S)}$, so the Lebesgue space $L^p(S)$ is contained in the Lorentz space $L^{p,\infty}(S)$.
+This containment is generally strict: for example, the function
+\begin{equation*}
+  t \mapsto \1_{[0,1)}(t) t^{-1/p}
+\end{equation*}
+is in $L^{p,\infty}(\R)$ but not in $L^p(\R)$.
+It also possible to define Lorentz spaces $L^{p,q}(S)$ for general $q$, but we will not use these.
+
+The main application of weak Lebesgue spaces is in the \emph{Marcinkiewicz interpolation theorem}, which lets one deduce the boundedness of an operator on a range of $L^p$ spaces from `weak endpoint bounds'.
+See \cite[Theorem 1.3.2]{grafakos} for the proof.
+
+\begin{thm}[Marcinkiewicz]\label{thm:marcinkiewicz}\index{theorem!Marcinkiewicz (interpolation)}
+  Let $(S_1,\mc{A}_1,\mu_1)$ and $(S_2,\mc{A}_2,\mu_2)$ be $\sigma$-finite measure spaces, and let $0 < p_0 < p_1 \leq \infty$.
+  Let $T$ be a sublinear operator\footnote{That is, $|T(f + g)| \leq |T(f)| + |T(g)|$ and $|T(\lambda f)| = |\lambda||T(f)|$ for all $f,g$ and $\lambda \in \C$. This holds in particular if $T$ is linear.} defined on all functions in
+  \begin{equation*}
+    L^{p_0}(S_1) + L^{p_1}(S_1) = \{f_0 + f_1 : f_i \in L^{p_i}(S_1)\},
+  \end{equation*}
+  mapping into the space of measurable functions on $S_1$.
+  Suppose there exist constants $C_0, C_1 < \infty$ such that
+  \begin{equation*}
+    \begin{aligned}
+      \|Tf\|_{L^{p_0,\infty}(S_2)} &\leq C_0 \|f\|_{L^{p_0}(S_1)} \qquad \forall f \in L^{p_0}(S_1), \\
+      \|Tf\|_{L^{p_1,\infty}(S_2)} &\leq C_1 \|f\|_{L^{p_1}(S_1)} \qquad \forall f \in L^{p_1}(S_1).
+    \end{aligned}
+  \end{equation*}
+  Then there exists a constant $C$ such that for all $p_0 < p < p_1$ and all $f \in L^p(S_1)$,
+  \begin{equation*}
+    \|Tf\|_{L^{p,\infty}(S_2)} \leq C \|f\|_{L^{p,\infty}(S_1)} \qquad \forall f \in L^{p}(S_1).
+  \end{equation*}
+  That is, if $T$ is bounded from $L^{p_0}$ to $L^{p_0,\infty}$ and from $L^{p_1}$ to $L^{p_1,\infty}$, then $T$ is bounded on $L^p$ for all $p \in (p_0,p_1)$.
+  This hypothesis holds in particular if $T$ is bounded on $L^{p_0}$ and $L^{p_1}$.
 \end{thm}
 
-\begin{thm}[Riesz--Thorin]
-  (Riesz--Thorin theorem for Bochner spaces)
-\end{thm}
+
+
+
+\emph{\textbf{further material to be added as required}}
+
+
+
+% \begin{thm}[Riesz--Thorin]
+%   (Riesz--Thorin theorem for Bochner spaces)
+% \end{thm}
 
 % then move to more general interpolation spaces
 
