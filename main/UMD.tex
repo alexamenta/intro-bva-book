@@ -89,8 +89,8 @@ This characterisation of the $\UMD_{p}$ constant, with a short duality argument,
     \begin{aligned}
       \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p}(\Omega;X))}
       &= \sup_{\mb{f}} \| T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f} \|_{L^{p}(\Omega;X)} \\
-      &= \sup_{\mb{f}, \mb{g}} \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle \\
-      &= \sup_{\mb{f}, \mb{g}} \langle  \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle \\
+      &= \sup_{\mb{f}, \mb{g}} \big| \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle \big| \\
+      &= \sup_{\mb{f}, \mb{g}} \big| \langle  \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle \big| \\
       &= \sup_{\mb{g}} \| T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \|_{L^{p'}(\Omega;X^{*})}
       &= \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p'}(\Omega;X^{*}))},
   \end{aligned}
@@ -118,10 +118,10 @@ This will be more useful once we know the $p$-independence of the UMD property.
   \begin{equation*}
     \begin{aligned}
       \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;Y)}^{p}
-      &= \int_{\Omega} \int_{S} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\mu(s) \, \dd\P(\omega) \\
-      &=  \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
-      &\leq \beta_{p}(X)^{p} \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
-      &= \beta_{p}(X)^{p} \int_{\Omega}  \int_{S} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega) \Big\|_{X}^{p}   \, \dd\mu(s) \, \dd\P(\omega) \\
+      &= \int_{\Omega} \int_{S} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p} \, \dd\mu(s) \, \dd\P(\omega) \\
+      &=  \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
+      &\leq \beta_{p}(X)^{p} \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
+      &= \beta_{p}(X)^{p} \int_{\Omega}  \int_{S} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p}   \, \dd\mu(s) \, \dd\P(\omega) \\
       &= \beta_{p}(X)^{p} \Big\| \sum_{n=0}^N d\mb{f}_{n} \Big\|_{L^p(\Omega;Y)}^{p},
     \end{aligned}
   \end{equation*}
@@ -220,7 +220,7 @@ For now we will assume it, and deduce the weak-type $(1,1)$ estimate for finite 
   \begin{equation*}
     \begin{aligned}
       \P(\|\td{\mb{c}}\|_{X} > t)
-      &\leq t^{-p}\|T_{\mc{A}_{\bullet, \xi_{\bullet}}} \mb{c} \|_{L^p(\Omega;X)}^{p} \\
+      &\leq t^{-p}\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{c} \|_{L^p(\Omega;X)}^{p} \\
       &\lesssim_{p,X} t^{-p} \|\mb{c} \|_{L^p(\Omega;X)}^{p} \\
       &\leq t^{-p}  \Big( \|\mb{c} \|_{L^1(\Omega;X)}^{\frac{1}{p}} \|\mb{c}\|_{L^\infty(\Omega;X)}^{1-\frac{1}{p}} \Big)^{p} \\
       &\lesssim_{p} t^{-p}  t^{p-1} = t^{-1} .
