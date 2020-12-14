@@ -542,23 +542,23 @@ This suggests that for a general Banach space we could use Rademacher averages t
   Let $X$ be a Banach space.
   For $N \in \N$ we define the (finite) \emph{Rademacher space}\index{Rademacher spaces} $\varepsilon_{N}(X)$ to be the space of finite sequences $\mb{x}_{\bullet} = (\mb{x}_{n})_{n=0}^{N}$ in $X$, equipped with the norm
   \begin{equation*}
-    \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)} := \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{1}(\Omega;X)},
+    \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)} := \E \Big( \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}^{2} \Big)^{1/2} = \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{2}(\Omega;X)},
   \end{equation*}
   where $(\varepsilon_{n})_{n = 0}^{N}$ is an arbitrary finite Rademacher sequence on an arbitrary probability space $(\Omega,\mc{A},\P)$.
   We also define the (infinite) Rademacher space $\varepsilon(X)$ to be the space of infinite sequences $\mb{x}_{\bullet} = (\mb{x}_{n})_{n \in \N}$ such that the series
   \begin{equation}\label{eq:infinite-rademacher-sum}
     \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} = \lim_{N \to \infty} \sum_{n = 0}^{N} \varepsilon_{n} \mb{x}_{n}
   \end{equation}
-  converges in $L^{1}(\Omega;X)$, equipped with the norm
+  converges in $L^{2}(\Omega;X)$, equipped with the norm
   \begin{equation*}
-    \|\mb{x}_{\bullet}\|_{\varepsilon(X)} := \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{1}(\Omega;X)}.
+    \|\mb{x}_{\bullet}\|_{\varepsilon(X)} := \E \Big( \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}^{2} \Big)^{1/2} = \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^{2}(\Omega;X)}.
   \end{equation*}
   As before, $(\varepsilon_{n})_{n \in \N}$ is an arbitrary infinite Rademacher sequence on an arbitrary probability space $(\Omega,\mc{A},\P)$.
 \end{defn}
 
 \begin{rmk}
-  The Kahane--Khintchine inequality says that the Rademacher averages in the definitions above can be replaced with $L^p$-Rademacher averages, and that the resulting norms are equivalent up to a constant independent of $N$.
-  It also says that the convergence of the infinite Rademacher sum \eqref{eq:infinite-rademacher-sum} in $L^1(\Omega;X)$ is equivalent to its convergence in $L^p(\Omega;X)$ for any $p \in [1,\infty)$.
+  The Kahane--Khintchine inequality says that the $L^2$-Rademacher averages in the definitions above can be replaced with $L^p$-Rademacher averages for any $p \in [1,\infty)$, and that the resulting norms are equivalent up to a constant independent of $N$.
+  It also says that the convergence of the infinite Rademacher sum \eqref{eq:infinite-rademacher-sum} in $L^2(\Omega;X)$ is equivalent to its convergence in $L^p(\Omega;X)$ for any $p \in [1,\infty)$.
 \end{rmk}
 
 The Rademacher space $\varepsilon(X)$ is a Banach space (Exercise \ref{ex:on-rad-spaces}), and in most applications of Banach-valued analysis it plays the role of $\ell^2(\N;X)$.
@@ -570,7 +570,7 @@ We saw already that $\varepsilon(H) = \ell^2(\N;H)$ when $H$ is a Hilbert space;
   Let $p \in [1,2]$ and $q \in [2,\infty]$.
   A Banach space $X$ has \emph{(Rademacher) type $p$} if there exists a constant $C < \infty$ such that
   \begin{equation*}
-    \| \mb{x}_{\bullet} \|_{\varepsilon(X)} := \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \leq C \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{p} \Big)^{1/p} = C\|\mb{x}_{\bullet}\|_{\ell^p(X)}
+    \| \mb{x}_{\bullet} \|_{\varepsilon(X)} := \E \Big( \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}^{2} \Big)^{1/2} \leq C \Big( \sum_{n \in \N} \|\mb{x}_{n}\|_{X}^{p} \Big)^{1/p} = C\|\mb{x}_{\bullet}\|_{\ell^p(X)}
   \end{equation*}
   for all sequences $\mb{x}_{\bullet} \in \ell^{p}(X)$, or equivalently if we have the continuous inclusion $\ell^{p}(X) \subset \varepsilon(X)$.
   On the other hand, $X$ has \emph{(Rademacher) cotype $q$} if there exists $C < \infty$ such that
@@ -583,11 +583,11 @@ We saw already that $\varepsilon(H) = \ell^2(\N;H)$ when $H$ is a Hilbert space;
 We restrict to $p \in [1,2]$ and $q \in [2,\infty]$ because the type and cotype inequalities can never hold for $p > 2$ and $q < 2$ (Exercise \ref{ex:no-extreme-types}).
 Every Banach space $X$ has type $1$ and cotype $\infty$: indeed, by the triangle inequality
 \begin{equation*}
-  \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} \leq \E \sum_{n \in \N} \|\varepsilon_{n} \mb{x}_{n}\|_{X} = \sum_{n \in \N} \|\mb{x}_{n}\|_{X}
+  \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{L^2(\Omega;X)} \leq \sum_{n \in \N} \|\varepsilon_{n} \mb{x}_{n}\|_{L^2(\Omega;X)} = \sum_{n \in \N} \|\mb{x}_{n}\|_{X}
 \end{equation*}
-and by the contraction principle (Theorem \ref{thm:contraction})
+and by the contraction principle (Theorem \ref{thm:contraction}) and Kahane--Khintchine\footnote{The proof of the contraction principle applies equally well to $L^p$-Rademacher averages for all $p \in [1,\infty)$, so technically Kahane--Khintchine can be avoided here.}
 \begin{equation*}
-  \|\mb{x}_{n}\|_{X} \lesssim \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n}\Big\|_{X} \qquad \forall n \in \N.
+  \|\mb{x}_{n}\|_{X} \lesssim \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n}\Big\|_{L^2(\Omega;X)} \qquad \forall n \in \N.
 \end{equation*}
 Thus we always have continuous inclusions
 \begin{equation*}
@@ -607,7 +607,7 @@ Since every finite-dimensional Banach space is isomorphic to a Hilbert space, an
   Let $(S,\mc{A},\mu)$ be a measure space, and consider the Banach space $X = L^p(S)$ with $p \in [1,\infty)$.
   Then $X$ has type $\min(p,2)$ and cotype $\max(p,2)$.
   For simplicity we will show that $L^p(S)$ has type $p$ when $p \in [1,2]$, as the remaining statements have analogous proofs.
-  For a sequence of functions $f_{n} \in L^p(S)$,
+  For a sequence of functions $f_{n} \in L^p(S)$,\todo{simplify this using square functions - Khintchine}
   \begin{equation*}
     \begin{aligned}
       \E \Big\| \sum_{n \in \N} \varepsilon_{n} f_{n} \Big\|_{L^p(S)}
@@ -631,8 +631,8 @@ Since every finite-dimensional Banach space is isomorphic to a Hilbert space, an
   Consider the standard basis vectors $\mb{e}_{n} \in c_{0}$.
   For all $N \in \N$ and $q < \infty$ we can compute
   \begin{equation*}
-    \E \Big\| \sum_{n = 0}^{N-1} \varepsilon_{n} \mb{e}_{n} \Big\|_{c_0}
-    = \E \| (\varepsilon_{0}, \varepsilon_{1}, \cdots, \varepsilon_{N-1}, 0, 0, \cdots) \|_{c_{0}} = 1
+    \Big\| \sum_{n = 0}^{N-1} \varepsilon_{n} \mb{e}_{n} \Big\|_{L^2(\Omega;c_0)}
+    = \| (\varepsilon_{0}, \varepsilon_{1}, \cdots, \varepsilon_{N-1}, 0, 0, \cdots) \|_{L^2(\Omega;c_{0})} = 1
   \end{equation*}
   and
   \begin{equation*}
@@ -648,7 +648,7 @@ Since every finite-dimensional Banach space is isomorphic to a Hilbert space, an
 \end{example}
 
 Given a Banach space $X$, one would expect that the Rademacher spaces $\varepsilon(X)$ and $\varepsilon(X^{*})$ are dual to each other.\index{K-convexity@$K$-convexity!and duality of Rademacher spaces}
-This requires the additional assumption of \emph{$K$-convexity}, which we will discuss in Chapter \ref{sec:UMD}.\footnote{It turns out that this is equivalent to $X$ having non-trivial type.}
+This requires the additional assumption of \emph{$K$-convexity}, which we will discuss in a later chapter.\footnote{It turns out that this is equivalent to $X$ having non-trivial type.}
 In general we do have the following H\"older-type (or Cauchy--Schwartz-type) inequality.
 See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
 
@@ -656,7 +656,7 @@ See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
   Let $X$ be a Banach space, and consider $\mb{x}_{\bullet} \in \varepsilon(X)$ and $\mb{x}_{\bullet}^{*} \in \varepsilon(X^{*})$.
   Then
   \begin{equation*}
-    \Big| \sum_{n \in \N} \langle \mb{x}_{n}, \mb{x}_{n}^{*} \rangle \Big| \lesssim \|\mb{x}_{\bullet}\|_{\varepsilon(X)} \|\mb{x}_{\bullet}^{*}\|_{\varepsilon(X^{*})} 
+    \Big| \sum_{n \in \N} \langle \mb{x}_{n}, \mb{x}_{n}^{*} \rangle \Big| \leq \|\mb{x}_{\bullet}\|_{\varepsilon(X)} \|\mb{x}_{\bullet}^{*}\|_{\varepsilon(X^{*})} 
   \end{equation*}
 \end{prop}
 
@@ -667,13 +667,13 @@ See Exercise \ref{ex:DPLMV} for some extensions of this result to three factors.
     \sum_{n \in \N} \langle \mb{x}_{n}, \mb{x}_{n}^{*} \rangle
     = \E \Big\langle \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n}, \sum_{m \in \N} \varepsilon_{m} \mb{x}_{m}^{*} \Big\rangle.
   \end{equation*}
-  Thus we can use Cauchy--Schwarz and Kahane--Khintchine to estimate
+  Thus we can use Cauchy--Schwarz to estimate
     \begin{equation*}
       \begin{aligned}
         \Big|\sum_{n \in \N} \langle \mb{x}_{n}, \mb{x}_{n}^{*} \rangle \Big|
         &\leq \Big( \E \Big\| \sum_{n \in \N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}^{2} \Big)^{1/2} 
         \Big( \E \Big\| \sum_{m \in \N} \varepsilon_{m} \mb{x}_{m}^{*} \Big\|_{X^{*}}^{2} \Big)^{1/2} \\
-        & \simeq \|\mb{x}_{\bullet}\|_{\varepsilon(X)} \|\mb{x}_{\bullet}^{*}\|_{\varepsilon(X^{*})} .
+        & = \|\mb{x}_{\bullet}\|_{\varepsilon(X)} \|\mb{x}_{\bullet}^{*}\|_{\varepsilon(X^{*})} .
       \end{aligned}
     \end{equation*}
 \end{proof}
