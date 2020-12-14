@@ -274,13 +274,13 @@ We will prove this through a series of lemmas, in which we obtain increasingly f
 Next we show that the oscillation control established in the previous lemma extends to more general stopping times (that is, more general than the constant stopping time $n$).
 
 \begin{lem}\label{lem:st-extension}
-  Suppose that there exist $t > 0$ and $C > 0$ such that
+  Suppose that there exist $t > 0$ and $c > 0$ such that
   \begin{equation*}
-    \P(A \cap \{ \| \mb{f}_n - \mb{f}_{k-1} \| > t \} ) \leq C \P(A) \qquad \forall k \leq n, A \in \mc{A}_k.
+    \P(A \cap \{ \| \mb{f}_n - \mb{f}_{k-1} \|_{X} > t \} ) \leq c \P(A) \qquad \forall k \leq n, A \in \mc{A}_k.
   \end{equation*}
   Then for all $k \in \N$, $A \in \mc{A}_k$, and all stopping times $T$ such that $T \geq k$ on $A$,
   \begin{equation}\label{eq:jn-stoptime}
-    \P(A \cap \{T < \infty\} \cap \{ \| \mb{f}_{T} - \mb{f}_{k-1} \| > 2t \} ) \leq 2C \P(A).
+    \P(A \cap \{T < \infty\} \cap \{ \| \mb{f}_{T} - \mb{f}_{k-1} \|_{X} > 2t \} ) \leq 2c \P(A).
   \end{equation}
 \end{lem}
 
@@ -290,26 +290,26 @@ Since \eqref{eq:jn-stoptime} involves the condition $T < \infty$, we don't need 
 \begin{proof}
   Sum over all possible values of the stopping time:
   \begin{equation*}
-      \P(A \cap \{T < \infty\} \cap \{ \| \mb{f}_{T} - \mb{f}_{k-1} \| > 2t \} ) 
-      = \lim_{N \to \infty} \sum_{n = k}^{N} \P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{k-1} \| > 2t \} ),
+      \P(A \cap \{T < \infty\} \cap \{ \| \mb{f}_{T} - \mb{f}_{k-1} \|_{X} > 2t \} ) 
+      = \lim_{N \to \infty} \sum_{n = k}^{N} \P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{k-1} \|_{X} > 2t \} ),
   \end{equation*}
   where $A_{n} := A \cap \{T = n\}$.
   For fixed $N > n > k$, since $A_n \in \mc{A}_n \subset \mc{A}_{n+1}$, we have by assumption
   \begin{equation*}
     \begin{aligned}
-      &\P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{k-1} \| > 2t \} ) \\
-      &\leq \P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{N} \| > t \} )
-      + \P(A_n \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \| > t \} ) \\
-      &\leq C \P(A_n) + \P(A_n \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \| > t \} ).
+      &\P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{k-1} \|_{X} > 2t \} ) \\
+      &\leq \P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{N} \|_{X} > t \} )
+      + \P(A_n \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \|_{X} > t \} ) \\
+      &\leq c \P(A_n) + \P(A_n \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \|_{X} > t \} ).
     \end{aligned}
   \end{equation*}
   Thus we have
   \begin{equation*}
     \begin{aligned}
-      &\lim_{N \to \infty} \sum_{n = k}^{N} \P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{k-1} \| > 2t \} ) \\
-      &\leq \lim_{N \to \infty} \Big( C \sum_{n=k}^N \P(A_n) + \sum_{n=k}^N \P(A_n \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \| > t \}) \Big) \\
-      &\leq C \P(A) + \lim_{N \to \infty} \P(A \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \| > t \})  
-      \leq 2C\P(A)
+      &\lim_{N \to \infty} \sum_{n = k}^{N} \P(A_n \cap \{ \| \mb{f}_{n} - \mb{f}_{k-1} \|_{X} > 2t \} ) \\
+      &\leq \lim_{N \to \infty} \Big( c \sum_{n=k}^N \P(A_n) + \sum_{n=k}^N \P(A_n \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \|_{X} > t \}) \Big) \\
+      &\leq c \P(A) + \lim_{N \to \infty} \P(A \cap \{ \| \mb{f}_{k-1} - \mb{f}_{N} \|_{X} > t \})  
+      \leq 2c\P(A)
     \end{aligned}
   \end{equation*}
   using the assumption and that $A \in \mc{A}_k$ in the last estimate.
@@ -325,10 +325,10 @@ and its Doob maximal function
 \end{equation*}
 
 \begin{lem}\label{lem:jn-mf}
-  Suppose that $\mb{f}_{\bullet}$ satisfies \eqref{eq:jn-stoptime} for some $t > 0$ and $C > 0$, for all $k \in \N$, $A \in \mc{A}_k$, and all stopping times $T$ such that $T \geq k$ on $A$.
+  Suppose that $\mb{f}_{\bullet}$ satisfies \eqref{eq:jn-stoptime} for some $t > 0$ and $c > 0$, for all $k \in \N$, $A \in \mc{A}_k$, and all stopping times $T$ such that $T \geq k$ on $A$.
   Then for all $s > 0$, all $k \in \N$, and all $A \in \mc{A}_{k}$,
   \begin{equation}\label{eq:jn-mf-eq}
-    \P(A \cap \{ \mc{M}({}^{k-1} \mb{f}_{\bullet}) > s + 2t \}) \leq 2C \P(A \cap \{  \mc{M}({}^{k-1} \mb{f}_{\bullet}) > s \}).
+    \P(A \cap \{ \mc{M}({}^{k-1} \mb{f}_{\bullet}) > s + 2t \}) \leq 2c \P(A \cap \{  \mc{M}({}^{k-1} \mb{f}_{\bullet}) > s \}).
   \end{equation}
 \end{lem}
 
@@ -336,23 +336,23 @@ and its Doob maximal function
   Fix $k \in \N$ and consider the stopping times
   \begin{equation*}
     \begin{aligned}
-      S &:= \inf\{n \geq k : \|\mb{f}_n - \mb{f}_{k-1}\| > s\}, \\
-      T &:= \inf\{n \geq k : \|\mb{f}_n - \mb{f}_{k-1}\| > s + 2t\}.
+      S &:= \inf\{n \geq k : \|\mb{f}_n - \mb{f}_{k-1}\|_{X} > s\}, \\
+      T &:= \inf\{n \geq k : \|\mb{f}_n - \mb{f}_{k-1}\|_{X} > s + 2t\}.
     \end{aligned}
   \end{equation*}
   Then $k \leq S \leq T$, and \eqref{eq:jn-mf-eq} can be rewritten as
   \begin{equation*}
-    \P(A \cap \{T < \infty\}) \leq 2C \P(A \cap \{S < \infty\}).
+    \P(A \cap \{T < \infty\}) \leq 2c \P(A \cap \{S < \infty\}).
   \end{equation*}
   Now fix $n \geq k$ and let $A_n := A \cap \{S = n\} \in \mc{A}_n$. 
   On $A_n \cap \{T < \infty\}$ we have
   \begin{equation*}
-    \|\mb{f}_{T} - \mb{f}_{n-1}\| \geq \|\mb{f}_{T} - \mb{f}_{k-1}\| - \|\mb{f}_{n-1} - \mb{f}_{k-1}\| > (s + 2t) - s = 2t,
+    \|\mb{f}_{T} - \mb{f}_{n-1}\|_{X} \geq \|\mb{f}_{T} - \mb{f}_{k-1}\|_{X} - \|\mb{f}_{n-1} - \mb{f}_{k-1}\|_{X} > (s + 2t) - s = 2t,
   \end{equation*}
   so
   \begin{equation*}
-    \P(A_n \cap \{T < \infty\}) = \P(A_n \cap \{T < \infty\} \cap \{\|\mb{f}_{T} - \mb{f}_{n-1}\| > 2t\} )
-    \leq 2C \P(A_n)
+    \P(A_n \cap \{T < \infty\}) = \P(A_n \cap \{T < \infty\} \cap \{\|\mb{f}_{T} - \mb{f}_{n-1}\|_{X} > 2t\} )
+    \leq 2c \P(A_n)
   \end{equation*}
   by assumption, since $T$ is a stopping time such that $T \geq k$ on $A_{n}$.
   Summing over $n \geq k$ completes the proof.
@@ -411,7 +411,7 @@ Now we can put everything together to prove the John--Nirenberg inequality.
   For all $k \leq n$, $A \in \mc{A}_k$, and $t > 0$.
   Lemma \ref{lem:st-extension} then extends this, saying that
   \begin{equation}\label{eq:jn-stoptime-end}
-    \P(A \cap \{T < \infty\} \cap \{ \| \mb{f}_{T} - \mb{f}_{k-1} \| > 2t \} ) \leq 2\Big( \frac{\|\mb{f}_{\bullet}\|_{*,q}}{t} \Big)^{q} \P(A)
+    \P(A \cap \{T < \infty\} \cap \{ \| \mb{f}_{T} - \mb{f}_{k-1} \|_{X} > 2t \} ) \leq 2\Big( \frac{\|\mb{f}_{\bullet}\|_{*,q}}{t} \Big)^{q} \P(A)
   \end{equation}
   for all $t > 0$, $k \in \N$, $A \in \mc{A}_k$, and all stopping times $T$ such that $T \geq k$ on $A$.
   Lemma \ref{lem:jn-mf} gives us the maximal function estimate
@@ -432,8 +432,8 @@ Now we can put everything together to prove the John--Nirenberg inequality.
       \|\mb{f}_{\bullet}\|_{*,p}
       &= \sup_{\substack{k,n \in \N \\ k \leq n}} \sup_{A \in \mc{A}_{k}^{+}} \Big( \fint_{A} \|\mb{f}_{n} - \mb{f}_{k-1} \|_{X}^{p} \, \dd\P \Big)^{1/p} \\
       &\leq \sup_{\substack{k,n \in \N \\ k \leq n}} \sup_{A \in \mc{A}_{k}^{+}} \Big( \fint_{A} \mc{M}({}^{k-1}\mb{f}_{\bullet})^{p} \, \dd\P \Big)^{1/p} \\
-      &= \sup_{k \in \N} \sup_{A \in \mc{A}_{k}^{+}} \P(A)^{-1/p} \|\1_{A} \mc{M}({}^{k-1}\mb{f}_{\bullet}) \|_{L^p(A)} \\
-      &\leq \frac{1 + c(t)^{1/p}}{1 - c(t)^{1/p}} t .
+      &= \sup_{k \in \N} \sup_{A \in \mc{A}_{k}^{+}} \P(A)^{-1/p} \|\1_{A} \mc{M}({}^{k-1}\mb{f}_{\bullet}) \|_{L^p(A)} 
+      \leq \frac{1 + c(t)^{1/p}}{1 - c(t)^{1/p}} t .
     \end{aligned}
   \end{equation*}
   Now it's just a matter of making a good choice of $t > 2^{1/q} \|\mb{f}_{\bullet}\|_{*,q}$.
