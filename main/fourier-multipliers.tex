@@ -1,16 +1,340 @@
-\emph{under construction}
+\section{The Hilbert transform}
 
-% \section{Fourier multipliers}
+Recall from the introduction that the Hilbert transform of a scalar-valued function $\map{f}{\R}{\C}$ is defined by
+\begin{equation*}
+  Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\substack{\varepsilon \downarrow 0 \\ R \uparrow \infty}} \int_{\varepsilon < |y| < R} f(x-y) \, \frac{\dd y}{y}
+\end{equation*}
+(the truncation of the integral can be done in different ways; this is not too important).
+This operator arises in complex analysis as follows.
+Given a real-valued function $\map{f}{\R}{\R}$, there is a unique holomorphic function $F$ on the upper half-space $\C_{+} = \{z \in \C : \Im(z) > 0\}$ such that for almost all $x \in \R = \partial \C_{+}$, the real part $\Re(F)$ satisfies
+\begin{equation*}
+  \lim_{z \to x} \Re(F(z)) = f(x) \qquad \ae \,  x \in \R,
+\end{equation*}
+provided the limit is taken within an appropriate region.
+It turns out that
+\begin{equation*}
+  \lim_{z \to x} \Im(F(z)) = Hf(x)
+\end{equation*}
+for almost all $x \in \R$.
+Thus the Hilbert transform computes what is called the \emph{conjugate function} of a real-valued $\map{f}{\R}{\R}$.
+See \cite[\textsection 5.1.2]{grafakos} for more details.
+There are plenty of other applications of this operator (and its generalisations, notably the Riesz transforms) outside of complex analysis, but we will not be too concerned with these.
 
-% \section{The Hilbert transform and the HT property}
+Classical methods in harmonic analysis (most notably Calder\'on--Zygmund theory) imply that the Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, while explicit computation of $Hf$ when $f = \1_{[0,1]}$ shows that $H$ is not bounded on $L^1(\R)$ or $L^\infty(\R)$.
+In this chapter (and the next) we will consider Banach-valued extensions of the Hilbert transform.
+In particular, we will show that these extensions are bounded on $L^p(\R;X)$ for $p \in (1,\infty)$ if and only if the Banach space $X$ has the UMD property.
 
-% \section{UMD implies HT}
+\begin{defn}
+  Let $X$ be a complex Banach space.\footnote{All of this theory can be formulated for real Banach spaces too, but once we get to Fourier multipliers it will be much nicer to have restricted ourselves to the complex setting.}
+  Given a function $\mb{f} \in L^p(\R;X)$ for some $p \in [1,\infty]$, for all $0 < \varepsilon < R < \infty$ we define the \emph{truncated Hilbert transform}
+  \begin{equation*}
+    H_{\varepsilon,R} \mb{f}(x) :=  \frac{1}{\pi} \int_{\varepsilon < |y| < R} \mb{f}(x-y) \, \frac{\dd y}{y} =  \frac{1}{\pi} \int_{\varepsilon < |x-y| < E} \mb{f}(y) \, \frac{\dd y}{x-y} \qquad \forall x \in \R.
+  \end{equation*}
+  We also define the \emph{Hilbert transform}
+  \begin{equation*}
+    H\mb{f}(x) := \lim_{\substack{\varepsilon \downarrow 0 \\ E \uparrow \infty}} H_{\varepsilon,E}\mb{f}(x)
+  \end{equation*}
+  provided that the limit (in $X$) exists.
+  To distinguish these operator from the classical scalar-valued Hilbert transform (or its truncations) we may write $H_{X}$ or $H_{X, \varepsilon, E}$.
+\end{defn}
 
-% (use the argument in HNVW1 - two lectures of work)
+Note that the truncated Hilbert transforms always exist, and they are bounded on $L^p(\R;X)$ for all $p \in [1,\infty]$: indeed, by Young's convolution inequality,
+\begin{equation*}
+  \|H_{\varepsilon,E} \mb{f}\|_{L^p(\R;X)} \leq \Big( \int_{\varepsilon < |y| < E} \frac{\dd y}{|y|} \Big) \|\mb{f}\|_{L^p(\R;X)} = C_{\varepsilon,E}  \|\mb{f}\|_{L^p(\R;X)}.
+\end{equation*}
+The constants $C_{\varepsilon,E}$ are always finite, but they blows up as $\varepsilon \downarrow 0$ and $E \uparrow \infty$.
+To show the existence and boundedness of the Hilbert transform, we need to use methods that exploit the cancellation between positive and negative values of the kernel $1/y$.
+For example, calculus can be used to show that $H\mb{f}$ exists when $\mb{f} \in C_{c}^1(\R;X)$ is continuously differentiable and compactly supported (Exercise \ref{ex:HT-C1}).
 
-% \section{The Mikhlin multiplier theorem}
+The Hilbert transform, at least when it exists, commutes with translations and dilations.
+That is, if the input function $\mb{f}$ is replaced by a translation by $s \in \R$ or a dilation by $\lambda > 0$,
+\begin{equation*}
+  \Tr_{s} \mb{f} (x) := \mb{f}(x - s), \qquad \Dil_{\lambda} \mb{f}(x) := \mb{f}(x/\lambda), 
+\end{equation*}
+then the output of the Hilbert transform is also replaced by the same translation or dilation.
+It also anticommutes with reflections, i.e. if the input function is replaced by
+\begin{equation*}
+  \Refl \mb{f}(x) := \mb{f}(-x),
+\end{equation*}
+then the output is replaced by the negative of its reflection.
+These results are summed up as follows.
 
-% \section{The Littlewood--Paley theorem}
+\begin{prop}
+  Let $X$ be a complex Banach space and $\map{\mb{f}}{\R}{X}$, and suppose that $H\mb{f}(x)$ exists for almost all $x \in \R$.
+  Then for all $s \in \R$ and $\lambda > 0$, the Hilbert transforms $H(\Tr_{s} \mb{f})$, $H(\Dil_{\lambda} \mb{f})$, and $H(\Refl \mb{f})$  exist almost everywhere, and
+  \begin{equation*}
+    H(\Tr_{s} \mb{f}) = \Tr_{s} (H\mb{f}), \qquad H(\Dil_{\lambda} \mb{f}) = \Dil_{\lambda} H(\mb{f}), \quad H(\Refl(\mb{f})) = -\Refl(H\mb{f}).
+  \end{equation*}
+\end{prop}
+
+\begin{proof}
+  For all $0 < \varepsilon < E < \infty$ the truncated Hilbert transforms, being convolution operators, satisfy
+  \begin{equation*}
+    H_{\varepsilon,E}(\Tr_{s} \mb{f}) = \Tr_{s} (H_{\varepsilon,E} \mb{f}),
+  \end{equation*}
+  and the result follows by taking $\varepsilon \downarrow 0$ and $E \uparrow \infty$.
+  The reflection is handled in the same way, using that the convolution kernel $1/y$ is odd.
+  As for the dilation, we have
+  \begin{equation*}
+    \begin{aligned}
+      H_{\varepsilon,E}(\Dil_{\lambda} \mb{f})(x)
+      &= \frac{1}{\pi} \int_{\varepsilon < |x-y| < E} \mb{f}\Big(\frac{y}{\lambda}\Big) \, \frac{\dd y}{x-y} \\
+      &= \frac{\lambda}{\pi} \int_{\varepsilon < |x - \lambda z| < E} \mb{f}(z) \, \frac{\dd z}{x - \lambda z} \\
+      &= \frac{\lambda}{\pi} \int_{\varepsilon < |\lambda(\lambda^{-1}x - z)| < E} \mb{f}(z) \, \frac{\dd z}{\lambda(\lambda^{-1}x - z)} \\
+      &= \Dil_{\lambda}(H_{\varepsilon/\lambda, E/\lambda} \mb{f})(x)
+    \end{aligned}
+  \end{equation*}
+  and again the result follows by taking limits in $\varepsilon$ and $E$.
+\end{proof}
+
+In fact, these properties characterise the Hilbert transform among all bounded linear operators on $L^2(\R)$ (and in fact on $L^p(\R)$ for all $p$), up to a scalar multiple.
+The following result is `well-known' in the scalar case: it appears as \cite[Exercise 5.1.11]{grafakos}.
+The proof for geenral complex Banach spaces is Exercise \ref{ex:HT-char}.%mk\
+
+\begin{prop}\label{prop:HT-char}
+  Let $X$ be a complex Banach space, and suppose that $T$ is a bounded linear operator on $L^2(\R;X)$ which commutes with all translations and dilations, and which anticommutes with reflections.
+  Then $T = cH_{X}$ for some $c \in \C$.
+\end{prop}
+
+
+\section{Dyadic systems}
+
+To establish boundedness of the Hilbert transform associated with a UMD space, we will need to relate it to martingale transforms.
+The transforms we will need are related to the Haar multipliers we considered in Section \ref{sec:haar-decomp}.
+However, we will need not only the dyadic filtration on the unit interval $[0,1)$, but more general \emph{dyadic systems} on $\R$.
+
+\begin{defn}
+  For all $j \in \Z$ let
+  \begin{equation*}
+    \mc{D}_{j}^{0} = \{2^{-j}[k, k+1) : k \in \Z\}
+  \end{equation*}
+  denote the set of all dyadic intervals in $\R$ of length $2^{-j}$, and let
+  \begin{equation*}
+    \mc{D}^{0} := \bigcup_{j \in \Z} \mc{D}_{j}^{0}
+  \end{equation*}
+  denote the \emph{standard dyadic system}---i.e. the set of all dyadic intervals in $\R$.
+  For every two-sided (i.e. $\Z$-indexed) sequence $\omega \in \{0,1\}^{\Z}$, define for all $j \in \Z$
+  \begin{equation*}
+    \mc{D}_{j}^{\omega} := \mc{D}_{j}^{0} + \sum_{i > j} 2^{-i} \omega_{i}:
+  \end{equation*}
+  this is the set of all dyadic intervals of length $2^{-j}$ as before, but with left endpoints shifted by the number $\sum_{i > j} 2^{-i} \omega_{i} \in [0,2^{-j})$: this number has the binary representation
+  \begin{equation*}
+    2^{-j}(0.\omega_{j+1}\omega_{j+2}\ldots)_{2} .
+  \end{equation*}
+  Finally, define the \emph{$\omega$-shifted dyadic system}
+  \begin{equation*}
+   \mc{D}^{\omega} := \bigcup_{j \in \Z} \mc{D}_{j}^{\omega}.
+  \end{equation*}
+\end{defn}
+
+We call $\mc{D}^{\omega}$ a `dyadic system' because it satisfies the following property.\footnote{This is technically the \emph{definition} of a dyadic system of intervals in $\R$. \cite[Lemma 5.1.7]{HNVW16} then says that every such dyadic system is given by $\mc{D}^\omega$ for some $\omega$. More general notions of dyadic systems (not necessarily of intervals, not necessarily in $\R$) exist. A good reference on this topic is \cite{LN18}.}
+
+\begin{prop}
+  Suppose $\omega \in \{0,1\}^{\Z}$ and $j \in \Z$.
+  Then every interval $I \in \mc{D}_{j}^{\omega}$ has length $2^{-j}$, and there exist intervals $I_{-}, I_{+} \in \mc{D}^{\omega}_{j+1}$ such that $I = I_{-} \cup I_{+}$.
+\end{prop}
+
+\begin{proof}
+  By construction every interval $I \in \mc{D}_{j}^{\omega}$ has length $2^{-j}$.
+  We have
+  \begin{equation*}
+    I = 2^{-j}[k,k+1) + \sum_{i > j} 2^{-i} \omega_{i}
+  \end{equation*}
+  for some $k \in \Z$.
+  Let $k' := k - \omega_{j}$, and consider the intervals
+  \begin{equation*}
+    \begin{aligned}
+      I_{-} &= 2^{-{j+1}}[2k', 2k'+1) + \sum_{i > j-1} 2^{-i} \omega_{i}, \\
+      I_{+} &= 2^{-{j+1}}[2k'+1, 2k'+2) + \sum_{i > j-1} 2^{-i} \omega_{i}. 
+    \end{aligned}
+  \end{equation*}
+  Both of these intervals are in $\mc{D}^{\omega}_{j-1}$, both have length $2^{-(j-1)}$, and they are adjacent.
+  Thus their union is an interval of length $2^{-j}$.
+  The left endpoint of $I_{-}$ is
+  \begin{equation*}
+    \begin{aligned}
+    2^{-j+1}(2k') + \sum_{i > j-1} 2^{-i} \omega_{i}
+    &= 2^{-j}(k - \omega_{j}) + 2^{-j} \omega_{j} + \sum_{i > j} 2^{-i} \omega_{i} \\
+    &= 2^{-j}k + \sum_{i > j} 2^{-i} \omega_{i},
+  \end{aligned}
+  \end{equation*}
+  which equals the left endpoint of $I$.
+  Similarly, the right endpoint of $I_{+}$ is equal to the right endpoint of $I$.
+  Thus $I = I_{-} \cup I_{+}$.
+\end{proof}
+
+\begin{rmk}
+The intervals in a shifted dyadic system $\mc{D}^{\omega}$ also satisfy the \emph{dyadic dichotomy}: if $I$ and $J$ are intervals in $\mc{D}^{\omega}$, then they are either comparable ($I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
+Prove this yourself in Exercise \ref{ex:dyadic-dichotomy}.
+\end{rmk}
+
+Dyadic systems are not translation invariant: given an interval $I \in \mc{D}^{\omega}$ and a parameter $x \in \R$, it is generally not true that $I + x \in \mc{D}^{\omega}$.
+However, the \emph{set of dyadic systems} is itself translation invariant.
+
+\begin{prop}
+  Let $\omega \in \{0,1\}^{\Z}$ and $x \in \R$.
+  Then $\mc{D}^{\omega} + x = \mc{D}^{\omega'}$ for some $\omega' \in \{0,1\}^{\Z}$.
+\end{prop}
+
+\begin{proof}
+  Suppose $I \in \mc{D}^{\omega}$, so that
+  \begin{equation*}
+    I = 2^{-j}[k, k+1) + \sum_{i > j} 2^{-i} \omega_{j}
+  \end{equation*}
+  for some $k \in \Z$.
+  The parameter $x$ has a binary expansion
+  \begin{equation*}
+    x = \sum_{i \in \Z} 2^{-i} \eta_{i}
+    = 2^{-j} \sum_{i \in \Z} 2^{j-i}\eta_{i}
+    = 2^{-j} \big( \sum_{i \leq j} 2^{j-i}\eta_{i} + \sum_{i > j} 2^{j-i}\eta_{i} \Big) 
+  \end{equation*}
+  for some finitely supported $\eta \in \{0,1\}^{\Z}$.
+  Letting $k_{j} = k + \sum_{i \leq j} 2^{j-i} \eta_{i} \in \Z$, we thus have
+  \begin{equation*}
+    \begin{aligned}
+      I + x &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} (\omega_{j} + \eta_{i}) \\
+      &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} \omega_{j}'
+    \end{aligned}
+  \end{equation*}
+  where $\omega'$ is the (formal) binary expansion of the sum of the numbers with (formal) binary expansions $\omega$ and $\eta$.
+  Thus $\mc{D}^{\omega} + x \subseteq \mc{D}^{\omega'}$, and a symmetric argument shows that $\mc{D}^{\omega'} \subseteq \mc{D}^{\omega} + x$.
+  Therefore we have $\mc{D}^{\omega} + x = \mc{D}^{\omega'}$.
+\end{proof}
+
+We are not content with shifted dyadic systems: we also need dilations.
+
+\begin{defn}
+  For $\omega \in \{0,1\}^{\Z}$ and $t > 0$, define the \emph{dilated dyadic system}
+  \begin{equation*}
+    t\mc{D}^{\omega} := \{tI : I \in \mc{D}^{\omega}\}.
+  \end{equation*}
+\end{defn}
+
+Of course, if we take $t$ to be a dyadic power $t = 2^{j}$ for some $j \in \Z$, then $t\mc{D}^{\omega} = \mc{D}^{\omega'}$ where $\omega'$ is a shift of $\omega$.
+Thus as long as we allow for changes in the parameter $\omega$ we only need to consider dilated dyadic systems $t\mc{D}^{\omega}$ for $t \in [1,2)$.
+
+Why do we consider shifted and dilated dyadic systems?
+Consider the probability space $\Omega := [1,2) \times \{0,1\}^{\Z}$, where $[1,2)$ is equipped with a probability measure $\nu$ (not necessarily the Lebesgue measure) and each factor $\{0,1\}$ has the uniform probability measure.
+Since our set of generalised dyadic systems is parametrised by $\Omega$, we are now in a position to consider a `random dyadic system', and to consider the associated `random martingale transforms'.
+We are also able to take \emph{expectations} of such random martingale transforms.
+By the construction of our shifted and dilated dyadic systems, these expectations will satisfy the same translation, dilation, and reflection invariances that characterise the Hilbert transform.\footnote{For reflection invariance of shifted dyadic systems see Exercise \ref{ex:dyadic-refln-invariance}.}
+We will thus be able to recover the Hilbert transform as an expectation of random martingale transforms.
+
+All of this is easier said than done: these invariances do not characterise the Hilbert transform itself, but rather $cH$ for some scalar $c \in \C$.
+We will need to make sure that $c \neq 0$.
+
+\section{Generalised Haar expansions and shift operators}
+
+Recall from Proposition \ref{prop:haar-multipliers} that for all $\mb{f} \in L^p([0,1);X)$ with $p \in (1,\infty)$ and $X$ a UMD space, we have
+\begin{equation*}
+  \Big\| \sum_{I \in \mc{D}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)} \lesssim_{p,X} \Big(\sup_{I \in \mc{D}} |a_{I}| \Big) \|\mb{f}\|_{L^p([0,1);X)}
+\end{equation*}
+for all scalar sequences $(a_{I})_{I \in \mc{D}}$ indexed by the set of dyadic subintervals of $[0,1)$.
+In particular, Haar decompositions are unconditional in $L^p([0,1);X)$.
+This can be extended in a straightforward way to general dyadic systems on $\R$, and the $L^p$-unconditionality can also be supplemented with a.e. pointwise convergence.
+
+\begin{thm}\label{thm:general-haar-decompositions}
+  Let $X$ be a complex UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}^{\omega}$ be a shifted dyadic system.
+  Then for all scalar sequences $(a_{I})_{I \in \mc{D}^{\omega}}$ indexed by $\mc{D}^{\omega}$ and all $\mb{f} \in L^p(\R;X)$,
+  \begin{equation}\label{eq:generalised-haar}
+      \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \Big(\sup_{I \in \mc{D}} |a_{I}| \Big) \|\mb{f}\|_{L^p([0,1);X)}
+  \end{equation}
+\end{thm}
+
+\begin{rmk}
+  Previously we only defined the Haar functions $h_{I}$ for dyadic subintervals of $[0,1)$, but the same definition applies for all intervals in $\R$:
+  we have
+  \begin{equation*}
+    h_{I} := |I|^{-1/2}(\1_{I_{-}} - \1_{I_{+}})
+  \end{equation*}
+  where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
+\end{rmk}
+
+\begin{proof}[Proof of Theorem \ref{thm:general-haar-decompositions}]
+  By density, it suffices to prove the result for integrable and compactly supported $\mb{f}$.
+  Under this assumption, there exists a scale $j_{0} \in \N$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}^{\omega}_{j}$ for all $j \geq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
+    The support of this function is covered by the standard dyadic intervals $[-1/2,0)$ and $[0,1/2)$, but $[-1/2,1/2)$ is not a standard dyadic interval.}
+  Let $I_{j} := I_{j}^{0} \cup I_{j}^{1}$ be the union of these two intervals.
+  Then for all $j \geq j_{0}$ we can write
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &\leq \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &+ \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \supset I_{j}}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
+    \end{aligned}
+  \end{equation*}
+  exploiting the dyadic dichotomy to restrict to intervals $I \supset I_{j}$ in the second term.
+  This term can be estimated by
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \supset I_{j}}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &\leq \sum_{k < j} \sum_{\sigma = 0,1} \big\| a_{I^{\sigma}_{k}} h_{I^{\sigma}_{k}} \otimes \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \big\|_{L^p(\R;X)} \\
+      &\leq \|a_{\bullet}\|_{\infty} \sum_{k < j} \sum_{\sigma = 0,1} \|h_{I^{\sigma}_{k}}\|_{p} \| \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \|_{X} \\
+      &\leq \|a_{\bullet}\|_{\infty} \sum_{k < j} \sum_{\sigma = 0,1} |I_{k}^\sigma|^{\frac{1}{p}-\frac{1}{2}} \|\mb{f}\|_{L^1(\R;X)} |I_{k}^{\sigma}|^{-\frac{1}{2}} \\
+      &= 2\|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^\infty(\R;X)} \sum_{k < j} 2^{-k(\frac{1}{p} - 1)} \\
+      &\lesssim 2\|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^\infty(\R;X)} 2^{j(1 - \frac{1}{p})}.
+    \end{aligned}
+  \end{equation*}
+  To control the first term, let $\P_{j}$ be the renormalised Lebesgue measure $|I_{j}|^{-1} \dd x$ on $I_{j}$.
+  Then $(I_{j},\P_{j})$ is a probability space (with the Borel $\sigma$-algebra).
+  Define a filtration $(\mc{F}_{n}^{j})_{n \in \N}$ on $I_{j}$ by
+  \begin{equation*}
+    \mc{F}_{n}^{j} := \sigma\{I \in \mc{D}^{\omega}_{j+n} : I \subset I_{j}\}.
+  \end{equation*}
+  Then by the same argument we used to prove Proposition \ref{prop:haar-multipliers}---really we are just looking at a rescaled, shifted version of that result---we identify the generalised Haar multiplier with a martingale transform associated with the filtration $\mc{F}^{j}_{\bullet}$, with consequence that
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &=  |I_{j}|^{1/p} \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(I_{j}, \P_{j};X)} \\
+      &\lesssim_{p,X} |I_{j}|^{1/p} \|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^p(I_{j},\P_{j};X)} \\
+      &\lesssim_{p,X} \|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^p(\R;X)}
+    \end{aligned}
+  \end{equation*}
+  using that $X$ has the UMD property and that $\mb{f}$ is supported in $I_{j}$.
+
+  In the end, for all $j \leq j_{0}$ we have
+  \begin{equation*}
+    \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+    \lesssim \|a_{\bullet}\|_{\infty}\Big(\|\mb{f}\|_{L^1(\R;X)} 2^{j(1 - \frac{1}{p})} + \|\mb{f}\|_{L^p(\R;X)}\Big),
+  \end{equation*}
+  and so taking $j \downarrow -\infty$ yields
+    \begin{equation*}
+    \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+    \lesssim \|a_{\bullet}\|_{\infty}\|\mb{f}\|_{L^p(\R;X)}.
+  \end{equation*}
+  Since this estimate is independent of the support of $\mb{f}$ and of $\|\mb{f}\|_{L^1(\R;X)}$, the result is proven.
+  
+\end{proof}
+
+\section{Existence and boundedness of the Hilbert transform}
+
+\section{Fourier multipliers}
+
+\section{The Mikhlin and Littlewood--Paley  theorems}
+
+\section{Exercises}
+
+\begin{exercise}\label{ex:HT-C1}
+  Let $X$ be a complex Banach space and suppose that $\mb{f} \in C_{c}^1(\R;X)$ is continuously differentiable and compactly supported.
+  Show that the Hilbert transform $H\mb{f}(x)$ exists for all $x \in \R$.
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ be a complex Banach space such that the Hilbert transform $H_{X}$ is bounded on $L^p(\R;X)$ for some $p \in (1,\infty)$,
+  Show that the scalar-valued Hilbert transform $H$ admits a bounded $X$-valued extension, in the sense of Definition \ref{defn:X-val-extn}.
+\end{exercise}
+
+\begin{exercise}\label{ex:HT-char}
+  Prove Proposition \ref{prop:HT-char}, assuming the result in the scalar case.
+\end{exercise}
+
+\begin{exercise}\label{ex:dyadic-dichotomy}
+  Prove the dyadic dichotomy for shifted dyadic systems: if $\omega \in \{0,1\}^{\Z}$ and $I,J \in \mc{D}^{\omega}$, then either $I$ and $J$ are comparable (i.e. $I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
+\end{exercise}
+
+\begin{exercise}\label{ex:dyadic-refln-invariance}
+  Show that the set of shifted dyadic systems is reflection invariant, i.e. that $-\mc{D}^{\omega} = \mc{D}^{\omega'}$ for some $\omega' \in \{0,1\}^{\Z}$.
+\end{exercise}
 
 
 
