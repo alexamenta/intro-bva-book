@@ -237,8 +237,14 @@ This can be extended in a straightforward way to general dyadic systems on $\R$,
   Let $X$ be a complex UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}^{\omega}$ be a shifted dyadic system.
   Then for all scalar sequences $(a_{I})_{I \in \mc{D}^{\omega}}$ indexed by $\mc{D}^{\omega}$ and all $\mb{f} \in L^p(\R;X)$,
   \begin{equation}\label{eq:generalised-haar}
-      \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \Big(\sup_{I \in \mc{D}} |a_{I}| \Big) \|\mb{f}\|_{L^p([0,1);X)}
+    \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \Big(\sup_{I \in \mc{D}} |a_{I}| \Big) \|\mb{f}\|_{L^p([0,1);X)}
   \end{equation}
+  (this statement includes the unconditional summability of the series in $L^p(\R;X)$).
+  Furthermore, for almost every $x \in \R$ we have the pointwise limit
+  \begin{equation*}
+    \lim_{\substack{n \uparrow \infty \\ m \downarrow -\infty}} \sum_{\substack{I \in \mc{D}^{\omega} \\ 2^{m} < |I| < 2^{n}}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle = \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle.
+  \end{equation*}
+  
 \end{thm}
 
 \begin{rmk}
@@ -250,9 +256,12 @@ This can be extended in a straightforward way to general dyadic systems on $\R$,
   where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
 \end{rmk}
 
+
+
 \begin{proof}[Proof of Theorem \ref{thm:general-haar-decompositions}]
-  By density, it suffices to prove the result for integrable and compactly supported $\mb{f}$.
-  Under this assumption, there exists a scale $j_{0} \in \N$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}^{\omega}_{j}$ for all $j \geq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
+  We begin with the $L^p$-unconditionality statement.
+  By density, it suffices to prove the result for compactly supported $\mb{f}$.
+  Under this assumption, there exists a scale $j_{0} \in \Z$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}^{\omega}_{j}$ for all $j \geq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
     The support of this function is covered by the standard dyadic intervals $[-1/2,0)$ and $[0,1/2)$, but $[-1/2,1/2)$ is not a standard dyadic interval.}
   Let $I_{j} := I_{j}^{0} \cup I_{j}^{1}$ be the union of these two intervals.
   Then for all $j \geq j_{0}$ we can write
@@ -271,10 +280,11 @@ This can be extended in a straightforward way to general dyadic systems on $\R$,
       &\leq \sum_{k < j} \sum_{\sigma = 0,1} \big\| a_{I^{\sigma}_{k}} h_{I^{\sigma}_{k}} \otimes \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \big\|_{L^p(\R;X)} \\
       &\leq \|a_{\bullet}\|_{\infty} \sum_{k < j} \sum_{\sigma = 0,1} \|h_{I^{\sigma}_{k}}\|_{p} \| \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \|_{X} \\
       &\leq \|a_{\bullet}\|_{\infty} \sum_{k < j} \sum_{\sigma = 0,1} |I_{k}^\sigma|^{\frac{1}{p}-\frac{1}{2}} \|\mb{f}\|_{L^1(\R;X)} |I_{k}^{\sigma}|^{-\frac{1}{2}} \\
-      &= 2\|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^\infty(\R;X)} \sum_{k < j} 2^{-k(\frac{1}{p} - 1)} \\
-      &\lesssim 2\|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^\infty(\R;X)} 2^{j(1 - \frac{1}{p})}.
+      &= 2\|a_{\bullet}\|_{\infty} |I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} \sum_{k < j} 2^{-k(\frac{1}{p} - 1)} \\
+      &\lesssim 2\|a_{\bullet}\|_{\infty} |I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} 2^{j(1 - \frac{1}{p})}
     \end{aligned}
   \end{equation*}
+  using that $\mb{f}$ is supported in $I_{j_{0}}$ to estimate the $L^1$ norm.
   To control the first term, let $\P_{j}$ be the renormalised Lebesgue measure $|I_{j}|^{-1} \dd x$ on $I_{j}$.
   Then $(I_{j},\P_{j})$ is a probability space (with the Borel $\sigma$-algebra).
   Define a filtration $(\mc{F}_{n}^{j})_{n \in \N}$ on $I_{j}$ by
@@ -295,16 +305,63 @@ This can be extended in a straightforward way to general dyadic systems on $\R$,
   In the end, for all $j \leq j_{0}$ we have
   \begin{equation*}
     \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
-    \lesssim \|a_{\bullet}\|_{\infty}\Big(\|\mb{f}\|_{L^1(\R;X)} 2^{j(1 - \frac{1}{p})} + \|\mb{f}\|_{L^p(\R;X)}\Big),
+    \lesssim_{p,X} \|a_{\bullet}\|_{\infty} \|\mb{f}\|_{L^p(\R;X)} \Big(|I_{j_{0}}|^{1/p'}  2^{j(1 - \frac{1}{p})} + 1\Big),
   \end{equation*}
-  and so taking $j \downarrow -\infty$ yields
+  so taking $j \downarrow -\infty$ yields
     \begin{equation*}
     \Big\| \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
-    \lesssim \|a_{\bullet}\|_{\infty}\|\mb{f}\|_{L^p(\R;X)}.
+    \lesssim_{p,X} \|a_{\bullet}\|_{\infty}\|\mb{f}\|_{L^p(\R;X)},
   \end{equation*}
-  Since this estimate is independent of the support of $\mb{f}$ and of $\|\mb{f}\|_{L^1(\R;X)}$, the result is proven.
-  
+  completing the proof of $L^p$-uncondionality.
+
+  Now we prove the a.e. pointwise convergence.
+  Let
+  \begin{equation*}
+    \mb{g} := \sum_{I \in \mc{D}^{\omega}} a_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle;
+  \end{equation*}
+  we know from the previous statement that this sum exists in $L^p(\R;X)$.
+  For almost all $x \in \R$, fixing $m,n \in \Z$, we can write
+  \begin{equation*}
+    \begin{aligned}
+    \mb{g}(x) - \sum_{\substack{x \in I \in \mc{D}^{\omega} \\ 2^{m} < |I| < 2^{n} \\ I \ni x}} a_{I} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle 
+    = \Big( \sum_{k \leq m} + \sum_{k \geq n} \Big) a_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle
+  \end{aligned}
+\end{equation*}
+where $I_{k}(x)$ is the unique interval in $\mc{D}^\omega_{k}$ containing $x$.
+The first summand satisfies
+\begin{equation*}
+  \begin{aligned}
+  \Big\| \sum_{k \leq m} a_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|
+  &\leq \sum_{k \leq m} |I_{k}(x)|^{-1/2} \|\mb{f}\|_{L^p(\R;X)} \|h_{I_k(x)}\|_{p'} \\
+  &=  \|\mb{f}\|_{L^p(\R;X)} \sum_{k \leq m}  2^{k(1 - 1/p')} \\
+  &\lesssim \|\mb{f}\|_{L^p(\R;X)} 2^{m(1 - 1/p')}.
+\end{aligned}
+\end{equation*}
+Now fix $\varepsilon > 0$, and let $m \in \Z$ be so small that this term is less than $\varepsilon$.
+We get
+\begin{equation*}
+  \Big\|  \mb{g}(x) - \sum_{\substack{x \in I \in \mc{D}^{\omega} \\ 2^{m} < |I| < 2^{n} \\ I \ni x}} a_{I} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle  \Big\|_{X} \leq \varepsilon + \Big\| \sum_{k \geq n} a_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X}.
+\end{equation*}
+By considering only the subintervals of $I_{m}(x)$ and rescaling as in the proof of the unconditionality statement, the a.e. convergence of martingales implies that
+\begin{equation*}
+  \sum_{k \geq m} a_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle
+\end{equation*}
+converges for almost all $x \in I_{m}$ (thus for almost all $x \in \R$, since varying $x \in \R$ leads to only countably many intervals $I_{m}(x)$).
+Thus for $n \in \Z$ sufficiently large we have
+\begin{equation*}
+  \Big\| \sum_{k \geq m} a_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X} < \varepsilon.
+\end{equation*}
+It follows that for small $m$ and large $n$ we have
+\begin{equation*}
+  \Big\|  \mb{g}(x) - \sum_{\substack{x \in I \in \mc{D}^{\omega} \\ 2^{m} < |I| < 2^{n} \\ I \ni x}} a_{I} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle  \Big\|_{X} \leq 2\varepsilon,
+\end{equation*}
+and since $\varepsilon > 0$ was arbitrary we get our result.
 \end{proof}
+
+\begin{rmk}
+  This argument could have been avoided by considering conditional expectations and martingales on general $\sigma$-finite measure spaces, indexed over $\Z$ rather than $\N$.
+  The result would then follow from the `extended' UMD property defined via such martingales (which is, of course, equivalent to our UMD property).
+\end{rmk}
 
 \section{Existence and boundedness of the Hilbert transform}
 
