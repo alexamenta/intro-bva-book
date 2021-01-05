@@ -1,0 +1,207 @@
+\documentclass[a4paper,10pt]{amsbook}
+
+\usepackage{conf}
+
+\hyphenation{pro-duct de-fi-ning}
+
+%% Margin notes (use commands below to enable or disable notes)
+% \usepackage[disable]{todonotes}
+\usepackage[color=blue!30]{todonotes}
+
+\begin{document}
+
+\title{Exam questions}
+\date{\today}
+
+%\author[A. Amenta]{Alex Amenta}
+%\address{\noindent Mathematisches Institut \newline \indent Universit\"at Bonn, Bonn, Germany}
+%\email{amenta@math.uni-bonn.de}
+
+\maketitle
+%\tableofcontents
+
+%% Main matter
+
+\section{Strong measurability and Bochner spaces}
+
+\begin{exercise}\label{ex:measurability-containments}
+  Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space.
+  Prove the containments
+  \begin{equation*}
+    \SMeas(S;X) \subset \Meas(S;X) \subset \WMeas(S;X).
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}\label{ex:finite-sigma-alg-duality}
+  Let $X$ be a Banach space and $(S,\mc{A},\mu)$ a measure space such that the $\sigma$-algebra $\mc{A}$ is finite.
+  Show that the isometric embedding
+  \begin{equation*}
+    \map{\Phi}{L^{p'}(S,\mc{A},\mu;X^*)}{L^p(S,\mc{A},\mu;X)^*}, \qquad \Phi \mb{g}(\mb{f}) = \int_S \langle \mb{f}(x), \mb{g}(x) \rangle \, \dd\mu(x)
+  \end{equation*}
+  is an isomorphism for all $p \in [1,\infty]$.
+\end{exercise}
+
+\begin{exercise}\label{ex:sm-limits}
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  Let $(\mb{f}_{n})_{n \in \N}$ be a sequence of $X$-valued functions and $\map{\mb{f}}{S}{X}$, and suppose that $\mb{f}_{n} \to \mb{f}$ almost everywhere (with respect to $\mu$).
+  Suppose that for each $n \in \N$ there exists a set $N_{n} \subset S$ with $\mu(N_{n}) = 0$ such that $\mb{f}_{n}$ is strongly measurable on $S \sm N_{n}$.
+  Show that there exists a set $N \subset S$ with $\mu(N) = 0$ such that $\mb{f}$ is strongly measurable on $S \sm N$.
+  (That is: show that the a.e. limit of a.e. strongly measurable functions is a.e. strongly measurable.)
+\end{exercise}
+
+\begin{exercise}\label{ex:tensor-extension-basic-props}
+  Let $(S, \mc{A}, \mu)$ be a measure space and $p \in [1,\infty)$.
+  Suppose that $T \in \Lin(L^{p}(S))$ is a bounded linear operator.
+  \begin{itemize}
+  \item\index{bounded Banach-valued extension!for finite dimensional spaces}
+    Show that $T$ admits a bounded $X$-valued extension for all finite dimensional Banach spaces $X$.
+  \item\index{tensor extension!adjoints}
+    Let $X$ be any Banach space and suppose $\mb{x}^* \in X^*$.
+    Show that for all $f \in L^{p}(S) \otimes X$,
+    \begin{equation*}
+      \langle (T \otimes I)f, \mb{x}^* \rangle = T(\langle f, \mb{x}^* \rangle).
+    \end{equation*}
+  \end{itemize}
+
+\end{exercise}
+
+\section{Probability in Banach spaces}
+
+\begin{exercise}\label{ex:CE-monotonicity}\index{conditional expectations!monotonicity}
+  Let $(\Omega,\mc{A},\P)$ is a probability space, $X$ a Banach space, and $\mb{f} \in L^1(\Omega;X)$.
+  Let $\mc{B}$ and $\mc{B}'$ be $\sigma$-subalgebras of $\mc{A}$ with $\mc{B}' \subset \mc{B}$.
+  Show that
+  \begin{equation*}
+    \E^{\mc{B}'} \E^{\mc{B}} \mb{f} = \E^{\mc{B}'} \mb{f}
+  \end{equation*}
+  in two ways: first by using the defining property of conditional expectations, and then by using its construction as the adjoint of an inclusion map.
+\end{exercise}
+
+\begin{exercise}\label{ex:gambling-in-linfty}
+  This exercise takes place in the setting of Example 3.12 (gambling in Banach spaces).
+  \begin{itemize}
+  \item
+    Let $X = \ell^\infty(\N)$.
+    Suppose that the wager vectors $\map{\mb{x}_n}{\Omega}{\ell^\infty(\N)}$ are such that for all $\omega \in \Omega$, the vectors $(\mb{x}_n(\omega))_{n \in \N}$ are pairwise distinct standard basis vectors (i.e. $\{0,1\}$-valued sequences, zero for all but one index).
+    Fix $\lambda > 0$ and let $K = \{\mb{a} \in \ell^\infty(\N) : \|\mb{a}\|_\infty \geq \lambda\} = \ell^\infty(\N) \sm B_\lambda(\mb{0})$.
+    Show that the stopping time
+    \begin{equation*}
+      T_K(\omega) := \inf\{n \in \N : \mb{s}_n(\omega) \in K\} 
+    \end{equation*}
+    is finite if and only if $\lambda \leq 1$.
+  \item
+    As above, but now let $X = \ell^2(\N)$, and show that the stopping time $T_K$ is finite for all $\lambda > 0$.
+  \end{itemize}
+\end{exercise}
+
+\begin{exercise}
+  Let $(\Omega, \mc{A}, \P)$ be a probability space, $\mc{B}$ a $\sigma$-subalgebra of $\mc{A}$, and let $X$ and $Y$ be Banach spaces.
+  Consider an operator-valued function $T \in L^\infty(\mc{B}; \Lin(X,Y))$.
+  For $\mb{f} \in L^1(\mc{A}; X)$ define the function $T\mb{f} \in L^1(\mc{A}; Y)$ by
+  \begin{equation*}
+    T\mb{f}(\omega) := T(\omega) \mb{f}(\omega).
+  \end{equation*}
+  Prove that $\E^{\mc{B}}(T\mb{f}) = T \E^{\mc{B}}\mb{f}$ for all $\mb{f} \in L^1(\mc{A};X)$.
+\end{exercise}
+
+\section{The Radon--Nikodym property}
+
+\begin{exercise}
+  Let $X$ be a Banach space with the Radon--Nikodym property, and suppose that $Y$ is a Banach space which is isomorphic to $X$.
+  Show that $Y$ also has the Radon--Nikodym property.
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ be a Banach space with the Radon--Nikodym property.
+  Show that every bounded linear operator $\map{T}{L^1([0,1])}{X}$ is of the form
+  \begin{equation*}
+    Tf = \int_0^1 f(t) \mb{g}(t) \, \dd t
+  \end{equation*}
+  for some $\mb{g} \in L^1([0,1];X)$.
+\end{exercise}
+
+\begin{exercise}
+  Show that a Banach space $X$ has the Radon--Nikodym property if and only if every $X$-valued Lipschitz function on $[0,1]$ is differentiable almost everywhere.
+\end{exercise}
+
+\section{Rademacher sums}
+
+\begin{exercise}
+  Let $N \in \N$ and suppose that the subsets $(E_{j})_{j=0}^{J}$, $E_{j} \subset \{0,1,\ldots,N\}$ form a partition of $\{0,1,\ldots,N\}$.
+  Let $(\varepsilon_{n})_{n=0}^{N}$ be a Rademacher sequence on a probability space $(\Omega,\mc{A},\P)$, and let $(\varepsilon'_{j})_{j=0}^{J}$ be another Rademacher sequence on a probability space $(\Omega', \mc{A}', \P')$.
+  Let $(\mb{x}_{n})_{n=0}^{N}$ be a finite sequence of vectors in a Banach space $X$.
+  Show that
+  \begin{equation*}
+    \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{x}_{n} \Big\|_{X} = \E' \E \Big\| \sum_{j=0}^{J} \varepsilon'_{j} \sum_{n \in E_{j}} \varepsilon_{n} \mb{x}_{n} \Big\|_{X}
+  \end{equation*}
+  where $\E'$ denotes the expectation on $\P'$.
+\end{exercise}
+
+\begin{exercise}
+  Let $(S,\mc{A},\mu)$ be a measure space and $X$ a Banach space.
+  For all $p \in [1,\infty)$, show that
+  \begin{equation*}
+    \varepsilon(L^{p}(\mu;X)) = L^{p}(\mu;\varepsilon(X))
+  \end{equation*}
+  with equivalent norms (after identifying sequences of functions $S \to X$ with functions $S \to \varepsilon(X)$). 
+\end{exercise}
+
+\begin{exercise}
+  Show that it is impossible for a Banach space to have `type $p > 2$' or `cotype $q < 2$'.
+\end{exercise}
+
+\begin{exercise}
+  Give an example of a Banach space $X$ with finite cotype such that the dual $X^{*}$ does not have nontrivial type.
+\end{exercise}
+
+\section{The UMD property}
+
+\begin{exercise}\label{ex:UMD-isomorphism}\index{UMD property!of closed subspaces of UMD spaces}
+  Let $X$ be a Banach space and $Y$ a closed subspace of $X$.
+  Suppose that $Z$ is a Banach space and $\map{\phi}{Z}{Y}$ is an isomorphism.
+  Show that 
+  \begin{equation*}
+    \beta_{p}(Z) \leq \|\phi\|_{\Lin(Z,Y)} \|\phi^{-1}\|_{\Lin(Y,Z)} \beta_{p}(X) \qquad \forall p \in (1,\infty).
+  \end{equation*}
+\end{exercise}
+
+In the following exercise we use the notion of the $R$-bound of a set of operators.
+Let $X$ be a Banach space and suppose $\mc{T} \subset \Lin(X)$ is a set of bounded linear operators on $X$.
+We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$,
+\begin{equation*}
+  \|T_{\bullet} \mb{x}_{\bullet}\|_{\varepsilon_{N}(X)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)}.
+\end{equation*}
+The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound of $\mc{T}$.
+
+\begin{exercise}
+  Let $X$ be a UMD Banach space, let $p \in (1,\infty)$, and let $\mb{f}_{\bullet}$ be an $X$-valued $L^p$-bounded martingale with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$.
+  Let $T_{\bullet}$ be an $R$-bounded sequence of operators in $\Lin(X)$.
+  Show that the martingale transform with coefficients $T_{\bullet}$ is bounded, i.e.
+  \begin{equation*}
+    \| (T \cdot \mb{f})_{N} \|_{L^p(\Omega;X)} \lesssim R(T_{\bullet}) \|\mb{f}_{N}\|_{L^p(\Omega;X)}.
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}
+  Let $H$ be an infinite dimensional Hilbert space, and let $\mc{K}(H)$ be the space of all compact operators on $H$.
+  Show that $\mc{K}(H)$ is not UMD.
+\end{exercise}
+
+\section{Fourier multipliers and Littlewood--Paley theory}
+
+\section{Necessity of the UMD property}
+
+\section{Schatten class operators}
+
+\section{Fourier type}
+
+
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

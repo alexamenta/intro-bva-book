@@ -89,8 +89,8 @@ This characterisation of the $\UMD_{p}$ constant, with a short duality argument,
     \begin{aligned}
       \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p}(\Omega;X))}
       &= \sup_{\mb{f}} \| T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f} \|_{L^{p}(\Omega;X)} \\
-      &= \sup_{\mb{f}, \mb{g}} \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle \\
-      &= \sup_{\mb{f}, \mb{g}} \langle  \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle \\
+      &= \sup_{\mb{f}, \mb{g}} \big| \langle T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{f}, \mb{g} \rangle \big| \\
+      &= \sup_{\mb{f}, \mb{g}} \big| \langle  \mb{f}, T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \rangle \big| \\
       &= \sup_{\mb{g}} \| T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{g} \|_{L^{p'}(\Omega;X^{*})}
       &= \|T_{\mc{A}_{\bullet}, \xi_{\bullet}}\|_{\Lin(L^{p'}(\Omega;X^{*}))},
   \end{aligned}
@@ -118,10 +118,10 @@ This will be more useful once we know the $p$-independence of the UMD property.
   \begin{equation*}
     \begin{aligned}
       \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;Y)}^{p}
-      &= \int_{\Omega} \int_{S} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}^{p} \, \dd\mu(s) \, \dd\P(\omega) \\
-      &=  \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
-      &\leq \beta_{p}(X)^{p} \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
-      &= \beta_{p}(X)^{p} \int_{\Omega}  \int_{S} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega) \Big\|_{X}^{p}   \, \dd\mu(s) \, \dd\P(\omega) \\
+      &= \int_{\Omega} \int_{S} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p} \, \dd\mu(s) \, \dd\P(\omega) \\
+      &=  \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N \xi_{n} d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
+      &\leq \beta_{p}(X)^{p} \int_{S} \Big( \int_{\Omega} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p}  \, \dd\P(\omega) \Big) \, \dd\mu(s) \\
+      &= \beta_{p}(X)^{p} \int_{\Omega}  \int_{S} \Big\| \sum_{n=0}^N d\mb{f}_{n}(\omega)(s) \Big\|_{X}^{p}   \, \dd\mu(s) \, \dd\P(\omega) \\
       &= \beta_{p}(X)^{p} \Big\| \sum_{n=0}^N d\mb{f}_{n} \Big\|_{L^p(\Omega;Y)}^{p},
     \end{aligned}
   \end{equation*}
@@ -220,7 +220,7 @@ For now we will assume it, and deduce the weak-type $(1,1)$ estimate for finite 
   \begin{equation*}
     \begin{aligned}
       \P(\|\td{\mb{c}}\|_{X} > t)
-      &\leq t^{-p}\|T_{\mc{A}_{\bullet, \xi_{\bullet}}} \mb{c} \|_{L^p(\Omega;X)}^{p} \\
+      &\leq t^{-p}\|T_{\mc{A}_{\bullet}, \xi_{\bullet}} \mb{c} \|_{L^p(\Omega;X)}^{p} \\
       &\lesssim_{p,X} t^{-p} \|\mb{c} \|_{L^p(\Omega;X)}^{p} \\
       &\leq t^{-p}  \Big( \|\mb{c} \|_{L^1(\Omega;X)}^{\frac{1}{p}} \|\mb{c}\|_{L^\infty(\Omega;X)}^{1-\frac{1}{p}} \Big)^{p} \\
       &\lesssim_{p} t^{-p}  t^{p-1} = t^{-1} .
@@ -306,16 +306,16 @@ The sequence $(\mc{A}_{\min(n,T)})_{n \in \N}$ is in fact a filtration (Exercise
 \begin{prop}\label{prop:stopped-martingale}
   Let $X$ be a Banach space and $(\Omega,\mc{A},\P)$ a probability space, and let $\mc{A}_{\bullet}$ be a filtration.
   Let $\mb{f} \in L^1(\Omega;X)$, and let $\mb{f}_{\bullet} := \E^{\mc{A}_{\bullet}} \mb{f}$ be the associated martingale. 
-  If $\map{T}{\Omega}{\N \cup \{\infty\}}$ is a finite stopping time, then
+  If $\map{T}{\Omega}{\N \cup \{\infty\}}$ is a stopping time, then
   \begin{equation}\label{eq:stopmgale}
-    \E^{\mc{A}_{T}} \mb{f} \aeeq \mb{f}_{T},
+    \E^{\mc{A}_{T}} \mb{f} \aeeq \mb{f}_{T}
   \end{equation}
-  and so $\|\mb{f}_{T}\|_{L^1(\Omega;X)} \leq \|\mb{f}\|_{L^1(\Omega;X)}$.
-  Furthermore, the stopped process $\mb{f}_{\min(\bullet,T)}$ is a martingale with respect to $\mc{A}_{\min(\bullet,T)}$.
+  where we define $\mb{f}_{T}(\omega) := \mb{f}(\omega)$ when $T(\omega) = \infty$, and so $\|\mb{f}_{T}\|_{L^1(\Omega;X)} \leq \|\mb{f}\|_{L^1(\Omega;X)}$.
+  Furthermore, the stopped process $\mb{f}_{\min(\bullet,T)}$ is a martingale with respect to both $\mc{A}_{\bullet}$ and $\mc{A}_{\min(\bullet,T)}$.
 \end{prop}
 
 \begin{proof}
-  The fact that $\mb{f}_{\min(\bullet,T)}$ is a martingale follows from \eqref{eq:stopmgale}, which implies in addition that $\mb{f}_{\min(\bullet,T)} = \E^{\mc{A}_{\min(\bullet,T)}} \mb{f}$ is the martingale associated with $\mb{f}$ and the filtration $\mc{A}_{\min(\bullet,T)}$.
+  The fact that $\mb{f}_{\min(\bullet,T)}$ is a martingale with respect to $\mc{A}_{\min(\bullet,T)}$ follows from \eqref{eq:stopmgale}, which implies in addition that $\mb{f}_{\min(\bullet,T)} = \E^{\mc{A}_{\min(\bullet,T)}} \mb{f}$ is the martingale associated with $\mb{f}$ and $\mc{A}_{\min(\bullet,T)}$.\todo{add that the stopped process is a martingale with respect to $\mc{A}_{\bullet}$ too}
   Thus we need only prove \eqref{eq:stopmgale}.
   
   Fix a set $A \in \mc{A}_{T}$, and let $A_{k} = A \cap \{T = k\}$ for $k \in \N \cup \{\infty\}$, so that $A_{k} \in \mc{A}_{k}$ and $(A_{k})_{k \in \N \cup \{\infty\}}$ is a partition of $A$.
@@ -338,7 +338,7 @@ Now, to Gundy's decomposition.
   \begin{equation*}
     r(\omega) := \inf\big\{ n \in \N : \|\mb{f}_{n}(\omega)\|_{X} > \lambda \big\},
   \end{equation*}
-  where $\mb{f}$ is the martingale associated with $\mb{f}$ and $\mc{A}_{\bullet}$.
+  where $\mb{f}_{\bullet}$ is the martingale associated with $\mb{f}$ and $\mc{A}_{\bullet}$.
   For $n \in \N$ define the scalar-valued function $v_{n} = \|d\mb{f}_{n}\|_{X} \1_{\{r = n\}}$, and define two more stopping times
   \begin{equation*}
     \begin{aligned}
@@ -575,7 +575,7 @@ Integrating this over $\omega' \in \Omega'$, taking the $p$-th root, and using K
 so taking the supremum over $N \in \N$ establishes \eqref{eq:burkholder}.
 
 Now let's assume \eqref{eq:burkholder} and establish that $X$ is $\UMD_{p}$, and hence $\UMD$.
-Let $\xi_{\bullet}$ be a sequence of signs and $(\mb{f}_{\bullet})$ an $X$-valued $L^p$-bounded martingale, and fix $N \in \N$.
+Let $\xi_{\bullet}$ be a sequence of signs and $\mb{f}_{\bullet}$ an $X$-valued $L^p$-bounded martingale, and fix $N \in \N$.
 Then by assumption
 \begin{equation*}
   \begin{aligned}
@@ -629,7 +629,7 @@ or equivalently by the difference sequence
       &\simeq_{p,X} \|d(g \cdot \mb{f})_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))} \\
       &= \|g_{\bullet} d\mb{f}_{\bullet}\|_{\varepsilon_{N}(L^p(\Omega;X))} \\
       &\simeq_{p} \|g_{\bullet} d\mb{f}_{\bullet}\|_{L^p(\Omega;\varepsilon_{N}(X))} \\
-      &\simeq_{p} \Big( \int_{\Omega} \|g_{\bullet}(\omega) d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p}.
+      &= \Big( \int_{\Omega} \|g_{\bullet}(\omega) d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p}.
     \end{aligned}
   \end{equation*}
   The contraction principle then yields
@@ -637,7 +637,7 @@ or equivalently by the difference sequence
     \begin{aligned}
     \Big( \int_{\Omega} \|g_{\bullet}(\omega) d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p}
     &\lesssim \Big( \int_{\Omega} \big( \sup_{n \in \N} |g_{n}(\omega)| \big)^{p} \|d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p} \\
-    &\lesssim \big( \sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \big)  \Big( \int_{\Omega} \|d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p},
+    &\leq \big( \sup_{n \in \N} \|g_{n}\|_{L^\infty(\Omega)} \big)  \Big( \int_{\Omega} \|d\mb{f}_{\bullet}(\omega)\|_{\varepsilon_{N}(X)}^{p} \, \dd\P(\omega) \Big)^{1/p},
   \end{aligned}
 \end{equation*}
 and one more application of Exercise \ref{ex:rad-leb-comm} and Burkholder's inequality gives
@@ -731,7 +731,7 @@ In the scalar case $X = \K$, this leads to a quick proof of a classical result.
   Let $a_{I} = \xi_{I}$ if $I \in \mc{I}$ and $a_{I} = 0$ for all $I \in \mc{D} \sm \mc{I}$.
   With $f = \sum_{I \in \mc{I}} h_{I}$, Proposition \ref{prop:haar-multipliers} says that
   \begin{equation*}
-    \Big\|\sum_{I \in \mc{I}} a_{I} h_{I} \langle f, h_{I} \rangle \Big\|_{L^p([0,1))} \lesssim_{p} \|f\|_{L^p([0,1))}.
+    \Big\|\sum_{I \in \mc{D}} a_{I} h_{I} \langle f, h_{I} \rangle \Big\|_{L^p([0,1))} \lesssim_{p} \|f\|_{L^p([0,1))}.
   \end{equation*}
   But since $\langle h_{I}, h_{J} \rangle = \delta_{I}(J)$, it follows that $\langle f, h_{I} \rangle = 1$ for all $I \in \mc{I}$, and thus
   \begin{equation*}
@@ -777,7 +777,7 @@ We let $\ell^1_{n}$ denote the space of scalar sequences $(x_{i})_{i=1}^{n}$, or
   This is a martingale with respect to the filtration $\mc{A}_{\bullet}$ generated by $\pi_{\bullet}$.
   
   Now fix $N \geq 1$.
-  Since the functions $\mb{f}_{1}, \mb{f}_{2}, \ldots, \mb{f}_{N}$ are all functions of the $\mc{A}_{N}$-measurable coordinate functions $\pi_{1}, \pi_{2}, \ldots, \pi_{N}$, and since $\mc{A}_{N}$ is generated by $2^{N}$ atoms of equal measure, the functions $\mb{f}_{1}, \ldots, \mb{f}_{N}$ take values in a subspace of $X$ which is isometric to $\ell^1_{2^{N}}$.
+  Since the functions $\mb{f}_{0}, \mb{f}_{1}, \ldots, \mb{f}_{N}$ are all functions of the $\mc{A}_{N}$-measurable coordinate functions $\pi_{1}, \pi_{2}, \ldots, \pi_{N}$, and since $\mc{A}_{N}$ is generated by $2^{N}$ atoms of equal measure, the functions $\mb{f}_{0}, \mb{f}_{1}, \ldots, \mb{f}_{N}$ take values in a subspace of $X$ which is isometric to $\ell^1_{2^{N}}$.
   Given a finite sequence of signs $(\xi_{n})_{n=0}^{N}$, this lets us write
   \begin{equation}\label{eq:L1-notUMD-est1}
     \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq \beta_{p}(\ell^{1}_{2^N}) \| \mb{f}_{N} \|_{L^p(\Omega;X)}
