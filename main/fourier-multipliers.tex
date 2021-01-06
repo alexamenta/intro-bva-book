@@ -47,9 +47,9 @@ To show the existence and boundedness of the Hilbert transform, we need to use m
 For example, calculus can be used to show that $H\mb{f}$ exists when $\mb{f} \in C_{c}^1(\R;X)$ is continuously differentiable and compactly supported (Exercise \ref{ex:HT-C1}).
 
 The Hilbert transform, at least when it exists, commutes with translations and dilations.
-That is, if the input function $\mb{f}$ is replaced by a translation by $s \in \R$ or a dilation by $\lambda > 0$,
+That is, if the input function $\mb{f}$ is replaced by a translation by $s \in \R$ or a dilation\footnote{The definition of $\Dil_{\lambda}$ below is such that $\|\Dil_{\lambda} \mb{f}\|_{2} = \|\mb{f}\|_{2}$: it is $L^2$-normalised.} by $\lambda > 0$,
 \begin{equation*}
-  \Tr_{s} \mb{f} (x) := \mb{f}(x - s), \qquad \Dil_{\lambda} \mb{f}(x) := \mb{f}(x/\lambda), 
+  \Tr_{s} \mb{f} (x) := \mb{f}(x - s), \qquad \Dil_{\lambda} \mb{f}(x) := \lambda^{-1/2}\mb{f}(x/\lambda), 
 \end{equation*}
 then the output of the Hilbert transform is also replaced by the same translation or dilation.
 It also anticommutes with reflections, i.e. if the input function is replaced by
@@ -78,9 +78,9 @@ These results are summed up as follows.
   \begin{equation*}
     \begin{aligned}
       H_{\varepsilon,E}(\Dil_{\lambda} \mb{f})(x)
-      &= \frac{1}{\pi} \int_{\varepsilon < |x-y| < E} \mb{f}\Big(\frac{y}{\lambda}\Big) \, \frac{\dd y}{x-y} \\
-      &= \frac{\lambda}{\pi} \int_{\varepsilon < |x - \lambda z| < E} \mb{f}(z) \, \frac{\dd z}{x - \lambda z} \\
-      &= \frac{\lambda}{\pi} \int_{\varepsilon < |\lambda(\lambda^{-1}x - z)| < E} \mb{f}(z) \, \frac{\dd z}{\lambda(\lambda^{-1}x - z)} \\
+      &= \frac{1}{\lambda^{1/2}\pi} \int_{\varepsilon < |x-y| < E}  \mb{f}\Big(\frac{y}{\lambda}\Big) \, \frac{\dd y}{x-y} \\
+      &= \frac{\lambda^{1/2}}{\pi} \int_{\varepsilon < |x - \lambda z| < E} \mb{f}(z) \, \frac{\dd z}{x - \lambda z} \\
+      &= \frac{\lambda^{1/2}}{\pi} \int_{\varepsilon < |\lambda(\lambda^{-1}x - z)| < E} \mb{f}(z) \, \frac{\dd z}{\lambda(\lambda^{-1}x - z)} \\
       &= \Dil_{\lambda}(H_{\varepsilon/\lambda, E/\lambda} \mb{f})(x)
     \end{aligned}
   \end{equation*}
@@ -212,8 +212,9 @@ We are not content with shifted dyadic systems: we also need dilations.
 
 Of course, if we take $t$ to be a dyadic power $t = 2^{j}$ for some $j \in \Z$, then $t\mc{D}^{\omega} = \mc{D}^{\omega'}$ where $\omega'$ is a shift of $\omega$.
 Thus as long as we allow for changes in the parameter $\omega$ we only need to consider dilated dyadic systems $t\mc{D}^{\omega}$ for $t \in [1,2)$.
+In the following sections we will refer to a translated shifted dyadic system $t\mc{D}^{\omega}$, for some $t \in [1,2)$ and $\omega \in \{0,1\}^{\Z}$, simply as a \emph{generalised dyadic system}, and we may suppress reference to $t$ and $\omega$ and denote it by $\mc{D}$.
 
-Why do we consider shifted and dilated dyadic systems?
+Why do we consider generalised dyadic systems?
 Consider the probability space $\Omega := [1,2) \times \{0,1\}^{\Z}$, where $[1,2)$ is equipped with a probability measure $\nu$ (not necessarily the Lebesgue measure) and each factor $\{0,1\}$ has the uniform probability measure.
 Since our set of generalised dyadic systems is parametrised by $\Omega$, we are now in a position to consider a `random dyadic system', and to consider the associated `random martingale transforms'.
 We are also able to take \emph{expectations} of such random martingale transforms.
@@ -231,7 +232,8 @@ Recall from Proposition \ref{prop:haar-multipliers} that for all $\mb{f} \in L^p
 \end{equation*}
 for all scalar sequences $(a_{I})_{I \in \mc{D}}$ indexed by the set of dyadic subintervals of $[0,1)$.
 In particular, Haar decompositions are unconditional in $L^p([0,1);X)$.
-This can be extended in a straightforward way to general dyadic systems on $\R$, and the $L^p$-unconditionality can also be supplemented with a.e. pointwise convergence.
+\todo{replace by two-sided randomised estimate via Burkholder's inequality}
+This can be extended in a straightforward way to general dyadic systems on $\R$, and the $L^p$-unconditionality can also be supplemented with a.e. pointwise convergence.\todo{change notaation of generalised dyadic system}\todo{we need the reverse estimate but randomised}
 
 \begin{thm}\label{thm:general-haar-decompositions}
   Let $X$ be a complex UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}^{\omega}$ be a shifted dyadic system.
@@ -362,6 +364,45 @@ and since $\varepsilon > 0$ was arbitrary we get our result.
   This argument could have been avoided by considering conditional expectations and martingales on general $\sigma$-finite measure spaces, indexed over $\Z$ rather than $\N$.
   The result would then follow from the `extended' UMD property defined via such martingales (which is, of course, equivalent to our UMD property).
 \end{rmk}
+
+\todo{exposition}
+
+Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:%mk
+\begin{equation*}
+  h_{I} = \Dil_{|I|} \Tr_{\ell(I)} h,
+\end{equation*}
+where $\ell(I) := \inf(I)$ is the left endpoint of $I$ and $h = h_{[0,1)}$.
+This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and an interval $I \subset \R$, define
+\begin{equation*}
+  k_{I} := \Dil_{|I|} \Tr_{\ell(I)} k.
+\end{equation*}
+
+\begin{defn}
+  Given a generalised dyadic system $\mc{D}$, we say a function $\map{k}{\R}{\C}$ is \emph{$\mc{D}$-admissible} if it is a finite linear combination of Haar functions $h_{J}$ with $J \in \mc{D}_{j}$ for some fixed $j \in \Z$ and $J \subset [0,1)$,
+  and $\|k\|_{\infty} \leq 1$.
+\end{defn}
+
+\todo{exposition}
+
+\begin{defn}
+  Let $\mc{D}$ be a generalised dyadic system, $X$ a Banach space, and $k$ a $\mc{D}$-admissible function.
+  The \emph{shift operator} $S_{k}$ associated with $k$ is defined by the formal sum
+  \begin{equation*}
+    S_{k} \mb{f} := \sum_{I \in \mc{D}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \qquad \forall \map{\mb{f}}{\R}{X}.
+  \end{equation*}
+\end{defn}
+
+When the $\mc{D}$-admissible function $k$ is the base Haar function $h$, $S_{h}$ is just the identity operator (ignoring issues of well-definedness of the formal sum), as it sends a function to its own Haar expansion.
+In general, since $k$ is a finite linear combination of Haar functions localised to equal-length subintervals of $[0,1)$, $S_{k}$ takes the Haar expansion of $\mb{f}$ and `shifts' each entry onto multiple Haar functions at the same scale.
+This is most easily seen by considering the action of $S_{k}$ on $h$ (in the case $X = \C$):
+\begin{equation*}
+  S_{k} h = k_{[0,1)} = \sum_{n=1}^{N} c_{n} h_{I_{n}}
+\end{equation*}
+for some scalars $c_{n} \in \C$ and intervals $I_{n} \subset [0,1)$, $I_{n} \in \mc{D}_{j}$ for some $j \in \Z$.
+
+\begin{thm}
+  
+\end{thm}
 
 \section{Existence and boundedness of the Hilbert transform}
 
