@@ -322,7 +322,7 @@ This result---along with unconditionality and pointwise convergence of the Haar 
 
 \todo{exposition}
 
-Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:%mk
+Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:
 \begin{equation*}
   h_{I} = \Dil_{|I|} \Tr_{\ell(I)} h,
 \end{equation*}
@@ -333,31 +333,163 @@ This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and
 \end{equation*}
 
 \begin{defn}
-  Given a generalised dyadic system $\mc{D}$, we say a function $\map{k}{\R}{\C}$ is \emph{$\mc{D}$-admissible} if it is a finite linear combination of Haar functions $h_{J}$ with $J \in \mc{D}_{j}$ for some fixed $j \in \Z$ and $J \subset [0,1)$,
-  and $\|k\|_{\infty} \leq 1$.
+  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite linear combination of Haar functions $h_{J}$ with $J \in \mc{D}_{j}$, $J \subset [0,1)$ (where $\mc{D}$ is the \emph{standard} dyadic system) for some fixed $j \in \N$, and if furthermore $\|k\|_{\infty} \leq 1$.
 \end{defn}
 
 \todo{exposition}
 
 \begin{defn}
-  Let $\mc{D}$ be a generalised dyadic system, $X$ a Banach space, and $k$ a $\mc{D}$-admissible function.
+  Let $\mc{D}$ be a generalised dyadic system, $X$ a Banach space, and $k$ an admissible base function.
   The \emph{shift operator} $S_{k}$ associated with $k$ is defined by the formal sum
   \begin{equation*}
     S_{k} \mb{f} := \sum_{I \in \mc{D}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \qquad \forall \map{\mb{f}}{\R}{X}.
   \end{equation*}
 \end{defn}
 
-When the $\mc{D}$-admissible function $k$ is the base Haar function $h$, $S_{h}$ is just the identity operator (ignoring issues of well-definedness of the formal sum), as it sends a function to its own Haar expansion.
-In general, since $k$ is a finite linear combination of Haar functions localised to equal-length subintervals of $[0,1)$, $S_{k}$ takes the Haar expansion of $\mb{f}$ and `shifts' each entry onto multiple Haar functions at the same scale.
+When the admissible base function $k$ is $h$ itself, $S_{h}$ is just the identity operator (ignoring issues of well-definedness of the formal sum), as it sends a function to its own Haar expansion (with respect to $\mc{D}$).
+In general, since $k$ is a finite linear combination of Haar functions localised to equal-length subintervals of $[0,1)$, $S_{k}$ takes the generalised Haar expansion of $\mb{f}$ and `shifts' each entry onto multiple Haar functions at a smaller scale.
 This is most easily seen by considering the action of $S_{k}$ on $h$ (in the case $X = \C$):
 \begin{equation*}
-  S_{k} h = k_{[0,1)} = \sum_{n=1}^{N} c_{n} h_{I_{n}}
+  S_{k} h = k_{[0,1)} = \sum_{n=1}^{N} \alpha_{n} h_{I_{n}}
 \end{equation*}
-for some scalars $c_{n} \in \C$ and intervals $I_{n} \subset [0,1)$, $I_{n} \in \mc{D}_{j}$ for some $j \in \Z$.
+for some scalars $\alpha_{n} \in \C$ and intervals $I_{n} \subset [0,1)$, with $I_{n} \in \mc{D}_{j}$ for some $j \in \N$.
 
 \begin{thm}
-  
+  Let $X$ be a complex UMD space, $p \in (1,\infty)$, $\mc{D}$ a generalised dyadic system, and $k$ an admissible base function.
+  Then for every $\mb{f} \in L^p(\R;X)$ the series defining $S_{k}\mb{f}$ is unconditionally summable in $L^p(\R;X)$,
+  and we have the norm estimates
+  \begin{equation*}
+    \|S_{k} \mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} k_{I} \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+  \end{equation*}
+  Furthermore, the series defining $S_{k}\mb{f}$ is convergent almost everywhere, in the sense that
+  \begin{equation*}
+    \lim_{\substack{n \uparrow \infty}{m \downarrow \infty}} \sum_{\substack{I \in \mc{D} \\ 2^{m} < |I| < 2^{n}}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle = S_{k}\mb{f}(x) \qquad \text{a.e. } x \in \R.
+  \end{equation*}
 \end{thm}
+
+\begin{proof}
+  To prove the unconditional summability and the norm estimates, it suffices to consider functions $\mb{f}$ with finite Haar expansions, as the subspace of all such functions is dense in $L^p(\R;X)$.\todo{link to proof of this}
+  In this setting, $S_{k}\mb{f}$ is automatically defined, and we need only prove quantitative statements.
+  
+  For each interval $I \in \mc{D}$, admissibility of $k$ means that we can write
+  \begin{equation*}
+    k_{I} = \sum_{j \in \Theta} \alpha_{j} h_{I_{j}},
+  \end{equation*}
+  where $\Theta$ is a finite indexing set, $\alpha_{j} \in \C$, and $I_{j} \in \mc{D}$ are subintervals of $I$ of length $2^{-\ell}|I|$ for some fixed $\ell \in \N$.
+  Thus we can write
+  \begin{equation*}
+    \begin{aligned}
+      S_{k}\mb{f} = \sum_{j \in \Theta} \sum_{I \in \mc{D}} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle .
+    \end{aligned}
+  \end{equation*}
+  For each interval $J \in \mc{D}$ we have $J = I_{j}$ for at most one value of $I$ and $j$, so by the unconditionality statement of Theorem \ref{thm:general-haar-decompositions} we have
+  Letting $(\xi_{j,I})_{\Theta \times \mc{D}}$ be a sequence of signs $\xi_{j,I} = \pm 1$, we have
+  \begin{equation*}
+      \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \xi_{j,I} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      \lesssim_{p,X}  \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+  \end{equation*}
+  for any sequence of signs $(\xi_{j,I})_{\Theta \times \mc{D}}$.
+  Thus we have unconditionality of the series defining $S_{k}\mb{f}$.
+  For the norm estimates, write
+  \begin{equation*}
+    \begin{aligned}
+      \|S_{k} \mb{f}\|_{L^p(\R;X)}
+      &= \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &\lesssim_{p,X} \E \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \varepsilon_{|I_{j}|} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &= \E \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \varepsilon_{2^{-\ell}|I|} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+    \end{aligned}
+   \end{equation*}
+   again using Theorem \ref{thm:general-haar-decompositions}.
+   By independence of the choice of Rademacher sequence, we have
+   \begin{equation*}
+     \begin{aligned}
+       \E \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \varepsilon_{2^{-\ell}|I|} \alpha_{j}  h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+       &= \E \Big\| \sum_{j \in \Theta} \sum_{I \in \mc{D}} \varepsilon_{|I|} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+       &= \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
+     \end{aligned}
+   \end{equation*}
+   which proves our first norm estimate.
+
+   For the second norm estimate, we first note that the assumption $\|k\|_{\infty} \leq 1$ and the fact that $k$ is supported on $[0,1)$ implies that $|k_{I}(x)| \leq |h_{I}(x)|$ for all $x \in \R$.
+   Thus by Kahane--Khitchine and the contraction principle,
+   \begin{equation*}
+     \begin{aligned}
+       \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+       &\simeq_{p} \Big( \int_{\R} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} k_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x \Big)^{1/p} \\
+       &= \Big( \int_{\R} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} \frac{k_{I}(x)}{h_{I}(x)} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x \Big)^{1/p} \\
+       &\lesssim \Big( \int_{\R} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x \Big)^{1/p} \\
+       &\simeq_{p} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+     \end{aligned}
+   \end{equation*}
+   with the interpretation $\frac{k_{I}(x)}{h_{I}(x)} h_{I}(x) = 0$ when $h_{I}(x) = 0$.
+   Applying Theorem \ref{thm:general-haar-decompositions} once more yields
+   \begin{equation*}
+     \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+     \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+   \end{equation*}
+
+   Now we turn to pointwise convergence.
+   Applying Theorem \ref{thm:general-haar-decompositions} to the function $S_{k}\mb{f}$, we find that the limit
+   \begin{equation*}
+     \lim_{\substack{n \uparrow \infty \\ m \downarrow -\infty}} \sum_{\substack{I \in \mc{D} \\ 2^{m} < |I| < 2^{n}}} h_{I} \otimes \langle S_{k} \mb{f}, h_{I} \rangle.
+   \end{equation*}
+   exists for almost all $x \in \R$.
+   But since
+   \begin{equation*}
+     \langle S_{k} \mb{f}, h_{I} \rangle = \sum_{I \in \mc{D}} \langle  k_{I} , h_{I} \rangle \langle \mb{f}, h_{I} \rangle  = \sum_{j \in \Theta} \alpha_{j} \langle h_{I_{j}}, h_{I} \rangle \langle \mb{f}, h_{I} \rangle,
+   \end{equation*}
+   we get almost everywhere existence of the limit
+   \begin{equation*}
+     \lim_{\substack{n \uparrow \infty \\ m \downarrow -\infty}}  \sum_{\substack{I \in \mc{D} \\ 2^{m + \ell} < |I| < 2^{n + \ell}}} \sum_{j \in \Theta} \alpha_{j} h_{I_{j}} \otimes \langle \mb{f}, h_{I} \rangle
+     = \lim_{\substack{n \uparrow \infty \\ m \downarrow -\infty}}  \sum_{\substack{I \in \mc{D} \\ 2^{m} < |I| < 2^{n}}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle,
+   \end{equation*}
+   which is what we were aiming for.
+\end{proof}
+
+\begin{defn}
+  Let $k$ be an admissible base function and $\nu$ a probability measure on $[1,2)$.
+  We define the \emph{average dyadic shift operator} $\langle S_k \rangle^{\nu}$ by
+  \begin{equation*}
+    \langle \big(S_{k} \rangle^{\nu}\mb{f}\big)(x) := \int_{[1,2)} \int_{\{0,1\}^{\Z}} (S_{k}^{\omega, t}\mb{f})(x) \, \dd \P(\omega) \, \dd \nu(t)
+  \end{equation*}
+  where $S_{k}^{\omega,t}$ is the dyadic shift operator computed with respect to the generalised dyadic system $t\mc{D}^{\omega}$.
+\end{defn}
+
+\todo{put the notation $S^{\omega,t}_{k}$ above where necessary}
+
+\begin{lem}
+  Let $X$ be UMD, $p \in (1,\infty)$, and let $k$ be an admissible base function.
+  Then for $\mb{f} \in L^p(\R;X)$, $\langle S_{k} \rangle^{\nu} \mb{f}$ is well-defined in the following senses:
+  \begin{itemize}
+  \item
+    For almost every $x \in \R$, the $X$-valued function $(\omega, t) \mapsto (S_{k}^{\omega, t}\mb{f})(x)$ is Bochner integrable.
+  \item
+    The $L^p(\R;X)$-valued function $(\omega,t) \mapsto S_{k}^{\omega,t}\mb{f}$ is Bochner integrable.
+  \end{itemize}
+  Furthermore, we have the representation
+  \begin{equation*}
+    \langle S_{k} \rangle^{\nu} \mb{f}(x) = \sum_{j = -\infty}^{\infty} \int_{[1,2)} \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}^{\omega}_{j}} k_{I}(x) \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega) \, \dd\nu(t)
+  \end{equation*}
+  pointwise for a.e. $x \in \R$, and in $L^p(\R;X)$.\todo{put note on sense of series $\sum_{-\infty}^{\infty}$}
+\end{lem}
+
+\begin{proof}
+  Recalling that
+  \begin{equation*}
+    S_{k}^{\omega,t} = \sum_{j = -\infty}^{\infty} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \langle \mb{f}, h_{I} \rangle,
+  \end{equation*}
+  by countability of the summands it suffices to show that 
+\end{proof}
+
+\begin{lem}
+  \todo{averaging over $\omega$ gives a convolution operator}
+\end{lem}
+
+\todo{discussion of average dyadic shifts}
+
+\begin{prop}
+  \todo{consequential boundedness}
+\end{prop}
 
 \section{Existence and boundedness of the Hilbert transform}
 
