@@ -61,9 +61,9 @@ Once we have established uniform boundedness of these operators on $L^p(\R;X)$, 
 
 The Hilbert transform commutes with translations and dilations, and anticommutes with reflections.
 That is, defining
-\begin{equation*}
+\begin{equation}\label{eq:symmetries}
   \Tr_{s} f (x) := f(x - s), \qquad \Dil_{\lambda} f(x) := \lambda^{-1/2}f(x/\lambda), \qquad   \Refl f(x) := f(-x),
-\end{equation*}
+\end{equation}
 we have the identities
 \begin{equation*}
   H(\Tr_{s} f) = \Tr_{s} (Hf), \qquad H(\Dil_{\lambda} f) = \Dil_{\lambda} H(f), \quad H(\Refl(f)) = -\Refl(Hf).
@@ -605,18 +605,151 @@ and thus
 This completes the proof.
 \end{proof}
 
+\section{Operator-valued Fourier multipliers and $R$-boundedness}
 
+Recall the definitions of the Fourier transform and its inverse from Definition \ref{defn:FT}: for $\mb{f} \in L^1(\R;X)$ we define the \emph{Fourier transform}\index{Fourier transform} $\hat{\mb{f}} \in C(\R;X)$ (the continuity is Exercise \ref{ex:FT-bounded-1-infty}) by 
+  \begin{equation*}
+    \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R} e^{-2\pi i t \cdot \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R,
+  \end{equation*}%mk
+  and the \emph{inverse Fourier transform} $\mb{f}^{\vee} \in C(\R;X)$
+  \begin{equation*}
+    \mb{f}^{\vee}(x) = \mc{F}^{-1}(\mb{f})(x) := \int_{\R} e^{2\pi i x \cdot \xi} \mb{f}(\xi) \, \dd \xi \in X \qquad \forall x \in \R
+  \end{equation*}
+  (note the simple identity $\mb{f}^{\vee}(\xi) = \hat{\mb{f}}(-\xi)$).
+  For functions $\mb{f} \in L^1(\R;X)$ such that $\hat{\mb{f}} \in L^1(\R;X)$, the \emph{Fourier inversion formula}
+  \begin{equation}\label{eq:fourier-inversion}
+    \mb{f} = (\hat{\mb{f}})^\vee, \qquad \text{i.e.} \qquad \mb{f}(x) \aeeq \int_{\R} e^{2\pi i x \cdot \xi} \hat{\mb{f}}(\xi)  \, \dd\xi
+  \end{equation}
+  holds: this can be deduced by the corresponding result for the scalar-valued Fourier transform, but in this course it is not too important to us.
+  We will, however, be interested in \emph{Fourier multipliers}: these are operators given by acting on the individual frequency components $\hat{\mb{f}}(\xi)$ in the representation \eqref{eq:fourier-inversion}.
+  The rigorous definition follows.
 
-\section{Fourier multipliers}
+\begin{defn}
+  Let $X$ and $Y$ be complex Banach spaces, and consider an operator-valued function $\map{M}{\R}{\Lin(X,Y)}$.
+  The Fourier multiplier $T_{M}$ is the operator $C^{\infty}_{c}(\R;X) \to C(\R;Y)$ defined by
+  \begin{equation*}
+    T_{M}(\mb{f}) := (M \cdot \hat{\mb{f}})^{\vee}, \qquad \text{i.e.} \qquad (T_{M}\mb{f})(x) = \int_{\R} e^{2\pi i x \cdot \xi} M(\xi)(\hat{\mb{f}}(\xi))  \, \dd\xi.
+  \end{equation*}
+\end{defn}
+
+The operator-valued function $M$ is called the \emph{symbol} of the operator $T_{M}$.
+We should quickly show that this definition actually makes sense.
+
+\begin{prop}
+  If $\mb{f} \in C_{c}^\infty(\R;X)$ and $M \in L^\infty(\R;\Lin(X,Y))$, then $\hat{\mb{f}} \in L^1(\R;X)$ and $M \cdot \hat{\mb{f}} \in L^1(\R;Y)$ .
+\end{prop}
+
+\begin{proof}
+  Once we know that $\hat{\mb{f}} \in L^1(\R;X)$, then $M \cdot \hat{\mb{f}} \in L^1(\R;Y)$ follows from strong measurability of the $Y$-valued function $M \cdot \hat{\mb{f}}$ (which can be proven either directly by approximation with simple functions, or by Pettis - we omit the argument) and the H\"older estimate $\|M \cdot \hat{\mb{f}}\|_{L^1(\R;Y)} \leq \|M\|_{L^\infty(\R;\Lin(X,Y))} \|\hat{\mb{f}}\|_{L^1(\R;X)}$.
+  To show that $\hat{\mb{f}} \in L^1(\R;X)$, first split the integral into a part near the origin and a part `at infinity':
+  \begin{equation*}
+    \int_{\R} \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi = \Big( \int_{[-1,1]} + \int_{\R \sm [-1,1]} \Big) \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi.
+  \end{equation*}
+  The integral on $[-1,1]$ is bounded by $2\|\hat{\mb{f}}\|_{L^\infty(\R;X)}$, which is finite.
+  The remaining integral can be bounded using a classic Fourier analytic technique coming from the identity $\widehat{\partial \mb{f}} = -i\xi \hat{\mb{f}}$:
+  \begin{equation*}
+    \begin{aligned}
+    \int_{\R \sm [-1,1]} \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi
+    &= \int_{\R \sm [-1,1]} |\xi|^{-2} \|(-i\xi)^{2}\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi \\
+    &= \int_{\R \sm [-1,1]} |\xi|^{-2} \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{X} \, \dd\xi \\
+    &\leq \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{L^\infty(\R;X)} \int_{\R \sm [-1,1]} |\xi|^{-2} \, \dd\xi .
+  \end{aligned}
+\end{equation*}
+The integral here is finite, and since $\mb{f}$ is smooth and compactly supported, 
+\begin{equation*}
+   \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{L^\infty(\R;X)} \leq \|\partial^{2} \mb{f}\|_{L^1(\R;X)} < \infty.
+\end{equation*}
+\end{proof}
+
+Thus, at least for functions $\mb{f} \in C_{c}^\infty(\R;X)$ and symbols $M \in L^\infty(\R;\Lin(X,Y))$, we get a well-defined continuous function $T_{M}\mb{f} \colon \R \to Y$.
+We can state some simple but useful intertwining relations that Fourier multipliers have with translations and modulations, where for $\eta \in \R$ we define the \emph{modulation} of a function $\mb{f}$ (taking values in some Banach space) by
+\begin{equation*}
+  (\Mod_{\eta} \mb{f})(x) := e^{2\pi i \eta x} \mb{f}(x) \qquad \forall x \in \R.
+\end{equation*}
+
+\begin{prop}
+  Let $X$ and $Y$ be Banach spaces and $M \in L^\infty(\R;\Lin(X,Y))$.
+  Then for all $s \in \R$ and $\mb{f} \in C^{\infty}_{c}(\R;X)$,
+  \begin{equation*}
+    T_{\Tr_{s} M} \mb{f} = \Mod_{s} T_{M} \Mod_{-s} \mb{f} \quad \text{and} \quad
+    T_{\Mod_{s} M} \mb{f} = \Tr_{-s} T_{M} \mb{f}. 
+  \end{equation*}
+\end{prop}
+
+Now for each $p \in [1,\infty)$, the space $C_{c}^\infty(\R;X)$ is dense in $L^p(\R;X)$: this is because it contains the algebraic tensor product $C_{c}^\infty(\R) \otimes X$, which is dense in $L^p(\R;X)$ since $C_{c}^\infty(\R)$ is dense in $L^p(\R)$ (by a mollification argument).\footnote{Here we are relying on Exercise \ref{ex:general-density}.}
+Thus we can ask ourselves the question: when does the operator $T_{M}$ extend by density to a bounded operator $L^p(\R;X) \to L^p(\R;Y)$?
+That is, when do we have the estimate
+\begin{equation*}
+  \|T_{M} \mb{f}\|_{L^p(\R;Y)} \lesssim \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in C_{c}^\infty(\R;X)?
+\end{equation*}
+These operators occur all the time in applications, particularly in PDEs, and allowing for general operator-valued symbols is sometimes necessary.
+Of course, for many applications it is sufficient to consider \emph{scalar-valued symbols}, which occur when $X = Y$ and when $M(\xi)(\mb{x}) = m(\xi)\mb{x}$ for some scalar-valued function $\map{m}{\R}{\C}$.
+Although the UMD condition turns out to be pretty much necessary for both operator-valued and scalar-valued symbols, the operator-valued context involves additional \emph{$R$-boundedness} assumptions on the symbol which are interesting in themselves.
+We introduced $R$-boundedness in Exercise \ref{ex:R-bd-mgale-tf}, but we repeat the definition here. 
+
+\begin{defn}
+  Let $X$ and $Y$ be Banach spaces and suppose $\mc{T} \subset \Lin(X,Y)$ is a set of bounded linear operators from $X$ to $Y$.
+We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$ in $X$,
+\begin{equation*}
+  \|T_{\bullet} \mb{x}_{\bullet}\|_{\varepsilon_{N}(Y)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)},
+\end{equation*}
+or equivalently by Kahane--Khintchine (with a potentially different constant $\tilde{C}$)
+\begin{equation}\label{eq:R1}
+  \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} T_{n} \mb{x}_{n} \Big\|_{Y} \leq \tilde{C} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n}  \mb{x}_{n} \Big\|_{X}
+\end{equation}
+The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound of the set of operators $\mc{T}$.\footnote{The best possible constant in \eqref{eq:R1} is sometimes denoted by $R_{1}(\mc{T})$, and Kahane--Khintchine yields $R_{1}(\mc{T}) \simeq R(\mc{T})$ with a constant independent of the set $\mc{T}$.}
+\end{defn}
+
+By considering sequences with one element in this definition, we see that
+\begin{equation*}
+  R(\mc{T}) \geq \sup_{T \in \mc{T}} \|T\|_{\Lin(X,Y)},
+\end{equation*}
+so that $R$-boundedness of a set of operators is a stronger condition than uniform boundedness.
+Under quite restrictive type and cotype assumptions on $X$ and $Y$, $R$-boundedness is equivalent to uniform boundedness (see Exercise \ref{ex:R-bound-type}); in particular, if $X$ and $Y$ are isomorphic to Hilbert spaces, then this equivalence holds.
+In general $R$-boundedness of a family of operators is strictly stronger than uniform boundedness, and establishing this property requires some form of `compatibility' or `similarity' of the operators in the set.
+
+\begin{example}\label{eg:R-bounded-multipliers}
+  Let $X$ be a Banach space, let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space, and fix $p \in [1,\infty)$.
+  For each $g \in L^\infty(S)$ define the multiplication operator $M_{g} \in \Lin(L^p(S;X))$ by $M_{g}\mb{f} = g\mb{f}$.
+  Then for all $C < \infty$, the set of operators
+  \begin{equation*}
+    \{M_{g}  : \|g\|_{L^\infty(S)} \leq C\} \subset \Lin(L^{p}(S;X))
+  \end{equation*}
+  is $R$-bounded.
+  To see this, fix a finite sequence $(g_{n})_{n=0}^{N}$ in $L^\infty(S)$ with $\|g_{n}\|_{L^\infty(S)} \leq C$ for all $n$, and a finite sequence $(\mb{f}_{n})_{n=0}^{N}$ in $L^p(S;X)$.
+  Then by Kahane--Khintchine and the contraction principle,
+  \begin{equation*}
+    \begin{aligned}
+      \| M_{g_{\bullet}} \mb{f}_{\bullet} \|_{\varepsilon_{N}(L^p(S;X))}
+      &\simeq_{p} \Big( \int_{\R} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} g_{n}(s) \mb{f}_{n}(s) \Big\|_{X}^{p} \, \dd\mu(s) \Big)^{1/p} \\
+      &\lesssim C \Big( \int_{\R} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{f}_{n}(s) \Big\|_{X}^{p} \, \dd\mu(s) \Big)^{1/p} \\
+      &\simeq_{p} C \| \mb{f}_{\bullet} \|_{\varepsilon_{N}(L^p(S;X))},
+    \end{aligned}
+  \end{equation*}
+  proving the claimed $R$-boundedness.
+\end{eg}
+
+The fundamental link between $R$-boundedness and Fourier multipliers comes from the following theorem, whose proof we omit.\footnote{It isn't too difficult, we just don't need it. For details see \cite[Theorem 5.3.15]{HNVW16}.}
+
+\begin{thm}[Cl\'ement--Pr\"uss]
+  Let $X$ and $Y$ be Banach spaces and $p \in (1,\infty)$.
+  Let $M \in L^\infty(\R;\Lin(X,Y))$ be an operator-valued symbol such that the Fourier multiplier $T_{M}$ is bounded from $L^p(\R;X)$ to $L^p(\R;Y)$.
+  Then the set\footnote{Recall that a point $\xi \in \R$ is a Lebesgue point of $M$ if $M(\xi) = \lim_{\varepsilon \downarrow 0} \fint_{\xi-\varepsilon}^{\xi+\varepsilon} M(\eta) \, \dd\eta $, and that almost every $\xi \in \R$ is a Lebesgue point of $M$.}
+  \begin{equation*}
+    \{M(\xi) : \text{$\xi \in \R$ is a Lebesgue point of $M$}\}
+  \end{equation*}
+  is $R$-bounded.
+  In particular, if $M$ is continuous, then the range $M(\R) \subset \Lin(X,Y)$ is $R$-bounded.
+\end{thm}
+
+Thus $R$-boundedness is a necessary condition for the $L^p$-boundedness of an operator-valued Fourier multiplier.
+In the next section we investigate sufficient conditions.
 
 \section{The Mikhlin and Littlewood--Paley  theorems}
 
+
+
 \section{Exercises}
-
-
-\begin{exercise}\label{ex:HT-char}
-  Prove Proposition \ref{prop:HT-char}, assuming the result in the scalar case.\todo{this is false as is}
-\end{exercise}
 
 \begin{exercise}\label{ex:dyadic-dichotomy}
   Prove the dyadic dichotomy for shifted dyadic systems: if $\omega \in \{0,1\}^{\Z}$ and $I,J \in \mc{D}^{\omega}$, then either $I$ and $J$ are comparable (i.e. $I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
@@ -631,6 +764,28 @@ This completes the proof.
 \end{exercise}
 
 
+\begin{exercise}\label{ex:R-bound-type}
+  Let $X$ be a Banach space with cotype $2$ and $Y$ a Banach space with type $2$.
+  Show $R$-boundedness of a set of operators $\mc{T} \subset \Lin(X,Y)$ is equivalent to uniform boundedness.\footnote{The converse is also true: if uniform boundedness implies $R$-boundedness for every $\mc{T} \subset \Lin(X,Y)$, then $X$ has cotype $2$ and $Y$ has type $2$. See \cite[Proposition 8.6.1]{HNVW17}.\ }
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ be a Banach space, and for each scalar $\lambda \in \K$ consider the operator $m_{\lambda}(\mb{x}) := \lambda \mb{x}$.
+  For each $C < \infty$, show that the set
+  \begin{equation*}
+    \{m_{\lambda} : |\lambda| \leq C\} \subset \Lin(X)
+  \end{equation*}
+  is $R$-bounded.
+\end{exercise}
+
+\begin{exercise}
+  Let $X$, $Y$, and $Z$ be Banach spaces, and let $\mc{T} \subset \Lin(X,Y)$ and $\mc{T}' \subset \Lin(Y,Z)$ be $R$-bounded sets of operators.
+  Show that the set of operators
+  \begin{equation*}
+    \{AB : A \in \mc{T}', B \in \mc{T}\} \subset \Lin(X,Z)
+  \end{equation*}
+  is $R$-bounded.
+\end{exercise}
 
 
 %%% Local Variables:
