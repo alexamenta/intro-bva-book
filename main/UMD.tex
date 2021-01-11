@@ -774,15 +774,15 @@ where $(\varepsilon_{I})_{I \in \mc{D} \cup \{\varnothing\}}$ and $(\tilde{\vare
   \begin{equation}\label{eq:haar-sqfn-kk}
     \begin{aligned}
       &\E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)} \\
-      &\simeq_{p} \Big( \int_{0}^{1} \E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x\Big)^{1/p}.
+      &\simeq_{p} \Big( \int_{0}^{1} \E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I}(x) \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x\Big)^{1/p}.
   \end{aligned}
   \end{equation}
   For all $x \in [0,1)$ and $k \in \N$, there is precisely one interval $I \in \mc{D}_{k}$ with $x \in I$: call this interval $I_{k}(x)$.
   Then since $h_{I}$ is supported in $I$ we have
   \begin{equation*}
     \begin{aligned}
-    &\E \Big\|  \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X} \\
-    &= \E \Big\|  \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{k \in \N} \varepsilon_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X}.
+    &\E \Big\|  \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I}(x)  \langle \mb{f}, h_{I} \rangle \Big\|_{X} \\
+    &= \E \Big\|  \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{k \in \N} \varepsilon_{I_{k}(x)} h_{I_{k}(x)}(x)  \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X}.
   \end{aligned}
   \end{equation*}
   Since the set of intervals $(I_{k}(x))_{k \in \N}$ and the set of lengths $(|I_{k}(x)|)_{k \in \N}$ are in bijective correspondence, and since Rademacher averages are independent of the choice of Rademacher sequence, we can write

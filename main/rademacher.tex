@@ -607,20 +607,16 @@ Since every finite-dimensional Banach space is isomorphic to a Hilbert space, an
   Let $(S,\mc{A},\mu)$ be a measure space, and consider the Banach space $X = L^p(S)$ with $p \in [1,\infty)$.
   Then $X$ has type $\min(p,2)$ and cotype $\max(p,2)$.
   For simplicity we will show that $L^p(S)$ has type $p$ when $p \in [1,2]$, as the remaining statements have analogous proofs.
-  For a sequence of functions $f_{n} \in L^p(S)$,\todo{simplify this using square functions - Khintchine}
+  For a sequence of functions $f_{n} \in L^p(S)$,
   \begin{equation*}
     \begin{aligned}
       \E \Big\| \sum_{n \in \N} \varepsilon_{n} f_{n} \Big\|_{L^p(S)}
-      &\stackrel{(1)}{\simeq_{p}} \Big( \int_{\Omega} \Big\| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n} \Big\|_{L^p(S)}^{2} \, \dd\P(\omega) \Big)^{1/2} \\
-      &= \Big( \int_{\Omega} \Big( \int_{S} \Big| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n}(s) \Big|^{p} \, \dd\mu(s) \Big)^{2/p} \, \dd\P(\omega) \Big)^{1/2} \\
-      &\stackrel{(2)}{\leq} \Big( \int_{S} \Big( \int_{\Omega} \Big| \sum_{n \in \N} \varepsilon_{n}(\omega) f_{n}(s) \Big|^{2} \, \dd\P(\omega) \Big)^{p/2} \, \dd\mu(s) \Big)^{1/p} \\
-      &= \Big( \int_{S} \Big( \E \Big| \sum_{n \in \N} \varepsilon_{n} f_{n}(s) \Big|^{2} \Big)^{p/2} \, \dd\mu(s) \Big)^{1/p} \\
-      &\stackrel{(3)}{\lesssim} \Big( \int_{S} \sum_{n \in \N} |f_{n}(s)|^{p} \, \dd\mu(s) \Big)^{1/p}
-      = \Big( \sum_{n \in \N} \|f_{n}\|_{L^p(S)}^{p} \Big)^{1/p}.
+      &\simeq_{p} \Big( \int_{S} \Big( \sum_{n \in \N} |f_{n}|^{2} \Big)^{p/2} \, \dd\mu(s) \Big)^{1/p} \\
+      &\leq \Big( \int_{S} \sum_{n \in \N} |f_{n}|^{p} \, \dd\mu(s) \Big)^{1/p}
+      = \Big( \sum_{n \in \N} \|f_{n}\|_{L^p(S)}^{p} \Big)^{1/p}
     \end{aligned}
   \end{equation*}
-  Estimate (1) uses Kahane--Khintchine, estimate (2) uses Minkowski's inequality (using $2/p > 1$), and estimate (3) uses that the scalar field $\K$ has type $p$.
-  
+  using Theorem \ref{thm:rademacher-lp} and the continuous inclusion of $\ell^{2}$ in $\ell^{p}$ for $p \leq 2$.
   As mentioned above, if the measure space $S$ is such that $L^p(S)$ is finite-dimensional, then $L^p(S)$ has type $2$ and cotype $2$ (the strongest possible type and cotype).
   If $L^p(S)$ is infinite-dimensional, then it does not have type greater than $\min(p,2)$ or cotype less than $\max(2,p)$ (Exercise \ref{ex:Lp-optimal-type}). 
 \end{example}
