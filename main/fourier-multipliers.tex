@@ -1,3 +1,17 @@
+Many important operators in (scalar-valued) Fourier analysis are \emph{Fourier multipliers}.
+For each frequency $\xi \in \R$, such an operator maps the complex exponential function $x \mapsto e^{ix\xi}$ to the scalar multiple $m(\xi)e^{ix\xi}$ for some function $\map{m}{\R}{\C}$, called the \emph{symbol}.
+\emph{Fourier multiplier theorems} generally give sufficient conditions for an operator $T_{m}$, defined as above, to be defined and bounded on $L^{p}(\R)$ for some or all $p \in (1,\infty)$.
+The Mikhlin theorem---probably the most well-known and versatile multiplier theorem beyond Plancherel's theorem---gives sufficient conditions in terms of the symbol $m$ and its derivative.
+The closely-related \emph{Littlewood--Paley theorem} gives an equivalent expression for the $L^p$ norm of a function in terms of square functions related to Fourier projections.
+
+Both of these theorems have Banach-valued extensions.
+Fourier multipliers on Banach-valued functions are intrinsically more complicated, as complex exponentials now have `direction' given by vectors $\mb{x} \in X$, and a Fourier multiplier on $X$-valued functions will now map elementary tensors $x \mapsto e^{i\xi x}\mb{x}$ to $e^{i\xi x}M(\xi)(\mb{x})$, where $M(\xi)$ is an operator from $X$ to another Banach space $Y$---not just a scalar.
+The Littlewood--Paley theorem also becomes more complicated, as for Banach-valued functions square functions have to be interpreted via Rademacher averages.
+Nevertheless, both of these theorems have satisfactory analogues when the underlying Banach spaces have the UMD property.
+
+The most important nontrivial Fourier multiplier is the Hilbert transform, which is also the most important nontrivial \emph{singular integral operator}.
+The UMD-valued Mikhlin and Littlewood--Paley theorems both ultimately reduce to analysis of the Hilbert transform.
+
 \section{The Hilbert transform}
 
 Recall from the introduction that the Hilbert transform of a scalar-valued function $\map{f}{\R}{\C}$ is defined by
@@ -5,26 +19,24 @@ Recall from the introduction that the Hilbert transform of a scalar-valued funct
   Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\substack{\varepsilon \downarrow 0 \\ E \uparrow \infty}} \int_{\varepsilon < |y| < E} f(x-y) \, \frac{\dd y}{y}
 \end{equation*}
 (the truncation of the integral can be done in different ways; this is not too important).
-This operator arises in complex analysis as follows.
+As stated above, the Hilbert transform is used in the proof of various Fourier multiplier theorems, but it also arises fundamentally in complex analysis.
 Given a real-valued function $\map{f}{\R}{\R}$, there is a unique holomorphic function $F$ on the upper half-space $\C_{+} = \{z \in \C : \Im(z) > 0\}$ such that for almost all $x \in \R = \partial \C_{+}$, the real part $\Re(F)$ satisfies
 \begin{equation*}
-  \lim_{z \to x} \Re(F(z)) = f(x) \qquad \ae \,  x \in \R,
+  \lim_{y \to 0} \Re(F(x+iy)) = f(x) \qquad \ae \,  x \in \R.
 \end{equation*}
-provided the limit is taken within an appropriate region.
-It turns out that
+This function turns out to satisfy
 \begin{equation*}
-  \lim_{z \to x} \Im(F(z)) = Hf(x)
+  \lim_{y \to 0} \Im(F(x+iy)) = Hf(x)  \qquad \ae \,  x \in \R.
 \end{equation*}
-for almost all $x \in \R$.
 Thus the Hilbert transform computes what is called the \emph{conjugate function} of a real-valued $\map{f}{\R}{\R}$.
 See \cite[\textsection 5.1.2]{grafakos} for more details.
-There are plenty of other applications of this operator (and its generalisations, notably the Riesz transforms) outside of complex analysis, but we will not be too concerned with these.
+There are plenty of other applications of this operator (and its generalisations, notably the Riesz transforms) outside of complex analysis, but we will not consider them in this course.
 
-Classical methods in harmonic analysis (most notably Calder\'on--Zygmund theory) imply that the Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, while explicit computation of $Hf$ when $f = \1_{[0,1]}$ shows that $H$ is not bounded on $L^1(\R)$ or $L^\infty(\R)$.
+Classical methods in harmonic analysis imply that the Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, while explicit computation of $Hf$ when $f = \1_{[0,1]}$ shows that $H$ is not bounded on $L^1(\R)$ or $L^\infty(\R)$.
 In this chapter (and the next) we will consider Banach-valued extensions of the Hilbert transform.
 In particular, we will show that these extensions are bounded on $L^p(\R;X)$ for $p \in (1,\infty)$ if and only if the Banach space $X$ has the UMD property.
 
-Consider a complex Banach space $X$ and fix $p \in (1,\infty)$.
+Consider a Banach space $X$ and fix $p \in (1,\infty)$.
 Recall from Chapter \ref{sec:Bochner-spaces} that the tensor extension $H \otimes I$ is defined on the algebraic tensor product $L^p(\R) \otimes X$ by its action on elementary tensors,
 \begin{equation*}
   (H \otimes I)(f \otimes \mb{x}) := (Hf) \otimes \mb{x} \qquad \forall f \in L^p(\R), \mb{x} \in X.
@@ -38,7 +50,7 @@ Recall also that $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension if 
 In this chapter we will prove the following theorem.
 
 \begin{thm}[Burkholder]\label{thm:Burkholder}
-  Suppose that $X$ is a complex UMD Banach space.
+  Suppose that $X$ is a UMD Banach space.
   Then for all $p \in (1,\infty)$, the Hilbert transform $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension.
 \end{thm}
 
@@ -69,8 +81,8 @@ we have the identities
   H(\Tr_{s} f) = \Tr_{s} (Hf), \qquad H(\Dil_{\lambda} f) = \Dil_{\lambda} H(f), \quad H(\Refl(f)) = -\Refl(Hf).
 \end{equation*}
 In fact, these properties characterise the Hilbert transform among all bounded linear operators on $L^2(\R)$ (and in fact on $L^p(\R)$ for all $p$), up to a scalar multiple: any operator $T \in \Lin(L^2(\R))$ satisfying these properties must satisfy $T = cH$ for some $c \in \C$.\footnote{This result appears as \cite[Exercise 5.1.11]{grafakos}; it follows relatively simply from the Fourier multiplier representation of $H$, which we will discuss later.}
-This characterisation provides a heuristic way of finding representations of the Hilbert transform and its truncations: find a family of operators which `almost' represents the Hilbert transform (for us, these will be related to martingale transforms), and somehow average over translations and dilations to produce an operator with the same invariances as $H$.
-The resulting operator will be equal to $cH$ for some $c \in \C$.\todo{exposition should be improved}
+Whatever methods we use to establish bounded Banach-valued extensions of the Hilbert transform must respect these invariances.
+This idea leads us to the analysis of generalised dyadic systems.
 
 \section{Generalised dyadic systems and shift operators}
 
@@ -176,7 +188,8 @@ However, the \emph{set of dyadic systems} is itself translation invariant.
   Therefore we have $\mc{D}^{\omega} + x = \mc{D}^{\omega'}$.
 \end{proof}
 
-We are not content with shifted dyadic systems: we also need dilations.
+As stated above, our methods will also need to be dilation invariant.
+To this end we allow for an additional modification to our dyadic systems.
 
 \begin{defn}
   For $\omega \in \{0,1\}^{\Z}$ and $t > 0$, define the \emph{dilated dyadic system}
@@ -185,16 +198,20 @@ We are not content with shifted dyadic systems: we also need dilations.
   \end{equation*}
 \end{defn}
 
-Of course, if we take $t$ to be a dyadic power $t = 2^{j}$ for some $j \in \Z$, then $t\mc{D}^{\omega} = \mc{D}^{\omega'}$ where $\omega'$ is a shift of $\omega$.
-Thus as long as we allow for changes in the parameter $\omega$ we only need to consider dilated dyadic systems $t\mc{D}^{\omega}$ for $t \in [1,2)$.
+If $t = 2^{j}$ for some $j \in \Z$, then $t\mc{D}^{\omega} = \mc{D}^{\omega'}$ where $\omega'$ is a shift of $\omega$.
+Thus as long as we allow for arbitrary $\omega \in \{0,1\}^{\Z}$, we need only consider dilated dyadic systems $t\mc{D}^{\omega}$ for $t \in [1,2)$.
 In the following sections we will refer to a translated shifted dyadic system $t\mc{D}^{\omega}$, for some $t \in [1,2)$ and $\omega \in \{0,1\}^{\Z}$, simply as a \emph{generalised dyadic system}, and we may suppress reference to $t$ and $\omega$ and denote it by $\mc{D}$.
-Although we have not formally proven it, generalised dyadic systems satisfy the conclusion of Proposition \ref{prop:dyadicsystems} (with length $t2^{-j}$ in place of $2^{-j}$) and the dyadic dichotomy (Remark \ref{rmk:dyadic-dichotomy}).
 
-Why do we consider generalised dyadic systems?
-Consider the probability space $\Omega := [1,2) \times \{0,1\}^{\Z}$, where $[1,2)$ is equipped with a probability measure $\nu$ (not necessarily the Lebesgue measure) and each factor $\{0,1\}$ has the uniform probability measure.
-Since our set of generalised dyadic systems is parametrised by $\Omega$, we are now in a position to consider a `random dyadic system', and to consider the associated `random martingale transforms'.
+\begin{rmk}
+  Although we have not formally proven it, generalised dyadic systems satisfy the conclusion of Proposition \ref{prop:dyadicsystems} (with length $t2^{-j}$ in place of $2^{-j}$) and the dyadic dichotomy (Remark \ref{rmk:dyadic-dichotomy}).  
+\end{rmk}
+
+
+Why do we need generalised dyadic systems?
+Consider the probability space $\Omega := [1,2) \times \{0,1\}^{\Z}$, where $[1,2)$ is equipped with a probability measure $\nu$ and each factor $\{0,1\}$ has the uniform probability measure.
+Since our set of generalised dyadic systems is parametrised by $\Omega$, we can consider `random dyadic systems', and associated `random martingale transforms'.
 We are also able to take \emph{expectations} of such random martingale transforms.
-By the construction of our shifted and dilated dyadic systems, these expectations will satisfy the same translation, dilation, and reflection invariances that characterise the Hilbert transform.\footnote{For reflection invariance of shifted dyadic systems see Exercise \ref{ex:dyadic-refln-invariance}.}
+By the construction of our shifted and dilated dyadic systems, these expectations will satisfy the same translation, dilation, and reflection invariances as the Hilbert transform.\footnote{For reflection invariance of shifted dyadic systems see Exercise \ref{ex:dyadic-refln-invariance}.}
 With a bit of work, we will be able to recover truncated Hilbert transforms as expectations of random martingale transforms, and thus deduce uniform bounds for truncated Hilbert transforms from the UMD property.
 
 From generalised dyadic systems we can construct generalised Haar expansions.
@@ -208,7 +225,12 @@ Recall from Proposition \ref{prop:haar-sqfn} that for all $\mb{f} \in L^p([0,1);
 \end{equation*}
 where $\mc{D}$ is the standard dyadic system on $[0,1)$.
 % Since the union of the finite Rademacher spaces $\varepsilon_{n}(X)$ is dense in $\varepsilon(X)$ (Exercise \ref{ex:on-rad-spaces}), it follows that the set of functions $\mb{f} \in L^p([0,1);X))$ with finitely many nonzero Haar coefficients is dense in $L^p([0,1);X)$.
-This can be extended to general dyadic systems on $\R$.
+This can be extended to general dyadic systems on $\R$: for any bounded interval $I \subset \R$ (not necessarily dyadic) we define the Haar function
+\begin{equation*}
+  h_{I} := |I|^{-1/2}(\1_{I_{-}} - \1_{I_{+}})
+\end{equation*}
+where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
+
 
 \begin{thm}\label{thm:general-haar-decompositions}
   Let $X$ be a UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}$ be a generalised dyadic system.
@@ -221,14 +243,6 @@ This can be extended to general dyadic systems on $\R$.
     % Furthermore, the set of functions $\mb{f} \in L^p(\R;X)$ such that the sequence $(\langle \mb{f}, h_{I} \rangle)_{I \in \mc{D}}$ is finitely supported is dense in $L^p(\R;X)$.
 \end{thm}
 
-\begin{rmk}
-  Previously we only defined the Haar functions $h_{I}$ for dyadic subintervals of $[0,1)$, but the same definition applies for all intervals in $\R$:
-  we have
-  \begin{equation*}
-    h_{I} := |I|^{-1/2}(\1_{I_{-}} - \1_{I_{+}})
-  \end{equation*}
-  where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
-\end{rmk}
 
 \begin{proof}[Proof of Theorem \ref{thm:general-haar-decompositions}]
   % As in the case of the unit interval, the density statement follows from \eqref{eq:gen-haar-sqfn} and abstract properties of Rademacher spaces.
@@ -242,13 +256,12 @@ This can be extended to general dyadic systems on $\R$.
   Under this assumption, there exists a scale $j_{0} \in \Z$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}_{j}$ for all $j \leq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
     The support of this function is covered by the standard dyadic intervals $[-1/2,0)$ and $[0,1/2)$, but $[-1/2,1/2)$ is not a standard dyadic interval.}
   Let $I_{j} := I_{j}^{0} \cup I_{j}^{1}$ be the union of these two intervals.
-  We separate the contributions of large and small intervals to the Rademacher average: 
-  for all $j \leq j_{0}$ we write
+  We fix $j \leq j_{0}$ and separate the contributions of small and large intervals to the Rademacher average: 
   \begin{equation*}
     \begin{aligned}
-      \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
-      &\leq \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
-      &+ \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k} \\ I \supset I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
+      &\E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &\leq \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      + \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k} \\ I \supset I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
     \end{aligned}
   \end{equation*}
   exploiting the dyadic dichotomy to restrict to intervals comparable to $I_{j}$.
@@ -266,7 +279,7 @@ This can be extended to general dyadic systems on $\R$.
   \end{equation*}
   using that $\mb{f}$ is supported in $I_{j_{0}}$ to estimate the $L^1$ norm.
 
-  To control the contribution from small intervals, we can reduce to the probabilistic setting.
+  To control the contribution from small intervals, we reduce to the probabilistic setting.
   Let $\P_{j}$ be the renormalised Lebesgue measure $|I_{j}|^{-1} \dd x$ on $I_{j}$.
   Then $(I_{j},\P_{j})$ is a probability space (with the Borel $\sigma$-algebra).
   Define a filtration $(\mc{F}_{n}^{j})_{n \in \N}$ on $I_{j}$ by
@@ -293,12 +306,12 @@ This can be extended to general dyadic systems on $\R$.
 \end{proof}
 
 \begin{rmk}
-  This argument could have been avoided by considering conditional expectations and martingales on general $\sigma$-finite measure spaces, indexed over $\Z$ rather than $\N$.
+  This argument could have been avoided by considering conditional expectations and martingales on general $\sigma$-finite measure spaces, indexed over $\Z$ rather than $\N$, as is done in \cite{HNVW16}.
   The result would then follow from the `extended' UMD property defined via such martingales (which is, of course, equivalent to our UMD property).
 \end{rmk}
 
 The operators we will use to represent truncated Hilbert transforms are related to generalised Haar expansions, but with the Haar coefficients mapped onto a more general system of functions parametrised by a generalised dyadic system.
-Notice that Haar functions are simply generated by one single Haar function: for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:
+Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:
 \begin{equation*}
   h_{I} = \Dil_{|I|} \Tr_{\ell(I)} h,
 \end{equation*}
@@ -309,14 +322,14 @@ This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and
 \end{equation*}
 
 \begin{defn}
-  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
+  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite $\K$-linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
 \end{defn}
 
 \begin{defn}
   Let $\mc{D} = t\mc{D}^{\omega}$ be a generalised dyadic system, $X$ a Banach space, and $k$ an admissible base function.
-  For $m,n \in \Z$ with $m \leq n$ we define the \emph{truncated shift operator} $S_{k,n,m} = S_{k,n,m}^{t,\omega}$ by
+  For $m,n \in \Z$ with $m \leq n$ we define the \emph{truncated shift operator} $S_{k,m,n} = S_{k,m,n}^{t,\omega}$ by
   \begin{equation*}
-    S_{k,n,m} \mb{f} := \sum_{I \in \mc{D}_{m,n}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \qquad \forall \map{\mb{f}}{\R}{X},
+    S_{k,m,n} \mb{f} := \sum_{I \in \mc{D}_{m,n}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \qquad \forall \map{\mb{f}}{\R}{X},
   \end{equation*}
   where we write $\mc{D}_{m,n} = \bigcup_{j = m}^{n} \mc{D}_{j}$.
 \end{defn}
@@ -325,14 +338,14 @@ Although the indexing set $\mc{D}_{m,n}$ is infinite, for all $x \in \R$ the sum
 
 \begin{rmk}
   In \cite{HNVW16} non-truncated shift operators $S_{k}$ are considered.
-  We work with truncated shifts in order to avoid convergence issues; this is possible since ultimately we are only working with truncated Hilbert transforms.
+  We work with truncated shifts in order to avoid convergence issues.
 \end{rmk}
 
-When the admissible base function $k$ is $h$ itself, $S_{h}$ acts as a Haar projection: it sends a function to its partial Haar expansion onto intervals in $\mc{D}_{j}$ with $m \leq j \leq n$.
+When the admissible base function $k$ is the Haar function $h$ itself, $S_{h, m,n}$ acts as a \emph{Haar projection} to scales between $m$ and $n$: it sends a function to its partial Haar expansion onto intervals in $\mc{D}_{j}$ with $m \leq j \leq n$.
 In general, since $k$ is a finite linear combination of Haar functions localised to equal-length subintervals of $[0,1)$, $S_{k}$ takes the generalised Haar projection of $\mb{f}$ and `shifts' each entry onto multiple Haar functions at a fixed smaller scale.
 
 \begin{thm}\label{eq:shift-boundedness}
-  Let $X$ be a complex UMD space, $p \in (1,\infty)$, $\mc{D}$ a generalised dyadic system, and $k$ an admissible base function.
+  Let $X$ be a UMD space, $p \in (1,\infty)$, $\mc{D}$ a generalised dyadic system, and $k$ an admissible base function.
   Then for all $m \leq n$, $S_{k,m,n}$ is bounded on $L^{p}(\R;X)$ uniformly in $m$ and $n$,
   with
   \begin{equation*}
@@ -345,7 +358,7 @@ In general, since $k$ is a finite linear combination of Haar functions localised
   \begin{equation*}
     k_{I} = \sum_{\theta \in \Theta} \alpha_{\theta} h_{I_{\theta}},
   \end{equation*}
-  where $\Theta$ is a finite indexing set, $\alpha_{\theta} \in \C$, and $I_{\theta} \in \mc{D}$ are subintervals of $I$ of length $2^{-\ell}|I|$ for some fixed $\ell \in \N$.
+  where $\Theta$ is a finite indexing set, $\alpha_{\theta} \in \K$, and $I_{\theta} \in \mc{D}$ are subintervals of $I$ of length $2^{-\ell}|I|$ for some fixed $\ell \in \N$.
   Thus for $\mb{f} \in L^p(\R;X)$ we can write
   \begin{equation*}
     \begin{aligned}
@@ -355,7 +368,7 @@ In general, since $k$ is a finite linear combination of Haar functions localised
   For each interval $J \in \mc{D}$ we have $J = I_{\theta}$ for at most one value of $I$ and $\theta$, so by Theorem \ref{thm:general-haar-decompositions} we can estimate
   \begin{equation*}
     \begin{aligned}
-      \|S_{k} \mb{f}\|_{L^p(\R;X)}
+      \|S_{k,m,n} \mb{f}\|_{L^p(\R;X)}
       &= \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
       &\lesssim_{p,X} \E \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I_{\theta}|} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
       &= \E \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \varepsilon_{2^{-\ell}|I|} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}.
@@ -386,35 +399,37 @@ In general, since $k$ is a finite linear combination of Haar functions localised
    Applying Theorem \ref{thm:general-haar-decompositions} once more yields
    \begin{equation*}
      \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
-     \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+     \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)},
    \end{equation*}
-
+   completing the proof.
  \end{proof}
+ 
+ \section{Average truncated shifts and truncated Hilbert transforms}
 
- \section{Average truncated shifts and truncated Hilbert transforms}{
-
-\begin{defn}
-  Fix a UMD space $X$ and $p \in (1,\infty)$.
-  Let $k$ be an admissible base function and $\nu$ a probability measure on $[1,2)$.
-  For $m,n \in \Z$ with $m \leq n$ we define the \emph{average truncated dyadic shift operator} $\langle S_k \rangle^{\nu} \in \Lin(L^p(\R;X))$ by
-  \begin{equation}\label{eq:avg-shift}
-    \langle S_{k,m,n} \rangle^{\nu}\mb{f} := \int_{[1,2)} \int_{\{0,1\}^{\Z}} S_{k,m,n}^{\omega, t}\mb{f} \, \dd \P(\omega) \, \dd \nu(t)
-  \end{equation}
-  as an $L^p(\R;X)$-valued Bochner integral.
-\end{defn}
-
+ Since individual generalised dyadic systems $t\mc{D}^{\omega}$ are not translation or dilation invariant, neither are the shift operators $S_{k,m,n}^{\omega,t}$.
+ But the set of all generalised dyadic systems is translation and dilation invariant, so averaging over $\omega$ and $t$ results in operators that have these invariances (at least in the formal `untruncated' limit as $m \downarrow -\infty$ and $n \uparrow \infty$).
+ 
+ \begin{defn}
+   Fix a UMD space $X$ and $p \in (1,\infty)$.
+   Let $k$ be an admissible base function and $\nu$ a probability measure on $[1,2)$.
+   For $m,n \in \Z$ with $m \leq n$ we define the \emph{average truncated dyadic shift operator} $\langle S_{k,m,n} \rangle^{\nu} \in \Lin(L^p(\R;X))$ by the $L^p(\R;X)$-valued Bochner integral
+   \begin{equation}\label{eq:avg-shift}
+     \langle S_{k,m,n} \rangle^{\nu}\mb{f} := \int_{[1,2)} \int_{\{0,1\}^{\Z}} S_{k,m,n}^{\omega, t}\mb{f} \, \dd \P(\omega) \, \dd \nu(t).
+   \end{equation}
+ \end{defn}
+ 
 \begin{lem}
   For all Banach spaces $X$ and all $p \in (1,\infty)$, the $L^p(\R;X)$-valued Bochner integral \eqref{eq:avg-shift} exists.
 \end{lem}
 
 \begin{proof}
 It suffices to show that the function $(\omega,t) \mapsto S_{k}^{\omega, t}\mb{f}$ is strongly measurable and bounded.
-Boundedness follows from the fact that each of the truncated dyadic shifts $S_{k,m,n}^{\omega,t}$ is bounded uniformly in $(\omega,t)$ (we make no claim of uniformity in $m$ and $n$ here).
+Boundedness follows from the fact that each of the truncated dyadic shifts $S_{k,m,n}^{\omega,t}$ is bounded on $L^p(\R;X)$, uniformly in $(\omega,t)$, by Theorem \ref{eq:shift-boundedness}.
 For strong measurability, note that every $I \in t\mc{D}^{\omega}$ can be expressed as
 \begin{equation}\label{eq:interval-parametrisation}
   I = 2^{-j}t([s,s+1) + \omega^{(j)}), \qquad \omega^{j} := \sum_{i > j} 2^{j-i} \omega_{i} \in [0,1]
 \end{equation}
-for $s \in \Z$, so that
+for some $s \in \Z$, so that
 \begin{equation*}
   S_{k,m,n}^{\omega, t}\mb{f} = \sum_{j = m}^{n} \sum_{s \in \Z} k_{2^{-j}t([s,s+1) + \omega^{(j)})} \otimes \langle \mb{f}, h_{2^{-j}t([s,s+1) + \omega^{(j)})} \rangle.
 \end{equation*}
@@ -433,8 +448,10 @@ This follows from the fact that the functions
 are continuous in $(\omega^{(j)},t)$.
 \end{proof}
 
+Having shown that the average truncated dyadic shifts $\langle S_{k,m,n} \rangle^{\nu}$ are well-defined as bounded operators on $L^p(\R;X)$, we turn to representing them in terms of more familiar convolution operators.
+
 \begin{prop}\label{prop:shift-average-repn}
-  Let $X$ be a Banach space, $p \in (1,\infty)$, and let $\nu$ be a probability measure on $[1,2)$.
+  Let $X$ be a UMD space, $p \in (1,\infty)$, and let $\nu$ be a probability measure on $[1,2)$.
   Given an admissible base function $k$, let
   \begin{equation}\label{eq:phik}
     \phi^{k}(x) := \int_{\R} k(x+u)h(u) \, \dd u \qquad \forall x \in \R
@@ -749,7 +766,7 @@ In the next section we investigate sufficient conditions.
 
 \section{The Mikhlin and Littlewood--Paley  theorems}
 
-
+\textbf{in progress}
 
 \section{Exercises}
 
@@ -765,6 +782,10 @@ In the next section we investigate sufficient conditions.
   Complete the proof of Theorem \ref{thm:general-haar-decompositions}.
 \end{exercise}
 
+\begin{exercise}
+  Let $k$ be an admissible base function, $\mc{D} = t\mc{D}^{\omega}$ a generalised dyadic system, and $X$ any Banach space.
+  Show that for all $m \leq n$, the truncated dyadic shift $S_{k,m,n}^{t,\omega}$ is bounded on $L^\infty(\R;X)$.
+\end{exercise}
 
 \begin{exercise}\label{ex:R-bound-type}
   Let $X$ be a Banach space with cotype $2$ and $Y$ a Banach space with type $2$.
