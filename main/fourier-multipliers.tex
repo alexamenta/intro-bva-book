@@ -81,7 +81,7 @@ However, we will need not only the dyadic filtration on the unit interval $[0,1)
 \begin{defn}
   For all $j \in \Z$ let
   \begin{equation*}
-    \mc{D}_{j}^{0} = \{t2^{-j}[k, k+1) : k \in \Z\}
+    \mc{D}_{j}^{0} = \{2^{-j}[k, k+1) : k \in \Z\}
   \end{equation*}
   denote the set of all dyadic intervals in $\R$ of length $2^{-j}$, and let
   \begin{equation*}
@@ -154,7 +154,7 @@ However, the \emph{set of dyadic systems} is itself translation invariant.
 \begin{proof}
   Suppose $I \in \mc{D}^{\omega}$, so that
   \begin{equation*}
-    I = 2^{-j}[k, k+1) + \sum_{i > j} 2^{-i} \omega_{j}
+    I = 2^{-j}[k, k+1) + \sum_{i > j} 2^{-i} \omega_{i}
   \end{equation*}
   for some $k \in \Z$.
   The parameter $x$ has a binary expansion
@@ -167,7 +167,7 @@ However, the \emph{set of dyadic systems} is itself translation invariant.
   Letting $k_{j} = k + \sum_{i \leq j} 2^{j-i} \eta_{i} \in \Z$, we thus have
   \begin{equation*}
     \begin{aligned}
-      I + x &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} (\omega_{j} + \eta_{i}) \\
+      I + x &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} (\omega_{i} + \eta_{i}) \\
       &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} \omega_{j}'
     \end{aligned}
   \end{equation*}
@@ -211,14 +211,14 @@ where $\mc{D}$ is the standard dyadic system on $[0,1)$.
 This can be extended to general dyadic systems on $\R$.
 
 \begin{thm}\label{thm:general-haar-decompositions}
-  Let $X$ be a complex UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}$ be a generalised dyadic system.
+  Let $X$ be a UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}$ be a generalised dyadic system.
   Then for all $\mb{f} \in L^p(\R;X)$,
   \begin{equation}\label{eq:gen-haar-sqfn}
       \|\mb{f}\|_{L^p(\R;X)}
       \simeq_{p,X} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} 
       = \E \Big\| \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}.
     \end{equation}
-    Furthermore, the set of functions $\mb{f} \in L^p(\R;X)$ such that the sequence $(\langle \mb{f}, h_{I} \rangle)_{I \in \mc{D}}$ is finitely supported is dense in $L^p(\R;X)$.
+    % Furthermore, the set of functions $\mb{f} \in L^p(\R;X)$ such that the sequence $(\langle \mb{f}, h_{I} \rangle)_{I \in \mc{D}}$ is finitely supported is dense in $L^p(\R;X)$.
 \end{thm}
 
 \begin{rmk}
@@ -234,54 +234,59 @@ This can be extended to general dyadic systems on $\R$.
   % As in the case of the unit interval, the density statement follows from \eqref{eq:gen-haar-sqfn} and abstract properties of Rademacher spaces.
   We will only prove the estimate
   \begin{equation*}
-    \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X}     \|\mb{f}\|_{L^p(\R;X)},
+    \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X}     \|\mb{f}\|_{L^p(\R;X)},
   \end{equation*}
   as the remaining estimates can be deduced similarly (Exercise \ref{ex:mgale-reduction}).
   % rewrite if unconditionality is still needed
   By density, it suffices to prove the result for compactly supported $\mb{f}$.
-  Under this assumption, there exists a scale $j_{0} \in \Z$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}^{\omega}_{j}$ for all $j \geq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
+  Under this assumption, there exists a scale $j_{0} \in \Z$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}_{j}$ for all $j \leq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
     The support of this function is covered by the standard dyadic intervals $[-1/2,0)$ and $[0,1/2)$, but $[-1/2,1/2)$ is not a standard dyadic interval.}
   Let $I_{j} := I_{j}^{0} \cup I_{j}^{1}$ be the union of these two intervals.
-  Then for all $j \geq j_{0}$ we can write
+  We separate the contributions of large and small intervals to the Rademacher average: 
+  for all $j \leq j_{0}$ we write
   \begin{equation*}
     \begin{aligned}
-      \E \Big\| \sum_{I \in \mc{D}^{\omega}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
-      &\leq \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
-      &+ \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \supset I_{j}}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
+      \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &\leq \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &+ \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k} \\ I \supset I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
     \end{aligned}
   \end{equation*}
-  exploiting the dyadic dichotomy to restrict to intervals $I \supset I_{j}$ in the second term.
-  This term can be estimated by
+  exploiting the dyadic dichotomy to restrict to intervals comparable to $I_{j}$.
+  
+  The contribution from large intervals can be estimated crudely by
   \begin{equation*}
     \begin{aligned}
-      \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \supset I_{j}}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k} \\ I \supset I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
       &\leq \sum_{k < j} \sum_{\sigma = 0,1} \big\| h_{I^{\sigma}_{k}} \otimes \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \big\|_{L^p(\R;X)} \\
       &\leq \sum_{k < j} \sum_{\sigma = 0,1} \|h_{I^{\sigma}_{k}}\|_{p} \| \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \|_{X} \\
       &\leq  \sum_{k < j} \sum_{\sigma = 0,1} |I_{k}^\sigma|^{\frac{1}{p}-\frac{1}{2}} \|\mb{f}\|_{L^1(\R;X)} |I_{k}^{\sigma}|^{-\frac{1}{2}} \\
-      &= 2|I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} \sum_{k < j} 2^{-k(\frac{1}{p} - 1)} \\
+      &\leq 2|I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} \sum_{k < j} 2^{-k(\frac{1}{p} - 1)} \\
       &\lesssim 2 |I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} 2^{j(1 - \frac{1}{p})}
     \end{aligned}
   \end{equation*}
   using that $\mb{f}$ is supported in $I_{j_{0}}$ to estimate the $L^1$ norm.
-  To control the first term, let $\P_{j}$ be the renormalised Lebesgue measure $|I_{j}|^{-1} \dd x$ on $I_{j}$.
+
+  To control the contribution from small intervals, we can reduce to the probabilistic setting.
+  Let $\P_{j}$ be the renormalised Lebesgue measure $|I_{j}|^{-1} \dd x$ on $I_{j}$.
   Then $(I_{j},\P_{j})$ is a probability space (with the Borel $\sigma$-algebra).
   Define a filtration $(\mc{F}_{n}^{j})_{n \in \N}$ on $I_{j}$ by
   \begin{equation*}
-    \mc{F}_{n}^{j} := \sigma\{I \in \mc{D}^{\omega}_{j+n} : I \subset I_{j}\}.
+    \mc{F}_{n}^{j} := \sigma\{I \in \mc{D}_{j+n} : I \subset I_{j}\}.
   \end{equation*} 
   Then by the same argument we used to prove Proposition \ref{prop:haar-sqfn}---really we are just looking at a rescaled, shifted version of that result---we identify the generalised Haar decomposition with a martingale representation associated to the filtration $\mc{F}^{j}_{\bullet}$, and then invoke Burkholder's inequalities, with consequence that
   \begin{equation*}
     \begin{aligned}
-      \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
-      &=  |I_{j}|^{1/p} \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(I_{j}, \P_{j};X)} \\
+      \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &=  |I_{j}|^{1/p} \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(I_{j}, \P_{j};X)} \\
       &\lesssim_{p,X} |I_{j}|^{1/p} \|\mb{f}\|_{L^p(I_{j},\P_{j};X)} 
       \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
     \end{aligned}
   \end{equation*}
   using that $\mb{f}$ is supported in $I_{j}$.
-  In the end, for all $j \leq j_{0}$ we have
+  
+  Putting the two terms together, for all $j \leq j_{0}$ we have
   \begin{equation*}
-    \E \Big\| \sum_{I \in \mc{D}^{\omega}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+    \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
     \lesssim_{p,X}  \|\mb{f}\|_{L^p(\R;X)} \Big(|I_{j_{0}}|^{1/p'}  2^{j(1 - \frac{1}{p})} + 1\Big),
   \end{equation*}
   so taking $j \downarrow -\infty$ completes the proof.
@@ -292,9 +297,8 @@ This can be extended to general dyadic systems on $\R$.
   The result would then follow from the `extended' UMD property defined via such martingales (which is, of course, equivalent to our UMD property).
 \end{rmk}
 
-\todo{exposition}
-
-Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:
+The operators we will use to represent truncated Hilbert transforms are related to generalised Haar expansions, but with the Haar coefficients mapped onto a more general system of functions parametrised by a generalised dyadic system.
+Notice that Haar functions are simply generated by one single Haar function: for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:
 \begin{equation*}
   h_{I} = \Dil_{|I|} \Tr_{\ell(I)} h,
 \end{equation*}
@@ -305,10 +309,8 @@ This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and
 \end{equation*}
 
 \begin{defn}
-  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite linear combination of Haar functions $h_{J}$ with $J \in \mc{D}_{j}$, $J \subset [0,1)$ (where $\mc{D}$ is the \emph{standard} dyadic system) for some fixed $j \in \N$, and if furthermore $\|k\|_{\infty} \leq 1$.
+  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
 \end{defn}
-
-\todo{exposition}
 
 \begin{defn}
   Let $\mc{D} = t\mc{D}^{\omega}$ be a generalised dyadic system, $X$ a Banach space, and $k$ an admissible base function.
@@ -319,7 +321,7 @@ This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and
   where we write $\mc{D}_{m,n} = \bigcup_{j = m}^{n} \mc{D}_{j}$.
 \end{defn}
 
-Note that for all $x \in \R$ the sum defining $S_{k,m,n}\mb{f}(x)$ is actually finite, as for each $j \in \Z$ there is at most one interval $I \in \mc{D}_{j}$ for which $k_{I}(x) \neq 0$, since $k_{I}$ is supported in $I$.
+Although the indexing set $\mc{D}_{m,n}$ is infinite, for all $x \in \R$ the sum defining $S_{k,m,n}\mb{f}(x)$ is actually finite, as for each $j \in \Z$ there is at most one interval $I \in \mc{D}_{j}$ for which $k_{I}(x) \neq 0$ (as $k_{I}$ is supported in $I$), and only $m \leq j \leq n$ contribute to the sum.
 
 \begin{rmk}
   In \cite{HNVW16} non-truncated shift operators $S_{k}$ are considered.
@@ -727,7 +729,7 @@ In general $R$-boundedness of a family of operators is strictly stronger than un
     \end{aligned}
   \end{equation*}
   proving the claimed $R$-boundedness.
-\end{eg}
+\end{example}
 
 The fundamental link between $R$-boundedness and Fourier multipliers comes from the following theorem, whose proof we omit.\footnote{It isn't too difficult, we just don't need it. For details see \cite[Theorem 5.3.15]{HNVW16}.}
 
