@@ -1,18 +1,814 @@
-\emph{under construction}
+Many important operators in (scalar-valued) Fourier analysis are \emph{Fourier multipliers}.
+For each frequency $\xi \in \R$, such an operator maps the complex exponential function $x \mapsto e^{ix\xi}$ to the scalar multiple $m(\xi)e^{ix\xi}$ for some function $\map{m}{\R}{\C}$, called the \emph{symbol}.
+\emph{Fourier multiplier theorems} generally give sufficient conditions for an operator $T_{m}$, defined as above, to be defined and bounded on $L^{p}(\R)$ for some or all $p \in (1,\infty)$.
+The Mikhlin theorem---probably the most well-known and versatile multiplier theorem beyond Plancherel's theorem---gives sufficient conditions in terms of the symbol $m$ and its derivative.
+The closely-related \emph{Littlewood--Paley theorem} gives an equivalent expression for the $L^p$ norm of a function in terms of square functions related to Fourier projections.
 
-% \section{Fourier multipliers}
+Both of these theorems have Banach-valued extensions.
+Fourier multipliers on Banach-valued functions are intrinsically more complicated, as complex exponentials now have `direction' given by vectors $\mb{x} \in X$, and a Fourier multiplier on $X$-valued functions will now map elementary tensors $x \mapsto e^{i\xi x}\mb{x}$ to $e^{i\xi x}M(\xi)(\mb{x})$, where $M(\xi)$ is an operator from $X$ to another Banach space $Y$---not just a scalar.
+The Littlewood--Paley theorem also becomes more complicated, as for Banach-valued functions square functions have to be interpreted via Rademacher averages.
+Nevertheless, both of these theorems have satisfactory analogues when the underlying Banach spaces have the UMD property.
 
-% \section{The Hilbert transform and the HT property}
+The most important nontrivial Fourier multiplier is the Hilbert transform, which is also the most important nontrivial \emph{singular integral operator}.
+The UMD-valued Mikhlin and Littlewood--Paley theorems both ultimately reduce to analysis of the Hilbert transform.
 
-% \section{UMD implies HT}
+\section{The Hilbert transform}
 
-% (use the argument in HNVW1 - two lectures of work)
+Recall from the introduction that the Hilbert transform of a scalar-valued function $\map{f}{\R}{\C}$ is defined by
+\begin{equation*}
+  Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\substack{\varepsilon \downarrow 0 \\ E \uparrow \infty}} \int_{\varepsilon < |y| < E} f(x-y) \, \frac{\dd y}{y}
+\end{equation*}
+(the truncation of the integral can be done in different ways; this is not too important).
+As stated above, the Hilbert transform is used in the proof of various Fourier multiplier theorems, but it also arises fundamentally in complex analysis.
+Given a real-valued function $\map{f}{\R}{\R}$, there is a unique holomorphic function $F$ on the upper half-space $\C_{+} = \{z \in \C : \Im(z) > 0\}$ such that for almost all $x \in \R = \partial \C_{+}$, the real part $\Re(F)$ satisfies
+\begin{equation*}
+  \lim_{y \to 0} \Re(F(x+iy)) = f(x) \qquad \ae \,  x \in \R.
+\end{equation*}
+This function turns out to satisfy
+\begin{equation*}
+  \lim_{y \to 0} \Im(F(x+iy)) = Hf(x)  \qquad \ae \,  x \in \R.
+\end{equation*}
+Thus the Hilbert transform computes what is called the \emph{conjugate function} of a real-valued $\map{f}{\R}{\R}$.
+See \cite[\textsection 5.1.2]{grafakos} for more details.
+There are plenty of other applications of this operator (and its generalisations, notably the Riesz transforms) outside of complex analysis, but we will not consider them in this course.
 
-% \section{The Mikhlin multiplier theorem}
+Classical methods in harmonic analysis imply that the Hilbert transform is bounded on $L^p(\R)$ for all $p \in (1,\infty)$, while explicit computation of $Hf$ when $f = \1_{[0,1]}$ shows that $H$ is not bounded on $L^1(\R)$ or $L^\infty(\R)$.
+In this chapter (and the next) we will consider Banach-valued extensions of the Hilbert transform.
+In particular, we will show that these extensions are bounded on $L^p(\R;X)$ for $p \in (1,\infty)$ if and only if the Banach space $X$ has the UMD property.
 
-% \section{The Littlewood--Paley theorem}
+Consider a Banach space $X$ and fix $p \in (1,\infty)$.
+Recall from Chapter \ref{sec:Bochner-spaces} that the tensor extension $H \otimes I$ is defined on the algebraic tensor product $L^p(\R) \otimes X$ by its action on elementary tensors,
+\begin{equation*}
+  (H \otimes I)(f \otimes \mb{x}) := (Hf) \otimes \mb{x} \qquad \forall f \in L^p(\R), \mb{x} \in X.
+\end{equation*}
+The algebraic tensor product $L^p(\R) \otimes X$ is the linear span of such elementary tensors, so $H \otimes I$ is extended by linearity to all of $L^p(\R) \otimes X$.
+Recall also that $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension if and only if
+\begin{equation*}
+  \|(H \otimes I)\mb{f}\|_{L^p(\R;X)} \lesssim \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in L^p(\R) \otimes X.
+\end{equation*}
+
+In this chapter we will prove the following theorem.
+
+\begin{thm}[Burkholder]\label{thm:Burkholder}
+  Suppose that $X$ is a UMD Banach space.
+  Then for all $p \in (1,\infty)$, the Hilbert transform $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension.
+\end{thm}
+
+To prove this result, it suffices to prove that for all $0 < \varepsilon < E < \infty$, the \emph{truncated $X$-valued Hilbert transform}
+\begin{equation*}
+  H_{\varepsilon,E}^{X} \mb{f}(x) :=  \frac{1}{\pi} \int_{\varepsilon < |y| < E} \mb{f}(x-y) \, \frac{\dd y}{y} = \frac{1}{\pi} \int_{\varepsilon < |x-y| < E} \mb{f}(y) \, \frac{\dd y}{x-y}
+\end{equation*}
+is bounded on $L^p(\R;X)$ \emph{uniformly in $\varepsilon$ and $E$}.
+Since the kernel $\1_{(\varepsilon,E)}(y)/y$ is integrable, Young's inequality implies that $H_{\varepsilon,E}$ is bounded on $L^p(\R;X)$, but it does not provide uniformity in the truncation parameters.
+Once we have established uniform boundedness of these operators on $L^p(\R;X)$, Theorem \ref{thm:Burkholder} follows by noting that for all $\mb{f} \in L^p(\R) \otimes X$
+\begin{equation*}
+  \begin{aligned}
+    \|(H \otimes I)\mb{f}\|_{L^p(\R;X)}
+    = \lim_{\varepsilon \downarrow 0, E \uparrow \infty} \|(H_{\varepsilon,E} \otimes I)\mb{f}\|_{L^p(\R;X)}
+    &= \lim_{\varepsilon \downarrow 0, E \uparrow \infty} \|H_{\varepsilon,E}^{X}\mb{f}\|_{L^p(\R;X)} \\
+    &\lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
+  \end{aligned}
+\end{equation*}
+(the limit is justified by the definition of the scalar-valued Hilbert transform $Hf(x) = \lim H_{\varepsilon, E}f(x)$ and the fact that $\mb{f} \in L^p(\R) \otimes X$ has finite-dimensional range).
+
+The Hilbert transform commutes with translations and dilations, and anticommutes with reflections.
+That is, defining
+\begin{equation}\label{eq:symmetries}
+  \Tr_{s} f (x) := f(x - s), \qquad \Dil_{\lambda} f(x) := \lambda^{-1/2}f(x/\lambda), \qquad   \Refl f(x) := f(-x),
+\end{equation}
+we have the identities
+\begin{equation*}
+  H(\Tr_{s} f) = \Tr_{s} (Hf), \qquad H(\Dil_{\lambda} f) = \Dil_{\lambda} H(f), \quad H(\Refl(f)) = -\Refl(Hf).
+\end{equation*}
+In fact, these properties characterise the Hilbert transform among all bounded linear operators on $L^2(\R)$ (and in fact on $L^p(\R)$ for all $p$), up to a scalar multiple: any operator $T \in \Lin(L^2(\R))$ satisfying these properties must satisfy $T = cH$ for some $c \in \C$.\footnote{This result appears as \cite[Exercise 5.1.11]{grafakos}; it follows relatively simply from the Fourier multiplier representation of $H$, which we will discuss later.}
+Whatever methods we use to establish bounded Banach-valued extensions of the Hilbert transform must respect these invariances.
+This idea leads us to the analysis of generalised dyadic systems.
+
+\section{Generalised dyadic systems and shift operators}
+
+To establish uniform bounds on the truncated Hilbert transforms $H_{\varepsilon, E}^{X}$ when $X$ is UMD, we will need to relate them to martingale transforms.
+The transforms we will need are related to the Haar multipliers we considered in Section \ref{sec:haar-decomp}.
+However, we will need not only the dyadic filtration on the unit interval $[0,1)$, but more general \emph{dyadic systems} on $\R$.
+
+\begin{defn}
+  For all $j \in \Z$ let
+  \begin{equation*}
+    \mc{D}_{j}^{0} = \{2^{-j}[k, k+1) : k \in \Z\}
+  \end{equation*}
+  denote the set of all dyadic intervals in $\R$ of length $2^{-j}$, and let
+  \begin{equation*}
+    \mc{D}^{0} := \bigcup_{j \in \Z} \mc{D}_{j}^{0}
+  \end{equation*}
+  denote the \emph{standard dyadic system}---i.e. the set of all dyadic intervals in $\R$.
+  For every two-sided (i.e. $\Z$-indexed) sequence $\omega \in \{0,1\}^{\Z}$, define for all $j \in \Z$
+  \begin{equation*}
+    \mc{D}_{j}^{\omega} := \mc{D}_{j}^{0} + \sum_{i > j} 2^{-i} \omega_{i}:
+  \end{equation*}
+  this is the set of all dyadic intervals of length $2^{-j}$ as before, but with left endpoints shifted by the number $\sum_{i > j} 2^{-i} \omega_{i} \in [0,2^{-j})$: this number has the binary representation
+  \begin{equation*}
+    2^{-j}(0.\omega_{j+1}\omega_{j+2}\ldots)_{2} .
+  \end{equation*}
+  Finally, define the \emph{$\omega$-shifted dyadic system}
+  \begin{equation*}
+   \mc{D}^{\omega} := \bigcup_{j \in \Z} \mc{D}_{j}^{\omega}.
+  \end{equation*}
+\end{defn}
+
+We call $\mc{D}^{\omega}$ a `dyadic system' because it satisfies the following property.\footnote{This is technically the \emph{definition} of a dyadic system of intervals in $\R$. \cite[Lemma 5.1.7]{HNVW16} then says that every such dyadic system is given by $\mc{D}^\omega$ for some $\omega$. More general notions of dyadic systems (not necessarily of intervals, not necessarily in $\R$) exist. A good reference on this topic is \cite{LN18}.}
+
+\begin{prop}\label{prop:dyadicsystems}
+  Suppose $\omega \in \{0,1\}^{\Z}$ and $j \in \Z$.
+  Then every interval $I \in \mc{D}_{j}^{\omega}$ has length $2^{-j}$, and there exist intervals $I_{-}, I_{+} \in \mc{D}^{\omega}_{j+1}$ such that $I = I_{-} \cup I_{+}$.
+\end{prop}
+
+\begin{proof}
+  By construction every interval $I \in \mc{D}_{j}^{\omega}$ has length $2^{-j}$.
+  We have
+  \begin{equation*}
+    I = 2^{-j}[k,k+1) + \sum_{i > j} 2^{-i} \omega_{i}
+  \end{equation*}
+  for some $k \in \Z$.
+  Let $k' := k - \omega_{j}$, and consider the intervals
+  \begin{equation*}
+    \begin{aligned}
+      I_{-} &= 2^{-{j+1}}[2k', 2k'+1) + \sum_{i > j-1} 2^{-i} \omega_{i}, \\
+      I_{+} &= 2^{-{j+1}}[2k'+1, 2k'+2) + \sum_{i > j-1} 2^{-i} \omega_{i}. 
+    \end{aligned}
+  \end{equation*}
+  Both of these intervals are in $\mc{D}^{\omega}_{j-1}$, both have length $2^{-(j-1)}$, and they are adjacent.
+  Thus their union is an interval of length $2^{-j}$.
+  The left endpoint of $I_{-}$ is
+  \begin{equation*}
+    \begin{aligned}
+    2^{-j+1}(2k') + \sum_{i > j-1} 2^{-i} \omega_{i}
+    &= 2^{-j}(k - \omega_{j}) + 2^{-j} \omega_{j} + \sum_{i > j} 2^{-i} \omega_{i} \\
+    &= 2^{-j}k + \sum_{i > j} 2^{-i} \omega_{i},
+  \end{aligned}
+  \end{equation*}
+  which equals the left endpoint of $I$.
+  Similarly, the right endpoint of $I_{+}$ is equal to the right endpoint of $I$.
+  Thus $I = I_{-} \cup I_{+}$.
+\end{proof}
+
+\begin{rmk}\label{rmk:dyadic-dichotomy}
+The intervals in a shifted dyadic system $\mc{D}^{\omega}$ also satisfy the \emph{dyadic dichotomy}: if $I$ and $J$ are intervals in $\mc{D}^{\omega}$, then they are either comparable ($I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
+Prove this yourself in Exercise \ref{ex:dyadic-dichotomy}.
+\end{rmk}
+
+Dyadic systems are not translation invariant: given an interval $I \in \mc{D}^{\omega}$ and a parameter $x \in \R$, it is generally not true that $I + x \in \mc{D}^{\omega}$.
+However, the \emph{set of dyadic systems} is itself translation invariant.
+
+\begin{prop}
+  Let $\omega \in \{0,1\}^{\Z}$ and $x \in \R$.
+  Then $\mc{D}^{\omega} + x = \mc{D}^{\omega'}$ for some $\omega' \in \{0,1\}^{\Z}$.
+\end{prop}
+
+\begin{proof}
+  Suppose $I \in \mc{D}^{\omega}$, so that
+  \begin{equation*}
+    I = 2^{-j}[k, k+1) + \sum_{i > j} 2^{-i} \omega_{i}
+  \end{equation*}
+  for some $k \in \Z$.
+  The parameter $x$ has a binary expansion
+  \begin{equation*}
+    x = \sum_{i \in \Z} 2^{-i} \eta_{i}
+    = 2^{-j} \sum_{i \in \Z} 2^{j-i}\eta_{i}
+    = 2^{-j} \big( \sum_{i \leq j} 2^{j-i}\eta_{i} + \sum_{i > j} 2^{j-i}\eta_{i} \Big) 
+  \end{equation*}
+  for some finitely supported $\eta \in \{0,1\}^{\Z}$.
+  Letting $k_{j} = k + \sum_{i \leq j} 2^{j-i} \eta_{i} \in \Z$, we thus have
+  \begin{equation*}
+    \begin{aligned}
+      I + x &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} (\omega_{i} + \eta_{i}) \\
+      &= 2^{-j}[k_{j}, k_{j} + 1) + \sum_{i > j} 2^{-i} \omega_{j}'
+    \end{aligned}
+  \end{equation*}
+  where $\omega'$ is the (formal) binary expansion of the sum of the numbers with (formal) binary expansions $\omega$ and $\eta$.
+  Thus $\mc{D}^{\omega} + x \subseteq \mc{D}^{\omega'}$, and a symmetric argument shows that $\mc{D}^{\omega'} \subseteq \mc{D}^{\omega} + x$.
+  Therefore we have $\mc{D}^{\omega} + x = \mc{D}^{\omega'}$.
+\end{proof}
+
+As stated above, our methods will also need to be dilation invariant.
+To this end we allow for an additional modification to our dyadic systems.
+
+\begin{defn}
+  For $\omega \in \{0,1\}^{\Z}$ and $t > 0$, define the \emph{dilated dyadic system}
+  \begin{equation*}
+    t\mc{D}^{\omega} := \{tI : I \in \mc{D}^{\omega}\}.
+  \end{equation*}
+\end{defn}
+
+If $t = 2^{j}$ for some $j \in \Z$, then $t\mc{D}^{\omega} = \mc{D}^{\omega'}$ where $\omega'$ is a shift of $\omega$.
+Thus as long as we allow for arbitrary $\omega \in \{0,1\}^{\Z}$, we need only consider dilated dyadic systems $t\mc{D}^{\omega}$ for $t \in [1,2)$.
+In the following sections we will refer to a translated shifted dyadic system $t\mc{D}^{\omega}$, for some $t \in [1,2)$ and $\omega \in \{0,1\}^{\Z}$, simply as a \emph{generalised dyadic system}, and we may suppress reference to $t$ and $\omega$ and denote it by $\mc{D}$.
+
+\begin{rmk}
+  Although we have not formally proven it, generalised dyadic systems satisfy the conclusion of Proposition \ref{prop:dyadicsystems} (with length $t2^{-j}$ in place of $2^{-j}$) and the dyadic dichotomy (Remark \ref{rmk:dyadic-dichotomy}).  
+\end{rmk}
 
 
+Why do we need generalised dyadic systems?
+Consider the probability space $\Omega := [1,2) \times \{0,1\}^{\Z}$, where $[1,2)$ is equipped with a probability measure $\nu$ and each factor $\{0,1\}$ has the uniform probability measure.
+Since our set of generalised dyadic systems is parametrised by $\Omega$, we can consider `random dyadic systems', and associated `random martingale transforms'.
+We are also able to take \emph{expectations} of such random martingale transforms.
+By the construction of our shifted and dilated dyadic systems, these expectations will satisfy the same translation, dilation, and reflection invariances as the Hilbert transform.\footnote{For reflection invariance of shifted dyadic systems see Exercise \ref{ex:dyadic-refln-invariance}.}
+With a bit of work, we will be able to recover truncated Hilbert transforms as expectations of random martingale transforms, and thus deduce uniform bounds for truncated Hilbert transforms from the UMD property.
+
+From generalised dyadic systems we can construct generalised Haar expansions.
+Recall from Proposition \ref{prop:haar-sqfn} that for all $\mb{f} \in L^p([0,1);X)$ with $p \in (1,\infty)$ and $X$ a UMD space, we have 
+  \begin{equation*}
+    \begin{aligned}
+    \|\mb{f}\|_{L^p([0,1);X)}
+    &\simeq_{p,X} \E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} +  \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)} \\
+    &= \E \Big\| \tilde{\varepsilon}_{0} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)}
+  \end{aligned}
+\end{equation*}
+where $\mc{D}$ is the standard dyadic system on $[0,1)$.
+% Since the union of the finite Rademacher spaces $\varepsilon_{n}(X)$ is dense in $\varepsilon(X)$ (Exercise \ref{ex:on-rad-spaces}), it follows that the set of functions $\mb{f} \in L^p([0,1);X))$ with finitely many nonzero Haar coefficients is dense in $L^p([0,1);X)$.
+This can be extended to general dyadic systems on $\R$: for any bounded interval $I \subset \R$ (not necessarily dyadic) we define the Haar function
+\begin{equation*}
+  h_{I} := |I|^{-1/2}(\1_{I_{-}} - \1_{I_{+}})
+\end{equation*}
+where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
+
+
+\begin{thm}\label{thm:general-haar-decompositions}
+  Let $X$ be a UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}$ be a generalised dyadic system.
+  Then for all $\mb{f} \in L^p(\R;X)$,
+  \begin{equation}\label{eq:gen-haar-sqfn}
+      \|\mb{f}\|_{L^p(\R;X)}
+      \simeq_{p,X} \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} 
+      = \E \Big\| \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}.
+    \end{equation}
+    % Furthermore, the set of functions $\mb{f} \in L^p(\R;X)$ such that the sequence $(\langle \mb{f}, h_{I} \rangle)_{I \in \mc{D}}$ is finitely supported is dense in $L^p(\R;X)$.
+\end{thm}
+
+
+\begin{proof}[Proof of Theorem \ref{thm:general-haar-decompositions}]
+  % As in the case of the unit interval, the density statement follows from \eqref{eq:gen-haar-sqfn} and abstract properties of Rademacher spaces.
+  We will only prove the estimate
+  \begin{equation*}
+    \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X}     \|\mb{f}\|_{L^p(\R;X)},
+  \end{equation*}
+  as the remaining estimates can be deduced similarly (Exercise \ref{ex:mgale-reduction}).
+  % rewrite if unconditionality is still needed
+  By density, it suffices to prove the result for compactly supported $\mb{f}$.
+  Under this assumption, there exists a scale $j_{0} \in \Z$ such that the support of $\mb{f}$ is covered by the union of two adjacent intervals $I_{j}^{0}, I_{j}^{1} \in \mc{D}_{j}$ for all $j \leq j_{0}$.\footnote{The union of these intervals need not be an element of $\mc{D}^{\omega}_{j-1}$: consider for example the standard dyadic system and the function $\1_{[-1/4,1/4)}$.
+    The support of this function is covered by the standard dyadic intervals $[-1/2,0)$ and $[0,1/2)$, but $[-1/2,1/2)$ is not a standard dyadic interval.}
+  Let $I_{j} := I_{j}^{0} \cup I_{j}^{1}$ be the union of these two intervals.
+  We fix $j \leq j_{0}$ and separate the contributions of small and large intervals to the Rademacher average: 
+  \begin{equation*}
+    \begin{aligned}
+      &\E \Big\| \sum_{I \in \mc{D}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &\leq \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      + \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k} \\ I \supset I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
+    \end{aligned}
+  \end{equation*}
+  exploiting the dyadic dichotomy to restrict to intervals comparable to $I_{j}$.
+  
+  The contribution from large intervals can be estimated crudely by
+  \begin{equation*}
+    \begin{aligned}
+      \E \Big\| \sum_{k < j} \sum_{\substack{I \in \mc{D}_{k} \\ I \supset I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &\leq \sum_{k < j} \sum_{\sigma = 0,1} \big\| h_{I^{\sigma}_{k}} \otimes \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \big\|_{L^p(\R;X)} \\
+      &\leq \sum_{k < j} \sum_{\sigma = 0,1} \|h_{I^{\sigma}_{k}}\|_{p} \| \langle \mb{f}, h_{I^{\sigma}_{j}} \rangle \|_{X} \\
+      &\leq  \sum_{k < j} \sum_{\sigma = 0,1} |I_{k}^\sigma|^{\frac{1}{p}-\frac{1}{2}} \|\mb{f}\|_{L^1(\R;X)} |I_{k}^{\sigma}|^{-\frac{1}{2}} \\
+      &\leq 2|I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} \sum_{k < j} 2^{-k(\frac{1}{p} - 1)} \\
+      &\lesssim 2 |I_{j_{0}}|^{1/p'} \|\mb{f}\|_{L^p(\R;X)} 2^{j(1 - \frac{1}{p})}
+    \end{aligned}
+  \end{equation*}
+  using that $\mb{f}$ is supported in $I_{j_{0}}$ to estimate the $L^1$ norm.
+
+  To control the contribution from small intervals, we reduce to the probabilistic setting.
+  Let $\P_{j}$ be the renormalised Lebesgue measure $|I_{j}|^{-1} \dd x$ on $I_{j}$.
+  Then $(I_{j},\P_{j})$ is a probability space (with the Borel $\sigma$-algebra).
+  Define a filtration $(\mc{F}_{n}^{j})_{n \in \N}$ on $I_{j}$ by
+  \begin{equation*}
+    \mc{F}_{n}^{j} := \sigma\{I \in \mc{D}_{j+n} : I \subset I_{j}\}.
+  \end{equation*} 
+  Then by the same argument we used to prove Proposition \ref{prop:haar-sqfn}---really we are just looking at a rescaled, shifted version of that result---we identify the generalised Haar decomposition with a martingale representation associated to the filtration $\mc{F}^{j}_{\bullet}$, and then invoke Burkholder's inequalities, with consequence that
+  \begin{equation*}
+    \begin{aligned}
+      \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+      &=  |I_{j}|^{1/p} \E \Big\| \sum_{k \geq j} \sum_{\substack{I \in \mc{D}_{k}^{\omega} \\ I \subseteq I_{j}}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(I_{j}, \P_{j};X)} \\
+      &\lesssim_{p,X} |I_{j}|^{1/p} \|\mb{f}\|_{L^p(I_{j},\P_{j};X)} 
+      \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
+    \end{aligned}
+  \end{equation*}
+  using that $\mb{f}$ is supported in $I_{j}$.
+  
+  Putting the two terms together, for all $j \leq j_{0}$ we have
+  \begin{equation*}
+    \E \Big\| \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+    \lesssim_{p,X}  \|\mb{f}\|_{L^p(\R;X)} \Big(|I_{j_{0}}|^{1/p'}  2^{j(1 - \frac{1}{p})} + 1\Big),
+  \end{equation*}
+  so taking $j \downarrow -\infty$ completes the proof.
+\end{proof}
+
+\begin{rmk}
+  This argument could have been avoided by considering conditional expectations and martingales on general $\sigma$-finite measure spaces, indexed over $\Z$ rather than $\N$, as is done in \cite{HNVW16}.
+  The result would then follow from the `extended' UMD property defined via such martingales (which is, of course, equivalent to our UMD property).
+\end{rmk}
+
+The operators we will use to represent truncated Hilbert transforms are related to generalised Haar expansions, but with the Haar coefficients mapped onto a more general system of functions parametrised by a generalised dyadic system.
+Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just a translation and ($L^2$-normalised) dilation of the Haar function of the unit interval:
+\begin{equation*}
+  h_{I} = \Dil_{|I|} \Tr_{\ell(I)} h,
+\end{equation*}
+where $\ell(I) := \inf(I)$ is the left endpoint of $I$ and $h = h_{[0,1)}$.
+This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and an interval $I \subset \R$, define
+\begin{equation*}
+  k_{I} := \Dil_{|I|} \Tr_{\ell(I)} k.
+\end{equation*}
+
+\begin{defn}
+  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite $\K$-linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
+\end{defn}
+
+\begin{defn}
+  Let $\mc{D} = t\mc{D}^{\omega}$ be a generalised dyadic system, $X$ a Banach space, and $k$ an admissible base function.
+  For $m,n \in \Z$ with $m \leq n$ we define the \emph{truncated shift operator} $S_{k,m,n} = S_{k,m,n}^{t,\omega}$ by
+  \begin{equation*}
+    S_{k,m,n} \mb{f} := \sum_{I \in \mc{D}_{m,n}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \qquad \forall \map{\mb{f}}{\R}{X},
+  \end{equation*}
+  where we write $\mc{D}_{m,n} = \bigcup_{j = m}^{n} \mc{D}_{j}$.
+\end{defn}
+
+Although the indexing set $\mc{D}_{m,n}$ is infinite, for all $x \in \R$ the sum defining $S_{k,m,n}\mb{f}(x)$ is actually finite, as for each $j \in \Z$ there is at most one interval $I \in \mc{D}_{j}$ for which $k_{I}(x) \neq 0$ (as $k_{I}$ is supported in $I$), and only $m \leq j \leq n$ contribute to the sum.
+
+\begin{rmk}
+  In \cite{HNVW16} non-truncated shift operators $S_{k}$ are considered.
+  We work with truncated shifts in order to avoid convergence issues.
+\end{rmk}
+
+When the admissible base function $k$ is the Haar function $h$ itself, $S_{h, m,n}$ acts as a \emph{Haar projection} to scales between $m$ and $n$: it sends a function to its partial Haar expansion onto intervals in $\mc{D}_{j}$ with $m \leq j \leq n$.
+In general, since $k$ is a finite linear combination of Haar functions localised to equal-length subintervals of $[0,1)$, $S_{k}$ takes the generalised Haar projection of $\mb{f}$ and `shifts' each entry onto multiple Haar functions at a fixed smaller scale.
+
+\begin{thm}\label{eq:shift-boundedness}
+  Let $X$ be a UMD space, $p \in (1,\infty)$, $\mc{D}$ a generalised dyadic system, and $k$ an admissible base function.
+  Then for all $m \leq n$, $S_{k,m,n}$ is bounded on $L^{p}(\R;X)$ uniformly in $m$ and $n$,
+  with
+  \begin{equation*}
+    \|S_{k,m,n} \mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  For each interval $I \in \mc{D}$, admissibility of $k$ means that we can write
+  \begin{equation*}
+    k_{I} = \sum_{\theta \in \Theta} \alpha_{\theta} h_{I_{\theta}},
+  \end{equation*}
+  where $\Theta$ is a finite indexing set, $\alpha_{\theta} \in \K$, and $I_{\theta} \in \mc{D}$ are subintervals of $I$ of length $2^{-\ell}|I|$ for some fixed $\ell \in \N$.
+  Thus for $\mb{f} \in L^p(\R;X)$ we can write
+  \begin{equation*}
+    \begin{aligned}
+      S_{k,m,n}\mb{f} = \sum_{\theta \in \Theta}  \sum_{I \in \mc{D}_{m,n}} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle .
+    \end{aligned}
+  \end{equation*}
+  For each interval $J \in \mc{D}$ we have $J = I_{\theta}$ for at most one value of $I$ and $\theta$, so by Theorem \ref{thm:general-haar-decompositions} we can estimate
+  \begin{equation*}
+    \begin{aligned}
+      \|S_{k,m,n} \mb{f}\|_{L^p(\R;X)}
+      &= \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &\lesssim_{p,X} \E \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I_{\theta}|} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+      &= \E \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \varepsilon_{2^{-\ell}|I|} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}.
+    \end{aligned}
+   \end{equation*}
+   By independence of the choice of Rademacher sequence, we have
+   \begin{equation*}
+     \begin{aligned}
+       &\E \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \varepsilon_{2^{-\ell}|I|} \alpha_{\theta}  h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \\
+       &= \E \Big\| \sum_{\theta \in \Theta} \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} \alpha_{\theta} h_{I_{\theta}} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+       = \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)},
+     \end{aligned}
+   \end{equation*}
+   which proves our first norm estimate.
+
+   For the second norm estimate, we first note that the assumption $\|k\|_{\infty} \leq 1$ and the fact that $k$ is supported on $[0,1)$ implies that $|k_{I}(x)| \leq |h_{I}(x)|$ for all $x \in \R$.
+   Thus by Kahane--Khitchine and the contraction principle,
+   \begin{equation*}
+     \begin{aligned}
+       \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+       &\simeq_{p} \Big( \int_{\R} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x \Big)^{1/p} \\
+       &= \Big( \int_{\R} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} \frac{k_{I}(x)}{h_{I}(x)} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x \Big)^{1/p} \\
+       &\lesssim \Big( \int_{\R} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x \Big)^{1/p} \\
+       &\simeq_{p} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+     \end{aligned}
+   \end{equation*}
+   with the interpretation $\frac{k_{I}(x)}{h_{I}(x)} h_{I}(x) = 0$ when $h_{I}(x) = 0$.
+   Applying Theorem \ref{thm:general-haar-decompositions} once more yields
+   \begin{equation*}
+     \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)}
+     \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)},
+   \end{equation*}
+   completing the proof.
+ \end{proof}
+ 
+ \section{Average truncated shifts and truncated Hilbert transforms}
+
+ Since individual generalised dyadic systems $t\mc{D}^{\omega}$ are not translation or dilation invariant, neither are the shift operators $S_{k,m,n}^{\omega,t}$.
+ But the set of all generalised dyadic systems is translation and dilation invariant, so averaging over $\omega$ and $t$ results in operators that have these invariances (at least in the formal `untruncated' limit as $m \downarrow -\infty$ and $n \uparrow \infty$).
+ 
+ \begin{defn}
+   Fix a UMD space $X$ and $p \in (1,\infty)$.
+   Let $k$ be an admissible base function and $\nu$ a probability measure on $[1,2)$.
+   For $m,n \in \Z$ with $m \leq n$ we define the \emph{average truncated dyadic shift operator} $\langle S_{k,m,n} \rangle^{\nu} \in \Lin(L^p(\R;X))$ by the $L^p(\R;X)$-valued Bochner integral
+   \begin{equation}\label{eq:avg-shift}
+     \langle S_{k,m,n} \rangle^{\nu}\mb{f} := \int_{[1,2)} \int_{\{0,1\}^{\Z}} S_{k,m,n}^{\omega, t}\mb{f} \, \dd \P(\omega) \, \dd \nu(t).
+   \end{equation}
+ \end{defn}
+ 
+\begin{lem}
+  For all Banach spaces $X$ and all $p \in (1,\infty)$, the $L^p(\R;X)$-valued Bochner integral \eqref{eq:avg-shift} exists.
+\end{lem}
+
+\begin{proof}
+It suffices to show that the function $(\omega,t) \mapsto S_{k}^{\omega, t}\mb{f}$ is strongly measurable and bounded.
+Boundedness follows from the fact that each of the truncated dyadic shifts $S_{k,m,n}^{\omega,t}$ is bounded on $L^p(\R;X)$, uniformly in $(\omega,t)$, by Theorem \ref{eq:shift-boundedness}.
+For strong measurability, note that every $I \in t\mc{D}^{\omega}$ can be expressed as
+\begin{equation}\label{eq:interval-parametrisation}
+  I = 2^{-j}t([s,s+1) + \omega^{(j)}), \qquad \omega^{j} := \sum_{i > j} 2^{j-i} \omega_{i} \in [0,1]
+\end{equation}
+for some $s \in \Z$, so that
+\begin{equation*}
+  S_{k,m,n}^{\omega, t}\mb{f} = \sum_{j = m}^{n} \sum_{s \in \Z} k_{2^{-j}t([s,s+1) + \omega^{(j)})} \otimes \langle \mb{f}, h_{2^{-j}t([s,s+1) + \omega^{(j)})} \rangle.
+\end{equation*}
+Thus it suffices to show that the functions
+\begin{equation*}
+  (\omega,t) \mapsto k_{2^{-j}t([s,s+1) + \omega^{(j)})} \otimes \langle \mb{f}, h_{2^{-j}t([s,s+1) + \omega^{(j)})} \rangle
+\end{equation*}
+are strongly measurable.
+This follows from the fact that the functions
+\begin{equation*}
+  \begin{aligned}
+    (\omega,t) &\mapsto \langle \mb{f}, h_{2^{-j}t([s,s+1) + \omega^{(j)})} \rangle = \int_{\R} \mb{f}(y) h_{2^{-j}t([s,s+1) + \omega^{(j)})}(y) \, \dd y \in X\\
+    (\omega,t) &\mapsto k_{2^{-j}t([s,s+1) + \omega^{(j)})} = \Dil_{2^{-j}t} \Tr_{2^{-j}t(s + \omega^{(j)})} k \in L^p(\R)
+\end{aligned}
+\end{equation*}
+are continuous in $(\omega^{(j)},t)$.
+\end{proof}
+
+Having shown that the average truncated dyadic shifts $\langle S_{k,m,n} \rangle^{\nu}$ are well-defined as bounded operators on $L^p(\R;X)$, we turn to representing them in terms of more familiar convolution operators.
+
+\begin{prop}\label{prop:shift-average-repn}
+  Let $X$ be a UMD space, $p \in (1,\infty)$, and let $\nu$ be a probability measure on $[1,2)$.
+  Given an admissible base function $k$, let
+  \begin{equation}\label{eq:phik}
+    \phi^{k}(x) := \int_{\R} k(x+u)h(u) \, \dd u \qquad \forall x \in \R
+  \end{equation}
+  and for all $t > 0$ let $\phi^{k}_{t}(x) := t^{-1}\phi^{k}(x/t)$ be the $L^1$-normalised dilation of $\phi^{k}$.
+  Then for all $\mb{f} \in L^p(\R;X)$ and all $m \leq n$,
+  \begin{equation*}
+    \langle S_{k,m,n} \rangle^{\nu} \mb{f} = \int_{2^{-n}}^{2^{-m}} \phi_{t}^{k} \ast \mb{f} \, \dd\tilde{\nu}(t),
+  \end{equation*}
+  where $\tilde{\nu}$ is the extension of $\nu$ to a measure on $(0,\infty)$ given by $\tilde{\nu}(A) := \nu(2^{-j}A)$ for all $A \subset [2^{j},2^{j+1})$, $j \in \Z$.
+\end{prop}
+
+\begin{proof}
+  First we will compute
+  \begin{equation*}
+    \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega)
+  \end{equation*}
+  for $x \in \R$, $t \in [1,2)$, and $j \in \Z$.
+  Use the parametrisation of $I \in t\mc{D}_{j}^{\omega}$ from \eqref{eq:interval-parametrisation} to write this as
+  \begin{equation*}
+    \int_{\{0,1\}^{\Z}} \sum_{s \in \Z} k_{2^{-j}t([s,s+1) + \omega^{(j)})}(x) \langle \mb{f}, h_{2^{-j}t([s,s+1) + \omega^{(j)})} \rangle \, \dd\P(\omega).
+  \end{equation*}
+  Since the number $\omega^{(j)} \in [0,1]$ is uniformly distributed in $[0,1]$ as $\omega$ varies over $\{0,1\}^{\Z}$, this can be rewritten as
+  \begin{equation*}
+    \begin{aligned}
+    &\int_{0}^{1} \sum_{s \in \Z} k_{2^{-j}t([s,s+1) + u)}(x) \langle \mb{f}, h_{2^{-j}t([s,s+1) + u)} \rangle \, \dd u \\
+    &= \int_{\R}  k_{2^{-j}t[v,v+1)}(x) \langle \mb{f}, h_{2^{-j}t[v,v+1)} \rangle \, \dd v \\
+    &= \int_{\R} (2^{-j} t)^{-1/2} k(2^{j} t^{-1} x - v)\int_{\R} (2^{-j} t)^{-1/2} h(2^{j} t^{-1} y - v)\mb{f}(y) \, \dd y \, \dd v \\
+    &= \int_{\R} \Big[ (2^{-j} t)^{-1} \int_{\R} k(2^j t^{-1} x - v) h(2^j t^{-1} y - v) \, \dd v \Big] \mb{f}(y) \, \dd y .
+  \end{aligned}
+\end{equation*}
+By the change of variable $u = (2^{-j}t)^{-1} y - v$, we see that for $y \in \R$ the square bracketed term is equal to
+\begin{equation*}
+  \begin{aligned}
+    &(2^{-j} t)^{-1} \int_{\R} k(2^j t^{-1} x - v) h(2^j t^{-1} y - v) \, \dd v \\
+    &= (2^{-j} t)^{-1} \int_{\R} k(2^j t^{-1} (x-y) + u) h(u) \, \dd u
+    = \phi_{2^{-j} t}^{k}(x-y).
+  \end{aligned}
+\end{equation*}
+Thus we have
+\begin{equation*}
+  \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega)
+  = \int_{\R} \phi_{2^{-j} t}^{k}(x-y) \mb{f}(y) \, \dd y
+  = \phi_{2^{-j} t}^{k} \ast \mb{f}(x).
+\end{equation*}
+Summing over $m \leq j \leq n$ and integrating in $t \in [1,2)$, we have
+\begin{equation*}
+  \langle S_{k,m,n} \rangle^{\nu} \mb{f} = \int_{[1,2)} \sum_{j=m}^{n} \phi_{2^{-j} t}^{k} \ast \mb{f}   \, \dd\nu(t) = \int_{2^{-n}}^{2^{-m}} \phi^{k}_{t} \ast \mb{f} \, \dd\tilde{\nu}(t)
+\end{equation*}
+as claimed.
+\end{proof}
+
+Finally, by making two judicious choices of the measure $\nu$, we obtain bounds for convolution operators which seem to have little to do with dyadic shifts.
+The right choices of $k$, and a little elbow grease, will yield uniform bounds for truncated Hilbert transforms, and will also be central in proving the Mikhlin and Littlewood--Paley theorems. 
+
+\begin{cor}\label{cor:intop-bounds}
+  Let $X$ be a UMD space, $p \in (1,\infty)$, and $k$ an admissible base function.
+  With $\phi^{k}$ defined as in \eqref{eq:phik}, for all integers $m \leq n$ we have the bounds
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \int_{2^{-n}}^{2^{-m}} \phi_{t}^{k} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)} &\lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)} \\
+      \E \Big\| \sum_{j = m}^{n} \varepsilon_{j} \phi_{2^{-j}}^{j} \ast \mb{f} \Big\|_{L^p(\R;X)} &\lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+    \end{aligned}
+  \end{equation*}
+  The implicit constants in these estimates are independent of $m$ and $n$.
+\end{cor}
+
+\begin{proof}
+  The first estimate follows from Proposition \ref{prop:shift-average-repn} and Theorem \ref{eq:shift-boundedness}, by choosing $\nu = \frac{1}{\log(2)}\dd t/t$ (the factor $\frac{1}{\log(2)}$ makes $\nu$ a probability measure on $[1,2)$):
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \int_{2^{-n}}^{2^{-m}} \phi_{t}^{k} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)}
+      &= \| \langle S_{k,m,n} \rangle^{\nu} \mb{f} \|_{L^p(\R;X)} \\
+      &\leq \frac{1}{\log 2}\int_{[1,2)} \int_{\{0,1\}^{\Z}} \|S_{k,m,n}^{t,\omega} \mb{f} \|_{L^p(\R;X)} \, \dd\P(\omega) \, \frac{\dd t}{t} \\
+      &\lesssim_{p,X} \frac{1}{\log 2} \int_{[1,2)} \int_{\{0,1\}^{\Z}} \| \mb{f} \|_{L^p(\R;X)} \, \dd\P(\omega) \, \frac{\dd t}{t} \\
+      &= \|\mb{f}\|_{L^p(\R;X)}.
+    \end{aligned}
+  \end{equation*}
+  The second estimate is proven in the same way, choosing $\nu = \delta_{1}$ (the Dirac measure at $t=1$) and using the randomised estimate from Theorem \ref{eq:shift-boundedness}.
+\end{proof}
+
+Now we pull an admissible base function $k$ out of thin air:\footnote{One motivation for this choice of $k$ is that the Hilbert transform swaps $\sin$ and $\cos$, which can be seen by the Fourier multiplier representation that we have not yet discussed. Thinking of a Haar function as a discrete sine wave, this choice of $k$ looks like a discrete cosine wave. So the associated shifts $S_{k}$ `map discrete sine to discrete cosine', and thus should somehow represent the Hilbert transform. Luckily, this actually works.} we take
+\begin{equation*}
+  k := 2^{-1/2}(h_{[0,1/2)} - h_{[1/2,1)}) = \1_{[0,1/4) \cup [3/4,1)} -\1_{[1/4, 3/4)}.
+\end{equation*}
+The function $\phi = \phi^{k}$, defined by
+\begin{equation*}
+  k(x) = \int_{\R} k(x+u)h(u) \, \dd u
+\end{equation*}
+as in the previous section, can be compute $\phi$ explicitly: it is the piecewise affine odd function supported on $[-1,1]$ which interpolates between the values
+\begin{equation*}
+  \begin{aligned}
+    \phi(0) &= 0 \\
+    \phi(1/4) &= -3/4 \\
+    \phi(1/2) &= 0 \\
+    \phi(3/4) &= 1/4 \\
+    \phi(1) &= 0.
+  \end{aligned}
+\end{equation*}
+A graph of this function is given in \cite[Figure 5.1]{HNVW16}, but we only need to know that $\phi$ is odd and supported on $[-1,1]$, and that $\int_{0}^{1} \phi(y) \, \dd y = -1/8$ (and we only really need that $-1/8 \neq 0$).
+We are ready to prove Theorem \ref{thm:Burkholder}, the boundedness of UMD-valued extensions of the Hilbert transform.
+
+\begin{proof}[Proof of Theorem \ref{thm:Burkholder}]
+  As discussed above, it suffices to prove the bounds
+  \begin{equation}\label{eq:HT-unifbds}
+    \|H^{X}_{\varepsilon, E} \mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in L^p(\R;X)
+  \end{equation}
+  uniformly in $0 < \varepsilon < E < \infty$.
+  Fix these parameters and consider the operator
+  \begin{equation*}
+    \int_{\varepsilon}^{E} \phi_{t} \ast \mb{f}(x) \, \frac{\dd t}{t}
+  \end{equation*}
+  with $\phi$ defined as above.
+  Letting $\Phi(x) := \int_{0}^{x} \phi(s) \, \dd s$ be the primitive of $\phi$, we can write
+  \begin{equation*}
+    \begin{aligned}
+    \int_{\varepsilon}^{E} \phi_{t} \ast \mb{f}(x) \, \frac{\dd t}{t}
+    &= \int_{\R} \int_{\varepsilon}^{E} \phi(y/t) \, \frac{\dd t}{t^{2}} \, \mb{f}(x - y) \, \dd y \\
+    &= \int_{\R} \frac{\Phi(y/\varepsilon) - \Phi(y/E) }{y} \, \mb{f}(x-y) \, \dd y
+  \end{aligned}
+\end{equation*}
+by the fundamental theorem of calculus.
+The properties of $\phi$ mentioned above imply that $\Phi$ is even, with $\Phi(y) = -1/8$ for all $y \in \R \sm [-1,1]$.
+This lets us write
+\begin{equation*}
+  \begin{aligned}
+    \frac{\Phi(y/\varepsilon) - \Phi(y/E) }{y}
+    &= \frac{1}{\varepsilon} \frac{\varepsilon}{y} \Big( \Phi\big(\frac{y}{\varepsilon}\big) \1_{[-1,1]}\big(\frac{y}{\varepsilon}) - \frac{1}{8}\1_{\R \sm [-1,1]}\big(\frac{y}{\varepsilon}\big) \Big) \\
+    &= \psi_{\varepsilon}(y) - \psi_{E}(y) + \frac{1}{8y}\1_{[\varepsilon, E]}(|y|)
+  \end{aligned}
+\end{equation*}
+where $\psi(x) := x^{-1} \Phi(x) \1_{[-1,1]}(x)$.
+The last term is a nonzero multiple of the convolution kernel of $H_{\varepsilon, E}$, and rearranging everything leads to the representaton
+\begin{equation*}
+  \begin{aligned}
+  -\frac{\pi}{8} H_{\varepsilon, E}\mb{f}
+  &= \int_{2^{\lfloor \log_{2} \varepsilon \rfloor}}^{2^{\lfloor \log_{2} E \rfloor}} \phi_{t} \ast \mb{f} \, \frac{\dd t}{t} \\
+  &+ \Big( \int_{2^{\lfloor \log_{2} E \rfloor}}^{E} - \int_{2^{\lfloor \log_{2} \varepsilon \rfloor}}^{\varepsilon} \Big) \phi_{t} \ast \mb{f} \, \frac{\dd t}{t} - \psi_{\varepsilon} \ast \mb{f} + \psi_{E} \ast \mb{f}.
+\end{aligned}
+\end{equation*}
+The integral operator on the first line is uniformly bounded in $\varepsilon$ and $E$ on $L^p(\R;X)$ by Corollary \ref{cor:intop-bounds}, so it remains to deal with the second line, consisting of error terms.
+
+First, note that
+\begin{equation*}
+  \begin{aligned}
+    \|\phi_{t} \ast \mb{f}(x)\|_{X} &= t^{-1} \Big\| \int_{\R} \phi(y/t) \mb{f}(x-y) \, \dd y \Big\| \\
+    &\lesssim t^{-1} \int_{\R} \1_{[-1,1]}(y/t) \mb{f}(x-y) \, \dd y \\
+    &= \fint_{[x-1, x+1]} \|\mb{f}(y)\|_{X} \, \dd y \leq M(\|\mb{f}\|_{X})(x),
+  \end{aligned}
+\end{equation*}
+since $\phi$ is bounded and supported on $[-1,1]$, where $M$ is the Hardy--Littlewood maximal operator.
+Since $\varepsilon$ and $E$ are within a factor $2$ of $2^{\lfloor \log_{2} \varepsilon \rfloor}$ and $2^{\lfloor \log_{2} E \rfloor}$ respectively, this implies that
+\begin{equation*}
+  \Big\| \Big( \int_{2^{\lfloor \log_{2} E \rfloor}}^{E} - \int_{2^{\lfloor \log_{2} \varepsilon \rfloor}}^{\varepsilon} \Big) \phi_{t} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)}
+  \lesssim \|M(\|\mb{f}\|)\|_{L^p(\R)} \lesssim \|\mb{f}\|_{L^p(\R;X)}
+\end{equation*}
+by the Hardy--Littlewood maximal theorem.
+By the same reasoning, since
+\begin{equation*}
+  \psi(x) = \1_{[-1,1]}(x) x^{-1} \int_{0}^{x} \phi(s) \, \dd s
+\end{equation*}
+is also bounded and supported on $[-1,1]$, we get
+\begin{equation*}
+  \|\psi_{t} \ast \mb{f}(x)\|_{X} \lesssim M(\|\mb{f}\|_{X})(x),
+\end{equation*}
+and thus
+\begin{equation*}
+  \|\psi_{\varepsilon} \ast \mb{f} - \psi_{E} \ast \mb{f}\|_{L^p(\R;X)} \lesssim \|M(\|\mb{f}\|_{X})\|_{L^p(\R)} \lesssim \|\mb{f}\|_{L^p(\R;X)}.
+\end{equation*}
+This completes the proof.
+\end{proof}
+
+\section{Operator-valued Fourier multipliers and $R$-boundedness}
+
+Recall the definitions of the Fourier transform and its inverse from Definition \ref{defn:FT}: for $\mb{f} \in L^1(\R;X)$ we define the \emph{Fourier transform}\index{Fourier transform} $\hat{\mb{f}} \in C(\R;X)$ (the continuity is Exercise \ref{ex:FT-bounded-1-infty}) by 
+  \begin{equation*}
+    \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R} e^{-2\pi i t \cdot \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R,
+  \end{equation*}%mk
+  and the \emph{inverse Fourier transform} $\mb{f}^{\vee} \in C(\R;X)$
+  \begin{equation*}
+    \mb{f}^{\vee}(x) = \mc{F}^{-1}(\mb{f})(x) := \int_{\R} e^{2\pi i x \cdot \xi} \mb{f}(\xi) \, \dd \xi \in X \qquad \forall x \in \R
+  \end{equation*}
+  (note the simple identity $\mb{f}^{\vee}(\xi) = \hat{\mb{f}}(-\xi)$).
+  For functions $\mb{f} \in L^1(\R;X)$ such that $\hat{\mb{f}} \in L^1(\R;X)$, the \emph{Fourier inversion formula}
+  \begin{equation}\label{eq:fourier-inversion}
+    \mb{f} = (\hat{\mb{f}})^\vee, \qquad \text{i.e.} \qquad \mb{f}(x) \aeeq \int_{\R} e^{2\pi i x \cdot \xi} \hat{\mb{f}}(\xi)  \, \dd\xi
+  \end{equation}
+  holds: this can be deduced by the corresponding result for the scalar-valued Fourier transform, but in this course it is not too important to us.
+  We will, however, be interested in \emph{Fourier multipliers}: these are operators given by acting on the individual frequency components $\hat{\mb{f}}(\xi)$ in the representation \eqref{eq:fourier-inversion}.
+  The rigorous definition follows.
+
+\begin{defn}
+  Let $X$ and $Y$ be complex Banach spaces, and consider an operator-valued function $\map{M}{\R}{\Lin(X,Y)}$.
+  The Fourier multiplier $T_{M}$ is the operator $C^{\infty}_{c}(\R;X) \to C(\R;Y)$ defined by
+  \begin{equation*}
+    T_{M}(\mb{f}) := (M \cdot \hat{\mb{f}})^{\vee}, \qquad \text{i.e.} \qquad (T_{M}\mb{f})(x) = \int_{\R} e^{2\pi i x \cdot \xi} M(\xi)(\hat{\mb{f}}(\xi))  \, \dd\xi.
+  \end{equation*}
+\end{defn}
+
+The operator-valued function $M$ is called the \emph{symbol} of the operator $T_{M}$.
+We should quickly show that this definition actually makes sense.
+
+\begin{prop}
+  If $\mb{f} \in C_{c}^\infty(\R;X)$ and $M \in L^\infty(\R;\Lin(X,Y))$, then $\hat{\mb{f}} \in L^1(\R;X)$ and $M \cdot \hat{\mb{f}} \in L^1(\R;Y)$ .
+\end{prop}
+
+\begin{proof}
+  Once we know that $\hat{\mb{f}} \in L^1(\R;X)$, then $M \cdot \hat{\mb{f}} \in L^1(\R;Y)$ follows from strong measurability of the $Y$-valued function $M \cdot \hat{\mb{f}}$ (which can be proven either directly by approximation with simple functions, or by Pettis - we omit the argument) and the H\"older estimate $\|M \cdot \hat{\mb{f}}\|_{L^1(\R;Y)} \leq \|M\|_{L^\infty(\R;\Lin(X,Y))} \|\hat{\mb{f}}\|_{L^1(\R;X)}$.
+  To show that $\hat{\mb{f}} \in L^1(\R;X)$, first split the integral into a part near the origin and a part `at infinity':
+  \begin{equation*}
+    \int_{\R} \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi = \Big( \int_{[-1,1]} + \int_{\R \sm [-1,1]} \Big) \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi.
+  \end{equation*}
+  The integral on $[-1,1]$ is bounded by $2\|\hat{\mb{f}}\|_{L^\infty(\R;X)}$, which is finite.
+  The remaining integral can be bounded using a classic Fourier analytic technique coming from the identity $\widehat{\partial \mb{f}} = -i\xi \hat{\mb{f}}$:
+  \begin{equation*}
+    \begin{aligned}
+    \int_{\R \sm [-1,1]} \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi
+    &= \int_{\R \sm [-1,1]} |\xi|^{-2} \|(-i\xi)^{2}\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi \\
+    &= \int_{\R \sm [-1,1]} |\xi|^{-2} \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{X} \, \dd\xi \\
+    &\leq \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{L^\infty(\R;X)} \int_{\R \sm [-1,1]} |\xi|^{-2} \, \dd\xi .
+  \end{aligned}
+\end{equation*}
+The integral here is finite, and since $\mb{f}$ is smooth and compactly supported, 
+\begin{equation*}
+   \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{L^\infty(\R;X)} \leq \|\partial^{2} \mb{f}\|_{L^1(\R;X)} < \infty.
+\end{equation*}
+\end{proof}
+
+Thus, at least for functions $\mb{f} \in C_{c}^\infty(\R;X)$ and symbols $M \in L^\infty(\R;\Lin(X,Y))$, we get a well-defined continuous function $T_{M}\mb{f} \colon \R \to Y$.
+We can state some simple but useful intertwining relations that Fourier multipliers have with translations and modulations, where for $\eta \in \R$ we define the \emph{modulation} of a function $\mb{f}$ (taking values in some Banach space) by
+\begin{equation*}
+  (\Mod_{\eta} \mb{f})(x) := e^{2\pi i \eta x} \mb{f}(x) \qquad \forall x \in \R.
+\end{equation*}
+
+\begin{prop}
+  Let $X$ and $Y$ be Banach spaces and $M \in L^\infty(\R;\Lin(X,Y))$.
+  Then for all $s \in \R$ and $\mb{f} \in C^{\infty}_{c}(\R;X)$,
+  \begin{equation*}
+    T_{\Tr_{s} M} \mb{f} = \Mod_{s} T_{M} \Mod_{-s} \mb{f} \quad \text{and} \quad
+    T_{\Mod_{s} M} \mb{f} = \Tr_{-s} T_{M} \mb{f}. 
+  \end{equation*}
+\end{prop}
+
+Now for each $p \in [1,\infty)$, the space $C_{c}^\infty(\R;X)$ is dense in $L^p(\R;X)$: this is because it contains the algebraic tensor product $C_{c}^\infty(\R) \otimes X$, which is dense in $L^p(\R;X)$ since $C_{c}^\infty(\R)$ is dense in $L^p(\R)$ (by a mollification argument).\footnote{Here we are relying on Exercise \ref{ex:general-density}.}
+Thus we can ask ourselves the question: when does the operator $T_{M}$ extend by density to a bounded operator $L^p(\R;X) \to L^p(\R;Y)$?
+That is, when do we have the estimate
+\begin{equation*}
+  \|T_{M} \mb{f}\|_{L^p(\R;Y)} \lesssim \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in C_{c}^\infty(\R;X)?
+\end{equation*}
+These operators occur all the time in applications, particularly in PDEs, and allowing for general operator-valued symbols is sometimes necessary.
+Of course, for many applications it is sufficient to consider \emph{scalar-valued symbols}, which occur when $X = Y$ and when $M(\xi)(\mb{x}) = m(\xi)\mb{x}$ for some scalar-valued function $\map{m}{\R}{\C}$.
+Although the UMD condition turns out to be pretty much necessary for both operator-valued and scalar-valued symbols, the operator-valued context involves additional \emph{$R$-boundedness} assumptions on the symbol which are interesting in themselves.
+We introduced $R$-boundedness in Exercise \ref{ex:R-bd-mgale-tf}, but we repeat the definition here. 
+
+\begin{defn}
+  Let $X$ and $Y$ be Banach spaces and suppose $\mc{T} \subset \Lin(X,Y)$ is a set of bounded linear operators from $X$ to $Y$.
+We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$ in $X$,
+\begin{equation*}
+  \|T_{\bullet} \mb{x}_{\bullet}\|_{\varepsilon_{N}(Y)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)},
+\end{equation*}
+or equivalently by Kahane--Khintchine (with a potentially different constant $\tilde{C}$)
+\begin{equation}\label{eq:R1}
+  \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} T_{n} \mb{x}_{n} \Big\|_{Y} \leq \tilde{C} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n}  \mb{x}_{n} \Big\|_{X}
+\end{equation}
+The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound of the set of operators $\mc{T}$.\footnote{The best possible constant in \eqref{eq:R1} is sometimes denoted by $R_{1}(\mc{T})$, and Kahane--Khintchine yields $R_{1}(\mc{T}) \simeq R(\mc{T})$ with a constant independent of the set $\mc{T}$.}
+\end{defn}
+
+By considering sequences with one element in this definition, we see that
+\begin{equation*}
+  R(\mc{T}) \geq \sup_{T \in \mc{T}} \|T\|_{\Lin(X,Y)},
+\end{equation*}
+so that $R$-boundedness of a set of operators is a stronger condition than uniform boundedness.
+Under quite restrictive type and cotype assumptions on $X$ and $Y$, $R$-boundedness is equivalent to uniform boundedness (see Exercise \ref{ex:R-bound-type}); in particular, if $X$ and $Y$ are isomorphic to Hilbert spaces, then this equivalence holds.
+In general $R$-boundedness of a family of operators is strictly stronger than uniform boundedness, and establishing this property requires some form of `compatibility' or `similarity' of the operators in the set.
+
+\begin{example}\label{eg:R-bounded-multipliers}
+  Let $X$ be a Banach space, let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space, and fix $p \in [1,\infty)$.
+  For each $g \in L^\infty(S)$ define the multiplication operator $M_{g} \in \Lin(L^p(S;X))$ by $M_{g}\mb{f} = g\mb{f}$.
+  Then for all $C < \infty$, the set of operators
+  \begin{equation*}
+    \{M_{g}  : \|g\|_{L^\infty(S)} \leq C\} \subset \Lin(L^{p}(S;X))
+  \end{equation*}
+  is $R$-bounded.
+  To see this, fix a finite sequence $(g_{n})_{n=0}^{N}$ in $L^\infty(S)$ with $\|g_{n}\|_{L^\infty(S)} \leq C$ for all $n$, and a finite sequence $(\mb{f}_{n})_{n=0}^{N}$ in $L^p(S;X)$.
+  Then by Kahane--Khintchine and the contraction principle,
+  \begin{equation*}
+    \begin{aligned}
+      \| M_{g_{\bullet}} \mb{f}_{\bullet} \|_{\varepsilon_{N}(L^p(S;X))}
+      &\simeq_{p} \Big( \int_{\R} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} g_{n}(s) \mb{f}_{n}(s) \Big\|_{X}^{p} \, \dd\mu(s) \Big)^{1/p} \\
+      &\lesssim C \Big( \int_{\R} \E \Big\| \sum_{n=0}^{N} \varepsilon_{n} \mb{f}_{n}(s) \Big\|_{X}^{p} \, \dd\mu(s) \Big)^{1/p} \\
+      &\simeq_{p} C \| \mb{f}_{\bullet} \|_{\varepsilon_{N}(L^p(S;X))},
+    \end{aligned}
+  \end{equation*}
+  proving the claimed $R$-boundedness.
+\end{example}
+
+The fundamental link between $R$-boundedness and Fourier multipliers comes from the following theorem, whose proof we omit.\footnote{It isn't too difficult, we just don't need it. For details see \cite[Theorem 5.3.15]{HNVW16}.}
+
+\begin{thm}[Cl\'ement--Pr\"uss]
+  Let $X$ and $Y$ be Banach spaces and $p \in (1,\infty)$.
+  Let $M \in L^\infty(\R;\Lin(X,Y))$ be an operator-valued symbol such that the Fourier multiplier $T_{M}$ is bounded from $L^p(\R;X)$ to $L^p(\R;Y)$.
+  Then the set\footnote{Recall that a point $\xi \in \R$ is a Lebesgue point of $M$ if $M(\xi) = \lim_{\varepsilon \downarrow 0} \fint_{\xi-\varepsilon}^{\xi+\varepsilon} M(\eta) \, \dd\eta $, and that almost every $\xi \in \R$ is a Lebesgue point of $M$.}
+  \begin{equation*}
+    \{M(\xi) : \text{$\xi \in \R$ is a Lebesgue point of $M$}\}
+  \end{equation*}
+  is $R$-bounded.
+  In particular, if $M$ is continuous, then the range $M(\R) \subset \Lin(X,Y)$ is $R$-bounded.
+\end{thm}
+
+Thus $R$-boundedness is a necessary condition for the $L^p$-boundedness of an operator-valued Fourier multiplier.
+In the next section we investigate sufficient conditions.
+
+\section{The Mikhlin and Littlewood--Paley  theorems}
+
+\textbf{in progress}
+
+\section{Exercises}
+
+\begin{exercise}\label{ex:dyadic-dichotomy}
+  Prove the dyadic dichotomy for shifted dyadic systems: if $\omega \in \{0,1\}^{\Z}$ and $I,J \in \mc{D}^{\omega}$, then either $I$ and $J$ are comparable (i.e. $I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
+\end{exercise}
+
+\begin{exercise}\label{ex:dyadic-refln-invariance}
+  Show that the set of shifted dyadic systems is reflection invariant, i.e. that $-\mc{D}^{\omega} = \mc{D}^{\omega'}$ for some $\omega' \in \{0,1\}^{\Z}$.
+\end{exercise}
+
+\begin{exercise}\label{ex:mgale-reduction}
+  Complete the proof of Theorem \ref{thm:general-haar-decompositions}.
+\end{exercise}
+
+\begin{exercise}
+  Let $k$ be an admissible base function, $\mc{D} = t\mc{D}^{\omega}$ a generalised dyadic system, and $X$ any Banach space.
+  Show that for all $m \leq n$, the truncated dyadic shift $S_{k,m,n}^{t,\omega}$ is bounded on $L^\infty(\R;X)$.
+\end{exercise}
+
+\begin{exercise}\label{ex:R-bound-type}
+  Let $X$ be a Banach space with cotype $2$ and $Y$ a Banach space with type $2$.
+  Show $R$-boundedness of a set of operators $\mc{T} \subset \Lin(X,Y)$ is equivalent to uniform boundedness.\footnote{The converse is also true: if uniform boundedness implies $R$-boundedness for every $\mc{T} \subset \Lin(X,Y)$, then $X$ has cotype $2$ and $Y$ has type $2$. See \cite[Proposition 8.6.1]{HNVW17}.\ }
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ be a Banach space, and for each scalar $\lambda \in \K$ consider the operator $m_{\lambda}(\mb{x}) := \lambda \mb{x}$.
+  For each $C < \infty$, show that the set
+  \begin{equation*}
+    \{m_{\lambda} : |\lambda| \leq C\} \subset \Lin(X)
+  \end{equation*}
+  is $R$-bounded.
+\end{exercise}
+
+\begin{exercise}
+  Let $X$, $Y$, and $Z$ be Banach spaces, and let $\mc{T} \subset \Lin(X,Y)$ and $\mc{T}' \subset \Lin(Y,Z)$ be $R$-bounded sets of operators.
+  Show that the set of operators
+  \begin{equation*}
+    \{AB : A \in \mc{T}', B \in \mc{T}\} \subset \Lin(X,Z)
+  \end{equation*}
+  is $R$-bounded.
+\end{exercise}
 
 
 %%% Local Variables:

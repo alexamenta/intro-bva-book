@@ -653,7 +653,7 @@ as we wanted.
 
 See Exercise \ref{ex:R-bd-mgale-tf} for one possible extension of this result to operator-valued martingale transforms.
 
-\section{Haar decompositions}
+\section{Haar decompositions}\label{sec:haar-decomp}
 
 We return to the Haar decomposition of a function, established way back in Example \ref{eg:haar}.
 Given a Banach space $X$ and an integrable function $\mb{f} \in L^1([0,1);X)$ on the unit interval, the \emph{Haar expansion} of $\mb{f}$ is the representation
@@ -742,6 +742,60 @@ In the scalar case $X = \K$, this leads to a quick proof of a classical result.
 
 Since every function $f \in L^p([0,1))$ has a Haar expansion, this says that the Haar functions are an \emph{unconditional basis} of $L^p([0,1))$ for all $p \in (1,\infty)$.
 For more on bases and their relation with Banach space theory see \cite{AK06}.
+
+Before moving on, we will state one more result on Haar decompositions which is basically an immediate consequence of Burkholder's inequalities.
+
+\begin{prop}\label{prop:haar-sqfn}
+  Let $X$ be a UMD Banach space and $p \in (1,\infty)$.
+  Then for all $\mb{f} \in L^p([0,1);X)$,
+  \begin{equation*}
+    \begin{aligned}
+    \|\mb{f}\|_{L^p([0,1);X)}
+    &\simeq_{p,X} \E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} +  \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)} \\
+    &= \E \Big\| \tilde{\varepsilon}_{0} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)}
+  \end{aligned}
+\end{equation*}
+where $(\varepsilon_{I})_{I \in \mc{D} \cup \{\varnothing\}}$ and $(\tilde{\varepsilon}_{2^{-n}})_{n \in \N \cup \{-\infty\}}$ are two Rademacher sequences indexed over different sets.
+\end{prop}
+
+\begin{proof}
+  The equivalence
+    \begin{equation*}
+    \|\mb{f}\|_{L^p([0,1);X)}
+    \simeq_{p,X} \E \Big\|  \tilde{\varepsilon}_{0} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)}
+  \end{equation*}
+  follows immediately from Burkholder's inequalities (and Kahane--Khintchine) since
+  \begin{equation*}
+     \tilde{\varepsilon}_{0} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I} \otimes \langle \mb{f}, h_{I} \rangle
+    = \tilde{\varepsilon}_{0} d\mb{f}_{0} + \sum_{n = 1}^{\infty} \tilde{\varepsilon}_{2^{-(n-1)}} d\mb{f}_{n}
+  \end{equation*}
+  by \eqref{eq:haar-difference}.
+  To get the remaining equality, first use Kahane--Khintchine to write
+  \begin{equation}\label{eq:haar-sqfn-kk}
+    \begin{aligned}
+      &\E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p([0,1);X)} \\
+      &\simeq_{p} \Big( \int_{0}^{1} \E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I}(x) \langle \mb{f}, h_{I} \rangle \Big\|_{X}^{p} \, \dd x\Big)^{1/p}.
+  \end{aligned}
+  \end{equation}
+  For all $x \in [0,1)$ and $k \in \N$, there is precisely one interval $I \in \mc{D}_{k}$ with $x \in I$: call this interval $I_{k}(x)$.
+  Then since $h_{I}$ is supported in $I$ we have
+  \begin{equation*}
+    \begin{aligned}
+    &\E \Big\|  \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \varepsilon_{I} h_{I}(x)  \langle \mb{f}, h_{I} \rangle \Big\|_{X} \\
+    &= \E \Big\|  \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} + \sum_{k \in \N} \varepsilon_{I_{k}(x)} h_{I_{k}(x)}(x)  \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X}.
+  \end{aligned}
+  \end{equation*}
+  Since the set of intervals $(I_{k}(x))_{k \in \N}$ and the set of lengths $(|I_{k}(x)|)_{k \in \N}$ are in bijective correspondence, and since Rademacher averages are independent of the choice of Rademacher sequence, we can write
+  \begin{equation*}
+    \begin{aligned}
+    &\E \Big\| \varepsilon_{\varnothing} \langle \mb{f} \rangle_{[0,1)} +\sum_{k \in \N} \varepsilon_{I_{k}(x)} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X} \\
+    &= \E \Big\| \tilde{\varepsilon}_{0} \langle \mb{f} \rangle_{[0,1)} + \sum_{k \in \N} \tilde{\varepsilon}_{|I_{k}(x)|} h_{I_{k}(x)}(x) \otimes \langle \mb{f}, h_{I_{k}(x)} \rangle \Big\|_{X} \\
+    &= \E \Big\| \tilde{\varepsilon}_{0} \langle \mb{f} \rangle_{[0,1)} + \sum_{I \in \mc{D}} \tilde{\varepsilon}_{|I|} h_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{X}
+  \end{aligned}
+  \end{equation*}
+  repeating the support argument from before.
+  Plugging this back into \eqref{eq:haar-sqfn-kk} and reversing the Kahane--Khintchine argument completes the proof.
+\end{proof}
 
 \section{Failure of UMD for $L^1$ and other spaces}
 

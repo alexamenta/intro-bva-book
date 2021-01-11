@@ -91,7 +91,7 @@ Different operators can be used to reflect different geometric properties.
 
 Another important operator in harmonic analysis is the Hilbert transform\index{Hilbert transform}, defined on $\map{f}{\R}{\C}$ by
 \begin{equation}\label{eq:HT-scalar}
-  Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\varepsilon \downarrow 0} \int_{|y| > \varepsilon} f(x-y) \, \frac{\dd y}{y}.
+  Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\substack{\varepsilon \downarrow 0 \\ E \uparrow \infty}} \int_{\varepsilon < |y| < E} f(x-y) \, \frac{\dd y}{y}.
 \end{equation}
 The Hilbert transform is a prototypical \emph{singular integral operator}: the integral kernel $1/y$ is not integrable, so $H$ cannot be defined as a classical integral operator, but cancellation between the positive and negative values of $1/y$ allow $Hf$ to be well-defined as a \emph{principal value integral} when $f$ is sufficiently smooth (Schwartz, for example).
 One can show that $H$ is a \emph{Fourier multiplier}\index{Fourier multiplier} with symbol $m(\xi) = -i\sgn(\xi)$: that is, for all Schwartz functions $f \in \Sch(\R)$, $Hf = (m\hat{f})^{\vee}$, where $\vee$ denotes the inverse Fourier transform.
