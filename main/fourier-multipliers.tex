@@ -316,13 +316,13 @@ Notice that for every interval $I \subset \R$, the Haar function $h_{I}$ is just
   h_{I} = \Dil_{|I|} \Tr_{\ell(I)} h,
 \end{equation*}
 where $\ell(I) := \inf(I)$ is the left endpoint of $I$ and $h = h_{[0,1)}$.
-This motivates a more general definition: given a function $\map{k}{\R}{\C}$ and an interval $I \subset \R$, define
+This motivates a more general definition: given a function $\map{k}{\R}{\K}$ and an interval $I \subset \R$, define
 \begin{equation*}
   k_{I} := \Dil_{|I|} \Tr_{\ell(I)} k.
 \end{equation*}
 
 \begin{defn}
-  We say a function $\map{k}{\R}{\C}$ is an \emph{admissible base function} if it is a finite $\K$-linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
+  We say a function $\map{k}{\R}{\K}$ is an \emph{admissible base function} if it is a finite $\K$-linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
 \end{defn}
 
 \begin{defn}
@@ -349,7 +349,7 @@ In general, since $k$ is a finite linear combination of Haar functions localised
   Then for all $m \leq n$, $S_{k,m,n}$ is bounded on $L^{p}(\R;X)$ uniformly in $m$ and $n$,
   with
   \begin{equation*}
-    \|S_{k,m,n} \mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+    \|S_{k,m,n} \mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \E \Big\| \sum_{I \in \mc{D}_{m,n}} \varepsilon_{|I|} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
   \end{equation*}
 \end{thm}
 
@@ -427,7 +427,7 @@ It suffices to show that the function $(\omega,t) \mapsto S_{k}^{\omega, t}\mb{f
 Boundedness follows from the fact that each of the truncated dyadic shifts $S_{k,m,n}^{\omega,t}$ is bounded on $L^p(\R;X)$, uniformly in $(\omega,t)$, by Theorem \ref{eq:shift-boundedness}.
 For strong measurability, note that every $I \in t\mc{D}^{\omega}$ can be expressed as
 \begin{equation}\label{eq:interval-parametrisation}
-  I = 2^{-j}t([s,s+1) + \omega^{(j)}), \qquad \omega^{j} := \sum_{i > j} 2^{j-i} \omega_{i} \in [0,1]
+  I = 2^{-j}t([s,s+1) + \omega^{(j)}), \qquad \omega^{(j)} := \sum_{i > j} 2^{j-i} \omega_{i} \in [0,1]
 \end{equation}
 for some $s \in \Z$, so that
 \begin{equation*}
@@ -467,7 +467,7 @@ Having shown that the average truncated dyadic shifts $\langle S_{k,m,n} \rangle
 \begin{proof}
   First we will compute
   \begin{equation*}
-    \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega)
+    \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega)
   \end{equation*}
   for $x \in \R$, $t \in [1,2)$, and $j \in \Z$.
   Use the parametrisation of $I \in t\mc{D}_{j}^{\omega}$ from \eqref{eq:interval-parametrisation} to write this as
@@ -493,7 +493,7 @@ By the change of variable $u = (2^{-j}t)^{-1} y - v$, we see that for $y \in \R$
 \end{equation*}
 Thus we have
 \begin{equation*}
-  \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \otimes \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega)
+  \int_{\{0,1\}^{\Z}} \sum_{I \in t\mc{D}_{j}^{\omega}} k_{I}(x) \langle \mb{f}, h_{I} \rangle \, \dd\P(\omega)
   = \int_{\R} \phi_{2^{-j} t}^{k}(x-y) \mb{f}(y) \, \dd y
   = \phi_{2^{-j} t}^{k} \ast \mb{f}(x).
 \end{equation*}
@@ -577,13 +577,16 @@ by the fundamental theorem of calculus.
 The properties of $\phi$ mentioned above imply that $\Phi$ is even, with $\Phi(y) = -1/8$ for all $y \in \R \sm [-1,1]$.
 This lets us write
 \begin{equation*}
-  \begin{aligned}
-    \frac{\Phi(y/\varepsilon) - \Phi(y/E) }{y}
-    &= \frac{1}{\varepsilon} \frac{\varepsilon}{y} \Big( \Phi\big(\frac{y}{\varepsilon}\big) \1_{[-1,1]}\big(\frac{y}{\varepsilon}) - \frac{1}{8}\1_{\R \sm [-1,1]}\big(\frac{y}{\varepsilon}\big) \Big) \\
-    &= \psi_{\varepsilon}(y) - \psi_{E}(y) + \frac{1}{8y}\1_{[\varepsilon, E]}(|y|)
-  \end{aligned}
+  \frac{\Phi(y/\varepsilon)}{y}
+  = \frac{1}{\varepsilon} \frac{\varepsilon}{y} \Big( \Phi\big(\frac{y}{\varepsilon}\big) \1_{[-1,1]}\big(\frac{y}{\varepsilon}) - \frac{1}{8}\1_{\R \sm [-1,1]}\big(\frac{y}{\varepsilon}\big) \Big) = \psi_{\varepsilon}(y) - \frac{1}{8y}\1_{(\varepsilon,\infty)}(|y|)
 \end{equation*}
 where $\psi(x) := x^{-1} \Phi(x) \1_{[-1,1]}(x)$.
+and thus
+\begin{equation*}
+  \frac{\Phi(y/\varepsilon) - \Phi(y/E))}{y}
+    = \psi_{\varepsilon}(y) - \psi_{E}(y) - \frac{1}{8y}\1_{[\varepsilon, E]}(|y|).
+  \end{aligned}
+\end{equation*}
 The last term is a nonzero multiple of the convolution kernel of $H_{\varepsilon, E}$, and rearranging everything leads to the representaton
 \begin{equation*}
   \begin{aligned}
