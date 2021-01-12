@@ -850,7 +850,7 @@ By direct computation, for all Banach spaces $X,Y$ and symbols $M \in L^\infty(\
   Since each operator $\Mod_{a}$ is just multiplication by a unimodular function (a complex exponential), Example \eqref{eg:R-bounded-multipliers} gives us
   \begin{equation*}
     R\big( \{ \Mod_{a} \in \Lin(L^p(\R;X)) : a \in \R \} \big)
-    \leq R\big( \{ M_{g} \in \Lin(L^p(\R;X))} : \|g\|_{L^\infty(\R)} \leq 1\} \big) \lesssim 1,
+    \leq R\big( \{ M_{g} \in \Lin(L^p(\R;X))  : \|g\|_{L^\infty(\R)} \leq 1\} \big) \lesssim 1,
 \end{equation*}
 so the boundedness of $\Delta_{(0,\infty)}$ on $L^p(\R;X)$ that we proved earlier completes the proof.
 \end{proof}
@@ -859,7 +859,35 @@ so the boundedness of $\Delta_{(0,\infty)}$ on $L^p(\R;X)$ that we proved earlie
 
 \section{The Mikhlin and Littlewood--Paley theorems}
 
-\textbf{in progress}
+Let $\mc{J}$ denote the set of \emph{Littlewood--Paley intervals}
+\begin{equation*}
+  \mc{J} := \{\pm(2^{j}, 2^{j+1}) : j \in \Z\}.
+\end{equation*}
+
+\begin{defn}
+  Given complex Banach spaces $X$ and $Y$, an operator-valued function $M \in L^\infty(\R; \Lin(X,Y))$ is called a \emph{Mikhlin symbol} if it is continuous and differentiable on each Littlewood--Paley interval $I \in \mc{J}$, and if the \emph{Mikhlin norm}
+  \begin{equation*}
+    \|M\|_{\mf{M}(\R;X,Y)} := R \Big( \big\{ M(\xi), \xi M'(\xi) \in \Lin(X,Y) : \xi \in \bigcup_{I \in \mc{J}} I \big\} \Big)
+  \end{equation*}
+  is finite.
+\end{defn}
+
+Note that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bound-type}), or if each $M(\xi)$ is a scalar multiplication operator (Exercise \ref{ex:scalars}), the Mikhlin norm of $M$ is equivalent to the uniform bound
+\begin{equation*}
+  \|M\|_{\mf{M}(\R;X,Y)} \simeq \sup_{\xi \in \bigcup_{I \in \mc{J}} I} \Big( \|M(\xi)\|_{\Lin(X,Y)} + |\xi|\|M'(\xi)\|_{\Lin(X,Y)} \Big).
+\end{equation*}
+
+\begin{thm}
+  Let $X$ and $Y$ be complex UMD spaces, and let $M \in L^\infty(\R;\Lin(X,Y))$ be a Mikhlin symbol.
+  Then
+  \begin{equation*}
+    \|T_{M}\|_{\Lin(L^p(\R;X), L^p(\R;Y))} \lesssim_{p,X,Y} \|M\|_{\mf{M}(\R;X,Y)}.
+  \end{equation*}
+\end{thm}
+
+\todo{WORKING ON THSI SECTION}
+
+
 
 \section{Exercises}
 
@@ -885,7 +913,7 @@ so the boundedness of $\Delta_{(0,\infty)}$ on $L^p(\R;X)$ that we proved earlie
   Show $R$-boundedness of a set of operators $\mc{T} \subset \Lin(X,Y)$ is equivalent to uniform boundedness.\footnote{The converse is also true: if uniform boundedness implies $R$-boundedness for every $\mc{T} \subset \Lin(X,Y)$, then $X$ has cotype $2$ and $Y$ has type $2$. See \cite[Proposition 8.6.1]{HNVW17}.\ }
 \end{exercise}
 
-\begin{exercise}
+\begin{exercise}\label{ex:scalars}
   Let $X$ be a Banach space, and for each scalar $\lambda \in \K$ consider the operator $m_{\lambda}(\mb{x}) := \lambda \mb{x}$.
   For each $C < \infty$, show that the set
   \begin{equation*}
