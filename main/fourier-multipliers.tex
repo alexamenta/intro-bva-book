@@ -856,13 +856,15 @@ so the boundedness of $\Delta_{(0,\infty)}$ on $L^p(\R;X)$ that we proved earlie
 \end{proof}
 
 
-
 \section{The Mikhlin and Littlewood--Paley theorems}
+
+\todo{needs exposition}
 
 Let $\mc{J}$ denote the set of \emph{Littlewood--Paley intervals}
 \begin{equation*}
   \mc{J} := \{\pm(2^{j}, 2^{j+1}) : j \in \Z\}.
 \end{equation*}
+We have $\mc{J} = \mc{J}_{+} \cup \mc{J}_{-}$, where $\mc{J}_{\pm}$ denotes the set of Littlewood--Paley intervals contained in $\pm(0,\infty)$.
 
 \begin{defn}
   Given complex Banach spaces $X$ and $Y$, an operator-valued function $M \in L^\infty(\R; \Lin(X,Y))$ is called a \emph{Mikhlin symbol} if it is continuous and differentiable on each Littlewood--Paley interval $I \in \mc{J}$, and if the \emph{Mikhlin norm}
@@ -885,8 +887,71 @@ Note that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bound-t
   \end{equation*}
 \end{thm}
 
-\todo{WORKING ON THSI SECTION}
+We prove this theorem in a few steps.
+We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, where $I$ ranges over the set of all Littlewood--Paley intervals.
 
+\begin{lem}
+  Let $X$ and $Y$ be UMD spaces, $p \in (1,\infty)$, and let $M \in \mf{M}(\R;X,Y)$ be a Mikhlin symbol.
+  Then the set of truncated Fourier multipliers
+  \begin{equation*}
+    \{T_{\1_{I} M} : I \in \mc{J}\} \subset \Lin(L^p(\R;X), L^p(\R;Y))
+  \end{equation*}
+  has $R$-bound $\lesssim_{p,X,Y} \|M\|_{\mf{M}(\R;X,Y)}$.
+\end{lem}
+
+\begin{proof}
+  For each interval $I = \mc{J}$, write $I = (\ell(I), r(I))$ and let $\midp(I)$ be the midpoint of $I$.
+  Then for $\xi \in I$ we have the identity\todo{insert lemma: $R$-boundedness of the one-sided limits}
+  \begin{equation*}
+    \begin{aligned}
+      \1_{I}(\xi)M(\xi)
+      &= \1_{I}(\xi) \Big( M(\midp(I)) + \int_{\midp(I)}^{\xi} M'(\eta) \, \dd\eta \Big) \\
+      &= \1_{I}(\xi) \Big( M(\midp(I)) + \int_{\ell(I)}^{\xi} M'(\eta) \, \dd\eta - \int_{\ell(I)}^{\midp(I)} M'(\eta) \Big) \\
+      &= \1_{I}(\xi) \Big( M(\midp(I)) - \int_{\ell(I)}^{\midp{I}} M'(\eta) \, \dd\eta \Big) + \int_{I} \1_{(\eta,r(I))}(\xi) M'(\eta) \, \dd\eta.
+    \end{aligned}
+  \end{equation*}
+  When $I \in \mc{J}_{+}$, a change of variables leads to the Fourier multiplier identity
+  \begin{equation*}
+    T_{\1_I M} \mb{f}
+    = \Big( M(\midp(I)) - \int_{1}^{3/2} |I| M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f} + \int_{1}^{2} |I| M'(t|I|) \Delta_{(t|I|,r(I))} \, \dd t;
+  \end{equation*}
+  a corresponding identity holds with $I \in \mc{J}_{-}$.
+  Consider a sequence of functions $(\mb{f}_{I})_{I \in \mc{J}_{+}}$ and estimate the $R$-bounds corresponding to the three summands above separately.
+  First we have
+  \begin{equation*}
+    \begin{aligned}
+      &\E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} M(\midp(I)) \Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
+      &\lesssim R\big( \{M(\midp(I)) : I \in \mc{J}_{+} \} \big) \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I}  \Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
+    &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} 
+  \end{aligned}
+\end{equation*}
+using the definition of the MIkhlin norm, and that the set of Fourier projections $\{\Delta_{I} : I \in \mc{J}_{+}\} \subset L^p(\R;X)$ is $R$-bounded, since $X$ is UMD (Proposition \ref{prop:Fproj-Rbd}).
+For the second term we have
+\begin{equation*}
+  \begin{aligned}
+    &\E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \Big( \int_{1}^{3/2} |I|  M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
+    &\leq \int_{1}^{3/2} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} t|I|  M'(t|I|)\Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \, \frac{\dd t}{t}.
+  \end{aligned}
+\end{equation*}
+For each $t \in [1,2)$ we have
+\begin{equation*}
+  \begin{aligned}
+    &\E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} t|I|  M'(t|I|)\Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
+    &\lesssim R\big( \{ t|I|  M'(t|I|) : I \in \mc{J}_{+}\} \big) \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
+    &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)}
+  \end{aligned}
+\end{equation*}
+again using the definition of the Mikhlin norm and Proposition \ref{prop:Fproj-Rbd}.
+The third term is estimated in exactly the same way, so we omit the argument.
+All up we get
+\begin{equation*}
+  \begin{aligned}
+    \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} T_{\1_{I} M} \mb{f}_{I} \Big\|_{L^p(\R;X)} \lesssim \E \Big\|\sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)},
+  \end{aligned}
+\end{equation*}
+which proves the desired $R$-bound for $\mc{J}_{+}$.
+The same argument proves the $R$-bound for $\mc{J}_{-}$, and putting them together completes the proof.
+\end{proof}
 
 
 \section{Exercises}
