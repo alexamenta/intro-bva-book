@@ -459,7 +459,7 @@ Having shown that the average truncated dyadic shifts $\langle S_{k,m,n} \rangle
   and for all $t > 0$ let $\phi^{k}_{t}(x) := t^{-1}\phi^{k}(x/t)$ be the $L^1$-normalised dilation of $\phi^{k}$.
   Then for all $\mb{f} \in L^p(\R;X)$ and all $m \leq n$,
   \begin{equation*}
-    \langle S_{k,m,n} \rangle^{\nu} \mb{f} = \int_{2^{-n}}^{2^{-m}} \phi_{t}^{k} \ast \mb{f} \, \dd\tilde{\nu}(t),
+    \langle S_{k,m,n} \rangle^{\nu} \mb{f} = \int_{2^{-n}}^{2^{-m+1}} \phi_{t}^{k} \ast \mb{f} \, \dd\tilde{\nu}(t),
   \end{equation*}
   where $\tilde{\nu}$ is the extension of $\nu$ to a measure on $(0,\infty)$ given by $\tilde{\nu}(A) := \nu(2^{-j}A)$ for all $A \subset [2^{j},2^{j+1})$, $j \in \Z$.
 \end{prop}
@@ -499,7 +499,7 @@ Thus we have
 \end{equation*}
 Summing over $m \leq j \leq n$ and integrating in $t \in [1,2)$, we have
 \begin{equation*}
-  \langle S_{k,m,n} \rangle^{\nu} \mb{f} = \int_{[1,2)} \sum_{j=m}^{n} \phi_{2^{-j} t}^{k} \ast \mb{f}   \, \dd\nu(t) = \int_{2^{-n}}^{2^{-m}} \phi^{k}_{t} \ast \mb{f} \, \dd\tilde{\nu}(t)
+  \langle S_{k,m,n} \rangle^{\nu} \mb{f} = \int_{[1,2)} \sum_{j=m}^{n} \phi_{2^{-j} t}^{k} \ast \mb{f}   \, \dd\nu(t) = \int_{2^{-n}}^{2^{-m+1}} \phi^{k}_{t} \ast \mb{f} \, \dd\tilde{\nu}(t)
 \end{equation*}
 as claimed.
 \end{proof}
@@ -512,7 +512,7 @@ The right choices of $k$, and a little elbow grease, will yield uniform bounds f
   With $\phi^{k}$ defined as in \eqref{eq:phik}, for all integers $m \leq n$ we have the bounds
   \begin{equation*}
     \begin{aligned}
-      \Big\| \int_{2^{-n}}^{2^{-m}} \phi_{t}^{k} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)} &\lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)} \\
+      \Big\| \int_{2^{-n}}^{2^{-m+1}} \phi_{t}^{k} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)} &\lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)} \\
       \E \Big\| \sum_{j = m}^{n} \varepsilon_{j} \phi_{2^{-j}}^{j} \ast \mb{f} \Big\|_{L^p(\R;X)} &\lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
     \end{aligned}
   \end{equation*}
@@ -523,7 +523,7 @@ The right choices of $k$, and a little elbow grease, will yield uniform bounds f
   The first estimate follows from Proposition \ref{prop:shift-average-repn} and Theorem \ref{eq:shift-boundedness}, by choosing $\nu = \frac{1}{\log(2)}\dd t/t$ (the factor $\frac{1}{\log(2)}$ makes $\nu$ a probability measure on $[1,2)$):
   \begin{equation*}
     \begin{aligned}
-      \Big\| \int_{2^{-n}}^{2^{-m}} \phi_{t}^{k} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)}
+      \Big\| \int_{2^{-n}}^{2^{-m+1}} \phi_{t}^{k} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)}
       &= \| \langle S_{k,m,n} \rangle^{\nu} \mb{f} \|_{L^p(\R;X)} \\
       &\leq \frac{1}{\log 2}\int_{[1,2)} \int_{\{0,1\}^{\Z}} \|S_{k,m,n}^{t,\omega} \mb{f} \|_{L^p(\R;X)} \, \dd\P(\omega) \, \frac{\dd t}{t} \\
       &\lesssim_{p,X} \frac{1}{\log 2} \int_{[1,2)} \int_{\{0,1\}^{\Z}} \| \mb{f} \|_{L^p(\R;X)} \, \dd\P(\omega) \, \frac{\dd t}{t} \\
@@ -601,7 +601,7 @@ First, note that
   \begin{aligned}
     \|\phi_{t} \ast \mb{f}(x)\|_{X} &= t^{-1} \Big\| \int_{\R} \phi(y/t) \mb{f}(x-y) \, \dd y \Big\| \\
     &\lesssim t^{-1} \int_{\R} \1_{[-1,1]}(y/t) \mb{f}(x-y) \, \dd y \\
-    &= \fint_{[x-1, x+1]} \|\mb{f}(y)\|_{X} \, \dd y \leq M(\|\mb{f}\|_{X})(x),
+    &= \fint_{[x-t, x+t]} \|\mb{f}(y)\|_{X} \, \dd y \leq M(\|\mb{f}\|_{X})(x),
   \end{aligned}
 \end{equation*}
 since $\phi$ is bounded and supported on $[-1,1]$, where $M$ is the Hardy--Littlewood maximal operator.
@@ -633,7 +633,7 @@ From now on we consider complex Banach spaces $X$, although the following theory
 Recall the definitions of the Fourier transform and its inverse from Definition \ref{defn:FT}: for $\mb{f} \in L^1(\R;X)$ we define the \emph{Fourier transform}\index{Fourier transform} $\hat{\mb{f}} \in C(\R;X)$ (the continuity is Exercise \ref{ex:FT-bounded-1-infty}) by 
   \begin{equation*}
     \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R} e^{-2\pi i t \cdot \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R,
-  \end{equation*}%mk
+  \end{equation*}
   and the \emph{inverse Fourier transform} $\mb{f}^{\vee} \in C(\R;X)$
   \begin{equation*}
     \mb{f}^{\vee}(x) = \mc{F}^{-1}(\mb{f})(x) := \int_{\R} e^{2\pi i x \cdot \xi} \mb{f}(\xi) \, \dd \xi \in X \qquad \forall x \in \R
@@ -779,7 +779,6 @@ Before moving on to the Mikhlin theorem and its proof, we quickly discuss \emph{
 \begin{defn}
   For every measurable subset $S \subset R$ we define the \emph{Fourier projection} $\Delta_{S}$ to the Fourier multiplier $T_{\1_{S}}$ with scalar-valued symbol $\1_{S}$.
 \end{defn}
-\todo{make sure all spaces are complex here}
 
 \begin{prop}\label{prop:Fproj-Rbd}
   Let $X$ be a complex UMD space and $p \in (1,\infty)$.
@@ -879,7 +878,9 @@ Note that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bound-t
   \|M\|_{\mf{M}(\R;X,Y)} \simeq \sup_{\xi \in \bigcup_{I \in \mc{J}} I} \Big( \|M(\xi)\|_{\Lin(X,Y)} + |\xi|\|M'(\xi)\|_{\Lin(X,Y)} \Big).
 \end{equation*}
 
-\begin{thm}
+\todo{note that the Hilbert transform has a Mikhlin symbol, so do $\Delta_{I}$ for $I \in \mc{J}$}
+
+\begin{thm}\label{thm:Mikhlin}
   Let $X$ and $Y$ be complex UMD spaces, and let $M \in L^\infty(\R;\Lin(X,Y))$ be a Mikhlin symbol.
   Then
   \begin{equation*}
@@ -890,7 +891,7 @@ Note that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bound-t
 We prove this theorem in a few steps.
 We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, where $I$ ranges over the set of all Littlewood--Paley intervals.
 
-\begin{lem}
+\begin{lem}\label{lem:Mikhlin-components-R}
   Let $X$ and $Y$ be UMD spaces, $p \in (1,\infty)$, and let $M \in \mf{M}(\R;X,Y)$ be a Mikhlin symbol.
   Then the set of truncated Fourier multipliers
   \begin{equation*}
@@ -901,7 +902,7 @@ We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, 
 
 \begin{proof}
   For each interval $I = \mc{J}$, write $I = (\ell(I), r(I))$ and let $\midp(I)$ be the midpoint of $I$.
-  Then for $\xi \in I$ we have the identity\todo{insert lemma: $R$-boundedness of the one-sided limits}
+  Then for $\xi \in I$ we have the identity
   \begin{equation*}
     \begin{aligned}
       \1_{I}(\xi)M(\xi)
@@ -925,7 +926,7 @@ We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, 
     &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} 
   \end{aligned}
 \end{equation*}
-using the definition of the MIkhlin norm, and that the set of Fourier projections $\{\Delta_{I} : I \in \mc{J}_{+}\} \subset L^p(\R;X)$ is $R$-bounded, since $X$ is UMD (Proposition \ref{prop:Fproj-Rbd}).
+using the definition of the Mikhlin norm, and that the set of Fourier projections $\{\Delta_{I} : I \in \mc{J}_{+}\} \subset L^p(\R;X)$ is $R$-bounded, since $X$ is UMD (Proposition \ref{prop:Fproj-Rbd}).
 For the second term we have
 \begin{equation*}
   \begin{aligned}
@@ -953,6 +954,196 @@ which proves the desired $R$-bound for $\mc{J}_{+}$.
 The same argument proves the $R$-bound for $\mc{J}_{-}$, and putting them together completes the proof.
 \end{proof}
 
+Next we recall a reparametrised version of the Rademacher average estimate from Corollary \ref{cor:intop-bounds}.
+In what follows we let
+\begin{equation*}
+  \phi(x) = \phi^{h}(x) = \int_{\R} h(x+u) h(u) \, \dd u
+\end{equation*}
+using the notation from Proposition \ref{prop:shift-average-repn}.
+This function can be computed explicitly: it is the piecewise affine even function supported on $[-1,1]$ which interpolates between the values
+\begin{equation*}
+  \begin{aligned}
+    \phi(0) &= 1 \\ 
+    \phi(1/2) &= -1/2 \\
+    \phi(1) &= 0.
+  \end{aligned}
+\end{equation*}
+For each interval $I \in \mc{J}$ define
+\begin{equation*}
+  \phi_{I}(x) := 2|I|\phi(2|I|x) = \phi_{1/2|I|}(x)
+\end{equation*}
+(this is not the same as the definition of $k_{I}$ in the previous section when $k$ is an admissible base function).
+
+\begin{lem}\label{lem:reparam-LP}
+  Let $X$ be a UMD space and $p \in (1,\infty)$.
+  Then for all $\mb{f} \in L^p(\R;X)$,
+  \begin{equation*}
+    \E \Big\| \sum_{I \in \mc{J}_{\mc{J}_{\pm}}} \varepsilon_{I} \phi_{I} \ast \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  Applying Corollary \ref{cor:intop-bounds} with $k = h$ yields
+  \begin{equation*}
+    \E \Big\| \sum_{j = m}^{n} \varepsilon_{j} \phi_{2^{-j}} \ast \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+  \end{equation*}
+  For each pair of integers $m \leq n$.
+  The second part of Exercise \ref{ex:on-rad-spaces} then lets us take the limit as $m \downarrow -\infty$ and $n \uparrow \infty$, and
+  \begin{equation*}
+    \E \Big\| \sum_{j \in \Z} \varepsilon_{j} \phi_{2^{-j}} \ast \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+\end{equation*}
+The result follows simply by noting that the sets $\{2^{-j} : j \in \Z\}$ and $\{1/2|I| : I \in \mc{J}_{\pm}\}$ are equal.
+\end{proof}
+
+Besides one technical computation, we are ready to prove the Mikhlin multiplier theorem.
+Let's just get straight to it and address the technical computation when it arises.
+
+\begin{proof}[Proof of Theorem \ref{thm:Mikhlin}]
+  By density and duality, it suffices to prove the estimate
+  \begin{equation*}
+    |\langle T_{M} \mb{f}, \mb{g} \rangle| \lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \|\mb{f}\|_{L^p(\R;X)} \|\mb{g}\|_{L^{p'}(\R;Y^{*})}
+  \end{equation*}
+  for all $\mb{f} \in C_{c}^\infty(\R;X)$ and $\mb{g} \in C_{c}^\infty(\R;Y^*)$.
+  Fix such functions and write, using Exercise \ref{ex:fourier-inversion} for the Fourier inversion,
+  \begin{equation*}
+    \langle T_{M} \mb{f}, \mb{g} \rangle
+    = \langle M\hat{\mb{f}}, \check{\mb{g}} \rangle
+    = \sum_{I \in \mc{J}} \langle \1_{I} M\hat{\mb{f}}, \check{\mb{g}} \rangle
+    = \sum_{\sigma \in \{-,+\}} \sum_{I \in \mc{J}_{\sigma}} \langle \1_{I} M\hat{\mb{f}}, \check{\mb{g}} \rangle.
+  \end{equation*}
+  For simplicity we will only consider the contributions from $\mc{J}_{+}$; $\mc{J}_{-}$ is handled in exactly the same way and the estimates can be summed.
+  We smuggle in the functions $\phi_{I}$:
+  \begin{equation*}
+    \begin{aligned}
+    \sum_{I \in \mc{J}_{+}} \langle \1_{I} M\hat{\mb{f}}, \check{\mb{g}} \rangle
+    &= \sum_{I \in \mc{J}_{+}} \big\langle \frac{\1_{I} M}{\widehat{\phi_{I}} \widecheck{\phi_{I}}} \widehat{\phi_{I}} \hat{\mb{f}}, \widecheck{\phi_{I}} \check{\mb{g}} \big\rangle \\
+    &= \sum_{I \in \mc{J}_{+}} \big\langle \1_{I} N \widehat{\phi_{I}} \hat{\mb{f}}, \widecheck{\phi_{I}} \check{\mb{g}} \big\rangle \\
+    &=\sum_{I \in \mc{J}_{+}} \big\langle T_{\1_{I} N} (\phi_{I} \ast \mb{f}) , \phi_{I} \ast \mb{g} \big\rangle
+  \end{aligned}
+  \end{equation*}
+where
+\begin{equation*}
+  N := \sum_{I \in \mc{J}} \frac{\1_{I} M}{\widehat{\phi_{I}} \widecheck{\phi_{I}}}
+\end{equation*}
+and where Exercise \ref{ex:fourier-inversion} was used in the last line.
+In Lemma \ref{lem:N-symbol} we will show that $N$ is a Mikhlin symbol, with
+\begin{equation}\label{eq:N-bound}
+  \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)};
+\end{equation}
+for now we assume this result and proceed.
+We use the Rademacher space Cauchy--Schwartz inequality (Proposition \ref{prop:rademacher-CS}) and Kahane--Khintchine to write
+\begin{equation*}
+  \begin{aligned}
+    &\Big| \sum_{I \in \mc{J}_{+}} \big\langle T_{\1_{I} N} (\phi_{I} \ast \mb{f}) , \phi_{I} \ast \mb{g} \big\rangle \Big| \\
+    &\lesssim \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} T_{\1_{I} N} (\phi_{I} \ast \mb{f}) \Big\|_{L^p(\R;Y)}
+    \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} (\phi_{I} \ast \mb{g}) \Big\|_{L^p(\R;Y^{*})} \\
+    &\lesssim \|N\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} (\phi_{I} \ast \mb{f}) \Big\|_{L^p(\R;X)}
+    \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} (\phi_{I} \ast \mb{g}) \Big\|_{L^p(\R;Y^{*})} \\
+  \end{aligned}
+\end{equation*}
+with Lemma \ref{lem:Mikhlin-components-R} appearing in the last line.
+We use \eqref{eq:N-bound} and Lemma \ref{lem:reparam-LP} to bound this by
+\begin{equation*}
+  \|M\|_{\mf{M}(\R;X,Y)} \| \mb{f} \|_{L^p(\R;X)} \| \mb{g} \|_{L^p(\R;Y^{*})},
+\end{equation*}
+which completes the proof.
+\end{proof}
+
+It remains to control the symbol $N$ defined in the proof.
+
+\begin{lem}\label{lem:N-symbol}
+  Let $X$ and $Y$ be Banach spaces, and suppose $M \in L^\infty(\R;\Lin(X,Y))$ is a Mikhlin symbol.
+  Let $\phi$ be defined as above.
+  Then the function
+  \begin{equation*}
+    N := \sum_{I \in \mc{J}} \frac{\1_{I} M}{\widehat{\phi_{I}} \widecheck{\phi_{I}}}
+  \end{equation*}
+  is a Mikhlin symbol, and
+  \begin{equation*}
+    \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)}
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  Fairly straightforward estimates show that the product of Mikhlin symbols is a Mikhlin symbols, with multiplicativity of the Miklhin norms, so we have
+  \begin{equation*}
+     \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widehat{\phi_{I}}} \Big\|_{\mf{M}(\R)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widecheck{\phi_{I}}} \Big\|_{\mf{M}(\R)}.
+   \end{equation*}
+   Furthermore, dilation and reflection invariance shows that
+   \begin{equation*}
+     \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widehat{\phi_{I}}} \Big\|_{\mf{M}(\R)}
+     = \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widecheck{\phi_{I}}} \Big\|_{\mf{M}(\R)}
+     = \sup_{I \in \mc{J_{+}}} \Big\| \frac{\1_{I}}{\widehat{\phi_{I}}} \Big\|_{\mf{M}(\R)}
+     = \Big\| \frac{\1_{[1/2,1)}}{\hat{\phi}} \Big\|_{\mf{M}(\R)}.
+   \end{equation*}
+   By definition we have
+   \begin{equation*}
+     \begin{aligned}
+       \Big\| \frac{\1_{[1/2,1)}}{\widehat{\phi}} \Big\|_{\mf{M}(\R)}
+       &= \sup_{\xi \in (1/2, 1)} \Big( \frac{1}{|\hat{\phi}(\xi)|}  + \xi\Big|\Big(\frac{1}{\hat{\phi}}\Big)'(\xi)| \Big) \\
+       &= \sup_{\xi \in (1/2, 1)} \Big( \frac{1}{|\hat{\phi}(\xi)|}  + \xi\Big|\frac{\hat{\phi}'(\xi)}{\hat{\phi}(\xi)^2}\Big| \Big)
+   \end{aligned}
+   \end{equation*}
+   assuming all the quantities here make sense.
+   Since $\phi$ is bounded and compactly supported, $\hat{\phi}$ is continuously differentiable, so to bound this quantity it suffices to show that
+   \begin{equation}\label{eq:phi-0}
+     \hat{\phi}(\xi) \neq 0 \qquad \forall \xi \in [1/2, 1].
+   \end{equation}
+   Since $\phi = h \ast \Refl(h)$ we have
+   \begin{equation*}
+     \hat{\phi}(\xi) = \hat{h}(\xi) \hat{h}(-\xi).
+   \end{equation*}
+   A direct computation gives
+   \begin{equation*}
+     \begin{aligned}
+     \hat{h}(\xi) = \widehat{\1_{[0,1/2)}}(\xi) - \widehat{\1_{[1/2,1)}}(\xi)
+     &= \int_{0}^{1/2} e^{-2\pi i x \xi} \, \dd x - \int_{1/2}^{1} e^{-2\pi i x \xi} \, \dd x \\
+     &= - \Big[ \frac{e^{-2\pi i x\xi}}{2\pi i \xi} \Big]_{x=0}^{1/2} + \Big[ \frac{-e^{-2\pi i x\xi}}{2\pi i \xi} \Big]_{x=1/2}^{1} \\
+     &= \frac{-1}{2\pi i \xi} \Big( e^{-\pi i \xi} - 1 - e^{-2\pi i \xi} + e^{-\pi i \xi}\Big) \\
+     &= \frac{1}{2\pi i \xi} \Big( e^{-2\pi i \xi} - 2e^{-\pi i \xi} + 1 \Big).
+   \end{aligned}
+ \end{equation*}
+ This vanishes if and only if
+ \begin{equation*}
+   e^{-\pi i \xi} = 1,
+ \end{equation*}
+ i.e. if and only if $\xi \in 2\Z$.
+ This establishes \eqref{eq:phi-0} and completes the proof.
+\end{proof}
+
+We conclude this section with the Littlewood--Paley theorem for Banach-valued functions on the real line.\footnote{In a sense, Lemma \ref{lem:reparam-LP} is already a Littlewood--Paley theorem with a piecewise affine cutoff. As in the scalar-valued case, in one dimension (i.e. on $\R$) no regularity is needed on the cutoff function: characteristic functions on Littlewood--Paley intervals suffice. In higher dimensions (i.e. on $\R^{d}$) smoother cutoffs are needed, as in the scalar-valued case. See \cite[Theorem 5.5.22]{HNVW16},}
+
+\begin{thm}[Littlewood--Paley]
+  Let $X$ be a complex UMD space and $p \in (1,\infty)$.
+  Then for all $\mb{f} \in L^p(\R;X)$,
+  \begin{equation*}
+    \|\mb{f}\|_{L^p(\R;X)} \simeq_{p,X} \E\Big\| \sum_{I \in \mc{J}} \varepsilon_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Consider the Fourier multiplier with scalar-valued symbol
+  \begin{equation*}
+    m := \sum_{I \in \mc{J}} a_{I} \1_{I},
+  \end{equation*}
+  where $a_{I} \in \{-1,+1\}$ for all $I \in \mc{J}$.
+  Then $m$ is almost trivially a Miklhin symbol, and we have
+  \begin{equation*}
+    \Big\| \sum_{I \in \mc{J}} a_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+  \end{equation*}
+  Applying this to the function $\mb{g} = \sum_{I \in \mc{J}} a_{I} \Delta_{I} \mb{f}$ proves the reverse estimate
+  \begin{equation*}
+    \|\mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \Big\| \sum_{I \in \mc{J}} a_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)}.
+  \end{equation*}
+  Averaging both of these estimates over all choices of signs (i.e. replacing $a_{\bullet}$ with a Rademacher sequence) completes the proof.
+\end{proof}
+
+An alternative proof of the estimate
+\begin{equation*}
+  \E\Big\| \sum_{I \in \mc{J}} \varepsilon_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
+\end{equation*}
+is sketched in Exercise \ref{ex:LP-op-2}.
+This proof is more difficult, but directly interprets this estimate as the boundedness of a single operator-valued Fourier multiplier, while the proof above uses boundedness of infinitely many scalar-valued Fourier multipliers.
 
 \section{Exercises}
 
@@ -996,6 +1187,31 @@ The same argument proves the $R$-bound for $\mc{J}_{-}$, and putting them togeth
   and
   \begin{equation*}
     R\big(\{AB : A \in \mc{T}', B \in \mc{T}\}\big) \leq R(\mc{T})R(\mc{T}').
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}\label{ex:fourier-inversion}
+  Let $X$ be a complex Banach space.
+  For functions $\mb{f} \in L^1(\R;X)$ and $\mb{g} \in L^1(\R;X^{*})$ with integrable Fourier transforms, prove that
+  \begin{equation*}
+    \int_{\R} \langle \hat{\mb{f}}(\xi), \check{\mb{g}}(\xi) \rangle \, \dd\xi
+    = \int_{\R} \langle \mb{f}(x), \mb{g}(x) \rangle \, \dd x.
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}\label{ex:LP-op-2}
+  Let $X$ be a complex UMD space and $p \in (1,\infty)$.
+  Prove the one-sided Littlewood--Paley estimate
+  \begin{equation*}
+    \E \Big\| \sum_{I \in \mc{J}} \varepsilon_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
+  \end{equation*}
+  via the Mikhlin theorem by considering the operator-valued symbol
+  \begin{equation*}
+    M \in L^\infty(\R; \Lin(X, \varepsilon_{\mc{J}}(X)))
+  \end{equation*}
+  defined by
+  \begin{equation*}
+    (M(\xi)\mb{x})_{I} := \1_{I}(\xi)\mb{x} \qquad \forall I \in \mc{J}.
   \end{equation*}
 \end{exercise}
 
