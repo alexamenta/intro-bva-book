@@ -1,25 +1,24 @@
-Many important operators in (scalar-valued) Fourier analysis are \emph{Fourier multipliers}.
+Many important operators in (scalar-valued) Fourier analysis are \emph{Fourier multipliers}.\index{Fourier multiplier}
 For each frequency $\xi \in \R$, such an operator maps the complex exponential function $x \mapsto e^{ix\xi}$ to the scalar multiple $m(\xi)e^{ix\xi}$ for some function $\map{m}{\R}{\C}$, called the \emph{symbol}.
 \emph{Fourier multiplier theorems} generally give sufficient conditions for an operator $T_{m}$, defined as above, to be defined and bounded on $L^{p}(\R)$ for some or all $p \in (1,\infty)$.
-The Mikhlin theorem---probably the most well-known and versatile multiplier theorem beyond Plancherel's theorem---gives sufficient conditions in terms of the symbol $m$ and its derivative.
-The closely-related \emph{Littlewood--Paley theorem} gives an equivalent expression for the $L^p$ norm of a function in terms of square functions related to Fourier projections.
+These sufficient conditions usually involve smoothness requirements on the symbol $m$.
+% The closely-related \emph{Littlewood--Paley theorem} gives an equivalent expression for the $L^p$ norm of a function in terms of square functions related to Fourier projections.
 
-Both of these theorems have Banach-valued extensions.
-Fourier multipliers on Banach-valued functions are intrinsically more complicated, as complex exponentials now have `direction' given by vectors $\mb{x} \in X$, and a Fourier multiplier on $X$-valued functions will now map elementary tensors $x \mapsto e^{i\xi x}\mb{x}$ to $e^{i\xi x}M(\xi)(\mb{x})$, where $M(\xi)$ is an operator from $X$ to another Banach space $Y$---not just a scalar.
-The Littlewood--Paley theorem also becomes more complicated, as for Banach-valued functions square functions have to be interpreted via Rademacher averages.
-Nevertheless, both of these theorems have satisfactory analogues when the underlying Banach spaces have the UMD property.
+Naturally, many Fourier multiplier theorems have Banach-valued extensions, particularly when the Banach spaces involved have the UMD property.
+Fourier multipliers on Banach-valued functions are intrinsically more complicated, as complex exponentials now have `direction' given by vectors $\mb{x} \in X$, and a Fourier multiplier on $X$-valued functions will now map elementary tensors $x \mapsto e^{i\xi x}\mb{x}$ to $e^{i\xi x}M(\xi)(\mb{x})$, where $M(\xi)$ is an operator from $X$ to another Banach space $Y$, and if $X = Y$ this operator need not be given by scalar multiplication (although these `scalar-valued' symbols are still important).
 
-The most important nontrivial Fourier multiplier is the Hilbert transform, which is also the most important nontrivial \emph{singular integral operator}.
-The UMD-valued Mikhlin and Littlewood--Paley theorems both ultimately reduce to analysis of the Hilbert transform.
+The most important Fourier multiplier (to harmonic analysts, at least) is the Hilbert transform, which also has a natural representation as a \emph{singular integral operator}.
+In these notes we will not consider more general singular integral operators, but these also have a rich Banach-valued theory which is deeply connected with the UMD property.
+The Fourier multiplier theorems we will prove ultimately boil down to boundedness of the Hilbert transform, and this is where we will begin the chapter.
 
-\section{The Hilbert transform}
+\section{The Hilbert transform}\index{Hilbert transform}
 
 Recall from the introduction that the Hilbert transform of a scalar-valued function $\map{f}{\R}{\C}$ is defined by
 \begin{equation*}
   Hf(x) := \frac{1}{\pi} \mathrm{p. v.} \int_{\R} f(x-y) \, \frac{\dd y}{y} := \frac{1}{\pi} \lim_{\substack{\varepsilon \downarrow 0 \\ E \uparrow \infty}} \int_{\varepsilon < |y| < E} f(x-y) \, \frac{\dd y}{y}
 \end{equation*}
 (the truncation of the integral can be done in different ways; this is not too important).
-As stated above, the Hilbert transform is used in the proof of various Fourier multiplier theorems, but it also arises fundamentally in complex analysis.
+As stated above, the Hilbert transform is used in the proof of various Fourier multiplier theorems, but it also arises fundamentally in complex analysis.\index{Hilbert transform!connection with holomorphic functions}
 Given a real-valued function $\map{f}{\R}{\R}$, there is a unique holomorphic function $F$ on the upper half-space $\C_{+} = \{z \in \C : \Im(z) > 0\}$ such that for almost all $x \in \R = \partial \C_{+}$, the real part $\Re(F)$ satisfies
 \begin{equation*}
   \lim_{y \to 0} \Re(F(x+iy)) = f(x) \qquad \ae \,  x \in \R.
@@ -46,15 +45,21 @@ Recall also that $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension if 
 \begin{equation*}
   \|(H \otimes I)\mb{f}\|_{L^p(\R;X)} \lesssim \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in L^p(\R) \otimes X.
 \end{equation*}
+In this case, we can define a bounded linear operator $\widetilde{H}_{X}$ on $L^p(\R;X)$ by density, with
+\begin{equation*}
+  \widetilde{H}_{X} \mb{f} := \lim_{n \to \infty} (H \otimes I)\mb{f}_{n}
+\end{equation*}
+whenever $\mb{f}_{\bullet}$ is a sequence in $L^p(\R) \otimes X$ such that $\mb{f}_{n} \to \mb{f}$ in $L^p(\R;X)$.
+The operator $\widetilde{H}_{X}$ can be rightfully called `the Hilbert transform on $L^p(\R;X)$'.
 
-In this chapter we will prove the following theorem.
+The goal of the next few sections is to prove the following theorem.
 
-\begin{thm}[Burkholder]\label{thm:Burkholder}
+\begin{thm}[Burkholder]\label{thm:Burkholder}\index{theorem!Burkholder}
   Suppose that $X$ is a UMD Banach space.
   Then for all $p \in (1,\infty)$, the Hilbert transform $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension.
 \end{thm}
 
-To prove this result, it suffices to prove that for all $0 < \varepsilon < E < \infty$, the \emph{truncated $X$-valued Hilbert transform}
+To prove this, it suffices to prove that for all $0 < \varepsilon < E < \infty$, the \emph{truncated $X$-valued Hilbert transform}\index{Hilbert transform!truncations}
 \begin{equation*}
   H_{\varepsilon,E}^{X} \mb{f}(x) :=  \frac{1}{\pi} \int_{\varepsilon < |y| < E} \mb{f}(x-y) \, \frac{\dd y}{y} = \frac{1}{\pi} \int_{\varepsilon < |x-y| < E} \mb{f}(y) \, \frac{\dd y}{x-y}
 \end{equation*}
@@ -76,7 +81,7 @@ That is, defining
 \begin{equation}\label{eq:symmetries}
   \Tr_{s} f (x) := f(x - s), \qquad \Dil_{\lambda} f(x) := \lambda^{-1/2}f(x/\lambda), \qquad   \Refl f(x) := f(-x),
 \end{equation}
-we have the identities
+we have the identities\index{Hilbert transform!symmetries}
 \begin{equation*}
   H(\Tr_{s} f) = \Tr_{s} (Hf), \qquad H(\Dil_{\lambda} f) = \Dil_{\lambda} H(f), \quad H(\Refl(f)) = -\Refl(Hf).
 \end{equation*}
@@ -88,7 +93,7 @@ This idea leads us to the analysis of generalised dyadic systems.
 
 To establish uniform bounds on the truncated Hilbert transforms $H_{\varepsilon, E}^{X}$ when $X$ is UMD, we will need to relate them to martingale transforms.
 The transforms we will need are related to the Haar multipliers we considered in Section \ref{sec:haar-decomp}.
-However, we will need not only the dyadic filtration on the unit interval $[0,1)$, but more general \emph{dyadic systems} on $\R$.
+However, we will need not only the dyadic filtration on the unit interval $[0,1)$, but more general \emph{dyadic systems}\index{dyadic system} on $\R$.
 
 \begin{defn}
   For all $j \in \Z$ let
@@ -99,7 +104,7 @@ However, we will need not only the dyadic filtration on the unit interval $[0,1)
   \begin{equation*}
     \mc{D}^{0} := \bigcup_{j \in \Z} \mc{D}_{j}^{0}
   \end{equation*}
-  denote the \emph{standard dyadic system}---i.e. the set of all dyadic intervals in $\R$.
+  denote the \emph{standard dyadic system}\index{dyadic system!standard}---i.e. the set of all dyadic intervals in $\R$.
   For every two-sided (i.e. $\Z$-indexed) sequence $\omega \in \{0,1\}^{\Z}$, define for all $j \in \Z$
   \begin{equation*}
     \mc{D}_{j}^{\omega} := \mc{D}_{j}^{0} + \sum_{i > j} 2^{-i} \omega_{i}:
@@ -108,7 +113,7 @@ However, we will need not only the dyadic filtration on the unit interval $[0,1)
   \begin{equation*}
     2^{-j}(0.\omega_{j+1}\omega_{j+2}\ldots)_{2} .
   \end{equation*}
-  Finally, define the \emph{$\omega$-shifted dyadic system}
+  Finally, define the \emph{$\omega$-shifted dyadic system}\index{dyadic system!shifted}
   \begin{equation*}
    \mc{D}^{\omega} := \bigcup_{j \in \Z} \mc{D}_{j}^{\omega}.
   \end{equation*}
@@ -151,7 +156,7 @@ We call $\mc{D}^{\omega}$ a `dyadic system' because it satisfies the following p
 \end{proof}
 
 \begin{rmk}\label{rmk:dyadic-dichotomy}
-The intervals in a shifted dyadic system $\mc{D}^{\omega}$ also satisfy the \emph{dyadic dichotomy}: if $I$ and $J$ are intervals in $\mc{D}^{\omega}$, then they are either comparable ($I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
+The intervals in a shifted dyadic system $\mc{D}^{\omega}$ also satisfy the \emph{dyadic dichotomy}:\index{dyadic dichotomy} if $I$ and $J$ are intervals in $\mc{D}^{\omega}$, then they are either comparable ($I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
 Prove this yourself in Exercise \ref{ex:dyadic-dichotomy}.
 \end{rmk}
 
@@ -191,7 +196,7 @@ However, the \emph{set of dyadic systems} is itself translation invariant.
 As stated above, our methods will also need to be dilation invariant.
 To this end we allow for an additional modification to our dyadic systems.
 
-\begin{defn}
+\begin{defn}\index{dyadic system!dilated}
   For $\omega \in \{0,1\}^{\Z}$ and $t > 0$, define the \emph{dilated dyadic system}
   \begin{equation*}
     t\mc{D}^{\omega} := \{tI : I \in \mc{D}^{\omega}\}.
@@ -200,7 +205,7 @@ To this end we allow for an additional modification to our dyadic systems.
 
 If $t = 2^{j}$ for some $j \in \Z$, then $t\mc{D}^{\omega} = \mc{D}^{\omega'}$ where $\omega'$ is a shift of $\omega$.
 Thus as long as we allow for arbitrary $\omega \in \{0,1\}^{\Z}$, we need only consider dilated dyadic systems $t\mc{D}^{\omega}$ for $t \in [1,2)$.
-In the following sections we will refer to a translated shifted dyadic system $t\mc{D}^{\omega}$, for some $t \in [1,2)$ and $\omega \in \{0,1\}^{\Z}$, simply as a \emph{generalised dyadic system}, and we may suppress reference to $t$ and $\omega$ and denote it by $\mc{D}$.
+In the following sections we will refer to a translated shifted dyadic system $t\mc{D}^{\omega}$, for some $t \in [1,2)$ and $\omega \in \{0,1\}^{\Z}$, simply as a \emph{generalised dyadic system},\index{dyadic system!generalised} and we may suppress reference to $t$ and $\omega$ and denote it by $\mc{D}$.
 
 \begin{rmk}
   Although we have not formally proven it, generalised dyadic systems satisfy the conclusion of Proposition \ref{prop:dyadicsystems} (with length $t2^{-j}$ in place of $2^{-j}$) and the dyadic dichotomy (Remark \ref{rmk:dyadic-dichotomy}).  
@@ -231,8 +236,7 @@ This can be extended to general dyadic systems on $\R$: for any bounded interval
 \end{equation*}
 where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
 
-
-\begin{thm}\label{thm:general-haar-decompositions}
+\begin{thm}\label{thm:general-haar-decompositions}\index{Haar decomposition!and generalised dyadic systems}
   Let $X$ be a UMD Banach space, $p \in (1,\infty)$, and let $\mc{D}$ be a generalised dyadic system.
   Then for all $\mb{f} \in L^p(\R;X)$,
   \begin{equation}\label{eq:gen-haar-sqfn}
@@ -243,8 +247,7 @@ where $I_{-}$ and $I_{+}$ are the left and right halves of the interval $I$.
     % Furthermore, the set of functions $\mb{f} \in L^p(\R;X)$ such that the sequence $(\langle \mb{f}, h_{I} \rangle)_{I \in \mc{D}}$ is finitely supported is dense in $L^p(\R;X)$.
 \end{thm}
 
-
-\begin{proof}[Proof of Theorem \ref{thm:general-haar-decompositions}]
+\begin{proof}
   % As in the case of the unit interval, the density statement follows from \eqref{eq:gen-haar-sqfn} and abstract properties of Rademacher spaces.
   We will only prove the estimate
   \begin{equation*}
@@ -322,12 +325,12 @@ This motivates a more general definition: given a function $\map{k}{\R}{\K}$ and
 \end{equation*}
 
 \begin{defn}
-  We say a function $\map{k}{\R}{\K}$ is an \emph{admissible base function} if it is a finite $\K$-linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
+  We say a function $\map{k}{\R}{\K}$ is an \emph{admissible base function}\index{admissible base function} if it is a finite $\K$-linear combination of Haar functions $h_{J}$ associated with standard dyadic intervals $J \subset [0,1)$ of a fixed length $2^{-j}$; in addition we require that $\|k\|_{\infty} \leq 1$.
 \end{defn}
 
 \begin{defn}
   Let $\mc{D} = t\mc{D}^{\omega}$ be a generalised dyadic system, $X$ a Banach space, and $k$ an admissible base function.
-  For $m,n \in \Z$ with $m \leq n$ we define the \emph{truncated shift operator} $S_{k,m,n} = S_{k,m,n}^{t,\omega}$ by
+  For $m,n \in \Z$ with $m \leq n$ we define the \emph{truncated dyadic shift operator}\index{dyadic shift operator} $S_{k,m,n} = S_{k,m,n}^{t,\omega}$ by
   \begin{equation*}
     S_{k,m,n} \mb{f} := \sum_{I \in \mc{D}_{m,n}} k_{I} \otimes \langle \mb{f}, h_{I} \rangle \qquad \forall \map{\mb{f}}{\R}{X},
   \end{equation*}
@@ -337,14 +340,14 @@ This motivates a more general definition: given a function $\map{k}{\R}{\K}$ and
 Although the indexing set $\mc{D}_{m,n}$ is infinite, for all $x \in \R$ the sum defining $S_{k,m,n}\mb{f}(x)$ is actually finite, as for each $j \in \Z$ there is at most one interval $I \in \mc{D}_{j}$ for which $k_{I}(x) \neq 0$ (as $k_{I}$ is supported in $I$), and only $m \leq j \leq n$ contribute to the sum.
 
 \begin{rmk}
-  In \cite{HNVW16} non-truncated shift operators $S_{k}$ are considered.
+  In \cite{HNVW16} non-truncated dyadic shift operators $S_{k}$ are considered.
   We work with truncated shifts in order to avoid convergence issues.
 \end{rmk}
 
 When the admissible base function $k$ is the Haar function $h$ itself, $S_{h, m,n}$ acts as a \emph{Haar projection} to scales between $m$ and $n$: it sends a function to its partial Haar expansion onto intervals in $\mc{D}_{j}$ with $m \leq j \leq n$.
 In general, since $k$ is a finite linear combination of Haar functions localised to equal-length subintervals of $[0,1)$, $S_{k}$ takes the generalised Haar projection of $\mb{f}$ and `shifts' each entry onto multiple Haar functions at a fixed smaller scale.
 
-\begin{thm}\label{eq:shift-boundedness}
+\begin{thm}\label{eq:shift-boundedness}\index{dyadic shift operator!boundedness in UMD spaces}
   Let $X$ be a UMD space, $p \in (1,\infty)$, $\mc{D}$ a generalised dyadic system, and $k$ an admissible base function.
   Then for all $m \leq n$, $S_{k,m,n}$ is bounded on $L^{p}(\R;X)$ uniformly in $m$ and $n$,
   with
@@ -412,7 +415,7 @@ In general, since $k$ is a finite linear combination of Haar functions localised
  \begin{defn}
    Fix a UMD space $X$ and $p \in (1,\infty)$.
    Let $k$ be an admissible base function and $\nu$ a probability measure on $[1,2)$.
-   For $m,n \in \Z$ with $m \leq n$ we define the \emph{average truncated dyadic shift operator} $\langle S_{k,m,n} \rangle^{\nu} \in \Lin(L^p(\R;X))$ by the $L^p(\R;X)$-valued Bochner integral
+   For $m,n \in \Z$ with $m \leq n$ we define the \emph{average truncated dyadic shift operator}\index{dyadic shift operator!averaged} $\langle S_{k,m,n} \rangle^{\nu} \in \Lin(L^p(\R;X))$ by the $L^p(\R;X)$-valued Bochner integral
    \begin{equation}\label{eq:avg-shift}
      \langle S_{k,m,n} \rangle^{\nu}\mb{f} := \int_{[1,2)} \int_{\{0,1\}^{\Z}} S_{k,m,n}^{\omega, t}\mb{f} \, \dd \P(\omega) \, \dd \nu(t).
    \end{equation}
@@ -450,7 +453,7 @@ are continuous in $(\omega^{(j)},t)$.
 
 Having shown that the average truncated dyadic shifts $\langle S_{k,m,n} \rangle^{\nu}$ are well-defined as bounded operators on $L^p(\R;X)$, we turn to representing them in terms of more familiar convolution operators.
 
-\begin{prop}\label{prop:shift-average-repn}
+\begin{prop}\label{prop:shift-average-repn}\index{dyadic shift operator!representation of averages as convolutions}
   Let $X$ be a UMD space, $p \in (1,\infty)$, and let $\nu$ be a probability measure on $[1,2)$.
   Given an admissible base function $k$, let
   \begin{equation}\label{eq:phik}
@@ -541,8 +544,8 @@ The function $\phi = \phi^{k}$, defined by
 \begin{equation*}
   k(x) = \int_{\R} k(x+u)h(u) \, \dd u
 \end{equation*}
-as in the previous section, can be compute $\phi$ explicitly: it is the piecewise affine odd function supported on $[-1,1]$ which interpolates between the values
-\begin{equation*}
+as in the previous section, can be compute $\phi$ explicitly (Exercise \ref{ex:phi-computation}): it is the piecewise affine odd function supported on $[-1,1]$ which interpolates between the values
+\begin{equation}\label{eq:phi-1}
   \begin{aligned}
     \phi(0) &= 0 \\
     \phi(1/4) &= -3/4 \\
@@ -550,11 +553,11 @@ as in the previous section, can be compute $\phi$ explicitly: it is the piecewis
     \phi(3/4) &= 1/4 \\
     \phi(1) &= 0.
   \end{aligned}
-\end{equation*}
+\end{equation}
 A graph of this function is given in \cite[Figure 5.1]{HNVW16}, but we only need to know that $\phi$ is odd and supported on $[-1,1]$, and that $\int_{0}^{1} \phi(y) \, \dd y = -1/8$ (and we only really need that $-1/8 \neq 0$).
 We are ready to prove Theorem \ref{thm:Burkholder}, the boundedness of UMD-valued extensions of the Hilbert transform.
 
-\begin{proof}[Proof of Theorem \ref{thm:Burkholder}]
+\begin{proof}[Proof of Theorem \ref{thm:Burkholder}]\index{theorem!Burkholder}
   As discussed above, it suffices to prove the bounds
   \begin{equation}\label{eq:HT-unifbds}
     \|H^{X}_{\varepsilon, E} \mb{f}\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in L^p(\R;X)
@@ -604,7 +607,7 @@ First, note that
     &= \fint_{[x-t, x+t]} \|\mb{f}(y)\|_{X} \, \dd y \leq M(\|\mb{f}\|_{X})(x),
   \end{aligned}
 \end{equation*}
-since $\phi$ is bounded and supported on $[-1,1]$, where $M$ is the Hardy--Littlewood maximal operator.
+since $\phi$ is bounded and supported on $[-1,1]$, where $M$ is the Hardy--Littlewood maximal operator\index{Hardy--Littlewood maximal operator}.
 Since $\varepsilon$ and $E$ are within a factor $2$ of $2^{\lfloor \log_{2} \varepsilon \rfloor}$ and $2^{\lfloor \log_{2} E \rfloor}$ respectively, this implies that
 \begin{equation*}
   \Big\| \Big( \int_{2^{\lfloor \log_{2} E \rfloor}}^{E} - \int_{2^{\lfloor \log_{2} \varepsilon \rfloor}}^{\varepsilon} \Big) \phi_{t} \ast \mb{f} \, \frac{\dd t}{t} \Big\|_{L^p(\R;X)}
@@ -647,7 +650,7 @@ Recall the definitions of the Fourier transform and its inverse from Definition 
   We will, however, be interested in \emph{Fourier multipliers}: these are operators given by acting on the individual frequency components $\hat{\mb{f}}(\xi)$ in the representation \eqref{eq:fourier-inversion}.
   The rigorous definition follows.
 
-\begin{defn}
+\begin{defn}\index{Fourier multiplier}
   Let $X$ and $Y$ be complex Banach spaces, and consider an operator-valued function $\map{M}{\R}{\Lin(X,Y)}$.
   The Fourier multiplier $T_{M}$ is the operator $C^{\infty}_{c}(\R;X) \to C(\R;Y)$ defined by
   \begin{equation*}
@@ -655,7 +658,7 @@ Recall the definitions of the Fourier transform and its inverse from Definition 
   \end{equation*}
 \end{defn}
 
-The operator-valued function $M$ is called the \emph{symbol} of the operator $T_{M}$.
+The operator-valued function $M$ is called the \emph{symbol}\index{symbol} of the operator $T_{M}$.
 We should quickly show that this definition actually makes sense.
 
 \begin{prop}
@@ -692,7 +695,7 @@ That is, when do we have the estimate
   \|T_{M} \mb{f}\|_{L^p(\R;Y)} \lesssim \|\mb{f}\|_{L^p(\R;X)} \qquad \forall \mb{f} \in C_{c}^\infty(\R;X)?
 \end{equation*}
 
-We have already studied one of the most important Fourier multipliers: the Hilbert transform.
+We have already studied one of the most important Fourier multipliers: the Hilbert transform.\index{Hilbert transform!as a Fourier multiplier}
 A well-known result in harmonic analysis is the identification of the Hilbert transform $H$ as the Fourier multiplier $T_{m}$ with scalar-valued symbol\footnote{The value of $m(0)$ is irrelevant, as the operator $T_{m}$ only depends on the almost-everywhere equivalence class of $m$.)}
 \begin{equation*}
   m(\xi) := -i\sgn(\xi) =
@@ -711,7 +714,7 @@ We introduced $R$-boundedness in Exercise \ref{ex:R-bd-mgale-tf}, but we repeat 
 
 \begin{defn}
   Let $X$ and $Y$ be (real or complex) Banach spaces and suppose $\mc{T} \subset \Lin(X,Y)$ is a set of bounded linear operators from $X$ to $Y$.
-We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$ in $X$,
+We say that the set $\mc{T}$ is \emph{$R$-bounded}\index{R-bounds@$R$-bounds} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$ in $X$,
 \begin{equation*}
   \|T_{\bullet} \mb{x}_{\bullet}\|_{\varepsilon_{N}(Y)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)},
 \end{equation*}
@@ -738,7 +741,7 @@ so $R$-boundedness of a set of operators is a stronger condition than uniform bo
 Under quite restrictive type and cotype assumptions on $X$ and $Y$, $R$-boundedness is equivalent to uniform boundedness (see Exercise \ref{ex:R-bound-type}); in particular, if $X$ and $Y$ are isomorphic to Hilbert spaces, then this equivalence holds.
 In general $R$-boundedness of a family of operators is strictly stronger than uniform boundedness, and estimating $R$-bounds requires some form of `compatibility' or `similarity' of the operators in the set.
 
-\begin{example}\label{eg:R-bounded-multipliers}
+\begin{example}\label{eg:R-bounded-multipliers}\index{R-bounds@$R$-bounds!of pointwise multiplication operators}
   Let $X$ be a Banach space, let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space, and fix $p \in [1,\infty)$.
   For each $g \in L^\infty(S)$ define the multiplication operator $M_{g} \in \Lin(L^p(S;X))$ by $M_{g}\mb{f} = g\mb{f}$.
   Then for all $C < \infty$, the set of operators
@@ -759,9 +762,31 @@ In general $R$-boundedness of a family of operators is strictly stronger than un
   proving the claimed $R$-boundedness.
 \end{example}
 
+\begin{example}\label{eg:R-bounded-unions}\index{R-bounds@$R$-bounds!of unions}
+  Let $X$ and $Y$ be Banach spaces, and let $\mc{T}$ and $\mc{S}$ be $R$-bounded subsets of $\Lin(X,Y)$.
+  Then $\mc{T} \cup \mc{S}$ is also $R$-bounded, with $R(\mc{T} \cup \mc{S}) \leq R(\mc{T}) + R(\mc{S})$.
+  To see this, fix finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T} \cup \mc{S}$ and $(\mb{x}_{n})_{n=0}^{N}$ in $X$.
+  Define
+  \begin{equation*}
+    A := \{n : T_{n} \in \mc{T}\}, \qquad B := \{0,1,\ldots,N\} \sm A.
+  \end{equation*}
+  so that $A \cup B = \{0,1,\ldots,N\}$.
+  Then
+  \begin{equation*}
+    \begin{aligned}
+      \|T_{\bullet} \mb{f}_{\bullet}\|_{\varepsilon_{N}(Y)}
+      &\leq \|T_{\bullet} \mb{f}_{\bullet}\|_{\varepsilon_{A}(Y)} + \|T_{\bullet} \mb{f}_{\bullet}\|_{\varepsilon_{B}(Y)} \\
+      &\leq R(\mc{T}) \| \mb{f}_{\bullet}\|_{\varepsilon_{A}(X)} + R(\mc{S}) \| \mb{f}_{\bullet}\|_{\varepsilon_{B}(X)} \\
+      &\lesssim (R(\mc{T}) + R(\mc{S})) \|\mb{f}_{\bullet}\|_{\varepsilon_{N}(X)}
+    \end{aligned}
+  \end{equation*}
+  writing $\varepsilon_{A}$ and $\varepsilon_{B}$ to denote Rademacher spaces indexed by the sets $A$ and $B$, and using the contraction principle in the last line.
+  This example shows a useful general principle: if a set of operators can be decomposed into a finite union of $R$-bounded sets, then the original set is $R$-bounded.
+\end{example}
+
 The fundamental link between $R$-boundedness and Fourier multipliers comes from the following theorem, whose proof we omit.\footnote{It isn't too difficult, we just don't need it. For details see \cite[Theorem 5.3.15]{HNVW16}.}
 
-\begin{thm}[Cl\'ement--Pr\"uss]
+\begin{thm}[Cl\'ement--Pr\"uss]\index{R-bounds@$R$-bounds!necessity for Fourier multipliers}
   Let $X$ and $Y$ be Banach spaces and $p \in (1,\infty)$.
   Let $M \in L^\infty(\R;\Lin(X,Y))$ be an operator-valued symbol such that the Fourier multiplier $T_{M}$ is bounded from $L^p(\R;X)$ to $L^p(\R;Y)$.
   Then the set\footnote{Recall that a point $\xi \in \R$ is a Lebesgue point of $M$ if $M(\xi) = \lim_{\varepsilon \downarrow 0} \fint_{\xi-\varepsilon}^{\xi+\varepsilon} M(\eta) \, \dd\eta $, and that almost every $\xi \in \R$ is a Lebesgue point of $M$.}
@@ -777,10 +802,10 @@ In the next section we investigate sufficient conditions.
 Before moving on to the Mikhlin theorem and its proof, we quickly discuss \emph{Fourier projections}.
 
 \begin{defn}
-  For every measurable subset $S \subset R$ we define the \emph{Fourier projection} $\Delta_{S}$ to the Fourier multiplier $T_{\1_{S}}$ with scalar-valued symbol $\1_{S}$.
+  For every measurable subset $S \subset R$ we define the \emph{Fourier projection}\index{Fourier projections} $\Delta_{S}$ to the Fourier multiplier $T_{\1_{S}}$ with scalar-valued symbol $\1_{S}$.
 \end{defn}
 
-\begin{prop}\label{prop:Fproj-Rbd}
+\begin{prop}\label{prop:Fproj-Rbd}\index{R-bounds@$R$-bounds!of Fourier projections on UMD spaces}\index{Fourier projections!R-bounded for UMD spaces}
   Let $X$ be a complex UMD space and $p \in (1,\infty)$.
   Then for each interval $I \subset \R$ (including unbounded intervals), the Fourier projection $\Delta_{I}$ is bounded on $L^p(\R;X)$.
   Furthermore, the set of Fourier projections
@@ -790,7 +815,7 @@ Before moving on to the Mikhlin theorem and its proof, we quickly discuss \emph{
   is $R$-bounded.
 \end{prop}
 
-The proof relies on the intertwining relations between Fourier multipliers, translations, and modulations, where for $\eta \in \R$ we define the \emph{modulation} of a function $\mb{f}$ (taking values in some Banach space) by
+The proof relies on the intertwining relations between Fourier multipliers, translations, and modulations, where for $\eta \in \R$ we define the \emph{modulation}\index{modulation} of a function $\mb{f}$ (taking values in some Banach space) by
 \begin{equation*}
   (\Mod_{\eta} \mb{f})(x) := e^{2\pi i \eta x} \mb{f}(x) \qquad \forall x \in \R.
 \end{equation*}
@@ -857,41 +882,49 @@ so the boundedness of $\Delta_{(0,\infty)}$ on $L^p(\R;X)$ that we proved earlie
 
 \section{The Mikhlin and Littlewood--Paley theorems}
 
-\todo{needs exposition}
+We can now move to the Mikhlin multiplier theorem.
+As shown by the Hilbert transform and Fourier projections $\Delta_{I}$, the symbol of an $L^p$-bounded Fourier multiplier can have discontinuities.
+However, away from the endpoints of an interval $I \subset \R$, the symbol $\1_{I}$ of the Fourier projection $\Delta_{I}$ is quite regular (in this case, locally constant).
+The class of \emph{Mikhlin symbols} have similar properties: they have discontinuities on a particular countable set of points (the dyadic numbers $\pm 2^{j}$ with $j \in \Z$, along with the origin), and on the dyadic intervals in between they are continuous and differentiable, with some scale-invariant control on the derivatives on these intervals.
+We establish the boundedness of the associated Fourier multipliers on $L^p(\R;X)$, when $X$ is UMD and $p \in (1,\infty)$, essentially by representing them in terms of the Fourier projections $\Delta_{I}$, exploiting the $R$-boundedness of these operators, and using estimates proved earlier for average dyadic shift operators.
 
-Let $\mc{J}$ denote the set of \emph{Littlewood--Paley intervals}
+Let us formalise the definition of a Miklhin symbol.
+We let $\mc{J}$ denote the set of \emph{Littlewood--Paley intervals}\index{Littlewood--Paley intervals}
 \begin{equation*}
   \mc{J} := \{\pm(2^{j}, 2^{j+1}) : j \in \Z\}.
 \end{equation*}
-We have $\mc{J} = \mc{J}_{+} \cup \mc{J}_{-}$, where $\mc{J}_{\pm}$ denotes the set of Littlewood--Paley intervals contained in $\pm(0,\infty)$.
+We lete $\mc{J}_{+}$ and $\mc{J}_{-}$ denote the set of Littlewood--Paley intervals contained in $\pm(0,\infty)$, so that $\mc{J} = \mc{J}_{+} \cup \mc{J}_{-}$.
 
 \begin{defn}
-  Given complex Banach spaces $X$ and $Y$, an operator-valued function $M \in L^\infty(\R; \Lin(X,Y))$ is called a \emph{Mikhlin symbol} if it is continuous and differentiable on each Littlewood--Paley interval $I \in \mc{J}$, and if the \emph{Mikhlin norm}
+  Given complex Banach spaces $X$ and $Y$, an operator-valued function $M \in L^\infty(\R; \Lin(X,Y))$ is called a \emph{Mikhlin symbol}\index{Mikhlin symbols} if it is continuous and differentiable on each Littlewood--Paley interval $I \in \mc{J}$, and if the \emph{Mikhlin norm}\index{Mikhlin norm}
   \begin{equation*}
     \|M\|_{\mf{M}(\R;X,Y)} := R \Big( \big\{ M(\xi), \xi M'(\xi) \in \Lin(X,Y) : \xi \in \bigcup_{I \in \mc{J}} I \big\} \Big)
   \end{equation*}
   is finite.
 \end{defn}
 
-Note that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bound-type}), or if each $M(\xi)$ is a scalar multiplication operator (Exercise \ref{ex:scalars}), the Mikhlin norm of $M$ is equivalent to the uniform bound
+Note that the union of Littlewood--Paley intervals in this definition can be written as
+\begin{equation*}
+  \bigcup_{I \in \mc{J}} I = \R \sm \big( \{0\} \cup \{\pm 2^{j} : j \in \Z\} \big).
+\end{equation*}
+Note also that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bound-type}), or if each $M(\xi)$ is a scalar multiplication operator (Exercise \ref{ex:scalars}), the Mikhlin norm of $M$ is equivalent to the uniform bound
 \begin{equation*}
   \|M\|_{\mf{M}(\R;X,Y)} \simeq \sup_{\xi \in \bigcup_{I \in \mc{J}} I} \Big( \|M(\xi)\|_{\Lin(X,Y)} + |\xi|\|M'(\xi)\|_{\Lin(X,Y)} \Big).
 \end{equation*}
 
-\todo{note that the Hilbert transform has a Mikhlin symbol, so do $\Delta_{I}$ for $I \in \mc{J}$}
-
-\begin{thm}\label{thm:Mikhlin}
-  Let $X$ and $Y$ be complex UMD spaces, and let $M \in L^\infty(\R;\Lin(X,Y))$ be a Mikhlin symbol.
-  Then
+\begin{thm}\label{thm:Mikhlin}\index{theorem!Mikhlin}
+  Let $X$ and $Y$ be complex UMD spaces, and suppose that $M \in L^\infty(\R;\Lin(X,Y))$ is a Mikhlin symbol.
+  Then for all $\mb{f} \in C_{c}^\infty(\R;X)$,
   \begin{equation*}
-    \|T_{M}\|_{\Lin(L^p(\R;X), L^p(\R;Y))} \lesssim_{p,X,Y} \|M\|_{\mf{M}(\R;X,Y)}.
+    \|T_{M} \mb{f}\|_{L^p(\R;Y)} \lesssim_{p,X,Y} \|M\|_{\mf{M}(\R;X,Y)} \|\mb{f}\|_{L^p(\R;X)}.
   \end{equation*}
+  In particular $T_{M}$ extends to a bounded operator $L^p(\R;X) \to L^p(\R;Y)$.
 \end{thm}
 
 We prove this theorem in a few steps.
-We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, where $I$ ranges over the set of all Littlewood--Paley intervals.
+We start with $R$-boundedness of the set of `localised' Fourier multipliers $T_{\1_{I} M}$, where $I$ ranges over the set of all Littlewood--Paley intervals.\footnote{This lemma implies in particular that these truncated Fourier multipliers are uniformly bounded $L^p(\R;X) \to L^p(\R;Y)$.}
 
-\begin{lem}\label{lem:Mikhlin-components-R}
+\begin{lem}\label{lem:Mikhlin-components-R}\index{R-bounds@$R$-bounds!of localised Mikhlin multipliers}
   Let $X$ and $Y$ be UMD spaces, $p \in (1,\infty)$, and let $M \in \mf{M}(\R;X,Y)$ be a Mikhlin symbol.
   Then the set of truncated Fourier multipliers
   \begin{equation*}
@@ -901,7 +934,10 @@ We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, 
 \end{lem}
 
 \begin{proof}
-  For each interval $I = \mc{J}$, write $I = (\ell(I), r(I))$ and let $\midp(I)$ be the midpoint of $I$.
+  By Example \ref{eg:R-bounded-unions} it suffices to consider $I \in \mc{J}_{+}$ and $I \in \mc{J}_{-}$ separately.
+  We will only give the argument for $\mc{J}_{+}$, as only a change of notation is needed to handle $\mc{J}_{-}$.
+
+  For each interval $I = \mc{J}_{+}$, write $I = (\ell(I), r(I))$ and let $\midp(I)$ be the midpoint of $I$.
   Then for $\xi \in I$ we have the identity
   \begin{equation*}
     \begin{aligned}
@@ -911,35 +947,34 @@ We start with $R$-boundedness of the set of Fourier multipliers $T_{\1_{I} M}$, 
       &= \1_{I}(\xi) \Big( M(\midp(I)) - \int_{\ell(I)}^{\midp{I}} M'(\eta) \, \dd\eta \Big) + \int_{I} \1_{(\eta,r(I))}(\xi) M'(\eta) \, \dd\eta.
     \end{aligned}
   \end{equation*}
-  When $I \in \mc{J}_{+}$, a change of variables leads to the Fourier multiplier identity
+  A change of variables leads to the Fourier multiplier identity
   \begin{equation*}
     T_{\1_I M} \mb{f}
-    = \Big( M(\midp(I)) - \int_{1}^{3/2} |I| M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f} + \int_{1}^{2} |I| M'(t|I|) \Delta_{(t|I|,r(I))} \, \dd t;
+    = \Big( M(\midp(I)) - \int_{1}^{3/2} |I| M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f} + \int_{1}^{2} |I| M'(t|I|) \Delta_{(t|I|,r(I))} \, \dd t.
   \end{equation*}
-  a corresponding identity holds with $I \in \mc{J}_{-}$.
   Consider a sequence of functions $(\mb{f}_{I})_{I \in \mc{J}_{+}}$ and estimate the $R$-bounds corresponding to the three summands above separately.
   First we have
   \begin{equation*}
     \begin{aligned}
-      &\E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} M(\midp(I)) \Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
-      &\lesssim R\big( \{M(\midp(I)) : I \in \mc{J}_{+} \} \big) \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I}  \Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
-    &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} 
+      \big\|M(\midp(\bullet)) \Delta_{\bullet} \mb{f}_{\bullet} \big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y))}
+      &\leq R\big( \{M(\midp(I)) : I \in \mc{J}_{+} \} \big) \|\Delta_{\bullet} \mb{f}_{\bullet} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))} \\
+      &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \| \mb{f}_{\bullet} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))} 
   \end{aligned}
 \end{equation*}
-using the definition of the Mikhlin norm, and that the set of Fourier projections $\{\Delta_{I} : I \in \mc{J}_{+}\} \subset L^p(\R;X)$ is $R$-bounded, since $X$ is UMD (Proposition \ref{prop:Fproj-Rbd}).
+using the definition of the Mikhlin norm, and that the set of Fourier projections $\{\Delta_{I} : I \in \mc{J}_{+}\} \subset L^p(\R;X)$ is $R$-bounded, since $X$ is UMD and $p \in (1,\infty)$ (Proposition \ref{prop:Fproj-Rbd}).
 For the second term we have
 \begin{equation*}
   \begin{aligned}
-    &\E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \Big( \int_{1}^{3/2} |I|  M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
-    &\leq \int_{1}^{3/2} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} t|I|  M'(t|I|)\Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \, \frac{\dd t}{t}.
+    &\Big\| \Big( \int_{1}^{3/2} |\bullet|  M'(t|\bullet|) \, \dd t \Big)\Delta_{\bullet} \mb{f}_{\bullet} \Big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y))} \\
+    &\qquad \leq \int_{1}^{3/2} \big\| t|\bullet|  M'(t|\bullet|)\Delta_{\bullet} \mb{f}_{\bullet} \big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))} \, \frac{\dd t}{t}.
   \end{aligned}
 \end{equation*}
 For each $t \in [1,2)$ we have
 \begin{equation*}
   \begin{aligned}
-    &\E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} t|I|  M'(t|I|)\Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
-    &\lesssim R\big( \{ t|I|  M'(t|I|) : I \in \mc{J}_{+}\} \big) \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \Delta_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)} \\
-    &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)}
+    \big\| t|\bullet|  M'(t|\bullet|)\Delta_{\bullet} \mb{f}_{\bullet} \big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y))} 
+    &\leq R\big( \{ t|I|  M'(t|I|) : I \in \mc{J}_{+}\} \big) \| \Delta_{\bullet} \mb{f}_{\bullet} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))} \\
+    &\lesssim_{p,X} \|M\|_{\mf{M}(\R;X,Y)} \| \mb{f}_{\bullet} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))}
   \end{aligned}
 \end{equation*}
 again using the definition of the Mikhlin norm and Proposition \ref{prop:Fproj-Rbd}.
@@ -947,11 +982,12 @@ The third term is estimated in exactly the same way, so we omit the argument.
 All up we get
 \begin{equation*}
   \begin{aligned}
-    \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} T_{\1_{I} M} \mb{f}_{I} \Big\|_{L^p(\R;X)} \lesssim \E \Big\|\sum_{I \in \mc{J}_{+}} \varepsilon_{I} \mb{f}_{I} \Big\|_{L^p(\R;X)},
+    \big\|T_{\1_{\bullet} M} \mb{f}_{\bullet} \big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y))}
+    \lesssim \|\mb{f}_{\bullet} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))},
   \end{aligned}
 \end{equation*}
 which proves the desired $R$-bound for $\mc{J}_{+}$.
-The same argument proves the $R$-bound for $\mc{J}_{-}$, and putting them together completes the proof.
+As already mentioned, the same argument adapts to $\mc{J}_{-}$, and this is sufficient to establish the claimed $R$-bound.
 \end{proof}
 
 Next we recall a reparametrised version of the Rademacher average estimate from Corollary \ref{cor:intop-bounds}.
@@ -960,14 +996,14 @@ In what follows we let
   \phi(x) = \phi^{h}(x) = \int_{\R} h(x+u) h(u) \, \dd u
 \end{equation*}
 using the notation from Proposition \ref{prop:shift-average-repn}.
-This function can be computed explicitly: it is the piecewise affine even function supported on $[-1,1]$ which interpolates between the values
-\begin{equation*}
+This function can be computed explicitly, although in this case we don't actually need the explicit representation (Exercise \ref{ex:phi-computation}): it is the piecewise affine even function supported on $[-1,1]$ which interpolates between the values
+\begin{equation}\label{eq:phi-2}
   \begin{aligned}
     \phi(0) &= 1 \\ 
     \phi(1/2) &= -1/2 \\
     \phi(1) &= 0.
   \end{aligned}
-\end{equation*}
+\end{equation}
 For each interval $I \in \mc{J}$ define
 \begin{equation*}
   \phi_{I}(x) := 2|I|\phi(2|I|x) = \phi_{1/2|I|}(x)
@@ -978,7 +1014,7 @@ For each interval $I \in \mc{J}$ define
   Let $X$ be a UMD space and $p \in (1,\infty)$.
   Then for all $\mb{f} \in L^p(\R;X)$,
   \begin{equation*}
-    \E \Big\| \sum_{I \in \mc{J}_{\mc{J}_{\pm}}} \varepsilon_{I} \phi_{I} \ast \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+    \| \phi_{\bullet} \ast \mb{f} \|_{\varepsilon_{\mc{J}_{\pm}}(L^p(\R;X))} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
   \end{equation*}
 \end{lem}
 
@@ -990,7 +1026,7 @@ For each interval $I \in \mc{J}$ define
   For each pair of integers $m \leq n$.
   The second part of Exercise \ref{ex:on-rad-spaces} then lets us take the limit as $m \downarrow -\infty$ and $n \uparrow \infty$, and
   \begin{equation*}
-    \E \Big\| \sum_{j \in \Z} \varepsilon_{j} \phi_{2^{-j}} \ast \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
+    \| \phi_{2^{-\bullet}} \ast \mb{f} \|_{\varepsilon_{\Z}(L^p(\R;X))} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
 \end{equation*}
 The result follows simply by noting that the sets $\{2^{-j} : j \in \Z\}$ and $\{1/2|I| : I \in \mc{J}_{\pm}\}$ are equal.
 \end{proof}
@@ -1025,28 +1061,28 @@ where
 \begin{equation*}
   N := \sum_{I \in \mc{J}} \frac{\1_{I} M}{\widehat{\phi_{I}} \widecheck{\phi_{I}}}
 \end{equation*}
-and where Exercise \ref{ex:fourier-inversion} was used in the last line.
+and where Exercise \ref{ex:fourier-inversion} was used again in the last line.
 In Lemma \ref{lem:N-symbol} we will show that $N$ is a Mikhlin symbol, with
 \begin{equation}\label{eq:N-bound}
-  \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)};
+  \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)},
 \end{equation}
-for now we assume this result and proceed.
+but for now we will assume this result and proceed.
 We use the Rademacher space Cauchy--Schwartz inequality (Proposition \ref{prop:rademacher-CS}) and Kahane--Khintchine to write
 \begin{equation*}
   \begin{aligned}
     &\Big| \sum_{I \in \mc{J}_{+}} \big\langle T_{\1_{I} N} (\phi_{I} \ast \mb{f}) , \phi_{I} \ast \mb{g} \big\rangle \Big| \\
-    &\lesssim \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} T_{\1_{I} N} (\phi_{I} \ast \mb{f}) \Big\|_{L^p(\R;Y)}
-    \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} (\phi_{I} \ast \mb{g}) \Big\|_{L^p(\R;Y^{*})} \\
-    &\lesssim \|N\|_{\mf{M}(\R;X,Y)} \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} (\phi_{I} \ast \mb{f}) \Big\|_{L^p(\R;X)}
-    \E \Big\| \sum_{I \in \mc{J}_{+}} \varepsilon_{I} (\phi_{I} \ast \mb{g}) \Big\|_{L^p(\R;Y^{*})} \\
+    &\leq \big\| T_{\1_{\bullet} N} (\phi_{\bullet} \ast \mb{f}) \big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y))}
+    \| \phi_{\bullet} \ast \mb{g} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y^{*}))} \\
+    &\lesssim_{p,X,Y} \|N\|_{\mf{M}(\R;X,Y)} \| \phi_{\bullet} \ast \mb{f} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))}
+    \|\phi_{\bullet} \ast \mb{g} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y^{*}))} \\
   \end{aligned}
 \end{equation*}
-with Lemma \ref{lem:Mikhlin-components-R} appearing in the last line.
+with Lemma \ref{lem:Mikhlin-components-R} being used in the last line.
 We use \eqref{eq:N-bound} and Lemma \ref{lem:reparam-LP} to bound this by
 \begin{equation*}
   \|M\|_{\mf{M}(\R;X,Y)} \| \mb{f} \|_{L^p(\R;X)} \| \mb{g} \|_{L^p(\R;Y^{*})},
 \end{equation*}
-which completes the proof.
+which will complete the proof once we have proven \eqref{eq:N-bound}.
 \end{proof}
 
 It remains to control the symbol $N$ defined in the proof.
@@ -1065,7 +1101,7 @@ It remains to control the symbol $N$ defined in the proof.
 \end{lem}
 
 \begin{proof}
-  Fairly straightforward estimates show that the product of Mikhlin symbols is a Mikhlin symbols, with multiplicativity of the Miklhin norms, so we have
+  Fairly straightforward estimates show that the product of Mikhlin symbols is a Mikhlin symbol, with multiplicativity of the Mikhlin norms, so we have
   \begin{equation*}
      \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widehat{\phi_{I}}} \Big\|_{\mf{M}(\R)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widecheck{\phi_{I}}} \Big\|_{\mf{M}(\R)}.
    \end{equation*}
@@ -1080,7 +1116,7 @@ It remains to control the symbol $N$ defined in the proof.
    \begin{equation*}
      \begin{aligned}
        \Big\| \frac{\1_{[1/2,1)}}{\widehat{\phi}} \Big\|_{\mf{M}(\R)}
-       &= \sup_{\xi \in (1/2, 1)} \Big( \frac{1}{|\hat{\phi}(\xi)|}  + \xi\Big|\Big(\frac{1}{\hat{\phi}}\Big)'(\xi)| \Big) \\
+       &= \sup_{\xi \in (1/2, 1)} \Big( \frac{1}{|\hat{\phi}(\xi)|}  + \xi\Big|\Big(\frac{1}{\hat{\phi}}\Big)'(\xi) \Big| \Big) \\
        &= \sup_{\xi \in (1/2, 1)} \Big( \frac{1}{|\hat{\phi}(\xi)|}  + \xi\Big|\frac{\hat{\phi}'(\xi)}{\hat{\phi}(\xi)^2}\Big| \Big)
    \end{aligned}
    \end{equation*}
@@ -1103,21 +1139,17 @@ It remains to control the symbol $N$ defined in the proof.
      &= \frac{1}{2\pi i \xi} \Big( e^{-2\pi i \xi} - 2e^{-\pi i \xi} + 1 \Big).
    \end{aligned}
  \end{equation*}
- This vanishes if and only if
- \begin{equation*}
-   e^{-\pi i \xi} = 1,
- \end{equation*}
- i.e. if and only if $\xi \in 2\Z$.
+ This vanishes if and only if $e^{-\pi i \xi} = 1$,\footnote{This can be seen geometrically, or just by solving the quadratic equation in $e^{-\pi i \xi}$.} which happens if and only if $\xi \in 2\Z$.
  This establishes \eqref{eq:phi-0} and completes the proof.
 \end{proof}
 
-We conclude this section with the Littlewood--Paley theorem for Banach-valued functions on the real line.\footnote{In a sense, Lemma \ref{lem:reparam-LP} is already a Littlewood--Paley theorem with a piecewise affine cutoff. As in the scalar-valued case, in one dimension (i.e. on $\R$) no regularity is needed on the cutoff function: characteristic functions on Littlewood--Paley intervals suffice. In higher dimensions (i.e. on $\R^{d}$) smoother cutoffs are needed, as in the scalar-valued case. See \cite[Theorem 5.5.22]{HNVW16},}
+We conclude this section with the Littlewood--Paley theorem for UMD-valued functions on the real line.\footnote{In a sense, Lemma \ref{lem:reparam-LP} is already a Littlewood--Paley theorem with a piecewise affine cutoff. As in the scalar-valued case, in one dimension (i.e. on $\R$) no regularity is needed on the cutoff function: characteristic functions on Littlewood--Paley intervals suffice. In higher dimensions (i.e. on $\R^{d}$) smoother cutoffs are needed, as in the scalar-valued case. See \cite[Theorem 5.5.22]{HNVW16},}
 
-\begin{thm}[Littlewood--Paley]
+\begin{thm}[Littlewood--Paley]\index{theorem!Littlewood--Paley}
   Let $X$ be a complex UMD space and $p \in (1,\infty)$.
   Then for all $\mb{f} \in L^p(\R;X)$,
   \begin{equation*}
-    \|\mb{f}\|_{L^p(\R;X)} \simeq_{p,X} \E\Big\| \sum_{I \in \mc{J}} \varepsilon_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)}.
+    \|\mb{f}\|_{L^p(\R;X)} \simeq_{p,X} \big\| \Delta_{\bullet} \mb{f} \big\|_{\varepsilon_{\mc{J}}(L^p(\R;X))}.
   \end{equation*}
 \end{thm}
 
@@ -1127,7 +1159,7 @@ We conclude this section with the Littlewood--Paley theorem for Banach-valued fu
     m := \sum_{I \in \mc{J}} a_{I} \1_{I},
   \end{equation*}
   where $a_{I} \in \{-1,+1\}$ for all $I \in \mc{J}$.
-  Then $m$ is almost trivially a Miklhin symbol, and we have
+  Then $m$ is almost trivially a Mikhlin symbol, and we have
   \begin{equation*}
     \Big\| \sum_{I \in \mc{J}} a_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}.
   \end{equation*}
@@ -1140,14 +1172,14 @@ We conclude this section with the Littlewood--Paley theorem for Banach-valued fu
 
 An alternative proof of the estimate
 \begin{equation*}
-  \E\Big\| \sum_{I \in \mc{J}} \varepsilon_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
+  \big\| \Delta_{\bullet} \mb{f} \big\|_{\varepsilon_{\mc{J}}(L^p(\R;X))} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
 \end{equation*}
 is sketched in Exercise \ref{ex:LP-op-2}.
 This proof is more difficult, but directly interprets this estimate as the boundedness of a single operator-valued Fourier multiplier, while the proof above uses boundedness of infinitely many scalar-valued Fourier multipliers.
 
-\section{Exercises}
+\section*{Exercises}
 
-\begin{exercise}\label{ex:dyadic-dichotomy}
+\begin{exercise}\label{ex:dyadic-dichotomy}\index{dyadic dichotomy}
   Prove the dyadic dichotomy for shifted dyadic systems: if $\omega \in \{0,1\}^{\Z}$ and $I,J \in \mc{D}^{\omega}$, then either $I$ and $J$ are comparable (i.e. $I \subseteq J$ or $J \subseteq I$) or disjoint ($I \cap J = \varnothing$).
 \end{exercise}
 
@@ -1164,12 +1196,12 @@ This proof is more difficult, but directly interprets this estimate as the bound
   Show that for all $m \leq n$, the truncated dyadic shift $S_{k,m,n}^{t,\omega}$ is bounded on $L^\infty(\R;X)$.
 \end{exercise}
 
-\begin{exercise}\label{ex:R-bound-type}
+\begin{exercise}\label{ex:R-bound-type}\index{R-bounds@$R$-bounds!equivalence with uniform bounds}
   Let $X$ be a Banach space with cotype $2$ and $Y$ a Banach space with type $2$.
-  Show $R$-boundedness of a set of operators $\mc{T} \subset \Lin(X,Y)$ is equivalent to uniform boundedness.\footnote{The converse is also true: if uniform boundedness implies $R$-boundedness for every $\mc{T} \subset \Lin(X,Y)$, then $X$ has cotype $2$ and $Y$ has type $2$. See \cite[Proposition 8.6.1]{HNVW17}.\ }
+  Show that $R$-boundedness of a set of operators $\mc{T} \subset \Lin(X,Y)$ is equivalent to uniform boundedness.\footnote{The converse is also true: if uniform boundedness implies $R$-boundedness for every $\mc{T} \subset \Lin(X,Y)$, then $X$ has cotype $2$ and $Y$ has type $2$. See \cite[Proposition 8.6.1]{HNVW17}.\ }
 \end{exercise}
 
-\begin{exercise}\label{ex:scalars}
+\begin{exercise}\label{ex:scalars}\index{R-bounds@$R$-bounds!of sets of scalars}
   Let $X$ be a Banach space, and for each scalar $\lambda \in \K$ consider the operator $m_{\lambda}(\mb{x}) := \lambda \mb{x}$.
   For each $C < \infty$, show that the set
   \begin{equation*}
@@ -1199,7 +1231,7 @@ This proof is more difficult, but directly interprets this estimate as the bound
   \end{equation*}
 \end{exercise}
 
-\begin{exercise}\label{ex:LP-op-2}
+\begin{exercise}\label{ex:LP-op-2}\index{theorem!Littlewood--Paley}
   Let $X$ be a complex UMD space and $p \in (1,\infty)$.
   Prove the one-sided Littlewood--Paley estimate
   \begin{equation*}
@@ -1213,6 +1245,10 @@ This proof is more difficult, but directly interprets this estimate as the bound
   \begin{equation*}
     (M(\xi)\mb{x})_{I} := \1_{I}(\xi)\mb{x} \qquad \forall I \in \mc{J}.
   \end{equation*}
+\end{exercise}
+
+\begin{exercise}\label{ex:phi-computation}
+  Explicitly compute the functions $\phi^{k}$ and $\phi^{h}$ appearing in \eqref{eq:phi-1} and \eqref{eq:phi-2}.\footnote{Hint: compute their derivatives instead. Think like a lazy physicist.}
 \end{exercise}
 
 

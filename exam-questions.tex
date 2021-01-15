@@ -22,7 +22,6 @@
 
 %% Main matter
 
-\section{Strong measurability and Bochner spaces}
 
 \begin{exercise}\label{ex:measurability-containments}
   Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space.
@@ -65,9 +64,7 @@
 
 \end{exercise}
 
-\section{Probability in Banach spaces}
-
-\begin{exercise}\label{ex:CE-monotonicity}\index{conditional expectations!monotonicity}
+\begin{exercise}
   Let $(\Omega,\mc{A},\P)$ is a probability space, $X$ a Banach space, and $\mb{f} \in L^1(\Omega;X)$.
   Let $\mc{B}$ and $\mc{B}'$ be $\sigma$-subalgebras of $\mc{A}$ with $\mc{B}' \subset \mc{B}$.
   Show that
@@ -77,7 +74,7 @@
   in two ways: first by using the defining property of conditional expectations, and then by using its construction as the adjoint of an inclusion map.
 \end{exercise}
 
-\begin{exercise}\label{ex:gambling-in-linfty}
+\begin{exercise}
   This exercise takes place in the setting of Example 3.12 (gambling in Banach spaces).
   \begin{itemize}
   \item
@@ -104,8 +101,6 @@
   Prove that $\E^{\mc{B}}(T\mb{f}) = T \E^{\mc{B}}\mb{f}$ for all $\mb{f} \in L^1(\mc{A};X)$.
 \end{exercise}
 
-\section{The Radon--Nikodym property}
-
 \begin{exercise}
   Let $X$ be a Banach space with the Radon--Nikodym property, and suppose that $Y$ is a Banach space which is isomorphic to $X$.
   Show that $Y$ also has the Radon--Nikodym property.
@@ -123,8 +118,6 @@
 \begin{exercise}
   Show that a Banach space $X$ has the Radon--Nikodym property if and only if every $X$-valued Lipschitz function on $[0,1]$ is differentiable almost everywhere.
 \end{exercise}
-
-\section{Rademacher sums}
 
 \begin{exercise}
   Let $N \in \N$ and suppose that the subsets $(E_{j})_{j=0}^{J}$, $E_{j} \subset \{0,1,\ldots,N\}$ form a partition of $\{0,1,\ldots,N\}$.
@@ -154,9 +147,7 @@
   Give an example of a Banach space $X$ with finite cotype such that the dual $X^{*}$ does not have nontrivial type.
 \end{exercise}
 
-\section{The UMD property}
-
-\begin{exercise}\label{ex:UMD-isomorphism}\index{UMD property!of closed subspaces of UMD spaces}
+\begin{exercise}
   Let $X$ be a Banach space and $Y$ a closed subspace of $X$.
   Suppose that $Z$ is a Banach space and $\map{\phi}{Z}{Y}$ is an isomorphism.
   Show that 
@@ -164,14 +155,6 @@
     \beta_{p}(Z) \leq \|\phi\|_{\Lin(Z,Y)} \|\phi^{-1}\|_{\Lin(Y,Z)} \beta_{p}(X) \qquad \forall p \in (1,\infty).
   \end{equation*}
 \end{exercise}
-
-In the following exercise we use the notion of the $R$-bound of a set of operators.
-Let $X$ be a Banach space and suppose $\mc{T} \subset \Lin(X)$ is a set of bounded linear operators on $X$.
-We say that the set $\mc{T}$ is \emph{$R$-bounded} if there exists a constant $C < \infty$ such that for all finite sequences $(T_{n})_{n=0}^{N}$ in $\mc{T}$ and $(\mb{x}_{n})_{n=0}^{N}$,
-\begin{equation*}
-  \|T_{\bullet} \mb{x}_{\bullet}\|_{\varepsilon_{N}(X)} \leq C \|\mb{x}_{\bullet}\|_{\varepsilon_{N}(X)}.
-\end{equation*}
-The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound of $\mc{T}$.
 
 \begin{exercise}
   Let $X$ be a UMD Banach space, let $p \in (1,\infty)$, and let $\mb{f}_{\bullet}$ be an $X$-valued $L^p$-bounded martingale with respect to a filtration $\mc{A}_{\bullet}$ on a probability space $(\Omega,\mc{A},\P)$.
@@ -187,14 +170,52 @@ The best possible constant $C$ is denoted $R(\mc{T})$, and called the $R$-bound 
   Show that $\mc{K}(H)$ is not UMD.
 \end{exercise}
 
-\section{Fourier multipliers and Littlewood--Paley theory}
+\begin{exercise}
+  Let $k$ be an admissible base function, $\mc{D} = t\mc{D}^{\omega}$ a generalised dyadic system, and $X$ any Banach space.
+  Show that for all $m \leq n$, the truncated dyadic shift $S_{k,m,n}^{t,\omega}$ is bounded on $L^\infty(\R;X)$.
+\end{exercise}
 
-\section{Necessity of the UMD property}
+\begin{exercise}
+  Let $X$ be a Banach space with cotype $2$ and $Y$ a Banach space with type $2$.
+  Show that $R$-boundedness of a set of operators $\mc{T} \subset \Lin(X,Y)$ is equivalent to uniform boundedness.
+\end{exercise}
 
-\section{Schatten class operators}
+\begin{exercise}
+  Let $X$ be a Banach space, and for each scalar $\lambda \in \K$ consider the operator $m_{\lambda}(\mb{x}) := \lambda \mb{x}$.
+  For each $C < \infty$, show that the set
+  \begin{equation*}
+    \{m_{\lambda} : |\lambda| \leq C\} \subset \Lin(X)
+  \end{equation*}
+  is $R$-bounded.
+\end{exercise}
 
-\section{Fourier type}
+\begin{exercise}
+  Let $X$, $Y$, and $Z$ be Banach spaces, and let $\mc{T} \subset \Lin(X,Y)$ and $\mc{T}' \subset \Lin(Y,Z)$ be $R$-bounded sets of operators.
+  Show the $R$-bounds
+  \begin{equation*}
+    R\big(\{A - A' : A,A' \in \mc{T}\} \big) \leq 2R(\mc{T})
+  \end{equation*}
+  and
+  \begin{equation*}
+    R\big(\{AB : A \in \mc{T}', B \in \mc{T}\}\big) \leq R(\mc{T})R(\mc{T}').
+  \end{equation*}
+\end{exercise}
 
+\begin{exercise}
+  Let $X$ be a complex UMD space and $p \in (1,\infty)$.
+  Prove the one-sided Littlewood--Paley estimate
+  \begin{equation*}
+    \E \Big\| \sum_{I \in \mc{J}} \varepsilon_{I} \Delta_{I} \mb{f} \Big\|_{L^p(\R;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\R;X)}
+  \end{equation*}
+  via the Mikhlin theorem by considering the operator-valued symbol
+  \begin{equation*}
+    M \in L^\infty(\R; \Lin(X, \varepsilon_{\mc{J}}(X)))
+  \end{equation*}
+  defined by
+  \begin{equation*}
+    (M(\xi)\mb{x})_{I} := \1_{I}(\xi)\mb{x} \qquad \forall I \in \mc{J}.
+  \end{equation*}
+\end{exercise}
 
 
 \end{document}
