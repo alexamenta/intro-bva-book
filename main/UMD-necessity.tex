@@ -1,10 +1,73 @@
-\emph{under construction}
+The goal of this chapter is to prove the converse to Burkholder's theorem (Theorem \ref{thm:Burkholder}).
 
-%\section{Paley--Walsh martingales and the dyadic UMD property}
+\begin{thm}[Bourgain]\label{thm:Bourgain}
+  Let $X$ be a Banach space, and suppose that for some $p \in (1,\infty)$ the Hilbert transform $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension.
+  Then $X$ is UMD.
+\end{thm}
 
-% \section{Transference of Fourier multipliers}
 
-% \section{Bourgain's theorem (might need a few sections)}
+
+
+
+\section{Paley--Walsh martingales and dyadic UMD}
+
+\begin{defn}
+  paley--walsh martingales
+\end{defn}
+
+\begin{defn}
+  For $p \in (1,\infty)$, a Banach space $X$ is said to have the \emph{dyadic $\UMD_{p}$ property} if there exists a constant $C < \infty$ such that for all $X$-valued Paley--Walsh martingales $\mb{f}_{\bullet}$ and all sequences of signs $\xi_n = \pm 1$,
+  \begin{equation}\label{eq:dyadic-UMD-property}
+    \sup_{N \in \N} \Big\| \sum_{n=0}^{N} \xi_{n} d\mb{f}_{n} \Big\|_{L^p(\Omega;X)} \leq C \sup_{N \in \N} \Big\| \sum_{n=0}^{N} d\mb{f}_{n}\Big\|_{L^p(\Omega;X)}.
+  \end{equation}
+\end{defn}
+
+This is the same definition as that of the $\UMD_{p}$ property, but with the class of martingales restricted to the Paley--Walsh martingales.
+
+\begin{thm}\label{thm:dyadic-UMD}
+  The dyadic $\UMD_{p}$ property is equivalent to the (unrestricted) $\UMD_{p}$ property.
+\end{thm}
+
+\begin{proof}
+  
+\end{proof}
+
+\section{Transference and Fourier multipliers on the torus}
+
+\begin{thm}
+  Suppose that 
+\end{thm}
+
+\begin{defn}
+  Fourier transform on the torus, IFT on $\Z$, Fourier multipliers
+\end{defn}
+
+\begin{defn}
+  hilbert transform on the torus
+\end{defn}
+
+\begin{thm}
+  UMD implies boundedness of HT on torus
+\end{thm}
+
+\begin{defn}
+  amplifications of HT 
+\end{defn}
+
+\section{Bourgain's theorem}
+
+In this section we prove Theorem \ref{thm:Bourgain}: if the Banach space $X$ is such that the Hilbert transform $H \in \Lin(L^p(\R))$ has a bounded $X$-valued extension for some $p \in (1,\infty)$, then $X$ is UMD.
+By Theorem \ref{thm:dyadic-UMD} it suffices to show that $X$ has the dyadic $\UMD_{p}$ property.
+
+
+\section*{Exercises}
+
+\begin{exercise}
+  Let $X$ be a complex Banach space.
+  Show that the Mikhlin multiplier theorem (Theorem \ref{thm:Mikhlin}, in the case $X = Y$) and the Littlewood--Paley theorem (Theorem \ref{thm:LittlewoodPaley}) hold if and only if $X$ has the UMD property.\footnote{You can and should argue via Bourgain's theorem.}
+\end{exercise}
+
+
 
 
 %%% Local Variables:
