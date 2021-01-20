@@ -635,26 +635,26 @@ From now on we consider complex Banach spaces $X$, although the following theory
 
 Recall the definitions of the Fourier transform and its inverse from Definition \ref{defn:FT}: for $\mb{f} \in L^1(\R;X)$ we define the \emph{Fourier transform}\index{Fourier transform} $\hat{\mb{f}} \in C(\R;X)$ (the continuity is Exercise \ref{ex:FT-bounded-1-infty}) by 
   \begin{equation*}
-    \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R} e^{-2\pi i t \cdot \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R,
+    \hat{\mb{f}}(\xi) = \mc{F}(\mb{f})(\xi) := \int_{\R} e^{-2\pi i t \xi} \mb{f}(t)  \, \dd t \in X \qquad \forall \xi \in \R,
   \end{equation*}
-  and the \emph{inverse Fourier transform} $\mb{f}^{\vee} \in C(\R;X)$
+  and the \emph{inverse Fourier transform} $\check{\mb{f}} \in C(\R;X)$
   \begin{equation*}
-    \mb{f}^{\vee}(x) = \mc{F}^{-1}(\mb{f})(x) := \int_{\R} e^{2\pi i x \cdot \xi} \mb{f}(\xi) \, \dd \xi \in X \qquad \forall x \in \R
+    \check{\mb{f}}(t) = \mc{F}^{-1}(\mb{f})(t) := \int_{\R} e^{2\pi i t \xi} \mb{f}(\xi) \, \dd \xi \in X \qquad \forall t \in \R
   \end{equation*}
-  (note the simple identity $\mb{f}^{\vee}(\xi) = \hat{\mb{f}}(-\xi)$).
+  (note the simple identity $\check{\mb{f}}(\xi) = \hat{\mb{f}}(-\xi)$).
   For functions $\mb{f} \in L^1(\R;X)$ such that $\hat{\mb{f}} \in L^1(\R;X)$, the \emph{Fourier inversion formula}
   \begin{equation}\label{eq:fourier-inversion}
-    \mb{f} = (\hat{\mb{f}})^\vee, \qquad \text{i.e.} \qquad \mb{f}(x) \aeeq \int_{\R} e^{2\pi i x \cdot \xi} \hat{\mb{f}}(\xi)  \, \dd\xi
+    \mb{f} = (\hat{\mb{f}})^\vee, \qquad \text{i.e.} \qquad \mb{f}(t) \aeeq \int_{\R} e^{2\pi i t \xi} \hat{\mb{f}}(\xi)  \, \dd\xi
   \end{equation}
   holds: this can be deduced by the corresponding result for the scalar-valued Fourier transform, but in this course it is not too important to us.
   We will, however, be interested in \emph{Fourier multipliers}: these are operators given by acting on the individual frequency components $\hat{\mb{f}}(\xi)$ in the representation \eqref{eq:fourier-inversion}.
   The rigorous definition follows.
 
 \begin{defn}\index{Fourier multiplier}
-  Let $X$ and $Y$ be complex Banach spaces, and consider an operator-valued function $\map{M}{\R}{\Lin(X,Y)}$.
+  Let $X$ and $Y$ be complex Banach spaces, and consider a bounded operator-valued function $M \in L^\infty(\R;\Lin(X,Y))$.
   The Fourier multiplier $T_{M}$ is the operator $C^{\infty}_{c}(\R;X) \to C(\R;Y)$ defined by
   \begin{equation*}
-    T_{M}(\mb{f}) := (M \cdot \hat{\mb{f}})^{\vee}, \qquad \text{i.e.} \qquad (T_{M}\mb{f})(x) = \int_{\R} e^{2\pi i x \cdot \xi} M(\xi)(\hat{\mb{f}}(\xi))  \, \dd\xi.
+    T_{M}\mb{f} := (M \cdot \hat{\mb{f}})^{\vee}, \qquad \text{i.e.} \qquad (T_{M}\mb{f})(t) = \int_{\R} e^{2\pi i t \cdot \xi} M(\xi)(\hat{\mb{f}}(\xi))  \, \dd\xi.
   \end{equation*}
 \end{defn}
 
@@ -678,12 +678,12 @@ We should quickly show that this definition actually makes sense.
     \int_{\R \sm [-1,1]} \|\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi
     &= \int_{\R \sm [-1,1]} |\xi|^{-2} \|(-i\xi)^{2}\hat{\mb{f}}(\xi)\|_{X} \, \dd\xi \\
     &= \int_{\R \sm [-1,1]} |\xi|^{-2} \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{X} \, \dd\xi \\
-    &\leq \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{L^\infty(\R;X)} \int_{\R \sm [-1,1]} |\xi|^{-2} \, \dd\xi .
+    &\leq \|\widehat{\partial^{2} \mb{f}}\|_{L^\infty(\R;X)} \int_{\R \sm [-1,1]} |\xi|^{-2} \, \dd\xi .
   \end{aligned}
 \end{equation*}
 The integral here is finite, and since $\mb{f}$ is smooth and compactly supported, 
 \begin{equation*}
-   \|\widehat{\partial^{2} \mb{f}}(\xi)\|_{L^\infty(\R;X)} \leq \|\partial^{2} \mb{f}\|_{L^1(\R;X)} < \infty.
+   \|\widehat{\partial^{2} \mb{f}}\|_{L^\infty(\R;X)} \leq \|\partial^{2} \mb{f}\|_{L^1(\R;X)} < \infty.
 \end{equation*}
 \end{proof}
 
@@ -802,7 +802,7 @@ In the next section we investigate sufficient conditions.
 Before moving on to the Mikhlin theorem and its proof, we quickly discuss \emph{Fourier projections}.
 
 \begin{defn}
-  For every measurable subset $S \subset R$ we define the \emph{Fourier projection}\index{Fourier projections} $\Delta_{S}$ to the Fourier multiplier $T_{\1_{S}}$ with scalar-valued symbol $\1_{S}$.
+  For every measurable subset $S \subset \R$ we define the \emph{Fourier projection}\index{Fourier projections} $\Delta_{S}$ to the Fourier multiplier $T_{\1_{S}}$ with scalar-valued symbol $\1_{S}$.
 \end{defn}
 
 \begin{prop}\label{prop:Fproj-Rbd}\index{R-bounds@$R$-bounds!of Fourier projections on UMD spaces}\index{Fourier projections!R-bounded for UMD spaces}
@@ -817,7 +817,7 @@ Before moving on to the Mikhlin theorem and its proof, we quickly discuss \emph{
 
 The proof relies on the intertwining relations between Fourier multipliers, translations, and modulations, where for $\eta \in \R$ we define the \emph{modulation}\index{modulation} of a function $\mb{f}$ (taking values in some Banach space) by
 \begin{equation*}
-  (\Mod_{\eta} \mb{f})(x) := e^{2\pi i \eta x} \mb{f}(x) \qquad \forall x \in \R.
+  (\Mod_{\eta} \mb{f})(t) := e^{2\pi i \eta x} \mb{f}(t) \qquad \forall t \in \R.
 \end{equation*}
 By direct computation, for all Banach spaces $X,Y$ and symbols $M \in L^\infty(\R;\Lin(X,Y))$, for all $s \in \R$ and $\mb{f} \in C^{\infty}_{c}(\R;X)$,
 \begin{equation*}
@@ -856,14 +856,14 @@ By direct computation, for all Banach spaces $X,Y$ and symbols $M \in L^\infty(\
     = \{\Mod_{a} \Delta_{(0,\infty)} \Mod_{-a} - \Mod_{b} \Delta_{(0,\infty)} \Mod_{-b} : a,b \in \R\} 
   \end{equation*}
   ignoring unbounded intervals for technical convenience (but of course they can be handled by the same argument).
-  By the first bound in Exercise \eqref{ex:R-bound-stuff} we get
+  By the first bound in Exercise \ref{ex:R-bound-stuff} we get
   \begin{equation*}
     \begin{aligned}
       &R\big( \{\Delta_{I} \in \Lin(L^p(\R;X)) : \text{$I \subset \R$ an interval}\} \big) \\
       &\leq 2R\big( \{\Mod_{a} \Delta_{(0,\infty)} \Mod_{-a} \in \Lin(L^p(\R;X)) : a \in \R\}  \big),
   \end{aligned}
   \end{equation*}
-  and by the second bound in Exercise \eqref{ex:R-bound-stuff} we have
+  and by the second bound in Exercise \ref{ex:R-bound-stuff} we have
   \begin{equation*}
     \begin{aligned}
       &R\big( \{\Mod_{a} \Delta_{(0,\infty)} \Mod_{-a} \in \Lin(L^p(\R;X)) : a \in \R\}  \big) \\
@@ -871,7 +871,7 @@ By direct computation, for all Banach spaces $X,Y$ and symbols $M \in L^\infty(\
     \end{aligned}
   \end{equation*}
   using that one-element sets of bounded operators are $R$-bounded.
-  Since each operator $\Mod_{a}$ is just multiplication by a unimodular function (a complex exponential), Example \eqref{eg:R-bounded-multipliers} gives us
+  Since each operator $\Mod_{a}$ is just multiplication by a unimodular function (a complex exponential), Example \ref{eg:R-bounded-multipliers} gives us
   \begin{equation*}
     R\big( \{ \Mod_{a} \in \Lin(L^p(\R;X)) : a \in \R \} \big)
     \leq R\big( \{ M_{g} \in \Lin(L^p(\R;X))  : \|g\|_{L^\infty(\R)} \leq 1\} \big) \lesssim 1,
@@ -914,7 +914,7 @@ Note also that if $X$ has cotype $2$ and $Y$ has type $2$ (Exercise \ref{ex:R-bo
 
 \begin{thm}\label{thm:Mikhlin}\index{theorem!Mikhlin}
   Let $X$ and $Y$ be complex UMD spaces, and suppose that $M \in L^\infty(\R;\Lin(X,Y))$ is a Mikhlin symbol.
-  Then for all $\mb{f} \in C_{c}^\infty(\R;X)$,
+  Then for all $\mb{f} \in C_{c}^\infty(\R;X)$ and all $p \in (1,\infty)$,
   \begin{equation*}
     \|T_{M} \mb{f}\|_{L^p(\R;Y)} \lesssim_{p,X,Y} \|M\|_{\mf{M}(\R;X,Y)} \|\mb{f}\|_{L^p(\R;X)}.
   \end{equation*}
@@ -943,14 +943,14 @@ We start with $R$-boundedness of the set of `localised' Fourier multipliers $T_{
     \begin{aligned}
       \1_{I}(\xi)M(\xi)
       &= \1_{I}(\xi) \Big( M(\midp(I)) + \int_{\midp(I)}^{\xi} M'(\eta) \, \dd\eta \Big) \\
-      &= \1_{I}(\xi) \Big( M(\midp(I)) + \int_{\ell(I)}^{\xi} M'(\eta) \, \dd\eta - \int_{\ell(I)}^{\midp(I)} M'(\eta) \Big) \\
+      &= \1_{I}(\xi) \Big( M(\midp(I)) + \int_{\ell(I)}^{\xi} M'(\eta) \, \dd\eta - \int_{\ell(I)}^{\midp(I)} M'(\eta) \, \dd\eta \Big) \\
       &= \1_{I}(\xi) \Big( M(\midp(I)) - \int_{\ell(I)}^{\midp{I}} M'(\eta) \, \dd\eta \Big) + \int_{I} \1_{(\eta,r(I))}(\xi) M'(\eta) \, \dd\eta.
     \end{aligned}
   \end{equation*}
   A change of variables leads to the Fourier multiplier identity
   \begin{equation*}
     T_{\1_I M} \mb{f}
-    = \Big( M(\midp(I)) - \int_{1}^{3/2} |I| M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f} + \int_{1}^{2} |I| M'(t|I|) \Delta_{(t|I|,r(I))} \, \dd t.
+    = \Big( M(\midp(I)) - \int_{1}^{3/2} |I| M'(t|I|) \, \dd t \Big)\Delta_{I} \mb{f} + \int_{1}^{2} |I| M'(t|I|) \Delta_{(t|I|,r(I))} \mb{f} \, \dd t.
   \end{equation*}
   Consider a sequence of functions $(\mb{f}_{I})_{I \in \mc{J}_{+}}$ and estimate the $R$-bounds corresponding to the three summands above separately.
   First we have
@@ -1072,9 +1072,9 @@ We use the Rademacher space Cauchy--Schwartz inequality (Proposition \ref{prop:r
   \begin{aligned}
     &\Big| \sum_{I \in \mc{J}_{+}} \big\langle T_{\1_{I} N} (\phi_{I} \ast \mb{f}) , \phi_{I} \ast \mb{g} \big\rangle \Big| \\
     &\leq \big\| T_{\1_{\bullet} N} (\phi_{\bullet} \ast \mb{f}) \big\|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y))}
-    \| \phi_{\bullet} \ast \mb{g} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y^{*}))} \\
+    \| \phi_{\bullet} \ast \mb{g} \|_{\varepsilon_{\mc{J}_{+}}(L^{p'}(\R;Y^{*}))} \\
     &\lesssim_{p,X,Y} \|N\|_{\mf{M}(\R;X,Y)} \| \phi_{\bullet} \ast \mb{f} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;X))}
-    \|\phi_{\bullet} \ast \mb{g} \|_{\varepsilon_{\mc{J}_{+}}(L^p(\R;Y^{*}))} \\
+    \|\phi_{\bullet} \ast \mb{g} \|_{\varepsilon_{\mc{J}_{+}}(L^{p'}(\R;Y^{*}))} \\
   \end{aligned}
 \end{equation*}
 with Lemma \ref{lem:Mikhlin-components-R} being used in the last line.
@@ -1103,7 +1103,7 @@ It remains to control the symbol $N$ defined in the proof.
 \begin{proof}
   Fairly straightforward estimates show that the product of Mikhlin symbols is a Mikhlin symbol, with multiplicativity of the Mikhlin norms, so we have
   \begin{equation*}
-     \|N\|_{\mf{M}(\R;X,Y)} \lesssim \|M\|_{\mf{M}(\R;X,Y)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widehat{\phi_{I}}} \Big\|_{\mf{M}(\R)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widecheck{\phi_{I}}} \Big\|_{\mf{M}(\R)}.
+     \|N\|_{\mf{M}(\R;X,Y)} \leq \|M\|_{\mf{M}(\R;X,Y)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widehat{\phi_{I}}} \Big\|_{\mf{M}(\R)} \Big\| \sum_{I \in \mc{J}} \frac{\1_{I} }{\widecheck{\phi_{I}}} \Big\|_{\mf{M}(\R)}.
    \end{equation*}
    Furthermore, dilation and reflection invariance shows that
    \begin{equation*}
@@ -1194,6 +1194,12 @@ This proof is more difficult, but directly interprets this estimate as the bound
 \begin{exercise}
   Let $k$ be an admissible base function, $\mc{D} = t\mc{D}^{\omega}$ a generalised dyadic system, and $X$ any Banach space.
   Show that for all $m \leq n$, the truncated dyadic shift $S_{k,m,n}^{t,\omega}$ is bounded on $L^\infty(\R;X)$.
+\end{exercise}
+
+\begin{exercise}
+  Let $X$ be a complex Banach space and $\mb{f} \in L^1(\R;X)$.
+  Suppose that $\hat{\mb{f}} \in L^1(\R;X)$.
+  Show that there exists a continuous function $\mb{g} \colon \R \to X$ such that $\mb{f} \aeeq \mb{g}$.
 \end{exercise}
 
 \begin{exercise}\label{ex:R-bound-type}\index{R-bounds@$R$-bounds!equivalence with uniform bounds}
