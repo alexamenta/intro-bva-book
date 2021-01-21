@@ -1,6 +1,6 @@
-\documentclass[a4paper,10pt]{amsbook}
+\documentclass[a4paper,10pt]{article}
 
-\usepackage{conf}
+\usepackage{conf2}
 
 \hyphenation{pro-duct de-fi-ning}
 
@@ -10,8 +10,7 @@
 
 \begin{document}
 
-\title{Exam questions}
-\date{\today}
+\title{Intro to Banach-valued Analysis: exam questions}
 
 %\author[A. Amenta]{Alex Amenta}
 %\address{\noindent Mathematisches Institut \newline \indent Universit\"at Bonn, Bonn, Germany}
@@ -21,7 +20,13 @@
 %\tableofcontents
 
 %% Main matter
+The oral exam will have the following format: first, you present an answer to a question of your choice, and then we will ask you to present an answer to a random question.
+If you can't answer the question we give you, we will ask you another random question.
+After you successfully answer a question from us, you can present an answer to another question of your choice, and the process repeats until 30 minutes have passed.
+You are allowed to consult the lecture notes during the exam.
 
+As the exams will take place on Zoom, you are basically required to give a verbal sketch of the proof, with additional notes on paper if necessary.
+Make sure to test your microphone and camera before the exam!
 
 \begin{exercise}\label{ex:measurability-containments}
   Let $X$ be a Banach space and $(S,\mc{A})$ a measurable space.
@@ -74,22 +79,22 @@
   in two ways: first by using the defining property of conditional expectations, and then by using its construction as the adjoint of an inclusion map.
 \end{exercise}
 
-\begin{exercise}
-  This exercise takes place in the setting of Example 3.12 (gambling in Banach spaces).
-  \begin{itemize}
-  \item
-    Let $X = \ell^\infty(\N)$.
-    Suppose that the wager vectors $\map{\mb{x}_n}{\Omega}{\ell^\infty(\N)}$ are such that for all $\omega \in \Omega$, the vectors $(\mb{x}_n(\omega))_{n \in \N}$ are pairwise distinct standard basis vectors (i.e. $\{0,1\}$-valued sequences, zero for all but one index).
-    Fix $\lambda > 0$ and let $K = \{\mb{a} \in \ell^\infty(\N) : \|\mb{a}\|_\infty \geq \lambda\} = \ell^\infty(\N) \sm B_\lambda(\mb{0})$.
-    Show that the stopping time
-    \begin{equation*}
-      T_K(\omega) := \inf\{n \in \N : \mb{s}_n(\omega) \in K\} 
-    \end{equation*}
-    is finite if and only if $\lambda \leq 1$.
-  \item
-    As above, but now let $X = \ell^2(\N)$, and show that the stopping time $T_K$ is finite for all $\lambda > 0$.
-  \end{itemize}
-\end{exercise}
+% \begin{exercise}
+%   This exercise takes place in the setting of Example 3.12 (gambling in Banach spaces).
+%   \begin{itemize}
+%   \item
+%     Let $X = \ell^\infty(\N)$.
+%     Suppose that the wager vectors $\map{\mb{x}_n}{\Omega}{\ell^\infty(\N)}$ are such that for all $\omega \in \Omega$, the vectors $(\mb{x}_n(\omega))_{n \in \N}$ are pairwise distinct standard basis vectors (i.e. $\{0,1\}$-valued sequences, zero for all but one index).
+%     Fix $\lambda > 0$ and let $K = \{\mb{a} \in \ell^\infty(\N) : \|\mb{a}\|_\infty \geq \lambda\} = \ell^\infty(\N) \sm B_\lambda(\mb{0})$.
+%     Show that the stopping time
+%     \begin{equation*}
+%       T_K(\omega) := \inf\{n \in \N : \mb{s}_n(\omega) \in K\} 
+%     \end{equation*}
+%     is finite if and only if $\lambda \leq 1$.
+%   \item
+%     As above, but now let $X = \ell^2(\N)$, and show that the stopping time $T_K$ is finite for all $\lambda > 0$.
+%   \end{itemize}
+% \end{exercise}
 
 \begin{exercise}
   Let $(\Omega, \mc{A}, \P)$ be a probability space, $\mc{B}$ a $\sigma$-subalgebra of $\mc{A}$, and let $X$ and $Y$ be Banach spaces.

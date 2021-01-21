@@ -5,8 +5,11 @@ The goal of this chapter is to prove the converse to Burkholder's theorem (Theor
   Then $X$ is UMD.
 \end{thm}
 
+\todo{MORE EXPOSITION}
+
 \section{The dyadic UMD property}
 
+\todo{MORE EXPOSITION}
 
 \begin{defn}
   For $p \in (1,\infty)$, a Banach space $X$ is said to have the \emph{dyadic $\UMD_{p}$ property} if there exists a constant $C < \infty$ such that for all $X$-valued $L^p$-bounded martingales $\mb{f}_{\bullet}$ with respect to the dyadic filtration $\mc{F}_{\bullet}$ on $[0,1)$,
@@ -79,7 +82,7 @@ Given a stochastic process $\mb{f}_{\bullet}$ consisting of simple functions on 
 Fix $N \in \N$ and consider the finite filtration $(\mc{F}_{n})_{n=0}^{N}$.
 Then there exists a finite filtration $(\mc{F}_{n}')_{n=0}^{N}$ on the unit interval $[0,1)$ such that each $\mc{F}_{n}'$ is atomic, with the atoms being intervals, and such that the atoms of $\mc{F}_{n}'$ are in bijective correspondence with those of $\mc{F}_{n}$ for each $n \in \N$.
 In what follows we will refer to such a filtration on $[0,1)$ as a \emph{finite interval filtration}.
-This bijective correspondence induces an isometric isomorphism $\psi \colon L^p(\Omega,\mc{F}_{N};X) \to L^p([0,1),\mc{F}_{N}';X)$ for all $p \in [1,\infty]$, such that for every $\mb{g} \in L^p(\Omega, \mb{F}_{N};X)$ and all $n \in \{0,1,\ldots,N\}$,
+This bijective correspondence induces an isometric isomorphism $\psi \colon L^p(\Omega,\mc{F}_{N};X) \to L^p([0,1),\mc{F}_{N}';X)$ for all $p \in [1,\infty]$, such that for every $\mb{g} \in L^p(\Omega, \mc{F}_{N};X)$ and all $n \in \{0,1,\ldots,N\}$,
 \begin{equation*}
   \psi(\E^{\mc{F}_{n}} \mb{g}) = \E^{\mc{F}_{n}'} \psi(\mb{g}). 
 \end{equation*}
@@ -130,7 +133,80 @@ First, note that every finite interval filtration $(\mc{F}_{n})_{n=0}^{N}$ such 
 Denote this tree by $T_{\mc{F}} = (V(T_{\mc{F}}), E(T_{\mc{F}}))$, where $V(T_{\mc{F}})$ and $E(T_{\mc{F}})$ denote the sets of vertices and edges respectively.
 Let $\alpha \colon V(T_{\mc{F}}) \to \mc{F}_{N}$ be the \emph{vertex-to-atom map}, sending a vertex of the tree $T_{\mc{F}}$ to the associated atom of $\mc{F}_{\bullet}$.
 We say that two finite interval filtrations $\mc{F}_{\bullet}$, $\mc{F}'_{\bullet}$ are \emph{commonly indexed} if the associated trees $T_{\mc{F}}$ and $T_{\mc{F}'}$ are isomorphic as graphs: that is, the containment structures among the atoms of $\mc{F}_{\bullet}$ and $\mc{F}'_{\bullet}$ are identical.
-A simple example of this construction is pictured in Figure TODO\todo{make figure}.
+A simple example of this construction is pictured in Figure \ref{fig:tree}.
+
+  \begin{figure}
+    \caption{Two commonly indexed finite interval filtrations and the associated tree.}
+    \label{fig:tree}
+    \begin{center}
+      \vspace{0.5cm}
+      \begin{tikzpicture}[scale=1.4]
+   %\draw [help lines] (0,0) grid (5,2);
+
+   %filtration 1
+        \draw [thin] (0,0) -- (4,0);
+        
+        \draw [thin] (0,-0.2) -- (1.8,-0.2); \draw [thin] (1.9,-0.2) -- (4,-0.2);
+        
+        \draw [thin] (0,-0.4) -- (1,-0.4); \draw [thin] (1.1,-0.4) -- (1.8,-0.4);
+        \draw [thin] (1.9,-0.4) -- (3,-0.4); \draw [thin] (3.1,-0.4) -- (4,-0.4);
+        
+        \draw [thin] (0,-0.6) -- (0.5,-0.6); \draw [thin] (0.6,-0.6) -- (1,-0.6);
+        \draw [thin] (1.1,-0.6) -- (1.8,-0.6);
+        \draw [thin] (1.9,-0.6) -- (3,-0.6); \draw [thin] (3.1,-0.6) -- (4,-0.6);
+
+        \draw (0,-0.3) node[left] {$\mc{F}_{\bullet}$};
+        
+        % filtration 2
+        \draw [thin] (0,-1) -- (4,-1);
+        
+        \draw [thin] (0,-1.2) -- (2.8,-1.2); \draw [thin] (2.9,-1.2) -- (4,-1.2);
+        
+        \draw [thin] (0,-1.4) -- (1.5,-1.4); \draw [thin] (1.6,-1.4) -- (2.8,-1.4);
+        \draw [thin] (2.9,-1.4) -- (3.5,-1.4); \draw [thin] (3.6,-1.4) -- (4,-1.4);
+        
+        \draw [thin] (0,-1.6) -- (0.5,-1.6); \draw [thin] (0.6,-1.6) -- (1.5,-1.6);
+        \draw [thin] (1.6,-1.6) -- (2.8,-1.6);
+        \draw [thin] (2.9,-1.6) -- (3.5,-1.6); \draw [thin] (3.6,-1.6) -- (4,-1.6);
+
+        \draw (0,-1.3) node[left] {$\mc{F}'_{\bullet}$};
+  
+        % tree
+        \draw[fill=black] (6,0) circle [radius = 1pt];
+        
+        \draw[fill=black] (5.5,-0.5) circle [radius = 1pt];
+        \draw[thin] (6,0) -- (5.5,-0.5);
+        \draw[fill=black] (6.5,-0.5) circle [radius = 1pt];
+        \draw[thin] (6,0) -- (6.5,-0.5);
+
+        \draw[fill=black] (5.25,-1) circle [radius = 1pt];
+        \draw[thin] (5.5,-0.5) -- (5.25,-1);
+        \draw[fill=black] (5.75,-1) circle [radius = 1pt];
+        \draw[thin] (5.5,-0.5) -- (5.75,-1);
+        
+        \draw[fill=black] (6.25,-1) circle [radius = 1pt];
+        \draw[thin] (6.5,-0.5) -- (6.25,-1);
+        \draw[fill=black] (6.75,-1) circle [radius = 1pt];
+        \draw[thin] (6.5,-0.5) -- (6.75,-1);
+
+        \draw[fill=black] (5.125,-1.5) circle [radius = 1pt];
+        \draw[thin] (5.25,-1) -- (5.125,-1.5);
+        \draw[fill=black] (5.375,-1.5) circle [radius = 1pt];
+        \draw[thin] (5.25,-1) -- (5.375,-1.5);
+        
+        \draw[fill=black] (5.75,-1.5) circle [radius = 1pt];
+        \draw[thin] (5.75,-1) -- (5.75,-1.5);
+
+        \draw[fill=black] (6.25,-1.5) circle [radius = 1pt];
+        \draw[thin] (6.25,-1) -- (6.25,-1.5);
+        \draw[fill=black] (6.75,-1.5) circle [radius = 1pt];
+        \draw[thin] (6.75,-1) -- (6.75,-1.5);
+
+        \draw (6,-1.6) node[below] {$T_{\mc{F}_{\bullet}} \cong T_{\mc{F}'_{\bullet}}$};
+
+      \end{tikzpicture}
+      \end{center}
+\end{figure}
 
 \begin{defn}
   Let $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}'$ be commonly indexed finite interval filtrations with associated tree $T$ and vertex-to-atom maps $\map{\alpha}{T}{\mc{F}_{N}}$ and $\map{\alpha'}{T}{\mc{F}_{N}'}$.
@@ -181,8 +257,8 @@ Thus for all $v \in V(T)$ we can estimate
 \begin{equation*}
   \begin{aligned}
     &\Big\| \frac{\1_{\alpha(v)}}{|\alpha(v)|} \otimes \E(\mb{f}\1_{\alpha(v)}) - \frac{\1_{\alpha'(v)}}{|\alpha'(v)|} \otimes \E(\mb{f}\1_{\alpha'(v)}) \Big\|_{L^p([0,1);X)} \\
-    &\leq \Big\| \Big( \frac{\1_{\alpha(v)}}{|\alpha(v)|} - \frac{\1_{\alpha'(v)}}{|\alpha'(v)|}\Big) \otimes \E(\mb{f}\1_{\alpha(v)}) \Big\|_{L^p([0,1);X)}
-    + \Big\| \frac{\1_{\alpha'(v)}}{|\alpha'(v)|} \otimes \big( \E(\mb{f}\1_{\alpha(v)}) -  \E(\mb{f}\1_{\alpha'(v)}) \big)\Big\|_{L^p([0,1);X)}\\
+    &\leq \Big\| \Big( \frac{\1_{\alpha(v)}}{|\alpha(v)|} - \frac{\1_{\alpha'(v)}}{|\alpha'(v)|}\Big) \otimes \E(\mb{f}\1_{\alpha(v)}) \Big\|_{L^p([0,1);X)} \\
+    &\qquad + \Big\| \frac{\1_{\alpha'(v)}}{|\alpha'(v)|} \otimes \big( \E(\mb{f}\1_{\alpha(v)}) -  \E(\mb{f}\1_{\alpha'(v)}) \big)\Big\|_{L^p([0,1);X)}\\
     &\leq  \Big\| \frac{\1_{\alpha(v)}}{|\alpha(v)|} - \frac{\1_{\alpha'(v)}} {|\alpha'(v)|} \Big\|_{p} \| \E(\mb{f}\1_{\alpha(v)}) \|_{X}
     + \Big\| \frac{\1_{\alpha'(v)}}{|\alpha'(v)|} \Big\|_{p} \big\|  \E(\mb{f}\1_{\alpha(v)}) -  \E(\mb{f}\1_{\alpha'(v)}) \big\|_{X} \\
     &\lesssim_{\mc{F}_{\bullet}} \varepsilon^{1/p} \|\mb{f}\|_{L^p([0,1);X)} + \varepsilon \lesssim \varepsilon^{1/p}.
@@ -241,7 +317,7 @@ In the next lemma we show that finite interval filtrations can be approximated a
   using $J \in \mc{G}_{m(n)}$ and $I \in \mc{F}_{n}' \subset \mc{F}_{N}'$.
 \end{proof}
 
-\begin{thm}
+\begin{thm}\label{thm:dyadic-UMD}
   Suppose that $p \in (1,\infty)$ and that $X$ has the dyadic UMD property.
   Then $X$ is UMD.
 \end{thm}
@@ -264,32 +340,25 @@ In the next lemma we show that finite interval filtrations can be approximated a
   By $\varepsilon$-closeness, the second term is bounded by $C_{\mc{F}_{\bullet}} N \varepsilon^{1/p}$ (Lemma \ref{lem:closeness}, here we use $\|\mb{f}_{N}\|_{L^p([0,1);X)} = 1$).
   To control the first term we write
   \begin{equation*}
-      \Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{F}'_{n}} - \E^{\mc{F}'_{n-1}}) \mb{f}_{N} \Big\|_{L^p([0,1);X)}
-      &= \Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{G}_{m(n)}} - \E^{\mc{G}_{m(n-1)}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)}
-    \end{equation*}
-    using the identity \eqref{eq:approx-CE-ident}.
-    By a telescoping sum, we have
-    \begin{equation*}
-      \begin{aligned}
+    \Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{F}'_{n}} - \E^{\mc{F}'_{n-1}}) \mb{f}_{N} \Big\|_{L^p([0,1);X)}
+    = \Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{G}_{m(n)}} - \E^{\mc{G}_{m(n-1)}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)}
+  \end{equation*}
+  using the identity \eqref{eq:approx-CE-ident}.
+  By a telescoping sum argument we have
+  \begin{equation*}
+    \begin{aligned}
       &\Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{G}_{m(n)}} - \E^{\mc{G}_{m(n-1)}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)} \\
       &\qquad = \Big\| \sum_{m=0}^{m(N)} \tilde{\xi}_{m} (\E^{\mc{G}_{m}} - \E^{\mc{G}_{m-1}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)}
     \end{aligned}
-    \end{equation*}
-    where
-    \begin{equation*}
-      \tilde{\xi}_{m} :=
-      \begin{cases}
-        \xi_{n} & \text{if $m = m(n)$} \\
-        1 & \text{otherwise.}
-      \end{cases}
-    \end{equation*}
-    Thus the assumed UMD property with respect to the dyadic filtration yields
-    \begin{equation*}
-      \begin{aligned}
-        \Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{G}_{m(n)}} - \E^{\mc{G}_{m(n-1)}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)}
-        &\leq C \|\E^{\mc{F}'_{N}} \mb{f}_{N}\|_{L^p([0,1);X)} \\
-        &\leq C\|\mb{f}_{N}\|_{L^p([0,1);X)}.
-      \end{aligned}
+  \end{equation*}
+  for some sequence $\tilde{\xi}_{\bullet}$.
+  Thus the assumed UMD property with respect to the dyadic filtration yields
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{n=0}^{N} \xi_{n} (\E^{\mc{G}_{m(n)}} - \E^{\mc{G}_{m(n-1)}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)}
+      &\leq C \|\E^{\mc{F}'_{N}} \mb{f}_{N}\|_{L^p([0,1);X)} \\
+      &\leq C\|\mb{f}_{N}\|_{L^p([0,1);X)}.
+    \end{aligned}
     \end{equation*}
     All up we have
     \begin{equation*}
@@ -298,32 +367,267 @@ In the next lemma we show that finite interval filtrations can be approximated a
     and since $\varepsilon \in (0,1)$ was arbitrary this completes the proof.
   \end{proof}
 
-  \todo{have to discuss paley--walsh representation}
+  For future reference we provide a useful characterisation of martingales on the dyadic filtration.
+
+  \begin{prop}\label{prop:PW-martingales}
+    Let $X$ be a Banach space and $\mb{f}_{\bullet}$ an $X$-valued martingale on $[0,1)$ with respect to the dyadic filtration $\mc{F}_{\bullet}$.
+    Then there exist functions $\mb{\phi}_{n} \colon \{-1,1\}^{n-1} \to X$ ($\mb{\phi}_{1}$ is simply a constant in $X$) such that
+    \begin{equation*}
+      d\mb{f}_{n}(t) = r_{n}(t) \mb{\phi}_{n}(r_1(t), r_{2}(t)\ldots, r_{n-1}(t)) \qquad \forall n \geq 1,
+    \end{equation*}
+    where $(r_{n})_{n \geq 1}$ are the Rademacher functions defined on $[0,1)$, i.e.
+    \begin{equation*}
+      r_{n} := \sgn(\sin(2^n \pi t))
+    \end{equation*}
+    (see Example \ref{eg:analyst-rademachers}).
+  \end{prop}
+
+  \begin{proof}
+    Write
+    \begin{equation*}
+      d\mb{f}_{n} = \sum_{I \in \mc{D}_{n-1}} (\1_{I_+} + \1_{I_{-}}) d\mb{f}_{n}
+    \end{equation*}
+    where $I_-$ and $I_+$ are the left and right halves of the interval $I$.
+    Since $d\mb{f}_{n}$ is $\mc{F}_{n}$-measurable, it is constant on the intervals $I_\pm$ for $I \in \mc{D}_{n-1}$: let $\mb{x}_{I}$ denote the value of $d\mb{f}_{n}$ on $I_+$.
+    Since $\E^{\mc{F}_{n-1}}d\mb{f}_{n} = 0$, we must have that $d\mb{f}_{n} = -\mb{x}_{I}$ on $I_{-}$, and so
+    \begin{equation*}
+      d\mb{f}_{n} = \sum_{I \in \mc{D}_{n-1}} (\1_{I_+} - \1_{I_{-}}) \otimes \mb{x}_{I} = r_{n} \tilde{\mb{\phi}}, \qquad \tilde{\mb{\phi}} := \sum_{I \in \mc{D}_{n-1}} \1_{I} \otimes \mb{x}_{I}.
+    \end{equation*}
+    The function $\tilde{\mb{\phi}} \colon [0,1) \to X$ is $\mc{F}_{n-1}$-measurable, and $\mc{F}_{n-1}$ is generated by $2^{n-1}$ atoms, so we have $\tilde{\mb{\phi}} = \mb{\phi}(r_{1}, r_{2}, \ldots, r_{n-1})$ for some $\mb{\phi} \in \{-1,1\}^{n-1} \to X$.
+  \end{proof}
 
 
-\section{The Hilbert transform on the torus}
+  \section{The Hilbert transform on the torus}
+
+  To prove the UMD property from boundedness of the Hilbert transform, we will make one further reduction: we will first deduce the boundedness of the \emph{Hilbert transform on the torus}.
+  For `torus' is the abelian group
+  \begin{equation*}
+    \T = [0,1) \cong \R / \Z
+  \end{equation*}
+  with addition $+$ given by the usual addition on $\R$, modulo $\Z$.
+  We equip $\T$ with the Lebesgue measure, and of course this measure is translation invariant with respect to addition.
+  Naturally every function on the torus can be identified with a $1$-periodic function on $\R$, and conversely.
+  
+  For a complex Banach space $X$ and $\mb{f} \in L^1(\T;X)$ we define the Fourier transform $\map{\hat{\mb{f}}}{\Z}{X}$ by
+  \begin{equation*}
+    \hat{\mb{f}}(n) := \int_{\T} e^{2\pi i t n} \mb{f}(t) \, \dd t.
+  \end{equation*}
+  A function $\mb{f} \in L^1(\T;X)$ is called a \emph{trigonometric polynomial} if $\hat{\mb{f}}$ is finitely supported, and in this case we have the finite sum
+  \begin{equation}\label{eq:trigpoly}
+    \mb{f}(t) = \sum_{n \in \Z} e^{2\pi i t n} \hat{\mb{f}}(n) = \sum_{n \in \Z} e_{n}(t) \hat{\mb{f}}(n),
+  \end{equation}
+  writing $e_{n}(t) := e^{2\pi i t n}$.
+  In the scalar-valued setting, the trigonometric polynomials are dense in $L^p(\T)$ for all $p \in [1,\infty]$, and thus for all $X$ the trigonometric polynomials are dense in $L^p(\T;X)$ for all $p \in [1,\infty)$.
+
+  By analogy with the Fourier multiplier representation of the Hilbert transform on the real line, we define the Hilbert transform on the torus, initially just on trigonomeric polynomials.
+  \begin{defn}
+    Let $X$ be a complex Banach space and $\mb{f} \in L^1(\T;X)$ a trigonometric polynomial.
+    Then we define the Hilbert transform $H_{\T}\mb{f}$ by
+    \begin{equation*}
+      H_{\T} \mb{f} := -i \sum_{n \in \Z} \sgn(n) e_{n} \otimes \hat{\mb{f}}(n) = -i \Big( \sum_{n > 0} - \sum_{n < 0} \Big) e_{n} \otimes \hat{\mb{f}}(n).
+    \end{equation*}  
+  \end{defn}
+
+  \todo{EXPOSITION}
+
+  \begin{lem}\label{lem:transference}
+    Let $X$ be a Banach space, $p \in [1,\infty)$, $\mb{f} \in L^p(\T;X)$, and let $\phi \in \Sch(\R)$ be a scalar-valued Schwartz function on the real line.
+    For all $\lambda > 0$, let $\Dil_{\varepsilon}^{p} \phi$ be the $L^p$-normalised dilation of $\mb{f}$ by $\lambda$: that is, for $t \in \R$, $(\Dil_{\lambda}^{p}\phi)(t) := \lambda^{-1/p} \phi(t/\lambda)$.
+    Then
+    \begin{equation*}
+        \lim_{\lambda \to \infty} \| (\Dil_{\lambda}\phi) \mb{f} \|_{L^p(\R;X)} = \|\mb{f}\|_{L^p(\T;X)}\|\phi\|_{L^p(\R)}.
+    \end{equation*}
+  \end{lem}
+
+  \begin{proof}
+    The left hand side, to the power $p$, can be written as
+    \begin{equation}\label{eq:bracketed-quantity}
+      \lim_{\lambda \to \infty} \int_{\R} \lambda^{-1}|\phi(t/\lambda)|^{p} \|\mb{f}(t)\|_{X}^{p} \, \dd t
+      = \lim_{\lambda \to \infty} \int_{0}^{1} \|\mb{f}(t)\|_{X}^{p} \Big( \sum_{k \in \Z} \frac{|\phi((t+k)/\lambda)|^{p}}{\lambda} \Big) \, \dd t.
+  \end{equation}
+  For all $t \in (0,1)$ and $\lambda > 1$, since $\phi \in \Sch(\R)$, there exists $C < \infty$ such that
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{k \in \Z} \frac{|\phi((t+k)/\lambda)|^{p}}{\lambda}
+      &\leq \frac{C}{\lambda} \sum_{k \in \Z} \min(1,|t+k|/\lambda)^{-2p} \\
+      &\leq \frac{C}{\lambda} \Big( \sum_{|k| \leq 2\lambda} 1 + \sum_{|k| > 2\lambda}  (|t+k|/\lambda)^{-2p} \Big) \\
+      &\lesssim \frac{1}{\lambda} \Big( \lambda + \lambda^{2p} \sum_{k > 2\lambda} k^{-2p} \Big) \\
+      &\leq 1 + \lambda^{2p-1} \int_{2\lambda}^\infty t^{-2p} \, \dd t \Big) \\
+      &\simeq 1 + \lambda^{2p-1} \lambda^{-2p+1} \simeq 1
+    \end{aligned}
+  \end{equation*}
+  using that $2p > 1$.
+  Thus the bracketed quantity in \eqref{eq:bracketed-quantity} is bounded uniformly in $t$ as $\lambda \to \infty$, and we can use dominated convergence to write
+  \begin{equation*}
+    \begin{aligned}
+      &\lim_{\lambda \to \infty} \int_{0}^{1} \|\mb{f}(t)\|_{X}^{p} \Big( \sum_{k \in \Z} \frac{|\phi((t+k)/\lambda)|^{p}}{\lambda} \Big) \, \dd t \\
+      &= \int_{0}^{1} \|\mb{f}(t)\|_{X}^{p} \lim_{\lambda \to \infty} \Big( \sum_{k \in \Z} \frac{|\phi((t+k)/\lambda)|^{p}}{\lambda} \Big) \, \dd t \\
+      &= \int_{0}^{1} \|\mb{f}(t)\|_{X}^{p} \Big( \int_{\R} |\phi(s)|^{p} \, \dd s\Big) \, \dd t
+    \end{aligned}
+  \end{equation*}
+  since the bracketed quantity is a Riemann sum.
+  The result follows.
+  \end{proof}
+
+  \begin{prop}\label{prop:UMD-HTT}
+    Let $X$ be a complex Banach space and $p \in (1,\infty)$.
+    Suppose that the Hilbert transform $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension.
+    Then for all trigonometric polynomials $\mb{f} \in L^1(\T;X)$, we have
+    \begin{equation*}
+      \|H_{\T} \mb{f}\|_{L^p(\T;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\T;X)}.
+    \end{equation*}
+  \end{prop}
+  
+  \begin{proof}
+    First write
+    \begin{equation*}
+      \begin{aligned}
+        H_{\T} \mb{f}
+        &= \sum_{n \in \Z} -i \sgn(n) e_{n} \otimes \hat{\mb{f}}(n) \\
+        &= \frac{1}{2} \Big(
+        \sum_{n \in \Z} -i \sgn\Big(n+\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n)
+        + \sum_{n \in \Z} -i \sgn\Big(n-\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n) \Big),
+      \end{aligned}
+    \end{equation*}
+    noting that $\sgn(n) = \sgn(n \pm \frac{1}{2})$ for all $n \neq 0$, and that $\sgn(1/2) = -\sgn(-1/2)$.
+    Thus it suffices to prove the estimates
+    \begin{equation*}
+      \Big\| \sum_{n \in \Z} -i \sgn\Big(n\pm\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n) \Big\|_{L^p(\T;X)} \lesssim_{p,X} \|\mb{f}\|_{L^p(\T;X)}
+    \end{equation*}
+    for both choices of sign $\pm$.
+    Since the argument is identical for both choices, we just take $+$.
+    
+    Fix a Schwartz function $\phi \in \Sch(\R)$ such that the Fourier transform $\hat{\phi}$ is supported in $(-1/2,1/2)$, and normalise such that $\|\phi\|_{p} = 1$.
+    Fix $\lambda > 1$, and note that $\Dil^{p}_{\lambda}\phi$ is also supported in $(-1/2,1/2)$, with $\|\Dil^{p}_{\lambda}\phi\|_{p} = 1$.
+    We will use that $H \otimes I$ has a bounded extension to $L^p(\R;X)$, where $H$ is the scalar-valued Hilbert transform (Theorem \ref{thm:Burkholder}).
+    Observe that
+    \begin{equation*}
+      \begin{aligned}
+        (H \otimes I)((\Dil_{\lambda}^{p} \phi) e_{\frac{1}{2}} \mb{f})
+        &= (H \otimes I)\Big( \sum_{n \in \Z} (\Dil_{\lambda}^{p} \phi) e_{n + \frac{1}{2}} \otimes \hat{\mb{f}}(n) \Big) \\
+        &= \sum_{n \in \Z} H((\Dil_{\lambda}^{p}\phi) e_{n + \frac{1}{2}}) \otimes \hat{\mb{f}}(n)
+      \end{aligned}
+    \end{equation*}
+    since the sum has finitely many nonzero terms.
+    For each $n \in \Z$, the modulation $(\Dil_{\lambda}^{p}\phi) e_{n + \frac{1}{2}} = \Mod_{n + \frac{1}{2}} (\Dil_{\lambda}^{p}\phi)$ has Fourier transform supported in $(n, n+1)$, so
+    \begin{equation*}
+          H((\Dil_{\lambda}^{p}\phi) e_{n + \frac{1}{2}}) = -i\sgn(n) (\Dil_{\lambda}^{p}\phi) e_{n + \frac{1}{2}} = -i\sgn\big(n+\frac{1}{2}\big) (\Dil_{\lambda}^{p}\phi) e_{n} e_{\frac{1}{2}}
+    \end{equation*}
+    which lets us write
+    \begin{equation*}
+       (H \otimes I)((\Dil_{\lambda}^{p}\phi) e_{\frac{1}{2}} \mb{f}) = (\Dil_{\lambda}^{p}\phi) e_{\frac{1}{2}} \sum_{n \in \Z} -i\sgn\big(n + \frac{1}{2}\big)  e_{n} \otimes \hat{\mb{f}}(n)
+     \end{equation*}
+     Now we use Lemma \ref{lem:transference} backwards, invoke boundedness of $H \otimes I$ on $L^p(\R;X)$, and then use Lemma \ref{lem:transference} forwards:
+     \begin{equation*}
+       \begin{aligned}
+         &\Big\| \sum_{n \in \Z} -i \sgn\Big(n\pm\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n) \Big\|_{L^p(\T;X)} \\
+         &= \Big\| e_{\frac{1}{2}} \sum_{n \in \Z} -i \sgn\Big(n\pm\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n) \Big\|_{L^p(\T;X)} \\
+         &= \Big\| e_{\frac{1}{2}} \sum_{n \in \Z} -i \sgn\Big(n\pm\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n) \Big\|_{L^p(\T;X)} \|\phi\|_{L^p(\R)} \\
+         &= \lim_{\lambda \to \infty} \Big\| (\Dil_{\lambda}^{p}\phi) e_{\frac{1}{2}} \sum_{n \in \Z} -i \sgn\Big(n\pm\frac{1}{2}\Big) e_{n} \otimes \hat{\mb{f}}(n) \Big\|_{L^p(\R;X)} \\
+         &= \lim_{\lambda \to \infty} \big\| (H \otimes I)((\Dil_{\lambda}^{p} \phi)e_{\frac{1}{2}} \mb{f}) \big\|_{L^p(\R;X)} \\
+         &\lesssim_{p,X} \lim_{\lambda \to \infty} \big\| e_{\frac{1}{2}} (\Dil_{\lambda}^{p} \phi)  \mb{f} \big\|_{L^p(\R;X)} 
+         = \lim_{\lambda \to \infty} \big\| (\Dil_{\lambda}^{p} \phi)  \mb{f} \big\|_{L^p(\R;X)} 
+         = \| \mb{f} \|_{L^p(\T;X)}.
+       \end{aligned}
+     \end{equation*}
+     The same argument with $k - \frac{1}{2}$ in place of $k + \frac{1}{2}$ completes the proof.
+  \end{proof}
+
+  In the argument used to deduce the UMD property from boundedness of the Hilbert transform, we use not only the boundedness of $H_{\T}$, but also of associated operators on the $N$-torus $\T^{N} = \T \times \cdots \times \T$.
+
+  \begin{defn}\label{defn:higher-HT}
+    Let $X$ be a complex Banach space such that $H_{\T}$ is bounded on $L^p(\T;X)$, and fix $N \in \N$.
+    For $n \leq N$, let $\T_{n}$ denote the $n$th copy of $\T$ in the product space $\T^{N}$, so that $\T^{N} = \T_{1} \times \cdots \times \T_{N}$.
+    Let $H_{\T,n}$ be the bounded linear operator on $L^p(\T^{N};X)$ which acts as $H_{\T}$ on $\T_{n}$, and as the identity operator in all other coordinates.\footnote{This operator can be written as $H_{\T,n} = I \otimes \cdots \otimes I \otimes H_{\T} \otimes I \otimes \cdots \otimes I$.}
+    That is, for $\mb{f} \in L^p(\T^{N};X)$, we have
+    \begin{equation*}
+      H_{\T,n}\mb{f}(t_{1}, \ldots, t_{N}) = (H_{\T} \mb{f}(t_{1}, \ldots, t_{n-1}, \bullet, t_{n+1}, \ldots, t_{N}))(t_{n})
+    \end{equation*}
+    Where the functions $\mb{f}(t_{1}, \ldots, t_{n-1}, \bullet, t_{n+1}, \ldots, t_{N}) \colon \T \to X$ are given by
+    \begin{equation*}
+      \mb{f}(t_{1}, \ldots, t_{n-1}, \bullet, t_{n+1}, \ldots, t_{N})(s) := \mb{f}(t_{1}, \ldots, t_{n-1}, s, t_{n+1}, \ldots, t_{N})
+    \end{equation*}
+    By Fubini's theorem, these definitions make sense almost everywhere, and the operators $H_{\T,n}$ are bounded on $L^p(\T^{N};X)$ for all $N \geq n$, with norms bounded uniformly in $N$ and $n$.
+  \end{defn}
 
 
-\begin{defn}
-  Fourier transform on the torus, IFT on $\Z$, Fourier multipliers
-\end{defn}
+\section{Bourgain's theorem: from the Hilbert transform to UMD}
 
-\begin{defn}
-  hilbert transform on the torus
-\end{defn}
-
-\begin{thm}
-  UMD implies boundedness of HT on torus
-\end{thm}
-
-\begin{defn}
-  amplifications of HT 
-\end{defn}
-
-\section{Bourgain's theorem}
-
-In this section we prove Theorem \ref{thm:Bourgain}: if the Banach space $X$ is such that the Hilbert transform $H \in \Lin(L^p(\R))$ has a bounded $X$-valued extension for some $p \in (1,\infty)$, then $X$ is UMD.
+In this section we prove Theorem \ref{thm:Bourgain}: if the Banach space $X$ is such that the Hilbert transform $H \in \Lin(L^p(\R))$ admits a bounded $X$-valued extension for some $p \in (1,\infty)$, then $X$ is UMD.
 By Theorem \ref{thm:dyadic-UMD} it suffices to show that $X$ has the dyadic $\UMD_{p}$ property.
+Furthermore, by Proposition \ref{prop:UMD-HTT} we know that the Hilbert transform $H_{\T}$ on the torus is bounded on $L^p(\T;X)$, and thus so are the operators $H_{\T,n}$ on $L^p(\T^{N};X)$ from Definition \ref{defn:higher-HT}.
+
+The key estimate is the following, whose proof we will briefly defer.
+\begin{prop}\label{prop:Bourgain-H}
+  Let $p \in (1,\infty)$, and suppose $X$ is a complex Banach space such that $H_{\T}$ is bounded on $L^p(\T;X)$.
+  Then for all finite sign sequences $(\xi_{n})_{n=1}^{N}$ and all functions $\mb{f}_{n} \in L^p(\T^{n};X)$ with $1 \leq n \leq N$, under the natural identification $L^p(\T^{n};X) \subset L^p(\T^{N};X)$, we have
+  \begin{equation*}
+    \Big\| \sum_{n=1}^{N} \xi_{k} H_{\T,n} \mb{f}_{n} \Big\|_{L^p(\T^{N};X)} \lesssim_{p,X} \Big\| \sum_{n=1}^{N} \mb{f}_{n} \Big\|_{L^p(\T^{N};X)}.
+  \end{equation*}
+\end{prop}
+
+Assuming this for the moment, let's prove Bourgain's theorem.
+\begin{proof}[Proof of Theorem \ref{thm:Bourgain}, assuming Proposition \ref{prop:Bourgain-H}]
+  It suffices to consider finite $X$-valued martingales $(\mb{f}_n)_{n=0}^{N}$ on $[0,1)$ with respect to the dyadic filtration.
+  By Proposition \ref{prop:PW-martingales}, there exist functions $\map{\mb{\phi}_{n}}{\{-1,1\}^{n-1}}{X}$ such that
+  \begin{equation*}
+    d\mb{f}_{n} = r_{n} \mb{\phi}_{n}(r_{1}, r_{2}, \ldots, r_{n-1})
+  \end{equation*}
+  where $r_{\bullet}$ are the Rademacher functions on $[0,1)$.
+  So we need to prove the estimate
+  \begin{equation*}
+    \Big\| \sum_{n=0}^{N} \xi_{n} r_{n} \mb{\phi}_{n}(r_{1}, r_{2}, \ldots, r_{n-1}) \Big\|_{L^p([0,1);X)} \lesssim \Big\| \sum_{n=0}^{N} r_{n} \mb{\phi}_{n}(r_{1}, r_{2}, \ldots, r_{n-1}) \Big\|_{L^p([0,1);X)}.
+  \end{equation*}
+  This would follow from proving
+  \begin{equation*}
+    \Big\| \sum_{n=1}^{N} \xi_{n} \mb{g}_{n} \Big\|_{L^p(\T^{N};X)} \lesssim \Big\| \sum_{n=1}^{N} \mb{g}_{n} \Big\|_{L^p(\T^{N};X)}
+  \end{equation*}
+  for all $\mb{g}_{n} \in L^p(\T^{n};X) \subset L^p(\T^{N};X)$, as can be seen by switching to a different Rademacher sequence $(r_{n})_{n=1}^{N}$ on $\T^{N}$, where each $r_{n}$ only depends on the $n$th factor $\T_{n}$.
+  Since $H_{\T,n}^{2} = -I$ on $L^p(\T^{N};X)$ for all $n \leq N$, we can use Proposition \ref{prop:Bourgain-H} twice to estimate
+  \begin{equation*}
+    \begin{aligned}
+      \Big\| \sum_{n=1}^{N} \xi_{n} \mb{g}_{n} \Big\|_{L^p(\T^{N};X)}
+      &= \Big\| \sum_{n=1}^{N} \xi_{n} H_{\T,n} (H_{\T,n} \mb{g}_{n}) \Big\|_{L^p(\T^{N};X)} \\
+      &\lesssim_{p,X}  \Big\| \sum_{n=1}^{N} H_{\T,n} \mb{g}_{n} \Big\|_{L^p(\T^{N};X)} 
+      \lesssim_{p,X}  \Big\| \sum_{n=1}^{N} \mb{g}_{n} \Big\|_{L^p(\T^{N};X)},
+    \end{aligned}
+  \end{equation*}
+  completing the proof.
+\end{proof}
+
+So we are left with proving Proposition \ref{prop:Bourgain-H}.
+This relies on a clever choice of isometry of $L^p(\T^{n};X)$ into $L^p(\T; L^p(\T^{n};X))$, which intertwines the operator $H_{\T,n}$ with the $L^p(\T^{n};X)$-valued Hilbert transform $\tilde{H}_{\T}$ in a special way.
+
+\begin{lem}
+  Fix a sequence $M_{\bullet} = (M_{n})_{n=1}^{N}$ of nonzero integers, and define $\mc{B}_{M} \colon L^p(\T^{N};X) \to L^{p}(\T; L^p(\T^{N};X))$ by
+  \begin{equation*}
+    (\mc{B}_{M} \mb{g}(s))(t_{1}, \ldots, t_{N}) := \mb{g}(t_{1} + M_{1} s, \ldots, t_{N} + M_{N} s).
+  \end{equation*}
+  Then $\mc{B}_{M}$ is an isometry which maps trigonometric polynomials into trigonometric polynomials.
+  Furthermore, given a sequence of trigonometric polynomials
+  \begin{equation*}
+    \mb{f}_{n} \in L^p(T^{n};X),
+  \end{equation*}
+  if the sequence $|M_{1}|, |M_{2}|, \ldots, |M_{N}|$ is sufficiently rapidly increasing, we have
+  \begin{equation*}
+    \tilde{H}_{\T} (\mc{B}_{M} \mb{f}_{n}) = \sgn(M_{n}) \mc{B}_{M} H_{\T,n} \mb{f}_{n}
+  \end{equation*}
+  where $\tilde{H}_{\T}$ is the Hilbert transform on $L^p(\T; L^p(\T^{N};X))$.
+\end{lem}
+
+\begin{proof}
+  
+\end{proof}
+
+Finally we can establish the missing ingredient in our proof of Theorem \ref{thm:Bourgain}.
+
+\begin{proof}[Proof of Proposition \ref{prop:Bourgain-H}]
+  
+\end{proof}
+
+
+
+
 
 
 \section*{Exercises}
