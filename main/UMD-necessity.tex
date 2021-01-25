@@ -8,7 +8,7 @@ In this chapter we prove the converse to Burkholder's theorem (Theorem \ref{thm:
 To prove this we first need to make some reductions.
 We will show that the UMD property, i.e. unconditionality of all martingale difference sequences, is equivalent to the corresponding property restricted to martingales on the dyadic filtration on the unit interval $[0,1)$: thus we don't need to consider so many martingales when establishing the UMD property.
 We will also show that boundedness of the Hilbert transform implies boundedness of a corresponding Hilbert transform $H_{\T}$ on the torus $\T$, which is basically just the unit interval $[0,1)$ with addition modulo $1$.
-Bourgain's painfully clever argument then relates martingales on the dyadic filtration to sequences of functions on $\T$, and bridges the gap between the Hilbert transform and UMD.
+Bourgain's painfully clever argument then relates martingales on the dyadic filtration to sequences of functions on higher dimensional tori $\T^{n}$, and bridges the gap between the Hilbert transform and UMD.
 
 \section{The dyadic UMD property}
 
@@ -212,7 +212,7 @@ A simple example of this construction is pictured in Figure \ref{fig:tree}.
 \end{figure}
 
 \begin{defn}
-  Let $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}'$ be commonly indexed finite interval filtrations with associated tree $T$ and vertex-to-atom maps $\map{\alpha}{T}{\mc{F}_{N}}$ and $\map{\alpha'}{T}{\mc{F}_{N}'}$.
+  Let $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}'$ be commonly indexed finite interval filtrations with associated tree $T$ and vertex-to-atom maps $\map{\alpha}{V(T)}{\mc{F}_{N}}$ and $\map{\alpha'}{V(T)}{\mc{F}_{N}'}$.
   For $\varepsilon \in (0,1)$, we say that $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}'$ are \emph{$\varepsilon$-close} if for all $v \in V(T)$,
   \begin{equation*}
     |\alpha(v) \Delta \alpha'(v)| = |(\alpha(v) \cup \alpha'(v)) \sm (\alpha(v) \cap \alpha'(v))| < \varepsilon,
@@ -224,7 +224,7 @@ A simple example of this construction is pictured in Figure \ref{fig:tree}.
 \end{defn}
 
 \begin{lem}\label{lem:closeness}
-  Fix $N \in \N$ and let $(\mc{F}_{n})_{n=0}^{N}, (\mc{F}'_{n})_{n=0}^{N}$ be commonly indexed finite interval filtrations, with associated tree $T$ and vertex-to-atom maps $\map{\alpha}{T}{\mc{F}_{N}}$ and $\map{\alpha'}{T}{\mc{F}_{N}'}$.
+  Fix $N \in \N$ and let $(\mc{F}_{n})_{n=0}^{N}, (\mc{F}'_{n})_{n=0}^{N}$ be commonly indexed finite interval filtrations, with associated tree $T$ and vertex-to-atom maps $\map{\alpha}{V(T)}{\mc{F}_{N}}$ and $\map{\alpha'}{V(T)}{\mc{F}_{N}'}$.
   Then if $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}$ are $\varepsilon$-close, then for all $\mb{f} \in L^p(\mc{F}_{N};X)$ with $\|\mb{f}\|_{L^p(\mc{F}_{N};X)} = 1$,
   \begin{equation*}
     \sup_{0 \leq n \leq N} \|(\E^{\mc{F}_{n}} - \E^{\mc{F}_{n}'})\mb{f}\|_{L^p([0,1);X)} \lesssim_{\mc{F}_{\bullet}} \varepsilon^{1/p}.
@@ -278,7 +278,7 @@ In the next lemma we show that finite interval filtrations can be approximated a
 
 \begin{lem}\label{lem:dyadic-approximation}
   Let $(\mc{F}_{n})_{n=0}^{N}$ be a finite interval filtration and $\varepsilon \in (0,1)$.
-  Then there is filtration $\mc{F}'_{\bullet}$ such that $\mc{F}_{\bullet}$ and $\mc{F}'_{\bullet}$ are commonly indexed and $\varepsilon$-close, with $\mc{F}'_{n} \subset \mc{D}_{m(n)}$ for some increasing sequence $m(0) < m(1) < \ldots < m(N)$, where $\mc{G}_{\bullet}$ is the dyadic filtration.
+  Then there is filtration $\mc{F}'_{\bullet}$ such that $\mc{F}_{\bullet}$ and $\mc{F}'_{\bullet}$ are commonly indexed and $\varepsilon$-close, with $\mc{F}'_{n} \subset \mc{G}_{m(n)}$ for some increasing sequence $m(0) < m(1) < \ldots < m(N)$, where $\mc{G}_{\bullet}$ is the dyadic filtration.
   Furthermore, for all $n \in \{0,1,\ldots,N\}$ we have
   \begin{equation}\label{eq:approx-CE-ident}
     \E^{\mc{F}'_{n}} = \E^{\mc{G}_{m(n)}} \E^{\mc{F}'_{N}}.
@@ -303,18 +303,18 @@ In the next lemma we show that finite interval filtrations can be approximated a
   \end{equation*}
   for all atoms $A \in \mc{F}_{n+1}$.
   Iterating this construction yields a filtration with the claimed properties, other than the conditional expectation identity \eqref{eq:approx-CE-ident} which remains to be shown.
-  To show this, fix $\mb{f} \in L^1(\mc{F}_{N}')$ and $I \in \mc{F}_{n}'$: we will show that
+  To show this, fix $f \in L^1(\mc{F}_{N}')$ and $I \in \mc{F}_{n}'$: we will show that
   \begin{equation*}
-    \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} \mb{f} \, \dd t = \int_{I} \mb{f},
+    \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f \, \dd t = \int_{I} f,
   \end{equation*}
   which establishes the identity via the defining property of conditional expectations.
   Since $I \in \mc{F}_{n}' \subset \mc{G}_{m(n)}$, $I$ can be written as a union of dyadic intervals $J \in \mc{D}_{m(n)}$, so
   \begin{equation*}
     \begin{aligned}
-      \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} \mb{f}(t) \, \dd t
-      &= \sum_{\substack{J \in \mc{D}_{m(n)} \\ J \subset I}} \int_{J} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} \mb{f}(t) \, \dd t \\
-      &= \sum_{\substack{J \in \mc{D}_{m(n)} \\ J \subset I}} \int_{J} \E^{\mc{F}_{N}'} \mb{f}(t) \, \dd t
-      = \int_{I} \E^{\mc{F}_{N}'} \mb{f}(t) \, \dd t = \int_{I} \mb{f}(t) \, \dd t
+      \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f(t) \, \dd t
+      &= \sum_{\substack{J \in \mc{D}_{m(n)} \\ J \subset I}} \int_{J} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f(t) \, \dd t \\
+      &= \sum_{\substack{J \in \mc{D}_{m(n)} \\ J \subset I}} \int_{J} \E^{\mc{F}_{N}'} f(t) \, \dd t
+      = \int_{I} \E^{\mc{F}_{N}'} f(t) \, \dd t = \int_{I} f(t) \, \dd t
     \end{aligned}
   \end{equation*}
   using $J \in \mc{G}_{m(n)}$ and $I \in \mc{F}_{n}' \subset \mc{F}_{N}'$.
@@ -329,7 +329,7 @@ In the next lemma we show that finite interval filtrations can be approximated a
   By Proposition \ref{prop:UMD-FIF} it suffices to consider martingales $\mb{f}_{\bullet}$ on $[0,1)$ with respect to finite interval filtrations $(\mc{F}_{n})_{n=0}^{N}$.
   By homogeneity we may assume that $\|\mb{f}_{N}\|_{L^p([0,1);X)} = 1$.
   Let $(\xi_{n})_{n=0}^{N}$ be a sequence of signs.
-  Fix $\varepsilon \in (0,1)$ and let $\mc{F}'_{\bullet}$ be a filtration as in Lemma \ref{lem:dyadic-approximation}, such that $\mc{F}_{n}' \subset \mc{D}_{m(n)}$ for all $n$ and such that $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}'$ are commonly indexed and $\varepsilon$-close.
+  Fix $\varepsilon \in (0,1)$ and let $\mc{F}'_{\bullet}$ be a filtration as in Lemma \ref{lem:dyadic-approximation}, such that $\mc{F}_{n}' \subset \mc{G}_{m(n)}$ for all $n$ (where $\mc{G}_{\bullet}$ is the dyadic filtration) and such that $\mc{F}_{\bullet}$ and $\mc{F}_{\bullet}'$ are commonly indexed and $\varepsilon$-close.
   Let $\mb{f}_{\bullet}$ be a martingale with respect to a finite interval filtration $\mc{F}_{\bullet}$, and let $\mc{F}'_{\bullet}$ be an $\varepsilon$-close filtration as in the previous lemma.
   Then we have
   \begin{equation*}
@@ -354,7 +354,7 @@ In the next lemma we show that finite interval filtrations can be approximated a
       &\qquad = \Big\| \sum_{m=0}^{m(N)} \tilde{\xi}_{m} (\E^{\mc{G}_{m}} - \E^{\mc{G}_{m-1}}) \E^{\mc{F}'_{N}} \mb{f}_{N} \Big\|_{L^p([0,1);X)}
     \end{aligned}
   \end{equation*}
-  for some sequence $\tilde{\xi}_{\bullet}$.
+  for some sequence of signs $\tilde{\xi}_{\bullet}$.
   Thus the assumed UMD property with respect to the dyadic filtration yields
   \begin{equation*}
     \begin{aligned}
