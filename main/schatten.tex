@@ -1,13 +1,161 @@
-\emph{under construction}
 
-% \section{Schatten class operators}
 
-% \section{The UMD property of the Schatten classes}
+\section{Schatten class operators}
+Let $H$ be a Hilbert space (finite or infinite dimensional) and consider a bounded linear operator $u \in \Lin(H)$.
+The \emph{approximation numbers} (or \emph{singular values}) of $u$ are the numbers
+\begin{equation*}
+  a_{n}(u) := \inf\{\|u - v\|_{\Lin(H)} : \mathrm{rk}(v) < n\}
+\end{equation*}
+i.e. $a_{n}(u)$ is the distance from $u$ to the set of operators of rank less than $n$ in $\Lin(H)$.
+We have $\|u\|_{\Lin(H)} = a_{1}(u)$, and the sequence $(a_{n}(u))_{n \geq 1}$ is monotonically decreasing, with $a_{n}(u) \to 0$ if and only if $u$ is compact.
+By putting integrability conditions on the sequence $a_{\bullet}(u)$, we obtain useful classes of compact operators.
 
-% \section{Schur multipliers}
+\begin{defn}
+  For a Hilbert space $H$ and $p \in [1,\infty)$, we define the \emph{Schatten class} $\mc{C}^{p}(H) \subset \Lin(H)$ by
+  \begin{equation*}
+    \mc{C}^{p}(H) := \{u \in \Lin(H) : a_{\bullet}(u) \in \ell^{p}\}.
+  \end{equation*}
+  Equipped with the norm $\|u\|_{\mc{C}^{p}(H)} := \|a_{\bullet}(u)\|_{\ell^{p}}$, $\mc{C}^{p}(H)$ is a Banach space.
+\end{defn}
 
-% \section{Operator Lipschitz functions}
+One can equivalently write
+\begin{equation*}
+  \|u\|_{\mc{C}^{p}(H)} = \tr(|u|^{p})^{1/p},
+\end{equation*}
+where $|u| = u^{*}u$ and $|u|^{p}$ is defined via the spectral theorem.
+From this representation it is clear that the Schatten class $\mc{C}^{1}(H)$ is exactly the set of trace class operators.
+On the other hand, $\mc{C}^{2}(H)$ is the set of Hilbert--Schmidt operators---this is a Hilbert space under the inner product
+\begin{equation*}
+  \langle u, v \rangle := \sum_{i \in I} \langle u(h_{i}), v(h_{i}) \rangle_{H}
+\end{equation*}
+with $(h_{i})_{i \in I}$ being any orthonormal basis of $H$.
+We have not defined $\mc{C}^\infty(H)$, but there are two conventions: it is generally defined as either the space $\mc{K}(H)$ of all compact operators, or simply as $\Lin(H)$.
+In general, the Schatten class $\mc{C}^{p}(H)$ behaves like a non-commutative version of the sequence space $\ell^{p}$.
+Indeed, since the norm of $\mc{C}^{p}(H)$ is directly modeled on that of $\ell^{p}$, we immediatley have the continuous inclusion
+\begin{equation*}
+  \mc{C}^{p_{0}}(H) \hookrightarrow \mc{C}^{p_{1}}(H) \qquad 1 \leq p_0 \leq p_1 < \infty.
+\end{equation*}
+We will not prove the basic properties of Schatten classes here; these can be found in \cite[Appendix D]{HNVW16}.
+Below we collect the fundamental properties of Schatten classes that we will use without proof.
 
+\todo{insert properties}
+
+\begin{prop}[Duality]\label{prop:Schatten-duality}
+  For any Hilbert space $H$ and $p \in (1,\infty)$, the map $\map{\phi}{\mc{C}^{p'}(H)}{\mc{C}^{p}(H)^*}$ given by
+  \begin{equation*}
+    \phi(u)(v) := \tr(uv)
+  \end{equation*}
+  is an isometric isomorphism.
+  In particular we have the `non-commmutative H\"older inequality'
+  \begin{equation*}
+    |\tr(uv)| \leq \|u\|_{\mc{C}^{p}(H)} \|v\|_{\mc{C}^{p'}(H)},
+  \end{equation*}
+  and the dual of $\mc{C}^{p}(H)$ is naturally identified with $\mc{C}^{p'}(H)$.
+\end{prop}
+
+\begin{prop}[Interpolation]\label{prop:Schatten-interpolation}
+  Fix a Hilbert space $H$, let $1 \leq p_0 < p_1 < \infty$.
+  \begin{itemize}
+  \item Suppose that $T \in \Lin(\mc{C}^{p_{1}}(H))$ is a bounded linear operator from $\mc{C}^{p_{1}}(H)$ to itself such that for all $u \in \mc{C}^{p_{0}}(H)$,
+  \begin{equation*}
+    \|Tu\|_{\mc{C}^{p_{0}}(H)} \lesssim \|u\|_{\mc{C}^{p_{0}}(H)}
+  \end{equation*}
+  (i.e. $T$ is bounded on $\mc{C}^{p_0}(H)$ as well as on the larger space $\mc{C}^{p_1}(H)$).
+  Then for all $p \in [p_0,p_1]$, $T$ extends to a bounded linear operator on $\mc{C}^{p}(H)$, i.e.
+  \begin{equation*}
+    \|Tu\|_{\mc{C}^{p}(H)} \lesssim \|u\|_{\mc{C}^{p}(H)} \qquad \forall u \in \mc{C}^{p}(H).
+  \end{equation*}
+
+\item Let $(S,\mc{A},\mu)$ be a $\sigma$-finite measure space.
+  Suppose that $T \in \Lin(L^{p_1}(S;\mc{C}^{p_{1}}(H)))$, and that for all $\mb{f} \in L^{p_0}(S;\mc{C}^{p_{0}}(H))$,
+  \begin{equation*}
+    \|T\mb{f}\|_{L^{p_0}(S;\mc{C}^{p_{0}}(H))} \lesssim \|\mb{f}\|_{L^{p_0}(S;\mc{C}^{p_{0}}(H))}.
+  \end{equation*}
+  Then for all $p \in [p_0,p_1]$, $T$ extends to a bounded linear operator on $L^{p}(S;\mc{C}^{p}(H)$).
+  \end{itemize}
+\end{prop}
+
+\begin{rmk}[For those who know about interpolation of Banach spaces]  In the language of complex interpolation spaces (which we have not introduced), we have that $[\mc{C}^{p_0}(H), \mc{C}^{p_1}(H)]_{\theta} = \mc{C}^{p}(H)$, where $\frac{1}{p} = \frac{1-\theta}{p_0} + \frac{\theta}{p_1}$, for all $\theta \in [0,1]$: this implies the first part of Proposition \ref{prop:Schatten-interpolation}.
+  The second part is then implied by the identity $[L^{p_0}(S;X_{0}), L^{p_1}(S; X_{1})]_{\theta} = L^{p}(S;[X_0,X_1]_{\theta})$, which holds for general $\sigma$-finite measure spaces $(S,\mc{A},\mu)$ and interpolation couples $(X_0,X_1)$.
+\end{rmk}
+
+\section{The UMD property of the Schatten classes}
+
+\begin{thm}\label{thm:Schatten-UMD}
+  Let $H$ be a Hilbert space and $p \in (1,\infty)$.
+  Then the Schatten class $\mc{C}^{p}(H)$ is UMD.\footnote{We won't stress this point, but the UMD constants are bounded independently of the Hilbert space $H$.
+  Naturally, they are smaller when $H$ is finite dimensional.}
+\end{thm}
+
+Of course, we won't prove the UMD property directly: instead, we'll show that the Hilbert transform $H_{\T}$ is bounded on $L^p(\T; \mc{C}^{p}(H))$, which by Remark \ref{rmk:HT-UMD-T} implies that $\mc{C}^{p}(H)$ is UMD.
+This argument relies on the \emph{Cotlar identity} for the Hilbert transform on the torus: for all trigonometric polynomials $\map{f,g}{\T}{\C}$,
+\begin{equation}\label{eq:Cotlar}
+  H_{\T}\big(f \cdot (H_{\T} g) + (H_{\T} f) \cdot g) = (H_{\T} f)(H_{\T} g) - fg.
+\end{equation}
+(Exercise \ref{ex:Cotlar}).
+This can be extended to Banach-valued functions as follows.
+\begin{lem}
+  Let $X$, $Y$, and $Z$ be complex Banach spaces, and let $\map{B}{X \times Y}{Z}$ be a bilinear operator.
+  For all functions $\mb{F} \colon \T \to X$ and $\mb{G} \colon \T \to Y$, define the lifting $\map{\tilde{B}(\mb{F},\mb{G})}{\T}{Z}$ by
+  \begin{equation*}
+    \tilde{B}(\mb{F},\mb{G})(t) := B(\mb{F}(t), \mb{G}(t)).
+  \end{equation*}
+  Then for all trigonometric polynomials $\map{\mb{f}}{\T}{X}$ and $\map{\mb{g}}{\T}{Y}$,
+  \begin{equation*}
+    H_{\T}^{Z}\big(\tilde{B}(\mb{f}, H_{\T}^{Y} \mb{g}) + \tilde{B}(H_{\T}^{X} \mb{f}, \mb{g})) = \tilde{B}(H_{\T}^{X} \mb{f}, H_{\T}^{Y} \mb{g}) - \tilde{B}(\mb{f}, \mb{g})
+  \end{equation*}
+  using superscripts to make clear which Banach-valued $H_{\T}$ is being used.
+\end{lem}
+
+\begin{proof}
+  By linearity, it suffices to check this for elementary tensors $\mb{f} = e_{n} \otimes \mb{x}$ and $\mb{g} = e_{m} \otimes \mb{y}$, with $n,m \in \Z$, $\mb{x} \in X$, and $\mb{y} \in Y$.
+  Since $H_{\T}^{X}$ acts as the tensor extension $H_{\T} \otimes I$ on $X$-valued trigonometric polynomials, and likewise with $Y$ and $Z$ in place of $X$, we have
+  \begin{equation*}
+    \begin{aligned}
+      &H_{\T}^{Z}\big(\tilde{B}(\mb{f}, H_{\T}^{Y} \mb{g}) + \tilde{B}(H_{\T}^{X} \mb{f}, \mb{g})) \\
+      &= H_{\T}^{Z} \big( \tilde{B}(e_{n} \otimes \mb{x}, H_{\T}^{Y} (e_{m} \otimes \mb{y}) ) + \tilde{B}(H_{\T}^{X} (e_{n} \otimes \mb{x}), e_{m} \otimes \mb{y})) \\
+      &= H_{\T}^{Z} \big( \tilde{B}(e_{n} \otimes \mb{x}, H_{\T} e_{m} \otimes \mb{y} ) + \tilde{B}(H_{\T} e_{n} \otimes \mb{x}, e_{m} \otimes \mb{y})) \\
+      &= H_{\T}^{Z} \big( (e_{n} \cdot (H_{\T} e_{m}) + (H_{\T} e_{n}) \cdot e_{m} )\otimes B(\mb{x},  \mb{y})) \\
+      &= H_{\T}(e_{n} \cdot (H_{\T} e_{m}) + (H_{\T} e_{n})) B(\mb{x}, \mb{y})
+    \end{aligned}
+  \end{equation*}
+  and similarly
+  \begin{equation*}
+    \tilde{B}(H_{\T}^{X} \mb{f}, H_{\T}^{Y} \mb{g}) - \tilde{B}(\mb{f}, \mb{g})
+    = ((H_{\T} e_n)(H_{\T} e_m) - e_n e_m) B(\mb{x},\mb{y}).
+  \end{equation*}
+  Thus the result follows from the complex-valued case.
+\end{proof}
+
+\begin{proof}[Proof of Theoem \ref{thm:Schatten-UMD}].
+  By the duality relation $\mc{C}^{p}(H)^* = \mc{C}^{p'}(H)$ (Proposition \ref{prop:Schatten-duality}) and the fact that a Banach space is UMD if and only if its dual is UMD (Proposition \ref{prop:UMD-duality}), it suffices to prove the result for $p \in [2,\infty)$.
+  We will show that the Hilbert transform $H_{\T}$ is bounded on $L^p(\T;\mc{C}^{p}(H))$ for all $p \in [2,\infty)$: let
+  \begin{equation*}
+    A_{p} := \|H_{\T}\|_{\Lin(L^p(\T;\mc{C}^{p}(H)))}.
+  \end{equation*}
+  By interpolation (Proposition \ref{prop:Schatten-interpolation}), it suffices to prove that $A_{2^{n}}$ is finite for $n \in \{1,2,\ldots\}$.
+  We will prove this by induction, with base case $n=1$ being true since $\mc{C}^{2}(H)$ is a Hilbert space.
+
+  \todo{UP TO HERE}
+\end{proof}
+
+\section{Schur multipliers}
+
+\section{Operator Lipschitz functions}
+
+\begin{thm}[Potapov--Sukochev]
+  Let $H$ be a Hilbert space and $p \in (1,\infty)$, and let $u$ and $v$ be compact self-adjoint operators on $H$ such that $u - v \in \mc{C}^{p}$.
+  Then for all Lipschitz functions $\map{f}{\R}{\R}$,
+  \begin{equation*}
+    \|f(u) - f(v)\|_{\mc{C}^{p}(H)} \lesssim_{p} \|f\|_{\Lip} \|u - v\|_{\mc{C}^{p}(H)}.
+  \end{equation*}
+\end{thm}
+
+\section{Exercises}
+
+\begin{exercise}\label{ex:Cotlar}
+  Prove the Cotlar identity \eqref{eq:Cotlar} for complex-valued functions.\footnote{See \cite[\textsection 5.4.a]{HNVW16} if you're stuck.}
+\end{exercise}
 
 %%% Local Variables:
 %%% mode: latex
