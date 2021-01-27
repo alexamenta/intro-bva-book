@@ -1,0 +1,188 @@
+%% Packages
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{enumerate}
+
+%% code from mathabx.sty and mathabx.dcl
+\DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+\DeclareFontShape{U}{mathx}{m}{n}{
+      <5> <6> <7> <8> <9> <10>
+      <10.95> <12> <14.4> <17.28> <20.74> <24.88>
+      mathx10
+      }{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareFontSubstitution{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
+\DeclareMathAccent{\wideparen}{0}{mathx}{"75}
+
+\def\cs#1{\texttt{\char`\\#1}}
+
+\usepackage{esint}
+
+% \usepackage[style=numeric, maxbibnames=99]{biblatex}
+% \addbibresource{bibliography.bib}
+% \renewcommand*{\bibfont}{\footnotesize}  %make bibliography small
+
+%\usepackage{showkeys}
+
+%\usepackage{mathbbol}
+\usepackage{bbm} %gives characteristic function without making the letters look bad
+\usepackage{bm}
+
+
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns,calc,decorations.pathreplacing}
+
+\usepackage[all]{xy}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref}  % PDF hyperlinks, with coloured links
+\definecolor{dullmagenta}{rgb}{0.4,0,0.4}   % #660066
+\definecolor{darkblue}{rgb}{0,0,0.4}
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+\hypersetup{linkcolor=darkblue,citecolor=blue,filecolor=dullmagenta,urlcolor=darkblue} % coloured links
+
+
+%% Environments
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor*}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem*{conj*}{Conjecture}
+\newtheorem{example}[thm]{Example}
+\newtheorem{exercise}{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+\newtheorem*{rmk*}{Remark}
+
+
+
+%% Macros
+
+\newcommand{\mc}{\mathcal}
+\newcommand{\ms}[1]{\mathscr{#1}}
+\newcommand{\mb}[1]{\bm{#1}}  %use the bm package instead... this alias is for compatibility 
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+
+\newcommand{\map}[3]{#1 \colon #2 \rightarrow #3}
+
+%% Blackboard  bold shortcuts
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Z}{\mathbb{Z}} 
+\newcommand{\I}{\mathbb{I}}
+
+
+%% Integrals
+\newcommand{\dd}{\mathrm{d}}
+\DeclareMathOperator{\pv}{p.v.}
+
+%% Operations
+\newcommand{\tensor}{\otimes}
+\newcommand{\bigtensor}{\bigotimes}
+\renewcommand{\bar}{\overline} % complex conjugation
+\newcommand{\restrict}[1]{\raisebox{-3pt}{\big\lvert}_{{#1}}}
+
+%% Better Greek letters
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+%% Useful functions
+\renewcommand{\1}{\mathbbm{1}}
+\DeclareMathOperator{\sgn}{sgn}
+
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+%% Set/metric geometry
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\spt}{spt}
+\newcommand{\setint}{\mathring} % interior of a set
+\newcommand{\setclos}{\bar} % closure of a set
+\newcommand{\cptsubset}{\subset\hspace{-2pt}\subset} % compact subset
+
+%% LHS and RHS of eqns
+\DeclareMathOperator{\LHS}{LHS}
+\DeclareMathOperator{\RHS}{RHS}
+
+
+%% Linear maps
+\newcommand{\Lin}{\mc{L}} % bounded linear maps
+\DeclareMathOperator{\Id}{Id} % identity operator
+\DeclareMathOperator{\rk}{rk} % rank
+\DeclareMathOperator{\tr}{tr} % trace
+
+%% Matrices and vectors
+\newcommand{\pmatr}[1]{\begin{pmatrix}#1\end{pmatrix}} % matrix
+\newcommand{\bmatr}[1]{\begin{bmatrix}#1\end{bmatrix}} % matrix
+
+%% *************************
+%% Project-local
+%% *************************
+
+%% Symmetry operators
+\DeclareMathOperator{\Mod}{Mod} % modulation
+\DeclareMathOperator{\Tr}{Tr} % translation
+\DeclareMathOperator{\Dil}{Dil} % dilation
+\DeclareMathOperator{\Refl}{Refl} % reflection
+
+%% Operators
+\newcommand{\HT}{\mathrm{H}}
+\newcommand{\BHT}{\mathrm{BHT}}
+\newcommand{\BHF}{\mathrm{BHF}}
+\newcommand{\BHWF}{\mathrm{BHWF}}
+
+\newcommand{\Bor}{\ms{B}} %Borel functions
+
+%% Spaces of functions
+\newcommand{\Sch}{\ms{S}} % Schwarz functions
+\newcommand{\Simp}{\Sigma} % Simple functions
+\newcommand{\Meas}{M} % measurable functions
+\newcommand{\SMeas}{SM} % strongly measurable functions
+\newcommand{\WMeas}{WM} % weakly measurable functions
+
+\newcommand{\loc}{\operatorname{loc}} % locally 
+
+%% Aliases
+\newcommand{\sm}{\setminus}
+\newcommand{\td}{\widetilde}
+\newcommand{\spn}{\mathrm{span}}
+\renewcommand{\ae}{\mathrm{a.e.}}
+\newcommand{\as}{\mathrm{a.s.}}
+\newcommand{\aeeq}{\stackrel{\ae}{=}}
+\newcommand{\aseq}{\stackrel{\as}{=}}
+\newcommand{\var}{\mathrm{var}}
+\newcommand{\conv}{\mathrm{conv}}
+\newcommand{\UMD}{\mathrm{UMD}}
+\renewcommand{\Im}{\mathrm{Im}}
+\renewcommand{\Re}{\mathrm{Re}}
+\newcommand{\midp}{\mathrm{mid}}
