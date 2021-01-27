@@ -303,21 +303,26 @@ In the next lemma we show that finite interval filtrations can be approximated a
   \end{equation*}
   for all atoms $A \in \mc{F}_{n+1}$.
   Iterating this construction yields a filtration with the claimed properties, other than the conditional expectation identity \eqref{eq:approx-CE-ident} which remains to be shown.
-  To show this, fix $f \in L^1(\mc{F}_{N}')$ and $I \in \mc{F}_{n}'$: we will show that
-  \begin{equation*}
-    \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f \, \dd t = \int_{I} f,
-  \end{equation*}
-  which establishes the identity via the defining property of conditional expectations.
-  Since $I \in \mc{F}_{n}' \subset \mc{G}_{m(n)}$, $I$ can be written as a union of dyadic intervals $J \in \mc{D}_{m(n)}$, so
+  To show this, by the defining property of conditional expectations, it suffices to show for all $f \in L^1([0,1))$ that $\E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f$ is $\mc{F}_{n}'$-measurable, and that
+  \begin{equation}\label{eq:ce-int-ident}
+    \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f \, \dd t = \int_{I} f \qquad \forall I \in \mc{F}_{n}'.
+  \end{equation}
+  Assuming the $\mc{F}_{n}'$-measurability, the identity \eqref{eq:ce-int-ident} is a consequence of the fact that $I \in \mc{G}_{m(n)} \cap \mc{F}_{N}'$:\todo{ACTUALLY WE HAVE TO WORK HARDER IN THE CONSTRUCTION HERE}
   \begin{equation*}
     \begin{aligned}
-      \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f(t) \, \dd t
-      &= \sum_{\substack{J \in \mc{D}_{m(n)} \\ J \subset I}} \int_{J} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f(t) \, \dd t \\
-      &= \sum_{\substack{J \in \mc{D}_{m(n)} \\ J \subset I}} \int_{J} \E^{\mc{F}_{N}'} f(t) \, \dd t
-      = \int_{I} \E^{\mc{F}_{N}'} f(t) \, \dd t = \int_{I} f(t) \, \dd t
+      \int_{I} \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f
+      = \int_{I} \E^{\mc{F}_{N}'} f
+      = \int_{I} f.
     \end{aligned}
   \end{equation*}
-  using $J \in \mc{G}_{m(n)}$ and $I \in \mc{F}_{n}' \subset \mc{F}_{N}'$.
+  To prove that $\E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f$ is $\mc{F}_{n}'$-measurable, use that each atom $A \in \mc{F}_{n}'$ can be partitioned into dyadic intervals from $\mc{D}_{m(n)}$, and that each $I \in \mc{D}_{m(n)}$ is a subset of some atom $A \in \mc{F}_{n}'$, to write
+  \begin{equation*}
+    \begin{aligned}
+      \E^{\mc{G}_{m(n)}} \E^{\mc{F}_{N}'} f
+      &= \sum_{I \in \mc{D}_{m(n)}} \frac{\1_{I}}{|I|} \otimes \E\big( (\E^{\mc{F}_{N}'} f) \1_{I} \big) \\
+      &= 2^{m(n)} \sum_{\text{atoms $A \in \mc{F}_{n}'$}} \sum_{\substack{I \in \mc{D}_{m(n)} \\ I \subset A}} \1_{I} \otimes \E\big( (\E^{\mc{F}_{N}'} f) \1_{I} \big) 
+    \end{aligned}
+  \end{equation*}
 \end{proof}
 
 \begin{thm}\label{thm:dyadic-UMD}
@@ -573,8 +578,25 @@ We will use these observations shortly.
        \end{aligned}
      \end{equation*}
      The same argument with $k - \frac{1}{2}$ in place of $k + \frac{1}{2}$ completes the proof.
-  \end{proof}
+   \end{proof}
 
+   \begin{rmk}\label{rmk:HT-fubini}
+     Once we know that $H_{\T}$ is bounded on $L^p(\T;X)$, we can deduce that for all $N \in \N$ the $L^p(\T^{N};X)$-valued Hilbert transform $\tilde{H}_{\T}$ is bounded on $L^p(\T;L^p(\T^{N};X))$.
+     Indeed, for
+     \begin{equation*}
+       \mb{g} \in L^p(\T; L^p(\T^{N};X)) = L^p(\T^{N};L^p(\T;X))
+     \end{equation*}
+     we can write
+     \begin{equation*}
+       \begin{aligned}
+         \|\tilde{H}_{\T} \mb{g}\|_{L^p(\T;L^p(\T^{N};X))}
+         &= \Big( \int_{\T^{N}} \|\tilde{H}_{\T} (\mb{g}(t))\|_{L^p(\T;X)}^{p} \, \dd t \Big)^{1/p} \\
+         &\lesssim_{p,X} \Big( \int_{\T^{N}} \| \mb{g}(t)\|_{L^p(\T;X)}^{p} \, \dd t \Big)^{1/p} \\
+         &= \|\mb{g}\|_{L^p(\T;L^p(\T^{N};X))}.
+       \end{aligned}
+     \end{equation*}
+   \end{rmk}
+   
   In the argument used to deduce the UMD property from boundedness of the Hilbert transform, we use not only the boundedness of $H_{\T}$, but also of associated operators on $\T^{N}$.
 
   \begin{defn}\label{defn:higher-HT}
@@ -611,7 +633,7 @@ The key estimate is the following, whose proof we will briefly defer.
   Let $p \in (1,\infty)$, and suppose $X$ is a complex Banach space such that $H_{\T}$ is bounded on $L^p(\T;X)$.
   Then for all finite sign sequences $(\xi_{n})_{n=1}^{N}$ and all functions $\mb{f}_{n} \in L^p_{0}(\T_{n};L^p(\T^{n-1};X))$ with $1 \leq n \leq N$, under the natural identification $L^p(\T^{n};X) \subset L^p(\T^{N};X)$, we have
   \begin{equation*}
-    \Big\| \sum_{n=1}^{N} \xi_{k} H_{\T,n} \mb{f}_{n} \Big\|_{L^p(\T^{N};X)} \lesssim_{p,X} \Big\| \sum_{n=1}^{N} \mb{f}_{n} \Big\|_{L^p(\T^{N};X)}.
+    \Big\| \sum_{n=1}^{N} \xi_{n} H_{\T,n} \mb{f}_{n} \Big\|_{L^p(\T^{N};X)} \lesssim_{p,X} \Big\| \sum_{n=1}^{N} \mb{f}_{n} \Big\|_{L^p(\T^{N};X)}.
   \end{equation*}
 \end{prop}
 
@@ -637,7 +659,7 @@ Assuming this for the moment, let's prove Bourgain's theorem.
       \lesssim_{p,X}  \Big\| \sum_{n=1}^{N} \mb{g}_{n} \Big\|_{L^p(\T^{N};X)},
     \end{aligned}
   \end{equation*}
-  completing the proof.
+  completing the proof.\footnote{Note that in the second application of Proposition \ref{prop:Bourgain-H}, we use that the functions $H_{\T,n} \mb{g}_{n} \colon \T_{n} \to \L^p(\T^{n-1};X)$ have vanishing integral, which follows from the definition of $H_{\T}$.}
 \end{proof}
 
 So we are left with proving Proposition \ref{prop:Bourgain-H}.
@@ -649,9 +671,9 @@ This relies on a clever choice of isometry of $L^p(\T^{N};X)$ into $L^p(\T; L^p(
     (\mc{B}_{M} \mb{g}(s))(t_{1}, \ldots, t_{N}) := \mb{g}(t_{1} + M_{1} s, \ldots, t_{N} + M_{N} s).
   \end{equation*}
   Then $\mc{B}_{M}$ is an isometry which maps trigonometric polynomials into trigonometric polynomials.
-  Furthermore, given a sequence of trigonometric polynomials
+  Furthermore, given a sequence of trigonometric polynomials $\mb{f} \colon \T^{n} \to X$ such that
   \begin{equation*}
-    \mb{f}_{n} \in L^p_{0}(T_{n}; L^p(\T^{n-1};X))
+    \mb{f}_{n} \in L^p_{0}(\T_{n}; L^p(\T^{n-1};X))
   \end{equation*}
   (note the vanishing integral condition), if the sequence $|M_{1}|, |M_{2}|, \ldots, |M_{N}|$ is sufficiently rapidly increasing, we have
   \begin{equation}\label{eq:B-ident}
@@ -673,13 +695,13 @@ This relies on a clever choice of isometry of $L^p(\T^{N};X)$ into $L^p(\T; L^p(
   \end{equation*}
   That $\mc{B}_{M}$ maps trigonometric polynomials to trigonometric polynomials is Exercise \ref{ex:B-trigpoly}.
   
-  Now consider $\mb{f}_{n} \in L^{p}_{0}(\T_{n} ; L^p(\T^{n-1};X))$ for $n \in \{1,2,\ldots,N\}$.
-  Viewing $\mb{f}_{n}$ as a function on $\T^{n}$, for $t \in \T^{n}$ write
+  Now consider trigonometric polynomials $\mb{f}_{n} \colon \T^{n} \to X$ such that $\mb{f}_{n} \in L^{p}_{0}(\T_{n} ; L^p(\T^{n-1};X))$ for $n \in \{1,2,\ldots,N\}$.
+  For $t \in \T^{n}$ write
   \begin{equation*}
     \begin{aligned}
       \mb{f}_{n}(t)
       &= \sum_{\substack{m \in \Z^{n} \\ m_{n} \neq 0}} e_{m}(t) \hat{\mb{f}_{n}}(m)  \\
-      &= \sum_{\substack{m \in \Z^{n} \\ m_{n} \neq 0}} e_{m_1,\ldots,m_{n-1}}(t_{1},\ldots,t_{n-1}) e_{m_n}(t_n) \hat{\mb{f}_{n}}(m) ,
+      &= \sum_{\substack{m \in \Z^{n} \\ m_{n} \neq 0}} e_{(m_1,\ldots,m_{n-1})}(t_{1},\ldots,t_{n-1}) e_{m_n}(t_n) \hat{\mb{f}_{n}}(m) ,
   \end{aligned}
   \end{equation*}
   with the restriction $m_{n} \neq 0$ coming from the vanishing integral assumption, as $\mb{f}_{n}(m) = \mb{0}$ when $m_{n} = 0$.
@@ -689,26 +711,26 @@ This relies on a clever choice of isometry of $L^p(\T^{N};X)$ into $L^p(\T; L^p(
   \end{equation*}
   and thus
   \begin{equation}\label{eq:BH}
-    \mc{B}_{M} H_{\T,n} \mb{f}_{n}(s)(t) = -i \sum_{\substack{m \in \Z^{n} \\ m_{n} \neq 0}} \sgn(m_n) e_{m}(t_1 + M_1s_1,\ldots,t_n + M_n s_n) \hat{\mb{f}_{n}}(m) .
+    \mc{B}_{M} H_{\T,n} \mb{f}_{n}(s)(t) = -i \sum_{\substack{m \in \Z^{n} \\ m_{n} \neq 0}} \sgn(m_n) e_{m}(t_1 + M_1s,\ldots,t_n + M_n s) \hat{\mb{f}_{n}}(m) .
   \end{equation}
   We can also compute
   \begin{equation*}
     \begin{aligned}
       \mc{B}_{M} \mb{f}_{n}(s)(t)
-      &= \mb{f}_{n}(t_1 + M_1 s, \ldots, t_n + M_n s_n) \\
+      &= \mb{f}_{n}(t_1 + M_1 s, \ldots, t_n + M_n s) \\
       &= \sum_{\substack{m \in \Z^{n} \\ m_n \neq 0}} e_{m}(t) e_{m \cdot M}(s) \hat{\mb{f}_n}(m)
     \end{aligned}
   \end{equation*}
   and thus
   \begin{equation}\label{eq:HB}
-    \tilde{H}_{\T} \mc{B}_{M} \mb{f}_{n}(s)(t) = -i \sum_{\substack{m \in \Z^{n} \\ m_n \neq 0}} \sgn(m \cdot M) e_{m}(t + M_1 s_1, \ldots, t + M_n s_n)  \hat{\mb{f}_n}(m).
+    \tilde{H}_{\T} \mc{B}_{M} \mb{f}_{n}(s)(t) = -i \sum_{\substack{m \in \Z^{n} \\ m_n \neq 0}} \sgn(m \cdot M) e_{m}(t + M_1 s, \ldots, t + M_n s)  \hat{\mb{f}_n}(m).
   \end{equation}
   
   Comparing \eqref{eq:BH} and \eqref{eq:HB}, to prove the intertwining relation \eqref{eq:B-ident} we need to show that
   \begin{equation}\label{eq:B-goal}
     \sgn(m \cdot M) = \sgn(m_n)\sgn(M_n) = \sgn(m_n M_n)
   \end{equation}
-  for all $n \in \{1,2,\ldots,N\}$ and all $m \in \Z^{n}$ with $\hat{\mb{f}_{n}} \neq 0$, which is where the rapid increase of the sequence $(M_n)$ comes into play.
+  for all $n \in \{1,2,\ldots,N\}$ and all $m \in \Z^{n}$ with $\hat{\mb{f}_{n}}(m) \neq 0$, which is where the rapid increase of the sequence $(M_n)$ comes into play.
   Since
   \begin{equation*}
      m \cdot M = m_1 M_1 + \cdots + m_{n-1} M_{n-1} + m_n M_n,
@@ -734,23 +756,9 @@ This relies on a clever choice of isometry of $L^p(\T^{N};X)$ into $L^p(\T; L^p(
 Finally we can establish the missing ingredient in our proof of Theorem \ref{thm:Bourgain}.
 
 \begin{proof}[Proof of Proposition \ref{prop:Bourgain-H}]
-  First we observe that by a Fubini argument, since $H_{\T}$ is bounded on $L^p(\T;X)$, the $L^p(\T^{N};X)$-valued Hilbert transform $\tilde{H}_{\T}$ is bounded on $L^p(\T;L^p(\T^{N};X))$.
-  Indeed, for
-  \begin{equation*}
-    \mb{g} \in L^p(\T; L^p(\T^{N};X)) = L^p(\T^{N};L^p(\T;X))
-  \end{equation*}
-  we can write
-  \begin{equation*}
-    \begin{aligned}
-      \|\tilde{H}_{\T} \mb{g}\|_{L^p(\T;L^p(\T^{N};X))}
-      &= \Big( \int_{\T^{N}} \|\tilde{H}_{\T} (\mb{g}(t))\|_{L^p(\T;X)}^{p} \, \dd t \Big)^{1/p} \\
-      &\lesssim_{p,X} \Big( \int_{\T^{N}} \| \mb{g}(t)\|_{L^p(\T;X)}^{p} \, \dd t \Big)^{1/p} \\
-      &= \|\mb{g}\|_{L^p(\T;L^p(\T^{N};X))}.
-  \end{aligned}
-  \end{equation*}
-
+  As mentioned in Remark \ref{rmk:HT-fubini}, since $H_{\T}$ is bounded on $L^p(\T;X)$,  the $L^p(\T^{N};X)$-valued Hilbert transform $\tilde{H}_{\T}$ is bounded on $L^p(\T;L^p(\T^{N};X))$. 
   
-  By a density argument, we can assume each $\mb{f}_{n}$ is a $L^p(\T^{n-1};X)$-valued trigonometric polynomial on $\T_{n}$.
+  By a density argument, we can assume each $\mb{f}_{n}$ is an $X$-valued trigonometric polynomial on $\T^{n}$.
   Choose a sequence $(M_{n})_{n=1}^{N}$ such that $\sgn(M_n) = \xi_{n}$ and such that $|M_n|$ increases sufficiently quickly.
   Then by Lemma \ref{lem:Bourgain} and the boundedness of $\tilde{H}_{\T}$ on $L^p(\T;L^p(\T^{N};X))$,
   \begin{equation*}
