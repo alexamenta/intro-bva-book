@@ -1,5 +1,3 @@
-
-
 \section{Schatten class operators}
 Let $H$ be a Hilbert space (finite or infinite dimensional) and consider a bounded linear operator $u \in \Lin(H)$.
 The \emph{approximation numbers} (or \emph{singular values}) of $u$ are the numbers
@@ -22,14 +20,26 @@ One can equivalently write
 \begin{equation*}
   \|u\|_{\mc{C}^{p}(H)} = \tr(|u|^{p})^{1/p},
 \end{equation*}
-where $|u| = u^{*}u$ and $|u|^{p}$ is defined via the spectral theorem.
+where $|u| = (u^{*}u)^{1/2}$ (the square root of the positive operator $u^{*} u$) and $|u|^{p}$ is defined via the spectral theorem.
 From this representation it is clear that the Schatten class $\mc{C}^{1}(H)$ is exactly the set of trace class operators.
-On the other hand, $\mc{C}^{2}(H)$ is the set of Hilbert--Schmidt operators---this is a Hilbert space under the inner product
+On the other hand, $\mc{C}^{2}(H)$ is the set of Hilbert--Schmidt operators---this is a Hilbert space with inner product
 \begin{equation*}
-  \langle u, v \rangle := \sum_{i \in I} \langle u(h_{i}), v(h_{i}) \rangle_{H}
+  \langle u, v \rangle := \tr(uv^*).
 \end{equation*}
-with $(h_{i})_{i \in I}$ being any orthonormal basis of $H$.
-We have not defined $\mc{C}^\infty(H)$, but there are two conventions: it is generally defined as either the space $\mc{K}(H)$ of all compact operators, or simply as $\Lin(H)$.
+For general $p \in [1,\infty)$ we have
+\begin{equation*}
+  \|u\|_{\mc{C}^{p}(H)} = \|u^* \|_{\mc{C}^{p}(H)},
+\end{equation*}
+as well as the useful identity
+\begin{equation}\label{eq:Schatten-convexity}
+  \|u\|_{\mc{C}^{2p}(H)} = \tr(((u^*u)^{1/2})^{2p})^{1/2p} = \tr((u^* u)^{p})^{1/2p} = \|u^* u\|_{\mc{C}^{p}}^{1/2}
+\end{equation}
+which follows from $u^{*} u = |u^{*} u|$.
+This will let us translate properties of the Banach spaces $\mc{C}^{p}(H)$, most importantly the UMD property, between each other.
+
+
+
+We have not defined $\mc{C}^\infty(H)$ (and we will not need to), but there are two reasonable definitions: it is either the subspace $\mc{K}(H) \subset \Lin(H)$ of all compact operators, or $\Lin(H)$ itself.
 In general, the Schatten class $\mc{C}^{p}(H)$ behaves like a non-commutative version of the sequence space $\ell^{p}$.
 Indeed, since the norm of $\mc{C}^{p}(H)$ is directly modeled on that of $\ell^{p}$, we immediatley have the continuous inclusion
 \begin{equation*}
@@ -38,7 +48,9 @@ Indeed, since the norm of $\mc{C}^{p}(H)$ is directly modeled on that of $\ell^{
 We will not prove the basic properties of Schatten classes here; these can be found in \cite[Appendix D]{HNVW16}.
 Below we collect the fundamental properties of Schatten classes that we will use without proof.
 
-\todo{insert properties}
+\begin{prop}
+  For any Hilbert space $H$ and $p \in [1,\infty)$, the finite-rank operators form a dense subspace of $\mc{C}^{p}(H)$.
+\end{prop}
 
 \begin{prop}[Duality]\label{prop:Schatten-duality}
   For any Hilbert space $H$ and $p \in (1,\infty)$, the map $\map{\phi}{\mc{C}^{p'}(H)}{\mc{C}^{p}(H)^*}$ given by
@@ -46,11 +58,12 @@ Below we collect the fundamental properties of Schatten classes that we will use
     \phi(u)(v) := \tr(uv)
   \end{equation*}
   is an isometric isomorphism.
-  In particular we have the `non-commmutative H\"older inequality'
-  \begin{equation*}
-    |\tr(uv)| \leq \|u\|_{\mc{C}^{p}(H)} \|v\|_{\mc{C}^{p'}(H)},
-  \end{equation*}
-  and the dual of $\mc{C}^{p}(H)$ is naturally identified with $\mc{C}^{p'}(H)$.
+  Thus the dual of $\mc{C}^{p}(H)$ is naturally identified with $\mc{C}^{p'}(H)$.
+  Using this along with \ref{eq:Schatten-convexity}, we can deduce the `non-commmutative H\"older inequality'
+  \begin{equation}\label{eq:NC-holder}
+    \|uv\|_{\mc{C}^{r}(H)} \leq \|u\|_{\mc{C}^{p}(H)} \|v\|_{\mc{C}^{q}(H)}
+  \end{equation}
+  whenever $p,q,r \in [1,\infty)$ satisfy $\frac{1}{p} + \frac{1}{q} = \frac{1}{r}$.
 \end{prop}
 
 \begin{prop}[Interpolation]\label{prop:Schatten-interpolation}
@@ -94,7 +107,8 @@ This argument relies on the \emph{Cotlar identity} for the Hilbert transform on 
 \end{equation}
 (Exercise \ref{ex:Cotlar}).
 This can be extended to Banach-valued functions as follows.
-\begin{lem}
+
+\begin{lem}\label{lem:Cotlar-BV}
   Let $X$, $Y$, and $Z$ be complex Banach spaces, and let $\map{B}{X \times Y}{Z}$ be a bilinear operator.
   For all functions $\mb{F} \colon \T \to X$ and $\mb{G} \colon \T \to Y$, define the lifting $\map{\tilde{B}(\mb{F},\mb{G})}{\T}{Z}$ by
   \begin{equation*}
@@ -127,19 +141,124 @@ This can be extended to Banach-valued functions as follows.
   Thus the result follows from the complex-valued case.
 \end{proof}
 
-\begin{proof}[Proof of Theoem \ref{thm:Schatten-UMD}].
-  By the duality relation $\mc{C}^{p}(H)^* = \mc{C}^{p'}(H)$ (Proposition \ref{prop:Schatten-duality}) and the fact that a Banach space is UMD if and only if its dual is UMD (Proposition \ref{prop:UMD-duality}), it suffices to prove the result for $p \in [2,\infty)$.
-  We will show that the Hilbert transform $H_{\T}$ is bounded on $L^p(\T;\mc{C}^{p}(H))$ for all $p \in [2,\infty)$: let
+We will use this result with the bilinear form $\map{B}{\mc{C}^{2p}(H) \times \mc{C}^{2p}(H)}{\mc{C}^{p}(H)}$ given by $B(u,v) := uv$, whose boundedness follows by the non-commutative H\"older inequality \eqref{eq:NC-holder}.
+
+\begin{proof}[Proof of Theorem \ref{thm:Schatten-UMD}]
+  Write $\mc{C}^{p} = \mc{C}^{p}(H)$ to ease notation.
+  By the duality relation $(\mc{C}^{p})^* = \mc{C}^{p'}$ (Proposition \ref{prop:Schatten-duality}) and the fact that a Banach space is UMD if and only if its dual is UMD (Proposition \ref{prop:UMD-duality}), it suffices to prove the result for $p \in [2,\infty)$.
+  We will show that the Hilbert transform $H_{\T}$ is bounded on $L^p(\T;\mc{C}^{p})$ for all $p \in [2,\infty)$: let
   \begin{equation*}
-    A_{p} := \|H_{\T}\|_{\Lin(L^p(\T;\mc{C}^{p}(H)))}.
+    A_{p} := \|H_{\T}\|_{\Lin(L^p(\T;\mc{C}^{p}))}.
   \end{equation*}
   By interpolation (Proposition \ref{prop:Schatten-interpolation}), it suffices to prove that $A_{2^{n}}$ is finite for $n \in \{1,2,\ldots\}$.
   We will prove this by induction, with base case $n=1$ being true since $\mc{C}^{2}(H)$ is a Hilbert space.
+  To simply notation further, we will fix $p \geq 2$, assume that $A_{p}$ is finite, and deduce that $A_{2p}$ is also finite.
 
+  For all $N \in \N$, let $P_{N}(\mc{C}^{2p})$ denote the set of $\mc{C}^{2p}$-valued trigonometric polynomials $\mb{f}$ of degree $\leq N$ (i.e. $\hat{\mb{f}}(m) = \mb{0}$ whenever $|m| > N$), and define
+  \begin{equation*}
+    A_{2p,N} := \sup_{\mb{f} \in P_{N}, \mb{f} \neq 0} \frac{\|H_{\T} \mb{f}\|_{L^p(\T;\mc{C}^{2p})}}{\|\mb{f}\|_{L^p(\T;\mc{C}^{2p})}},
+  \end{equation*}
+  i.e. $A_{2p,N}$ is the norm of the Hilbert transform $H_{\T}$ restricted to the subspace $P_{N} \subset L^p(\T;\mc{C}^{2p})$.
+  Then by density of the trigonometric polynomials
+  \begin{equation*}
+    A_{2p} = \lim_{N \to \infty} A_{2p,N},
+  \end{equation*}
+  and by Exercise \ref{ex:HT-FD}, the numbers $A_{2p,N}$ are all finite.\footnote{This could be thought of as a `noncommutative truncation argument'.}
+
+  For every function $\mb{F} \colon \T \to \Lin(H)$, let $\mb{F}^*$ denote the pointwise adjoint, given by $\mb{F}^{*}(t) := \mb{F}(t)^*$.
+  Fix a trigonometric polynomial $\mb{f} \in P_{N}$.
+  We have the identity
+  \begin{equation*}
+    (H_{\T} \mb{F})^{*} = H_{\T} (\mb{F}^*)
+  \end{equation*}
+  (Exercise \ref{ex:HT-adjoint-Schatten}), so by \eqref{eq:Schatten-convexity}, we can write
+  \begin{equation*}
+    \begin{aligned}
+      \|H_{\T} \mb{f}\|_{L^{2p}(\T;\mc{C}^{2p})}^{2}
+      &= \Big( \int_{\T} \|H_{\T} \mb{f}(t) \|_{\mc{C}^{2p}}^{2p} \, \dd t \Big)^{2/2p} \\
+      &= \Big( \int_{\T} \|H_{\T} \mb{f}(t)^* H_{\T} \mb{f}(t) \|_{\mc{C}^{p}}^{p} \, \dd t \Big)^{1/p} \\
+      &= \Big( \int_{\T} \|H_{\T} (\mb{f}^{*})(t) H_{\T} \mb{f}(t) \|_{\mc{C}^{p}}^{p} \, \dd t \Big)^{1/p} \\
+      &= \|H_{\T} (\mb{f}^*) H_{\T} \mb{f}\|_{L^p(\T;\mc{C}^{p})}.
+    \end{aligned}
+  \end{equation*}
+  By Cotlar's identity (more precisely, by the Banach-valued extension \eqref{lem:Cotlar-BV}), the definition of $A_{p}$ and $A_{2p,N}$, and the classical and non-commutative H\"older inequalities, we can estimate
+  \begin{equation*}
+    \begin{aligned}
+      &\|H_{\T} (\mb{f}^*) H_{\T} \mb{f}\|_{L^p(\T;\mc{C}^{p})} \\
+      &\leq \Big\|H_{\T}\Big(\mb{f}^* (H_{\T} \mb{f}) + (H_{\T} \mb{f}^*)\mb{f} \Big) \Big\|_{L^p(\T;\mc{C}^{p})} + \|\mb{f}^{*} \mb{f}\|_{L^p(\T;\mc{C}^{p})} \\
+      &\leq A_{p} \big( \|\mb{f}^* (H_{\T} \mb{f})\|_{L^p(\T;\mc{C}^{p})} + \| (H_{\T} \mb{f}^*)\mb{f} \|_{L^p(\T;\mc{C}^{p})} \big) + \|\mb{f}^{*} \mb{f}\|_{L^p(\T;\mc{C}^{p})} \\
+      &\leq A_{p} \big( \|\mb{f}^*\| \|H_{\T} \mb{f}\| + \| H_{\T} \mb{f}^*\| \| \mb{f} \| \big)   + \|\mb{f}^{*}\| \| \mb{f}\| 
+      \leq (2A_{p} A_{2p,N} + 1) \|\mb{f}\|^{2}.
+    \end{aligned}
+  \end{equation*}
+  where all the unlabeled norms are in $L^{2p}(\T;\mc{C}^{2p})$.
+  This tells us that
+  \begin{equation*}
+    A_{2p,N}^{2} \leq 2A_{p} A_{2p,N} + 1,
+  \end{equation*}
+  and thus by solving a quadratic equation
+  \begin{equation*}
+    A_{2p,N} \leq A_{p} + \sqrt{A_{p}^{2} - 1}.
+  \end{equation*}
+  Taking the limit as $N \to \infty$ and using that $A_{p} < \infty$, we find that $A_{2p} < \infty$ also.
+  This completes the proof.
+\end{proof}
+
+\begin{rmk}
+  With a small bit of extra work, this argument can be extended to show that
+  \begin{equation*}
+    \|H_{\T}\|_{L^p(\T;\mc{C}^{p})} \leq \frac{8}{\pi} \max(p,p')
+  \end{equation*}
+  for all $p \in (1,\infty)$, but we don't need this degree of control.
+  See \cite[Proposition 5.4.2]{HNVW16}.
+\end{rmk}
+
+\section{Schur multipliers}
+
+Let $H$ be a Hilbert space.
+A \emph{countable spectral resolution} of $H$ is a sequence of pairwise orthogonal projections $(e_{\lambda})_{\lambda \in \Lambda}$ on $H$, where $\Lambda \subset \R$ is countable, such that $\mb{h} = \sum_{\lambda \in \Lambda} e_{\lambda} \mb{h}$ for all $\mb{h} \in H$.\footnote{Note that the vectors $e_{\lambda} \mb{h}$ are orthogonal, so convergence of the series is independent of the ordering.}
+
+\begin{defn}
+  Given a countable spectral resolution $(e_{\lambda})_{\lambda \in \Lambda}$ on a Hilbert space $H$, and given an infinite matrix $(m_{\lambda,\mu})_{\lambda,\mu \in \Lambda}$ indexed by $\Lambda$, the \emph{Schur multiplier} $M_{m}^{e}$ is the operator acting on $\Lin(H)$ (note that this is an operator \emph{on} $\Lin(H)$, not \emph{in} $\Lin(H)$) defined formally by
+  \begin{equation*}
+    M_{m}^{e} u := \sum_{\lambda, \mu \in \Lambda} m_{\lambda,\mu} e_{\lambda} u e_{\mu} \qquad \forall u \in \Lin(H).
+  \end{equation*}
+  Note that when $u$ has finite rank, $M_{m}^{e} u$ is well-defined, as the sum is finite.
+\end{defn}
+
+In essence, $M_{m}^{e}$ takes the representation of $u \in \Lin(H)$ as an infinite matrix with respect to the spectral resolution $e_{\bullet}$, and multiplies this \emph{componentwise} by the infinite matrix $m$.
+There is no guarantee that this operation is well-defined on all $u \in \Lin(H)$, but when $m_{\lambda,\mu}$ is given by the differences of a scalar-valued Mikhlin symbol (recall Definition \ref{defn:mikhlin-symbol}), we can deduce the boundedness of the Schur multiplier $M_{m}^{e}$ on $\mc{C}^{p}(H)$ from the UMD property.
+
+\begin{thm}
+  Let $H$ be a Hilbert space with countable spectral resolution $(e_{\lambda})_{\lambda \in \Lambda}$, and fix $p \in (1,\infty)$.
+  Let $m \in L^\infty(\R)$ be a scalar-valued Mikhlin symbol, and consider the infinite matrix
+  \begin{equation*}
+    m_{\lambda,\mu} := m(\lambda - \mu) \qquad \lambda,\mu \in \Lambda \subset \R.
+  \end{equation*}
+  Then for all finite rank operators $v \in \Lin(H)$ we have the estimate
+  \begin{equation*}
+    \|M_{m}^{e} v\|_{\mc{C}^{p}(H)} \lesssim_{p} \|m\|_{\mf{M}(\R)} \|v\|_{\mc{C}^{p}(H)},
+  \end{equation*}
+  and thus by density we can extend $M_{m}^{e}$ to a bounded linear operator on $\mc{C}^{p}(H)$.
+\end{thm}
+
+\begin{proof}
+  For each $t \in \R$, consider the unitary operator
+  \begin{equation*}
+    u_{t} := \sum_{\lambda \in \Lambda} e^{2\pi i t} e_{\lambda}, 
+  \end{equation*}
+  so that $u_{t}^{*} = u_{-t}$.
+  Then for all $t \in \R$ we have
+  \begin{equation*}
+    \| M_{m}^{e} v \|_{\mc{C}^{p}(H)} = 
+    \|u_{t}  (M_{m}^{e} v) u_{-t} \|_{\mc{C}^{p}(H)}
+  \end{equation*}
+  since conjugating by a unitary preserves all approximation numbers, hence also the Schatten norms.
   \todo{UP TO HERE}
 \end{proof}
 
-\section{Schur multipliers}
+
+
 
 \section{Operator Lipschitz functions}
 
@@ -156,6 +275,20 @@ This can be extended to Banach-valued functions as follows.
 \begin{exercise}\label{ex:Cotlar}
   Prove the Cotlar identity \eqref{eq:Cotlar} for complex-valued functions.\footnote{See \cite[\textsection 5.4.a]{HNVW16} if you're stuck.}
 \end{exercise}
+
+\begin{exercise}\label{ex:HT-FD}
+  Let $X$ be a complex Banach space and let $P_{N}(X)$ denote the set of trigonometric polynomials $\map{\mb{f}}{\T}{X}$ of degree $\leq N$ (meaning that $\hat{\mb{f}}$ is supported in $\{-N,-N+1,\cdots,N-1,N\}$).
+  Show that 
+  \begin{equation*}
+    \|H_{\T} \mb{f}\|_{L^p(\T;X)} \lesssim_{p,X,N} \|\mb{f}\|_{L^p(\T;X)} \qquad \forall \mb{f} \in P_{N}(X).
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}\label{ex:HT-adjoint-Schatten}
+  Let $H$ be a Hilbert space and  $\mb{f} \colon \T \to \Lin(H)$ a $\Lin(H)$-valued trigonometric polynomial.
+  Show that $(H_{\T} \mb{f})(t))^* = (H_{\T} (\mb{f}^*))(t)$, where $\mb{f}^*$ is the pointwise adjoint of $\mb{f}$.
+\end{exercise}
+
 
 %%% Local Variables:
 %%% mode: latex
