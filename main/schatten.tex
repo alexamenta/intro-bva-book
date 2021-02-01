@@ -49,7 +49,7 @@ We will not prove the basic properties of Schatten classes here; these can be fo
 Below we collect the fundamental properties of Schatten classes that we will use without proof.
 
 \begin{prop}
-  For any Hilbert space $H$ and $p \in [1,\infty)$, the finite-rank operators form a dense subspace of $\mc{C}^{p}(H)$.
+  For any Hilbert space $H$ and $p \in [1,\infty)$, the finite rank operators form a dense subspace of $\mc{C}^{p}(H)$.
 \end{prop}
 
 \begin{prop}[Duality]\label{prop:Schatten-duality}
@@ -96,8 +96,7 @@ Below we collect the fundamental properties of Schatten classes that we will use
 
 \begin{thm}\label{thm:Schatten-UMD}
   Let $H$ be a Hilbert space and $p \in (1,\infty)$.
-  Then the Schatten class $\mc{C}^{p}(H)$ is UMD.\footnote{We won't stress this point, but the UMD constants are bounded independently of the Hilbert space $H$.
-  Naturally, they are smaller when $H$ is finite dimensional.}
+  Then the Schatten class $\mc{C}^{p}(H)$ is UMD, and there exists a constant $C_{p} < \infty$ such that $\beta_{p}(\mc{C}^{p}(H)) \leq C_{p}$ for all Hilbert spaces.
 \end{thm}
 
 Of course, we won't prove the UMD property directly: instead, we'll show that the Hilbert transform $H_{\T}$ is bounded on $L^p(\T; \mc{C}^{p}(H))$, which by Remark \ref{rmk:HT-UMD-T} implies that $\mc{C}^{p}(H)$ is UMD.
@@ -145,14 +144,16 @@ We will use this result with the bilinear form $\map{B}{\mc{C}^{2p}(H) \times \m
 
 \begin{proof}[Proof of Theorem \ref{thm:Schatten-UMD}]
   Write $\mc{C}^{p} = \mc{C}^{p}(H)$ to ease notation.
+  It will be clear from the proof that the resulting constants we obtain are independent of the choice of Hilbert space.
   By the duality relation $(\mc{C}^{p})^* = \mc{C}^{p'}$ (Proposition \ref{prop:Schatten-duality}) and the fact that a Banach space is UMD if and only if its dual is UMD (Proposition \ref{prop:UMD-duality}), it suffices to prove the result for $p \in [2,\infty)$.
   We will show that the Hilbert transform $H_{\T}$ is bounded on $L^p(\T;\mc{C}^{p})$ for all $p \in [2,\infty)$: let
   \begin{equation*}
     A_{p} := \|H_{\T}\|_{\Lin(L^p(\T;\mc{C}^{p}))}.
   \end{equation*}
   By interpolation (Proposition \ref{prop:Schatten-interpolation}), it suffices to prove that $A_{2^{n}}$ is finite for $n \in \{1,2,\ldots\}$.
-  We will prove this by induction, with base case $n=1$ being true since $\mc{C}^{2}(H)$ is a Hilbert space.
+  We will prove this by induction, with base case $n=1$ being true since $\mc{C}^{2}(H)$ is a Hilbert space (so in fact $A_{2} = 1$).\footnote{The fact that $A_{2}$ is independent of the choice of $H$ ultimately leads to our constants being $H$-independent throughout.}
   To simply notation further, we will fix $p \geq 2$, assume that $A_{p}$ is finite, and deduce that $A_{2p}$ is also finite.
+
 
   For all $N \in \N$, let $P_{N}(\mc{C}^{2p})$ denote the set of $\mc{C}^{2p}$-valued trigonometric polynomials $\mb{f}$ of degree $\leq N$ (i.e. $\hat{\mb{f}}(m) = \mb{0}$ whenever $|m| > N$), and define
   \begin{equation*}
@@ -226,26 +227,63 @@ A \emph{countable spectral resolution} of $H$ is a sequence of pairwise orthogon
   Note that when $u$ has finite rank, $M_{m}^{e} u$ is well-defined, as the sum is finite.
 \end{defn}
 
-In essence, $M_{m}^{e}$ takes the representation of $u \in \Lin(H)$ as an infinite matrix with respect to the spectral resolution $e_{\bullet}$, and multiplies this \emph{componentwise} by the infinite matrix $m$.
+Formally, $M_{m}^{e}$ takes the representation of $u \in \Lin(H)$ as an infinite matrix with respect to the spectral resolution $e_{\bullet}$, and multiplies this \emph{componentwise} by the infinite matrix $m$.
 There is no guarantee that this operation is well-defined on all $u \in \Lin(H)$, but when $m_{\lambda,\mu}$ is given by the differences of a scalar-valued Mikhlin symbol (recall Definition \ref{defn:mikhlin-symbol}), we can deduce the boundedness of the Schur multiplier $M_{m}^{e}$ on $\mc{C}^{p}(H)$ from the UMD property.
+First we prove a lemma that lets us handle simple diagonal Schur multipliers.
 
-\begin{thm}
+\begin{lem}\label{lem:schur-diag}
   Let $H$ be a Hilbert space with countable spectral resolution $(e_{\lambda})_{\lambda \in \Lambda}$, and fix $p \in (1,\infty)$.
-  Let $m \in L^\infty(\R)$ be a scalar-valued Mikhlin symbol, and consider the infinite matrix
+  Let $m_{\lambda,\mu}$ be bounded and diagonal, with $m_{\lambda} := m_{\lambda,\lambda}$ for $\lambda \in \Lambda$.
+  Then for all finite rank $u \in \Lin(H)$,
   \begin{equation*}
-    m_{\lambda,\mu} := m(\lambda - \mu) \qquad \lambda,\mu \in \Lambda \subset \R.
+    \|M_{m}^{e} u\|_{\mc{C}^{p}(H)} \leq \|m_{\bullet}\|_{\ell^\infty(\Lambda)} \|u\|_{\mc{C}^{p}(H)}.
   \end{equation*}
+\end{lem}
+
+\begin{proof}
+  Let $(\varepsilon_{\lambda})_{\lambda \in \Lambda}$ be a Rademacher sequence indexed by $\Lambda$ on a probability space $\Omega$, and use independence to write
+  \begin{equation*}
+    M_{m}^{e} u = \sum_{\lambda \in \Lambda} m_{\lambda} e_{\lambda} v e_{\mu} = \E \Big( \big(\sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \big) v \big(\sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \big) \Big).
+  \end{equation*}
+  By the ideal property of Schatten classes (Exercise \ref{ex:Schatten-ideal}):
+  \begin{equation*}
+    \begin{aligned}
+    \Big\| \sum_{\lambda \in \Lambda} e_{\lambda} v e_{\mu} \Big\|_{\mc{C}^{p}(H)}
+    &\leq \E \Big\| \big(\sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \big) v \big(\sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \big) \Big\|_{\mc{C}^{p}(H)} \\
+    &\E \Big\| \sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \Big\|_{\Lin(H)} \|v\|_{\mc{C}^{p}(H)} \Big\| \sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \Big\|_{\Lin(H)}.
+  \end{aligned}
+\end{equation*}
+For all $\omega \in \Omega$, orthogonality of the projections $e_{\lambda}$ implies that
+\begin{equation*}
+  \Big\| \sum_{\lambda \in \Lambda} \varepsilon_{\lambda}(\omega) m_{\lambda} e_{\lambda} \Big\|_{\Lin(H)} \leq \|\varepsilon_{\bullet} (\omega) m_{\bullet}\|_{\ell^\infty(\Lambda)} = \| m_{\bullet}\|_{\ell^\infty(\Lambda)};
+\end{equation*}
+applying this with $m \equiv 1$ to the other Rademacher term and integrating over $\Omega$ completes the proof.
+\end{proof}
+
+\begin{thm}\label{thm:Schur-multipliers}
+  Let $H$ be a Hilbert space with countable spectral resolution $(e_{\lambda})_{\lambda \in \Lambda}$, and fix $p \in (1,\infty)$.
+  Let $m \in C(\R \sm \{0\})$ be a scalar-valued Mikhlin symbol which is defined and continuous on $\R \sm \{0\}$.\footnote{Unlike the Mikhlin symbols we defined earlier, we demand that our symbols are defined at the points $\pm 2^{j}$, $j \in \Z$.}
+  Consider the infinite matrix
+  \begin{equation*}
+    m_{\lambda,\mu} :=
+    \begin{cases}
+      m(\lambda - \mu) & (\lambda \neq \mu \in \Lambda) \\ c & \lambda = \mu
+    \end{cases}
+  \end{equation*}
+  for some constant $c \in \C$.
   Then for all finite rank operators $v \in \Lin(H)$ we have the estimate
   \begin{equation*}
-    \|M_{m}^{e} v\|_{\mc{C}^{p}(H)} \lesssim_{p} \|m\|_{\mf{M}(\R)} \|v\|_{\mc{C}^{p}(H)},
+    \|M_{m}^{e} v\|_{\mc{C}^{p}(H)} \lesssim_{p} (\|m\|_{\mf{M}(\R)} + c) \|v\|_{\mc{C}^{p}(H)},
   \end{equation*}
   and thus by density we can extend $M_{m}^{e}$ to a bounded linear operator on $\mc{C}^{p}(H)$.
 \end{thm}
 
 \begin{proof}
+  Lemma \ref{lem:schur-diag} lets us assume without loss of generality that $c = 0$, by subtracting a constant diagonal Schur multiplier.\footnote{We could replace the constant diagonal with a bounded sequence, and deal with it in the same way.}
+  
   For each $t \in \R$, consider the unitary operator
   \begin{equation*}
-    u_{t} := \sum_{\lambda \in \Lambda} e^{2\pi i t} e_{\lambda}, 
+    u_{t} := \sum_{\lambda \in \Lambda} e^{2\pi i \lambda t} e_{\lambda}, 
   \end{equation*}
   so that $u_{t}^{*} = u_{-t}$.
   Then for all $t \in \R$ we have
@@ -254,21 +292,279 @@ There is no guarantee that this operation is well-defined on all $u \in \Lin(H)$
     \|u_{t}  (M_{m}^{e} v) u_{-t} \|_{\mc{C}^{p}(H)}
   \end{equation*}
   since conjugating by a unitary preserves all approximation numbers, hence also the Schatten norms.
-  \todo{UP TO HERE}
-\end{proof}
+  We compute, using the orthogonality of the projections $e_{\bullet}$,
+  \begin{equation*}
+    \begin{aligned}
+      u_{t}  (M_{m}^{e} v) u_{-t}
+      &= \sum_{\lambda, \mu \in \Lambda} \Big( \sum_{\lambda_{1} \in \Lambda} e^{2\pi i \lambda_{1} t} e_{\lambda_{1}} \Big)  m(\lambda - \mu) e_{\lambda} v e_{\mu} \Big(\sum_{\lambda_{2} \in \Lambda} e^{-2\pi i \lambda_{2} t} e_{\lambda_{2}} \Big) \\
+      &= \sum_{\lambda, \mu \in \Lambda} e^{2\pi i (\lambda - \mu) t}  m(\lambda - \mu) e_{\lambda} v e_{\mu} 
+      = \sum_{\theta \in \Delta} e^{2\pi i \theta t} m(\theta) v_{\theta},
+    \end{aligned}
+  \end{equation*}
+  where $\Delta$ is the set of nonzero differences $\{\lambda - \mu: \lambda \neq \mu \in \Lambda\}$ (using that $c = 0$)
+  and
+  \begin{equation*}
+    v_{\theta} := \sum_{\substack{\lambda,\mu \in \Lambda \\ \lambda - \mu = \theta}} e_{\lambda} v e_{\mu}.
+  \end{equation*}
+  Since $v$ has finite rank, we find that $v_{\theta} \neq 0$ for only finitely many $\theta \in \Delta$.
+  Note that the same computation with $m \equiv 1$, along with Lemma \ref{lem:schur-diag}, shows that
+  \begin{equation*}
+    \Big\| \sum_{\theta \in \Delta} e^{2\pi i \theta t} v_{\theta}\Big\|_{\mc{C}^{p}(H)} = \|v - v_{0}\|_{\mc{C}^{p}(H)} \leq 2\|v\|_{\mc{C}^{p}(H)}  \qquad \forall t \in \R.
+  \end{equation*}
+ 
+ Consider a function $\phi \in L^2(\R)$ with $\|\phi\|_{2} = 1$.
+ Then for all $s > 0$ we can write
+ \begin{equation*}
+   \begin{aligned}
+     \| M_{m}^{e} v \|_{\mc{C}^{p}(H)}^{2}
+     &= \int_{\R} \|M_{m}^{e} v \|_{\mc{C}^{p}(H)}^{2} |\Dil^{2}_{s} \phi(t)|^{2} \, \dd t \\
+     &= \int_{\R} \Big\| \sum_{\theta \in \Delta} m(\theta) e^{2\pi i \theta t} \Dil_{s}^{2} \phi(t) v_{\theta} \Big\|_{\mc{C}^{p}(H)}^{2} \, \dd t \\
+     &\leq \int_{\R} \Big\| \sum_{\theta \in \Delta} T_{m} (e_{\theta} \Dil_{s}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
+     &\qquad + \int_{\R} \Big\| \sum_{\theta \in \Delta} (m(\theta) - T_{m}) (e_{\theta} \Dil_{s}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t
+   \end{aligned}
+ \end{equation*}
+  where $T_{m}$ is the Fourier multiplier with symbol $m$.
+  The first term in this sum can be bounded by using the Mikhlin theorem on $L^2(\R;\mc{C}^{p}(H))$, valid since $\mc{C}^{p}(H)$ is UMD:
+  \begin{equation*}
+    \begin{aligned}
+      &\int_{\R} \Big\| \sum_{\theta \in \Delta} T_{m} (e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
+      &\lesssim_{p} \|m\|_{\mf{M}(\R)} \int_{\R} \Big\| \big( \sum_{\theta \in \Delta} e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta} \big)(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
+      &= \|m\|_{\mf{M}(\R)} \int_{\R} \Big\| \sum_{\theta \in \Delta} e^{2\pi i \theta t}  v_{\theta} \Big\|_{\mc{C}^{p}(H)}^{2} \Dil_{\lambda}^{2} \phi(t) \, \dd t \\
+      &\lesssim \|m\|_{\mf{M}(\R)} \int_{\R} \|v\|_{\mc{C}^{p}(H)} \Dil_{\lambda}^{2} \phi(t) \, \dd t
+      = \|m\|_{\mf{M}(\R)} \|v\|_{\mc{C}^{p}(H)}.
+    \end{aligned}
+  \end{equation*} 
+  As for the second term, we estimate crudely
+  \begin{equation*}
+    \begin{aligned}
+      &\Big(\int_{\R} \Big\| \sum_{\theta \in \Delta} (m(\theta) - T_{m}) (e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \Big)^{1/2} \\
+      &\leq \sum_{\theta \in \Delta} \Big( \int_{\R} \Big\| (m(\theta) - T_{m}) (e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \Big)^{1/2} \\
+      &\leq \sum_{\theta \in \Delta} \|v_{\theta}\|_{\mc{C}^{p}(H)} \Big( \int_{\R} \big| (m(\theta) - T_{m}) (e_{\theta} \Dil_{\lambda}^{2} \phi)(t) \big|^{2}  \, \dd t \Big)^{1/2} \\
+      &= \sum_{\theta \in \Delta} \|v_{\theta}\|_{\mc{C}^{p}(H)} \Big( \int_{\R} \big| (m(\theta) - \tilde{m}(\xi)) \Dil_{1/\lambda}^{2} \hat{\phi})(\xi - \theta) \big|^{2}  \, \dd \xi \Big)^{1/2}
+    \end{aligned}
+  \end{equation*}
+  using Plancherel's theorem for scalar-valued functions and some standard Fourier identities in the last step.
+  Notice that for all $\theta \in \Delta$,
+  \begin{equation*}
+       \int_{\R} \big| (m(\theta) - m(\xi)) \Dil_{1/\lambda}^{2} \hat{\phi})(\xi - \theta) \big|^{2}  \, \dd \xi
+      =  \int_{\R} |m(\theta) - m(\lambda^{-1}\xi + \theta)|^{2} |\hat{\phi}(\xi)|^{2}  \, \dd \xi .
+  \end{equation*}
+  Since $m$ is bounded and continuous away from $0$, and since $\theta \neq 0$, by dominated convergence this tends to $0$ as $\lambda \to \infty$.
+  Furthermore, since $v$ is finite rank, only finitely many differences $\theta \in \Delta$ are relevant, and thus we have proven that
+  \begin{equation*}
+     \| M_{m}^{e} v \|_{\mc{C}^{p}(H)}^{2} \lesssim_{p} \|m\|_{\mf{M}(\R)} \|v\|_{\mc{C}^{p}(H)}
+   \end{equation*}
+   as claimed.
+ \end{proof}
 
+ \begin{rmk}
+   For $v \in \mc{C}^{p}(H)$ for $p \in (1,\infty)$, and with symbol $m$ as in Theorem \ref{thm:Schur-multipliers}, the sum
+   \begin{equation*} 
+     M_{m}^{e} v = \sum_{\lambda,\mu \in \Lambda} m_{\lambda,\mu} e_{\lambda} v e_{\mu}
+   \end{equation*}
+   converges in $\mc{C}^{p}(H)$ for any ordering of $\Lambda$.
+   See \cite[Theorem 5.4.3]{HNVW16} for a more careful proof of this.
+ \end{rmk}
 
+\section{Applications to functional calculus: operator Lipschitz functions}
 
+The result we just proved for Schur multipliers, which followed by the UMD-valued Mikhlin theorem, has deep repercussions in spectral theory.
+Let $H$ be a complex Hilbert space.
+First recall that for every compact self-adjoint operator $u \in \mc{K}(H)$, the spectral theorem says that there exists a countable spectral resolution $(e_{\lambda})_{\lambda \in \sigma(u)}$ such that
+\begin{equation}\label{eq:u-res}
+  u = \sum_{\lambda \in \sigma(u)} \lambda e_{\lambda},
+\end{equation}
+where $\sigma(u) = \{\lambda \in \C : \text{$\lambda - u \in \Lin(H)$ is not invertible}\} \subset \R$ is the spectrum of $u$ (hence the term \emph{spectral resolution}).\footnote{A more complicated version of this theorem holds for self-adjoint but possibly non-compact operators.}
+For every continuous function $\map{f}{\sigma(u)}{\C}$ (generally the set $\sigma(u)$ has the cluster point $0$, and continuity is required here) we use the spectral resolution to define an operator
+\begin{equation}\label{eq:fu}
+  f(u) := \sum_{\lambda \in \sigma(u)} f(\lambda) e_{\lambda}.
+\end{equation}
+This operator is bounded, with
+\begin{equation*}
+  \|f(u)\|_{\Lin(H)} \leq \|f\|_{\infty} \|u\|_{\Lin(H)}.
+\end{equation*}
+This method of defining `functions of $u$' is called the \emph{functional calculus of $u$}.\footnote{For a somewhat na\"ively written introduction to this topic see \cite{AA-FC}.}
 
-\section{Operator Lipschitz functions}
+We will prove a theorem concering the continuity of the functional calculus with respect to a fixed function as the underlying operator varies.
+That is, if two compact self-adjoint operators $u,v \in \mc{K}(H)$ are close, and if $f$ is continuous on $\R$, are $f(u)$ and $f(v)$ also close?
+The answer turns out to depend strongly on both the function $f$ (particularly, quantitative continuity properties) and the choice of norm with respect to which we measure the operators.
+The Schatten classes $\mc{C}^{p}(H) \subset \mc{K}(H)$ are appropriate choices, and the UMD property of these spaces when $p \in (1,\infty)$ can be used in proving the following deep (and relatively recent) theorem.
 
-\begin{thm}[Potapov--Sukochev]
-  Let $H$ be a Hilbert space and $p \in (1,\infty)$, and let $u$ and $v$ be compact self-adjoint operators on $H$ such that $u - v \in \mc{C}^{p}$.
+\begin{thm}[Potapov--Sukochev]\label{thm:Potapov-Sukochev}
+  Let $H$ be a Hilbert space and $p \in (1,\infty)$, and let $u$ and $v$ be compact self-adjoint operators on $H$ such that $u - v \in \mc{C}^{p}$.\footnote{We are following the proof in \cite[\textsection 5.4.c]{HNVW16}, which requires compact $u$ and $v$. The full result, proven in \cite{PS11}, is for general self-adjoint operators (possibly unbounded). Only the difference is assumed to be bounded.}
   Then for all Lipschitz functions $\map{f}{\R}{\R}$,
   \begin{equation*}
-    \|f(u) - f(v)\|_{\mc{C}^{p}(H)} \lesssim_{p} \|f\|_{\Lip} \|u - v\|_{\mc{C}^{p}(H)}.
+    \|f(u) - f(v)\|_{\mc{C}^{p}(H)} \lesssim_{p} \|f\|_{\Lip} \|u - v\|_{\mc{C}^{p}(H)},
+  \end{equation*}
+  where
+  \begin{equation*}
+    \|f\|_{\Lip} := \sup_{t \neq s \in \R} \frac{|f(t) - f(s)|}{|t-s|}.
   \end{equation*}
 \end{thm}
+
+We prove this as a consequence of the following commutator estimate.
+
+\begin{lem}\label{lem:commutators}
+  Let $u \in \mc{K}(H)$ be compact and self adjoint, and let $v \in \Lin(H)$.
+  Then for all Lipschitz $\map{f}{\R}{\R}$,
+  \begin{equation*}
+    \|[f(u),v]\|_{\mc{C}^{p}(H)} \lesssim_{p} \|f\|_{\Lip} \|[u,v]\|_{\mc{C}^{p}(H)}.
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  Let $(e_{\lambda})_{\lambda \in \sigma(u)}$ be the spectral resolution of $u$, so that \eqref{eq:u-res} and \eqref{eq:fu} hold.
+  Then
+  \begin{equation*}
+    \begin{aligned}
+      [f(u),v]
+      = \big[ \sum_{\lambda \in \sigma(u)} f(\lambda) e_{\lambda},  v \sum_{\mu \in \sigma(u)} e_{\mu} \big] 
+      &= \sum_{\lambda, \mu \in \sigma(u)} f(\lambda) (e_{\lambda} v e_{\mu} - e_{\mu} v e_{\lambda}) \\
+      &= \sum_{\lambda, \mu \in \sigma(u)} (f(\lambda) - f(\mu)) e_{\lambda} v e_{\mu}.
+    \end{aligned}
+  \end{equation*}
+  The same computation with $f \equiv 1$ yields
+  \begin{equation*}
+    [u,v] = \sum_{\lambda, \mu \in \sigma(u)} (\lambda - \mu) e_{\lambda} v e_{\mu}.
+  \end{equation*}
+  Defining
+  \begin{equation*}
+    m_{\lambda,\mu}^{f} :=
+    \begin{cases}
+      \frac{f(\lambda) - f(\mu)}{\lambda - \mu} & \lambda \neq \mu \\
+      0 & \lambda = \mu.
+    \end{cases}
+  \end{equation*}
+  This shows that
+  \begin{equation*}
+    [f(u),v] = M^{e}_{m^{f}}([u,v]),
+  \end{equation*}
+  where $M^{e}_{m}$ is the Schur multiplier with symbol $m$ with respect to the countable spectral resolution $e_{\bullet}$.
+  This Schur multiplier is \emph{almost} of the form covered by Theorem \ref{thm:Schur-multipliers}; we need to do some more reduction to get there.
+  
+  First note that the function
+  \begin{equation*}
+    \tilde{f}(t) := \|f\|_{\Lip}^{-1} f(t) + 2t + f(0),
+  \end{equation*}
+  satisfies
+  \begin{equation}\label{eq:f-props}
+    \tilde{f}(0) = 0, \qquad  \|\tilde{f}\|_{\Lip} \leq 3, \qquad 1 \leq \frac{f(\lambda) - f(\mu)}{\lambda - \mu} \leq 3 \quad  \forall \lambda \neq \mu.
+  \end{equation}
+  If we prove the desired estimate for $\tilde{f}$, then we can write
+  \begin{equation*}
+    [f(u),v] = \|f\|_{\Lip}([\tilde{f}(u),v] - 2[u,v]), 
+  \end{equation*}
+  and thus deduce it for $f$ also.
+  From now on we will assume that $f$ satisfies the properties stated for $\tilde{f}$ in \eqref{eq:f-props}.
+
+  Now fix $x \in [1,3]$ and note that $x = e^{2\pi t}$ for $t = (\log(x))/2\pi \in [0,1]$.
+  Choose a Schwartz function $\psi \in \Sch(\R)$ such that $\psi(t) = e^{2\pi i t}$ for all $t \in [0,1]$.
+  Then by Fourier inversion we can write
+  \begin{equation*}
+    x = \psi(\log(x)/2\pi) = \int_{\R} \hat{\psi}(s) e^{2\pi i \log(x)/2\pi} \, \dd s = \int_{\R} \hat{\psi}(s) x^{is} \, \dd s.
+  \end{equation*}
+  Hence for all $\lambda \neq \mu \in \sigma(u)$, since all slopes of $f$ was arranged to be in the interval $[1,3]$, we get a formula
+  \begin{equation*}
+    \begin{aligned}
+      M^{e}_{m^f} [u,v]
+      &= \sum_{\lambda \neq \mu \in \sigma(u)} \frac{|f(\lambda)-f(\mu)|}{|\lambda - \mu|} e_{\lambda} [u,v] e_{\mu} \\
+      &= \int_{\R} \hat{\psi}(s) \big( |f(\lambda) - f(\mu)|^{is} |\lambda - \mu|^{-is} e_{\lambda} [u,v] e_{\mu} \big) \, \dd s \\
+      &= \int_{\R} \hat{\psi}(s) M^{e,f}_{m_{s}} M^{e}_{m_{-s}} [u,v] \, \dd s,
+    \end{aligned}
+  \end{equation*}
+  where $M_{m_{-s}}^{e}$ is the Schur multiplier with symbol
+  \begin{equation*}
+    m_{-s,\lambda,\mu} := |\lambda - \mu|^{-is},
+  \end{equation*}
+  and $M^{e,f}_{m_{s}}$ is the Schur multiplier with the same symbol (with the sign of $s$ flipped), defined with respect to the spectral resolution $(e_{f^{-1}(\alpha)})_{\alpha \in f(\sigma(u))}$.\footnote{By \eqref{eq:f-props}, $f$ is invertible.}
+  Now that we have Schur multipliers with symbols depending only on $\lambda - \mu$, we can hope to apply Theorem \ref{thm:Schur-multipliers} with Mikhlin symbols $\map{\phi_{s}}{\R \sm \{0\}}{\C}$ given by $\phi_{s}(\xi) := |\xi|^{is}$.
+  For all $\xi \in \R \sm \{0\}$ we have
+  \begin{equation*}
+    |\phi_{s}(\xi)| = 1, \qquad |\xi| |\phi_{s}'(\xi)| = |\xi| ||\xi|^{is} is/\xi| = |s|, 
+  \end{equation*}
+  so each $\phi_{s}$ is a Mikhlin symbol with $\|\phi_{s}\|_{\mf{M}(\R)} \leq 1 + |s|$.
+  Thus by Theorem \ref{thm:Schur-multipliers} the Schur multipliers in the representation above are well-defined on $\mc{C}^{p}(H)$, and we can estimate
+  \begin{equation*}
+    \begin{aligned}
+      \|M^{e}_{m^f} [u,v]\|_{\mc{C}^{p}(H)}
+      &\leq \int_{\R} |\hat{\psi}(s)| \|M^{e,f}_{m_{s}} M^{e}_{m_{-s}} [u,v]\|_{\mc{C}^{p}(H)} \, \dd s \\
+      &\lesssim_{p} \Big( \int_{\R} |\hat{\psi}(s)| (1 + |s|)^{2} \, \dd s \Big) \|[u,v]\|_{\mc{C}^{p}(H)}  \\
+      &\lesssim  \|[u,v]\|_{\mc{C}^{p}(H)}
+    \end{aligned}
+  \end{equation*}
+  using that $\hat{\psi} \in \Sch(\R)$ to estimate the integral in $s$.
+\end{proof}
+
+One final argument completes the proof of the Potapov--Sukochev theorem.
+
+\begin{proof}[Proof of Theorem \ref{thm:Potapov-Sukochev}]
+  Consider the operators
+  \begin{equation*}
+    U := \begin{bmatrix} u & 0 \\ 0 & v
+    \end{bmatrix},
+    \qquad
+    V := \begin{bmatrix} 0 & I \\ I & 0
+    \end{bmatrix}
+  \end{equation*}
+  on the direct sum $H \oplus H$.
+  Since $u$ and $v$ are compact and self-adjoint on $H$, $U$ is compact and self-adjoint on $H \oplus H$, and $V$ is clearly self-adjoint.
+  Lemma \ref{lem:commutators} (on $H \oplus H$) thus implies that
+  \begin{equation}\label{eq:com-bd}
+    \|[f(U),V]\|_{\mc{C}^{p}(H \oplus H)} \lesssim_{p} \|f\|_{\Lip} \|[U,V]\|_{\mc{C}^{p}(H \oplus H)}.
+  \end{equation}
+  We can compute
+  \begin{equation*}
+    \begin{aligned}
+      [f(U),V]
+      &= \begin{bmatrix} f(u) & 0 \\ 0 & f(v) \end{bmatrix}
+      \begin{bmatrix} 0 & I \\ I & 0 \end{bmatrix}
+      -
+      \begin{bmatrix} 0 & I \\ I & 0 \end{bmatrix}
+      \begin{bmatrix} f(u) & 0 \\ 0 & f(v) \end{bmatrix} \\
+      &= \begin{bmatrix}
+        0 & f(u) - f(v) \\ f(v) - f(u) & 0
+        \end{bmatrix},
+    \end{aligned}
+  \end{equation*}
+  so the estimate \eqref{eq:com-bd} says that
+  \begin{equation*}
+    \Bigg\| \begin{bmatrix}
+      0 & f(u) - f(v) \\ f(v) - f(u) & 0
+    \end{bmatrix} \Bigg\|_{\mc{C}^{p}(H \oplus H)}
+    \lesssim_{p} \|f\|_{\Lip}
+    \Bigg\| \begin{bmatrix}
+      0 & u - v \\ v - u & 0
+    \end{bmatrix} \Bigg\|_{\mc{C}^{p}(H \oplus H)}.
+  \end{equation*}
+  Finally, for a general element $w \in \mc{C}^{p}(H)$ we compute
+  \begin{equation*}
+    \begin{aligned}
+    \Bigg\| \begin{bmatrix}
+      0 & w \\ -w & 0
+    \end{bmatrix} \Bigg\|_{\mc{C}^{p}(H \oplus H)}^{p} 
+    &= \tr \bigg( \begin{bmatrix}
+      0 & w \\ -w & 0
+    \end{bmatrix}^* \begin{bmatrix}
+      0 & w \\ -w & 0
+    \end{bmatrix} \bigg)^{p/2} \\
+    &= \tr\bigg(
+    \begin{bmatrix}
+      w^{*}w  & 0 \\ 0 & w^{*} w
+    \end{bmatrix}
+    \bigg)^{p/2} \\
+    &= \tr
+    \begin{bmatrix}
+      (w^* w)^{p/2}  & 0 \\ 0 & (w^* w)^{p/2}
+    \end{bmatrix} 
+    = 2\|w\|_{\mc{C}^{p}(H)}^{p}.
+    \end{aligned}
+  \end{equation*}
+Applying this to $f(u) - f(v)$ and $u-v$ yields
+\begin{equation*}
+  \|f(v) - f(u)\|_{\mc{C}^{p}(H)} \lesssim_{p} \|f\|_{\Lip} \|v-u\|_{\mc{C}^{p}(H)},
+\end{equation*}
+completing the proof.
+\end{proof}
 
 \section{Exercises}
 
@@ -287,6 +583,27 @@ There is no guarantee that this operation is well-defined on all $u \in \Lin(H)$
 \begin{exercise}\label{ex:HT-adjoint-Schatten}
   Let $H$ be a Hilbert space and  $\mb{f} \colon \T \to \Lin(H)$ a $\Lin(H)$-valued trigonometric polynomial.
   Show that $(H_{\T} \mb{f})(t))^* = (H_{\T} (\mb{f}^*))(t)$, where $\mb{f}^*$ is the pointwise adjoint of $\mb{f}$.
+\end{exercise}
+
+\begin{exercise}\label{ex:Schatten-ideal}
+  Let $H$ be a Hilbert space and $p \in [1,\infty)$.
+  Show that the Schatten class $\mc{C}^{p}(H)$ is an operator ideal: that is, for all $u \in \mc{C}^{p}(H)$ and all $a,b \in \Lin(H)$, $aub \in \mc{C}^{p}(H)$ and
+  \begin{equation*}
+    \|aub\|_{\mc{C}^{p}(H)} \leq \|a\|_{\Lin(H)} \|u\|_{\mc{C}^{p}(H)} \|b\|_{\mc{C}^{p}(H)}.
+  \end{equation*}
+\end{exercise}
+
+\begin{exercise}
+  Let $N \in \N$ and consider the (standard) $N$-dimensional complex Hilbert space $\C^N$.
+  For all $N \times N$ matrices $A = (a_{m,n})_{m,n = 1}^{N} \in \Lin(H)$, define the upper triangular truncation $T(A) \in \Lin(H)$ componentwise by
+  \begin{equation*}
+    (T(A))_{m,n} := \begin{cases} a_{m,n} & (m \geq n) \\ 0 & (m < n). \end{cases}
+  \end{equation*}
+  Prove that
+  \begin{equation*}
+    \|T(A)\|_{\mc{C}^{p}(\C^{n})} \lesssim_{p} \|A\|_{\mc{C}^{p}(\C^{n})}.
+  \end{equation*}
+  for all $p \in (1,\infty)$, uniformly in $N$.
 \end{exercise}
 
 
