@@ -157,9 +157,9 @@ We will use this result with the bilinear form $\map{B}{\mc{C}^{2p}(H) \times \m
 
   For all $N \in \N$, let $P_{N}(\mc{C}^{2p})$ denote the set of $\mc{C}^{2p}$-valued trigonometric polynomials $\mb{f}$ of degree $\leq N$ (i.e. $\hat{\mb{f}}(m) = \mb{0}$ whenever $|m| > N$), and define
   \begin{equation*}
-    A_{2p,N} := \sup_{\mb{f} \in P_{N}, \mb{f} \neq 0} \frac{\|H_{\T} \mb{f}\|_{L^p(\T;\mc{C}^{2p})}}{\|\mb{f}\|_{L^p(\T;\mc{C}^{2p})}},
+    A_{2p,N} := \sup_{\substack{\mb{f} \in P_{N}(\mc{C}^{2p}) \\ \mb{f} \neq 0}} \frac{\|H_{\T} \mb{f}\|_{L^{2p}(\T;\mc{C}^{2p})}}{\|\mb{f}\|_{L^{2p}(\T;\mc{C}^{2p})}},
   \end{equation*}
-  i.e. $A_{2p,N}$ is the norm of the Hilbert transform $H_{\T}$ restricted to the subspace $P_{N} \subset L^p(\T;\mc{C}^{2p})$.
+  i.e. $A_{2p,N}$ is the norm of the Hilbert transform $H_{\T}$ restricted to the subspace $P_{N} \subset L^{2p}(\T;\mc{C}^{2p})$.
   Then by density of the trigonometric polynomials
   \begin{equation*}
     A_{2p} = \lim_{N \to \infty} A_{2p,N},
@@ -167,7 +167,7 @@ We will use this result with the bilinear form $\map{B}{\mc{C}^{2p}(H) \times \m
   and by Exercise \ref{ex:HT-FD}, the numbers $A_{2p,N}$ are all finite.\footnote{This could be thought of as a `noncommutative truncation argument'.}
 
   For every function $\mb{F} \colon \T \to \Lin(H)$, let $\mb{F}^*$ denote the pointwise adjoint, given by $\mb{F}^{*}(t) := \mb{F}(t)^*$.
-  Fix a trigonometric polynomial $\mb{f} \in P_{N}$.
+  Fix a trigonometric polynomial $\mb{f} \in P_{N}(\mc{C}^{2p})$.
   We have the identity
   \begin{equation*}
     (H_{\T} \mb{F})^{*} = H_{\T} (\mb{F}^*)
@@ -232,7 +232,7 @@ There is no guarantee that this operation is well-defined on all $u \in \Lin(H)$
 First we prove a lemma that lets us handle simple diagonal Schur multipliers.
 
 \begin{lem}\label{lem:schur-diag}
-  Let $H$ be a Hilbert space with countable spectral resolution $(e_{\lambda})_{\lambda \in \Lambda}$, and fix $p \in (1,\infty)$.
+  Let $H$ be a Hilbert space with countable spectral resolution $(e_{\lambda})_{\lambda \in \Lambda}$, and fix $p \in [1,\infty)$.
   Let $m_{\lambda,\mu}$ be bounded and diagonal, with $m_{\lambda} := m_{\lambda,\lambda}$ for $\lambda \in \Lambda$.
   Then for all finite rank $u \in \Lin(H)$,
   \begin{equation*}
@@ -243,12 +243,12 @@ First we prove a lemma that lets us handle simple diagonal Schur multipliers.
 \begin{proof}
   Let $(\varepsilon_{\lambda})_{\lambda \in \Lambda}$ be a Rademacher sequence indexed by $\Lambda$ on a probability space $\Omega$, and use independence to write
   \begin{equation*}
-    M_{m}^{e} u = \sum_{\lambda \in \Lambda} m_{\lambda} e_{\lambda} v e_{\mu} = \E \Big( \big(\sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \big) v \big(\sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \big) \Big).
+    M_{m}^{e} u = \sum_{\lambda \in \Lambda} m_{\lambda} e_{\lambda} v e_{\lambda} = \E \Big( \big(\sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \big) v \big(\sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \big) \Big).
   \end{equation*}
   By the ideal property of Schatten classes (Exercise \ref{ex:Schatten-ideal}):
   \begin{equation*}
     \begin{aligned}
-    \Big\| \sum_{\lambda \in \Lambda} e_{\lambda} v e_{\mu} \Big\|_{\mc{C}^{p}(H)}
+    \Big\| \sum_{\lambda \in \Lambda} e_{\lambda} v e_{\lambda} \Big\|_{\mc{C}^{p}(H)}
     &\leq \E \Big\| \big(\sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \big) v \big(\sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \big) \Big\|_{\mc{C}^{p}(H)} \\
     &\E \Big\| \sum_{\lambda \in \Lambda} \varepsilon_{\lambda} m_{\lambda} e_{\lambda} \Big\|_{\Lin(H)} \|v\|_{\mc{C}^{p}(H)} \Big\| \sum_{\mu \in \Lambda} \varepsilon_{\mu} e_{\mu} \Big\|_{\Lin(H)}.
   \end{aligned}
@@ -273,7 +273,7 @@ applying this with $m \equiv 1$ to the other Rademacher term and integrating ove
   for some constant $c \in \C$.
   Then for all finite rank operators $v \in \Lin(H)$ we have the estimate
   \begin{equation*}
-    \|M_{m}^{e} v\|_{\mc{C}^{p}(H)} \lesssim_{p} (\|m\|_{\mf{M}(\R)} + c) \|v\|_{\mc{C}^{p}(H)},
+    \|M_{m}^{e} v\|_{\mc{C}^{p}(H)} \lesssim_{p} (\|m\|_{\mf{M}(\R)} + |c|) \|v\|_{\mc{C}^{p}(H)},
   \end{equation*}
   and thus by density we can extend $M_{m}^{e}$ to a bounded linear operator on $\mc{C}^{p}(H)$.
 \end{thm}
@@ -296,8 +296,8 @@ applying this with $m \equiv 1$ to the other Rademacher term and integrating ove
   \begin{equation*}
     \begin{aligned}
       u_{t}  (M_{m}^{e} v) u_{-t}
-      &= \sum_{\lambda, \mu \in \Lambda} \Big( \sum_{\lambda_{1} \in \Lambda} e^{2\pi i \lambda_{1} t} e_{\lambda_{1}} \Big)  m(\lambda - \mu) e_{\lambda} v e_{\mu} \Big(\sum_{\lambda_{2} \in \Lambda} e^{-2\pi i \lambda_{2} t} e_{\lambda_{2}} \Big) \\
-      &= \sum_{\lambda, \mu \in \Lambda} e^{2\pi i (\lambda - \mu) t}  m(\lambda - \mu) e_{\lambda} v e_{\mu} 
+      &= \sum_{\lambda \neq \mu \in \Lambda} \Big( \sum_{\lambda_{1} \in \Lambda} e^{2\pi i \lambda_{1} t} e_{\lambda_{1}} \Big)  m(\lambda - \mu) e_{\lambda} v e_{\mu} \Big(\sum_{\lambda_{2} \in \Lambda} e^{-2\pi i \lambda_{2} t} e_{\lambda_{2}} \Big) \\
+      &= \sum_{\lambda \neq \mu \in \Lambda} e^{2\pi i (\lambda - \mu) t}  m(\lambda - \mu) e_{\lambda} v e_{\mu} 
       = \sum_{\theta \in \Delta} e^{2\pi i \theta t} m(\theta) v_{\theta},
     \end{aligned}
   \end{equation*}
@@ -327,29 +327,29 @@ applying this with $m \equiv 1$ to the other Rademacher term and integrating ove
   The first term in this sum can be bounded by using the Mikhlin theorem on $L^2(\R;\mc{C}^{p}(H))$, valid since $\mc{C}^{p}(H)$ is UMD:
   \begin{equation*}
     \begin{aligned}
-      &\int_{\R} \Big\| \sum_{\theta \in \Delta} T_{m} (e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
-      &\lesssim_{p} \|m\|_{\mf{M}(\R)} \int_{\R} \Big\| \big( \sum_{\theta \in \Delta} e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta} \big)(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
-      &= \|m\|_{\mf{M}(\R)} \int_{\R} \Big\| \sum_{\theta \in \Delta} e^{2\pi i \theta t}  v_{\theta} \Big\|_{\mc{C}^{p}(H)}^{2} \Dil_{\lambda}^{2} \phi(t) \, \dd t \\
-      &\lesssim \|m\|_{\mf{M}(\R)} \int_{\R} \|v\|_{\mc{C}^{p}(H)} \Dil_{\lambda}^{2} \phi(t) \, \dd t
+      &\int_{\R} \Big\| \sum_{\theta \in \Delta} T_{m} (e_{\theta} \Dil_{s}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
+      &\lesssim_{p} \|m\|_{\mf{M}(\R)} \int_{\R} \Big\| \big( \sum_{\theta \in \Delta} e_{\theta} \Dil_{s}^{2} \phi \otimes v_{\theta} \big)(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \\
+      &= \|m\|_{\mf{M}(\R)} \int_{\R} \Big\| \sum_{\theta \in \Delta} e^{2\pi i \theta t}  v_{\theta} \Big\|_{\mc{C}^{p}(H)}^{2} |\Dil_{s}^{2} \phi(t)|^{2} \, \dd t \\
+      &\lesssim \|m\|_{\mf{M}(\R)} \int_{\R} \|v\|_{\mc{C}^{p}(H)} |\Dil_{s}^{2} \phi(t)|^{2} \, \dd t
       = \|m\|_{\mf{M}(\R)} \|v\|_{\mc{C}^{p}(H)}.
     \end{aligned}
   \end{equation*} 
   As for the second term, we estimate crudely
   \begin{equation*}
     \begin{aligned}
-      &\Big(\int_{\R} \Big\| \sum_{\theta \in \Delta} (m(\theta) - T_{m}) (e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \Big)^{1/2} \\
-      &\leq \sum_{\theta \in \Delta} \Big( \int_{\R} \Big\| (m(\theta) - T_{m}) (e_{\theta} \Dil_{\lambda}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \Big)^{1/2} \\
-      &\leq \sum_{\theta \in \Delta} \|v_{\theta}\|_{\mc{C}^{p}(H)} \Big( \int_{\R} \big| (m(\theta) - T_{m}) (e_{\theta} \Dil_{\lambda}^{2} \phi)(t) \big|^{2}  \, \dd t \Big)^{1/2} \\
-      &= \sum_{\theta \in \Delta} \|v_{\theta}\|_{\mc{C}^{p}(H)} \Big( \int_{\R} \big| (m(\theta) - \tilde{m}(\xi)) \Dil_{1/\lambda}^{2} \hat{\phi})(\xi - \theta) \big|^{2}  \, \dd \xi \Big)^{1/2}
+      &\Big(\int_{\R} \Big\| \sum_{\theta \in \Delta} (m(\theta) - T_{m}) (e_{\theta} \Dil_{s}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \Big)^{1/2} \\
+      &\leq \sum_{\theta \in \Delta} \Big( \int_{\R} \Big\| (m(\theta) - T_{m}) (e_{\theta} \Dil_{s}^{2} \phi \otimes v_{\theta})(t) \Big\|_{\mc{C}^{p}(H)}^{2}  \, \dd t \Big)^{1/2} \\
+      &\leq \sum_{\theta \in \Delta} \|v_{\theta}\|_{\mc{C}^{p}(H)} \Big( \int_{\R} \big| (m(\theta) - T_{m}) (e_{\theta} \Dil_{s}^{2} \phi)(t) \big|^{2}  \, \dd t \Big)^{1/2} \\
+      &= \sum_{\theta \in \Delta} \|v_{\theta}\|_{\mc{C}^{p}(H)} \Big( \int_{\R} \big| (m(\theta) - \tilde{m}(\xi)) \Dil_{1/s}^{2} \hat{\phi})(\xi - \theta) \big|^{2}  \, \dd \xi \Big)^{1/2}
     \end{aligned}
   \end{equation*}
   using Plancherel's theorem for scalar-valued functions and some standard Fourier identities in the last step.
   Notice that for all $\theta \in \Delta$,
   \begin{equation*}
-       \int_{\R} \big| (m(\theta) - m(\xi)) \Dil_{1/\lambda}^{2} \hat{\phi})(\xi - \theta) \big|^{2}  \, \dd \xi
-      =  \int_{\R} |m(\theta) - m(\lambda^{-1}\xi + \theta)|^{2} |\hat{\phi}(\xi)|^{2}  \, \dd \xi .
+       \int_{\R} \big| (m(\theta) - m(\xi)) \Dil_{1/s}^{2} \hat{\phi})(\xi - \theta) \big|^{2}  \, \dd \xi
+      =  \int_{\R} |m(\theta) - m(s^{-1}\xi + \theta)|^{2} |\hat{\phi}(\xi)|^{2}  \, \dd \xi .
   \end{equation*}
-  Since $m$ is bounded and continuous away from $0$, and since $\theta \neq 0$, by dominated convergence this tends to $0$ as $\lambda \to \infty$.
+  Since $m$ is bounded and continuous away from $0$, and since $\theta \neq 0$, by dominated convergence this tends to $0$ as $s  \to \infty$.
   Furthermore, since $v$ is finite rank, only finitely many differences $\theta \in \Delta$ are relevant, and thus we have proven that
   \begin{equation*}
      \| M_{m}^{e} v \|_{\mc{C}^{p}(H)}^{2} \lesssim_{p} \|m\|_{\mf{M}(\R)} \|v\|_{\mc{C}^{p}(H)}
@@ -418,7 +418,7 @@ We prove this as a consequence of the following commutator estimate.
   \begin{equation*}
     \begin{aligned}
       [f(u),v]
-      = \big[ \sum_{\lambda \in \sigma(u)} f(\lambda) e_{\lambda},  v \sum_{\mu \in \sigma(u)} e_{\mu} \big] 
+      = \sum_{\lambda \in \sigma(u)} f(\lambda) [  e_{\lambda},  v ] 
       &= \sum_{\lambda, \mu \in \sigma(u)} f(\lambda) (e_{\lambda} v e_{\mu} - e_{\mu} v e_{\lambda}) \\
       &= \sum_{\lambda, \mu \in \sigma(u)} (f(\lambda) - f(\mu)) e_{\lambda} v e_{\mu}.
     \end{aligned}
@@ -444,7 +444,7 @@ We prove this as a consequence of the following commutator estimate.
   
   First note that the function
   \begin{equation*}
-    \tilde{f}(t) := \|f\|_{\Lip}^{-1} f(t) + 2t + f(0),
+    \tilde{f}(t) := \|f\|_{\Lip}^{-1} (f(t) - f(0)) + 2t,
   \end{equation*}
   satisfies
   \begin{equation}\label{eq:f-props}
