@@ -1,22 +1,98 @@
-\emph{under construction}
+\section{Fourier type}
 
-% \section{Fourier type}
+We have already discussed the Fourier transform on functions $\R \to X$ (Definition \ref{defn:FT}), and on functions $\T \to X$ (Section \ref{sec:HT-torus}); we can also define it on functions $\Z \to X$.
+We compile these definitions below.
+\begin{defn}
+  Let $X$ be a complex Banach space.
+  For integrable functions $\mb{f} \in L^1(\R;X)$, $\mb{g} \in L^1(\T;X)$, and $\mb{h} \in \ell^{1}(\Z;X)$, we define the Fourier transforms
+  \begin{equation*}
+    \begin{aligned}
+      \mc{F}_{\R} \mb{f} &\in L^{\infty}(\R;X), \qquad \mc{F}_{\R} \mb{f}(\xi) := \int_{\R} e^{-2\pi i x \xi} \mb{f}(x) \, \dd x, \\
+      \mc{F}_{\T} \mb{g} &\in \ell^{\infty}(\Z;X), \qquad \mc{F}_{\T} \mb{g}(n) := \int_{\T} e^{-2\pi i tn} \mb{g}(t) \, \dd t, \\
+      \mc{F}_{\Z} \mb{h} &\in L^\infty(\T;X), \qquad \mc{F}_{\Z} \mb{h}(t) := \sum_{n \in \Z} e^{-2\pi i nt} \mb{h}(n). \\
+    \end{aligned}
+  \end{equation*}
+\end{defn}
+In all the definitions above, it is straightforward to show that the Fourier transform maps $L^1(G;X)$ to $L^\infty(\widehat{G};X)$, where $\widehat{\R} = \R$, $\widehat{\T} = \Z$, and $\widehat{\Z} = \T$.\footnote{More generally, if $G$ is a locally compact Abelian group equipped with the Haar measure, then this statement still holds, with $\widehat{G}$ the \emph{dual group} of $G$--also equipped with its Haar measure. We will not go into this level of generality here, but for more details on Fourier analysis on topological groups, see for example ...}\todo{reference to Rudin perhaps in the footnote}
+When $X=H$ is a complex Hilbert space, Plancherel's theorem holds: for all $\mb{f} \in L^1(G; H)$ (with $G$ and $\widehat{G}$ as above), we have
+\begin{equation*}
+  \|\mc{F}_{G} \mb{f}\|_{L^2(\widehat{G};H)} = \|\mb{f}\|_{L^2(G;H)}.
+\end{equation*}
+By interpolation (e.g. by the Riesz--Thorin interpolation theorem) with the $L^1$-$L^\infty$ bound which holds for all Banach spaces, we deduce the Hilbert-valued \emph{Hausdorff--Young inequality}: for all $p \in [1,2]$ and $\mb{f} \in L^1(G;H) \cap L^p(G;H)$, we have
+\begin{equation*}
+  \|\mc{F}_{G} \mb{f}\|_{L^{p'}(\widehat{G};H)} \leq \|\mb{f}\|_{L^{p}(G;H)}.
+\end{equation*}
+It turns out that these estimates do not hold for general Banach spaces, so we turn the question of their validity into a definition.
+
+\begin{defn}
+  Let $X$ be a complex Banach space and $p \in [1,2]$.
+  We say that $X$ has \emph{$\R$-Fourier type $p$} if for all $\mb{f} \in L^1(\R;X) \cap L^p(\R;X)$,
+  \begin{equation*}
+    \|\mc{F}_{\R} \mb{f}\|_{L^{p'}(\R;X)} \lesssim \|\mb{f}\|_{L^{p}(\R;X)}.
+  \end{equation*}
+  Likewise, we say that $X$ has \emph{$\T$-Fourier type $p$} if for all $\mb{g} \in L^p(\T;X) \subset L^1(\T;X)$,
+  \begin{equation*}
+    \|\mc{F}_{\T} \mb{g}\|_{\ell^{p'}(\Z;X)} \lesssim \|\mb{g}\|_{L^{p}(\T;X)},
+  \end{equation*}
+  and that $X$ has \emph{$\Z$-Fourier type $p$} if for all $\mb{h} \in \ell^{1}(\T;X) \subset \ell^{p}(\T;X)$,
+  \begin{equation*}
+    \|\mb{F}_{\Z} \mb{h}\|_{L^{p'}(\T;X)} \lesssim \|\mb{h}\|_{\ell^{p}(\Z;X)}.
+  \end{equation*}
+  That is, $X$ has \emph{$G$-Fourier type $p$} if the Fourier transform $\mc{F}_{G}$ extends to a bounded linear operator $L^p(G;X) \to L^{p'}(\widehat{G};X)$.
+\end{defn}
+
+\begin{example}
+  In Example \ref{eg:FT} we showed that the Banach space $\ell^p$ (with $p \in [1,2)$) does not have $\R$-Fourier type $r$ for any $r \in (p,2]$.
+  We will show that it has $G$-Fourier type $p$ for $G \in \{\R,\T,\Z\}$.\footnote{The same argument works for any locally compact Abelian group $G$.}
+  Fix $\mb{f} \in L^1(G;\ell^{p}) \cap L^p(G;\ell^{p})$, and identify functions into $\ell^{p}$ with sequences of $\C$-valued functions.
+  Under this identification, linearity of the Fourier transform yields that $(\mc{F}_{G}\mb{f})_{n} = \mc{F}_{G} (\mb{f}_{n})$ for all $n \in \N$; the Fourier transform $\mc{F}_{G}$ on the right hand side is acting on the $\C$-valued function $\mb{f}_{n}$.
+  This lets us estimate, writing $\mu$ for the appropriate measure on $\widehat{G}$ (Lebesgue or counting),
+  \begin{equation*}
+    \begin{aligned}
+      \|\mc{F}_{G} \mb{f}\|_{L^{p'}(\widehat{G};\ell^{p})}
+      &= \Big( \int_{\widehat{G}} \|\mc{F}_{G} \mb{f}(\xi)\|_{\ell^{p}}^{p'} \, \dd\mu(\xi) \Big)^{1/p'} \\
+      &= \Big( \int_{\widehat{G}} \Big( \sum_{n \in \N} |\mc{F}_{G} (\mb{f}_{n})(\xi)|^{p}  \Big)^{p'/p} \, \dd\mu(\xi) \Big)^{1/p'} \\
+      &\leq \Big( \sum_{n \in \N}   \Big( \int_{\widehat{G}} |\mc{F}_{G} (\mb{f}_{n})(\xi)|^{p'} \dd\mu(\xi)  \Big)^{p/p'} \Big)^{1/p} \\
+      &\leq \Big( \sum_{n \in \N}  \Big( \int_{G} |\mb{f}_{n}(x)|^{p} \dd\mu(\xi) \Big)^{p/p} \Big)^{1/p} = \|\mb{f}\|_{L^{p}(G;\ell^{p})},
+  \end{aligned}
+  \end{equation*}
+  applying Minkowski's inequality on the third line, and the scalar-valued Hausdorff--Young inequality in the last line.
+\end{example}
+
+We will need a simple duality result for $\R$-Fourier type.
+Analogous statements hold for $\T$- and $\Z$-Fourier type (and for more general locally compact Abelian groups $G$), but we will not need them explicitly.
+
+\begin{prop}
+  Let $X$ be a complex Banach space and $p \in [1,2]$.
+  Then $X$ has $\R$-Fourier type $p$ if and only if $X^{*}$ has $\R$-Fourier type $p$.
+\end{prop}
+
+\begin{proof}
+  First suppose $X$ has $\R$-Fourier type $p$, and let $\mb{g} \in L^1(\R;X^{*}) \cap L^{p}(\R;X^{*})$.
+  We estimate $\|\mc{F}_{\R} \mb{g}\|_{L^{p'}(\R;X^{*})}$ by duality: for all $\mb{f} \in L^1(\R;X)} \cap L^p(\R;X)$, using Fubini, we have
+  \begin{equation*}
+    \begin{aligned}
+      \Big| \int_{\R} \langle \mb{f}(\xi), \mc{F}_{\R} \mb{g}(\xi) \rangle \, \dd\xi \Big|
+      &= \Big| \int_{\R} \Big\langle \mb{f}(\xi), \int_{\R} e^{-2\pi i x\xi} \mb{g}(x) \, \dd x \Big\rangle \, \dd\xi \Big| \\
+      &= \Big| \int_{\R} \Big\langle \int_{\R} e^{-2\pi i x\xi} \mb{f}(\xi) \, \dd\xi, \mb{g}(x) \Big\rangle \, \dd x \Big| \\
+      &= \Big| \int_{\R} \langle \mc{F}_{\R} \mb{f}(x), \mb{g}(x) \rangle \, \dd x\Big| \\
+      &\leq \|\mc{F}_{\R} \mb{f} \|_{L^{p'}(\R;X)} \|\mb{g}\|_{L^p(\R;X^{*})} 
+      \lesssim  \|\mb{f} \|_{L^{p}(\R;X)} \|\mb{g}\|_{L^p(\R;X^{*})}. 
+    \end{aligned}
+  \end{equation*}
+  Since $L^1(\R;X)} \cap L^p(\R;X)$ is dense in $L^p(\R;X)$, we deduce that $\|\mc{F}_{\R} \mb{g}\|_{L^{p'}(\R;X)} \lesssim \|\mb{g}\|_{L^p(\R;X^{*})}$.
+The same argument can be used to show that $X$ has $\R$-Fourier type $p$, assuming that $X^{*}$ has $\R$-Fourier type $p$.\footnote{Alternatively, starting from the assumption that $X^{*}$ has $\R$-Fourier type $p$, deduce that $X^{**}$ has $\R$-Fourier type $p$, and use that $X$ is isometric to a closed subspace of $X^{**}$. Naturally if a Banach space has $\R$-Fourier type $p$, then so do its closed subspaces.}
+\end{proof}
+
+\todo{remark earlier that $\R$, $\T$, $\Z$ fourier type are the same and that our first goal is to prove them equivalent}
 
 % \begin{itemize}
-% \item Fourier type with respect to $\R$, $\T$, and $\Z$; examples (e.g. by interpolation or Fubini)
 % \item UMD implies nontrivial Fourier type (can't find an elementary proof)
-% \item FT with respect to arbitrary lca group, in particular $\Z/N\Z$ and Cantor/Walsh group
 % \item Fourier type $2$ implies type and cotype $2$
-% \item STATE relations with type and cotype (some too subtle to prove)
 % \end{itemize}
 
-% \section{Kwapien's theorem}
+\section{Kwapien's theorem}
 
-% \begin{itemize}
-% \item \item gaussian sums, orthonormal invariance/covariance
-%   domination. STATE the equivalence with rademacher for finite cotype
-% \item detecting Hilbert spaces through type and cotype $2$ (have to do the Lindenstrauss reduction to f.d. subspaces, and the LIndenstrauss--Pelczynski Theorem 7.3)
-% \end{itemize}
 
 
 %%% Local Variables:
